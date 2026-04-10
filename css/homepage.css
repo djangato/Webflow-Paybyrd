@@ -1,0 +1,310 @@
+/* Paybyrd Webflow Overrides — Homepage Product Showcase */
+
+/* Hide the original slider section */
+.slider-2_wrap {
+  display: none !important;
+}
+
+/* ═══════════════════════════════════════════ */
+/* Product Showcase Section                   */
+/* ═══════════════════════════════════════════ */
+
+.pbrd-showcase {
+  width: 100%;
+  padding: 0 0 40px;
+  color: #fff;
+  overflow: hidden;
+  position: relative;
+}
+
+.pbrd-showcase * { box-sizing: border-box; }
+
+.pbrd-showcase-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Header */
+.pbrd-showcase-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.pbrd-showcase-label {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 16px;
+}
+
+.pbrd-showcase-header h2 {
+  font-size: clamp(2rem, 4.5vw, 3.25rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  margin: 0 0 20px;
+  color: #fff;
+}
+
+.pbrd-showcase-header p {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.5);
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+/* ─── Tab Navigation ─── */
+.pbrd-showcase-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 56px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 16px;
+  padding: 6px;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.pbrd-showcase-tab {
+  flex: 1;
+  padding: 12px 8px;
+  border: none;
+  border-radius: 12px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  position: relative;
+  white-space: nowrap;
+}
+
+.pbrd-showcase-tab:hover {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.pbrd-showcase-tab.active {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ─── Product Display ─── */
+.pbrd-showcase-stage {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 48px;
+  align-items: center;
+  min-height: 480px;
+}
+
+/* Left: Text content */
+.pbrd-showcase-text {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.pbrd-showcase-text.fading {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.pbrd-showcase-number {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.25);
+  margin-bottom: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.pbrd-showcase-text h3 {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0 0 16px;
+  color: #fff;
+}
+
+.pbrd-showcase-text p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0 0 28px;
+}
+
+/* Feature bullets */
+.pbrd-showcase-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pbrd-showcase-features li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.pbrd-showcase-features li::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  flex-shrink: 0;
+}
+
+.pbrd-showcase-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: gap 0.2s ease;
+}
+
+.pbrd-showcase-link:hover {
+  gap: 12px;
+}
+
+.pbrd-showcase-link svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.2s ease;
+}
+
+/* Right: Product image */
+.pbrd-showcase-visual {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  aspect-ratio: 4/3;
+}
+
+.pbrd-showcase-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.pbrd-showcase-img.fading {
+  opacity: 0;
+}
+
+/* Glow effect behind image */
+.pbrd-showcase-visual::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(ellipse at center, rgba(100, 100, 255, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Progress bar */
+.pbrd-showcase-progress {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.pbrd-progress-bar {
+  height: 3px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  flex: 1;
+  max-width: 80px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.pbrd-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 3px;
+  transition: width 0.1s linear;
+}
+
+.pbrd-progress-bar.active .pbrd-progress-fill {
+  width: 100%;
+}
+
+.pbrd-progress-bar.completed .pbrd-progress-fill {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 900px) {
+  .pbrd-showcase-stage {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    min-height: auto;
+  }
+
+  .pbrd-showcase-visual {
+    order: -1;
+    aspect-ratio: 16/10;
+  }
+
+  .pbrd-showcase-tabs {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    justify-content: flex-start;
+  }
+  .pbrd-showcase-tabs::-webkit-scrollbar { display: none; }
+
+  .pbrd-showcase-tab {
+    flex: 0 0 auto;
+    padding: 10px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pbrd-showcase-inner {
+    padding: 0 16px;
+  }
+
+  .pbrd-showcase-header {
+    margin-bottom: 32px;
+  }
+
+  .pbrd-showcase-tabs {
+    margin-bottom: 32px;
+  }
+
+  .pbrd-showcase-tab {
+    font-size: 0.75rem;
+    padding: 8px 12px;
+  }
+}
