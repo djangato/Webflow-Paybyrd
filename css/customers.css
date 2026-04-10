@@ -48,17 +48,8 @@
   display: flex;
   gap: 20px;
   width: max-content;
-  animation: pbrd-marquee-scroll var(--marquee-dur, 60s) linear infinite;
   padding: 10px 0 20px;
-}
-
-.pbrd-customers-track:hover {
-  animation-play-state: paused;
-}
-
-@keyframes pbrd-marquee-scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  will-change: transform;
 }
 
 .pbrd-customers-marquee {

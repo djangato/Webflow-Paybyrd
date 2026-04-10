@@ -1037,11 +1037,83 @@
 
     marquee.replaceWith(section);
 
-    // Card interactions (apply to all cards including duplicates)
+    // ─── JS-driven infinite marquee with scroll/swipe ─── //
+    var track = section.querySelector(".pbrd-customers-track");
+    var marqueeWrap = section.querySelector(".pbrd-customers-marquee");
+    var pos = 0;
+    var autoSpeed = 0.5; // px per frame
+    var isHovering = false;
+    var userScrolling = false;
+    var userScrollTimer = null;
+    var halfWidth = 0;
+    var raf = null;
+
+    function measureHalf() {
+      // Half the track = width of the original set (first half)
+      halfWidth = track.scrollWidth / 2;
+    }
+
+    function loop() {
+      if (!userScrolling) {
+        pos -= autoSpeed;
+      }
+      // Wrap seamlessly
+      if (pos <= -halfWidth) pos += halfWidth;
+      if (pos > 0) pos -= halfWidth;
+      track.style.transform = "translateX(" + pos + "px)";
+      raf = requestAnimationFrame(loop);
+    }
+
+    // Start after measuring
+    requestAnimationFrame(function () {
+      measureHalf();
+      loop();
+    });
+
+    // Recalculate on resize
+    window.addEventListener("resize", measureHalf);
+
+    // Mouse wheel / trackpad horizontal scroll
+    marqueeWrap.addEventListener("wheel", function (e) {
+      // Use deltaX for horizontal scroll, fallback to deltaY if shift is held or deltaX is 0
+      var delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      if (delta === 0) return;
+
+      e.preventDefault();
+      pos -= delta * 1.5;
+
+      // Mark as user scrolling, pause auto-advance briefly
+      userScrolling = true;
+      clearTimeout(userScrollTimer);
+      userScrollTimer = setTimeout(function () {
+        userScrolling = false;
+      }, 1500);
+    }, { passive: false });
+
+    // Touch swipe
+    var touchStartX = 0;
+    var touchLastX = 0;
+    marqueeWrap.addEventListener("touchstart", function (e) {
+      touchStartX = e.touches[0].clientX;
+      touchLastX = touchStartX;
+      userScrolling = true;
+    }, { passive: true });
+
+    marqueeWrap.addEventListener("touchmove", function (e) {
+      var x = e.touches[0].clientX;
+      var delta = touchLastX - x;
+      pos -= delta;
+      touchLastX = x;
+    }, { passive: true });
+
+    marqueeWrap.addEventListener("touchend", function () {
+      userScrolling = false;
+    }, { passive: true });
+
+    // Card interactions
     section.querySelectorAll(".pbrd-customer-card").forEach(function (card) {
       var video = card.querySelector("video");
 
-      // Hover: play video + pause marquee is handled by CSS
       card.addEventListener("mouseenter", function () {
         if (video) { video.currentTime = 0; video.play().catch(function () {}); }
       });
@@ -1049,14 +1121,13 @@
         if (video) video.pause();
       });
 
-      // Click: open lightbox (use modulo to map duplicate index to real index)
       card.addEventListener("click", function () {
         var idx = parseInt(card.dataset.idx) % customers.length;
         showLightbox(idx);
       });
     });
 
-    // Lazy load videos when they scroll into view
+    // Lazy load videos
     if ("IntersectionObserver" in window) {
       var obs = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
