@@ -2590,7 +2590,49 @@
   --pbrd-cta-text: #fff;
 }
 
-/* ─── All primary CTA buttons ─── */
+/* ─── Webflow native buttons ─── */
+
+/* All "Start Now", "Get Started", "Book a Call" buttons */
+a.button-main_wrap {
+  background: var(--pbrd-cta) !important;
+  border-color: var(--pbrd-cta) !important;
+}
+
+a.button-main_wrap:hover {
+  background: var(--pbrd-cta-hover) !important;
+  border-color: var(--pbrd-cta-hover) !important;
+  box-shadow: 0 8px 28px var(--pbrd-cta-glow) !important;
+}
+
+a.button-main_wrap .button-main_text {
+  color: var(--pbrd-cta-text) !important;
+}
+
+a.button-main_wrap .button-main_icon path {
+  stroke: var(--pbrd-cta-text) !important;
+}
+
+/* Footer "Get in Touch" glowing button */
+a.glowing_button_link {
+  background: var(--pbrd-cta) !important;
+  border-color: var(--pbrd-cta) !important;
+}
+
+a.glowing_button_link:hover {
+  background: var(--pbrd-cta-hover) !important;
+  box-shadow: 0 8px 28px var(--pbrd-cta-glow) !important;
+}
+
+a.glowing_button_link .glowing_button_text {
+  color: var(--pbrd-cta-text) !important;
+}
+
+/* Nav "Get in Touch" button */
+.nav_desktop_contain a.glowing_button_link {
+  background: var(--pbrd-cta) !important;
+}
+
+/* ─── All injected primary CTA buttons ─── */
 
 /* Mid-page CTA */
 .pbrd-mid-cta-primary {
