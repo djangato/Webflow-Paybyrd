@@ -1,0 +1,98 @@
+/* Paybyrd — CTA Button Color Psychology: Warm Orange */
+
+:root {
+  --pbrd-cta: #FF6B35;
+  --pbrd-cta-hover: #FF7D4A;
+  --pbrd-cta-glow: rgba(255, 107, 53, 0.3);
+  --pbrd-cta-text: #fff;
+}
+
+/* ─── All primary CTA buttons ─── */
+
+/* Mid-page CTA */
+.pbrd-mid-cta-primary {
+  background: var(--pbrd-cta) !important;
+  color: var(--pbrd-cta-text) !important;
+  border: none !important;
+}
+
+.pbrd-mid-cta-primary:hover {
+  background: var(--pbrd-cta-hover) !important;
+  box-shadow: 0 8px 32px var(--pbrd-cta-glow) !important;
+}
+
+/* Sticky CTA bar */
+.pbrd-sticky-btn {
+  background: var(--pbrd-cta) !important;
+  color: var(--pbrd-cta-text) !important;
+}
+
+.pbrd-sticky-btn:hover {
+  background: var(--pbrd-cta-hover) !important;
+  box-shadow: 0 4px 20px var(--pbrd-cta-glow) !important;
+}
+
+/* Exit intent popup */
+.pbrd-exit-cta {
+  background: var(--pbrd-cta) !important;
+  color: var(--pbrd-cta-text) !important;
+}
+
+.pbrd-exit-cta:hover {
+  background: var(--pbrd-cta-hover) !important;
+  box-shadow: 0 8px 32px var(--pbrd-cta-glow) !important;
+}
+
+/* Pricing page CTAs */
+.pbrd-pricing-cta a.pbrd-cta-button {
+  background: var(--pbrd-cta) !important;
+  color: var(--pbrd-cta-text) !important;
+  border-color: var(--pbrd-cta) !important;
+}
+
+.pbrd-pricing-cta a.pbrd-cta-button:hover {
+  background: var(--pbrd-cta-hover) !important;
+  box-shadow: 0 8px 32px var(--pbrd-cta-glow) !important;
+}
+
+/* POS featured terminal CTA */
+.pbrd-terminal-card.featured .pbrd-terminal-cta {
+  background: var(--pbrd-cta) !important;
+  color: var(--pbrd-cta-text) !important;
+  border-color: var(--pbrd-cta) !important;
+}
+
+.pbrd-terminal-card.featured .pbrd-terminal-cta:hover {
+  background: var(--pbrd-cta-hover) !important;
+  box-shadow: 0 4px 20px var(--pbrd-cta-glow) !important;
+}
+
+/* Showcase "Explore" links — subtle orange accent */
+.pbrd-showcase-link {
+  color: var(--pbrd-cta) !important;
+}
+
+/* Category filter active pill */
+.pbrd-filter-btn.active {
+  background: var(--pbrd-cta) !important;
+  color: var(--pbrd-cta-text) !important;
+  border-color: var(--pbrd-cta) !important;
+}
+
+/* ─── Subtle pulse on primary CTAs ─── */
+.pbrd-mid-cta-primary,
+.pbrd-sticky-btn,
+.pbrd-exit-cta {
+  animation: pbrd-cta-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes pbrd-cta-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 107, 53, 0); }
+  50% { box-shadow: 0 0 0 6px rgba(255, 107, 53, 0.12); }
+}
+
+.pbrd-mid-cta-primary:hover,
+.pbrd-sticky-btn:hover,
+.pbrd-exit-cta:hover {
+  animation: none;
+}
