@@ -532,17 +532,36 @@
 })();
 
 /* ═══════════════════════════════════════════ */
-/* Bento Grid — Cursor Spotlight Effect       */
+/* Bento Grid — Image Swap + Spotlight        */
 /* ═══════════════════════════════════════════ */
 (function () {
   "use strict";
   var path = window.location.pathname;
   if (path !== "/" && path !== "" && path !== "/index" && path !== "/index.html") return;
 
-  function initSpotlight() {
+  var CDN = "https://cdn.prod.website-files.com/69d9242bbde99c4b80e41ae9/";
+  var imageSwaps = [
+    CDN + "69d9242bbde99c4b80e41cae_Frame%201707479734.png",
+    CDN + "69d9242bbde99c4b80e41c72_slider-2_wrap.webp",
+    CDN + "69d9242bbde99c4b80e41cad_Website%20Feedback%20Figma.png",
+    null,
+    CDN + "69d9242bbde99c4b80e41cb1_New%20dashboard%20image.png"
+  ];
+
+  function initBento() {
     var cards = document.querySelectorAll(".card-1_element");
     if (!cards.length) return;
-    cards.forEach(function (card) {
+    cards.forEach(function (card, idx) {
+      if (imageSwaps[idx]) {
+        var img = card.querySelector(".card-1_gradient-bg .u-image");
+        if (img) {
+          img.src = imageSwaps[idx];
+          img.srcset = "";
+          img.style.objectFit = "contain";
+          img.style.objectPosition = "center";
+          img.style.padding = "16px";
+        }
+      }
       var spot = document.createElement("div");
       spot.className = "pbrd-spotlight";
       card.appendChild(spot);
@@ -555,8 +574,8 @@
   }
 
   if (document.readyState === "complete") {
-    initSpotlight();
+    initBento();
   } else {
-    window.addEventListener("load", initSpotlight);
+    window.addEventListener("load", initBento);
   }
 })();

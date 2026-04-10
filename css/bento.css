@@ -4,17 +4,63 @@
 /* ─── Card Element: base refinement ─── */
 .card-1_element {
   position: relative;
-  border-radius: 20px !important;
+  border-radius: 24px !important;
   overflow: hidden;
   transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
               box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1) !important;
-  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
   background: linear-gradient(
-    165deg,
-    rgba(255, 255, 255, 0.04) 0%,
-    rgba(255, 255, 255, 0.01) 50%,
-    rgba(255, 255, 255, 0.03) 100%
+    170deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.01) 40%,
+    rgba(255, 255, 255, 0.02) 100%
   ) !important;
+}
+
+/* ─── Image area: make images more prominent ─── */
+.card-1_gradient-bg {
+  position: relative;
+}
+
+/* Product screenshot styling */
+.card-1_gradient-bg .u-image {
+  transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1) !important;
+  border-radius: 12px;
+  object-fit: contain !important;
+  object-position: center !important;
+}
+
+.card-1_wrap:hover .card-1_gradient-bg .u-image {
+  transform: scale(1.05) !important;
+}
+
+/* Fade-to-card gradient at bottom of image area */
+.card-1_gradient-bg::after {
+  content: "" !important;
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 40% !important;
+  background: linear-gradient(to top, rgba(15, 15, 25, 0.9) 0%, transparent 100%) !important;
+  z-index: 4 !important;
+  pointer-events: none !important;
+}
+
+/* ─── Background decorative elements: softer ─── */
+.bento_card-1_img-bg-1 {
+  opacity: 0.25 !important;
+  transition: opacity 0.5s ease !important;
+}
+.card-1_wrap:hover .bento_card-1_img-bg-1 {
+  opacity: 0.4 !important;
+}
+.bento_card-1_img-bg-2 {
+  opacity: 0.15 !important;
+  transition: opacity 0.5s ease !important;
+}
+.card-1_wrap:hover .bento_card-1_img-bg-2 {
+  opacity: 0.25 !important;
 }
 
 /* ─── Animated gradient border on hover ─── */
@@ -22,14 +68,14 @@
   content: "";
   position: absolute;
   inset: 0;
-  border-radius: 20px;
+  border-radius: 24px;
   padding: 1px;
   background: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0) 40%,
-    rgba(255, 255, 255, 0.12) 50%,
-    rgba(255, 255, 255, 0) 60%,
+    rgba(255, 255, 255, 0) 35%,
+    rgba(255, 255, 255, 0.18) 50%,
+    rgba(255, 255, 255, 0) 65%,
     rgba(255, 255, 255, 0) 100%
   );
   background-size: 300% 300%;
@@ -46,7 +92,7 @@
 
 .card-1_wrap:hover .card-1_element::before {
   opacity: 1;
-  animation: pbrd-border-sweep 2s ease infinite;
+  animation: pbrd-border-sweep 2.5s ease infinite;
 }
 
 @keyframes pbrd-border-sweep {
@@ -59,9 +105,9 @@
 .card-1_wrap:hover .card-1_element {
   transform: translateY(-6px) !important;
   box-shadow:
-    0 12px 40px -8px rgba(0, 0, 0, 0.4),
-    0 0 60px -20px rgba(120, 120, 255, 0.08) !important;
-  border-color: rgba(255, 255, 255, 0.1) !important;
+    0 16px 48px -8px rgba(0, 0, 0, 0.5),
+    0 0 80px -30px rgba(100, 120, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
 }
 
 /* ─── Ambient glow behind card on hover ─── */
@@ -69,10 +115,10 @@
   content: "";
   position: absolute;
   inset: -1px;
-  border-radius: 20px;
+  border-radius: 24px;
   background: radial-gradient(
-    ellipse at 50% 80%,
-    rgba(100, 120, 255, 0.06) 0%,
+    ellipse at 50% 70%,
+    rgba(100, 120, 255, 0.07) 0%,
     transparent 60%
   );
   opacity: 0;
@@ -85,41 +131,12 @@
   opacity: 1;
 }
 
-/* ─── Image area: subtle zoom on hover ─── */
-.card-1_gradient-bg .u-image {
-  transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1),
-              filter 0.7s ease !important;
-}
-
-.card-1_wrap:hover .card-1_gradient-bg .u-image {
-  transform: scale(1.05) !important;
-}
-
-/* ─── Background decorative elements: enhance ─── */
-.bento_card-1_img-bg-1 {
-  opacity: 0.4 !important;
-  transition: opacity 0.5s ease !important;
-}
-
-.card-1_wrap:hover .bento_card-1_img-bg-1 {
-  opacity: 0.6 !important;
-}
-
-.bento_card-1_img-bg-2 {
-  opacity: 0.2 !important;
-  transition: opacity 0.5s ease !important;
-}
-
-.card-1_wrap:hover .bento_card-1_img-bg-2 {
-  opacity: 0.35 !important;
-}
-
-/* ─── Tag badges: premium treatment ─── */
+/* ─── Tag badges: premium glassmorphism ─── */
 .card-1_gradient-tag .tag_wrap-2 {
-  background: rgba(255, 255, 255, 0.08) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
+  background: rgba(255, 255, 255, 0.07) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
   border-radius: 100px !important;
   padding: 6px 16px !important;
   font-size: 0.6875rem !important;
@@ -131,18 +148,21 @@
 }
 
 .card-1_wrap:hover .card-1_gradient-tag .tag_wrap-2 {
-  background: rgba(255, 255, 255, 0.12) !important;
-  border-color: rgba(255, 255, 255, 0.18) !important;
+  background: rgba(255, 255, 255, 0.14) !important;
+  border-color: rgba(255, 255, 255, 0.22) !important;
   color: #fff !important;
 }
 
-/* ─── Content text: refine ─── */
+/* ─── Content area: better spacing and z-index ─── */
 .card-1_content {
   position: relative;
-  z-index: 2;
+  z-index: 5;
+  padding-top: 4px !important;
 }
 
 .card-1_content h3 {
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
   transition: color 0.4s ease !important;
 }
 
@@ -155,20 +175,20 @@
 }
 
 .card-1_wrap:hover .card-1_content .u-color-faded {
-  color: rgba(255, 255, 255, 0.55) !important;
+  color: rgba(255, 255, 255, 0.6) !important;
 }
 
-/* ─── Bottom row cards (Integrations, Loyalty): wider treatment ─── */
+/* ─── Bottom row cards: larger with more presence ─── */
 .card-1_wrap.u-column-span-3 .card-1_element {
-  min-height: 320px;
+  min-height: 340px;
 }
 
-/* ─── Section heading enhancement ─── */
+/* ─── Section heading: shimmer animation ─── */
 .grid-1_content_wrap h2 {
   background: linear-gradient(
-    135deg,
+    90deg,
     #fff 0%,
-    rgba(255, 255, 255, 0.7) 50%,
+    rgba(255, 255, 255, 0.55) 50%,
     #fff 100%
   ) !important;
   background-size: 200% auto !important;
@@ -183,15 +203,15 @@
   100% { background-position: 200% center; }
 }
 
-/* ─── Subtle cursor-following spotlight (applied via JS) ─── */
+/* ─── Cursor-following spotlight (applied via JS) ─── */
 .card-1_element .pbrd-spotlight {
   position: absolute;
-  width: 300px;
-  height: 300px;
+  width: 350px;
+  height: 350px;
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgba(255, 255, 255, 0.04) 0%,
+    rgba(255, 255, 255, 0.05) 0%,
     transparent 70%
   );
   pointer-events: none;
