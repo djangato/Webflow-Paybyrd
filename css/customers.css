@@ -174,10 +174,14 @@
   opacity: 0.95;
 }
 
-/* Per-customer logo size overrides */
+/* Per-customer logo overrides */
 .pbrd-customer-card[data-customer="vilagale"] .pbrd-customer-logo { height: 32px; max-width: 156px; }
 .pbrd-customer-card[data-customer="kabuki"] .pbrd-customer-logo { height: 32px; max-width: 156px; }
 .pbrd-customer-card[data-customer="kuantokusta"] .pbrd-customer-logo { height: 29px; max-width: 144px; }
+.pbrd-customer-card[data-customer="onyria"] .pbrd-customer-logo { height: 36px; max-width: 160px; }
+.pbrd-customer-card[data-customer="andreoticas"] .pbrd-customer-logo { height: 40px; max-width: 160px; filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(200,180,120,0.3)); }
+.pbrd-customer-card[data-customer="skinboutique"] .pbrd-customer-logo { height: 30px; max-width: 170px; filter: none; opacity: 0.85; }
+.pbrd-customer-card[data-customer="redeexpressos"] .pbrd-customer-logo { height: 30px; max-width: 150px; }
 
 .pbrd-customer-name {
   font-size: 0.75rem;
@@ -355,6 +359,10 @@
 .pbrd-carousel-card[data-customer="vilagale"] .pbrd-carousel-logo { height: 36px; max-width: 180px; }
 .pbrd-carousel-card[data-customer="kabuki"] .pbrd-carousel-logo { height: 36px; max-width: 180px; }
 .pbrd-carousel-card[data-customer="kuantokusta"] .pbrd-carousel-logo { height: 34px; max-width: 168px; }
+.pbrd-carousel-card[data-customer="onyria"] .pbrd-carousel-logo { height: 42px; max-width: 190px; }
+.pbrd-carousel-card[data-customer="andreoticas"] .pbrd-carousel-logo { height: 46px; max-width: 190px; filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(200,180,120,0.3)); }
+.pbrd-carousel-card[data-customer="skinboutique"] .pbrd-carousel-logo { height: 34px; max-width: 200px; filter: none; opacity: 0.9; }
+.pbrd-carousel-card[data-customer="redeexpressos"] .pbrd-carousel-logo { height: 34px; max-width: 170px; }
 
 .pbrd-carousel-name {
   font-size: 0.8125rem;

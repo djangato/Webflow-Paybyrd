@@ -815,7 +815,7 @@
       desc: "Elevating the in-store payment experience for high-end optical retail \u2014 with tailored POS flows that match the care behind every pair.",
       video: BASE + "andreoticas.mp4",
       poster: BASE + "andreoticas-poster.jpg",
-      logo: null
+      logo: BASE + "andreoticas-logo.png"
     },
     {
       name: "Onyria Resorts",
@@ -825,7 +825,7 @@
       desc: "From golf clubhouse to spa to fine dining \u2014 seamless omnichannel payments across one of Portugal\u2019s most prestigious resort groups.",
       video: BASE + "onyria.mp4",
       poster: BASE + "onyria-poster.jpg",
-      logo: null
+      logo: BASE + "onyria-logo.svg"
     },
     {
       name: "SkinBoutique by LMR",
@@ -835,7 +835,7 @@
       desc: "Streamlined checkout for high-value treatments \u2014 installments, recurring billing, and a payment experience as refined as the clinic itself.",
       video: BASE + "skinboutique.mp4",
       poster: BASE + "skinboutique-poster.jpg",
-      logo: null
+      logo: BASE + "skinboutique-logo.png"
     }
   ];
 
