@@ -9,24 +9,15 @@
   /* ═══════════════════════════════════════════ */
 
   function initMesh() {
+    // Insert into the hero section so it sits above the page background
+    var heroSection = document.querySelector('.hero-main_contain') || document.querySelector('[class*="hero"]');
+    if (!heroSection) return;
+
     var mesh = document.createElement("div");
     mesh.className = "pbrd-hero-mesh";
     mesh.innerHTML = '<div class="pbrd-mesh-blob"></div><div class="pbrd-mesh-blob"></div><div class="pbrd-mesh-blob"></div>';
-    document.body.insertBefore(mesh, document.body.firstChild);
-
-    // Fade out mesh on scroll
-    var ticking = false;
-    window.addEventListener("scroll", function () {
-      if (!ticking) {
-        requestAnimationFrame(function () {
-          var scrollY = window.scrollY || window.pageYOffset;
-          var opacity = Math.max(0, 1 - scrollY / 600);
-          mesh.style.opacity = String(opacity);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    }, { passive: true });
+    heroSection.style.position = heroSection.style.position || "relative";
+    heroSection.insertBefore(mesh, heroSection.firstChild);
   }
 
   /* ═══════════════════════════════════════════ */
@@ -83,7 +74,7 @@
     }
 
     showNext();
-    setInterval(showNext, 3500);
+    setInterval(showNext, 2200);
   }
 
   /* ═══════════════════════════════════════════ */
@@ -137,12 +128,20 @@
     overlay.className = "pbrd-exit-overlay";
     overlay.innerHTML =
       '<div class="pbrd-exit-card">' +
+        '<div class="pbrd-exit-accent"></div>' +
         '<button class="pbrd-exit-close">\u00D7</button>' +
-        '<div class="pbrd-exit-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>' +
-        '<h3>Before you go\u2026</h3>' +
-        '<p>See how Paybyrd can increase your approval rates and reduce payment costs with a free, no-commitment consultation.</p>' +
-        '<a href="/book-demo" class="pbrd-exit-cta">Book a Free Consultation</a>' +
-        '<button class="pbrd-exit-skip">No thanks, I\u2019ll explore on my own</button>' +
+        '<div class="pbrd-exit-body">' +
+          '<div class="pbrd-exit-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>' +
+          '<h3>Get a tailored payment proposal</h3>' +
+          '<p class="pbrd-exit-subtitle">In 15 minutes, we\u2019ll show you exactly how much you can save and which payment methods will grow your revenue.</p>' +
+          '<div class="pbrd-exit-proof">' +
+            '<div class="pbrd-exit-proof-item"><span class="pbrd-exit-proof-val">98%</span><span class="pbrd-exit-proof-lbl">Approval rate</span></div>' +
+            '<div class="pbrd-exit-proof-item"><span class="pbrd-exit-proof-val">24h</span><span class="pbrd-exit-proof-lbl">Setup time</span></div>' +
+            '<div class="pbrd-exit-proof-item"><span class="pbrd-exit-proof-val">\u20AC0</span><span class="pbrd-exit-proof-lbl">Setup fee</span></div>' +
+          '</div>' +
+          '<a href="/book-demo" class="pbrd-exit-cta">Book a 15-Min Call \u2192</a>' +
+          '<button class="pbrd-exit-skip">I\u2019ll come back later</button>' +
+        '</div>' +
       '</div>';
     document.body.appendChild(overlay);
 
