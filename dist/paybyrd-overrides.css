@@ -1474,8 +1474,8 @@
 
 /* ─── Individual Customer Card ─── */
 .pbrd-customer-card {
-  flex: 0 0 210px;
-  height: 380px;
+  flex: 0 0 264px;
+  height: 475px;
   border-radius: 20px;
   overflow: hidden;
   position: relative;
@@ -1597,7 +1597,7 @@
   opacity: 1;
 }
 
-/* ─── Lightbox / Modal ─── */
+/* ─── Carousel Lightbox ─── */
 .pbrd-lightbox {
   position: fixed;
   inset: 0;
@@ -1614,62 +1614,97 @@
 }
 
 .pbrd-lightbox.open {
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   opacity: 1;
   pointer-events: auto;
 }
 
-.pbrd-lightbox-card {
-  position: relative;
-  width: 340px;
-  max-width: 90vw;
-  height: 600px;
-  max-height: 85vh;
+/* Close */
+.pbrd-lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.25rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  line-height: 1;
+}
+.pbrd-lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+/* Carousel track */
+.pbrd-carousel-track {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  will-change: transform;
+}
+
+/* Carousel card */
+.pbrd-carousel-card {
+  flex: 0 0 320px;
+  height: 560px;
   border-radius: 24px;
   overflow: hidden;
-  transform: scale(0.85) translateY(30px);
-  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-  box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.6);
+  position: relative;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  opacity: 0.35;
+  transform: scale(0.85);
+  filter: brightness(0.5);
+  cursor: pointer;
 }
 
-.pbrd-lightbox.open .pbrd-lightbox-card {
-  transform: scale(1) translateY(0);
+.pbrd-carousel-card.active {
+  opacity: 1;
+  transform: scale(1);
+  filter: brightness(1);
+  box-shadow: 0 32px 80px -16px rgba(0, 0, 0, 0.6);
 }
 
-.pbrd-lightbox-video {
+.pbrd-carousel-card video {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: 0;
 }
 
-.pbrd-lightbox-overlay {
+.pbrd-carousel-overlay {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.9) 0%,
-    rgba(0, 0, 0, 0.2) 40%,
-    transparent 70%
-  );
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.25) 40%, transparent 70%);
   pointer-events: none;
 }
 
-.pbrd-lightbox-content {
+.pbrd-carousel-content {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 32px 28px;
+  padding: 28px 24px;
   z-index: 2;
 }
 
-.pbrd-lightbox-tag {
+.pbrd-carousel-tag {
   font-size: 0.625rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -1681,57 +1716,38 @@
   -webkit-backdrop-filter: blur(12px);
   color: rgba(255, 255, 255, 0.8);
   display: inline-block;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
-.pbrd-lightbox-name {
-  font-size: 1.5rem;
+.pbrd-carousel-name {
+  font-size: 1.375rem;
   font-weight: 600;
   color: #fff;
-  margin: 0 0 8px;
+  margin: 0 0 6px;
   letter-spacing: -0.02em;
 }
 
-.pbrd-lightbox-stat {
+.pbrd-carousel-stat {
   font-size: 0.8125rem;
   color: rgba(120, 180, 255, 0.8);
   font-weight: 600;
   margin: 0 0 8px;
 }
 
-.pbrd-lightbox-desc {
-  font-size: 0.8125rem;
+.pbrd-carousel-desc {
+  font-size: 0.75rem;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.5);
   margin: 0;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.4s ease;
 }
 
-/* Close button */
-.pbrd-lightbox-close {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  z-index: 3;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  color: #fff;
-  font-size: 1.125rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s ease;
-  font-family: inherit;
-  line-height: 1;
-}
-
-.pbrd-lightbox-close:hover {
-  background: rgba(255, 255, 255, 0.2);
+.pbrd-carousel-card.active .pbrd-carousel-desc {
+  max-height: 80px;
+  opacity: 1;
 }
 
 /* Nav arrows */
@@ -1739,15 +1755,15 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 3;
-  width: 40px;
-  height: 40px;
+  z-index: 10;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  border: none;
-  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.6);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -1755,23 +1771,38 @@
   transition: all 0.2s ease;
   font-family: inherit;
 }
-
 .pbrd-lightbox-nav:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.2);
   color: #fff;
 }
+.pbrd-lightbox-prev { left: max(16px, calc(50% - 280px)); }
+.pbrd-lightbox-next { right: max(16px, calc(50% - 280px)); }
+.pbrd-lightbox-nav svg { width: 18px; height: 18px; }
 
-.pbrd-lightbox-prev {
-  left: -60px;
+/* Dots */
+.pbrd-carousel-dots {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
 }
-
-.pbrd-lightbox-next {
-  right: -60px;
+.pbrd-carousel-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
-
-.pbrd-lightbox-nav svg {
-  width: 16px;
-  height: 16px;
+.pbrd-carousel-dot.active {
+  background: rgba(255, 255, 255, 0.8);
+  transform: scale(1.3);
 }
 
 /* ─── Bottom CTA ─── */
@@ -1820,23 +1851,23 @@
   .pbrd-lightbox-prev { left: 8px; }
   .pbrd-lightbox-next { right: 8px; }
 
-  .pbrd-lightbox-card {
-    width: 300px;
-    height: 520px;
+  .pbrd-carousel-card {
+    flex: 0 0 260px;
+    height: 460px;
   }
 }
 
 @media (max-width: 480px) {
   .pbrd-customer-card {
-    flex: 0 0 190px;
-    height: 340px;
+    flex: 0 0 220px;
+    height: 400px;
   }
 
   .pbrd-customer-content { padding: 20px 16px; }
   .pbrd-customer-name { font-size: 1rem; }
 
-  .pbrd-lightbox-card {
-    width: 280px;
-    height: 480px;
+  .pbrd-carousel-card {
+    flex: 0 0 240px;
+    height: 420px;
   }
 }

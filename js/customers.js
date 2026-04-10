@@ -53,77 +53,142 @@
   var chevLeftSVG = '<svg viewBox="0 0 16 16" fill="none"><path d="M10 4l-4 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   var chevRightSVG = '<svg viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
-  /* ─── Lightbox ─── */
+  /* ─── Carousel Lightbox ─── */
   var lightbox = null;
-  var lightboxIdx = 0;
+  var carouselIdx = 0;
+  var touchStartX = 0;
+
+  function buildCarouselCard(c, idx) {
+    return '<div class="pbrd-carousel-card' + (idx === 0 ? ' active' : '') + '" data-idx="' + idx + '">' +
+      '<video muted loop playsinline preload="metadata" poster="' + c.poster + '">' +
+        '<source src="' + c.video + '" type="video/mp4">' +
+      '</video>' +
+      '<div class="pbrd-carousel-overlay"></div>' +
+      '<div class="pbrd-carousel-content">' +
+        '<span class="pbrd-carousel-tag">' + c.industry + '</span>' +
+        '<h3 class="pbrd-carousel-name">' + c.name + '</h3>' +
+        '<p class="pbrd-carousel-stat">' + c.stat + '</p>' +
+        '<p class="pbrd-carousel-desc">' + c.desc + '</p>' +
+      '</div>' +
+    '</div>';
+  }
 
   function createLightbox() {
     var el = document.createElement("div");
     el.className = "pbrd-lightbox";
+
+    var dotsHTML = customers.map(function (_, i) {
+      return '<button class="pbrd-carousel-dot' + (i === 0 ? ' active' : '') + '" data-idx="' + i + '"></button>';
+    }).join("");
+
     el.innerHTML =
-      '<div class="pbrd-lightbox-card">' +
-        '<video class="pbrd-lightbox-video" muted loop playsinline></video>' +
-        '<div class="pbrd-lightbox-overlay"></div>' +
-        '<button class="pbrd-lightbox-close">\u00D7</button>' +
-        '<div class="pbrd-lightbox-content">' +
-          '<span class="pbrd-lightbox-tag"></span>' +
-          '<h3 class="pbrd-lightbox-name"></h3>' +
-          '<p class="pbrd-lightbox-stat"></p>' +
-          '<p class="pbrd-lightbox-desc"></p>' +
-        '</div>' +
+      '<button class="pbrd-lightbox-close">\u00D7</button>' +
+      '<div class="pbrd-carousel-track">' +
+        customers.map(buildCarouselCard).join("") +
       '</div>' +
       '<button class="pbrd-lightbox-nav pbrd-lightbox-prev">' + chevLeftSVG + '</button>' +
-      '<button class="pbrd-lightbox-nav pbrd-lightbox-next">' + chevRightSVG + '</button>';
+      '<button class="pbrd-lightbox-nav pbrd-lightbox-next">' + chevRightSVG + '</button>' +
+      '<div class="pbrd-carousel-dots">' + dotsHTML + '</div>';
+
     document.body.appendChild(el);
 
-    // Close handlers
+    // Close
     el.querySelector(".pbrd-lightbox-close").addEventListener("click", closeLightbox);
     el.addEventListener("click", function (e) {
       if (e.target === el) closeLightbox();
     });
+
+    // Keyboard
     document.addEventListener("keydown", function (e) {
       if (!el.classList.contains("open")) return;
       if (e.key === "Escape") closeLightbox();
-      if (e.key === "ArrowLeft") showLightbox((lightboxIdx - 1 + customers.length) % customers.length);
-      if (e.key === "ArrowRight") showLightbox((lightboxIdx + 1) % customers.length);
+      if (e.key === "ArrowLeft") goToCarousel((carouselIdx - 1 + customers.length) % customers.length);
+      if (e.key === "ArrowRight") goToCarousel((carouselIdx + 1) % customers.length);
     });
 
-    // Nav
+    // Nav buttons
     el.querySelector(".pbrd-lightbox-prev").addEventListener("click", function (e) {
       e.stopPropagation();
-      showLightbox((lightboxIdx - 1 + customers.length) % customers.length);
+      goToCarousel((carouselIdx - 1 + customers.length) % customers.length);
     });
     el.querySelector(".pbrd-lightbox-next").addEventListener("click", function (e) {
       e.stopPropagation();
-      showLightbox((lightboxIdx + 1) % customers.length);
+      goToCarousel((carouselIdx + 1) % customers.length);
     });
+
+    // Dots
+    el.querySelectorAll(".pbrd-carousel-dot").forEach(function (dot) {
+      dot.addEventListener("click", function (e) {
+        e.stopPropagation();
+        goToCarousel(parseInt(dot.dataset.idx));
+      });
+    });
+
+    // Click inactive card to navigate to it
+    el.querySelectorAll(".pbrd-carousel-card").forEach(function (card) {
+      card.addEventListener("click", function (e) {
+        var idx = parseInt(card.dataset.idx);
+        if (idx !== carouselIdx) {
+          e.stopPropagation();
+          goToCarousel(idx);
+        }
+      });
+    });
+
+    // Touch swipe
+    var track = el.querySelector(".pbrd-carousel-track");
+    track.addEventListener("touchstart", function (e) {
+      touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    track.addEventListener("touchend", function (e) {
+      var diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) goToCarousel(Math.min(carouselIdx + 1, customers.length - 1));
+        else goToCarousel(Math.max(carouselIdx - 1, 0));
+      }
+    }, { passive: true });
 
     return el;
   }
 
+  function goToCarousel(idx) {
+    carouselIdx = idx;
+    if (!lightbox) return;
+    var track = lightbox.querySelector(".pbrd-carousel-track");
+    var cards = lightbox.querySelectorAll(".pbrd-carousel-card");
+    var cardWidth = 340; // card width + gap
+
+    // Center the active card
+    var offset = (window.innerWidth / 2) - (320 / 2) - (idx * cardWidth);
+    track.style.transform = "translateX(" + offset + "px)";
+
+    // Update active states
+    cards.forEach(function (c, i) {
+      c.classList.toggle("active", i === idx);
+      var v = c.querySelector("video");
+      if (i === idx) { v.currentTime = 0; v.play().catch(function () {}); }
+      else { v.pause(); }
+    });
+
+    // Update dots
+    lightbox.querySelectorAll(".pbrd-carousel-dot").forEach(function (d, i) {
+      d.classList.toggle("active", i === idx);
+    });
+  }
+
   function showLightbox(idx) {
     if (!lightbox) lightbox = createLightbox();
-    lightboxIdx = idx;
-    var c = customers[idx];
-    var video = lightbox.querySelector(".pbrd-lightbox-video");
-    video.src = c.video;
-    video.poster = c.poster;
-    video.currentTime = 0;
-    video.play().catch(function () {});
-    lightbox.querySelector(".pbrd-lightbox-tag").textContent = c.industry;
-    lightbox.querySelector(".pbrd-lightbox-name").textContent = c.name;
-    lightbox.querySelector(".pbrd-lightbox-stat").textContent = c.stat;
-    lightbox.querySelector(".pbrd-lightbox-desc").textContent = c.desc;
     lightbox.classList.add("open");
     document.body.style.overflow = "hidden";
+    // Slight delay so the transition plays after display
+    requestAnimationFrame(function () { goToCarousel(idx); });
   }
 
   function closeLightbox() {
     if (!lightbox) return;
     lightbox.classList.remove("open");
     document.body.style.overflow = "";
-    var video = lightbox.querySelector(".pbrd-lightbox-video");
-    video.pause();
+    lightbox.querySelectorAll("video").forEach(function (v) { v.pause(); });
   }
 
   /* ─── Build Cards ─── */
