@@ -1,7 +1,6 @@
 /* Paybyrd Webflow Overrides — Bento Grid Enhancement */
-/* "Best payments platform on the planet" treatment */
 
-/* ─── Card Element: base refinement ─── */
+/* ─── Card Element: base ─── */
 .card-1_element {
   position: relative;
   border-radius: 24px !important;
@@ -9,79 +8,19 @@
   transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
               box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1) !important;
   border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  background: linear-gradient(
-    170deg,
-    rgba(255, 255, 255, 0.05) 0%,
-    rgba(255, 255, 255, 0.01) 40%,
-    rgba(255, 255, 255, 0.02) 100%
-  ) !important;
+  background: linear-gradient(170deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 40%, rgba(255,255,255,0.02) 100%) !important;
 }
 
-/* ─── Image area: make images more prominent ─── */
-.card-1_gradient-bg {
-  position: relative;
-}
-
-/* Product screenshot styling */
-.card-1_gradient-bg .u-image {
-  transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1) !important;
-  border-radius: 12px;
-  object-fit: contain !important;
-  object-position: center !important;
-}
-
-.card-1_wrap:hover .card-1_gradient-bg .u-image {
-  transform: scale(1.05) !important;
-}
-
-/* Fade-to-card gradient at bottom of image area */
-.card-1_gradient-bg::after {
-  content: "" !important;
-  position: absolute !important;
-  bottom: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  height: 40% !important;
-  background: linear-gradient(to top, rgba(15, 15, 25, 0.9) 0%, transparent 100%) !important;
-  z-index: 4 !important;
-  pointer-events: none !important;
-}
-
-/* ─── Background decorative elements: softer ─── */
-.bento_card-1_img-bg-1 {
-  opacity: 0.25 !important;
-  transition: opacity 0.5s ease !important;
-}
-.card-1_wrap:hover .bento_card-1_img-bg-1 {
-  opacity: 0.4 !important;
-}
-.bento_card-1_img-bg-2 {
-  opacity: 0.15 !important;
-  transition: opacity 0.5s ease !important;
-}
-.card-1_wrap:hover .bento_card-1_img-bg-2 {
-  opacity: 0.25 !important;
-}
-
-/* ─── Animated gradient border on hover ─── */
+/* Animated gradient border */
 .card-1_element::before {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: 24px;
   padding: 1px;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0) 35%,
-    rgba(255, 255, 255, 0.18) 50%,
-    rgba(255, 255, 255, 0) 65%,
-    rgba(255, 255, 255, 0) 100%
-  );
+  background: linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 35%, rgba(255,255,255,0.18) 50%, rgba(255,255,255,0) 65%, rgba(255,255,255,0) 100%);
   background-size: 300% 300%;
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   opacity: 0;
@@ -89,52 +28,47 @@
   pointer-events: none;
   z-index: 5;
 }
-
 .card-1_wrap:hover .card-1_element::before {
   opacity: 1;
   animation: pbrd-border-sweep 2.5s ease infinite;
 }
-
 @keyframes pbrd-border-sweep {
   0% { background-position: 100% 0%; }
   50% { background-position: 0% 100%; }
   100% { background-position: 100% 0%; }
 }
 
-/* ─── Hover: lift + glow ─── */
+/* Hover lift + glow */
 .card-1_wrap:hover .card-1_element {
   transform: translateY(-6px) !important;
-  box-shadow:
-    0 16px 48px -8px rgba(0, 0, 0, 0.5),
-    0 0 80px -30px rgba(100, 120, 255, 0.1) !important;
-  border-color: rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 16px 48px -8px rgba(0,0,0,0.5), 0 0 80px -30px rgba(100,120,255,0.1) !important;
+  border-color: rgba(255,255,255,0.12) !important;
 }
 
-/* ─── Ambient glow behind card on hover ─── */
+/* Ambient glow */
 .card-1_element::after {
   content: "";
   position: absolute;
   inset: -1px;
   border-radius: 24px;
-  background: radial-gradient(
-    ellipse at 50% 70%,
-    rgba(100, 120, 255, 0.07) 0%,
-    transparent 60%
-  );
+  background: radial-gradient(ellipse at 50% 70%, rgba(100,120,255,0.07) 0%, transparent 60%);
   opacity: 0;
   transition: opacity 0.5s ease;
   pointer-events: none;
   z-index: 0;
 }
+.card-1_wrap:hover .card-1_element::after { opacity: 1; }
 
-.card-1_wrap:hover .card-1_element::after {
-  opacity: 1;
-}
+/* Background decoratives */
+.bento_card-1_img-bg-1 { opacity: 0.2 !important; transition: opacity 0.5s ease !important; }
+.card-1_wrap:hover .bento_card-1_img-bg-1 { opacity: 0.35 !important; }
+.bento_card-1_img-bg-2 { opacity: 0.1 !important; transition: opacity 0.5s ease !important; }
+.card-1_wrap:hover .bento_card-1_img-bg-2 { opacity: 0.2 !important; }
 
-/* ─── Tag badges: premium glassmorphism ─── */
+/* Tag badges */
 .card-1_gradient-tag .tag_wrap-2 {
-  background: rgba(255, 255, 255, 0.07) !important;
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  background: rgba(255,255,255,0.07) !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
   backdrop-filter: blur(16px) !important;
   -webkit-backdrop-filter: blur(16px) !important;
   border-radius: 100px !important;
@@ -143,84 +77,462 @@
   font-weight: 600 !important;
   letter-spacing: 0.06em !important;
   text-transform: uppercase !important;
-  color: rgba(255, 255, 255, 0.85) !important;
+  color: rgba(255,255,255,0.85) !important;
   transition: all 0.4s ease !important;
 }
-
 .card-1_wrap:hover .card-1_gradient-tag .tag_wrap-2 {
-  background: rgba(255, 255, 255, 0.14) !important;
-  border-color: rgba(255, 255, 255, 0.22) !important;
+  background: rgba(255,255,255,0.14) !important;
+  border-color: rgba(255,255,255,0.22) !important;
   color: #fff !important;
 }
 
-/* ─── Content area: better spacing and z-index ─── */
-.card-1_content {
-  position: relative;
-  z-index: 5;
-  padding-top: 4px !important;
-}
+/* Content */
+.card-1_content { position: relative; z-index: 5; padding-top: 4px !important; }
+.card-1_content h3 { font-weight: 600 !important; letter-spacing: -0.01em !important; transition: color 0.4s ease !important; }
+.card-1_wrap:hover .card-1_content h3 { color: #fff !important; }
+.card-1_content .u-color-faded { transition: color 0.4s ease !important; }
+.card-1_wrap:hover .card-1_content .u-color-faded { color: rgba(255,255,255,0.6) !important; }
 
-.card-1_content h3 {
-  font-weight: 600 !important;
-  letter-spacing: -0.01em !important;
-  transition: color 0.4s ease !important;
-}
+.card-1_wrap.u-column-span-3 .card-1_element { min-height: 340px; }
 
-.card-1_wrap:hover .card-1_content h3 {
-  color: #fff !important;
-}
-
-.card-1_content .u-color-faded {
-  transition: color 0.4s ease !important;
-}
-
-.card-1_wrap:hover .card-1_content .u-color-faded {
-  color: rgba(255, 255, 255, 0.6) !important;
-}
-
-/* ─── Bottom row cards: larger with more presence ─── */
-.card-1_wrap.u-column-span-3 .card-1_element {
-  min-height: 340px;
-}
-
-/* ─── Section heading: shimmer animation ─── */
+/* Section heading shimmer */
 .grid-1_content_wrap h2 {
-  background: linear-gradient(
-    90deg,
-    #fff 0%,
-    rgba(255, 255, 255, 0.55) 50%,
-    #fff 100%
-  ) !important;
+  background: linear-gradient(90deg, #fff 0%, rgba(255,255,255,0.55) 50%, #fff 100%) !important;
   background-size: 200% auto !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   background-clip: text !important;
   animation: pbrd-text-shimmer 4s linear infinite;
 }
-
 @keyframes pbrd-text-shimmer {
   0% { background-position: 0% center; }
   100% { background-position: 200% center; }
 }
 
-/* ─── Cursor-following spotlight (applied via JS) ─── */
+/* Spotlight */
 .card-1_element .pbrd-spotlight {
   position: absolute;
   width: 350px;
   height: 350px;
   border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.05) 0%,
-    transparent 70%
-  );
+  background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
   pointer-events: none;
   z-index: 1;
   opacity: 0;
   transition: opacity 0.3s ease;
   transform: translate(-50%, -50%);
 }
+.card-1_wrap:hover .card-1_element .pbrd-spotlight { opacity: 1; }
 
-.card-1_wrap:hover .card-1_element .pbrd-spotlight {
-  opacity: 1;
+/* ═══════════════════════════════════════════ */
+/* Custom Animated Visuals                    */
+/* ═══════════════════════════════════════════ */
+
+.pbrd-viz-container {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pbrd-viz {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  font-family: inherit;
+}
+
+/* ─── Conversion Rates: Bar Chart ─── */
+.pbrd-viz-conversion {
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pbrd-viz-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  height: 60%;
+  width: 80%;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.pbrd-bar {
+  flex: 1;
+  height: var(--h);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  animation: pbrd-bar-grow 1s cubic-bezier(0.23,1,0.32,1) var(--d) both;
+}
+
+.pbrd-bar-fill {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px 4px 0 0;
+  background: linear-gradient(to top, rgba(255,255,255,0.08), rgba(255,255,255,0.15));
+  transition: background 0.3s ease;
+}
+
+.pbrd-bar-accent .pbrd-bar-fill {
+  background: linear-gradient(to top, rgba(120,255,180,0.15), rgba(120,255,180,0.35)) !important;
+}
+
+.card-1_wrap:hover .pbrd-bar-fill {
+  background: linear-gradient(to top, rgba(255,255,255,0.12), rgba(255,255,255,0.22));
+}
+
+.card-1_wrap:hover .pbrd-bar-accent .pbrd-bar-fill {
+  background: linear-gradient(to top, rgba(120,255,180,0.2), rgba(120,255,180,0.45)) !important;
+}
+
+.pbrd-bar span {
+  font-size: 0.5625rem;
+  color: rgba(255,255,255,0.3);
+  margin-top: 4px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  position: absolute;
+  top: -16px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card-1_wrap:hover .pbrd-bar span { opacity: 1; }
+
+@keyframes pbrd-bar-grow {
+  from { height: 0; }
+  to { height: var(--h); }
+}
+
+.pbrd-viz-label {
+  font-size: 0.6875rem;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+.pbrd-viz-trend {
+  font-size: 0.75rem;
+  color: rgba(120,255,180,0.7);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  animation: pbrd-fade-in 0.6s 1s both;
+}
+
+/* ─── Pricing: Fee Ticker ─── */
+.pbrd-viz-pricing {
+  flex-direction: column;
+  gap: 0;
+  padding: 20px 28px;
+  width: 100%;
+}
+
+.pbrd-fee-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  animation: pbrd-slide-in 0.5s cubic-bezier(0.23,1,0.32,1) var(--d) both;
+  transition: background 0.3s ease;
+}
+
+.pbrd-fee-row:hover {
+  background: rgba(255,255,255,0.04);
+}
+
+.pbrd-fee-icon {
+  color: rgba(255,255,255,0.3);
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.pbrd-fee-name {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.5);
+  flex: 1;
+  font-weight: 500;
+}
+
+.pbrd-fee-amount {
+  font-size: 0.8125rem;
+  color: rgba(255,255,255,0.85);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  font-family: inherit;
+}
+
+.pbrd-fee-highlight {
+  border: 1px solid rgba(120,255,180,0.15);
+  background: rgba(120,255,180,0.04);
+}
+
+.pbrd-fee-highlight .pbrd-fee-name {
+  color: rgba(120,255,180,0.7);
+}
+
+.pbrd-fee-highlight .pbrd-fee-amount {
+  color: rgba(120,255,180,0.8);
+}
+
+@keyframes pbrd-slide-in {
+  from { opacity: 0; transform: translateX(-12px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* ─── Security: Shield + Pulse ─── */
+.pbrd-viz-security {
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pbrd-shield-wrap {
+  position: relative;
+  width: 80px;
+  height: 96px;
+}
+
+.pbrd-shield-svg {
+  width: 80px;
+  height: 96px;
+  position: relative;
+  z-index: 2;
+}
+
+.pbrd-shield-check {
+  stroke-dasharray: 40;
+  stroke-dashoffset: 40;
+  animation: pbrd-check-draw 0.8s 0.5s cubic-bezier(0.23,1,0.32,1) forwards;
+}
+
+@keyframes pbrd-check-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+.pbrd-shield-pulse {
+  position: absolute;
+  inset: -15px;
+  border-radius: 50%;
+  border: 1px solid rgba(120,255,180,0.15);
+  animation: pbrd-pulse 2.5s ease-out infinite;
+}
+
+.pbrd-pulse-2 {
+  animation-delay: 1.25s;
+}
+
+@keyframes pbrd-pulse {
+  0% { transform: scale(0.8); opacity: 0.6; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.pbrd-security-badges {
+  display: flex;
+  gap: 8px;
+}
+
+.pbrd-sec-badge {
+  font-size: 0.5625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 4px 10px;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.03);
+  animation: pbrd-fade-in 0.5s var(--d) both;
+  transition: all 0.3s ease;
+}
+
+.card-1_wrap:hover .pbrd-sec-badge {
+  border-color: rgba(120,255,180,0.2);
+  color: rgba(120,255,180,0.7);
+  background: rgba(120,255,180,0.04);
+}
+
+/* ─── Integrations: Connected Nodes ─── */
+.pbrd-viz-integrations {
+  padding: 16px;
+}
+
+.pbrd-nodes-svg {
+  width: 100%;
+  height: 100%;
+  max-width: 280px;
+  max-height: 160px;
+}
+
+.pbrd-node-line {
+  stroke: rgba(255,255,255,0.06);
+  stroke-width: 1;
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: pbrd-line-draw 1s ease var(--d) forwards;
+}
+
+.card-1_wrap:hover .pbrd-node-line {
+  stroke: rgba(120,180,255,0.15);
+}
+
+@keyframes pbrd-line-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+.pbrd-node {
+  fill: rgba(255,255,255,0.04);
+  stroke: rgba(255,255,255,0.12);
+  stroke-width: 1;
+  transform-origin: center;
+  animation: pbrd-node-pop 0.4s cubic-bezier(0.23,1,0.32,1) var(--d) both;
+  transition: all 0.3s ease;
+}
+
+.card-1_wrap:hover .pbrd-node {
+  stroke: rgba(120,180,255,0.3);
+  fill: rgba(120,180,255,0.06);
+}
+
+.pbrd-node-center {
+  fill: rgba(255,255,255,0.06) !important;
+  stroke: rgba(255,255,255,0.2) !important;
+  stroke-width: 1.5;
+}
+
+.card-1_wrap:hover .pbrd-node-center {
+  stroke: rgba(120,180,255,0.5) !important;
+  fill: rgba(120,180,255,0.1) !important;
+}
+
+@keyframes pbrd-node-pop {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.pbrd-particle {
+  fill: rgba(120,180,255,0.5);
+  opacity: 0;
+  animation: pbrd-fade-in 0.3s var(--d) forwards;
+}
+
+.card-1_wrap:hover .pbrd-particle {
+  fill: rgba(120,180,255,0.8);
+}
+
+/* ─── Loyalty: Ring + Metrics ─── */
+.pbrd-viz-loyalty {
+  gap: 24px;
+  padding: 20px 24px;
+}
+
+.pbrd-loyalty-ring-wrap {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  flex-shrink: 0;
+}
+
+.pbrd-loyalty-ring {
+  width: 100%;
+  height: 100%;
+}
+
+.pbrd-ring-fill {
+  animation: pbrd-ring-draw 1.5s 0.3s cubic-bezier(0.23,1,0.32,1) forwards;
+  transition: stroke 0.3s ease;
+}
+
+.card-1_wrap:hover .pbrd-ring-fill {
+  stroke: rgba(120,180,255,0.8);
+}
+
+@keyframes pbrd-ring-draw {
+  to { stroke-dashoffset: 17; /* 264 - (264 * 0.94) ≈ 17 for 94% */ }
+}
+
+.pbrd-loyalty-value {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -55%);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+  animation: pbrd-fade-in 0.6s 0.8s both;
+}
+
+.pbrd-loyalty-value span {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.5);
+}
+
+.pbrd-loyalty-sub {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  font-size: 0.5625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.35);
+  font-weight: 600;
+  animation: pbrd-fade-in 0.6s 1s both;
+}
+
+.pbrd-loyalty-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pbrd-loyalty-metric {
+  animation: pbrd-fade-in 0.5s var(--d) both;
+}
+
+.pbrd-metric-num {
+  display: block;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.85);
+  font-variant-numeric: tabular-nums;
+}
+
+.pbrd-metric-label {
+  font-size: 0.625rem;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+
+.pbrd-stars {
+  font-size: 0.625rem;
+  color: rgba(255,200,50,0.6);
+  letter-spacing: 2px;
+  margin-top: 2px;
+  transition: color 0.3s ease;
+}
+
+.card-1_wrap:hover .pbrd-stars {
+  color: rgba(255,200,50,0.9);
+}
+
+/* ─── Shared animation ─── */
+@keyframes pbrd-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
 }
