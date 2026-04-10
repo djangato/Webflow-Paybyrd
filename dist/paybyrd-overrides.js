@@ -1403,16 +1403,16 @@
     section.innerHTML =
       '<div class="pbrd-mid-cta-card">' +
         '<div class="pbrd-mid-cta-text">' +
-          '<h3>Start accepting payments today</h3>' +
-          '<p>Go live in under 4 hours. No setup fees, no long-term contracts. Just plug in and grow.</p>' +
+          '<h3>Try Paybyrd. Risk free.</h3>' +
+          '<p>Not happy in the first 30 days? We\u2019ll refund every commission. No questions, no catches \u2014 just a team that\u2019s confident you\u2019ll stay.</p>' +
           '<div class="pbrd-mid-cta-stats">' +
-            '<div class="pbrd-mid-cta-stat">' + checkSVG + '<span>No setup fees</span></div>' +
-            '<div class="pbrd-mid-cta-stat">' + checkSVG + '<span>Live in 4 hours</span></div>' +
-            '<div class="pbrd-mid-cta-stat">' + checkSVG + '<span>Cancel anytime</span></div>' +
+            '<div class="pbrd-mid-cta-stat">' + checkSVG + '<span>30-day money-back guarantee</span></div>' +
+            '<div class="pbrd-mid-cta-stat">' + checkSVG + '<span>Live in under 4 hours</span></div>' +
+            '<div class="pbrd-mid-cta-stat">' + checkSVG + '<span>No contracts, cancel anytime</span></div>' +
           '</div>' +
         '</div>' +
         '<div class="pbrd-mid-cta-actions">' +
-          '<a href="https://onboard.paybyrd.com/" class="pbrd-mid-cta-primary">Get Started Free \u2192</a>' +
+          '<a href="https://onboard.paybyrd.com/" class="pbrd-mid-cta-primary">Start Risk-Free \u2192</a>' +
           '<a href="/book-demo" class="pbrd-mid-cta-secondary">Talk to Sales</a>' +
         '</div>' +
       '</div>';
