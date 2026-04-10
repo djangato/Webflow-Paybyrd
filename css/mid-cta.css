@@ -1,7 +1,12 @@
 /* Paybyrd — Mid-Page CTA Enhancement */
 
-/* Hide original sparse CTA */
+/* Hide original sparse CTAs */
 .grid-1_button_wrap {
+  display: none !important;
+}
+
+/* Hide the "Get Started" button above the AI Ready section */
+.cta-1_wrap .cta-1_button_wrap {
   display: none !important;
 }
 
