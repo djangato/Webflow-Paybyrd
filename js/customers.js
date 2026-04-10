@@ -6,6 +6,8 @@
 
   var BASE = "https://djangato.github.io/Webflow-Paybyrd/assets/customers/";
 
+  var LOGOS = "https://cdn.prod.website-files.com/69d9242bbde99c4b80e41aeb/";
+
   var customers = [
     {
       name: "TAP Air Portugal",
@@ -13,7 +15,8 @@
       stat: "Millions unlocked in new revenue",
       desc: "Global and local transaction processing with maximized approval rates and fraud reduction \u2014 unlocking millions in additional payment volume across 90+ markets.",
       video: BASE + "tap.mp4",
-      poster: BASE + "tap-poster.jpg"
+      poster: BASE + "tap-poster.jpg",
+      logo: LOGOS + "69d9242bbde99c4b80e41dcc_tap-logo.svg"
     },
     {
       name: "Wink",
@@ -21,7 +24,8 @@
       stat: "Real-time visibility across all stores",
       desc: "Leveraging real-time data across own stores and franchise network to boost loyalty, identify recurring shoppers, and increase basket size.",
       video: BASE + "wink.mp4",
-      poster: BASE + "wink-poster.jpg"
+      poster: BASE + "wink-poster.jpg",
+      logo: LOGOS + "69d9242bbde99c4b80e41dd1_WINK.svg"
     },
     {
       name: "Vila Gal\u00E9",
@@ -29,7 +33,8 @@
       stat: "Omnichannel across 40+ hotels",
       desc: "Seamless payment orchestration across one of the largest hotel groups in Portugal and Brazil \u2014 from front desk to spa to room service.",
       video: BASE + "vilagale.mp4",
-      poster: BASE + "vilagale-poster.jpg"
+      poster: BASE + "vilagale-poster.jpg",
+      logo: LOGOS + "69d9242bbde99c4b80e41dce_vila-gale.svg"
     },
     {
       name: "KuantoKusta",
@@ -37,7 +42,8 @@
       stat: "Higher checkout conversion with BNPL",
       desc: "High-performance checkout with multi-payment strategy including BNPL and local methods \u2014 reducing cart abandonment and increasing order value.",
       video: BASE + "kuantokusta.mp4",
-      poster: BASE + "kuantokusta-poster.jpg"
+      poster: BASE + "kuantokusta-poster.jpg",
+      logo: LOGOS + "69d9242bbde99c4b80e41dcd_kuanto-logo.svg"
     },
     {
       name: "Kabuki",
@@ -45,7 +51,8 @@
       stat: "Bespoke POS with loyalty insights",
       desc: "Tailored terminal experience with branded checkout flows and full customer loyalty visibility \u2014 turning every transaction into a relationship.",
       video: BASE + "kabuki.mp4",
-      poster: BASE + "kabuki-poster.jpg"
+      poster: BASE + "kabuki-poster.jpg",
+      logo: LOGOS + "69d9242bbde99c4b80e41dcb_kabuki.svg"
     }
   ];
 
@@ -66,6 +73,7 @@
       '<div class="pbrd-carousel-overlay"></div>' +
       '<div class="pbrd-carousel-content">' +
         '<span class="pbrd-carousel-tag">' + c.industry + '</span>' +
+        '<img class="pbrd-carousel-logo" src="' + c.logo + '" alt="' + c.name + '">' +
         '<h3 class="pbrd-carousel-name">' + c.name + '</h3>' +
         '<p class="pbrd-carousel-stat">' + c.stat + '</p>' +
         '<p class="pbrd-carousel-desc">' + c.desc + '</p>' +
@@ -156,10 +164,10 @@
     if (!lightbox) return;
     var track = lightbox.querySelector(".pbrd-carousel-track");
     var cards = lightbox.querySelectorAll(".pbrd-carousel-card");
-    var cardWidth = 340; // card width + gap
+    var cardWidth = 360; // card flex-basis + gap
 
     // Center the active card
-    var offset = (window.innerWidth / 2) - (320 / 2) - (idx * cardWidth);
+    var offset = (window.innerWidth / 2) - (340 / 2) - (idx * cardWidth);
     track.style.transform = "translateX(" + offset + "px)";
 
     // Update active states
@@ -200,6 +208,7 @@
       '<div class="pbrd-customer-overlay"></div>' +
       '<div class="pbrd-customer-tag">' + c.industry + '</div>' +
       '<div class="pbrd-customer-content">' +
+        '<img class="pbrd-customer-logo" src="' + c.logo + '" alt="' + c.name + '" loading="lazy">' +
         '<h3 class="pbrd-customer-name">' + c.name + '</h3>' +
         '<p class="pbrd-customer-stat">' + c.stat + '</p>' +
         '<p class="pbrd-customer-desc">' + c.desc + '</p>' +
