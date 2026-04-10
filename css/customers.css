@@ -153,6 +153,27 @@
   opacity: 1;
 }
 
+/* Text logo fallback (when no SVG available) */
+.pbrd-customer-logo-text {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+.pbrd-customer-card:hover .pbrd-customer-logo-text { opacity: 1; }
+
+.pbrd-carousel-logo-text {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+  opacity: 0.95;
+}
+
 /* Per-customer logo size overrides */
 .pbrd-customer-card[data-customer="vilagale"] .pbrd-customer-logo { height: 32px; max-width: 156px; }
 .pbrd-customer-card[data-customer="kabuki"] .pbrd-customer-logo { height: 32px; max-width: 156px; }

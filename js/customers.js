@@ -58,6 +58,46 @@
       video: BASE + "kabuki.mp4",
       poster: BASE + "kabuki-poster.jpg",
       logo: LOGOS + "69d9242bbde99c4b80e41dcb_kabuki.svg"
+    },
+    {
+      name: "Rede Expressos",
+      slug: "redeexpressos",
+      industry: "Transport",
+      stat: "Seamless ticketing across 700+ routes",
+      desc: "Powering frictionless payments for Portugal\u2019s largest intercity bus network \u2014 online, at the counter, and on the go. Every seat sold faster.",
+      video: BASE + "redeexpressos.mp4",
+      poster: BASE + "redeexpressos-poster.jpg",
+      logo: LOGOS + "69d9242bbde99c4b80e41dd3_rede%20expresso.png"
+    },
+    {
+      name: "Andr\u00E9 \u00D3ticas",
+      slug: "andreoticas",
+      industry: "Luxury Retail",
+      stat: "Premium checkout for premium eyewear",
+      desc: "Elevating the in-store payment experience for high-end optical retail \u2014 with tailored POS flows that match the care behind every pair.",
+      video: BASE + "andreoticas.mp4",
+      poster: BASE + "andreoticas-poster.jpg",
+      logo: null
+    },
+    {
+      name: "Onyria Resorts",
+      slug: "onyria",
+      industry: "Luxury Hospitality",
+      stat: "Unified payments across resort properties",
+      desc: "From golf clubhouse to spa to fine dining \u2014 seamless omnichannel payments across one of Portugal\u2019s most prestigious resort groups.",
+      video: BASE + "onyria.mp4",
+      poster: BASE + "onyria-poster.jpg",
+      logo: null
+    },
+    {
+      name: "SkinBoutique by LMR",
+      slug: "skinboutique",
+      industry: "Aesthetics & Health",
+      stat: "Effortless payments for premium care",
+      desc: "Streamlined checkout for high-value treatments \u2014 installments, recurring billing, and a payment experience as refined as the clinic itself.",
+      video: BASE + "skinboutique.mp4",
+      poster: BASE + "skinboutique-poster.jpg",
+      logo: null
     }
   ];
 
@@ -78,7 +118,9 @@
       '<div class="pbrd-carousel-overlay"></div>' +
       '<div class="pbrd-carousel-content">' +
         '<span class="pbrd-carousel-tag">' + c.industry + '</span>' +
-        '<img class="pbrd-carousel-logo" src="' + c.logo + '" alt="' + c.name + '">' +
+        (c.logo
+          ? '<img class="pbrd-carousel-logo" src="' + c.logo + '" alt="' + c.name + '">'
+          : '<div class="pbrd-carousel-logo-text">' + c.name + '</div>') +
         '<h3 class="pbrd-carousel-name">' + c.name + '</h3>' +
         '<p class="pbrd-carousel-stat">' + c.stat + '</p>' +
         '<p class="pbrd-carousel-desc">' + c.desc + '</p>' +
@@ -213,7 +255,9 @@
       '<div class="pbrd-customer-overlay"></div>' +
       '<div class="pbrd-customer-tag">' + c.industry + '</div>' +
       '<div class="pbrd-customer-content">' +
-        '<img class="pbrd-customer-logo" src="' + c.logo + '" alt="' + c.name + '" loading="lazy">' +
+        (c.logo
+          ? '<img class="pbrd-customer-logo" src="' + c.logo + '" alt="' + c.name + '" loading="lazy">'
+          : '<div class="pbrd-customer-logo-text">' + c.name + '</div>') +
         '<h3 class="pbrd-customer-name">' + c.name + '</h3>' +
         '<p class="pbrd-customer-stat">' + c.stat + '</p>' +
         '<p class="pbrd-customer-desc">' + c.desc + '</p>' +
