@@ -269,6 +269,13 @@
     var marquee = document.querySelector('[data-wf--section-partner-marquee--section-theme]');
     if (!marquee) return;
 
+    // Build cards HTML — duplicate the set for seamless infinite loop
+    var cardsHTML = customers.map(buildCard).join("");
+    var duplicatedCards = cardsHTML + cardsHTML;
+
+    // Calculate marquee duration based on number of cards (more cards = slower)
+    var marqueeDur = customers.length * 7; // ~7s per card
+
     var section = document.createElement("section");
     section.className = "pbrd-customers";
 
@@ -279,8 +286,10 @@
           '<h2>Powering payments for businesses that demand more.</h2>' +
         '</div>' +
       '</div>' +
-      '<div class="pbrd-customers-track">' +
-        customers.map(buildCard).join("") +
+      '<div class="pbrd-customers-marquee">' +
+        '<div class="pbrd-customers-track" style="--marquee-dur:' + marqueeDur + 's">' +
+          duplicatedCards +
+        '</div>' +
       '</div>' +
       '<div class="pbrd-customers-inner">' +
         '<div class="pbrd-customers-cta">' +
@@ -290,11 +299,11 @@
 
     marquee.replaceWith(section);
 
-    // Card interactions
+    // Card interactions (apply to all cards including duplicates)
     section.querySelectorAll(".pbrd-customer-card").forEach(function (card) {
       var video = card.querySelector("video");
 
-      // Hover: play video
+      // Hover: play video + pause marquee is handled by CSS
       card.addEventListener("mouseenter", function () {
         if (video) { video.currentTime = 0; video.play().catch(function () {}); }
       });
@@ -302,13 +311,14 @@
         if (video) video.pause();
       });
 
-      // Click: open lightbox
+      // Click: open lightbox (use modulo to map duplicate index to real index)
       card.addEventListener("click", function () {
-        showLightbox(parseInt(card.dataset.idx));
+        var idx = parseInt(card.dataset.idx) % customers.length;
+        showLightbox(idx);
       });
     });
 
-    // Lazy load videos
+    // Lazy load videos when they scroll into view
     if ("IntersectionObserver" in window) {
       var obs = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
@@ -318,7 +328,7 @@
             obs.unobserve(entry.target);
           }
         });
-      }, { rootMargin: "200px" });
+      }, { rootMargin: "300px" });
       section.querySelectorAll(".pbrd-customer-card").forEach(function (c) { obs.observe(c); });
     }
   }
