@@ -364,171 +364,260 @@
   background: rgba(120,255,180,0.04);
 }
 
-/* ─── Integrations: Connected Nodes ─── */
-.pbrd-viz-integrations {
-  padding: 16px;
-}
-
-.pbrd-nodes-svg {
+/* ─── Business Intelligence: Heatmap + KPIs ─── */
+.pbrd-viz-bi {
+  display: flex;
+  gap: 32px;
+  padding: 24px 32px;
   width: 100%;
-  height: 100%;
-  max-width: 280px;
-  max-height: 160px;
+  align-items: center;
 }
 
-.pbrd-node-line {
-  stroke: rgba(255,255,255,0.06);
-  stroke-width: 1;
+.pbrd-bi-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pbrd-bi-kpi {
+  animation: pbrd-fade-in 0.6s var(--d) both;
+}
+
+.pbrd-bi-number {
+  display: block;
+  font-size: 1.75rem;
+  font-weight: 300;
+  color: #fff;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.pbrd-bi-label {
+  display: block;
+  font-size: 0.625rem;
+  color: rgba(255,255,255,0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+/* Sparkline */
+.pbrd-bi-sparkline {
+  animation: pbrd-fade-in 0.6s var(--d) both;
+}
+
+.pbrd-bi-sparkline svg {
+  width: 100%;
+  height: 32px;
+  display: block;
+}
+
+.pbrd-spark-line {
   stroke-dasharray: 200;
   stroke-dashoffset: 200;
-  animation: pbrd-line-draw 1s ease var(--d) forwards;
+  animation: pbrd-line-draw 1.5s 0.5s ease forwards;
 }
 
-.card-1_wrap:hover .pbrd-node-line {
-  stroke: rgba(120,180,255,0.15);
+.card-1_wrap:hover .pbrd-spark-line {
+  stroke: rgba(120,180,255,0.7);
 }
 
 @keyframes pbrd-line-draw {
   to { stroke-dashoffset: 0; }
 }
 
-.pbrd-node {
-  fill: rgba(255,255,255,0.04);
-  stroke: rgba(255,255,255,0.12);
-  stroke-width: 1;
-  transform-origin: center;
-  animation: pbrd-node-pop 0.4s cubic-bezier(0.23,1,0.32,1) var(--d) both;
-  transition: all 0.3s ease;
+.pbrd-spark-label {
+  font-size: 0.5625rem;
+  color: rgba(255,255,255,0.2);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 4px;
+  display: block;
 }
 
-.card-1_wrap:hover .pbrd-node {
-  stroke: rgba(120,180,255,0.3);
-  fill: rgba(120,180,255,0.06);
-}
-
-.pbrd-node-center {
-  fill: rgba(255,255,255,0.06) !important;
-  stroke: rgba(255,255,255,0.2) !important;
-  stroke-width: 1.5;
-}
-
-.card-1_wrap:hover .pbrd-node-center {
-  stroke: rgba(120,180,255,0.5) !important;
-  fill: rgba(120,180,255,0.1) !important;
-}
-
-@keyframes pbrd-node-pop {
-  from { transform: scale(0); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-
-.pbrd-particle {
-  fill: rgba(120,180,255,0.5);
-  opacity: 0;
-  animation: pbrd-fade-in 0.3s var(--d) forwards;
-}
-
-.card-1_wrap:hover .pbrd-particle {
-  fill: rgba(120,180,255,0.8);
-}
-
-/* ─── Loyalty: Ring + Metrics ─── */
-.pbrd-viz-loyalty {
-  gap: 24px;
-  padding: 20px 24px;
-}
-
-.pbrd-loyalty-ring-wrap {
-  position: relative;
-  width: 100px;
-  height: 100px;
+/* Heatmap */
+.pbrd-bi-right {
   flex-shrink: 0;
 }
 
-.pbrd-loyalty-ring {
+.pbrd-heatmap-label {
+  font-size: 0.5625rem;
+  color: rgba(255,255,255,0.25);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.pbrd-heatmap-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+  padding-left: 20px;
+  margin-bottom: 3px;
+}
+
+.pbrd-heatmap-days span {
+  font-size: 0.5rem;
+  color: rgba(255,255,255,0.2);
+  text-align: center;
+  font-weight: 500;
+}
+
+.pbrd-heatmap-body {
+  display: flex;
+  gap: 4px;
+}
+
+.pbrd-heatmap-hours {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  justify-content: center;
+}
+
+.pbrd-heatmap-hours span {
+  font-size: 0.4375rem;
+  color: rgba(255,255,255,0.15);
+  width: 16px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-variant-numeric: tabular-nums;
+}
+
+.pbrd-heatmap-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 14px);
+  grid-template-rows: repeat(4, 14px);
+  gap: 3px;
+}
+
+.pbrd-heat-cell {
+  border-radius: 3px;
+  background: rgba(120, 180, 255, var(--op));
+  animation: pbrd-heat-pop 0.3s var(--d) both;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.card-1_wrap:hover .pbrd-heat-cell {
+  transform: scale(1.05);
+}
+
+@keyframes pbrd-heat-pop {
+  from { opacity: 0; transform: scale(0); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ─── Loyalty v2: Elegant Arc ─── */
+.pbrd-viz-loyalty2 {
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px 32px;
+  width: 100%;
+}
+
+.pbrd-loy-arc-wrap {
+  position: relative;
+  width: 180px;
+  height: 108px;
+  margin: 0 auto;
+}
+
+.pbrd-loy-arc {
   width: 100%;
   height: 100%;
 }
 
-.pbrd-ring-fill {
-  animation: pbrd-ring-draw 1.5s 0.3s cubic-bezier(0.23,1,0.32,1) forwards;
-  transition: stroke 0.3s ease;
+.pbrd-loy-arc-fill {
+  animation: pbrd-arc-draw 1.8s 0.3s cubic-bezier(0.23,1,0.32,1) forwards;
+  transition: stroke-width 0.3s ease;
 }
 
-.card-1_wrap:hover .pbrd-ring-fill {
-  stroke: rgba(120,180,255,0.8);
+.card-1_wrap:hover .pbrd-loy-arc-fill {
+  stroke-width: 7;
 }
 
-@keyframes pbrd-ring-draw {
-  to { stroke-dashoffset: 17; /* 264 - (264 * 0.94) ≈ 17 for 94% */ }
+@keyframes pbrd-arc-draw {
+  to { stroke-dashoffset: 17; }
 }
 
-.pbrd-loyalty-value {
+.pbrd-loy-dot {
+  animation: pbrd-dot-appear 0.3s 1.8s both;
+}
+
+@keyframes pbrd-dot-appear {
+  to { opacity: 1; }
+}
+
+.pbrd-loy-center {
   position: absolute;
-  top: 50%;
+  bottom: 0;
   left: 50%;
-  transform: translate(-50%, -55%);
-  font-size: 1.5rem;
-  font-weight: 700;
+  transform: translateX(-50%);
+  text-align: center;
+  animation: pbrd-fade-in 0.5s 0.8s both;
+}
+
+.pbrd-loy-big {
+  font-size: 2.5rem;
+  font-weight: 200;
   color: #fff;
+  letter-spacing: -0.04em;
+  line-height: 1;
   font-variant-numeric: tabular-nums;
-  animation: pbrd-fade-in 0.6s 0.8s both;
 }
 
-.pbrd-loyalty-value span {
-  font-size: 0.75rem;
-  color: rgba(255,255,255,0.5);
-}
-
-.pbrd-loyalty-sub {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, 50%);
-  font-size: 0.5625rem;
+.pbrd-loy-unit {
+  font-size: 0.625rem;
+  color: rgba(255,255,255,0.3);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: rgba(255,255,255,0.35);
-  font-weight: 600;
-  animation: pbrd-fade-in 0.6s 1s both;
+  letter-spacing: 0.15em;
+  font-weight: 500;
+  margin-top: 2px;
 }
 
-.pbrd-loyalty-metrics {
+.pbrd-loy-footer {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
 }
 
-.pbrd-loyalty-metric {
+.pbrd-loy-divider {
+  width: 1px;
+  height: 28px;
+  background: rgba(255,255,255,0.06);
+}
+
+.pbrd-loy-stat {
+  text-align: center;
   animation: pbrd-fade-in 0.5s var(--d) both;
 }
 
-.pbrd-metric-num {
+.pbrd-loy-stat-val {
   display: block;
   font-size: 1.125rem;
-  font-weight: 700;
+  font-weight: 300;
   color: rgba(255,255,255,0.85);
+  letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
+  line-height: 1;
 }
 
-.pbrd-metric-label {
-  font-size: 0.625rem;
-  color: rgba(255,255,255,0.35);
+.pbrd-loy-stat-lbl {
+  display: block;
+  font-size: 0.5625rem;
+  color: rgba(255,255,255,0.25);
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-weight: 600;
-}
-
-.pbrd-stars {
-  font-size: 0.625rem;
-  color: rgba(255,200,50,0.6);
-  letter-spacing: 2px;
-  margin-top: 2px;
-  transition: color 0.3s ease;
-}
-
-.card-1_wrap:hover .pbrd-stars {
-  color: rgba(255,200,50,0.9);
+  letter-spacing: 0.08em;
+  font-weight: 500;
+  margin-top: 4px;
 }
 
 /* ─── Shared animation ─── */
