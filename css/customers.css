@@ -43,38 +43,30 @@
   color: #fff;
 }
 
-/* ─── Card Scroll Container ─── */
+/* ─── Card Grid — centered, no scrollbar ─── */
 .pbrd-customers-track {
   display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
   padding: 0 24px 20px;
-  margin: 0 -24px;
-}
-
-.pbrd-customers-track::-webkit-scrollbar {
-  display: none;
 }
 
 /* ─── Individual Customer Card ─── */
 .pbrd-customer-card {
-  flex: 0 0 260px;
-  height: 420px;
+  flex: 0 0 210px;
+  height: 380px;
   border-radius: 20px;
   overflow: hidden;
   position: relative;
-  scroll-snap-align: start;
   cursor: pointer;
   transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
               box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .pbrd-customer-card:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 20px 60px -12px rgba(0, 0, 0, 0.5);
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 24px 64px -12px rgba(0, 0, 0, 0.6);
 }
 
 /* Video background */
@@ -85,7 +77,7 @@
   height: 100%;
   object-fit: cover;
   z-index: 0;
-  opacity: 0.85;
+  opacity: 0.8;
   transition: opacity 0.5s ease, transform 0.6s ease;
 }
 
@@ -94,22 +86,22 @@
   transform: scale(1.04);
 }
 
-/* Gradient overlay — bottom for text readability */
+/* Gradient overlay */
 .pbrd-customer-overlay {
   position: absolute;
   inset: 0;
   z-index: 1;
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.85) 0%,
-    rgba(0, 0, 0, 0.3) 40%,
-    rgba(0, 0, 0, 0.05) 70%,
+    rgba(0, 0, 0, 0.88) 0%,
+    rgba(0, 0, 0, 0.4) 35%,
+    rgba(0, 0, 0, 0.08) 65%,
     transparent 100%
   );
   pointer-events: none;
 }
 
-/* Top: industry tag */
+/* Industry tag */
 .pbrd-customer-tag {
   position: absolute;
   top: 16px;
@@ -119,7 +111,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  padding: 4px 10px;
+  padding: 5px 12px;
   border-radius: 100px;
   background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(12px);
@@ -135,7 +127,7 @@
   transform: translateY(0);
 }
 
-/* Bottom: content */
+/* Bottom content */
 .pbrd-customer-content {
   position: absolute;
   bottom: 0;
@@ -146,17 +138,33 @@
 }
 
 .pbrd-customer-name {
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   font-weight: 600;
   color: #fff;
-  margin: 0 0 6px;
+  margin: 0 0 4px;
   letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.pbrd-customer-stat {
+  font-size: 0.6875rem;
+  color: rgba(120, 180, 255, 0.7);
+  font-weight: 600;
+  margin: 0 0 6px;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: all 0.4s ease 0.05s;
+}
+
+.pbrd-customer-card:hover .pbrd-customer-stat {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .pbrd-customer-desc {
-  font-size: 0.75rem;
-  line-height: 1.5;
-  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.6875rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.5);
   margin: 0;
   max-height: 0;
   overflow: hidden;
@@ -169,36 +177,181 @@
   opacity: 1;
 }
 
-/* Play indicator */
-.pbrd-customer-play {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.8);
-  z-index: 2;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+/* ─── Lightbox / Modal ─── */
+.pbrd-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: rgba(0, 0, 0, 0);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
   opacity: 0;
-  transition: all 0.4s ease;
+  pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.pbrd-lightbox.open {
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.pbrd-lightbox-card {
+  position: relative;
+  width: 340px;
+  max-width: 90vw;
+  height: 600px;
+  max-height: 85vh;
+  border-radius: 24px;
+  overflow: hidden;
+  transform: scale(0.85) translateY(30px);
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.6);
+}
+
+.pbrd-lightbox.open .pbrd-lightbox-card {
+  transform: scale(1) translateY(0);
+}
+
+.pbrd-lightbox-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.pbrd-lightbox-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.2) 40%,
+    transparent 70%
+  );
   pointer-events: none;
 }
 
-.pbrd-customer-card:hover .pbrd-customer-play {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
+.pbrd-lightbox-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 32px 28px;
+  z-index: 2;
 }
 
-.pbrd-customer-play svg {
+.pbrd-lightbox-tag {
+  font-size: 0.625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 5px 12px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: rgba(255, 255, 255, 0.8);
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.pbrd-lightbox-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 8px;
+  letter-spacing: -0.02em;
+}
+
+.pbrd-lightbox-stat {
+  font-size: 0.8125rem;
+  color: rgba(120, 180, 255, 0.8);
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.pbrd-lightbox-desc {
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+
+/* Close button */
+.pbrd-lightbox-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 3;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #fff;
+  font-size: 1.125rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+  font-family: inherit;
+  line-height: 1;
+}
+
+.pbrd-lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Nav arrows */
+.pbrd-lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.pbrd-lightbox-nav:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+.pbrd-lightbox-prev {
+  left: -60px;
+}
+
+.pbrd-lightbox-next {
+  right: -60px;
+}
+
+.pbrd-lightbox-nav svg {
   width: 16px;
   height: 16px;
-  margin-left: 2px;
 }
 
 /* ─── Bottom CTA ─── */
@@ -230,31 +383,40 @@
 
 /* ─── Responsive ─── */
 @media (max-width: 768px) {
-  .pbrd-customers {
-    padding: 48px 0;
-  }
+  .pbrd-customers { padding: 48px 0; }
+  .pbrd-customers-header { margin-bottom: 32px; }
 
-  .pbrd-customer-card {
-    flex: 0 0 220px;
-    height: 360px;
+  .pbrd-customers-track {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
+  .pbrd-customers-track::-webkit-scrollbar { display: none; }
+  .pbrd-customer-card { scroll-snap-align: start; }
 
-  .pbrd-customers-header {
-    margin-bottom: 32px;
+  .pbrd-lightbox-prev { left: 8px; }
+  .pbrd-lightbox-next { right: 8px; }
+
+  .pbrd-lightbox-card {
+    width: 300px;
+    height: 520px;
   }
 }
 
 @media (max-width: 480px) {
   .pbrd-customer-card {
-    flex: 0 0 200px;
-    height: 320px;
+    flex: 0 0 190px;
+    height: 340px;
   }
 
-  .pbrd-customer-content {
-    padding: 20px 16px;
-  }
+  .pbrd-customer-content { padding: 20px 16px; }
+  .pbrd-customer-name { font-size: 1rem; }
 
-  .pbrd-customer-name {
-    font-size: 1.0625rem;
+  .pbrd-lightbox-card {
+    width: 280px;
+    height: 480px;
   }
 }
