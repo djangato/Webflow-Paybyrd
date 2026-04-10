@@ -1034,16 +1034,43 @@
   /* 1. Animated Gradient Mesh Background       */
   /* ═══════════════════════════════════════════ */
 
-  function initMesh() {
-    // Insert into the hero section so it sits above the page background
+  function initFibers() {
     var heroSection = document.querySelector('.hero-main_contain') || document.querySelector('[class*="hero"]');
     if (!heroSection) return;
 
-    var mesh = document.createElement("div");
-    mesh.className = "pbrd-hero-mesh";
-    mesh.innerHTML = '<div class="pbrd-mesh-blob"></div><div class="pbrd-mesh-blob"></div><div class="pbrd-mesh-blob"></div>';
+    var container = document.createElement("div");
+    container.className = "pbrd-hero-fibers";
+
+    // Define fiber lines — each with position, angle, length, color, timing
+    var fibers = [
+      { top: 12, left: -5, width: 65, angle: 2, color: "rgba(140,120,220,0.35)", glow: "rgba(160,140,255,0.6)", dur: 4, travel: 3.5, delay: 0 },
+      { top: 28, left: 10, width: 80, angle: -1.5, color: "rgba(100,130,240,0.25)", glow: "rgba(120,150,255,0.5)", dur: 5, travel: 4.2, delay: 1.2 },
+      { top: 45, left: -8, width: 70, angle: 1, color: "rgba(150,100,220,0.2)", glow: "rgba(170,130,255,0.45)", dur: 6, travel: 5, delay: 0.5 },
+      { top: 62, left: 5, width: 55, angle: -0.8, color: "rgba(120,140,255,0.2)", glow: "rgba(140,160,255,0.4)", dur: 4.5, travel: 3.8, delay: 2 },
+      { top: 78, left: -3, width: 75, angle: 1.5, color: "rgba(130,100,210,0.18)", glow: "rgba(160,130,240,0.4)", dur: 5.5, travel: 4.5, delay: 0.8 },
+      { top: 35, left: 20, width: 50, angle: -2, color: "rgba(100,120,230,0.15)", glow: "rgba(130,150,255,0.35)", dur: 7, travel: 5.5, delay: 1.5 },
+      { top: 55, left: 15, width: 60, angle: 0.5, color: "rgba(140,110,220,0.12)", glow: "rgba(170,140,255,0.3)", dur: 6.5, travel: 4.8, delay: 3 },
+      { top: 20, left: 30, width: 45, angle: -1, color: "rgba(110,130,240,0.1)", glow: "rgba(140,160,255,0.25)", dur: 5, travel: 6, delay: 2.5 },
+    ];
+
+    fibers.forEach(function (f) {
+      var el = document.createElement("div");
+      el.className = "pbrd-fiber";
+      el.style.cssText =
+        "top:" + f.top + "%;" +
+        "left:" + f.left + "%;" +
+        "width:" + f.width + "%;" +
+        "transform:rotate(" + f.angle + "deg);" +
+        "--color:" + f.color + ";" +
+        "--glow:" + f.glow + ";" +
+        "--dur:" + f.dur + "s;" +
+        "--travel:" + f.travel + "s;" +
+        "--delay:" + f.delay + "s;";
+      container.appendChild(el);
+    });
+
     heroSection.style.position = heroSection.style.position || "relative";
-    heroSection.insertBefore(mesh, heroSection.firstChild);
+    heroSection.insertBefore(container, heroSection.firstChild);
   }
 
   /* ═══════════════════════════════════════════ */
@@ -1214,7 +1241,7 @@
 
   /* ─── Init All ─── */
   function init() {
-    initMesh();
+    initFibers();
     initTicker();
     initStickyCTA();
     initExitIntent();
