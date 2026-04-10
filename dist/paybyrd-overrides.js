@@ -1035,22 +1035,29 @@
   /* ═══════════════════════════════════════════ */
 
   function initFibers() {
-    var heroSection = document.querySelector('.hero-main_contain') || document.querySelector('[class*="hero"]');
-    if (!heroSection) return;
-
     var container = document.createElement("div");
     container.className = "pbrd-hero-fibers";
 
-    // Define fiber lines — each with position, angle, length, color, timing
+    // Fibers spread across the full viewport height
     var fibers = [
-      { top: 12, left: -5, width: 65, angle: 2, color: "rgba(140,120,220,0.35)", glow: "rgba(160,140,255,0.6)", dur: 4, travel: 3.5, delay: 0 },
-      { top: 28, left: 10, width: 80, angle: -1.5, color: "rgba(100,130,240,0.25)", glow: "rgba(120,150,255,0.5)", dur: 5, travel: 4.2, delay: 1.2 },
-      { top: 45, left: -8, width: 70, angle: 1, color: "rgba(150,100,220,0.2)", glow: "rgba(170,130,255,0.45)", dur: 6, travel: 5, delay: 0.5 },
-      { top: 62, left: 5, width: 55, angle: -0.8, color: "rgba(120,140,255,0.2)", glow: "rgba(140,160,255,0.4)", dur: 4.5, travel: 3.8, delay: 2 },
-      { top: 78, left: -3, width: 75, angle: 1.5, color: "rgba(130,100,210,0.18)", glow: "rgba(160,130,240,0.4)", dur: 5.5, travel: 4.5, delay: 0.8 },
-      { top: 35, left: 20, width: 50, angle: -2, color: "rgba(100,120,230,0.15)", glow: "rgba(130,150,255,0.35)", dur: 7, travel: 5.5, delay: 1.5 },
-      { top: 55, left: 15, width: 60, angle: 0.5, color: "rgba(140,110,220,0.12)", glow: "rgba(170,140,255,0.3)", dur: 6.5, travel: 4.8, delay: 3 },
-      { top: 20, left: 30, width: 45, angle: -1, color: "rgba(110,130,240,0.1)", glow: "rgba(140,160,255,0.25)", dur: 5, travel: 6, delay: 2.5 },
+      // Top cluster (hero area) — slightly brighter
+      { top: 8, left: -5, width: 65, angle: 1.5, color: "rgba(140,120,220,0.35)", glow: "rgba(160,140,255,0.6)", dur: 4, travel: 3.5, delay: 0 },
+      { top: 18, left: 10, width: 80, angle: -1.2, color: "rgba(100,130,240,0.3)", glow: "rgba(120,150,255,0.55)", dur: 5, travel: 4.2, delay: 1.2 },
+      { top: 30, left: -8, width: 70, angle: 0.8, color: "rgba(150,100,220,0.25)", glow: "rgba(170,130,255,0.5)", dur: 6, travel: 5, delay: 0.5 },
+
+      // Middle section
+      { top: 38, left: 15, width: 55, angle: -1.8, color: "rgba(120,140,255,0.18)", glow: "rgba(140,160,255,0.4)", dur: 5.5, travel: 4.5, delay: 2 },
+      { top: 46, left: -3, width: 75, angle: 1, color: "rgba(130,100,210,0.15)", glow: "rgba(160,130,240,0.35)", dur: 7, travel: 5.5, delay: 0.8 },
+      { top: 54, left: 20, width: 50, angle: -0.5, color: "rgba(100,120,230,0.14)", glow: "rgba(130,150,255,0.3)", dur: 6, travel: 4.8, delay: 3 },
+
+      // Lower section
+      { top: 64, left: -6, width: 68, angle: 1.3, color: "rgba(140,110,220,0.12)", glow: "rgba(170,140,255,0.28)", dur: 5, travel: 5.2, delay: 1.5 },
+      { top: 72, left: 12, width: 60, angle: -1.5, color: "rgba(110,130,240,0.1)", glow: "rgba(140,160,255,0.25)", dur: 6.5, travel: 6, delay: 2.5 },
+      { top: 80, left: -2, width: 72, angle: 0.6, color: "rgba(130,100,220,0.1)", glow: "rgba(160,130,255,0.22)", dur: 7.5, travel: 5.8, delay: 4 },
+
+      // Bottom
+      { top: 88, left: 8, width: 55, angle: -0.8, color: "rgba(100,120,240,0.08)", glow: "rgba(130,150,255,0.2)", dur: 6, travel: 6.5, delay: 1 },
+      { top: 94, left: -4, width: 65, angle: 1.2, color: "rgba(140,120,220,0.08)", glow: "rgba(160,140,255,0.18)", dur: 8, travel: 7, delay: 3.5 },
     ];
 
     fibers.forEach(function (f) {
@@ -1069,8 +1076,7 @@
       container.appendChild(el);
     });
 
-    heroSection.style.position = heroSection.style.position || "relative";
-    heroSection.insertBefore(container, heroSection.firstChild);
+    document.body.insertBefore(container, document.body.firstChild);
   }
 
   /* ═══════════════════════════════════════════ */
