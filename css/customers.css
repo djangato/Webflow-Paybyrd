@@ -153,6 +153,11 @@
   opacity: 1;
 }
 
+/* Per-customer logo size overrides */
+.pbrd-customer-card[data-customer="vilagale"] .pbrd-customer-logo { height: 32px; max-width: 156px; }
+.pbrd-customer-card[data-customer="kabuki"] .pbrd-customer-logo { height: 32px; max-width: 156px; }
+.pbrd-customer-card[data-customer="kuantokusta"] .pbrd-customer-logo { height: 29px; max-width: 144px; }
+
 .pbrd-customer-name {
   font-size: 0.75rem;
   font-weight: 500;
@@ -325,6 +330,10 @@
   margin-bottom: 10px;
   display: block;
 }
+
+.pbrd-carousel-card[data-customer="vilagale"] .pbrd-carousel-logo { height: 36px; max-width: 180px; }
+.pbrd-carousel-card[data-customer="kabuki"] .pbrd-carousel-logo { height: 36px; max-width: 180px; }
+.pbrd-carousel-card[data-customer="kuantokusta"] .pbrd-carousel-logo { height: 34px; max-width: 168px; }
 
 .pbrd-carousel-name {
   font-size: 0.8125rem;

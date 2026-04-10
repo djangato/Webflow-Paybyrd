@@ -11,6 +11,7 @@
   var customers = [
     {
       name: "TAP Air Portugal",
+      slug: "tap",
       industry: "Airlines",
       stat: "Millions unlocked in new revenue",
       desc: "Global and local transaction processing with maximized approval rates and fraud reduction \u2014 unlocking millions in additional payment volume across 90+ markets.",
@@ -20,6 +21,7 @@
     },
     {
       name: "Wink",
+      slug: "wink",
       industry: "Retail",
       stat: "Real-time visibility across all stores",
       desc: "Leveraging real-time data across own stores and franchise network to boost loyalty, identify recurring shoppers, and increase basket size.",
@@ -29,6 +31,7 @@
     },
     {
       name: "Vila Gal\u00E9",
+      slug: "vilagale",
       industry: "Hospitality",
       stat: "Omnichannel across 40+ hotels",
       desc: "Seamless payment orchestration across one of the largest hotel groups in Portugal and Brazil \u2014 from front desk to spa to room service.",
@@ -38,6 +41,7 @@
     },
     {
       name: "KuantoKusta",
+      slug: "kuantokusta",
       industry: "E-Commerce",
       stat: "Higher checkout conversion with BNPL",
       desc: "High-performance checkout with multi-payment strategy including BNPL and local methods \u2014 reducing cart abandonment and increasing order value.",
@@ -47,6 +51,7 @@
     },
     {
       name: "Kabuki",
+      slug: "kabuki",
       industry: "Restaurants",
       stat: "Bespoke POS with loyalty insights",
       desc: "Tailored terminal experience with branded checkout flows and full customer loyalty visibility \u2014 turning every transaction into a relationship.",
@@ -66,7 +71,7 @@
   var touchStartX = 0;
 
   function buildCarouselCard(c, idx) {
-    return '<div class="pbrd-carousel-card' + (idx === 0 ? ' active' : '') + '" data-idx="' + idx + '">' +
+    return '<div class="pbrd-carousel-card' + (idx === 0 ? ' active' : '') + '" data-idx="' + idx + '" data-customer="' + c.slug + '">' +
       '<video muted loop playsinline preload="metadata" poster="' + c.poster + '">' +
         '<source src="' + c.video + '" type="video/mp4">' +
       '</video>' +
@@ -201,7 +206,7 @@
 
   /* ─── Build Cards ─── */
   function buildCard(c, idx) {
-    return '<div class="pbrd-customer-card" data-idx="' + idx + '">' +
+    return '<div class="pbrd-customer-card" data-idx="' + idx + '" data-customer="' + c.slug + '">' +
       '<video class="pbrd-customer-video" muted loop playsinline preload="none" poster="' + c.poster + '">' +
         '<source src="' + c.video + '" type="video/mp4">' +
       '</video>' +
