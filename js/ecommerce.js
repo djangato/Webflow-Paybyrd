@@ -605,13 +605,15 @@
       }
     });
 
-    /* Add closing stat — insert after the section, not inside it (avoids GSAP pin-spacer issues) */
+    /* Add closing stat — insert before the integrations section */
     if (!document.querySelector(".pbrd-ec-data-stat")) {
-      var stat = document.createElement("div");
-      stat.className = "pbrd-ec-data-stat";
-      stat.innerHTML = '<p>Merchants using Paybyrd analytics recover an average of <strong>12% more revenue</strong> within 60 days.</p>';
-      var sectionParent = section.closest(".pin-spacer") || section;
-      sectionParent.insertAdjacentElement("afterend", stat);
+      var intSection = findSectionByHeading("stack you already") || findSectionByHeading("plug in");
+      if (intSection) {
+        var stat = document.createElement("div");
+        stat.className = "pbrd-ec-data-stat";
+        stat.innerHTML = '<p>Merchants using Paybyrd analytics recover an average of <strong>12% more revenue</strong> within 60 days.</p>';
+        intSection.insertAdjacentElement("beforebegin", stat);
+      }
     }
   }
 
