@@ -660,30 +660,23 @@
     return el;
   }
 
+  function getCardWidth() {
+    if (window.innerWidth <= 480) return 240;
+    if (window.innerWidth <= 768) return 260;
+    return 340;
+  }
+
   function goToCarousel(idx) {
     carouselIdx = idx;
     if (!lightbox) return;
     var track = lightbox.querySelector(".pbrd-carousel-track");
     var cards = lightbox.querySelectorAll(".pbrd-carousel-card");
 
-    // Use the actual rendered position of the target card to center it
-    // First, reset transform so we can measure true positions
-    track.style.transition = "none";
-    track.style.transform = "translateX(0)";
+    /* Calculate offset to center the target card in viewport */
+    var cardW = getCardWidth();
+    var gap = 20;
+    var offset = (window.innerWidth / 2) - (cardW / 2) - (idx * (cardW + gap));
 
-    // Force layout recalc
-    void track.offsetHeight;
-
-    // Get the target card's center position relative to the track
-    var targetCard = cards[idx];
-    var trackRect = track.getBoundingClientRect();
-    var cardRect = targetCard.getBoundingClientRect();
-    var cardCenter = cardRect.left - trackRect.left + (cardRect.width / 2);
-
-    // Calculate offset to center this card in the viewport
-    var offset = (window.innerWidth / 2) - cardCenter;
-
-    // Re-enable transition and apply
     track.style.transition = "transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)";
     track.style.transform = "translateX(" + offset + "px)";
 
