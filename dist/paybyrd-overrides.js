@@ -3771,18 +3771,97 @@
       }
     });
 
-    /* Scale down/hide the oversized dashboard image */
-    section.querySelectorAll("img").forEach(function (img) {
-      var src = (img.getAttribute("src") || "").toLowerCase();
-      if (src.indexOf("dashboard") !== -1 || src.indexOf("statistics") !== -1 || src.indexOf("paybyrd") !== -1) {
-        img.style.maxHeight = "320px";
-        img.style.width = "auto";
-        img.style.margin = "0 auto";
-        img.style.display = "block";
-        img.style.borderRadius = "16px";
-        img.style.opacity = "0.85";
+    /* Replace the oversized dashboard image with a live mockup */
+    var imgCol = section.querySelector("[class*='column-2'], [class*='image']");
+    if (!imgCol) {
+      /* Try to find the image directly and use its parent */
+      section.querySelectorAll("img").forEach(function (img) {
+        var src = (img.getAttribute("src") || "").toLowerCase();
+        if (src.indexOf("paybyrd") !== -1 || src.indexOf("dashboard") !== -1 || src.indexOf("statistic") !== -1) {
+          imgCol = img.closest("[class*='column']") || img.parentElement;
+        }
+      });
+    }
+    if (imgCol) {
+      /* Hide original content */
+      Array.from(imgCol.children).forEach(function (c) { c.style.display = "none"; });
+
+      var dash = document.createElement("div");
+      dash.className = "pbrd-ec-live-dash";
+      dash.innerHTML =
+        '<div class="pbrd-ec-ld-header">' +
+          '<div class="pbrd-ec-ld-nav"><span class="pbrd-ec-ld-nav-active">Dashboard</span><span>Transactions</span><span>Analytics</span></div>' +
+          '<div class="pbrd-ec-ld-greeting">Good afternoon.</div>' +
+        '</div>' +
+
+        /* Volume + Acceptance row */
+        '<div class="pbrd-ec-ld-row">' +
+          '<div class="pbrd-ec-ld-card pbrd-ec-ld-volume">' +
+            '<div class="pbrd-ec-ld-card-label">Payment Volume</div>' +
+            '<div class="pbrd-ec-ld-big" id="pbrd-ec-ld-vol">\u20AC3,529,455</div>' +
+            '<div class="pbrd-ec-ld-vol-row">' +
+              '<span>\uD83C\uDDEA\uD83C\uDDFA \u20AC2.8M</span>' +
+              '<span>\uD83C\uDDEC\uD83C\uDDE7 \u00A3410K</span>' +
+              '<span>\uD83C\uDDE7\uD83C\uDDF7 R$1.3M</span>' +
+            '</div>' +
+          '</div>' +
+          '<div class="pbrd-ec-ld-card">' +
+            '<div class="pbrd-ec-ld-card-label">Payment Acceptance</div>' +
+            '<div class="pbrd-ec-ld-accept">' +
+              '<div class="pbrd-ec-ld-accept-row"><span>Visa</span><div class="pbrd-ec-ld-bar"><div class="pbrd-ec-ld-bar-fill" style="--bar-w:96%;background:#1A1F71"></div></div><span>96%</span></div>' +
+              '<div class="pbrd-ec-ld-accept-row"><span>Mastercard</span><div class="pbrd-ec-ld-bar"><div class="pbrd-ec-ld-bar-fill" style="--bar-w:94%;background:#EB001B"></div></div><span>94%</span></div>' +
+              '<div class="pbrd-ec-ld-accept-row"><span>Amex</span><div class="pbrd-ec-ld-bar"><div class="pbrd-ec-ld-bar-fill" style="--bar-w:89%;background:#006FCF"></div></div><span>89%</span></div>' +
+              '<div class="pbrd-ec-ld-accept-row"><span>MBWay</span><div class="pbrd-ec-ld-bar"><div class="pbrd-ec-ld-bar-fill" style="--bar-w:98%;background:#D4002A"></div></div><span>98%</span></div>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+
+        /* Transactions */
+        '<div class="pbrd-ec-ld-card">' +
+          '<div class="pbrd-ec-ld-card-label">Latest Transactions</div>' +
+          '<div class="pbrd-ec-ld-txs" id="pbrd-ec-ld-txs">' +
+            '<div class="pbrd-ec-ld-tx"><span class="pbrd-ec-ld-tx-s paid">Paid</span><span class="pbrd-ec-ld-tx-a">\u20AC245.00</span><span>Visa \u2022\u20224821</span><span>12s</span></div>' +
+            '<div class="pbrd-ec-ld-tx"><span class="pbrd-ec-ld-tx-s paid">Paid</span><span class="pbrd-ec-ld-tx-a">\u20AC89.90</span><span>PayPal</span><span>28s</span></div>' +
+            '<div class="pbrd-ec-ld-tx"><span class="pbrd-ec-ld-tx-s paid">Paid</span><span class="pbrd-ec-ld-tx-a">\u20AC32.00</span><span>MBWay</span><span>45s</span></div>' +
+          '</div>' +
+        '</div>';
+
+      imgCol.appendChild(dash);
+
+      /* Animate volume counter */
+      var volEl = document.getElementById("pbrd-ec-ld-vol");
+      var vol = 3529455;
+      setInterval(function () {
+        vol += Math.floor(Math.random() * 800) + 100;
+        if (volEl) volEl.textContent = "\u20AC" + vol.toLocaleString("en");
+      }, 4000);
+
+      /* Animate transactions */
+      var ldTxs = document.getElementById("pbrd-ec-ld-txs");
+      var ldPool = [
+        { a: "\u20AC156.00", m: "Mastercard" }, { a: "\u20AC42.50", m: "Apple Pay" },
+        { a: "\u20AC318.00", m: "Klarna" }, { a: "\u20AC78.00", m: "Google Pay" },
+        { a: "\u20AC205.50", m: "iDEAL" }, { a: "\u20AC93.20", m: "Visa \u2022\u20225847" }
+      ];
+      var ldI = 0;
+      if (ldTxs) {
+        var ldRows = ldTxs.querySelectorAll(".pbrd-ec-ld-tx");
+        setInterval(function () {
+          var t = ldPool[ldI % ldPool.length]; ldI++;
+          for (var r = ldRows.length - 1; r > 0; r--) ldRows[r].innerHTML = ldRows[r - 1].innerHTML;
+          ldRows[0].innerHTML = '<span class="pbrd-ec-ld-tx-s paid">Paid</span><span class="pbrd-ec-ld-tx-a">' + t.a + '</span><span>' + t.m + '</span><span>just now</span>';
+          ldRows[0].style.opacity = "0";
+          requestAnimationFrame(function () { ldRows[0].style.transition = "opacity 0.4s"; ldRows[0].style.opacity = "1"; });
+        }, 3500);
       }
-    });
+
+      /* Animate acceptance bars */
+      setTimeout(function () {
+        dash.querySelectorAll(".pbrd-ec-ld-bar-fill").forEach(function (f) {
+          f.style.width = f.style.getPropertyValue("--bar-w");
+        });
+      }, 500);
+    }
 
     /* Add integration pills */
     var grid = document.createElement("div");

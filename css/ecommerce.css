@@ -1114,6 +1114,184 @@
 
 /* Reuses .pbrd-oc-int-pill from omnichannel */
 
+/* Live Dashboard Mockup */
+.pbrd-ec-live-dash {
+  background: #fff;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+  max-width: 480px;
+  margin: 0 auto;
+  font-family: inherit;
+}
+
+.pbrd-ec-ld-header {
+  margin-bottom: 16px;
+}
+
+.pbrd-ec-ld-nav {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.pbrd-ec-ld-nav span {
+  font-size: 0.5625rem;
+  padding: 4px 10px;
+  border-radius: 6px;
+  color: rgba(26, 26, 46, 0.35);
+  font-weight: 500;
+}
+
+.pbrd-ec-ld-nav-active {
+  background: #1a1a2e !important;
+  color: #fff !important;
+}
+
+.pbrd-ec-ld-greeting {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.pbrd-ec-ld-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.pbrd-ec-ld-card {
+  background: rgba(26, 26, 46, 0.02);
+  border: 1px solid rgba(26, 26, 46, 0.06);
+  border-radius: 12px;
+  padding: 14px;
+  flex: 1;
+}
+
+.pbrd-ec-ld-card-label {
+  font-size: 0.5rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(26, 26, 46, 0.3);
+  margin-bottom: 8px;
+}
+
+.pbrd-ec-ld-big {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #1a1a2e;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(135deg, #5046e5, #1a1a2e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.pbrd-ec-ld-vol-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.pbrd-ec-ld-vol-row span {
+  font-size: 0.5625rem;
+  color: rgba(26, 26, 46, 0.4);
+}
+
+/* Acceptance bars */
+.pbrd-ec-ld-accept {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pbrd-ec-ld-accept-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.5625rem;
+  color: rgba(26, 26, 46, 0.45);
+}
+
+.pbrd-ec-ld-accept-row span:first-child {
+  width: 52px;
+  flex-shrink: 0;
+}
+
+.pbrd-ec-ld-accept-row span:last-child {
+  width: 24px;
+  text-align: right;
+  font-weight: 600;
+  color: rgba(26, 26, 46, 0.7);
+}
+
+.pbrd-ec-ld-bar {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(26, 26, 46, 0.06);
+  overflow: hidden;
+}
+
+.pbrd-ec-ld-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  width: 0;
+  transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Transactions */
+.pbrd-ec-ld-txs {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pbrd-ec-ld-tx {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: rgba(26, 26, 46, 0.02);
+  font-size: 0.5625rem;
+  color: rgba(26, 26, 46, 0.4);
+}
+
+.pbrd-ec-ld-tx-s {
+  font-size: 0.4375rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 100px;
+}
+
+.pbrd-ec-ld-tx-s.paid {
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+}
+
+.pbrd-ec-ld-tx-a {
+  font-weight: 600;
+  color: #1a1a2e;
+  font-variant-numeric: tabular-nums;
+  width: 48px;
+}
+
+.pbrd-ec-ld-tx span:nth-child(3) { flex: 1; }
+
+.pbrd-ec-ld-tx span:nth-child(4) {
+  font-size: 0.4375rem;
+  color: rgba(26, 26, 46, 0.2);
+}
+
+@media (max-width: 768px) {
+  .pbrd-ec-ld-row { flex-direction: column; }
+  .pbrd-ec-live-dash { max-width: 100%; }
+}
+
 .pbrd-ec-int-note {
   text-align: center;
   margin-top: 16px;
