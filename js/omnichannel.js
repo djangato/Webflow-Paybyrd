@@ -612,54 +612,77 @@
     var heartSVG = '<svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
     closingWrap.innerHTML =
-      /* Why merchants switch — urgency cards */
-      '<div class="pbrd-oc-switch-grid">' +
-        '<div class="pbrd-oc-switch-card">' +
-          '<div class="pbrd-oc-switch-number">4h</div>' +
-          '<div class="pbrd-oc-switch-text">Average time to go live. Not weeks. Not months. <strong>Hours.</strong></div>' +
-        '</div>' +
-        '<div class="pbrd-oc-switch-card">' +
-          '<div class="pbrd-oc-switch-number">0</div>' +
-          '<div class="pbrd-oc-switch-text">Setup fees. Migration costs. Long-term contracts. Hidden surprises.</div>' +
-        '</div>' +
-        '<div class="pbrd-oc-switch-card">' +
-          '<div class="pbrd-oc-switch-number">30</div>' +
-          '<div class="pbrd-oc-switch-text">Days to decide. Full money-back guarantee, no questions asked.</div>' +
-        '</div>' +
-        '<div class="pbrd-oc-switch-card">' +
-          '<div class="pbrd-oc-switch-number">1</div>' +
-          '<div class="pbrd-oc-switch-text">Platform for every channel. POS, online, mobile, kiosk, payment links \u2014 unified.</div>' +
-        '</div>' +
-      '</div>' +
+      /* Mollie-style feature cards with mini visualizations */
+      '<div class="pbrd-oc-feature-grid">' +
 
-      /* What you get — benefit cards with icons */
-      '<div class="pbrd-oc-benefits">' +
-        '<div class="pbrd-oc-benefit">' +
-          '<div class="pbrd-oc-benefit-icon">' + clockSVG + '</div>' +
-          '<h3>Live this week, not next quarter</h3>' +
-          '<p>Pre-built integrations for WooCommerce, Magento, SAP, and 20+ platforms. Your developer will thank you.</p>' +
+        /* Card 1: Setup speed */
+        '<div class="pbrd-oc-feature-card">' +
+          '<div class="pbrd-oc-feature-label">Setup</div>' +
+          '<h3>Go live in hours,<br>not months</h3>' +
+          '<p>Pre-built plug-ins for WooCommerce, Magento, SAP, and 20+ platforms. Your developer will thank you.</p>' +
+          '<div class="pbrd-oc-feature-viz">' +
+            '<div class="pbrd-oc-setup-steps">' +
+              '<div class="pbrd-oc-setup-step pbrd-oc-setup-done"><span>\u2713</span>Connect channels</div>' +
+              '<div class="pbrd-oc-setup-step pbrd-oc-setup-done"><span>\u2713</span>Configure methods</div>' +
+              '<div class="pbrd-oc-setup-step pbrd-oc-setup-done"><span>\u2713</span>Test & verify</div>' +
+              '<div class="pbrd-oc-setup-step pbrd-oc-setup-active"><span>4</span>You\u2019re live!</div>' +
+            '</div>' +
+            '<div class="pbrd-oc-setup-time">Average: <strong>4 hours</strong></div>' +
+          '</div>' +
         '</div>' +
-        '<div class="pbrd-oc-benefit">' +
-          '<div class="pbrd-oc-benefit-icon">' + shieldSVG + '</div>' +
-          '<h3>Risk-free. Literally.</h3>' +
-          '<p>30-day money-back guarantee. No contracts, no lock-in. If we don\u2019t deliver, you don\u2019t pay. It\u2019s that simple.</p>' +
+
+        /* Card 2: Transparent pricing */
+        '<div class="pbrd-oc-feature-card">' +
+          '<div class="pbrd-oc-feature-label">Pricing</div>' +
+          '<h3>Transparent pricing.<br>Zero surprises.</h3>' +
+          '<p>No setup fees, no monthly minimums, no hidden costs. Pay only for what you process.</p>' +
+          '<div class="pbrd-oc-feature-viz">' +
+            '<div class="pbrd-oc-price-rows">' +
+              '<div class="pbrd-oc-price-row"><span>Setup fee</span><span class="pbrd-oc-price-zero">\u20AC0</span></div>' +
+              '<div class="pbrd-oc-price-row"><span>Monthly fee</span><span class="pbrd-oc-price-zero">\u20AC0</span></div>' +
+              '<div class="pbrd-oc-price-row"><span>Migration cost</span><span class="pbrd-oc-price-zero">\u20AC0</span></div>' +
+              '<div class="pbrd-oc-price-row"><span>Lock-in period</span><span class="pbrd-oc-price-zero">None</span></div>' +
+              '<div class="pbrd-oc-price-row pbrd-oc-price-highlight"><span>Transaction fee</span><span>From 1.5% + \u20AC0.15</span></div>' +
+            '</div>' +
+          '</div>' +
         '</div>' +
-        '<div class="pbrd-oc-benefit">' +
-          '<div class="pbrd-oc-benefit-icon">' + rocketSVG + '</div>' +
-          '<h3>Built for where you\u2019re going</h3>' +
-          '<p>From 100 transactions to 100,000. Same platform, same price model, no surprises as you scale.</p>' +
+
+        /* Card 3: Risk-free guarantee */
+        '<div class="pbrd-oc-feature-card">' +
+          '<div class="pbrd-oc-feature-label">Guarantee</div>' +
+          '<h3>30 days to decide.<br>Risk-free.</h3>' +
+          '<p>Not happy? Full refund on every commission. No questions, no hassle, no fine print.</p>' +
+          '<div class="pbrd-oc-feature-viz">' +
+            '<div class="pbrd-oc-guarantee">' +
+              shieldSVG +
+              '<div class="pbrd-oc-guarantee-text">' +
+                '<div class="pbrd-oc-guarantee-title">30-Day Money-Back Guarantee</div>' +
+                '<div class="pbrd-oc-guarantee-sub">If Paybyrd doesn\u2019t deliver, you don\u2019t pay. Every commission refunded.</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
         '</div>' +
-        '<div class="pbrd-oc-benefit">' +
-          '<div class="pbrd-oc-benefit-icon">' + heartSVG + '</div>' +
-          '<h3>A team that picks up the phone</h3>' +
-          '<p>Real humans. Based in Europe. Average response time under 2 hours. Not a chatbot, not a ticket queue.</p>' +
+
+        /* Card 4: Human support */
+        '<div class="pbrd-oc-feature-card">' +
+          '<div class="pbrd-oc-feature-label">Support</div>' +
+          '<h3>A team that picks up<br>the phone</h3>' +
+          '<p>Real humans. Based in Europe. Not a chatbot, not a ticket queue.</p>' +
+          '<div class="pbrd-oc-feature-viz">' +
+            '<div class="pbrd-oc-support-metrics">' +
+              '<div class="pbrd-oc-support-metric"><div class="pbrd-oc-support-val">&lt;2h</div><div class="pbrd-oc-support-lbl">Avg. response</div></div>' +
+              '<div class="pbrd-oc-support-metric"><div class="pbrd-oc-support-val">98%</div><div class="pbrd-oc-support-lbl">Satisfaction</div></div>' +
+              '<div class="pbrd-oc-support-metric"><div class="pbrd-oc-support-val">24/7</div><div class="pbrd-oc-support-lbl">Monitoring</div></div>' +
+            '</div>' +
+            '<div class="pbrd-oc-support-note">' + heartSVG + 'Dedicated account manager for every merchant</div>' +
+          '</div>' +
         '</div>' +
+
       '</div>';
 
     valSection.insertAdjacentElement("afterend", closingWrap);
 
-    observeReveal(".pbrd-oc-switch-card", 100, closingWrap);
-    observeReveal(".pbrd-oc-benefit", 100, closingWrap);
+    observeReveal(".pbrd-oc-feature-card", 120, closingWrap);
   }
 
   /* ═══════════════════════════════════════════ */
