@@ -2562,6 +2562,12 @@
       }
     });
 
+    /* Show Loyalty slide (index 5) first */
+    var swiperEl = document.querySelector(".slider-4_content_wrap");
+    if (swiperEl && swiperEl.swiper) {
+      swiperEl.swiper.slideTo(5, 0);
+    }
+
     console.log("[Paybyrd] Carousel: swapped " + swapped + " images with overlays");
   }
 
@@ -2638,59 +2644,137 @@
     var allH2 = document.querySelectorAll("h2");
     var dashSection = null;
     allH2.forEach(function (h) {
-      if (h.textContent.toLowerCase().includes("dashboard") || h.textContent.toLowerCase().includes("data knows")) {
+      var t = h.textContent.toLowerCase();
+      if (t.includes("data knows") || t.includes("dashboard") || t.includes("next purchase")) {
         dashSection = h.closest("section") || h.closest("[class*='section']") || h.parentElement;
       }
     });
     if (!dashSection) return;
 
-    var grid = document.createElement("div");
-    grid.className = "pbrd-oc-dash-grid";
+    /* Override the heading and subtitle */
+    var heading = dashSection.querySelector("h2");
+    if (heading) heading.innerHTML = "Your competitors are guessing.<br>You\u2019ll know.";
 
-    grid.innerHTML =
-      /* Card 1: Cross-Channel Revenue */
-      '<div class="pbrd-oc-dash-card">' +
-        '<div class="pbrd-oc-dash-label">Cross-Channel Revenue</div>' +
-        '<div class="pbrd-oc-hbar"><span class="pbrd-oc-hbar-label">E-Commerce</span><div class="pbrd-oc-hbar-track"><div class="pbrd-oc-hbar-fill" style="width:62%;background:rgba(80,100,220,0.6)"></div></div><span class="pbrd-oc-hbar-val">62%</span></div>' +
-        '<div class="pbrd-oc-hbar"><span class="pbrd-oc-hbar-label">POS</span><div class="pbrd-oc-hbar-track"><div class="pbrd-oc-hbar-fill" style="width:31%;background:rgba(120,180,255,0.5)"></div></div><span class="pbrd-oc-hbar-val">31%</span></div>' +
-        '<div class="pbrd-oc-hbar"><span class="pbrd-oc-hbar-label">Pay-by-Link</span><div class="pbrd-oc-hbar-track"><div class="pbrd-oc-hbar-fill" style="width:7%;background:rgba(120,255,180,0.4)"></div></div><span class="pbrd-oc-hbar-val">7%</span></div>' +
+    var subtitle = dashSection.querySelector("h2 + p, h2 ~ p");
+    if (!subtitle) {
+      var allP = dashSection.querySelectorAll("p");
+      allP.forEach(function (p) {
+        if (p.textContent.length > 30) subtitle = p;
+      });
+    }
+    if (subtitle) subtitle.textContent = "Every transaction across every channel feeds one intelligent dashboard. See what single-channel platforms can\u2019t \u2014 the complete picture of your business and your customers.";
+
+    /* Build the full analytics showcase */
+    var section = document.createElement("div");
+    section.className = "pbrd-oc-analytics-wrap";
+    section.innerHTML =
+
+      /* Section header */
+      '<div style="text-align:center;margin-bottom:40px">' +
+        '<div class="pbrd-oc-journey-label" style="color:rgba(120,180,255,0.7)">Real-Time Intelligence</div>' +
+        '<h3 style="font-size:clamp(1.5rem,3vw,2.25rem);font-weight:600;letter-spacing:-0.02em;color:#fff;margin:0 0 12px">Your competitors are guessing. You\u2019ll know.</h3>' +
+        '<p style="font-size:0.9375rem;color:rgba(255,255,255,0.4);max-width:480px;margin:0 auto;line-height:1.6">Every transaction across every channel feeds one intelligent dashboard. See what single-channel platforms can\u2019t.</p>' +
       '</div>' +
 
-      /* Card 2: Returning Customers */
-      '<div class="pbrd-oc-dash-card">' +
-        '<div class="pbrd-oc-dash-label">Returning Customers</div>' +
-        '<div class="pbrd-oc-dash-big">847</div>' +
-        '<div class="pbrd-oc-dash-sub">identified this month \u2022 <span style="color:rgba(120,255,180,0.7);font-weight:600">\u2191 12%</span></div>' +
-      '</div>' +
-
-      /* Card 3: Buying Frequency */
-      '<div class="pbrd-oc-dash-card">' +
-        '<div class="pbrd-oc-dash-label">Buying Frequency</div>' +
-        '<div class="pbrd-oc-freq-bar">' +
-          '<div class="pbrd-oc-freq-seg" style="width:40%;background:rgba(255,255,255,0.08)"></div>' +
-          '<div class="pbrd-oc-freq-seg" style="width:35%;background:rgba(120,180,255,0.35)"></div>' +
-          '<div class="pbrd-oc-freq-seg" style="width:25%;background:rgba(255,100,50,0.5)"></div>' +
+      /* Row 1: Big metrics */
+      '<div class="pbrd-oc-dash-grid" style="grid-template-columns:1fr 1fr 1fr;margin-bottom:16px">' +
+        '<div class="pbrd-oc-dash-card" style="text-align:center">' +
+          '<div class="pbrd-oc-dash-big" style="font-size:2.5rem;font-weight:700">\u20AC1.4M</div>' +
+          '<div class="pbrd-oc-dash-sub">Total Volume Today</div>' +
+          '<div style="margin-top:8px;font-size:0.625rem;color:rgba(120,255,180,0.7);font-weight:600">\u2191 18% vs. last month</div>' +
         '</div>' +
-        '<div class="pbrd-oc-freq-legend">' +
-          '<div class="pbrd-oc-freq-item"><div class="pbrd-oc-freq-dot" style="background:rgba(255,255,255,0.15)"></div>Cold (1 visit) 40%</div>' +
-          '<div class="pbrd-oc-freq-item"><div class="pbrd-oc-freq-dot" style="background:rgba(120,180,255,0.5)"></div>Warm (2\u20134) 35%</div>' +
-          '<div class="pbrd-oc-freq-item"><div class="pbrd-oc-freq-dot" style="background:rgba(255,100,50,0.6)"></div>Hot (5+) 25%</div>' +
+        '<div class="pbrd-oc-dash-card" style="text-align:center">' +
+          '<div class="pbrd-oc-dash-big" style="font-size:2.5rem;font-weight:700;color:rgba(120,180,255,0.9)">98.2%</div>' +
+          '<div class="pbrd-oc-dash-sub">Approval Rate</div>' +
+          '<div style="margin-top:8px;font-size:0.625rem;color:rgba(120,255,180,0.7);font-weight:600">\u2191 2.1% above industry avg</div>' +
+        '</div>' +
+        '<div class="pbrd-oc-dash-card" style="text-align:center">' +
+          '<div class="pbrd-oc-dash-big" style="font-size:2.5rem;font-weight:700">847</div>' +
+          '<div class="pbrd-oc-dash-sub">Returning Customers</div>' +
+          '<div style="margin-top:8px;font-size:0.625rem;color:rgba(120,255,180,0.7);font-weight:600">\u2191 12% identified this month</div>' +
         '</div>' +
       '</div>' +
 
-      /* Card 4: Channel Overlap */
-      '<div class="pbrd-oc-dash-card">' +
-        '<div class="pbrd-oc-dash-label">Channel Overlap</div>' +
-        '<div class="pbrd-oc-dash-big" style="color:rgba(120,180,255,0.9)">23%</div>' +
-        '<div class="pbrd-oc-dash-sub">of online customers also buy in-store</div>' +
-        '<div style="margin-top:12px;font-size:0.6875rem;color:rgba(120,255,180,0.6);font-weight:600">\u2191 Cross-channel revenue per customer is 3.2\u00D7 higher</div>' +
+      /* Row 2: Charts */
+      '<div class="pbrd-oc-dash-grid">' +
+
+        /* Card: Cross-Channel Revenue */
+        '<div class="pbrd-oc-dash-card">' +
+          '<div class="pbrd-oc-dash-label">Revenue by Channel</div>' +
+          '<div class="pbrd-oc-hbar"><span class="pbrd-oc-hbar-label">E-Commerce</span><div class="pbrd-oc-hbar-track"><div class="pbrd-oc-hbar-fill" style="width:62%;background:linear-gradient(90deg,rgba(80,100,220,0.4),rgba(80,100,220,0.7))"></div></div><span class="pbrd-oc-hbar-val">\u20AC868K</span></div>' +
+          '<div class="pbrd-oc-hbar"><span class="pbrd-oc-hbar-label">POS</span><div class="pbrd-oc-hbar-track"><div class="pbrd-oc-hbar-fill" style="width:31%;background:linear-gradient(90deg,rgba(120,180,255,0.3),rgba(120,180,255,0.6))"></div></div><span class="pbrd-oc-hbar-val">\u20AC434K</span></div>' +
+          '<div class="pbrd-oc-hbar"><span class="pbrd-oc-hbar-label">Pay-by-Link</span><div class="pbrd-oc-hbar-track"><div class="pbrd-oc-hbar-fill" style="width:7%;background:linear-gradient(90deg,rgba(120,255,180,0.3),rgba(120,255,180,0.5))"></div></div><span class="pbrd-oc-hbar-val">\u20AC98K</span></div>' +
+          '<div style="margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.04);font-size:0.625rem;color:rgba(255,255,255,0.3)">All channels \u2022 One reconciliation \u2022 Real-time</div>' +
+        '</div>' +
+
+        /* Card: Buying Frequency */
+        '<div class="pbrd-oc-dash-card">' +
+          '<div class="pbrd-oc-dash-label">Buying Frequency Distribution</div>' +
+          '<div class="pbrd-oc-freq-bar" style="height:14px;border-radius:7px">' +
+            '<div class="pbrd-oc-freq-seg" style="width:40%;background:rgba(255,255,255,0.08);border-radius:7px 0 0 7px"></div>' +
+            '<div class="pbrd-oc-freq-seg" style="width:35%;background:rgba(120,180,255,0.35)"></div>' +
+            '<div class="pbrd-oc-freq-seg" style="width:25%;background:rgba(255,100,50,0.5);border-radius:0 7px 7px 0"></div>' +
+          '</div>' +
+          '<div class="pbrd-oc-freq-legend">' +
+            '<div class="pbrd-oc-freq-item"><div class="pbrd-oc-freq-dot" style="background:rgba(255,255,255,0.15)"></div>Cold (1x) 40%</div>' +
+            '<div class="pbrd-oc-freq-item"><div class="pbrd-oc-freq-dot" style="background:rgba(120,180,255,0.5)"></div>Warm (2\u20134x) 35%</div>' +
+            '<div class="pbrd-oc-freq-item"><div class="pbrd-oc-freq-dot" style="background:rgba(255,100,50,0.6)"></div>Hot (5+x) 25%</div>' +
+          '</div>' +
+          '<div style="margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.04);font-size:0.625rem;color:rgba(120,180,255,0.6);font-weight:600">Hot customers spend 3.2\u00D7 more than cold</div>' +
+        '</div>' +
+
+        /* Card: Channel Overlap */
+        '<div class="pbrd-oc-dash-card">' +
+          '<div class="pbrd-oc-dash-label">Cross-Channel Shoppers</div>' +
+          '<div style="display:flex;align-items:center;gap:16px;margin:8px 0">' +
+            '<div class="pbrd-oc-dash-big" style="font-size:2rem;color:rgba(120,180,255,0.9)">23%</div>' +
+            '<div style="font-size:0.6875rem;color:rgba(255,255,255,0.4);line-height:1.5">of customers shop<br>across multiple channels</div>' +
+          '</div>' +
+          '<div class="pbrd-oc-hbar" style="margin-top:8px"><span class="pbrd-oc-hbar-label" style="width:60px;font-size:0.5625rem">Online only</span><div class="pbrd-oc-hbar-track"><div class="pbrd-oc-hbar-fill" style="width:52%;background:rgba(80,100,220,0.4)"></div></div><span class="pbrd-oc-hbar-val">\u20AC89</span></div>' +
+          '<div class="pbrd-oc-hbar"><span class="pbrd-oc-hbar-label" style="width:60px;font-size:0.5625rem">Multi-channel</span><div class="pbrd-oc-hbar-track"><div class="pbrd-oc-hbar-fill" style="width:92%;background:linear-gradient(90deg,rgba(120,180,255,0.4),rgba(120,255,180,0.5))"></div></div><span class="pbrd-oc-hbar-val">\u20AC285</span></div>' +
+          '<div style="margin-top:8px;font-size:0.625rem;color:rgba(120,255,180,0.6);font-weight:600">\u2191 Multi-channel AOV is 3.2\u00D7 higher</div>' +
+        '</div>' +
+
+        /* Card: Hourly Transaction Heatmap */
+        '<div class="pbrd-oc-dash-card">' +
+          '<div class="pbrd-oc-dash-label">Peak Transaction Hours</div>' +
+          '<div class="pbrd-oc-heatmap">' +
+            '<div class="pbrd-oc-heatmap-row"><span class="pbrd-oc-heatmap-lbl">POS</span><div class="pbrd-oc-heatmap-cells">' +
+              '<div class="pbrd-oc-hcell" style="opacity:0.15" title="06:00"></div><div class="pbrd-oc-hcell" style="opacity:0.2"></div><div class="pbrd-oc-hcell" style="opacity:0.5"></div><div class="pbrd-oc-hcell" style="opacity:0.9"></div><div class="pbrd-oc-hcell" style="opacity:1"></div><div class="pbrd-oc-hcell" style="opacity:0.7"></div><div class="pbrd-oc-hcell" style="opacity:0.4"></div><div class="pbrd-oc-hcell" style="opacity:0.15"></div>' +
+            '</div></div>' +
+            '<div class="pbrd-oc-heatmap-row"><span class="pbrd-oc-heatmap-lbl">Web</span><div class="pbrd-oc-heatmap-cells">' +
+              '<div class="pbrd-oc-hcell pbrd-oc-hcell-web" style="opacity:0.1"></div><div class="pbrd-oc-hcell pbrd-oc-hcell-web" style="opacity:0.15"></div><div class="pbrd-oc-hcell pbrd-oc-hcell-web" style="opacity:0.3"></div><div class="pbrd-oc-hcell pbrd-oc-hcell-web" style="opacity:0.5"></div><div class="pbrd-oc-hcell pbrd-oc-hcell-web" style="opacity:0.4"></div><div class="pbrd-oc-hcell pbrd-oc-hcell-web" style="opacity:0.8"></div><div class="pbrd-oc-hcell pbrd-oc-hcell-web" style="opacity:1"></div><div class="pbrd-oc-hcell pbrd-oc-hcell-web" style="opacity:0.7"></div>' +
+            '</div></div>' +
+            '<div class="pbrd-oc-heatmap-times"><span>6am</span><span>9am</span><span>12pm</span><span>3pm</span><span>6pm</span><span>9pm</span><span>12am</span><span>3am</span></div>' +
+          '</div>' +
+          '<div style="margin-top:10px;font-size:0.625rem;color:rgba(255,255,255,0.3)">POS peaks at lunch \u2022 Web peaks evenings \u2022 Schedule staff accordingly</div>' +
+        '</div>' +
+
+      '</div>' +
+
+      /* Row 3: Integration ecosystem */
+      '<div class="pbrd-oc-dash-grid" style="grid-template-columns:1fr;margin-top:16px">' +
+        '<div class="pbrd-oc-dash-card" style="text-align:center">' +
+          '<div class="pbrd-oc-dash-label">Integration Ecosystem</div>' +
+          '<div style="display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin:16px 0">' +
+            '<div class="pbrd-oc-int-pill"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/woocommerce.svg" alt="WooCommerce" style="height:16px;width:auto">WooCommerce</div>' +
+            '<div class="pbrd-oc-int-pill"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/magento.svg" alt="Magento" style="height:16px;width:auto">Magento</div>' +
+            '<div class="pbrd-oc-int-pill"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/prestashop.svg" alt="PrestaShop" style="height:16px;width:auto">PrestaShop</div>' +
+            '<div class="pbrd-oc-int-pill"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/sap.svg" alt="SAP" style="height:16px;width:auto">SAP</div>' +
+            '<div class="pbrd-oc-int-pill"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/oracle.svg" alt="Oracle" style="height:16px;width:auto">Oracle</div>' +
+            '<div class="pbrd-oc-int-pill"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/whatsapp.svg" alt="WhatsApp" style="height:16px;width:auto">WhatsApp</div>' +
+            '<div class="pbrd-oc-int-pill"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/moloni.svg" alt="Moloni" style="height:16px;width:auto">Moloni</div>' +
+            '<div class="pbrd-oc-int-pill" style="border-color:rgba(120,180,255,0.2);color:rgba(120,180,255,0.8)">+ REST API</div>' +
+          '</div>' +
+          '<div style="font-size:0.6875rem;color:rgba(255,255,255,0.35)">Pre-built plug-ins \u2022 Same-day integration \u2022 Full API with webhooks and sandbox</div>' +
+        '</div>' +
       '</div>';
 
     /* Find a good spot inside the dashboard section */
     var container = dashSection.querySelector(".u-container, [class*='container']") || dashSection;
-    container.appendChild(grid);
+    container.appendChild(section);
 
-    observeReveal(".pbrd-oc-dash-card", 120, grid);
+    observeReveal(".pbrd-oc-dash-card", 100, section);
   }
 
   /* ═══════════════════════════════════════════ */

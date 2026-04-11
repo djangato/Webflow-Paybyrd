@@ -704,6 +704,86 @@
   flex-shrink: 0;
 }
 
+/* Heatmap */
+.pbrd-oc-heatmap {
+  margin-top: 8px;
+}
+
+.pbrd-oc-heatmap-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.pbrd-oc-heatmap-lbl {
+  font-size: 0.5625rem;
+  color: rgba(255, 255, 255, 0.35);
+  width: 28px;
+  flex-shrink: 0;
+}
+
+.pbrd-oc-heatmap-cells {
+  display: flex;
+  gap: 3px;
+  flex: 1;
+}
+
+.pbrd-oc-hcell {
+  flex: 1;
+  height: 18px;
+  border-radius: 3px;
+  background: rgba(80, 100, 220, 0.8);
+}
+
+.pbrd-oc-hcell-web {
+  background: rgba(120, 180, 255, 0.8);
+}
+
+.pbrd-oc-heatmap-times {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 36px;
+  margin-top: 4px;
+}
+
+.pbrd-oc-heatmap-times span {
+  font-size: 0.4375rem;
+  color: rgba(255, 255, 255, 0.2);
+}
+
+/* Integration pills */
+.pbrd-oc-int-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  transition: border-color 0.2s ease;
+}
+
+.pbrd-oc-int-pill:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Analytics wrap */
+.pbrd-oc-analytics-wrap {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (max-width: 900px) {
+  .pbrd-oc-analytics-wrap .pbrd-oc-dash-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
 /* ═══════════════════════════════════════════ */
 /* Section 6: Value Proposition Cards         */
 /* ═══════════════════════════════════════════ */
