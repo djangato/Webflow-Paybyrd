@@ -4317,6 +4317,9 @@ body.pbrd-page-omnichannel [class*='_wrap'] {
   gap: 16px;
   max-width: 900px;
   margin: 48px auto 0;
+  background: #0a0a0f;
+  border-radius: 24px;
+  padding: 24px;
 }
 
 .pbrd-oc-dash-card {
