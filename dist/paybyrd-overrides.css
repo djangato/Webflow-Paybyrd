@@ -6027,7 +6027,7 @@ a.glowing_button_link .glowing_button_text {
 }
 
 .pbrd-ec-bento-card {
-  background: #0a0a0f;
+  background: rgba(255, 255, 255, 0.03);
   border-radius: 20px;
   padding: 28px 24px;
   border: 1px solid rgba(255, 255, 255, 0.06);
@@ -6288,6 +6288,26 @@ a.glowing_button_link .glowing_button_text {
   .pbrd-ec-bento-lg, .pbrd-ec-bento-wide { grid-column: span 1; }
   .pbrd-ec-bento-wide-inner { flex-direction: column; gap: 20px; }
   .pbrd-ec-bento-wide-inner .pbrd-ec-bento-viz { width: 100%; }
+}
+
+/* Data section closing stat */
+.pbrd-ec-data-stat {
+  text-align: center;
+  padding: 40px 24px 0;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.pbrd-ec-data-stat p {
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: rgba(26, 26, 46, 0.45);
+  margin: 0;
+}
+
+.pbrd-ec-data-stat strong {
+  color: #1a1a2e;
+  font-weight: 700;
 }
 
 /* ═══════════════════════════════════════════ */

@@ -578,6 +578,43 @@
   }
 
   /* ═══════════════════════════════════════════ */
+  /* Section 5: Data Section — copy enhancement */
+  /* ═══════════════════════════════════════════ */
+
+  function enhanceDataSection() {
+    var section = findSectionByHeading("data that drives");
+    if (!section) return;
+
+    /* Override the bullet point copy with action-oriented text */
+    var copyMap = {
+      "monitor drop": "See exactly where customers leave \u2014 and why",
+      "spot failed": "Recover revenue from failed payments automatically",
+      "track method": "Know which payment methods convert \u2014 and which cost you sales",
+      "identify friction": "Catch problems before they become lost revenue",
+      "test and iterate": "Optimize without writing a single line of code"
+    };
+
+    section.querySelectorAll("p, span, div").forEach(function (el) {
+      if (el.children.length > 0) return;
+      var txt = el.textContent.toLowerCase().trim();
+      for (var key in copyMap) {
+        if (txt.indexOf(key) === 0) {
+          el.textContent = copyMap[key];
+          break;
+        }
+      }
+    });
+
+    /* Add closing stat at the bottom of the section */
+    if (!section.querySelector(".pbrd-ec-data-stat")) {
+      var stat = document.createElement("div");
+      stat.className = "pbrd-ec-data-stat";
+      stat.innerHTML = '<p>Merchants using Paybyrd analytics recover an average of <strong>12% more revenue</strong> within 60 days.</p>';
+      section.appendChild(stat);
+    }
+  }
+
+  /* ═══════════════════════════════════════════ */
   /* Section 6: Integration Logos               */
   /* ═══════════════════════════════════════════ */
 
@@ -777,7 +814,8 @@
       buildLogos();
       enhanceProblem();
       enhanceBenefits();
-      /* Section 5: "Data that drives" — DO NOT TOUCH */
+      /* Section 5: "Data that drives" — enhance copy only */
+      enhanceDataSection();
       enhanceIntegrations();
       enhanceJourney();
       buildTestimonials();
