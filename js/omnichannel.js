@@ -365,35 +365,36 @@
       '</div>'
     ];
 
-    /* Find slides by data-swiper-slide-index for correct matching */
-    var allSlides = document.querySelectorAll("[data-swiper-slide-index]");
-    if (!allSlides.length) {
-      allSlides = document.querySelectorAll(".slider-4_item, .swiper-slide");
+    /* Find the carousel image column — the right side that holds all slide images */
+    var carouselWrap = document.querySelector("[class*='slider-4']");
+    if (!carouselWrap) {
+      console.warn("[Paybyrd] Carousel wrapper not found");
+      return;
     }
 
+    /* Find all slide items */
+    var allSlides = carouselWrap.querySelectorAll("[class*='slider-4_item'], .swiper-slide");
     var added = 0;
+
     allSlides.forEach(function (slide) {
-      var idx = parseInt(slide.getAttribute("data-swiper-slide-index"));
-      if (isNaN(idx)) idx = Array.prototype.indexOf.call(allSlides, slide);
+      /* Use data-swiper-slide-index for correct mapping, fallback to DOM order */
+      var attr = slide.getAttribute("data-swiper-slide-index");
+      var idx = attr !== null ? parseInt(attr) : added;
       if (idx < 0 || idx >= overlays.length) return;
-      if (slide.querySelector(".pbrd-oc-overlays")) return; /* Skip if already injected */
+      if (slide.querySelector(".pbrd-oc-overlays")) return;
 
-      /* Find the image area inside the slide */
-      var img = slide.querySelector("img");
-      var container = img ? (img.closest("[class*='image']") || img.parentElement) : slide;
-
-      if (window.getComputedStyle(container).position === "static") {
-        container.style.position = "relative";
-      }
+      /* Make slide positioned for overlay */
+      slide.style.position = "relative";
+      slide.style.overflow = "visible";
 
       var overlayWrap = document.createElement("div");
       overlayWrap.className = "pbrd-oc-overlays";
       overlayWrap.innerHTML = overlays[idx];
-      container.appendChild(overlayWrap);
+      slide.appendChild(overlayWrap);
       added++;
     });
 
-    console.log("[Paybyrd] Carousel overlays added to " + added + " slides");
+    console.log("[Paybyrd] Carousel overlays: found " + allSlides.length + " slides, added " + added);
   }
 
   /* ═══════════════════════════════════════════ */
