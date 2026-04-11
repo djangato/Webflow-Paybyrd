@@ -4200,13 +4200,6 @@ a.glowing_button_link .glowing_button_text {
   color: #10b981;
 }
 
-/* ─── Force all sections to content-based height (omnichannel only) ─── */
-body.pbrd-page-omnichannel section,
-body.pbrd-page-omnichannel [class*='section'],
-body.pbrd-page-omnichannel [class*='_wrap'] {
-  min-height: auto !important;
-  height: auto !important;
-}
 
 /* ─── Carousel image container — remove Webflow gray bg ─── */
 [class*='slider-4'] .u-image-wrapper,
