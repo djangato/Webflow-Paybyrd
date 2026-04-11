@@ -4,17 +4,17 @@
   if (!window.location.pathname.includes("/book-demo")) return;
 
   var LOGOS_CDN = "https://cdn.prod.website-files.com/69d9242bbde99c4b80e41aeb/";
-  var IMG_CDN = "https://cdn.prod.website-files.com/69d9242bbde99c4b80e41ae9/";
+  var ASSET_BASE = "https://djangato.github.io/Webflow-Paybyrd/assets/product/";
 
-  // Image per step — contextual product screenshots
+  // Portrait product screenshots per step
   var stepImages = {
-    "Book a Call": IMG_CDN + "69d9242bbde99c4b80e41cb1_New%20dashboard%20image.png",
-    "Payment Channels": IMG_CDN + "69d9242bbde99c4b80e41c84_paybyrd-pos-tab-04.avif",
-    "Message": IMG_CDN + "69d9242bbde99c4b80e41cae_Frame%201707479734.png",
-    "Payment Volume": IMG_CDN + "69d9242bbde99c4b80e41cac_Website%20Feedback%20Figma%20(1).png",
-    "Company Details": IMG_CDN + "69d9242bbde99c4b80e41c72_slider-2_wrap.webp",
-    "Person Details": IMG_CDN + "69d9242bbde99c4b80e41cad_Website%20Feedback%20Figma.png",
-    "Contact Details": IMG_CDN + "69d9242bbde99c4b80e41cb1_New%20dashboard%20image.png"
+    "Book a Call": ASSET_BASE + "dashboard-dark.jpg",
+    "Payment Channels": ASSET_BASE + "dashboard-dark.jpg",
+    "Message": ASSET_BASE + "analytics-dark.jpg",
+    "Payment Volume": ASSET_BASE + "analytics-dark.jpg",
+    "Company Details": ASSET_BASE + "transactions-dark.jpg",
+    "Person Details": ASSET_BASE + "transactions-dark.jpg",
+    "Contact Details": ASSET_BASE + "dashboard-dark.jpg"
   };
 
   var lockSVG = '<svg viewBox="0 0 16 16" fill="none"><path d="M5 7V5a3 3 0 016 0v2M3 7h10a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1V8a1 1 0 011-1z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>';

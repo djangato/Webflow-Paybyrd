@@ -134,8 +134,16 @@
 }
 
 /* ─── Dynamic right-side image ─── */
+.pbrd-demo-image-col .u-image-wrapper {
+  aspect-ratio: auto !important;
+  height: 100% !important;
+}
+
 .pbrd-demo-image-col .u-image {
   transition: opacity 0.4s ease !important;
+  object-fit: contain !important;
+  object-position: center top !important;
+  border-radius: 16px !important;
 }
 
 .pbrd-demo-image-col .u-image.fading {
