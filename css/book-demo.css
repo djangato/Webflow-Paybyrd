@@ -138,7 +138,12 @@
   display: flex !important;
   align-items: flex-start !important;
   justify-content: center !important;
-  padding-top: 40px !important;
+  padding-top: 0 !important;
+}
+
+.pbrd-demo-image-col .pbrd-demo-visual {
+  position: sticky;
+  top: 100px;
 }
 
 .pbrd-demo-image-col .u-image-wrapper {
