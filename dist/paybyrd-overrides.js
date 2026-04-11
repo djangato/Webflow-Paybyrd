@@ -609,32 +609,41 @@
   var vizBI =
     '<div class="pbrd-viz pbrd-viz-bi">' +
       '<div class="pbrd-bv-card" style="animation:pbrd-dv-slide-up 0.5s ease both;flex:1">' +
-        '<div class="pbrd-bv-label">Recurring Shoppers</div>' +
-        '<div class="pbrd-bv-big" style="margin:4px 0">847</div>' +
-        '<div class="pbrd-bv-sublabel">\u20AC142 avg. ticket</div>' +
-        '<div class="pbrd-bv-divider"></div>' +
-        '<div class="pbrd-bv-label" style="margin-bottom:6px">Store Heatmap</div>' +
-        '<div class="pbrd-bv-heatgrid">' + heatCells + '</div>' +
+        '<div style="display:flex;gap:16px;align-items:flex-start">' +
+          '<div style="flex:1">' +
+            '<div class="pbrd-bv-label">Recurring Shoppers</div>' +
+            '<div class="pbrd-bv-big" style="margin:4px 0;font-size:1.75rem">847</div>' +
+            '<div class="pbrd-bv-sublabel">\u20AC142 avg. ticket</div>' +
+            '<div style="margin-top:12px">' +
+              '<div class="pbrd-bv-label">12-Week Trend</div>' +
+              '<svg viewBox="0 0 120 28" style="width:100%;height:28px;margin-top:4px"><path d="M0 24 C10 22, 15 20, 20 18 S30 14, 40 16 S55 10, 65 8 S80 6, 90 4 S105 2, 120 1" stroke="rgba(120,180,255,0.5)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-dasharray="200" stroke-dashoffset="200" style="animation:pbrd-line-draw 1.5s 0.5s ease forwards"/><path d="M0 24 C10 22, 15 20, 20 18 S30 14, 40 16 S55 10, 65 8 S80 6, 90 4 S105 2, 120 1 V28 H0Z" fill="url(#pbrd-bv-spark)" opacity="0.3"/><defs><linearGradient id="pbrd-bv-spark" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(120,180,255,0.4)"/><stop offset="100%" stop-color="rgba(120,180,255,0)"/></linearGradient></defs></svg>' +
+            '</div>' +
+          '</div>' +
+          '<div style="flex-shrink:0">' +
+            '<div class="pbrd-bv-label" style="margin-bottom:6px">Activity</div>' +
+            '<div class="pbrd-bv-heatgrid-sm">' + heatCells + '</div>' +
+          '</div>' +
+        '</div>' +
       '</div>' +
     '</div>';
 
   /* ─── Card 4: Loyalty — NPS arc + retention ─── */
   var vizLoyalty =
     '<div class="pbrd-viz pbrd-viz-loyalty2">' +
-      '<div class="pbrd-bv-card" style="animation:pbrd-dv-slide-up 0.5s ease both;text-align:center;flex:1">' +
-        '<div class="pbrd-bv-arc-wrap">' +
-          '<svg viewBox="0 0 120 70" style="width:100%;max-width:180px">' +
-            '<path d="M15 65 A45 45 0 0 1 105 65" stroke="rgba(255,255,255,0.04)" stroke-width="5" fill="none" stroke-linecap="round"/>' +
-            '<path class="pbrd-bv-arc-fill" d="M15 65 A45 45 0 0 1 105 65" stroke="url(#pbrd-bv-arc-g)" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="142" stroke-dashoffset="142"/>' +
-            '<defs><linearGradient id="pbrd-bv-arc-g" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="rgba(255,255,255,0.15)"/><stop offset="100%" stop-color="rgba(120,180,255,0.7)"/></linearGradient></defs>' +
-          '</svg>' +
-          '<div class="pbrd-bv-arc-val">94</div>' +
-          '<div class="pbrd-bv-arc-lbl">NPS Score</div>' +
-        '</div>' +
-        '<div class="pbrd-bv-divider"></div>' +
-        '<div class="pbrd-bv-row">' +
-          '<div class="pbrd-bv-mini"><span class="pbrd-bv-mini-val">3.2\u00D7</span><span class="pbrd-bv-mini-lbl">Repeat Rate</span></div>' +
-          '<div class="pbrd-bv-mini"><span class="pbrd-bv-mini-val">68%</span><span class="pbrd-bv-mini-lbl">Return &lt;30d</span></div>' +
+      '<div class="pbrd-bv-card" style="animation:pbrd-dv-slide-up 0.5s ease both;flex:1">' +
+        '<div style="display:flex;gap:20px;align-items:center">' +
+          '<div style="flex-shrink:0;position:relative;width:90px;height:90px">' +
+            '<svg viewBox="0 0 40 40" style="width:100%;height:100%"><circle cx="20" cy="20" r="17" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="2.5"/><circle cx="20" cy="20" r="17" fill="none" stroke="url(#pbrd-bv-ring-g)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="107" stroke-dashoffset="107" transform="rotate(-90 20 20)" style="animation:pbrd-bv-ring 1.2s 0.4s ease forwards"/><defs><linearGradient id="pbrd-bv-ring-g" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="rgba(255,255,255,0.15)"/><stop offset="100%" stop-color="rgba(120,180,255,0.7)"/></linearGradient></defs></svg>' +
+            '<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center"><span style="font-size:1.25rem;font-weight:300;color:#fff;letter-spacing:-0.03em">94</span><span style="font-size:0.4375rem;color:rgba(255,255,255,0.25);text-transform:uppercase;letter-spacing:0.08em">NPS</span></div>' +
+          '</div>' +
+          '<div style="flex:1">' +
+            '<div class="pbrd-bv-label">Customer Loyalty</div>' +
+            '<div style="display:flex;flex-direction:column;gap:8px;margin-top:10px">' +
+              '<div class="pbrd-bv-loyalty-row" style="animation:pbrd-fade-in 0.4s 0.3s both"><span class="pbrd-bv-loyalty-val">3.2\u00D7</span><span class="pbrd-bv-loyalty-lbl">Repeat purchase rate</span></div>' +
+              '<div class="pbrd-bv-loyalty-row" style="animation:pbrd-fade-in 0.4s 0.45s both"><span class="pbrd-bv-loyalty-val">68%</span><span class="pbrd-bv-loyalty-lbl">Return within 30 days</span></div>' +
+              '<div class="pbrd-bv-loyalty-row" style="animation:pbrd-fade-in 0.4s 0.6s both"><span class="pbrd-bv-loyalty-val">\u20AC218</span><span class="pbrd-bv-loyalty-lbl">Lifetime avg. spend</span></div>' +
+            '</div>' +
+          '</div>' +
         '</div>' +
       '</div>' +
     '</div>';

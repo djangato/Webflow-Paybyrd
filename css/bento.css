@@ -318,26 +318,51 @@
 .pbrd-bv-approval-fill { fill: none; stroke: rgba(120,255,180,0.6); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 113; stroke-dashoffset: 113; transform: rotate(-90deg); transform-origin: center; animation: pbrd-bv-ring 1.2s 0.5s ease forwards; }
 @keyframes pbrd-bv-ring { to { stroke-dashoffset: 9; } }
 
-/* ─── Heatmap grid ─── */
-.pbrd-bv-heatgrid {
+/* ─── Heatmap grid (compact) ─── */
+.pbrd-bv-heatgrid-sm {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 3px;
+  grid-template-columns: repeat(7, 10px);
+  grid-template-rows: repeat(4, 10px);
+  gap: 2px;
 }
 
 .pbrd-heat-cell {
-  aspect-ratio: 1;
-  border-radius: 3px;
+  border-radius: 2px;
   background: rgba(120, 180, 255, var(--op));
   animation: pbrd-heat-pop 0.3s var(--d) both;
   transition: all 0.2s ease;
 }
 
-.card-1_wrap:hover .pbrd-heat-cell { transform: scale(1.08); }
+.card-1_wrap:hover .pbrd-heat-cell { transform: scale(1.1); }
 
 @keyframes pbrd-heat-pop {
   from { opacity: 0; transform: scale(0); }
   to { opacity: 1; transform: scale(1); }
+}
+
+/* ─── Sparkline animation ─── */
+@keyframes pbrd-line-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+/* ─── Loyalty metric rows ─── */
+.pbrd-bv-loyalty-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.pbrd-bv-loyalty-val {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  font-variant-numeric: tabular-nums;
+  min-width: 40px;
+}
+
+.pbrd-bv-loyalty-lbl {
+  font-size: 0.625rem;
+  color: rgba(255, 255, 255, 0.3);
 }
 
 /* ─── Arc fill (loyalty) ─── */
