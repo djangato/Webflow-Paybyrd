@@ -1060,6 +1060,39 @@
       '</div>' +
     '</div>';
 
+  /* ─── Integrations — Ecosystem ─── */
+  var vizIntegrations =
+    '<div class="pbrd-sv">' +
+      '<div class="pbrd-sv-card pbrd-sv-card-hero" style="animation:pbrd-sv-up 0.5s ease both">' +
+        '<div class="pbrd-sv-label">Integration Ecosystem</div>' +
+        '<div class="pbrd-sv-integration-grid">' +
+          '<div class="pbrd-sv-integration" style="--d:0.05s"><div class="pbrd-sv-int-icon" style="--ibg:#7B61FF">\uD83D\uDED2</div><span class="pbrd-sv-int-name">WooCommerce</span><span class="pbrd-sv-int-badge pbrd-sv-int-live">Live</span></div>' +
+          '<div class="pbrd-sv-integration" style="--d:0.1s"><div class="pbrd-sv-int-icon" style="--ibg:#F46F25">\uD83D\uDED2</div><span class="pbrd-sv-int-name">Magento</span><span class="pbrd-sv-int-badge pbrd-sv-int-live">Live</span></div>' +
+          '<div class="pbrd-sv-integration" style="--d:0.15s"><div class="pbrd-sv-int-icon" style="--ibg:#DF0067">\uD83D\uDED2</div><span class="pbrd-sv-int-name">PrestaShop</span><span class="pbrd-sv-int-badge pbrd-sv-int-live">Live</span></div>' +
+          '<div class="pbrd-sv-integration" style="--d:0.2s"><div class="pbrd-sv-int-icon" style="--ibg:#2C5282">\uD83D\uDCCA</div><span class="pbrd-sv-int-name">Moloni</span><span class="pbrd-sv-int-badge pbrd-sv-int-live">Live</span></div>' +
+          '<div class="pbrd-sv-integration" style="--d:0.25s"><div class="pbrd-sv-int-icon" style="--ibg:#1A73E8">\uD83C\uDFE8</div><span class="pbrd-sv-int-name">Host HMS</span><span class="pbrd-sv-int-badge pbrd-sv-int-live">Live</span></div>' +
+          '<div class="pbrd-sv-integration" style="--d:0.3s"><div class="pbrd-sv-int-icon" style="--ibg:#0D47A1">\uD83C\uDFE8</div><span class="pbrd-sv-int-name">Newhotel</span><span class="pbrd-sv-int-badge pbrd-sv-int-live">Live</span></div>' +
+          '<div class="pbrd-sv-integration" style="--d:0.35s"><div class="pbrd-sv-int-icon" style="--ibg:#C74634">\uD83C\uDFE8</div><span class="pbrd-sv-int-name">Oracle</span><span class="pbrd-sv-int-badge pbrd-sv-int-live">Live</span></div>' +
+          '<div class="pbrd-sv-integration" style="--d:0.4s"><div class="pbrd-sv-int-icon" style="--ibg:#25D366">\uD83D\uDCAC</div><span class="pbrd-sv-int-name">WhatsApp</span><span class="pbrd-sv-int-badge pbrd-sv-int-live">Live</span></div>' +
+          '<div class="pbrd-sv-integration" style="--d:0.45s"><div class="pbrd-sv-int-icon" style="--ibg:#0070F2">\uD83D\uDCE6</div><span class="pbrd-sv-int-name">SAP</span><span class="pbrd-sv-int-badge pbrd-sv-int-live">Live</span></div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="pbrd-sv-row">' +
+        '<div class="pbrd-sv-card" style="animation:pbrd-sv-up 0.5s ease 0.3s both;flex:1;text-align:center">' +
+          '<div class="pbrd-sv-big" style="font-size:1.5rem;color:rgba(120,180,255,0.8)">9+</div>' +
+          '<div class="pbrd-sv-sublabel">Plug-ins</div>' +
+        '</div>' +
+        '<div class="pbrd-sv-card" style="animation:pbrd-sv-up 0.5s ease 0.35s both;flex:1;text-align:center">' +
+          '<div class="pbrd-sv-big" style="font-size:1.5rem;color:rgba(120,180,255,0.8)">&lt;1h</div>' +
+          '<div class="pbrd-sv-sublabel">Setup Time</div>' +
+        '</div>' +
+        '<div class="pbrd-sv-card" style="animation:pbrd-sv-up 0.5s ease 0.4s both;flex:1;text-align:center">' +
+          '<div class="pbrd-sv-big" style="font-size:1.5rem;color:rgba(120,255,180,0.8)">REST</div>' +
+          '<div class="pbrd-sv-sublabel">API Available</div>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+
   /* ─── Intelligence — Shopper Profiles ─── */
   var vizIntelligence =
     '<div class="pbrd-sv">' +
@@ -1101,7 +1134,7 @@
       '</div>' +
     '</div>';
 
-  var slideVisuals = [vizPlatform, vizDashboard, vizTransactions, vizAnalytics, vizIntelligence, vizPOS, vizPayments];
+  var slideVisuals = [vizPlatform, vizDashboard, vizTransactions, vizAnalytics, vizIntelligence, vizPOS, vizPayments, vizIntegrations];
 
   var slides = [
     { tab: "Platform", number: "01", title: "Unified Omnichannel Platform", description: "POS, e-commerce, QR codes, kiosks, and pay-by-link \u2014 all managed through one powerful dashboard with real-time data and full control.", features: ["Single dashboard for all channels", "Real-time transaction monitoring", "Multi-store and multi-currency support"], link: "/e-commerce", linkText: "Explore the platform" },
@@ -1110,7 +1143,8 @@
     { tab: "Analytics", number: "04", title: "Real-Time Business Intelligence", description: "Revenue breakdowns by time period, status analysis with 92% success rates, and volume distribution across Visa, Mastercard, MB Way, and more.", features: ["Revenue charts by time of day", "Status breakdown (success, failed, pending)", "Volume distribution by payment method"], link: "/e-commerce", linkText: "Explore analytics" },
     { tab: "Intelligence", number: "05", title: "Know Every Customer \u2014 Even the Anonymous Ones", description: "Paybyrd identifies returning shoppers across all channels automatically \u2014 even from anonymous in-store card transactions. See purchase history, frequency, spend patterns, and lifetime value without requiring logins or loyalty programs.", features: ["Auto-identify returning card holders across POS and online", "Purchase frequency scoring (cold, warm, hot)", "Top customer leaderboard with lifetime spend", "Works without apps, accounts, or loyalty sign-ups"], link: "/book-demo", linkText: "See it in action" },
     { tab: "POS", number: "06", title: "Enterprise-Grade POS Terminals", description: "Accept payments anywhere with Paybyrd-powered Android terminals. Portable, countertop, or kiosk-integrated \u2014 all running our software.", features: ["Android-based smart terminals", "Buy outright or rent monthly", "Built-in printer, scanner, and 4G"], link: "/pos", linkText: "View POS terminals" },
-    { tab: "Payments", number: "07", title: "192+ Currencies and Every Method That Matters", description: "From Visa and Amex to Pix, MB Way, and Klarna. Multi-acquiring with intelligent routing ensures the highest approval rates globally.", features: ["20+ payment methods supported", "Multi-acquiring & smart routing", "Local methods for every market"], link: "/payment-methods", linkText: "See all payment methods" }
+    { tab: "Payments", number: "07", title: "192+ Currencies and Every Method That Matters", description: "From Visa and Amex to Pix, MB Way, and Klarna. Multi-acquiring with intelligent routing ensures the highest approval rates globally.", features: ["20+ payment methods supported", "Multi-acquiring & smart routing", "Local methods for every market"], link: "/payment-methods", linkText: "See all payment methods" },
+    { tab: "Integrations", number: "08", title: "Connect Your Entire Tech Stack in Minutes", description: "Pre-built plug-ins for WooCommerce, Magento, PrestaShop, and hospitality PMS systems like Oracle, Newhotel, and Host. Plus WhatsApp for Business, SAP, Moloni, and a full REST API for custom builds.", features: ["E-commerce: WooCommerce, Magento, PrestaShop", "Hospitality: Oracle, Newhotel, Host Hotel Systems", "Business: SAP, Moloni, WhatsApp for Business", "Full REST API with webhooks and sandbox"], link: "/book-demo", linkText: "Explore integrations" }
   ];
 
   var currentSlide = 0;

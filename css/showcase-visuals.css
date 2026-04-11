@@ -342,6 +342,70 @@
   to { opacity: 1; transform: scale(1); }
 }
 
+/* ─── Integration grid ─── */
+.pbrd-sv-integration-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.pbrd-sv-integration {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  animation: pbrd-sv-pop 0.3s ease var(--d) both;
+  transition: background 0.2s ease;
+}
+
+.pbrd-sv-integration:hover { background: rgba(255, 255, 255, 0.05); }
+
+.pbrd-sv-int-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  background: var(--ibg, rgba(255,255,255,0.1));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.5625rem;
+  flex-shrink: 0;
+}
+
+.pbrd-sv-int-name {
+  font-size: 0.5rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pbrd-sv-int-badge {
+  font-size: 0.375rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 1px 5px;
+  border-radius: 100px;
+  flex-shrink: 0;
+}
+
+.pbrd-sv-int-live {
+  color: rgba(120, 255, 180, 0.8);
+  background: rgba(120, 255, 180, 0.08);
+}
+
+@media (max-width: 768px) {
+  .pbrd-sv-integration-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
 /* ─── POS spec rows ─── */
 .pbrd-sv-spec {
   display: flex;
