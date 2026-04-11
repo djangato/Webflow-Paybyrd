@@ -785,16 +785,72 @@
 }
 
 /* ═══════════════════════════════════════════ */
-/* Section 6: Value Proposition Cards         */
+/* Section 6: Closing Section                 */
 /* ═══════════════════════════════════════════ */
+
+.pbrd-oc-closing-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px 48px;
+}
+
+/* Switch cards — urgency numbers */
+.pbrd-oc-switch-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.pbrd-oc-switch-card {
+  background: #0a0a0f;
+  border-radius: 16px;
+  padding: 28px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  /* Scroll animation */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease;
+}
+
+.pbrd-oc-switch-card.pbrd-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.pbrd-oc-switch-card:hover {
+  border-color: rgba(120, 180, 255, 0.15);
+}
+
+.pbrd-oc-switch-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.pbrd-oc-switch-text {
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.pbrd-oc-switch-text strong {
+  color: rgba(255, 255, 255, 0.8);
+}
 
 .pbrd-oc-benefits {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   max-width: 1100px;
-  margin: 48px auto 0;
-  padding: 0 24px;
+  margin: 0 auto;
+  padding: 0;
 }
 
 .pbrd-oc-benefit {
@@ -935,7 +991,8 @@
     transform: rotate(90deg);
   }
   .pbrd-oc-dash-grid { grid-template-columns: 1fr; max-width: 480px; }
-  .pbrd-oc-benefits { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .pbrd-oc-switch-grid { grid-template-columns: repeat(2, 1fr); }
+  .pbrd-oc-benefits { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 768px) {

@@ -571,7 +571,7 @@
   /* ═══════════════════════════════════════════ */
 
   function buildBenefits() {
-    /* Find "More than numbers" or "Centralized control" section */
+    /* Find and replace the "More than numbers" section */
     var allH2 = document.querySelectorAll("h2");
     var valSection = null;
     allH2.forEach(function (h) {
@@ -581,33 +581,71 @@
     });
     if (!valSection) return;
 
-    var refundSVG = '<svg viewBox="0 0 24 24" fill="none"><path d="M3 10l4-4m0 0l4 4M7 6v8a4 4 0 004 4h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-    var userSVG = '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
-    var chartSVG = '<svg viewBox="0 0 24 24" fill="none"><path d="M3 20l5-8 4 4 6-10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    /* Override the bland heading */
+    var valH2 = valSection.querySelector("h2");
+    if (valH2) valH2.innerHTML = "Everything you need.<br>Nothing you don\u2019t.";
 
-    var benefits = document.createElement("div");
-    benefits.className = "pbrd-oc-benefits";
+    var valP = valSection.querySelector("p");
+    if (valP) valP.textContent = "No setup fees. No hidden costs. No contracts. Just a payment platform that connects every channel, recognizes every customer, and grows with your business.";
 
-    benefits.innerHTML =
-      '<div class="pbrd-oc-benefit">' +
-        '<div class="pbrd-oc-benefit-icon">' + refundSVG + '</div>' +
-        '<h3>One refund, any channel</h3>' +
-        '<p>Bought online? Return in-store. Paid via link? Refund at the terminal. Cross-channel refunds without manual reconciliation.</p>' +
+    /* Build the enhanced closing section */
+    var closingWrap = document.createElement("div");
+    closingWrap.className = "pbrd-oc-closing-wrap";
+
+    var clockSVG = '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
+    var shieldSVG = '<svg viewBox="0 0 24 24" fill="none"><path d="M12 3l8 4v5c0 5.25-3.44 10.14-8 11.5C7.44 22.14 4 17.25 4 12V7l8-4z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    var rocketSVG = '<svg viewBox="0 0 24 24" fill="none"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z" stroke="currentColor" stroke-width="1.5"/><path d="M12 15l-3-3c1-4 4-7 9-9-2 5-5 8-9 9l3 3z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    var heartSVG = '<svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+    closingWrap.innerHTML =
+      /* Why merchants switch — urgency cards */
+      '<div class="pbrd-oc-switch-grid">' +
+        '<div class="pbrd-oc-switch-card">' +
+          '<div class="pbrd-oc-switch-number">4h</div>' +
+          '<div class="pbrd-oc-switch-text">Average time to go live. Not weeks. Not months. <strong>Hours.</strong></div>' +
+        '</div>' +
+        '<div class="pbrd-oc-switch-card">' +
+          '<div class="pbrd-oc-switch-number">0</div>' +
+          '<div class="pbrd-oc-switch-text">Setup fees. Migration costs. Long-term contracts. Hidden surprises.</div>' +
+        '</div>' +
+        '<div class="pbrd-oc-switch-card">' +
+          '<div class="pbrd-oc-switch-number">30</div>' +
+          '<div class="pbrd-oc-switch-text">Days to decide. Full money-back guarantee, no questions asked.</div>' +
+        '</div>' +
+        '<div class="pbrd-oc-switch-card">' +
+          '<div class="pbrd-oc-switch-number">1</div>' +
+          '<div class="pbrd-oc-switch-text">Platform for every channel. POS, online, mobile, kiosk, payment links \u2014 unified.</div>' +
+        '</div>' +
       '</div>' +
-      '<div class="pbrd-oc-benefit">' +
-        '<div class="pbrd-oc-benefit-icon">' + userSVG + '</div>' +
-        '<h3>Customers recognized, not numbered</h3>' +
-        '<p>Automatic shopper identification from card data alone \u2014 across POS and online. No loyalty apps, no logins, no friction.</p>' +
-      '</div>' +
-      '<div class="pbrd-oc-benefit">' +
-        '<div class="pbrd-oc-benefit-icon">' + chartSVG + '</div>' +
-        '<h3>Intelligence that compounds</h3>' +
-        '<p>Every transaction enriches the picture. See patterns that single-channel platforms miss \u2014 frequency, lifetime value, channel preferences.</p>' +
+
+      /* What you get — benefit cards with icons */
+      '<div class="pbrd-oc-benefits">' +
+        '<div class="pbrd-oc-benefit">' +
+          '<div class="pbrd-oc-benefit-icon">' + clockSVG + '</div>' +
+          '<h3>Live this week, not next quarter</h3>' +
+          '<p>Pre-built integrations for WooCommerce, Magento, SAP, and 20+ platforms. Your developer will thank you.</p>' +
+        '</div>' +
+        '<div class="pbrd-oc-benefit">' +
+          '<div class="pbrd-oc-benefit-icon">' + shieldSVG + '</div>' +
+          '<h3>Risk-free. Literally.</h3>' +
+          '<p>30-day money-back guarantee. No contracts, no lock-in. If we don\u2019t deliver, you don\u2019t pay. It\u2019s that simple.</p>' +
+        '</div>' +
+        '<div class="pbrd-oc-benefit">' +
+          '<div class="pbrd-oc-benefit-icon">' + rocketSVG + '</div>' +
+          '<h3>Built for where you\u2019re going</h3>' +
+          '<p>From 100 transactions to 100,000. Same platform, same price model, no surprises as you scale.</p>' +
+        '</div>' +
+        '<div class="pbrd-oc-benefit">' +
+          '<div class="pbrd-oc-benefit-icon">' + heartSVG + '</div>' +
+          '<h3>A team that picks up the phone</h3>' +
+          '<p>Real humans. Based in Europe. Average response time under 2 hours. Not a chatbot, not a ticket queue.</p>' +
+        '</div>' +
       '</div>';
 
-    valSection.insertAdjacentElement("afterend", benefits);
+    valSection.insertAdjacentElement("afterend", closingWrap);
 
-    observeReveal(".pbrd-oc-benefit", 150, benefits);
+    observeReveal(".pbrd-oc-switch-card", 100, closingWrap);
+    observeReveal(".pbrd-oc-benefit", 100, closingWrap);
   }
 
   /* ═══════════════════════════════════════════ */
@@ -619,12 +657,17 @@
     section.className = "pbrd-oc-cta";
 
     section.innerHTML =
-      '<h2>See your customer journey in 15 minutes.</h2>' +
-      '<a href="/book-demo" class="pbrd-oc-cta-btn">Book a Free Demo \u2192</a>' +
-      '<div class="pbrd-oc-cta-proofs">' +
-        '<div class="pbrd-oc-cta-proof">' + checkSVG + '<span>30-day money-back guarantee</span></div>' +
-        '<div class="pbrd-oc-cta-proof">' + checkSVG + '<span>Live in under 4 hours</span></div>' +
-        '<div class="pbrd-oc-cta-proof">' + checkSVG + '<span>No contracts, cancel anytime</span></div>' +
+      '<div class="pbrd-oc-cta-inner">' +
+        '<div class="pbrd-oc-journey-label" style="color:rgba(120,255,180,0.7)">Ready?</div>' +
+        '<h2>Book a 15-minute call.<br>See your data come alive.</h2>' +
+        '<p style="font-size:1rem;color:rgba(255,255,255,0.45);max-width:480px;margin:0 auto 32px;line-height:1.6">We\u2019ll show you exactly how Paybyrd connects your channels, identifies your customers, and surfaces insights you\u2019re currently missing. No pitch deck \u2014 just your data.</p>' +
+        '<a href="/book-demo" class="pbrd-oc-cta-btn">Book a Free Demo \u2192</a>' +
+        '<div style="margin-top:16px;margin-bottom:32px"><a href="/pricing" style="color:rgba(255,255,255,0.4);font-size:0.875rem;text-decoration:none;transition:color 0.2s">Or explore pricing first \u2192</a></div>' +
+        '<div class="pbrd-oc-cta-proofs">' +
+          '<div class="pbrd-oc-cta-proof">' + checkSVG + '<span>Free 15-min consultation</span></div>' +
+          '<div class="pbrd-oc-cta-proof">' + checkSVG + '<span>No commitment required</span></div>' +
+          '<div class="pbrd-oc-cta-proof">' + checkSVG + '<span>Live in under 4 hours</span></div>' +
+        '</div>' +
       '</div>';
 
     /* Insert before the footer */
