@@ -1271,7 +1271,7 @@
     bar.innerHTML =
       '<div class="pbrd-sticky-inner">' +
         '<div class="pbrd-sticky-text"><strong>Start processing payments today.</strong> No setup fees, no commitment.</div>' +
-        '<a href="https://onboard.paybyrd.com/" class="pbrd-sticky-btn">Get Started Free</a>' +
+        '<a href="https://beta.paybyrd.com" class="pbrd-sticky-btn">Get Started Free</a>' +
         '<button class="pbrd-sticky-dismiss">\u00D7</button>' +
       '</div>';
     document.body.appendChild(bar);
@@ -1412,13 +1412,44 @@
           '</div>' +
         '</div>' +
         '<div class="pbrd-mid-cta-actions">' +
-          '<a href="https://onboard.paybyrd.com/" class="pbrd-mid-cta-primary">Start Risk-Free \u2192</a>' +
+          '<a href="https://beta.paybyrd.com" class="pbrd-mid-cta-primary">Start Risk-Free \u2192</a>' +
           '<a href="/book-demo" class="pbrd-mid-cta-secondary">Talk to Sales</a>' +
         '</div>' +
       '</div>';
 
     // Insert where the old CTA was
     original.parentElement.insertBefore(section, original);
+  }
+
+  if (document.readyState === "complete") {
+    init();
+  } else {
+    window.addEventListener("load", init);
+  }
+})();
+
+/* Paybyrd — Rewrite CTA button text and URLs */
+(function () {
+  "use strict";
+
+  function init() {
+    // Find all Webflow native buttons
+    document.querySelectorAll("a.button-main_wrap").forEach(function (btn) {
+      var textEl = btn.querySelector(".button-main_text");
+      if (!textEl) return;
+      var text = textEl.textContent.trim().toLowerCase();
+
+      // Rewrite "Start Now", "Get Started", "Getting Started"
+      if (text === "start now" || text === "get started" || text === "getting started") {
+        textEl.textContent = "Start Risk-Free";
+        btn.href = "https://beta.paybyrd.com";
+      }
+    });
+
+    // Also fix the onboard.paybyrd.com links we injected
+    document.querySelectorAll('a[href*="onboard.paybyrd.com"]').forEach(function (link) {
+      link.href = "https://beta.paybyrd.com";
+    });
   }
 
   if (document.readyState === "complete") {

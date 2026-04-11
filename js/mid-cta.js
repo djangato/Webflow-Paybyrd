@@ -25,7 +25,7 @@
           '</div>' +
         '</div>' +
         '<div class="pbrd-mid-cta-actions">' +
-          '<a href="https://onboard.paybyrd.com/" class="pbrd-mid-cta-primary">Start Risk-Free \u2192</a>' +
+          '<a href="https://beta.paybyrd.com" class="pbrd-mid-cta-primary">Start Risk-Free \u2192</a>' +
           '<a href="/book-demo" class="pbrd-mid-cta-secondary">Talk to Sales</a>' +
         '</div>' +
       '</div>';

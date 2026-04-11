@@ -120,7 +120,7 @@
     bar.innerHTML =
       '<div class="pbrd-sticky-inner">' +
         '<div class="pbrd-sticky-text"><strong>Start processing payments today.</strong> No setup fees, no commitment.</div>' +
-        '<a href="https://onboard.paybyrd.com/" class="pbrd-sticky-btn">Get Started Free</a>' +
+        '<a href="https://beta.paybyrd.com" class="pbrd-sticky-btn">Get Started Free</a>' +
         '<button class="pbrd-sticky-dismiss">\u00D7</button>' +
       '</div>';
     document.body.appendChild(bar);
