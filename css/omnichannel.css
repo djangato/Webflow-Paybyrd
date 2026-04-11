@@ -881,7 +881,8 @@
 
 /* Mini visualizations inside cards */
 .pbrd-oc-feature-viz {
-  background: #f7f6f3;
+  background: rgba(26, 26, 46, 0.02);
+  border: 1px solid rgba(26, 26, 46, 0.04);
   border-radius: 14px;
   padding: 20px;
 }
@@ -1018,7 +1019,8 @@
   flex: 1;
   text-align: center;
   padding: 12px 8px;
-  background: #fff;
+  background: rgba(26, 26, 46, 0.02);
+  border: 1px solid rgba(26, 26, 46, 0.04);
   border-radius: 10px;
 }
 
@@ -1052,8 +1054,44 @@
 }
 
 /* Checkout mockup */
+.pbrd-oc-feature-card .pbrd-oc-feature-viz:has(.pbrd-oc-checkout-mock) {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
 .pbrd-oc-checkout-mock {
-  max-width: 320px;
+  max-width: 300px;
+  margin: 0 auto;
+  border: 2px solid var(--chk-accent, rgba(26, 26, 46, 0.08));
+  border-radius: 16px;
+  padding: 20px;
+  background: #fff;
+  transition: border-color 0.6s ease;
+}
+
+.pbrd-oc-chk-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding-bottom: 14px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid rgba(26, 26, 46, 0.06);
+}
+
+.pbrd-oc-chk-brand img {
+  height: 20px;
+  width: auto;
+  transition: opacity 0.4s ease;
+}
+
+.pbrd-oc-chk-brand-label {
+  font-size: 0.5625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(26, 26, 46, 0.25);
 }
 
 .pbrd-oc-chk-header {
@@ -1081,8 +1119,8 @@
 }
 
 .pbrd-oc-chk-active {
-  border-color: rgba(80, 100, 220, 0.4);
-  background: rgba(80, 100, 220, 0.04);
+  border-color: var(--chk-accent, rgba(80, 100, 220, 0.4));
+  background: var(--chk-accent-bg, rgba(80, 100, 220, 0.04));
   transform: scale(1.02);
 }
 
@@ -1275,7 +1313,7 @@
   text-align: center;
   padding: 12px;
   border-radius: 10px;
-  background: #10b981;
+  background: var(--chk-accent, #10b981);
   color: #fff;
   font-size: 0.875rem;
   font-weight: 600;

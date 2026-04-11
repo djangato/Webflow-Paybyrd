@@ -758,81 +758,110 @@
 
     observeReveal(".pbrd-oc-feature-card", 120, closingWrap);
 
-    /* Animate checkout — full flow: browse → select card → fill → process → success */
+    /* Animate checkout — brand cycling + full payment flow */
     var chkContainer = closingWrap.querySelector(".pbrd-oc-checkout-mock");
     if (chkContainer) {
-      var chkMethods = chkContainer.querySelectorAll("[data-chk-idx]");
-      var browseIdx = 0;
-      var phase = 0; /* 0=browse methods, 1=card form, 2=processing, 3=success */
-      var browseCount = 0;
+      var brands = [
+        { name: "TAP Air Portugal", logo: LOGOS + "69d9242bbde99c4b80e41dcc_tap-logo.svg", color: "#E4002B" },
+        { name: "Vila Gal\u00E9", logo: LOGOS + "69d9242bbde99c4b80e41dce_vila-gale.svg", color: "#1B5E20" },
+        { name: "KuantoKusta", logo: LOGOS + "69d9242bbde99c4b80e41dcd_kuanto-logo.svg", color: "#FF6600" },
+        { name: "Kabuki", logo: LOGOS + "69d9242bbde99c4b80e41dcb_kabuki.svg", color: "#1a1a2e" },
+        { name: "Wi\u00F1k", logo: LOGOS + "69d9242bbde99c4b80e41dd1_WINK.svg", color: "#6B21A8" }
+      ];
+      var brandIdx = 0;
+
+      /* Add brand bar at top of checkout */
+      var brandBar = document.createElement("div");
+      brandBar.className = "pbrd-oc-chk-brand";
+      brandBar.innerHTML = '<img src="' + brands[0].logo + '" alt="' + brands[0].name + '"><span class="pbrd-oc-chk-brand-label">Powered by Paybyrd</span>';
+      chkContainer.insertBefore(brandBar, chkContainer.firstChild);
+
+      function setBrand(b) {
+        chkContainer.style.setProperty("--chk-accent", b.color);
+        chkContainer.style.setProperty("--chk-accent-bg", b.color + "0A");
+        chkContainer.style.borderColor = b.color;
+        var brandImg = chkContainer.querySelector(".pbrd-oc-chk-brand img");
+        if (brandImg) { brandImg.src = b.logo; brandImg.alt = b.name; }
+      }
+      setBrand(brands[0]);
 
       var methodListHTML = chkContainer.innerHTML;
 
-      var cardFormHTML =
-        '<div class="pbrd-oc-chk-header">Enter card details</div>' +
-        '<div class="pbrd-oc-chk-form">' +
-          '<div class="pbrd-oc-chk-field"><span class="pbrd-oc-chk-field-label">Name</span><span class="pbrd-oc-chk-field-val pbrd-oc-typing">Maria Santos</span></div>' +
-          '<div class="pbrd-oc-chk-field"><span class="pbrd-oc-chk-field-label">Card</span><span class="pbrd-oc-chk-field-val pbrd-oc-typing" style="animation-delay:0.8s">4821 \u2022\u2022\u2022\u2022 \u2022\u2022\u2022\u2022 7392</span></div>' +
-          '<div class="pbrd-oc-chk-field-row">' +
-            '<div class="pbrd-oc-chk-field"><span class="pbrd-oc-chk-field-label">Expiry</span><span class="pbrd-oc-chk-field-val pbrd-oc-typing" style="animation-delay:1.6s">09/28</span></div>' +
-            '<div class="pbrd-oc-chk-field"><span class="pbrd-oc-chk-field-label">CVV</span><span class="pbrd-oc-chk-field-val pbrd-oc-typing" style="animation-delay:2s">\u2022\u2022\u2022</span></div>' +
-          '</div>' +
-          '<div class="pbrd-oc-chk-amount"><span>Total</span><span>\u20AC50.00</span></div>' +
-          '<div class="pbrd-oc-chk-btn">Pay Now</div>' +
-        '</div>';
+      function runCheckoutLoop() {
+        var b = brands[brandIdx];
+        brandIdx = (brandIdx + 1) % brands.length;
+        setBrand(b);
+        chkContainer.innerHTML = methodListHTML;
+        /* Re-add brand bar with new brand */
+        var newBar = document.createElement("div");
+        newBar.className = "pbrd-oc-chk-brand";
+        newBar.innerHTML = '<img src="' + b.logo + '" alt="' + b.name + '"><span class="pbrd-oc-chk-brand-label">Powered by Paybyrd</span>';
+        chkContainer.insertBefore(newBar, chkContainer.firstChild);
+        setBrand(b);
 
-      var processingHTML =
-        '<div style="text-align:center;padding:32px 0">' +
-          '<div class="pbrd-oc-chk-spinner"></div>' +
-          '<div style="font-size:0.8125rem;color:rgba(26,26,46,0.4);margin-top:16px">Processing payment\u2026</div>' +
-        '</div>';
+        var methods = chkContainer.querySelectorAll("[data-chk-idx]");
+        var step = 0;
 
-      var successHTML =
-        '<div style="text-align:center;padding:24px 0">' +
-          '<div class="pbrd-oc-chk-success-icon">' + checkSVG + '</div>' +
-          '<div style="font-size:1rem;font-weight:600;color:#10b981;margin-top:12px">Payment Successful</div>' +
-          '<div style="font-size:0.75rem;color:rgba(26,26,46,0.4);margin-top:4px">\u20AC50.00 \u2022 Visa \u2022\u2022\u2022\u2022 7392</div>' +
-        '</div>';
-
-      function chkTick() {
-        if (phase === 0) {
-          /* Browse through payment methods */
-          chkMethods = chkContainer.querySelectorAll("[data-chk-idx]");
-          if (chkMethods.length) {
-            chkMethods.forEach(function (m) { m.classList.remove("pbrd-oc-chk-active"); });
-            chkMethods[browseIdx % chkMethods.length].classList.add("pbrd-oc-chk-active");
-            browseIdx++;
-            browseCount++;
-          }
-          if (browseCount >= 4) {
-            /* After browsing 4 methods, select Credit Card and show form */
+        function browseTick() {
+          if (step < 3) {
+            methods.forEach(function (m) { m.classList.remove("pbrd-oc-chk-active"); });
+            methods[step % methods.length].classList.add("pbrd-oc-chk-active");
+            step++;
+            setTimeout(browseTick, 1200);
+          } else {
+            /* Select Credit Card → show card form */
+            methods.forEach(function (m) { m.classList.remove("pbrd-oc-chk-active"); });
+            if (methods[1]) methods[1].classList.add("pbrd-oc-chk-active");
             setTimeout(function () {
-              phase = 1;
-              chkContainer.innerHTML = cardFormHTML;
+              chkContainer.innerHTML =
+                '<div class="pbrd-oc-chk-brand"><img src="' + b.logo + '" alt="' + b.name + '"><span class="pbrd-oc-chk-brand-label">Powered by Paybyrd</span></div>' +
+                '<div class="pbrd-oc-chk-header">Enter card details</div>' +
+                '<div class="pbrd-oc-chk-form">' +
+                  '<div class="pbrd-oc-chk-field"><span class="pbrd-oc-chk-field-label">Name</span><span class="pbrd-oc-chk-field-val pbrd-oc-typing">Maria Santos</span></div>' +
+                  '<div class="pbrd-oc-chk-field"><span class="pbrd-oc-chk-field-label">Card</span><span class="pbrd-oc-chk-field-val pbrd-oc-typing" style="animation-delay:0.8s">4821 \u2022\u2022\u2022\u2022 \u2022\u2022\u2022\u2022 7392</span></div>' +
+                  '<div class="pbrd-oc-chk-field-row">' +
+                    '<div class="pbrd-oc-chk-field"><span class="pbrd-oc-chk-field-label">Expiry</span><span class="pbrd-oc-chk-field-val pbrd-oc-typing" style="animation-delay:1.6s">09/28</span></div>' +
+                    '<div class="pbrd-oc-chk-field"><span class="pbrd-oc-chk-field-label">CVV</span><span class="pbrd-oc-chk-field-val pbrd-oc-typing" style="animation-delay:2s">\u2022\u2022\u2022</span></div>' +
+                  '</div>' +
+                  '<div class="pbrd-oc-chk-amount"><span>Total</span><span>\u20AC50.00</span></div>' +
+                  '<div class="pbrd-oc-chk-btn" style="background:' + b.color + '">Pay Now</div>' +
+                '</div>';
+              setBrand(b);
+
+              /* Processing */
               setTimeout(function () {
-                phase = 2;
-                chkContainer.innerHTML = processingHTML;
+                chkContainer.innerHTML =
+                  '<div class="pbrd-oc-chk-brand"><img src="' + b.logo + '" alt="' + b.name + '"><span class="pbrd-oc-chk-brand-label">Powered by Paybyrd</span></div>' +
+                  '<div style="text-align:center;padding:32px 0">' +
+                    '<div class="pbrd-oc-chk-spinner" style="border-top-color:' + b.color + '"></div>' +
+                    '<div style="font-size:0.8125rem;color:rgba(26,26,46,0.4);margin-top:16px">Processing payment\u2026</div>' +
+                  '</div>';
+                setBrand(b);
+
+                /* Success */
                 setTimeout(function () {
-                  phase = 3;
-                  chkContainer.innerHTML = successHTML;
-                  setTimeout(function () {
-                    /* Reset to method list */
-                    phase = 0;
-                    browseCount = 0;
-                    browseIdx = 0;
-                    chkContainer.innerHTML = methodListHTML;
-                  }, 2500);
-                }, 2000);
-              }, 3000);
-            }, 800);
-            return;
+                  chkContainer.innerHTML =
+                    '<div class="pbrd-oc-chk-brand"><img src="' + b.logo + '" alt="' + b.name + '"><span class="pbrd-oc-chk-brand-label">Powered by Paybyrd</span></div>' +
+                    '<div style="text-align:center;padding:24px 0">' +
+                      '<div class="pbrd-oc-chk-success-icon" style="background:' + b.color + '15">' + checkSVG + '</div>' +
+                      '<div style="font-size:1rem;font-weight:600;color:' + b.color + ';margin-top:12px">Payment Successful</div>' +
+                      '<div style="font-size:0.75rem;color:rgba(26,26,46,0.4);margin-top:4px">\u20AC50.00 \u2022 Visa \u2022\u2022\u2022\u2022 7392</div>' +
+                    '</div>';
+                  setBrand(b);
+                  chkContainer.querySelector(".pbrd-oc-chk-success-icon svg").style.color = b.color;
+
+                  /* Loop: next brand */
+                  setTimeout(runCheckoutLoop, 2500);
+                }, 1800);
+              }, 2500);
+            }, 1000);
           }
-          setTimeout(chkTick, 1500);
-          return;
         }
+
+        setTimeout(browseTick, 800);
       }
 
-      setTimeout(chkTick, 1200);
+      setTimeout(runCheckoutLoop, 1500);
     }
   }
 
