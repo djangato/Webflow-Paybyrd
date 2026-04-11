@@ -307,13 +307,23 @@
     };
 
     document.querySelectorAll("img").forEach(function (img) {
-      var src = img.src || img.getAttribute("src") || "";
+      /* Check src, currentSrc, and all attributes for the Webflow ID */
+      var src = img.src || img.currentSrc || img.getAttribute("src") || "";
+      var srcset = img.getAttribute("srcset") || "";
+      var check = src + " " + srcset;
+
       for (var id in imageMap) {
-        if (src.includes(id)) {
+        if (check.includes(id)) {
           img.src = imageMap[id];
-          img.srcset = "";
+          img.srcset = imageMap[id];
           img.removeAttribute("srcset");
           img.removeAttribute("sizes");
+          img.removeAttribute("data-wf-srcset");
+          /* Also update any picture source elements */
+          var picture = img.closest("picture");
+          if (picture) {
+            picture.querySelectorAll("source").forEach(function (s) { s.remove(); });
+          }
           break;
         }
       }
@@ -389,36 +399,33 @@
       '</div>'
     ];
 
-    /* Find the carousel image column — the right side that holds all slide images */
+    /* Find all slide items and inject overlays into the IMAGE column (.u-layout-column-2) */
     var carouselWrap = document.querySelector("[class*='slider-4']");
-    if (!carouselWrap) {
-      console.warn("[Paybyrd] Carousel wrapper not found");
-      return;
-    }
+    if (!carouselWrap) return;
 
-    /* Find all slide items */
     var allSlides = carouselWrap.querySelectorAll("[class*='slider-4_item'], .swiper-slide");
     var added = 0;
 
     allSlides.forEach(function (slide) {
-      /* Use data-swiper-slide-index for correct mapping, fallback to DOM order */
       var attr = slide.getAttribute("data-swiper-slide-index");
       var idx = attr !== null ? parseInt(attr) : added;
       if (idx < 0 || idx >= overlays.length) return;
-      if (slide.querySelector(".pbrd-oc-overlays")) return;
 
-      /* Make slide positioned for overlay */
-      slide.style.position = "relative";
-      slide.style.overflow = "visible";
+      /* Target the image column specifically, not the whole slide */
+      var imgCol = slide.querySelector(".u-layout-column-2, [class*='column-2']");
+      if (!imgCol || imgCol.querySelector(".pbrd-oc-overlays")) return;
+
+      imgCol.style.position = "relative";
+      imgCol.style.overflow = "visible";
 
       var overlayWrap = document.createElement("div");
       overlayWrap.className = "pbrd-oc-overlays";
       overlayWrap.innerHTML = overlays[idx];
-      slide.appendChild(overlayWrap);
+      imgCol.appendChild(overlayWrap);
       added++;
     });
 
-    console.log("[Paybyrd] Carousel overlays: found " + allSlides.length + " slides, added " + added);
+    console.log("[Paybyrd] Carousel overlays: " + added + " added to image columns");
   }
 
   /* ═══════════════════════════════════════════ */
