@@ -363,6 +363,81 @@
         if (panel) panel.classList.add("active");
       });
     });
+
+    /* ─── Convert tab: toggles cycling on/off ─── */
+    var toggles = showcase.querySelectorAll(".pbrd-ec-viz-toggle");
+    if (toggles.length) {
+      var togIdx = 0;
+      setInterval(function () {
+        var t = toggles[togIdx % toggles.length];
+        t.classList.toggle("on");
+        setTimeout(function () { t.classList.add("on"); }, 1200);
+        togIdx++;
+      }, 2000);
+    }
+
+    /* ─── Understand tab: funnel bars grow + numbers count up ─── */
+    var funnelSteps = showcase.querySelectorAll(".pbrd-ec-viz-funnel-step");
+    var funnelTargets = [12847, 8736, 6680, 5653];
+    var funnelBases = [11200, 7500, 5800, 4900];
+    if (funnelSteps.length) {
+      setInterval(function () {
+        funnelSteps.forEach(function (step, i) {
+          if (i >= funnelTargets.length) return;
+          var bump = Math.floor(Math.random() * 40) + 5;
+          funnelTargets[i] += bump;
+          var numEl = step.querySelector("span:last-child");
+          if (numEl) numEl.textContent = funnelTargets[i].toLocaleString("en");
+          /* Update bar width proportionally */
+          var bar = step.querySelector(".pbrd-ec-viz-funnel-bar");
+          if (bar) {
+            var pct = Math.min(100, (funnelTargets[i] / funnelTargets[0]) * 100);
+            bar.style.setProperty("--bar-w", pct + "%");
+          }
+        });
+      }, 3000);
+    }
+
+    /* ─── Control tab: new transactions arrive at top ─── */
+    var txList = showcase.querySelector(".pbrd-ec-viz-tx-list");
+    if (txList) {
+      var txPool = [
+        { status: "paid", amount: "\u20AC156.00", method: "Mastercard \u2022\u20229103" },
+        { status: "paid", amount: "\u20AC42.50", method: "Apple Pay" },
+        { status: "paid", amount: "\u20AC318.00", method: "Visa \u2022\u20225847" },
+        { status: "refund", amount: "\u20AC19.90", method: "iDEAL" },
+        { status: "paid", amount: "\u20AC78.00", method: "Google Pay" },
+        { status: "paid", amount: "\u20AC205.50", method: "Klarna" },
+        { status: "paid", amount: "\u20AC93.20", method: "Multibanco" },
+        { status: "paid", amount: "\u20AC447.00", method: "PayPal" },
+        { status: "refund", amount: "\u20AC55.00", method: "MBWay" },
+        { status: "paid", amount: "\u20AC129.90", method: "Visa \u2022\u20223621" }
+      ];
+      var txIdx = 0;
+      setInterval(function () {
+        var t = txPool[txIdx % txPool.length];
+        txIdx++;
+        var secs = Math.floor(Math.random() * 10) + 1;
+        var newTx = document.createElement("div");
+        newTx.className = "pbrd-ec-viz-tx";
+        newTx.style.cssText = "opacity:0;transform:translateY(-10px);transition:all 0.4s ease";
+        newTx.innerHTML =
+          '<div class="pbrd-ec-viz-tx-status ' + t.status + '">' + (t.status === "paid" ? "Paid" : "Refund") + '</div>' +
+          '<span>' + t.amount + '</span><span>' + t.method + '</span><span>' + secs + 's ago</span>';
+        txList.insertBefore(newTx, txList.firstChild);
+        requestAnimationFrame(function () {
+          newTx.style.opacity = "1";
+          newTx.style.transform = "translateY(0)";
+        });
+        /* Remove last if more than 4 */
+        while (txList.children.length > 4) {
+          var last = txList.lastElementChild;
+          last.style.opacity = "0";
+          last.style.transform = "translateY(10px)";
+          setTimeout(function () { if (last.parentNode) last.remove(); }, 400);
+        }
+      }, 2500);
+    }
   }
 
   /* ═══════════════════════════════════════════ */
