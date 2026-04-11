@@ -4505,7 +4505,9 @@ a.glowing_button_link .glowing_button_text {
 .pbrd-oc-analytics-wrap {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 48px 24px;
+  background: #0a0a0f;
+  border-radius: 24px;
 }
 
 @media (max-width: 900px) {
