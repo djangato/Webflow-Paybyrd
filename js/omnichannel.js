@@ -296,6 +296,104 @@
     });
 
     console.log("[Paybyrd] Carousel text enhanced");
+
+    /* ─── Image Overlays ─── */
+    addCarouselOverlays();
+  }
+
+  function addCarouselOverlays() {
+    var overlays = [
+      /* 0: Click & Collect */
+      '<div class="pbrd-oc-overlay-card" style="top:12%;right:8%">' +
+        '<div class="pbrd-oc-overlay-badge pbrd-oc-overlay-success">\u2713 Order Confirmed</div>' +
+        '<div class="pbrd-oc-overlay-row"><span>Order</span><span>#PB-4821</span></div>' +
+        '<div class="pbrd-oc-overlay-row"><span>Amount</span><span>\u20AC149.00</span></div>' +
+        '<div class="pbrd-oc-overlay-row"><span>Pickup</span><span>Ready in 15 min</span></div>' +
+      '</div>' +
+      '<div class="pbrd-oc-overlay-card pbrd-oc-overlay-sm" style="bottom:15%;right:12%">' +
+        '<div class="pbrd-oc-overlay-badge pbrd-oc-overlay-info">\uD83D\uDCCD Lisbon Store</div>' +
+        '<div style="font-size:0.625rem;color:rgba(255,255,255,0.5)">Customer arriving \u2022 Visa \u2022\u2022\u20224821</div>' +
+      '</div>',
+
+      /* 1: Cross-Channel Returns */
+      '<div class="pbrd-oc-overlay-card" style="top:10%;right:8%">' +
+        '<div class="pbrd-oc-overlay-badge pbrd-oc-overlay-warn">\u21BB Refund in progress</div>' +
+        '<div class="pbrd-oc-overlay-row"><span>Original</span><span>Online \u2022 \u20AC89.00</span></div>' +
+        '<div class="pbrd-oc-overlay-row"><span>Return at</span><span>Porto Store POS</span></div>' +
+        '<div class="pbrd-oc-overlay-row"><span>Card match</span><span style="color:rgba(120,255,180,0.8)">\u2713 Verified</span></div>' +
+      '</div>' +
+      '<div class="pbrd-oc-overlay-card pbrd-oc-overlay-sm" style="bottom:18%;left:8%">' +
+        '<div style="font-size:0.6875rem;font-weight:600;color:#fff">\u20AC89.00 refunded</div>' +
+        '<div style="font-size:0.5625rem;color:rgba(120,255,180,0.7)">No receipt needed \u2022 Auto-matched</div>' +
+      '</div>',
+
+      /* 2: QR Payments */
+      '<div class="pbrd-oc-overlay-card" style="bottom:12%;left:8%">' +
+        '<div class="pbrd-oc-overlay-badge pbrd-oc-overlay-success">\u2713 Payment received</div>' +
+        '<div class="pbrd-oc-overlay-row"><span>Amount</span><span>\u20AC24.50</span></div>' +
+        '<div class="pbrd-oc-overlay-row"><span>Method</span><span>Apple Pay</span></div>' +
+        '<div class="pbrd-oc-overlay-row"><span>Time</span><span>2.1 seconds</span></div>' +
+      '</div>',
+
+      /* 3: Payment Links */
+      '<div class="pbrd-oc-overlay-card pbrd-oc-overlay-msg" style="top:15%;right:8%">' +
+        '<div style="font-size:0.5625rem;color:rgba(255,255,255,0.35);margin-bottom:6px">WhatsApp \u2022 Just now</div>' +
+        '<div style="background:rgba(37,211,102,0.1);border:1px solid rgba(37,211,102,0.2);border-radius:12px;padding:10px 12px;font-size:0.6875rem;color:rgba(255,255,255,0.8);line-height:1.5">' +
+          'Hi! Here\u2019s your payment link for \u20AC245.00:<br>' +
+          '<span style="color:rgba(120,180,255,0.9);text-decoration:underline">pay.paybyrd.com/k8xP2</span>' +
+        '</div>' +
+      '</div>' +
+      '<div class="pbrd-oc-overlay-card pbrd-oc-overlay-sm" style="bottom:20%;right:12%">' +
+        '<div class="pbrd-oc-overlay-badge pbrd-oc-overlay-success">\u2713 Paid \u2022 32 seconds ago</div>' +
+      '</div>',
+
+      /* 4: Self-Service Kiosk */
+      '<div class="pbrd-oc-overlay-card" style="top:8%;right:6%">' +
+        '<div style="font-size:0.5rem;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.3);font-weight:600;margin-bottom:8px">Live Feed \u2022 Kiosk #3</div>' +
+        '<div class="pbrd-oc-overlay-row"><span>14:32</span><span>\u20AC3.50 \u2022 Parking</span></div>' +
+        '<div class="pbrd-oc-overlay-row"><span>14:28</span><span>\u20AC12.00 \u2022 Check-in</span></div>' +
+        '<div class="pbrd-oc-overlay-row"><span>14:15</span><span>\u20AC8.90 \u2022 Vending</span></div>' +
+      '</div>',
+
+      /* 5: Smart Loyalty */
+      '<div class="pbrd-oc-overlay-card" style="top:10%;right:8%">' +
+        '<div class="pbrd-oc-overlay-badge pbrd-oc-overlay-info">\u21BB Returning Customer</div>' +
+        '<div style="font-size:0.875rem;font-weight:600;color:#fff;margin:8px 0 4px">Sofia M.</div>' +
+        '<div class="pbrd-oc-overlay-row"><span>Visits</span><span>7</span></div>' +
+        '<div class="pbrd-oc-overlay-row"><span>Lifetime</span><span>\u20AC1,247</span></div>' +
+        '<div class="pbrd-oc-overlay-row"><span>Frequency</span><span class="pbrd-oc-freq-hot" style="font-size:0.625rem">Hot</span></div>' +
+      '</div>'
+    ];
+
+    /* Find slide image containers and add overlays */
+    var slides = document.querySelectorAll(".slider-4_item, [data-swiper-slide-index]");
+    if (!slides.length) {
+      /* Try alternative: find all images inside the carousel section */
+      var carouselSection = document.querySelector("[class*='slider-4']");
+      if (carouselSection) slides = carouselSection.querySelectorAll("[class*='item'], .swiper-slide");
+    }
+
+    slides.forEach(function (slide, i) {
+      if (i >= overlays.length) return;
+      /* Find the image wrapper inside the slide */
+      var imgWrap = slide.querySelector("[class*='image'], [class*='column-2'], img");
+      if (!imgWrap) imgWrap = slide;
+
+      /* Make sure the container is positioned for absolute children */
+      var container = imgWrap.closest("[class*='image']") || imgWrap.parentElement || slide;
+      if (window.getComputedStyle(container).position === "static") {
+        container.style.position = "relative";
+      }
+      container.style.overflow = "visible";
+
+      /* Inject overlay */
+      var overlayWrap = document.createElement("div");
+      overlayWrap.className = "pbrd-oc-overlays";
+      overlayWrap.innerHTML = overlays[i];
+      container.appendChild(overlayWrap);
+    });
+
+    console.log("[Paybyrd] Carousel overlays added to " + slides.length + " slides");
   }
 
   /* ═══════════════════════════════════════════ */
