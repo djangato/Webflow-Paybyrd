@@ -257,7 +257,6 @@
   z-index: 10000;
   display: flex;
   align-items: center;
-  justify-content: center;
   background: rgba(0, 0, 0, 0);
   backdrop-filter: blur(0px);
   -webkit-backdrop-filter: blur(0px);
