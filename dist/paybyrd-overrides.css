@@ -2994,3 +2994,374 @@ a.glowing_button_link .glowing_button_text {
   .pbrd-demo-visual { min-height: 320px; }
   .pbrd-dv-value { font-size: 1.25rem; }
 }
+
+/* Paybyrd — Showcase Section Custom Visuals */
+
+/* Remove old image styles */
+.pbrd-showcase-visual {
+  border: none !important;
+  background: none !important;
+  aspect-ratio: auto !important;
+  position: relative;
+  border-radius: 0 !important;
+  overflow: visible !important;
+}
+
+.pbrd-showcase-visual::after { display: none !important; }
+
+.pbrd-showcase-img { display: none !important; }
+
+/* ─── Visual container ─── */
+.pbrd-sv {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  font-family: inherit;
+}
+
+.pbrd-sv-row {
+  display: flex;
+  gap: 10px;
+}
+
+/* ─── Cards ─── */
+.pbrd-sv-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.pbrd-sv-card:hover {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.pbrd-sv-card-hero {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* ─── Typography ─── */
+.pbrd-sv-label {
+  font-size: 0.5625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.3);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.pbrd-sv-big {
+  font-size: 1.75rem;
+  font-weight: 300;
+  color: #fff;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.pbrd-sv-unit {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.35);
+  font-weight: 400;
+}
+
+.pbrd-sv-sublabel {
+  font-size: 0.5625rem;
+  color: rgba(255, 255, 255, 0.25);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ─── Mini metrics row ─── */
+.pbrd-sv-minis {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.pbrd-sv-mini {
+  flex: 1;
+  text-align: center;
+  padding: 8px 4px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.pbrd-sv-mini-v {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  font-variant-numeric: tabular-nums;
+}
+
+.pbrd-sv-mini-l {
+  display: block;
+  font-size: 0.4375rem;
+  color: rgba(255, 255, 255, 0.25);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 2px;
+}
+
+/* ─── Vertical bar chart ─── */
+.pbrd-sv-chart-area {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+  height: 56px;
+  margin-top: 10px;
+}
+
+.pbrd-sv-vbar {
+  flex: 1;
+  height: var(--h);
+  border-radius: 3px 3px 0 0;
+  background: linear-gradient(to top, rgba(80,100,220,0.25), rgba(80,100,220,0.5));
+  animation: pbrd-sv-bar-grow 0.7s ease var(--d) both;
+}
+
+.pbrd-sv-vbar-hi {
+  background: linear-gradient(to top, rgba(120,180,255,0.4), rgba(120,180,255,0.8)) !important;
+}
+
+@keyframes pbrd-sv-bar-grow { from { height: 0; } }
+
+.pbrd-sv-chart-labels {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 4px;
+}
+
+.pbrd-sv-chart-labels span {
+  font-size: 0.4375rem;
+  color: rgba(255, 255, 255, 0.2);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── Horizontal bars ─── */
+.pbrd-sv-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.pbrd-sv-hbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pbrd-sv-hbar-label {
+  font-size: 0.5625rem;
+  color: rgba(255, 255, 255, 0.4);
+  width: 60px;
+  flex-shrink: 0;
+}
+
+.pbrd-sv-hbar-track {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.04);
+  overflow: hidden;
+}
+
+.pbrd-sv-hbar-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: rgba(80, 100, 220, 0.5);
+  animation: pbrd-sv-hbar-grow 0.8s ease var(--d) both;
+}
+
+.pbrd-sv-hbar-accent {
+  background: rgba(120, 180, 255, 0.6) !important;
+}
+
+@keyframes pbrd-sv-hbar-grow { from { width: 0 !important; } }
+
+.pbrd-sv-hbar-val {
+  font-size: 0.5625rem;
+  color: rgba(255, 255, 255, 0.4);
+  font-variant-numeric: tabular-nums;
+  width: 28px;
+  text-align: right;
+}
+
+/* ─── Pills ─── */
+.pbrd-sv-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 4px;
+}
+
+.pbrd-sv-pill {
+  font-size: 0.5rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 3px 8px;
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.pbrd-sv-pill-on {
+  border-color: rgba(80, 100, 220, 0.25);
+  color: rgba(120, 150, 255, 0.8);
+  background: rgba(80, 100, 220, 0.1);
+}
+
+/* ─── Transaction list ─── */
+.pbrd-sv-txlist {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 8px;
+}
+
+.pbrd-sv-tx {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  animation: pbrd-sv-up 0.4s ease var(--d) both;
+  transition: background 0.2s ease;
+}
+
+.pbrd-sv-tx:hover { background: rgba(255, 255, 255, 0.04); }
+
+.pbrd-sv-tx-amount {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  font-variant-numeric: tabular-nums;
+  min-width: 65px;
+}
+
+.pbrd-sv-tx-method {
+  font-size: 0.625rem;
+  color: rgba(255, 255, 255, 0.35);
+  flex: 1;
+}
+
+.pbrd-sv-tx-status {
+  font-size: 0.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 2px 8px;
+  border-radius: 100px;
+}
+
+.pbrd-sv-tx-success {
+  color: rgba(120, 255, 180, 0.8);
+  background: rgba(120, 255, 180, 0.08);
+}
+
+.pbrd-sv-tx-processing {
+  color: rgba(255, 180, 60, 0.8);
+  background: rgba(255, 180, 60, 0.08);
+}
+
+/* ─── Status breakdown ─── */
+.pbrd-sv-status-bars {
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  overflow: hidden;
+  margin: 8px 0;
+  display: flex;
+}
+
+.pbrd-sv-sbar-fill {
+  height: 100%;
+  border-radius: 4px;
+}
+
+.pbrd-sv-status-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.5625rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 4px;
+}
+
+.pbrd-sv-status-row strong {
+  margin-left: auto;
+  color: rgba(255, 255, 255, 0.7);
+  font-variant-numeric: tabular-nums;
+}
+
+.pbrd-sv-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ─── Payment method icons ─── */
+.pbrd-sv-method-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.pbrd-sv-method {
+  aspect-ratio: 1.4;
+  border-radius: 6px;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.4375rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 0.02em;
+  animation: pbrd-sv-pop 0.3s ease var(--d) both;
+  transition: transform 0.2s ease;
+}
+
+.pbrd-sv-method:hover { transform: scale(1.08); }
+
+@keyframes pbrd-sv-pop {
+  from { opacity: 0; transform: scale(0.7); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ─── POS spec rows ─── */
+.pbrd-sv-spec {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.625rem;
+  color: rgba(255, 255, 255, 0.45);
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.pbrd-sv-spec-val {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+/* ─── Animation ─── */
+@keyframes pbrd-sv-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .pbrd-sv-row { flex-direction: column; }
+  .pbrd-sv-big { font-size: 1.5rem; }
+  .pbrd-sv-method-grid { grid-template-columns: repeat(4, 1fr); }
+}
