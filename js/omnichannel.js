@@ -556,6 +556,10 @@
 
   function init() {
     try {
+      /* Fix GSAP pin-spacer black gap on carousel */
+      var pinSpacer = document.querySelector(".pin-spacer");
+      if (pinSpacer) pinSpacer.style.background = "#fff";
+
       enhanceHero();
       buildLogos();
       buildJourney();
