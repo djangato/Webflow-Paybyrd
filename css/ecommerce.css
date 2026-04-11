@@ -48,8 +48,8 @@
 
 .pbrd-ec-hero-panel {
   position: absolute;
-  top: 8%;
-  right: 4%;
+  top: 20%;
+  right: 12%;
   width: 240px;
   background: rgba(10, 10, 20, 0.88);
   backdrop-filter: blur(20px);

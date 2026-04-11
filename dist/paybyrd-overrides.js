@@ -3353,12 +3353,16 @@
     var heading = section.querySelector("h2, h3");
     if (heading) heading.textContent = "Every abandoned cart is revenue walking out the door.";
 
-    /* Override the FIRST subtitle paragraph only, skip tiny ones */
-    var overridden = false;
+    /* Override ALL paragraphs in this section */
+    var pCount = 0;
     section.querySelectorAll("p").forEach(function (p) {
-      if (!overridden && p.textContent.length > 30) {
-        p.textContent = "68% of online carts are abandoned. The #1 reason? A checkout that\u2019s too slow, too complex, or doesn\u2019t offer the right payment method. Fix the checkout, fix the revenue.";
-        overridden = true;
+      if (p.textContent.length > 20) {
+        if (pCount === 0) {
+          p.textContent = "68% of online carts are abandoned. The #1 reason? A checkout that\u2019s too slow, too complex, or doesn\u2019t offer the right payment method. Fix the checkout, fix the revenue.";
+        } else {
+          p.style.display = "none"; /* Hide any additional paragraphs */
+        }
+        pCount++;
       }
     });
 
