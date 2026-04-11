@@ -2841,16 +2841,29 @@ a.glowing_button_link .glowing_button_text {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 32px;
-  padding: 24px 0;
-  opacity: 0.4;
+  gap: 40px;
+  padding: 28px 0 8px;
 }
 
 .pbrd-demo-logos img {
-  height: 18px;
+  height: 26px;
   width: auto;
   filter: brightness(0) invert(1);
-  opacity: 0.6;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.pbrd-demo-logos img:hover {
+  opacity: 0.8;
+}
+
+/* ─── Dynamic right-side image ─── */
+.pbrd-demo-image-col .u-image {
+  transition: opacity 0.4s ease !important;
+}
+
+.pbrd-demo-image-col .u-image.fading {
+  opacity: 0 !important;
 }
 
 /* ─── Responsive ─── */
@@ -2861,9 +2874,9 @@ a.glowing_button_link .glowing_button_text {
   }
 
   .pbrd-demo-logos {
-    gap: 20px;
+    gap: 24px;
     flex-wrap: wrap;
   }
 
-  .pbrd-demo-logos img { height: 14px; }
+  .pbrd-demo-logos img { height: 20px; }
 }

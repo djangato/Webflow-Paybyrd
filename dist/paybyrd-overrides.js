@@ -1465,6 +1465,18 @@
   if (!window.location.pathname.includes("/book-demo")) return;
 
   var LOGOS_CDN = "https://cdn.prod.website-files.com/69d9242bbde99c4b80e41aeb/";
+  var IMG_CDN = "https://cdn.prod.website-files.com/69d9242bbde99c4b80e41ae9/";
+
+  // Image per step — contextual product screenshots
+  var stepImages = {
+    "Book a Call": IMG_CDN + "69d9242bbde99c4b80e41cb1_New%20dashboard%20image.png",
+    "Payment Channels": IMG_CDN + "69d9242bbde99c4b80e41c84_paybyrd-pos-tab-04.avif",
+    "Message": IMG_CDN + "69d9242bbde99c4b80e41cae_Frame%201707479734.png",
+    "Payment Volume": IMG_CDN + "69d9242bbde99c4b80e41cac_Website%20Feedback%20Figma%20(1).png",
+    "Company Details": IMG_CDN + "69d9242bbde99c4b80e41c72_slider-2_wrap.webp",
+    "Person Details": IMG_CDN + "69d9242bbde99c4b80e41cad_Website%20Feedback%20Figma.png",
+    "Contact Details": IMG_CDN + "69d9242bbde99c4b80e41cb1_New%20dashboard%20image.png"
+  };
 
   var lockSVG = '<svg viewBox="0 0 16 16" fill="none"><path d="M5 7V5a3 3 0 016 0v2M3 7h10a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1V8a1 1 0 011-1z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>';
   var checkSVG = '<svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -1571,19 +1583,35 @@
       }
     }
 
-    // ─── 6. Track step changes for progress bar ─── //
+    // ─── 6. Find the right-side image for dynamic swapping ─── //
+    var imageCol = document.querySelector(".u-layout-column-2.u-display-none-medium");
+    var rightImage = imageCol ? imageCol.querySelector(".u-image") : null;
+    if (imageCol) imageCol.classList.add("pbrd-demo-image-col");
+
+    function swapImage(stepName) {
+      if (!rightImage || !stepImages[stepName]) return;
+      var newSrc = stepImages[stepName];
+      if (rightImage.src.indexOf(newSrc) !== -1) return; // same image
+      rightImage.classList.add("fading");
+      setTimeout(function () {
+        rightImage.src = newSrc;
+        rightImage.srcset = "";
+        rightImage.classList.remove("fading");
+      }, 350);
+    }
+
+    // ─── 7. Track step changes for progress bar + image swap ─── //
     var observer = new MutationObserver(function () {
-      // Find which fieldset is currently visible
       fieldsets.forEach(function (fs, idx) {
         var stepName = fs.getAttribute("if-step");
         var stepNum = stepNames.indexOf(stepName);
         if (stepNum < 0) return;
 
-        // Check if this fieldset is visible (Webflow's form library toggles display)
         var style = window.getComputedStyle(fs);
         if (style.display !== "none" && style.visibility !== "hidden") {
           var pct = stepNum === 0 ? 0 : (stepNum / totalSteps) * 100;
           progressFill.style.width = pct + "%";
+          swapImage(stepName);
         }
       });
     });
