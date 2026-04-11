@@ -313,22 +313,30 @@
 
       for (var id in imageMap) {
         if (src.indexOf(id) !== -1) {
-          /* Swap to transparent PNG */
-          img.setAttribute("src", imageMap[id]);
-          img.removeAttribute("srcset");
-          img.removeAttribute("sizes");
-          img.removeAttribute("data-wf-srcset");
+          /* Replace the img element entirely to bypass Webflow's image handlers */
+          var newImg = document.createElement("img");
+          newImg.src = imageMap[id];
+          newImg.alt = img.alt || "";
+          newImg.style.cssText = "width:100%;height:100%;object-fit:contain;";
+          newImg.loading = "eager";
+
+          var parent = img.parentElement;
+          /* If inside a <picture>, replace the whole picture */
           var picture = img.closest("picture");
-          if (picture) picture.querySelectorAll("source").forEach(function (s) { s.remove(); });
+          if (picture) {
+            picture.replaceWith(newImg);
+            parent = newImg.parentElement;
+          } else {
+            img.replaceWith(newImg);
+          }
 
           /* Add overlay to image parent */
           var overlayIdx = imageMap[id].indexOf("tab-0") !== -1
             ? parseInt(imageMap[id].charAt(imageMap[id].indexOf("tab-0") + 5)) - 1
             : -1;
 
-          if (overlayIdx >= 0 && overlayIdx < overlayCards.length) {
-            var parent = img.parentElement;
-            if (parent && !parent.querySelector(".pbrd-oc-overlays")) {
+          if (overlayIdx >= 0 && overlayIdx < overlayCards.length && parent) {
+            if (!parent.querySelector(".pbrd-oc-overlays")) {
               parent.style.position = "relative";
               parent.style.overflow = "visible";
               var wrap = document.createElement("div");
