@@ -2701,9 +2701,9 @@
         /* Card: Cross-Channel Revenue */
         '<div class="pbrd-oc-dash-card">' +
           '<div class="pbrd-oc-dash-label">Revenue by Channel</div>' +
-          '<div class="pbrd-oc-hbar"><span class="pbrd-oc-hbar-label">E-Commerce</span><div class="pbrd-oc-hbar-track"><div class="pbrd-oc-hbar-fill" style="width:62%;background:linear-gradient(90deg,rgba(80,100,220,0.4),rgba(80,100,220,0.7))"></div></div><span class="pbrd-oc-hbar-val">\u20AC868K</span></div>' +
-          '<div class="pbrd-oc-hbar"><span class="pbrd-oc-hbar-label">POS</span><div class="pbrd-oc-hbar-track"><div class="pbrd-oc-hbar-fill" style="width:31%;background:linear-gradient(90deg,rgba(120,180,255,0.3),rgba(120,180,255,0.6))"></div></div><span class="pbrd-oc-hbar-val">\u20AC434K</span></div>' +
-          '<div class="pbrd-oc-hbar"><span class="pbrd-oc-hbar-label">Pay-by-Link</span><div class="pbrd-oc-hbar-track"><div class="pbrd-oc-hbar-fill" style="width:7%;background:linear-gradient(90deg,rgba(120,255,180,0.3),rgba(120,255,180,0.5))"></div></div><span class="pbrd-oc-hbar-val">\u20AC98K</span></div>' +
+          '<div class="pbrd-oc-hbar"><span class="pbrd-oc-hbar-label">E-Commerce</span><div class="pbrd-oc-hbar-track"><div class="pbrd-oc-hbar-fill" style="--bar-w:62%;background:linear-gradient(90deg,rgba(80,100,220,0.4),rgba(80,100,220,0.7))"></div></div><span class="pbrd-oc-hbar-val">\u20AC868K</span></div>' +
+          '<div class="pbrd-oc-hbar"><span class="pbrd-oc-hbar-label">POS</span><div class="pbrd-oc-hbar-track"><div class="pbrd-oc-hbar-fill" style="--bar-w:31%;background:linear-gradient(90deg,rgba(120,180,255,0.3),rgba(120,180,255,0.6))"></div></div><span class="pbrd-oc-hbar-val">\u20AC434K</span></div>' +
+          '<div class="pbrd-oc-hbar"><span class="pbrd-oc-hbar-label">Pay-by-Link</span><div class="pbrd-oc-hbar-track"><div class="pbrd-oc-hbar-fill" style="--bar-w:7%;background:linear-gradient(90deg,rgba(120,255,180,0.3),rgba(120,255,180,0.5))"></div></div><span class="pbrd-oc-hbar-val">\u20AC98K</span></div>' +
           '<div style="margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.04);font-size:0.625rem;color:rgba(255,255,255,0.3)">All channels \u2022 One reconciliation \u2022 Real-time</div>' +
         '</div>' +
 
@@ -2711,9 +2711,9 @@
         '<div class="pbrd-oc-dash-card">' +
           '<div class="pbrd-oc-dash-label">Buying Frequency Distribution</div>' +
           '<div class="pbrd-oc-freq-bar" style="height:14px;border-radius:7px">' +
-            '<div class="pbrd-oc-freq-seg" style="width:40%;background:rgba(255,255,255,0.08);border-radius:7px 0 0 7px"></div>' +
-            '<div class="pbrd-oc-freq-seg" style="width:35%;background:rgba(120,180,255,0.35)"></div>' +
-            '<div class="pbrd-oc-freq-seg" style="width:25%;background:rgba(255,100,50,0.5);border-radius:0 7px 7px 0"></div>' +
+            '<div class="pbrd-oc-freq-seg" style="--seg-w:40%;background:rgba(255,255,255,0.08);border-radius:7px 0 0 7px"></div>' +
+            '<div class="pbrd-oc-freq-seg" style="--seg-w:35%;background:rgba(120,180,255,0.35)"></div>' +
+            '<div class="pbrd-oc-freq-seg" style="--seg-w:25%;background:rgba(255,100,50,0.5);border-radius:0 7px 7px 0"></div>' +
           '</div>' +
           '<div class="pbrd-oc-freq-legend">' +
             '<div class="pbrd-oc-freq-item"><div class="pbrd-oc-freq-dot" style="background:rgba(255,255,255,0.15)"></div>Cold (1x) 40%</div>' +
@@ -2730,8 +2730,8 @@
             '<div class="pbrd-oc-dash-big" style="font-size:2rem;color:rgba(120,180,255,0.9)">23%</div>' +
             '<div style="font-size:0.6875rem;color:rgba(255,255,255,0.4);line-height:1.5">of customers shop<br>across multiple channels</div>' +
           '</div>' +
-          '<div class="pbrd-oc-hbar" style="margin-top:8px"><span class="pbrd-oc-hbar-label" style="width:60px;font-size:0.5625rem">Online only</span><div class="pbrd-oc-hbar-track"><div class="pbrd-oc-hbar-fill" style="width:52%;background:rgba(80,100,220,0.4)"></div></div><span class="pbrd-oc-hbar-val">\u20AC89</span></div>' +
-          '<div class="pbrd-oc-hbar"><span class="pbrd-oc-hbar-label" style="width:60px;font-size:0.5625rem">Multi-channel</span><div class="pbrd-oc-hbar-track"><div class="pbrd-oc-hbar-fill" style="width:92%;background:linear-gradient(90deg,rgba(120,180,255,0.4),rgba(120,255,180,0.5))"></div></div><span class="pbrd-oc-hbar-val">\u20AC285</span></div>' +
+          '<div class="pbrd-oc-hbar" style="margin-top:8px"><span class="pbrd-oc-hbar-label" style="width:60px;font-size:0.5625rem">Online only</span><div class="pbrd-oc-hbar-track"><div class="pbrd-oc-hbar-fill" style="--bar-w:52%;background:rgba(80,100,220,0.4)"></div></div><span class="pbrd-oc-hbar-val">\u20AC89</span></div>' +
+          '<div class="pbrd-oc-hbar"><span class="pbrd-oc-hbar-label" style="width:60px;font-size:0.5625rem">Multi-channel</span><div class="pbrd-oc-hbar-track"><div class="pbrd-oc-hbar-fill" style="--bar-w:92%;background:linear-gradient(90deg,rgba(120,180,255,0.4),rgba(120,255,180,0.5))"></div></div><span class="pbrd-oc-hbar-val">\u20AC285</span></div>' +
           '<div style="margin-top:8px;font-size:0.625rem;color:rgba(120,255,180,0.6);font-weight:600">\u2191 Multi-channel AOV is 3.2\u00D7 higher</div>' +
         '</div>' +
 
@@ -2889,8 +2889,8 @@
                 '<div class="pbrd-oc-perf-big">92.7%</div>' +
                 '<div class="pbrd-oc-perf-sub">Approval rate</div>' +
                 '<div class="pbrd-oc-perf-bars">' +
-                  '<div class="pbrd-oc-perf-bar-row"><span>Paybyrd</span><div class="pbrd-oc-perf-bar-track"><div class="pbrd-oc-perf-bar-fill" style="width:92.7%;background:linear-gradient(90deg,rgba(16,185,129,0.4),rgba(16,185,129,0.8))"></div></div><span>92.7%</span></div>' +
-                  '<div class="pbrd-oc-perf-bar-row"><span>Industry avg</span><div class="pbrd-oc-perf-bar-track"><div class="pbrd-oc-perf-bar-fill" style="width:88%;background:rgba(26,26,46,0.12)"></div></div><span>88%</span></div>' +
+                  '<div class="pbrd-oc-perf-bar-row"><span>Paybyrd</span><div class="pbrd-oc-perf-bar-track"><div class="pbrd-oc-perf-bar-fill" style="--bar-w:92.7%;background:linear-gradient(90deg,rgba(16,185,129,0.4),rgba(16,185,129,0.8))"></div></div><span>92.7%</span></div>' +
+                  '<div class="pbrd-oc-perf-bar-row"><span>Industry avg</span><div class="pbrd-oc-perf-bar-track"><div class="pbrd-oc-perf-bar-fill" style="--bar-w:88%;background:rgba(26,26,46,0.12)"></div></div><span>88%</span></div>' +
                 '</div>' +
               '</div>' +
               '<div class="pbrd-oc-perf-logos">' +

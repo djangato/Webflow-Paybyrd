@@ -4390,6 +4390,12 @@ a.glowing_button_link .glowing_button_text {
   height: 100%;
   border-radius: 4px;
   background: rgba(80, 100, 220, 0.5);
+  width: 0 !important;
+  transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pbrd-oc-dash-card.pbrd-visible .pbrd-oc-hbar-fill {
+  width: var(--bar-w) !important;
 }
 
 .pbrd-oc-hbar-val {
@@ -4411,6 +4417,12 @@ a.glowing_button_link .glowing_button_text {
 
 .pbrd-oc-freq-seg {
   height: 100%;
+  width: 0 !important;
+  transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pbrd-oc-dash-card.pbrd-visible .pbrd-oc-freq-seg {
+  width: var(--seg-w) !important;
 }
 
 .pbrd-oc-freq-legend {
@@ -4464,7 +4476,23 @@ a.glowing_button_link .glowing_button_text {
   height: 18px;
   border-radius: 3px;
   background: rgba(80, 100, 220, 0.8);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+.pbrd-oc-dash-card.pbrd-visible .pbrd-oc-hcell {
+  transform: scaleY(1);
+}
+
+.pbrd-oc-dash-card.pbrd-visible .pbrd-oc-hcell:nth-child(1) { transition-delay: 0s; }
+.pbrd-oc-dash-card.pbrd-visible .pbrd-oc-hcell:nth-child(2) { transition-delay: 0.08s; }
+.pbrd-oc-dash-card.pbrd-visible .pbrd-oc-hcell:nth-child(3) { transition-delay: 0.16s; }
+.pbrd-oc-dash-card.pbrd-visible .pbrd-oc-hcell:nth-child(4) { transition-delay: 0.24s; }
+.pbrd-oc-dash-card.pbrd-visible .pbrd-oc-hcell:nth-child(5) { transition-delay: 0.32s; }
+.pbrd-oc-dash-card.pbrd-visible .pbrd-oc-hcell:nth-child(6) { transition-delay: 0.4s; }
+.pbrd-oc-dash-card.pbrd-visible .pbrd-oc-hcell:nth-child(7) { transition-delay: 0.48s; }
+.pbrd-oc-dash-card.pbrd-visible .pbrd-oc-hcell:nth-child(8) { transition-delay: 0.56s; }
 
 .pbrd-oc-hcell-web {
   background: rgba(120, 180, 255, 0.8);
@@ -4942,6 +4970,12 @@ a.glowing_button_link .glowing_button_text {
 .pbrd-oc-perf-bar-fill {
   height: 100%;
   border-radius: 4px;
+  width: 0 !important;
+  transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pbrd-oc-feature-card.pbrd-visible .pbrd-oc-perf-bar-fill {
+  width: var(--bar-w) !important;
 }
 
 .pbrd-oc-perf-logos {
