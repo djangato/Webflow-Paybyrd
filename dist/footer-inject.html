@@ -19,11 +19,13 @@
     { name: "Discover", category: "cards", region: "Worldwide", fee: "2.40% + \u20AC0.15", icon: "DISC", iconBg: "#FF6000", iconImg: iconBase + "discover.png" },
     { name: "Diners Club", category: "cards", region: "Worldwide", fee: "2.40% + \u20AC0.15", icon: "DC", iconBg: "#004A97", iconImg: iconBase + "diners.png" },
     { name: "China Union Pay", category: "cards", region: "Worldwide", fee: "2.80% + \u20AC0.15", icon: "CUP", iconBg: "#E21836", iconImg: iconBase + "unionpay.png" },
-    { name: "Apple Pay", category: "wallets", region: "Worldwide", fee: "Card rate applies", icon: "AP", iconBg: "#000" },
-    { name: "Google Pay", category: "wallets", region: "Worldwide", fee: "Card rate applies", icon: "GP", iconBg: "#4285F4" },
+    { name: "Apple Pay", category: "wallets", region: "Worldwide", fee: "Card rate applies", icon: "AP", iconBg: "#000", iconImg: iconBase + "applepay.png" },
+    { name: "Google Pay", category: "wallets", region: "Worldwide", fee: "Card rate applies", icon: "GP", iconBg: "#4285F4", iconImg: iconBase + "googlepay.png" },
     { name: "Samsung Pay", category: "wallets", region: "Worldwide", fee: "Card rate applies", icon: "SP", iconBg: "#1428A0" },
     { name: "PayPal", category: "wallets", region: "Worldwide", fee: "PayPal rate + \u20AC0.10", icon: "PP", iconBg: "#003087", iconImg: iconBase + "paypal.png" },
     { name: "Revolut Pay", category: "wallets", region: "Europe", fee: "1.00% + \u20AC0.20", icon: "REV", iconBg: "#0075EB" },
+    { name: "Alipay", category: "wallets", region: "Asia / Worldwide", fee: "2.50% + \u20AC0.10", icon: "ALI", iconBg: "#1677FF", iconImg: iconBase + "alipay.png" },
+    { name: "WeChat Pay", category: "wallets", region: "Asia / Worldwide", fee: "2.50% + \u20AC0.10", icon: "WC", iconBg: "#07C160", iconImg: iconBase + "wechat.png" },
     { name: "SEPA Direct Debit", category: "bank", region: "Europe", fee: "\u20AC0.30", icon: "SEPA", iconBg: "#2D6CA2" },
     { name: "SEPA Instant", category: "bank", region: "Europe", fee: "\u20AC0.35", icon: "SEPA", iconBg: "#2D6CA2" },
     { name: "iDEAL", category: "bank", region: "Netherlands", fee: "\u20AC0.29", icon: "iD", iconBg: "#CC0066", iconImg: iconBase + "ideal.png" },
@@ -33,7 +35,9 @@
     { name: "MBWay", category: "local", region: "Portugal", fee: "1.20% + \u20AC0.15", icon: "MBW", iconBg: "#D4002A", iconImg: iconBase + "mbway.png" },
     { name: "PIX", category: "local", region: "Brazil", fee: "0.99%", icon: "PIX", iconBg: "#32BCAD" },
     { name: "Multicaixa", category: "local", region: "Angola", fee: "Contact us", icon: "MCX", iconBg: "#E3242B", iconImg: iconBase + "multibanco.png" },
-    { name: "Multicaixa Express", category: "local", region: "Angola", fee: "Contact us", icon: "MCX", iconBg: "#E3242B", iconImg: iconBase + "multibanco.png" }
+    { name: "Multicaixa Express", category: "local", region: "Angola", fee: "Contact us", icon: "MCX", iconBg: "#E3242B", iconImg: iconBase + "multibanco.png" },
+    { name: "Bitcoin", category: "crypto", region: "Worldwide", fee: "1.00%", icon: "BTC", iconBg: "#F7931A", iconImg: iconBase + "bitcoin.png" },
+    { name: "Ethereum", category: "crypto", region: "Worldwide", fee: "1.00%", icon: "ETH", iconBg: "#627EEA", iconImg: iconBase + "ethereum.png" }
   ];
 
   var categories = [
@@ -42,7 +46,8 @@
     { id: "wallets", label: "Digital Wallets" },
     { id: "bank", label: "Bank Transfers" },
     { id: "bnpl", label: "Buy Now, Pay Later" },
-    { id: "local", label: "Local Methods" }
+    { id: "local", label: "Local Methods" },
+    { id: "crypto", label: "Cryptocurrency" }
   ];
 
   var categoryLabels = {
@@ -50,7 +55,8 @@
     wallets: "Digital Wallets",
     bank: "Bank Transfers & Direct Debit",
     bnpl: "Buy Now, Pay Later",
-    local: "Local Payment Methods"
+    local: "Local Payment Methods",
+    crypto: "Cryptocurrency"
   };
 
   var chevronSVG = '<svg class="pbrd-category-chevron" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';

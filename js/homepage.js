@@ -153,18 +153,18 @@
       '<div class="pbrd-sv-card pbrd-sv-card-hero" style="animation:pbrd-sv-up 0.5s ease both">' +
         '<div class="pbrd-sv-label">Payment Methods</div>' +
         '<div class="pbrd-sv-method-grid">' +
-          '<div class="pbrd-sv-method" style="--d:0.05s;--bg:#1A1F71">VISA</div>' +
-          '<div class="pbrd-sv-method" style="--d:0.1s;--bg:#EB001B">MC</div>' +
-          '<div class="pbrd-sv-method" style="--d:0.15s;--bg:#006FCF">AMEX</div>' +
-          '<div class="pbrd-sv-method" style="--d:0.2s;--bg:#000">AP</div>' +
-          '<div class="pbrd-sv-method" style="--d:0.25s;--bg:#4285F4">GP</div>' +
-          '<div class="pbrd-sv-method" style="--d:0.3s;--bg:#003087">PP</div>' +
-          '<div class="pbrd-sv-method" style="--d:0.35s;--bg:#D4002A">MBW</div>' +
-          '<div class="pbrd-sv-method" style="--d:0.4s;--bg:#CC0066">iD</div>' +
-          '<div class="pbrd-sv-method" style="--d:0.45s;--bg:#32BCAD">PIX</div>' +
-          '<div class="pbrd-sv-method" style="--d:0.5s;--bg:#FFB3C7">K</div>' +
-          '<div class="pbrd-sv-method" style="--d:0.55s;--bg:#2D6CA2">SEPA</div>' +
-          '<div class="pbrd-sv-method" style="--d:0.6s;--bg:#1F3B7A">MB</div>' +
+          '<div class="pbrd-sv-method" style="--d:0.05s;--bg:#fff"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/visa.png" alt="Visa"></div>' +
+          '<div class="pbrd-sv-method" style="--d:0.1s;--bg:#fff"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/mastercard.png" alt="Mastercard"></div>' +
+          '<div class="pbrd-sv-method" style="--d:0.15s;--bg:#fff"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/amex.png" alt="Amex"></div>' +
+          '<div class="pbrd-sv-method" style="--d:0.2s;--bg:#fff"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/applepay.png" alt="Apple Pay"></div>' +
+          '<div class="pbrd-sv-method" style="--d:0.25s;--bg:#fff"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/googlepay.png" alt="Google Pay"></div>' +
+          '<div class="pbrd-sv-method" style="--d:0.3s;--bg:#fff"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/paypal.png" alt="PayPal"></div>' +
+          '<div class="pbrd-sv-method" style="--d:0.35s;--bg:#fff"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/mbway.png" alt="MBWay"></div>' +
+          '<div class="pbrd-sv-method" style="--d:0.4s;--bg:#fff"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/ideal.png" alt="iDEAL"></div>' +
+          '<div class="pbrd-sv-method" style="--d:0.45s;--bg:#fff"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/klarna.png" alt="Klarna"></div>' +
+          '<div class="pbrd-sv-method" style="--d:0.5s;--bg:#fff"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/discover.png" alt="Discover"></div>' +
+          '<div class="pbrd-sv-method" style="--d:0.55s;--bg:#fff"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/diners.png" alt="Diners Club"></div>' +
+          '<div class="pbrd-sv-method" style="--d:0.6s;--bg:#fff"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/multibanco.png" alt="Multibanco"></div>' +
         '</div>' +
       '</div>' +
       '<div class="pbrd-sv-row">' +
@@ -189,15 +189,15 @@
       '<div class="pbrd-sv-card pbrd-sv-card-hero" style="animation:pbrd-sv-up 0.5s ease both">' +
         '<div class="pbrd-sv-label">Integration Ecosystem</div>' +
         '<div class="pbrd-sv-integration-grid">' +
-          '<div class="pbrd-sv-integration" style="--d:0.05s"><div class="pbrd-sv-int-icon" style="--ibg:#7B61FF">\uD83D\uDED2</div><span class="pbrd-sv-int-name">WooCommerce</span><span class="pbrd-sv-int-badge pbrd-sv-int-live">Live</span></div>' +
-          '<div class="pbrd-sv-integration" style="--d:0.1s"><div class="pbrd-sv-int-icon" style="--ibg:#F46F25">\uD83D\uDED2</div><span class="pbrd-sv-int-name">Magento</span><span class="pbrd-sv-int-badge pbrd-sv-int-live">Live</span></div>' +
-          '<div class="pbrd-sv-integration" style="--d:0.15s"><div class="pbrd-sv-int-icon" style="--ibg:#DF0067">\uD83D\uDED2</div><span class="pbrd-sv-int-name">PrestaShop</span><span class="pbrd-sv-int-badge pbrd-sv-int-live">Live</span></div>' +
-          '<div class="pbrd-sv-integration" style="--d:0.2s"><div class="pbrd-sv-int-icon" style="--ibg:#2C5282">\uD83D\uDCCA</div><span class="pbrd-sv-int-name">Moloni</span><span class="pbrd-sv-int-badge pbrd-sv-int-live">Live</span></div>' +
-          '<div class="pbrd-sv-integration" style="--d:0.25s"><div class="pbrd-sv-int-icon" style="--ibg:#1A73E8">\uD83C\uDFE8</div><span class="pbrd-sv-int-name">Host HMS</span><span class="pbrd-sv-int-badge pbrd-sv-int-live">Live</span></div>' +
-          '<div class="pbrd-sv-integration" style="--d:0.3s"><div class="pbrd-sv-int-icon" style="--ibg:#0D47A1">\uD83C\uDFE8</div><span class="pbrd-sv-int-name">Newhotel</span><span class="pbrd-sv-int-badge pbrd-sv-int-live">Live</span></div>' +
-          '<div class="pbrd-sv-integration" style="--d:0.35s"><div class="pbrd-sv-int-icon" style="--ibg:#C74634">\uD83C\uDFE8</div><span class="pbrd-sv-int-name">Oracle</span><span class="pbrd-sv-int-badge pbrd-sv-int-live">Live</span></div>' +
-          '<div class="pbrd-sv-integration" style="--d:0.4s"><div class="pbrd-sv-int-icon" style="--ibg:#25D366">\uD83D\uDCAC</div><span class="pbrd-sv-int-name">WhatsApp</span><span class="pbrd-sv-int-badge pbrd-sv-int-live">Live</span></div>' +
-          '<div class="pbrd-sv-integration" style="--d:0.45s"><div class="pbrd-sv-int-icon" style="--ibg:#0070F2">\uD83D\uDCE6</div><span class="pbrd-sv-int-name">SAP</span><span class="pbrd-sv-int-badge pbrd-sv-int-live">Live</span></div>' +
+          '<div class="pbrd-sv-integration" style="--d:0.05s"><div class="pbrd-sv-int-icon"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/woocommerce.svg" alt="WooCommerce"></div><span class="pbrd-sv-int-name">WooCommerce</span><span class="pbrd-sv-int-badge pbrd-sv-int-live">Live</span></div>' +
+          '<div class="pbrd-sv-integration" style="--d:0.1s"><div class="pbrd-sv-int-icon"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/magento.svg" alt="Magento"></div><span class="pbrd-sv-int-name">Magento</span><span class="pbrd-sv-int-badge pbrd-sv-int-live">Live</span></div>' +
+          '<div class="pbrd-sv-integration" style="--d:0.15s"><div class="pbrd-sv-int-icon"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/prestashop.svg" alt="PrestaShop"></div><span class="pbrd-sv-int-name">PrestaShop</span><span class="pbrd-sv-int-badge pbrd-sv-int-live">Live</span></div>' +
+          '<div class="pbrd-sv-integration" style="--d:0.2s"><div class="pbrd-sv-int-icon"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/moloni.svg" alt="Moloni"></div><span class="pbrd-sv-int-name">Moloni</span><span class="pbrd-sv-int-badge pbrd-sv-int-live">Live</span></div>' +
+          '<div class="pbrd-sv-integration" style="--d:0.25s"><div class="pbrd-sv-int-icon"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/host.png" alt="Host HMS"></div><span class="pbrd-sv-int-name">Host HMS</span><span class="pbrd-sv-int-badge pbrd-sv-int-live">Live</span></div>' +
+          '<div class="pbrd-sv-integration" style="--d:0.3s"><div class="pbrd-sv-int-icon"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/newhotel.svg" alt="Newhotel"></div><span class="pbrd-sv-int-name">Newhotel</span><span class="pbrd-sv-int-badge pbrd-sv-int-live">Live</span></div>' +
+          '<div class="pbrd-sv-integration" style="--d:0.35s"><div class="pbrd-sv-int-icon"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/oracle.svg" alt="Oracle"></div><span class="pbrd-sv-int-name">Oracle</span><span class="pbrd-sv-int-badge pbrd-sv-int-live">Live</span></div>' +
+          '<div class="pbrd-sv-integration" style="--d:0.4s"><div class="pbrd-sv-int-icon"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/whatsapp.svg" alt="WhatsApp"></div><span class="pbrd-sv-int-name">WhatsApp</span><span class="pbrd-sv-int-badge pbrd-sv-int-live">Live</span></div>' +
+          '<div class="pbrd-sv-integration" style="--d:0.45s"><div class="pbrd-sv-int-icon"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/sap.svg" alt="SAP"></div><span class="pbrd-sv-int-name">SAP</span><span class="pbrd-sv-int-badge pbrd-sv-int-live">Live</span></div>' +
         '</div>' +
       '</div>' +
       '<div class="pbrd-sv-row">' +
