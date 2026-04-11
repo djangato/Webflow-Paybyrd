@@ -209,6 +209,103 @@
   }
 
   /* ═══════════════════════════════════════════ */
+  /* Section 4: Tab Carousel Enhancement        */
+  /* ═══════════════════════════════════════════ */
+
+  function enhanceCarousel() {
+    var slideData = [
+      {
+        title: "Order online, collect in minutes.",
+        desc: "Your customer browses online, pays instantly, and picks up in-store \u2014 with the transaction already reconciled. No duplicate entries, no manual syncing. One order, two channels, zero friction.",
+        stat: "Reduce wait times by up to 40%"
+      },
+      {
+        title: "Returns without the headache.",
+        desc: "A customer bought online but wants to return in-store? Done in seconds. Paybyrd matches the original transaction across channels automatically \u2014 no receipt required, no manager override.",
+        stat: "Cross-channel refunds in under 10 seconds"
+      },
+      {
+        title: "QR code checkout \u2014 scan, pay, done.",
+        desc: "Generate a dynamic QR code on any POS terminal. Your customer scans with their phone and pays using their preferred method \u2014 cards, wallets, BNPL. Perfect for queues, events, and tableside payments.",
+        stat: "2.3s average completion time"
+      },
+      {
+        title: "No card? Send a payment link.",
+        desc: "Create a secure payment link and send it via SMS, WhatsApp, or email. Your customer pays from anywhere \u2014 phone orders, remote consultations, or outstanding invoices. Track every link in real-time.",
+        stat: "78% of payment links paid within 5 minutes"
+      },
+      {
+        title: "Self-service kiosks, fully connected.",
+        desc: "Unattended terminals that feed the same dashboard as your staffed POS. Vending machines, parking, hotel check-in \u2014 every transaction tracked, every customer identifiable, every channel unified.",
+        stat: "Same data depth as staffed terminals"
+      },
+      {
+        title: "Loyalty that runs itself.",
+        desc: "Forget apps and punch cards. Paybyrd identifies returning customers by their card data alone \u2014 across every channel. See who comes back, how often, and what they spend. Loyalty intelligence without the loyalty program.",
+        stat: "Identify returning customers automatically"
+      }
+    ];
+
+    /* Find carousel section */
+    var carousel = document.querySelector(".slider-4_component, [class*='slider-4']");
+    if (!carousel) return;
+
+    var carouselSection = carousel.closest("section") || carousel.closest("[class*='section']");
+    if (!carouselSection) return;
+
+    /* Inject section header above carousel */
+    var header = document.createElement("div");
+    header.className = "pbrd-oc-carousel-header";
+    header.innerHTML =
+      '<div class="pbrd-oc-journey-label">Omnichannel Capabilities</div>' +
+      '<h2 style="font-size:clamp(1.75rem,3.5vw,2.75rem);font-weight:600;letter-spacing:-0.025em;line-height:1.15;margin:0 0 8px;color:#1a1a2e">Make payments invisible.<br>Focus on delivering great experiences.</h2>' +
+      '<p style="font-size:1.0625rem;line-height:1.6;color:rgba(26,26,46,0.45);max-width:520px;margin:0 0 48px">Six ways Paybyrd connects your channels into one seamless experience for your customers \u2014 and one unified dashboard for you.</p>';
+
+    /* Find the heading inside the section and replace it or add above carousel */
+    var existingH2 = carouselSection.querySelector("h2");
+    if (existingH2) {
+      var existingHeader = existingH2.closest("[class*='header'], [class*='wrap']") || existingH2.parentElement;
+      existingHeader.replaceWith(header);
+    } else {
+      carouselSection.insertBefore(header, carouselSection.firstChild);
+    }
+
+    /* Override slide text content */
+    var slides = carouselSection.querySelectorAll(".slider-4_item, [data-swiper-slide-index]");
+    slides.forEach(function (slide, i) {
+      if (i >= slideData.length) return;
+      var d = slideData[i];
+
+      /* Find and override heading */
+      var heading = slide.querySelector("h2, h3, [class*='heading'], [class*='label_text']");
+      if (heading) heading.textContent = d.title;
+
+      /* Find and override description */
+      var desc = slide.querySelector("p, [class*='description'], [class*='text']");
+      if (desc) desc.textContent = d.desc;
+
+      /* Inject stat badge if not already present */
+      if (!slide.querySelector(".pbrd-oc-slide-stat")) {
+        var statBadge = document.createElement("div");
+        statBadge.className = "pbrd-oc-slide-stat";
+        statBadge.innerHTML = checkSVG + '<span>' + d.stat + '</span>';
+        var textArea = heading ? heading.parentElement : slide;
+        textArea.appendChild(statBadge);
+      }
+    });
+
+    /* Also override the tab link text if present */
+    var tabLinks = carouselSection.querySelectorAll(".slider-4_link_item");
+    var tabNames = ["Click & Collect", "Cross-Channel Returns", "QR Payments", "Payment Links", "Self-Service", "Smart Loyalty"];
+    tabLinks.forEach(function (link, i) {
+      if (i < tabNames.length) {
+        var linkText = link.querySelector("[class*='text'], span, p");
+        if (linkText) linkText.textContent = tabNames[i];
+      }
+    });
+  }
+
+  /* ═══════════════════════════════════════════ */
   /* Section 5: Dashboard Intelligence          */
   /* ═══════════════════════════════════════════ */
 
@@ -349,6 +446,7 @@
       enhanceHero();
       buildLogos();
       buildJourney();
+      enhanceCarousel();
       enhanceDashboard();
       buildBenefits();
       buildCTA();
