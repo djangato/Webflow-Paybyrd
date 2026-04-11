@@ -87,7 +87,18 @@
     }
 
     /* ─── Hero Dashboard Overlay on image ─── */
-    var heroImg = document.querySelector("img[src*='hero-10'], img[src*='hero']");
+    var heroImg = null;
+    /* Find hero image by Webflow ID or by proximity to h1 */
+    document.querySelectorAll("img").forEach(function (img) {
+      var src = (img.getAttribute("src") || "") + " " + (img.getAttribute("srcset") || "");
+      if (src.indexOf("hero") !== -1 || src.indexOf("41c4c") !== -1) {
+        heroImg = img;
+      }
+    });
+    /* Fallback: first image in the hero section */
+    if (!heroImg && ctaWrap) {
+      heroImg = ctaWrap.querySelector("img");
+    }
     if (heroImg) {
       var imgParent = heroImg.closest("[class*='image']") || heroImg.parentElement;
       imgParent.style.position = "relative";
