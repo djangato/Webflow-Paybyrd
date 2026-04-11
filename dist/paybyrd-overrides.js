@@ -2974,7 +2974,7 @@
     if (chkContainer) {
       var brands = [
         { name: "TAP Air Portugal", logo: LOGOS + "69d9242bbde99c4b80e41dcc_tap-logo.svg", color: "#E4002B", cardholder: "Ana Ferreira" },
-        { name: "Vila Gal\u00E9", logo: LOGOS + "69d9242bbde99c4b80e41dce_vila-gale.svg", color: "#1B5E20", cardholder: "Khalid Al-Thani" },
+        { name: "Vila Gal\u00E9", logo: LOGOS + "69d9242bbde99c4b80e41dce_vila-gale.svg", color: "#1B5E20", cardholder: "Khalid Al-Sulaiti" },
         { name: "KuantoKusta", logo: LOGOS + "69d9242bbde99c4b80e41dcd_kuanto-logo.svg", color: "#FF6600", cardholder: "Sophie van Dijk" },
         { name: "Kabuki", logo: LOGOS + "69d9242bbde99c4b80e41dcb_kabuki.svg", color: "#1a1a2e", cardholder: "C. Munger" },
         { name: "Wi\u00F1k", logo: LOGOS + "69d9242bbde99c4b80e41dd1_WINK.svg", color: "#6B21A8", cardholder: "Luca Bianchi" }
