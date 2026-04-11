@@ -58,7 +58,7 @@
   font-size: clamp(1.5rem, 2.5vw, 2rem);
   font-weight: 600;
   color: #fff;
-  margin: 0 0 8px;
+  margin: 0 0 16px;
   letter-spacing: -0.02em;
   line-height: 1.2;
 }
@@ -142,9 +142,9 @@
 }
 
 .pbrd-mid-cta-stat span {
-  font-size: 0.75rem;
-  color: rgba(255,255,255,0.35);
-  font-weight: 500;
+  font-size: 0.8125rem;
+  color: rgba(255,255,255,0.55);
+  font-weight: 600;
 }
 
 /* ─── Responsive ─── */
