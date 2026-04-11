@@ -4807,12 +4807,13 @@ a.glowing_button_link .glowing_button_text {
   border-radius: 10px;
   background: #fff;
   border: 1px solid rgba(26, 26, 46, 0.06);
-  transition: border-color 0.2s ease;
+  transition: border-color 0.4s ease, background 0.4s ease, transform 0.3s ease;
 }
 
 .pbrd-oc-chk-active {
   border-color: rgba(80, 100, 220, 0.4);
-  background: rgba(80, 100, 220, 0.03);
+  background: rgba(80, 100, 220, 0.04);
+  transform: scale(1.02);
 }
 
 .pbrd-oc-chk-icon {

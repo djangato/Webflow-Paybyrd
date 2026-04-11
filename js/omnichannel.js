@@ -473,9 +473,9 @@
           '<div style="margin-top:8px;font-size:0.625rem;color:rgba(120,255,180,0.7);font-weight:600">\u2191 18% vs. last month</div>' +
         '</div>' +
         '<div class="pbrd-oc-dash-card" style="text-align:center">' +
-          '<div class="pbrd-oc-dash-big" style="font-size:2.5rem;font-weight:700;color:rgba(120,180,255,0.9)">98.2%</div>' +
+          '<div class="pbrd-oc-dash-big" style="font-size:2.5rem;font-weight:700;color:rgba(120,180,255,0.9)">92.7%</div>' +
           '<div class="pbrd-oc-dash-sub">Approval Rate</div>' +
-          '<div style="margin-top:8px;font-size:0.625rem;color:rgba(120,255,180,0.7);font-weight:600">\u2191 2.1% above industry avg</div>' +
+          '<div style="margin-top:8px;font-size:0.625rem;color:rgba(120,255,180,0.7);font-weight:600">\u2191 1.7% above industry avg</div>' +
         '</div>' +
         '<div class="pbrd-oc-dash-card" style="text-align:center">' +
           '<div class="pbrd-oc-dash-big" style="font-size:2.5rem;font-weight:700">847</div>' +
@@ -625,10 +625,12 @@
             '<div class="pbrd-oc-checkout-mock">' +
               '<div class="pbrd-oc-chk-header">Select your payment method</div>' +
               '<div class="pbrd-oc-chk-methods">' +
-                '<div class="pbrd-oc-chk-method"><div class="pbrd-oc-chk-icon"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/mbway.png" alt="MB WAY"></div><div><div class="pbrd-oc-chk-name">MB WAY</div><div class="pbrd-oc-chk-sub">Pay with MB WAY</div></div></div>' +
-                '<div class="pbrd-oc-chk-method pbrd-oc-chk-active"><div class="pbrd-oc-chk-icon"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/visa.png" alt="Card"></div><div><div class="pbrd-oc-chk-name">Credit Card</div><div class="pbrd-oc-chk-sub">Visa, Mastercard, and more</div></div></div>' +
-                '<div class="pbrd-oc-chk-method"><div class="pbrd-oc-chk-icon"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/paypal.png" alt="PayPal"></div><div><div class="pbrd-oc-chk-name">PayPal</div><div class="pbrd-oc-chk-sub">Pay with your PayPal account</div></div></div>' +
-                '<div class="pbrd-oc-chk-method"><div class="pbrd-oc-chk-icon"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/klarna.png" alt="Klarna"></div><div><div class="pbrd-oc-chk-name">Klarna</div><div class="pbrd-oc-chk-sub">Buy now, pay later</div></div></div>' +
+                '<div class="pbrd-oc-chk-method" data-chk-idx="0"><div class="pbrd-oc-chk-icon"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/mbway.png" alt="MB WAY"></div><div><div class="pbrd-oc-chk-name">MB WAY</div><div class="pbrd-oc-chk-sub">Pay with MB WAY</div></div></div>' +
+                '<div class="pbrd-oc-chk-method" data-chk-idx="1"><div class="pbrd-oc-chk-icon"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/visa.png" alt="Card"></div><div><div class="pbrd-oc-chk-name">Credit Card</div><div class="pbrd-oc-chk-sub">Visa, Mastercard, and more</div></div></div>' +
+                '<div class="pbrd-oc-chk-method" data-chk-idx="2"><div class="pbrd-oc-chk-icon"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/paypal.png" alt="PayPal"></div><div><div class="pbrd-oc-chk-name">PayPal</div><div class="pbrd-oc-chk-sub">Pay with your PayPal account</div></div></div>' +
+                '<div class="pbrd-oc-chk-method" data-chk-idx="3"><div class="pbrd-oc-chk-icon"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/klarna.png" alt="Klarna"></div><div><div class="pbrd-oc-chk-name">Klarna</div><div class="pbrd-oc-chk-sub">Buy now, pay later</div></div></div>' +
+                '<div class="pbrd-oc-chk-method" data-chk-idx="4"><div class="pbrd-oc-chk-icon"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/ideal.png" alt="iDEAL"></div><div><div class="pbrd-oc-chk-name">iDEAL</div><div class="pbrd-oc-chk-sub">Pay with your bank account</div></div></div>' +
+                '<div class="pbrd-oc-chk-method" data-chk-idx="5"><div class="pbrd-oc-chk-icon"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/multibanco.png" alt="Multibanco"></div><div><div class="pbrd-oc-chk-name">Multibanco</div><div class="pbrd-oc-chk-sub">Pay via Multibanco reference</div></div></div>' +
               '</div>' +
             '</div>' +
           '</div>' +
@@ -673,10 +675,10 @@
           '<div class="pbrd-oc-feature-viz">' +
             '<div class="pbrd-oc-perf-layout">' +
               '<div class="pbrd-oc-perf-chart">' +
-                '<div class="pbrd-oc-perf-big">98.2%</div>' +
+                '<div class="pbrd-oc-perf-big">92.7%</div>' +
                 '<div class="pbrd-oc-perf-sub">Approval rate</div>' +
                 '<div class="pbrd-oc-perf-bars">' +
-                  '<div class="pbrd-oc-perf-bar-row"><span>Paybyrd</span><div class="pbrd-oc-perf-bar-track"><div class="pbrd-oc-perf-bar-fill" style="width:98.2%;background:linear-gradient(90deg,rgba(16,185,129,0.4),rgba(16,185,129,0.8))"></div></div><span>98.2%</span></div>' +
+                  '<div class="pbrd-oc-perf-bar-row"><span>Paybyrd</span><div class="pbrd-oc-perf-bar-track"><div class="pbrd-oc-perf-bar-fill" style="width:92.7%;background:linear-gradient(90deg,rgba(16,185,129,0.4),rgba(16,185,129,0.8))"></div></div><span>92.7%</span></div>' +
                   '<div class="pbrd-oc-perf-bar-row"><span>Industry avg</span><div class="pbrd-oc-perf-bar-track"><div class="pbrd-oc-perf-bar-fill" style="width:91%;background:rgba(26,26,46,0.12)"></div></div><span>91%</span></div>' +
                 '</div>' +
               '</div>' +
@@ -729,6 +731,17 @@
     valSection.insertAdjacentElement("afterend", closingWrap);
 
     observeReveal(".pbrd-oc-feature-card", 120, closingWrap);
+
+    /* Animate checkout — cycle active payment method */
+    var chkMethods = closingWrap.querySelectorAll("[data-chk-idx]");
+    if (chkMethods.length) {
+      var chkIdx = 0;
+      setInterval(function () {
+        chkMethods.forEach(function (m) { m.classList.remove("pbrd-oc-chk-active"); });
+        chkMethods[chkIdx].classList.add("pbrd-oc-chk-active");
+        chkIdx = (chkIdx + 1) % chkMethods.length;
+      }, 1800);
+    }
   }
 
   /* ═══════════════════════════════════════════ */
