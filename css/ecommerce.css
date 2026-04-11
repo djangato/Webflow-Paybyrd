@@ -1,0 +1,366 @@
+/* Paybyrd — E-Commerce Page Enhancements */
+
+/* ═══════════════════════════════════════════ */
+/* Hero stat strip                            */
+/* ═══════════════════════════════════════════ */
+
+.pbrd-ec-kicker {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(120, 180, 255, 0.7);
+  margin-bottom: 16px;
+}
+
+.pbrd-ec-stat-strip {
+  display: flex;
+  gap: 32px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+
+.pbrd-ec-stat-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.45);
+  font-weight: 500;
+}
+
+.pbrd-ec-stat-item strong {
+  color: #fff;
+  font-weight: 700;
+}
+
+/* ═══════════════════════════════════════════ */
+/* Social Proof Logos (reuse omnichannel)      */
+/* ═══════════════════════════════════════════ */
+
+/* Reuses .pbrd-oc-logos styles from omnichannel.css */
+
+/* ═══════════════════════════════════════════ */
+/* Impact Stat Cards                          */
+/* ═══════════════════════════════════════════ */
+
+.pbrd-ec-impact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 1000px;
+  margin: 48px auto 0;
+  padding: 0 24px;
+}
+
+.pbrd-ec-impact-card {
+  background: #0a0a0f;
+  border-radius: 20px;
+  padding: 36px 28px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease;
+}
+
+.pbrd-ec-impact-card.pbrd-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.pbrd-ec-impact-card:hover {
+  border-color: rgba(120, 180, 255, 0.12);
+}
+
+.pbrd-ec-impact-num {
+  font-size: 2.75rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, #fff 30%, rgba(120, 180, 255, 0.8));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.pbrd-ec-impact-text {
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.pbrd-ec-impact-text strong {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ═══════════════════════════════════════════ */
+/* Stat pills for benefit cards               */
+/* ═══════════════════════════════════════════ */
+
+.pbrd-ec-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  padding: 6px 14px;
+  border-radius: 100px;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.15);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: #0d9668;
+}
+
+.pbrd-ec-pill svg {
+  width: 12px;
+  height: 12px;
+  color: #10b981;
+}
+
+/* ═══════════════════════════════════════════ */
+/* Integration grid                           */
+/* ═══════════════════════════════════════════ */
+
+.pbrd-ec-integrations {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 32px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Reuses .pbrd-oc-int-pill from omnichannel */
+
+.pbrd-ec-int-note {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* ═══════════════════════════════════════════ */
+/* Expanded Testimonials                      */
+/* ═══════════════════════════════════════════ */
+
+.pbrd-ec-testimonials {
+  background: #f7f6f3;
+  padding: 80px 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.pbrd-ec-testimonials-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.pbrd-ec-testimonials-header {
+  margin-bottom: 48px;
+}
+
+.pbrd-ec-testimonials-header h2 {
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: #1a1a2e;
+  margin: 0 0 8px;
+}
+
+.pbrd-ec-testimonials-header p {
+  font-size: 1rem;
+  color: rgba(26, 26, 46, 0.4);
+  margin: 0;
+}
+
+.pbrd-ec-testimonials-grid {
+  display: flex;
+  gap: 24px;
+}
+
+.pbrd-ec-testimonials-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.pbrd-ec-testimonials-col:nth-child(2) {
+  padding-top: 40px;
+}
+
+.pbrd-ec-tcard {
+  background: #fff;
+  border-radius: 20px;
+  padding: 36px 32px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s ease;
+}
+
+.pbrd-ec-tcard.pbrd-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.pbrd-ec-tcard:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.07);
+}
+
+.pbrd-ec-tcard-quote {
+  font-size: 3rem;
+  line-height: 1;
+  color: rgba(26, 26, 46, 0.06);
+  font-family: Georgia, serif;
+  margin-bottom: 8px;
+  user-select: none;
+}
+
+.pbrd-ec-tcard-text {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: rgba(26, 26, 46, 0.65);
+  margin: 0 0 24px;
+}
+
+.pbrd-ec-tcard-divider {
+  height: 1px;
+  background: rgba(26, 26, 46, 0.06);
+  margin-bottom: 16px;
+}
+
+.pbrd-ec-tcard-attr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pbrd-ec-tcard-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.pbrd-ec-tcard-title {
+  font-size: 0.6875rem;
+  color: rgba(26, 26, 46, 0.35);
+}
+
+.pbrd-ec-tcard-logo {
+  height: 22px;
+  max-width: 80px;
+  object-fit: contain;
+  opacity: 0.35;
+}
+
+/* ═══════════════════════════════════════════ */
+/* Enhanced CTA                               */
+/* ═══════════════════════════════════════════ */
+
+.pbrd-ec-cta {
+  background: #0a0a0f;
+  padding: 80px 24px;
+  text-align: center;
+  color: #fff;
+  position: relative;
+  z-index: 1;
+}
+
+.pbrd-ec-cta h2 {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
+  color: #fff;
+}
+
+.pbrd-ec-cta > p {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.4);
+  max-width: 480px;
+  margin: 0 auto 32px;
+  line-height: 1.6;
+}
+
+.pbrd-ec-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 36px;
+  border-radius: 100px;
+  background: #FF6B35;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  font-family: inherit;
+}
+
+.pbrd-ec-cta-btn:hover {
+  transform: translateY(-2px);
+  background: #FF7D4A;
+  box-shadow: 0 8px 32px rgba(255, 107, 53, 0.3);
+}
+
+.pbrd-ec-cta-proofs {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+
+.pbrd-ec-cta-proof {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.45);
+  font-weight: 500;
+}
+
+.pbrd-ec-cta-proof svg {
+  width: 16px;
+  height: 16px;
+  color: rgba(120, 255, 180, 0.6);
+}
+
+/* ═══════════════════════════════════════════ */
+/* Responsive                                 */
+/* ═══════════════════════════════════════════ */
+
+@media (max-width: 900px) {
+  .pbrd-ec-impact-grid { grid-template-columns: 1fr; max-width: 400px; }
+  .pbrd-ec-testimonials-grid { flex-direction: column; }
+  .pbrd-ec-testimonials-col:nth-child(2) { padding-top: 0; }
+}
+
+@media (max-width: 768px) {
+  .pbrd-ec-stat-strip { gap: 16px; }
+  .pbrd-ec-testimonials { padding: 56px 16px; }
+  .pbrd-ec-cta-proofs { flex-direction: column; align-items: center; gap: 12px; }
+}
+
+@media (max-width: 480px) {
+  .pbrd-ec-impact-num { font-size: 2.25rem; }
+  .pbrd-ec-tcard { padding: 28px 24px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pbrd-ec-impact-card,
+  .pbrd-ec-tcard {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
