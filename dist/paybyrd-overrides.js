@@ -2580,13 +2580,13 @@
       '</div>',
 
       /* 1: Cross-Channel Returns */
-      '<div class="pbrd-oc-overlay-card" style="bottom:30%;left:6%">' +
+      '<div class="pbrd-oc-overlay-card" style="top:20%;left:5%">' +
         '<div class="pbrd-oc-overlay-badge pbrd-oc-overlay-warn">\u21BB Refund in progress</div>' +
         '<div class="pbrd-oc-overlay-row"><span>Original</span><span>Online \u2022 \u20AC89.00</span></div>' +
         '<div class="pbrd-oc-overlay-row"><span>Return at</span><span>Porto Store POS</span></div>' +
         '<div class="pbrd-oc-overlay-row"><span>Card match</span><span style="color:rgba(120,255,180,0.8)">\u2713 Verified</span></div>' +
       '</div>' +
-      '<div class="pbrd-oc-overlay-card pbrd-oc-overlay-sm" style="bottom:12%;right:6%">' +
+      '<div class="pbrd-oc-overlay-card pbrd-oc-overlay-sm" style="bottom:20%;left:10%">' +
         '<div class="pbrd-oc-overlay-badge pbrd-oc-overlay-success">\u2713 \u20AC89.00 refunded</div>' +
         '<div style="font-size:0.5625rem;color:rgba(120,255,180,0.7)">No receipt needed \u2022 Auto-matched</div>' +
       '</div>',
@@ -2620,7 +2620,7 @@
       '</div>',
 
       /* 5: Smart Loyalty */
-      '<div class="pbrd-oc-overlay-card" style="top:10%;right:8%">' +
+      '<div class="pbrd-oc-overlay-card" style="top:25%;right:5%">' +
         '<div class="pbrd-oc-overlay-badge pbrd-oc-overlay-info">\u21BB Returning Customer</div>' +
         '<div style="font-size:0.875rem;font-weight:600;color:#fff;margin:8px 0 4px">Sofia M.</div>' +
         '<div class="pbrd-oc-overlay-row"><span>Visits</span><span>7</span></div>' +
