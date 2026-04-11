@@ -770,33 +770,23 @@
       ];
       var brandIdx = 0;
 
-      /* Add brand bar at top of checkout */
-      var brandBar = document.createElement("div");
-      brandBar.className = "pbrd-oc-chk-brand";
-      brandBar.innerHTML = '<img src="' + brands[0].logo + '" alt="' + brands[0].name + '"><span class="pbrd-oc-chk-brand-label">Powered by Paybyrd</span>';
-      chkContainer.insertBefore(brandBar, chkContainer.firstChild);
+      /* Capture methods HTML WITHOUT brand bar */
+      var methodsOnlyHTML = chkContainer.innerHTML;
 
       function setBrand(b) {
         chkContainer.style.setProperty("--chk-accent", b.color);
         chkContainer.style.setProperty("--chk-accent-bg", b.color + "0A");
         chkContainer.style.borderColor = b.color;
-        var brandImg = chkContainer.querySelector(".pbrd-oc-chk-brand img");
-        if (brandImg) { brandImg.src = b.logo; brandImg.alt = b.name; }
       }
-      setBrand(brands[0]);
 
-      var methodListHTML = chkContainer.innerHTML;
+      function brandBarHTML(b) {
+        return '<div class="pbrd-oc-chk-brand"><img src="' + b.logo + '" alt="' + b.name + '"><span class="pbrd-oc-chk-brand-label">Powered by Paybyrd</span></div>';
+      }
 
       function runCheckoutLoop() {
         var b = brands[brandIdx];
         brandIdx = (brandIdx + 1) % brands.length;
-        setBrand(b);
-        chkContainer.innerHTML = methodListHTML;
-        /* Re-add brand bar with new brand */
-        var newBar = document.createElement("div");
-        newBar.className = "pbrd-oc-chk-brand";
-        newBar.innerHTML = '<img src="' + b.logo + '" alt="' + b.name + '"><span class="pbrd-oc-chk-brand-label">Powered by Paybyrd</span>';
-        chkContainer.insertBefore(newBar, chkContainer.firstChild);
+        chkContainer.innerHTML = brandBarHTML(b) + methodsOnlyHTML;
         setBrand(b);
 
         var methods = chkContainer.querySelectorAll("[data-chk-idx]");
