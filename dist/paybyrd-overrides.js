@@ -2033,7 +2033,7 @@
   }
 })();
 
-/* Paybyrd — Testimonials Section (replaces Webflow slider) */
+/* Paybyrd — Testimonials Section (Staggered Masonry + Scroll Animations) */
 (function () {
   "use strict";
   var path = window.location.pathname;
@@ -2112,16 +2112,50 @@
     var section = document.createElement("section");
     section.className = "pbrd-testimonials";
 
+    /* Split into 2 columns for masonry stagger */
+    var left = [];
+    var right = [];
+    for (var i = 0; i < testimonials.length; i++) {
+      if (i % 2 === 0) left.push(testimonials[i]);
+      else right.push(testimonials[i]);
+    }
+
     section.innerHTML =
       '<div class="pbrd-testimonials-header">' +
         '<h2>Payments that fit.<br>Partners that grow.</h2>' +
         '<p>Don\u2019t take our word for it. Here\u2019s what the people behind the brands have to say.</p>' +
       '</div>' +
       '<div class="pbrd-testimonials-grid">' +
-        testimonials.map(buildCard).join("") +
+        '<div class="pbrd-testimonials-col">' + left.map(buildCard).join("") + '</div>' +
+        '<div class="pbrd-testimonials-col">' + right.map(buildCard).join("") + '</div>' +
       '</div>';
 
     return section;
+  }
+
+  /* ─── Scroll-triggered reveal ─── */
+  function observeCards(section) {
+    var cards = section.querySelectorAll(".pbrd-testimonial-card");
+    if (!("IntersectionObserver" in window)) {
+      cards.forEach(function (c) { c.classList.add("pbrd-visible"); });
+      return;
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          /* Stagger the animation based on card position */
+          var card = entry.target;
+          var idx = Array.prototype.indexOf.call(cards, card);
+          setTimeout(function () {
+            card.classList.add("pbrd-visible");
+          }, idx * 100);
+          observer.unobserve(card);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
+
+    cards.forEach(function (c) { observer.observe(c); });
   }
 
   function init() {
@@ -2133,6 +2167,9 @@
 
     var section = buildSection();
     target.replaceWith(section);
+
+    /* Kick off scroll animations */
+    observeCards(section);
   }
 
   if (document.readyState === "complete") {
