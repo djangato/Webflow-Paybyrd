@@ -1988,12 +1988,30 @@
     var fieldsets = form.querySelectorAll("fieldset");
 
     function alignVisual() {
-      var counter = document.querySelector(".pbrd-demo-step-count");
-      if (!counter || window.innerWidth < 768) return;
-      var counterRect = counter.getBoundingClientRect();
+      if (window.innerWidth < 768) {
+        vizWrap.style.marginTop = "0px";
+        return;
+      }
+      /* Find the VISIBLE fieldset */
+      var activeFs = null;
+      for (var i = 0; i < fieldsets.length; i++) {
+        var s = window.getComputedStyle(fieldsets[i]);
+        if (s.display !== "none" && s.visibility !== "hidden") {
+          activeFs = fieldsets[i];
+          break;
+        }
+      }
+      if (!activeFs) return;
+
       var colRect = imageCol.getBoundingClientRect();
-      var offset = counterRect.top - colRect.top;
-      vizWrap.style.marginTop = Math.max(0, offset) + "px";
+      /* Step counter if present, otherwise first <p> (subtitle) for landing */
+      var ref = activeFs.querySelector(".pbrd-demo-step-count")
+             || activeFs.querySelector("p");
+      if (ref) {
+        vizWrap.style.marginTop = Math.max(0, ref.getBoundingClientRect().top - colRect.top) + "px";
+      } else {
+        vizWrap.style.marginTop = "0px";
+      }
     }
 
     function updateVisual() {
