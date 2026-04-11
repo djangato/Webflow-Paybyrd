@@ -2620,7 +2620,7 @@
       '</div>',
 
       /* 5: Smart Loyalty */
-      '<div class="pbrd-oc-overlay-card" style="top:25%;right:5%">' +
+      '<div class="pbrd-oc-overlay-card" style="bottom:10%;left:5%">' +
         '<div class="pbrd-oc-overlay-badge pbrd-oc-overlay-info">\u21BB Returning Customer</div>' +
         '<div style="font-size:0.875rem;font-weight:600;color:#fff;margin:8px 0 4px">Sofia M.</div>' +
         '<div class="pbrd-oc-overlay-row"><span>Visits</span><span>7</span></div>' +
