@@ -2776,9 +2776,17 @@
       children[c].style.display = "none";
     }
 
-    /* Insert our analytics section as the only visible content */
+    /* Add a light-themed intro header above the dark analytics block */
+    var intro = document.createElement("div");
+    intro.className = "pbrd-oc-dash-intro";
+    intro.innerHTML =
+      '<h2>One dashboard to rule them all.</h2>' +
+      '<p>Stop switching between platforms. Paybyrd consolidates every channel, every transaction, and every customer into a single real-time view \u2014 so you can make decisions in minutes, not days.</p>';
+    dashSection.appendChild(intro);
+
+    /* Insert our analytics section */
     dashSection.appendChild(section);
-    dashSection.style.padding = "60px 24px";
+    dashSection.style.padding = "80px 24px 60px";
 
     observeReveal(".pbrd-oc-dash-card", 100, section);
   }
