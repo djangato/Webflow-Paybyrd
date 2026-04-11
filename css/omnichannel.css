@@ -470,6 +470,17 @@
   color: #10b981;
 }
 
+/* ─── Carousel image container — remove Webflow gray bg ─── */
+[class*='slider-4'] .u-image-wrapper,
+[class*='slider-4'] [class*='image'],
+[class*='slider-4'] .u-layout-column-2,
+[class*='slider-4'] .u-layout-column-2 > * {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
 /* ─── Carousel Image Overlays ─── */
 .pbrd-oc-overlays {
   position: absolute;
