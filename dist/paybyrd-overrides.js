@@ -2517,37 +2517,48 @@
       "69d9242bbde99c4b80e41bfc": ASSET_BASE + "69d9242bbde99c4b80e41bfc_paybyrd-tab-06-removebg.png"
     };
 
+    /* Swap images AND add overlays in one pass */
+    var swapped = 0;
     document.querySelectorAll("img").forEach(function (img) {
-      /* Check src, currentSrc, and all attributes for the Webflow ID */
-      var src = img.src || img.currentSrc || img.getAttribute("src") || "";
-      var srcset = img.getAttribute("srcset") || "";
-      var check = src + " " + srcset;
+      var src = (img.getAttribute("src") || "") + " " + (img.getAttribute("srcset") || "");
 
       for (var id in imageMap) {
-        if (check.includes(id)) {
-          img.src = imageMap[id];
-          img.srcset = imageMap[id];
+        if (src.indexOf(id) !== -1) {
+          /* Swap to transparent PNG */
+          img.setAttribute("src", imageMap[id]);
           img.removeAttribute("srcset");
           img.removeAttribute("sizes");
           img.removeAttribute("data-wf-srcset");
-          /* Also update any picture source elements */
           var picture = img.closest("picture");
-          if (picture) {
-            picture.querySelectorAll("source").forEach(function (s) { s.remove(); });
+          if (picture) picture.querySelectorAll("source").forEach(function (s) { s.remove(); });
+
+          /* Add overlay to image parent */
+          var overlayIdx = imageMap[id].indexOf("tab-0") !== -1
+            ? parseInt(imageMap[id].charAt(imageMap[id].indexOf("tab-0") + 5)) - 1
+            : -1;
+
+          if (overlayIdx >= 0 && overlayIdx < overlayCards.length) {
+            var parent = img.parentElement;
+            if (parent && !parent.querySelector(".pbrd-oc-overlays")) {
+              parent.style.position = "relative";
+              parent.style.overflow = "visible";
+              var wrap = document.createElement("div");
+              wrap.className = "pbrd-oc-overlays";
+              wrap.innerHTML = overlayCards[overlayIdx];
+              parent.appendChild(wrap);
+            }
           }
+          swapped++;
           break;
         }
       }
     });
 
-    console.log("[Paybyrd] Carousel images + text enhanced");
-
-    /* ─── Image Overlays ─── */
-    addCarouselOverlays();
+    console.log("[Paybyrd] Carousel: swapped " + swapped + " images with overlays");
   }
 
-  function addCarouselOverlays() {
-    var overlays = [
+  /* Overlay card HTML per slide (used by enhanceCarousel) */
+  var overlayCards = [
       /* 0: Click & Collect */
       '<div class="pbrd-oc-overlay-card" style="top:12%;right:8%">' +
         '<div class="pbrd-oc-overlay-badge pbrd-oc-overlay-success">\u2713 Order Confirmed</div>' +
@@ -2609,35 +2620,6 @@
         '<div class="pbrd-oc-overlay-row"><span>Frequency</span><span class="pbrd-oc-freq-hot" style="font-size:0.625rem">Hot</span></div>' +
       '</div>'
     ];
-
-    /* Find all slide items and inject overlays into the IMAGE column (.u-layout-column-2) */
-    var carouselWrap = document.querySelector("[class*='slider-4']");
-    if (!carouselWrap) return;
-
-    var allSlides = carouselWrap.querySelectorAll("[class*='slider-4_item'], .swiper-slide");
-    var added = 0;
-
-    allSlides.forEach(function (slide) {
-      var attr = slide.getAttribute("data-swiper-slide-index");
-      var idx = attr !== null ? parseInt(attr) : added;
-      if (idx < 0 || idx >= overlays.length) return;
-
-      /* Target the image column specifically, not the whole slide */
-      var imgCol = slide.querySelector(".u-layout-column-2, [class*='column-2']");
-      if (!imgCol || imgCol.querySelector(".pbrd-oc-overlays")) return;
-
-      imgCol.style.position = "relative";
-      imgCol.style.overflow = "visible";
-
-      var overlayWrap = document.createElement("div");
-      overlayWrap.className = "pbrd-oc-overlays";
-      overlayWrap.innerHTML = overlays[idx];
-      imgCol.appendChild(overlayWrap);
-      added++;
-    });
-
-    console.log("[Paybyrd] Carousel overlays: " + added + " added to image columns");
-  }
 
   /* ═══════════════════════════════════════════ */
   /* Section 5: Dashboard Intelligence          */
