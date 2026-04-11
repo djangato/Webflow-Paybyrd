@@ -445,57 +445,144 @@
   /* ═══════════════════════════════════════════ */
 
   function enhanceBenefits() {
-    var benefitCopy = [
-      {
-        search: "omnichannel",
-        title: "One integration, every channel",
-        desc: "Connect your website, app, POS, and marketplaces to a single payment backend. One reconciliation, one dashboard, one source of truth.",
-        pill: "Single API for all channels"
-      },
-      {
-        search: "conversion",
-        title: "A checkout your customers actually finish",
-        desc: "White-labeled, mobile-optimized, pre-filled where possible. Guest checkout, saved cards, one-click payments. Reduce clicks, increase conversions.",
-        pill: "23% higher conversion rate"
-      },
-      {
-        search: "fraud",
-        title: "Block fraud, not customers",
-        desc: "AI-powered risk scoring that adapts to your business. Reduce chargebacks by up to 40% while keeping approval rates above 92%. Smart rules that learn.",
-        pill: "-40% chargebacks"
-      },
-      {
-        search: "optimi",
-        title: "See what\u2019s working. Fix what isn\u2019t.",
-        desc: "Real-time conversion funnels by device, country, payment method, and campaign. Know exactly where customers drop off \u2014 and why.",
-        pill: "Real-time analytics"
-      }
-    ];
+    /* Find and replace the benefits section */
+    var section = findSectionByHeading("built for the way");
+    if (!section) return;
 
-    var allH3 = document.querySelectorAll("h3, h4");
-    allH3.forEach(function (h) {
-      var txt = h.textContent.toLowerCase();
-      benefitCopy.forEach(function (b) {
-        if (txt.includes(b.search.toLowerCase()) && h.children.length === 0) {
-          h.textContent = b.title;
+    /* Hide ALL original content */
+    var children = section.children;
+    for (var c = 0; c < children.length; c++) children[c].style.display = "none";
 
-          /* Find sibling paragraph */
-          var parent = h.parentElement;
-          if (parent) {
-            var desc = parent.querySelector("p");
-            if (desc) desc.textContent = b.desc;
+    var ICON = BASE + "icons/";
+    var bento = document.createElement("div");
+    bento.className = "pbrd-ec-bento-wrap";
 
-            /* Add pill if not already present */
-            if (!parent.querySelector(".pbrd-ec-pill")) {
-              var pill = document.createElement("div");
-              pill.className = "pbrd-ec-pill";
-              pill.innerHTML = checkSVG + '<span>' + b.pill + '</span>';
-              parent.appendChild(pill);
-            }
-          }
+    bento.innerHTML =
+      '<div class="pbrd-ec-bento-header">' +
+        '<h2>Everything your checkout needs.<br>Nothing it doesn\u2019t.</h2>' +
+        '<p>From the first click to the final confirmation \u2014 every tool to maximize revenue and minimize friction.</p>' +
+      '</div>' +
+
+      '<div class="pbrd-ec-bento">' +
+
+        /* Row 1: Checkout (large) + Dashboard (large) */
+        '<div class="pbrd-ec-bento-card pbrd-ec-bento-lg">' +
+          '<h3>Your brand. Their favorite way to pay.</h3>' +
+          '<p>White-labeled checkout that auto-detects country and shows the right methods. Guest checkout, saved cards, one-tap wallets.</p>' +
+          '<div class="pbrd-ec-bento-viz">' +
+            '<div class="pbrd-ec-bv-checkout">' +
+              '<div class="pbrd-ec-bv-chk-row"><img src="' + ICON + 'visa.png"><span>Visa</span><div class="pbrd-ec-viz-toggle on"></div></div>' +
+              '<div class="pbrd-ec-bv-chk-row"><img src="' + ICON + 'applepay.png"><span>Apple Pay</span><div class="pbrd-ec-viz-toggle on"></div></div>' +
+              '<div class="pbrd-ec-bv-chk-row"><img src="' + ICON + 'klarna.png"><span>Klarna</span><div class="pbrd-ec-viz-toggle on"></div></div>' +
+              '<div class="pbrd-ec-bv-chk-row"><img src="' + ICON + 'mbway.png"><span>MBWay</span><div class="pbrd-ec-viz-toggle on"></div></div>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+
+        '<div class="pbrd-ec-bento-card pbrd-ec-bento-lg">' +
+          '<h3>Real-time transaction feed.</h3>' +
+          '<p>Every payment, every channel, one screen. Search, filter, refund \u2014 in seconds.</p>' +
+          '<div class="pbrd-ec-bento-viz">' +
+            '<div class="pbrd-ec-bv-feed" id="pbrd-ec-bento-feed">' +
+              '<div class="pbrd-ec-bv-tx"><div class="pbrd-ec-bv-status paid">Paid</div><span>\u20AC89.00</span><span>Visa \u2022\u20224821</span><span>just now</span></div>' +
+              '<div class="pbrd-ec-bv-tx"><div class="pbrd-ec-bv-status paid">Paid</div><span>\u20AC245.50</span><span>PayPal</span><span>12s ago</span></div>' +
+              '<div class="pbrd-ec-bv-tx"><div class="pbrd-ec-bv-status refund">Refund</div><span>\u20AC32.00</span><span>MBWay</span><span>28s ago</span></div>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+
+        /* Row 2: Pay Links + Security + Global */
+        '<div class="pbrd-ec-bento-card">' +
+          '<h3>Send a link. Get paid.</h3>' +
+          '<p>Payment links via WhatsApp, SMS, email. Perfect for phone orders and remote sales.</p>' +
+          '<div class="pbrd-ec-bento-viz">' +
+            '<div class="pbrd-ec-bv-link">' +
+              '<div class="pbrd-ec-bv-link-amount">\u20AC64</div>' +
+              '<div class="pbrd-ec-bv-link-curr">EUR</div>' +
+              '<div class="pbrd-ec-bv-link-channels"><span>WhatsApp</span><span>SMS</span><span>Email</span></div>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+
+        '<div class="pbrd-ec-bento-card">' +
+          '<h3>Fraud blocked.<br>Revenue protected.</h3>' +
+          '<p>AI risk scoring. 3D Secure. Smart rules that learn your business.</p>' +
+          '<div class="pbrd-ec-bento-viz">' +
+            '<div class="pbrd-ec-bv-shield">' +
+              '<div class="pbrd-ec-bv-shield-icon">' +
+                '<svg viewBox="0 0 24 24" fill="none"><path d="M12 3l8 4v5c0 5.25-3.44 10.14-8 11.5C7.44 22.14 4 17.25 4 12V7l8-4z" stroke="currentColor" stroke-width="1.5"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+              '</div>' +
+              '<div class="pbrd-ec-bv-shield-stats">' +
+                '<div><strong>0.12%</strong> chargeback rate</div>' +
+                '<div><strong>92.7%</strong> approval rate</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+
+        '<div class="pbrd-ec-bento-card">' +
+          '<h3>Go global.<br>Pay local.</h3>' +
+          '<p>35+ methods across 192 currencies. Auto-detect shopper location.</p>' +
+          '<div class="pbrd-ec-bento-viz">' +
+            '<div class="pbrd-ec-bv-global">' +
+              '<div class="pbrd-ec-bv-flag-row">' +
+                '<span>\uD83C\uDDF5\uD83C\uDDF9</span><span>\uD83C\uDDF3\uD83C\uDDF1</span><span>\uD83C\uDDE9\uD83C\uDDEA</span><span>\uD83C\uDDEB\uD83C\uDDF7</span><span>\uD83C\uDDEA\uD83C\uDDF8</span><span>\uD83C\uDDEC\uD83C\uDDE7</span><span>\uD83C\uDDE7\uD83C\uDDF7</span><span>\uD83C\uDDE6\uD83C\uDDF4</span>' +
+              '</div>' +
+              '<div class="pbrd-ec-bv-global-stat"><strong>35+</strong> methods \u2022 <strong>192</strong> currencies</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+
+        /* Row 3: Subscriptions (wide) */
+        '<div class="pbrd-ec-bento-card pbrd-ec-bento-wide">' +
+          '<div class="pbrd-ec-bento-wide-inner">' +
+            '<div>' +
+              '<h3>Recurring revenue. Zero effort.</h3>' +
+              '<p>Tokenized billing with automatic retries, dunning, and card updates. Reduce involuntary churn by up to 30%.</p>' +
+            '</div>' +
+            '<div class="pbrd-ec-bento-viz">' +
+              '<div class="pbrd-ec-bv-sub">' +
+                '<div class="pbrd-ec-bv-sub-icon">' + checkSVG + '</div>' +
+                '<div class="pbrd-ec-bv-sub-text">Subscription Confirmed</div>' +
+                '<div class="pbrd-ec-bv-sub-detail">\u20AC29.90/mo \u2022 Auto-renewal \u2022 Card on file</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+
+      '</div>';
+
+    section.appendChild(bento);
+
+    observeReveal(".pbrd-ec-bento-card", 100, bento);
+
+    /* Animate the bento feed */
+    var bentoFeed = document.getElementById("pbrd-ec-bento-feed");
+    if (bentoFeed) {
+      var feedPool = [
+        { s: "paid", a: "\u20AC156.00", m: "Mastercard" },
+        { s: "paid", a: "\u20AC42.50", m: "Apple Pay" },
+        { s: "paid", a: "\u20AC318.00", m: "Visa \u2022\u20225847" },
+        { s: "refund", a: "\u20AC19.90", m: "iDEAL" },
+        { s: "paid", a: "\u20AC78.00", m: "Google Pay" },
+        { s: "paid", a: "\u20AC205.50", m: "Klarna" }
+      ];
+      var feedIdx = 0;
+      setInterval(function () {
+        var f = feedPool[feedIdx % feedPool.length]; feedIdx++;
+        var row = document.createElement("div");
+        row.className = "pbrd-ec-bv-tx";
+        row.style.cssText = "opacity:0;transform:translateY(-8px);transition:all 0.4s ease";
+        row.innerHTML = '<div class="pbrd-ec-bv-status ' + f.s + '">' + (f.s === "paid" ? "Paid" : "Refund") + '</div><span>' + f.a + '</span><span>' + f.m + '</span><span>just now</span>';
+        bentoFeed.insertBefore(row, bentoFeed.firstChild);
+        requestAnimationFrame(function () { row.style.opacity = "1"; row.style.transform = "translateY(0)"; });
+        while (bentoFeed.children.length > 3) {
+          var last = bentoFeed.lastElementChild;
+          last.style.opacity = "0";
+          setTimeout(function () { if (last.parentNode) last.remove(); }, 400);
         }
-      });
-    });
+      }, 3000);
+    }
   }
 
   /* ═══════════════════════════════════════════ */
