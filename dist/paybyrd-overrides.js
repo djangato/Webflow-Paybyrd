@@ -3213,23 +3213,12 @@
       col.appendChild(strip);
     }
 
-    /* ─── Hero Dashboard Overlay on image ─── */
-    var heroImg = null;
-    /* Find hero image by Webflow ID or by proximity to h1 */
-    document.querySelectorAll("img").forEach(function (img) {
-      var src = (img.getAttribute("src") || "") + " " + (img.getAttribute("srcset") || "");
-      if (src.indexOf("hero") !== -1 || src.indexOf("41c4c") !== -1) {
-        heroImg = img;
-      }
-    });
-    /* Fallback: first image in the hero section */
-    if (!heroImg && ctaWrap) {
-      heroImg = ctaWrap.querySelector("img");
-    }
-    if (heroImg) {
-      var imgParent = heroImg.closest("[class*='image']") || heroImg.parentElement;
-      imgParent.style.position = "relative";
-      imgParent.style.overflow = "visible";
+    /* ─── Hero Dashboard Overlay ─── */
+    /* Hero is full-bleed — attach dashboard to the hero section itself */
+    var heroSection = heroH1.closest("section") || heroH1.closest("[class*='hero']") || heroH1.parentElement.parentElement;
+    if (heroSection) {
+      heroSection.style.position = "relative";
+      heroSection.style.overflow = "visible";
 
       var dashboard = document.createElement("div");
       dashboard.className = "pbrd-ec-hero-dash";
@@ -3284,7 +3273,7 @@
           '</div>' +
         '</div>';
 
-      imgParent.appendChild(dashboard);
+      heroSection.appendChild(dashboard);
 
       /* Animate funnel bars on load */
       setTimeout(function () {
@@ -3356,17 +3345,20 @@
   /* ═══════════════════════════════════════════ */
 
   function enhanceProblem() {
-    /* Override heading and subtitle */
-    overrideText("speed sells", "Every abandoned cart is revenue walking out the door.", "h2, h3");
-
-    var section = findSectionByHeading("abandoned cart") || findSectionByHeading("friction kills");
+    /* Find section first, then override within it */
+    var section = findSectionByHeading("speed sells") || findSectionByHeading("friction kills");
     if (!section) return;
 
-    /* Override subtitle paragraph */
-    var paragraphs = section.querySelectorAll("p");
-    paragraphs.forEach(function (p) {
-      if (p.textContent.length > 40 && p.textContent.length < 300) {
+    /* Override the heading */
+    var heading = section.querySelector("h2, h3");
+    if (heading) heading.textContent = "Every abandoned cart is revenue walking out the door.";
+
+    /* Override the FIRST subtitle paragraph only, skip tiny ones */
+    var overridden = false;
+    section.querySelectorAll("p").forEach(function (p) {
+      if (!overridden && p.textContent.length > 30) {
         p.textContent = "68% of online carts are abandoned. The #1 reason? A checkout that\u2019s too slow, too complex, or doesn\u2019t offer the right payment method. Fix the checkout, fix the revenue.";
+        overridden = true;
       }
     });
 
