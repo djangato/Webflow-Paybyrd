@@ -364,80 +364,70 @@
       });
     });
 
-    /* ─── Convert tab: toggles cycling on/off ─── */
+    /* ─── Animations only run when showcase is visible ─── */
+    var showcaseVisible = false;
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        showcaseVisible = entries[0].isIntersecting;
+      }, { threshold: 0.1 }).observe(showcase);
+    } else {
+      showcaseVisible = true;
+    }
+
+    /* Convert: toggles cycle */
     var toggles = showcase.querySelectorAll(".pbrd-ec-viz-toggle");
-    if (toggles.length) {
-      var togIdx = 0;
-      setInterval(function () {
-        var t = toggles[togIdx % toggles.length];
-        t.classList.toggle("on");
-        setTimeout(function () { t.classList.add("on"); }, 1200);
-        togIdx++;
-      }, 2000);
-    }
+    var togIdx = 0;
+    setInterval(function () {
+      if (!showcaseVisible || !toggles.length) return;
+      var t = toggles[togIdx % toggles.length];
+      t.classList.remove("on");
+      setTimeout(function () { t.classList.add("on"); }, 1200);
+      togIdx++;
+    }, 2500);
 
-    /* ─── Understand tab: funnel bars grow + numbers count up ─── */
-    var funnelSteps = showcase.querySelectorAll(".pbrd-ec-viz-funnel-step");
-    var funnelTargets = [12847, 8736, 6680, 5653];
-    var funnelBases = [11200, 7500, 5800, 4900];
-    if (funnelSteps.length) {
-      setInterval(function () {
-        funnelSteps.forEach(function (step, i) {
-          if (i >= funnelTargets.length) return;
-          var bump = Math.floor(Math.random() * 40) + 5;
-          funnelTargets[i] += bump;
-          var numEl = step.querySelector("span:last-child");
-          if (numEl) numEl.textContent = funnelTargets[i].toLocaleString("en");
-          /* Update bar width proportionally */
-          var bar = step.querySelector(".pbrd-ec-viz-funnel-bar");
-          if (bar) {
-            var pct = Math.min(100, (funnelTargets[i] / funnelTargets[0]) * 100);
-            bar.style.setProperty("--bar-w", pct + "%");
-          }
-        });
-      }, 3000);
-    }
+    /* Understand: funnel numbers tick up (capped) */
+    var funnelNums = [12847, 8736, 6680, 5653];
+    var funnelMax = [15000, 10000, 8000, 7000];
+    setInterval(function () {
+      if (!showcaseVisible) return;
+      var steps = showcase.querySelectorAll(".pbrd-ec-viz-funnel-step");
+      steps.forEach(function (step, i) {
+        if (i >= funnelNums.length) return;
+        if (funnelNums[i] < funnelMax[i]) funnelNums[i] += Math.floor(Math.random() * 30) + 5;
+        else funnelNums[i] = funnelNums[i] - 2000 + Math.floor(Math.random() * 200); /* Reset */
+        var numEl = step.querySelector("span:last-child");
+        if (numEl) numEl.textContent = funnelNums[i].toLocaleString("en");
+      });
+    }, 4000);
 
-    /* ─── Control tab: new transactions arrive at top ─── */
-    var txList = showcase.querySelector(".pbrd-ec-viz-tx-list");
-    if (txList) {
-      var txPool = [
-        { status: "paid", amount: "\u20AC156.00", method: "Mastercard \u2022\u20229103" },
-        { status: "paid", amount: "\u20AC42.50", method: "Apple Pay" },
-        { status: "paid", amount: "\u20AC318.00", method: "Visa \u2022\u20225847" },
-        { status: "refund", amount: "\u20AC19.90", method: "iDEAL" },
-        { status: "paid", amount: "\u20AC78.00", method: "Google Pay" },
-        { status: "paid", amount: "\u20AC205.50", method: "Klarna" },
-        { status: "paid", amount: "\u20AC93.20", method: "Multibanco" },
-        { status: "paid", amount: "\u20AC447.00", method: "PayPal" },
-        { status: "refund", amount: "\u20AC55.00", method: "MBWay" },
-        { status: "paid", amount: "\u20AC129.90", method: "Visa \u2022\u20223621" }
-      ];
-      var txIdx = 0;
-      setInterval(function () {
-        var t = txPool[txIdx % txPool.length];
-        txIdx++;
-        var secs = Math.floor(Math.random() * 10) + 1;
-        var newTx = document.createElement("div");
-        newTx.className = "pbrd-ec-viz-tx";
-        newTx.style.cssText = "opacity:0;transform:translateY(-10px);transition:all 0.4s ease";
-        newTx.innerHTML =
-          '<div class="pbrd-ec-viz-tx-status ' + t.status + '">' + (t.status === "paid" ? "Paid" : "Refund") + '</div>' +
-          '<span>' + t.amount + '</span><span>' + t.method + '</span><span>' + secs + 's ago</span>';
-        txList.insertBefore(newTx, txList.firstChild);
-        requestAnimationFrame(function () {
-          newTx.style.opacity = "1";
-          newTx.style.transform = "translateY(0)";
-        });
-        /* Remove last if more than 4 */
-        while (txList.children.length > 4) {
-          var last = txList.lastElementChild;
-          last.style.opacity = "0";
-          last.style.transform = "translateY(10px)";
-          setTimeout(function () { if (last.parentNode) last.remove(); }, 400);
-        }
-      }, 2500);
-    }
+    /* Control: transactions arrive — simple text swap, no DOM creation */
+    var txRows = showcase.querySelectorAll("[data-panel='control'] .pbrd-ec-viz-tx");
+    var txData = [
+      { s: "paid", a: "\u20AC156.00", m: "Mastercard" },
+      { s: "paid", a: "\u20AC42.50", m: "Apple Pay" },
+      { s: "paid", a: "\u20AC318.00", m: "Visa \u2022\u20225847" },
+      { s: "refund", a: "\u20AC19.90", m: "iDEAL" },
+      { s: "paid", a: "\u20AC78.00", m: "Google Pay" },
+      { s: "paid", a: "\u20AC205.50", m: "Klarna" },
+      { s: "paid", a: "\u20AC93.20", m: "Multibanco" },
+      { s: "paid", a: "\u20AC447.00", m: "PayPal" }
+    ];
+    var txI = 0;
+    setInterval(function () {
+      if (!showcaseVisible || !txRows.length) return;
+      /* Shift existing rows down by updating their content */
+      for (var r = txRows.length - 1; r > 0; r--) {
+        txRows[r].innerHTML = txRows[r - 1].innerHTML;
+      }
+      /* New transaction at top */
+      var t = txData[txI % txData.length]; txI++;
+      var secs = Math.floor(Math.random() * 10) + 1;
+      txRows[0].innerHTML =
+        '<div class="pbrd-ec-viz-tx-status ' + t.s + '">' + (t.s === "paid" ? "Paid" : "Refund") + '</div>' +
+        '<span>' + t.a + '</span><span>' + t.m + '</span><span>' + secs + 's ago</span>';
+      txRows[0].style.opacity = "0";
+      requestAnimationFrame(function () { txRows[0].style.transition = "opacity 0.4s"; txRows[0].style.opacity = "1"; });
+    }, 3000);
   }
 
   /* ═══════════════════════════════════════════ */
@@ -556,7 +546,7 @@
 
     observeReveal(".pbrd-ec-bento-card", 100, bento);
 
-    /* Animate the bento feed */
+    /* Animate the bento feed — text swap only, no DOM creation */
     var bentoFeed = document.getElementById("pbrd-ec-bento-feed");
     if (bentoFeed) {
       var feedPool = [
@@ -568,20 +558,22 @@
         { s: "paid", a: "\u20AC205.50", m: "Klarna" }
       ];
       var feedIdx = 0;
+      var feedRows = bentoFeed.querySelectorAll(".pbrd-ec-bv-tx");
+      var bentoVisible = false;
+      if ("IntersectionObserver" in window) {
+        new IntersectionObserver(function (e) { bentoVisible = e[0].isIntersecting; }, { threshold: 0.1 }).observe(bentoFeed);
+      } else { bentoVisible = true; }
+
       setInterval(function () {
-        var f = feedPool[feedIdx % feedPool.length]; feedIdx++;
-        var row = document.createElement("div");
-        row.className = "pbrd-ec-bv-tx";
-        row.style.cssText = "opacity:0;transform:translateY(-8px);transition:all 0.4s ease";
-        row.innerHTML = '<div class="pbrd-ec-bv-status ' + f.s + '">' + (f.s === "paid" ? "Paid" : "Refund") + '</div><span>' + f.a + '</span><span>' + f.m + '</span><span>just now</span>';
-        bentoFeed.insertBefore(row, bentoFeed.firstChild);
-        requestAnimationFrame(function () { row.style.opacity = "1"; row.style.transform = "translateY(0)"; });
-        while (bentoFeed.children.length > 3) {
-          var last = bentoFeed.lastElementChild;
-          last.style.opacity = "0";
-          setTimeout(function () { if (last.parentNode) last.remove(); }, 400);
+        if (!bentoVisible || !feedRows.length) return;
+        for (var r = feedRows.length - 1; r > 0; r--) {
+          feedRows[r].innerHTML = feedRows[r - 1].innerHTML;
         }
-      }, 3000);
+        var f = feedPool[feedIdx % feedPool.length]; feedIdx++;
+        feedRows[0].innerHTML = '<div class="pbrd-ec-bv-status ' + f.s + '">' + (f.s === "paid" ? "Paid" : "Refund") + '</div><span>' + f.a + '</span><span>' + f.m + '</span><span>just now</span>';
+        feedRows[0].style.opacity = "0";
+        requestAnimationFrame(function () { feedRows[0].style.transition = "opacity 0.4s"; feedRows[0].style.opacity = "1"; });
+      }, 3500);
     }
   }
 
