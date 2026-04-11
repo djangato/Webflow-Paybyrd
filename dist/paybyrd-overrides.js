@@ -2004,13 +2004,19 @@
       if (!activeFs) return;
 
       var colRect = imageCol.getBoundingClientRect();
-      /* Step counter if present, otherwise first <p> (subtitle) for landing */
-      var ref = activeFs.querySelector(".pbrd-demo-step-count")
-             || activeFs.querySelector("p");
-      if (ref) {
-        vizWrap.style.marginTop = Math.max(0, ref.getBoundingClientRect().top - colRect.top) + "px";
+      var counter = activeFs.querySelector(".pbrd-demo-step-count");
+
+      if (counter) {
+        /* Steps 1-6: align with the step counter */
+        vizWrap.style.marginTop = Math.max(0, counter.getBoundingClientRect().top - colRect.top) + "px";
       } else {
-        vizWrap.style.marginTop = "0px";
+        /* Landing step: align with just below the heading */
+        var heading = activeFs.querySelector("h1, h2, h3");
+        if (heading) {
+          vizWrap.style.marginTop = Math.max(0, heading.getBoundingClientRect().bottom - colRect.top + 24) + "px";
+        } else {
+          vizWrap.style.marginTop = "0px";
+        }
       }
     }
 
