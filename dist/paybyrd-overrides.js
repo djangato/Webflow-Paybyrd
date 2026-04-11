@@ -158,7 +158,7 @@
       name: "Paybyrd Rawhide",
       model: "PAX A920 Pro",
       desc: "Sleek portable terminal with high-res touchscreen, 4G & Wi-Fi. Perfect for restaurants, retail, and on-the-go.",
-      image: "https://cdn.prod.website-files.com/69d9242bbde99c4b80e41ae9/69d9242bbde99c4b80e41c84_paybyrd-pos-tab-04.avif",
+      image: "https://djangato.github.io/Webflow-Paybyrd/assets/product/A920_mockup.png",
       buyPrice: "\u20AC399", rentPrice: "\u20AC19.90",
       featured: true,
       specs: ["Android 10 \u00B7 PCI 6 SRED", "5.5\" HD Touchscreen Display", "4G / Wi-Fi / Bluetooth", "Built-in Printer & Scanner", "All-day Battery Life"]
@@ -167,7 +167,7 @@
       name: "Paybyrd Renegade",
       model: "PAX A77",
       desc: "Compact handheld terminal built for speed and mobility. Ideal for delivery, events, and small businesses.",
-      image: "https://cdn.prod.website-files.com/69d9242bbde99c4b80e41ae9/69d9242bbde99c4b80e41c82_paybyrd-pos-tab-03.avif",
+      image: "https://djangato.github.io/Webflow-Paybyrd/assets/product/A77.png",
       buyPrice: "\u20AC299", rentPrice: "\u20AC14.90",
       featured: false,
       specs: ["Android 10 \u00B7 PCI 5 SRED", "5.5\" HD Touchscreen Display", "4G / Wi-Fi Connectivity", "13MP Rear + 5MP Front Camera", "Professional Barcode Scanner"]
@@ -176,7 +176,7 @@
       name: "Paybyrd Eagle",
       model: "PAX IM30",
       desc: "All-in-one terminal designed for vending machines, kiosks, and unattended environments.",
-      image: "https://cdn.prod.website-files.com/69d9242bbde99c4b80e41ae9/69d9242bbde99c4b80e41c85_paybyrd-pos-tab-02.avif",
+      image: "https://djangato.github.io/Webflow-Paybyrd/assets/product/IM30.png",
       buyPrice: "\u20AC499", rentPrice: "\u20AC24.90",
       featured: false,
       specs: ["Android 10 \u00B7 PCI 6.x SRED", "5\" HD Touchscreen Display", "IP65 / IK09 Rated", "Seamless Kiosk Integration", "2MP Front Camera"]
