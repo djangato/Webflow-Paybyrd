@@ -662,40 +662,68 @@
       var dash = document.createElement("div");
       dash.className = "pbrd-ec-live-dash";
       dash.innerHTML =
-        '<div class="pbrd-ec-ld-header">' +
-          '<div class="pbrd-ec-ld-nav"><span class="pbrd-ec-ld-nav-active">Dashboard</span><span>Transactions</span><span>Analytics</span></div>' +
-          '<div class="pbrd-ec-ld-greeting">Good afternoon.</div>' +
+        /* Sidebar */
+        '<div class="pbrd-ec-ld-sidebar">' +
+          '<div class="pbrd-ec-ld-logo">\u25C8</div>' +
+          '<div class="pbrd-ec-ld-sidebar-section">DASHBOARD</div>' +
+          '<div class="pbrd-ec-ld-sidebar-item active">Dashboard</div>' +
+          '<div class="pbrd-ec-ld-sidebar-section">PAYMENTS</div>' +
+          '<div class="pbrd-ec-ld-sidebar-item">Transactions</div>' +
+          '<div class="pbrd-ec-ld-sidebar-item">Payouts</div>' +
+          '<div class="pbrd-ec-ld-sidebar-item">Orders</div>' +
+          '<div class="pbrd-ec-ld-sidebar-item">Chargebacks</div>' +
+          '<div class="pbrd-ec-ld-sidebar-item">PayLink</div>' +
+          '<div class="pbrd-ec-ld-sidebar-section">INSIGHTS</div>' +
+          '<div class="pbrd-ec-ld-sidebar-item">Business Intelligence</div>' +
+          '<div class="pbrd-ec-ld-sidebar-item">Activity Log</div>' +
         '</div>' +
 
-        /* Volume + Acceptance row */
-        '<div class="pbrd-ec-ld-row">' +
-          '<div class="pbrd-ec-ld-card pbrd-ec-ld-volume">' +
-            '<div class="pbrd-ec-ld-card-label">Payment Volume</div>' +
-            '<div class="pbrd-ec-ld-big" id="pbrd-ec-ld-vol">\u20AC3,529,455</div>' +
-            '<div class="pbrd-ec-ld-vol-row">' +
-              '<span>\uD83C\uDDEA\uD83C\uDDFA \u20AC2.8M</span>' +
-              '<span>\uD83C\uDDEC\uD83C\uDDE7 \u00A3410K</span>' +
-              '<span>\uD83C\uDDE7\uD83C\uDDF7 R$1.3M</span>' +
-            '</div>' +
+        /* Main content */
+        '<div class="pbrd-ec-ld-main">' +
+          '<div class="pbrd-ec-ld-topbar">' +
+            '<div class="pbrd-ec-ld-greeting">Good morning, aires.sebastiao</div>' +
+            '<div class="pbrd-ec-ld-search">Search transactions...</div>' +
           '</div>' +
-          '<div class="pbrd-ec-ld-card">' +
-            '<div class="pbrd-ec-ld-card-label">Payment Acceptance</div>' +
-            '<div class="pbrd-ec-ld-accept">' +
-              '<div class="pbrd-ec-ld-accept-row"><span>Visa</span><div class="pbrd-ec-ld-bar"><div class="pbrd-ec-ld-bar-fill" style="--bar-w:96%;background:#1A1F71"></div></div><span>96%</span></div>' +
-              '<div class="pbrd-ec-ld-accept-row"><span>Mastercard</span><div class="pbrd-ec-ld-bar"><div class="pbrd-ec-ld-bar-fill" style="--bar-w:94%;background:#EB001B"></div></div><span>94%</span></div>' +
-              '<div class="pbrd-ec-ld-accept-row"><span>Amex</span><div class="pbrd-ec-ld-bar"><div class="pbrd-ec-ld-bar-fill" style="--bar-w:89%;background:#006FCF"></div></div><span>89%</span></div>' +
-              '<div class="pbrd-ec-ld-accept-row"><span>MBWay</span><div class="pbrd-ec-ld-bar"><div class="pbrd-ec-ld-bar-fill" style="--bar-w:98%;background:#D4002A"></div></div><span>98%</span></div>' +
-            '</div>' +
-          '</div>' +
-        '</div>' +
 
-        /* Transactions */
-        '<div class="pbrd-ec-ld-card">' +
-          '<div class="pbrd-ec-ld-card-label">Latest Transactions</div>' +
-          '<div class="pbrd-ec-ld-txs" id="pbrd-ec-ld-txs">' +
-            '<div class="pbrd-ec-ld-tx"><span class="pbrd-ec-ld-tx-s paid">Paid</span><span class="pbrd-ec-ld-tx-a">\u20AC245.00</span><span>Visa \u2022\u20224821</span><span>12s</span></div>' +
-            '<div class="pbrd-ec-ld-tx"><span class="pbrd-ec-ld-tx-s paid">Paid</span><span class="pbrd-ec-ld-tx-a">\u20AC89.90</span><span>PayPal</span><span>28s</span></div>' +
-            '<div class="pbrd-ec-ld-tx"><span class="pbrd-ec-ld-tx-s paid">Paid</span><span class="pbrd-ec-ld-tx-a">\u20AC32.00</span><span>MBWay</span><span>45s</span></div>' +
+          '<div class="pbrd-ec-ld-content">' +
+            /* Left: Volume */
+            '<div class="pbrd-ec-ld-left">' +
+              '<div class="pbrd-ec-ld-volume">' +
+                '<div class="pbrd-ec-ld-card-label">EUR Total Volume</div>' +
+                '<div class="pbrd-ec-ld-big" id="pbrd-ec-ld-vol">\u20AC2,315,238</div>' +
+                '<div class="pbrd-ec-ld-vol-row">' +
+                  '<span>Transactions <strong>21,044</strong></span>' +
+                  '<span>Avg \u20AC110.02</span>' +
+                '</div>' +
+              '</div>' +
+              '<div class="pbrd-ec-ld-currencies">' +
+                '<span>\uD83C\uDDE7\uD83C\uDDF7 R$5.7M</span>' +
+                '<span>\uD83C\uDDFA\uD83C\uDDF8 $949K</span>' +
+                '<span>\uD83C\uDDEC\uD83C\uDDE7 \u00A3167K</span>' +
+              '</div>' +
+            '</div>' +
+
+            /* Right: Payments + Acceptance */
+            '<div class="pbrd-ec-ld-right">' +
+              '<div class="pbrd-ec-ld-payments">' +
+                '<div class="pbrd-ec-ld-card-label">Latest Payments</div>' +
+                '<div class="pbrd-ec-ld-txs" id="pbrd-ec-ld-txs">' +
+                  '<div class="pbrd-ec-ld-tx"><span class="pbrd-ec-ld-tx-dot" style="background:#10b981"></span><span class="pbrd-ec-ld-tx-a">\u20AC22.20</span><span>VG Evora</span></div>' +
+                  '<div class="pbrd-ec-ld-tx"><span class="pbrd-ec-ld-tx-dot" style="background:#10b981"></span><span class="pbrd-ec-ld-tx-a">\u20AC12.50</span><span>VG Pal\u00E1cio</span></div>' +
+                  '<div class="pbrd-ec-ld-tx"><span class="pbrd-ec-ld-tx-dot" style="background:#10b981"></span><span class="pbrd-ec-ld-tx-a">\u20AC73.20</span><span>VG Collection</span></div>' +
+                  '<div class="pbrd-ec-ld-tx"><span class="pbrd-ec-ld-tx-dot" style="background:#f59e0b"></span><span class="pbrd-ec-ld-tx-a">\u20AC62.00</span><span>SMY St Eulalia</span></div>' +
+                '</div>' +
+              '</div>' +
+              '<div class="pbrd-ec-ld-acceptance">' +
+                '<div class="pbrd-ec-ld-card-label">Payment Acceptance</div>' +
+                '<div class="pbrd-ec-ld-accept">' +
+                  '<div class="pbrd-ec-ld-accept-row"><span>EUR</span><div class="pbrd-ec-ld-bar"><div class="pbrd-ec-ld-bar-fill" style="--bar-w:96%;background:#10b981"></div></div><span>96%</span></div>' +
+                  '<div class="pbrd-ec-ld-accept-row"><span>BRL</span><div class="pbrd-ec-ld-bar"><div class="pbrd-ec-ld-bar-fill" style="--bar-w:82%;background:#f59e0b"></div></div><span>82%</span></div>' +
+                  '<div class="pbrd-ec-ld-accept-row"><span>USD</span><div class="pbrd-ec-ld-bar"><div class="pbrd-ec-ld-bar-fill" style="--bar-w:88%;background:#EB001B"></div></div><span>88%</span></div>' +
+                  '<div class="pbrd-ec-ld-accept-row"><span>AOA</span><div class="pbrd-ec-ld-bar"><div class="pbrd-ec-ld-bar-fill" style="--bar-w:71%;background:#5046e5"></div></div><span>71%</span></div>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
           '</div>' +
         '</div>';
 
