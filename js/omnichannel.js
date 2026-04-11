@@ -559,7 +559,15 @@
         '</div>' +
       '</div>';
 
-    /* Find a good spot inside the dashboard section */
+    /* Hide the existing Webflow dashboard carousel/slider content */
+    var existingSlider = dashSection.querySelector("[class*='slider'], [class*='carousel'], .swiper");
+    if (existingSlider) existingSlider.style.display = "none";
+    /* Also hide any remaining image/visual wrappers */
+    dashSection.querySelectorAll("[class*='image-wrapper'], [class*='visual']").forEach(function (el) {
+      el.style.display = "none";
+    });
+
+    /* Append our analytics section */
     var container = dashSection.querySelector(".u-container, [class*='container']") || dashSection;
     container.appendChild(section);
 
