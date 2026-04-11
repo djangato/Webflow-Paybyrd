@@ -1443,8 +1443,8 @@
   gap: 8px;
   padding: 16px 36px;
   border-radius: 100px;
-  background: #fff;
-  color: #0a0a1a;
+  background: #FF6B35;
+  color: #fff;
   font-size: 1rem;
   font-weight: 600;
   text-decoration: none;
@@ -1455,7 +1455,8 @@
 
 .pbrd-oc-cta-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(255, 255, 255, 0.15);
+  background: #FF7D4A;
+  box-shadow: 0 8px 32px rgba(255, 107, 53, 0.3);
 }
 
 .pbrd-oc-cta-proofs {
