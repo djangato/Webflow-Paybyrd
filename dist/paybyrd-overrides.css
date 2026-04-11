@@ -9,6 +9,8 @@
   padding: 100px 24px 80px;
   font-family: inherit;
   color: #fff;
+  background: #0a0a0f;
+  border-radius: 24px;
 }
 .pbrd-pricing-section * { box-sizing: border-box; }
 
