@@ -556,6 +556,7 @@
 
   function init() {
     try {
+      document.body.classList.add("pbrd-page-omnichannel");
       enhanceHero();
       buildLogos();
       buildJourney();

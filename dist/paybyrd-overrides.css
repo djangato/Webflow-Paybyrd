@@ -4200,19 +4200,12 @@ a.glowing_button_link .glowing_button_text {
   color: #10b981;
 }
 
-/* ─── Carousel section — prevent excessive height ─── */
-[class*='slider-4_component'],
-[class*='slider-4_wrap'] {
+/* ─── Force all sections to content-based height (omnichannel only) ─── */
+body.pbrd-page-omnichannel section,
+body.pbrd-page-omnichannel [class*='section'],
+body.pbrd-page-omnichannel [class*='_wrap'] {
   min-height: auto !important;
   height: auto !important;
-}
-
-/* Trim dashboard sections below carousel */
-.slider_wrap,
-[class*='slider_wrap'] {
-  min-height: auto !important;
-  padding-top: 60px !important;
-  padding-bottom: 60px !important;
 }
 
 /* ─── Carousel image container — remove Webflow gray bg ─── */
