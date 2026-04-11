@@ -4939,6 +4939,156 @@ a.glowing_button_link .glowing_button_text {
   opacity: 0.7;
 }
 
+/* Checkout card form */
+.pbrd-oc-chk-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pbrd-oc-chk-field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 8px 12px;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid rgba(26, 26, 46, 0.08);
+}
+
+.pbrd-oc-chk-field-label {
+  font-size: 0.5625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(26, 26, 46, 0.3);
+}
+
+.pbrd-oc-chk-field-val {
+  font-size: 0.8125rem;
+  color: #1a1a2e;
+  font-variant-numeric: tabular-nums;
+}
+
+.pbrd-oc-chk-field-row {
+  display: flex;
+  gap: 8px;
+}
+
+.pbrd-oc-chk-field-row .pbrd-oc-chk-field {
+  flex: 1;
+}
+
+.pbrd-oc-typing {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0;
+  animation: pbrd-oc-type 1.2s steps(20) forwards;
+}
+
+@keyframes pbrd-oc-type {
+  to { width: 100%; }
+}
+
+.pbrd-oc-chk-amount {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0 4px;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  border-top: 1px solid rgba(26, 26, 46, 0.06);
+  margin-top: 4px;
+}
+
+.pbrd-oc-chk-btn {
+  text-align: center;
+  padding: 12px;
+  border-radius: 10px;
+  background: #10b981;
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-top: 4px;
+  animation: pbrd-oc-btn-pulse 1s ease 2.5s both;
+}
+
+@keyframes pbrd-oc-btn-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3); }
+}
+
+/* Spinner */
+.pbrd-oc-chk-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(26, 26, 46, 0.08);
+  border-top-color: #10b981;
+  border-radius: 50%;
+  margin: 0 auto;
+  animation: pbrd-oc-spin 0.8s linear infinite;
+}
+
+@keyframes pbrd-oc-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Success icon */
+.pbrd-oc-chk-success-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  animation: pbrd-oc-pop 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pbrd-oc-chk-success-icon svg {
+  width: 24px;
+  height: 24px;
+  color: #10b981;
+}
+
+@keyframes pbrd-oc-pop {
+  from { transform: scale(0.5); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Terminal grid */
+.pbrd-oc-terminal-grid {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.pbrd-oc-terminal-item {
+  text-align: center;
+  flex: 1;
+}
+
+.pbrd-oc-terminal-item img {
+  height: 80px;
+  width: auto;
+  object-fit: contain;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
+}
+
+.pbrd-oc-terminal-name {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 2px;
+}
+
+.pbrd-oc-terminal-price {
+  font-size: 0.625rem;
+  color: rgba(26, 26, 46, 0.4);
+}
+
 .pbrd-oc-benefit-icon svg {
   width: 20px;
   height: 20px;

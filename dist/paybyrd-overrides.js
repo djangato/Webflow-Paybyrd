@@ -2686,7 +2686,7 @@
         '<div class="pbrd-oc-dash-card" style="text-align:center">' +
           '<div class="pbrd-oc-dash-big" style="font-size:2.5rem;font-weight:700;color:rgba(120,180,255,0.9)">92.7%</div>' +
           '<div class="pbrd-oc-dash-sub">Approval Rate</div>' +
-          '<div style="margin-top:8px;font-size:0.625rem;color:rgba(120,255,180,0.7);font-weight:600">\u2191 1.7% above industry avg</div>' +
+          '<div style="margin-top:8px;font-size:0.625rem;color:rgba(120,255,180,0.7);font-weight:600">\u2191 4.7% above industry avg</div>' +
         '</div>' +
         '<div class="pbrd-oc-dash-card" style="text-align:center">' +
           '<div class="pbrd-oc-dash-big" style="font-size:2.5rem;font-weight:700">847</div>' +
@@ -2890,7 +2890,7 @@
                 '<div class="pbrd-oc-perf-sub">Approval rate</div>' +
                 '<div class="pbrd-oc-perf-bars">' +
                   '<div class="pbrd-oc-perf-bar-row"><span>Paybyrd</span><div class="pbrd-oc-perf-bar-track"><div class="pbrd-oc-perf-bar-fill" style="width:92.7%;background:linear-gradient(90deg,rgba(16,185,129,0.4),rgba(16,185,129,0.8))"></div></div><span>92.7%</span></div>' +
-                  '<div class="pbrd-oc-perf-bar-row"><span>Industry avg</span><div class="pbrd-oc-perf-bar-track"><div class="pbrd-oc-perf-bar-fill" style="width:91%;background:rgba(26,26,46,0.12)"></div></div><span>91%</span></div>' +
+                  '<div class="pbrd-oc-perf-bar-row"><span>Industry avg</span><div class="pbrd-oc-perf-bar-track"><div class="pbrd-oc-perf-bar-fill" style="width:88%;background:rgba(26,26,46,0.12)"></div></div><span>88%</span></div>' +
                 '</div>' +
               '</div>' +
               '<div class="pbrd-oc-perf-logos">' +
@@ -2937,21 +2937,113 @@
           '</div>' +
         '</div>' +
 
+        /* Card 7: POS Terminals */
+        '<div class="pbrd-oc-feature-card">' +
+          '<div class="pbrd-oc-feature-label">Terminals</div>' +
+          '<h3>Enterprise-grade POS.<br>Your software built in.</h3>' +
+          '<p>Buy or rent. Android-powered, PCI-certified, with Paybyrd baked in.</p>' +
+          '<div class="pbrd-oc-feature-viz">' +
+            '<div class="pbrd-oc-terminal-grid">' +
+              '<div class="pbrd-oc-terminal-item">' +
+                '<img src="https://djangato.github.io/Webflow-Paybyrd/assets/product/A920_mockup.png" alt="Rawhide">' +
+                '<div class="pbrd-oc-terminal-name">Rawhide</div>' +
+                '<div class="pbrd-oc-terminal-price">From \u20AC19.90/mo</div>' +
+              '</div>' +
+              '<div class="pbrd-oc-terminal-item">' +
+                '<img src="https://djangato.github.io/Webflow-Paybyrd/assets/product/A77.png" alt="Renegade">' +
+                '<div class="pbrd-oc-terminal-name">Renegade</div>' +
+                '<div class="pbrd-oc-terminal-price">From \u20AC14.90/mo</div>' +
+              '</div>' +
+              '<div class="pbrd-oc-terminal-item">' +
+                '<img src="https://djangato.github.io/Webflow-Paybyrd/assets/product/IM30.png" alt="Eagle">' +
+                '<div class="pbrd-oc-terminal-name">Eagle</div>' +
+                '<div class="pbrd-oc-terminal-price">From \u20AC24.90/mo</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+
       '</div>';
 
     valSection.insertAdjacentElement("afterend", closingWrap);
 
     observeReveal(".pbrd-oc-feature-card", 120, closingWrap);
 
-    /* Animate checkout — cycle active payment method */
-    var chkMethods = closingWrap.querySelectorAll("[data-chk-idx]");
-    if (chkMethods.length) {
-      var chkIdx = 0;
-      setInterval(function () {
-        chkMethods.forEach(function (m) { m.classList.remove("pbrd-oc-chk-active"); });
-        chkMethods[chkIdx].classList.add("pbrd-oc-chk-active");
-        chkIdx = (chkIdx + 1) % chkMethods.length;
-      }, 1800);
+    /* Animate checkout — full flow: browse → select card → fill → process → success */
+    var chkContainer = closingWrap.querySelector(".pbrd-oc-checkout-mock");
+    if (chkContainer) {
+      var chkMethods = chkContainer.querySelectorAll("[data-chk-idx]");
+      var browseIdx = 0;
+      var phase = 0; /* 0=browse methods, 1=card form, 2=processing, 3=success */
+      var browseCount = 0;
+
+      var methodListHTML = chkContainer.innerHTML;
+
+      var cardFormHTML =
+        '<div class="pbrd-oc-chk-header">Enter card details</div>' +
+        '<div class="pbrd-oc-chk-form">' +
+          '<div class="pbrd-oc-chk-field"><span class="pbrd-oc-chk-field-label">Name</span><span class="pbrd-oc-chk-field-val pbrd-oc-typing">Maria Santos</span></div>' +
+          '<div class="pbrd-oc-chk-field"><span class="pbrd-oc-chk-field-label">Card</span><span class="pbrd-oc-chk-field-val pbrd-oc-typing" style="animation-delay:0.8s">4821 \u2022\u2022\u2022\u2022 \u2022\u2022\u2022\u2022 7392</span></div>' +
+          '<div class="pbrd-oc-chk-field-row">' +
+            '<div class="pbrd-oc-chk-field"><span class="pbrd-oc-chk-field-label">Expiry</span><span class="pbrd-oc-chk-field-val pbrd-oc-typing" style="animation-delay:1.6s">09/28</span></div>' +
+            '<div class="pbrd-oc-chk-field"><span class="pbrd-oc-chk-field-label">CVV</span><span class="pbrd-oc-chk-field-val pbrd-oc-typing" style="animation-delay:2s">\u2022\u2022\u2022</span></div>' +
+          '</div>' +
+          '<div class="pbrd-oc-chk-amount"><span>Total</span><span>\u20AC50.00</span></div>' +
+          '<div class="pbrd-oc-chk-btn">Pay Now</div>' +
+        '</div>';
+
+      var processingHTML =
+        '<div style="text-align:center;padding:32px 0">' +
+          '<div class="pbrd-oc-chk-spinner"></div>' +
+          '<div style="font-size:0.8125rem;color:rgba(26,26,46,0.4);margin-top:16px">Processing payment\u2026</div>' +
+        '</div>';
+
+      var successHTML =
+        '<div style="text-align:center;padding:24px 0">' +
+          '<div class="pbrd-oc-chk-success-icon">' + checkSVG + '</div>' +
+          '<div style="font-size:1rem;font-weight:600;color:#10b981;margin-top:12px">Payment Successful</div>' +
+          '<div style="font-size:0.75rem;color:rgba(26,26,46,0.4);margin-top:4px">\u20AC50.00 \u2022 Visa \u2022\u2022\u2022\u2022 7392</div>' +
+        '</div>';
+
+      function chkTick() {
+        if (phase === 0) {
+          /* Browse through payment methods */
+          chkMethods = chkContainer.querySelectorAll("[data-chk-idx]");
+          if (chkMethods.length) {
+            chkMethods.forEach(function (m) { m.classList.remove("pbrd-oc-chk-active"); });
+            chkMethods[browseIdx % chkMethods.length].classList.add("pbrd-oc-chk-active");
+            browseIdx++;
+            browseCount++;
+          }
+          if (browseCount >= 4) {
+            /* After browsing 4 methods, select Credit Card and show form */
+            setTimeout(function () {
+              phase = 1;
+              chkContainer.innerHTML = cardFormHTML;
+              setTimeout(function () {
+                phase = 2;
+                chkContainer.innerHTML = processingHTML;
+                setTimeout(function () {
+                  phase = 3;
+                  chkContainer.innerHTML = successHTML;
+                  setTimeout(function () {
+                    /* Reset to method list */
+                    phase = 0;
+                    browseCount = 0;
+                    browseIdx = 0;
+                    chkContainer.innerHTML = methodListHTML;
+                  }, 2500);
+                }, 2000);
+              }, 3000);
+            }, 800);
+            return;
+          }
+          setTimeout(chkTick, 1500);
+          return;
+        }
+      }
+
+      setTimeout(chkTick, 1200);
     }
   }
 
