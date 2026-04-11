@@ -611,15 +611,34 @@
     var rocketSVG = '<svg viewBox="0 0 24 24" fill="none"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z" stroke="currentColor" stroke-width="1.5"/><path d="M12 15l-3-3c1-4 4-7 9-9-2 5-5 8-9 9l3 3z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     var heartSVG = '<svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
+    var LOGOS = "https://cdn.prod.website-files.com/69d9242bbde99c4b80e41aeb/";
+
     closingWrap.innerHTML =
-      /* Mollie-style feature cards with mini visualizations */
       '<div class="pbrd-oc-feature-grid">' +
 
-        /* Card 1: Setup speed */
+        /* Card 1: Checkout — WIDE */
+        '<div class="pbrd-oc-feature-card pbrd-oc-feature-wide">' +
+          '<div class="pbrd-oc-feature-label">Checkout</div>' +
+          '<h3>A checkout designed<br>to convert</h3>' +
+          '<p>Fully white-labeled. Every payment method. Optimized for mobile. Your brand, your flow, our technology.</p>' +
+          '<div class="pbrd-oc-feature-viz">' +
+            '<div class="pbrd-oc-checkout-mock">' +
+              '<div class="pbrd-oc-chk-header">Select your payment method</div>' +
+              '<div class="pbrd-oc-chk-methods">' +
+                '<div class="pbrd-oc-chk-method"><div class="pbrd-oc-chk-icon"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/mbway.png" alt="MB WAY"></div><div><div class="pbrd-oc-chk-name">MB WAY</div><div class="pbrd-oc-chk-sub">Pay with MB WAY</div></div></div>' +
+                '<div class="pbrd-oc-chk-method pbrd-oc-chk-active"><div class="pbrd-oc-chk-icon"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/visa.png" alt="Card"></div><div><div class="pbrd-oc-chk-name">Credit Card</div><div class="pbrd-oc-chk-sub">Visa, Mastercard, and more</div></div></div>' +
+                '<div class="pbrd-oc-chk-method"><div class="pbrd-oc-chk-icon"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/paypal.png" alt="PayPal"></div><div><div class="pbrd-oc-chk-name">PayPal</div><div class="pbrd-oc-chk-sub">Pay with your PayPal account</div></div></div>' +
+                '<div class="pbrd-oc-chk-method"><div class="pbrd-oc-chk-icon"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/klarna.png" alt="Klarna"></div><div><div class="pbrd-oc-chk-name">Klarna</div><div class="pbrd-oc-chk-sub">Buy now, pay later</div></div></div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+
+        /* Card 2: Setup */
         '<div class="pbrd-oc-feature-card">' +
           '<div class="pbrd-oc-feature-label">Setup</div>' +
           '<h3>Go live in hours,<br>not months</h3>' +
-          '<p>Pre-built plug-ins for WooCommerce, Magento, SAP, and 20+ platforms. Your developer will thank you.</p>' +
+          '<p>Pre-built plug-ins for 20+ platforms.</p>' +
           '<div class="pbrd-oc-feature-viz">' +
             '<div class="pbrd-oc-setup-steps">' +
               '<div class="pbrd-oc-setup-step pbrd-oc-setup-done"><span>\u2713</span>Connect channels</div>' +
@@ -631,50 +650,77 @@
           '</div>' +
         '</div>' +
 
-        /* Card 2: Transparent pricing */
+        /* Card 3: Pricing */
         '<div class="pbrd-oc-feature-card">' +
           '<div class="pbrd-oc-feature-label">Pricing</div>' +
           '<h3>Transparent pricing.<br>Zero surprises.</h3>' +
-          '<p>No setup fees, no monthly minimums, no hidden costs. Pay only for what you process.</p>' +
+          '<p>Pay only for what you process.</p>' +
           '<div class="pbrd-oc-feature-viz">' +
             '<div class="pbrd-oc-price-rows">' +
               '<div class="pbrd-oc-price-row"><span>Setup fee</span><span class="pbrd-oc-price-zero">\u20AC0</span></div>' +
               '<div class="pbrd-oc-price-row"><span>Monthly fee</span><span class="pbrd-oc-price-zero">\u20AC0</span></div>' +
-              '<div class="pbrd-oc-price-row"><span>Migration cost</span><span class="pbrd-oc-price-zero">\u20AC0</span></div>' +
-              '<div class="pbrd-oc-price-row"><span>Lock-in period</span><span class="pbrd-oc-price-zero">None</span></div>' +
-              '<div class="pbrd-oc-price-row pbrd-oc-price-highlight"><span>Transaction fee</span><span>From 1.5% + \u20AC0.15</span></div>' +
+              '<div class="pbrd-oc-price-row"><span>Lock-in</span><span class="pbrd-oc-price-zero">None</span></div>' +
+              '<div class="pbrd-oc-price-row pbrd-oc-price-highlight"><span>Transaction</span><span>From 1.5% + \u20AC0.15</span></div>' +
             '</div>' +
           '</div>' +
         '</div>' +
 
-        /* Card 3: Risk-free guarantee */
-        '<div class="pbrd-oc-feature-card">' +
-          '<div class="pbrd-oc-feature-label">Guarantee</div>' +
-          '<h3>30 days to decide.<br>Risk-free.</h3>' +
-          '<p>Not happy? Full refund on every commission. No questions, no hassle, no fine print.</p>' +
+        /* Card 4: Acceptance Rate — WIDE */
+        '<div class="pbrd-oc-feature-card pbrd-oc-feature-wide">' +
+          '<div class="pbrd-oc-feature-label">Performance</div>' +
+          '<h3>Acceptance rates that<br>move the needle</h3>' +
+          '<p>Smart routing, local acquiring, and real-time retry logic that recovers revenue other platforms leave on the table.</p>' +
           '<div class="pbrd-oc-feature-viz">' +
-            '<div class="pbrd-oc-guarantee">' +
-              shieldSVG +
-              '<div class="pbrd-oc-guarantee-text">' +
-                '<div class="pbrd-oc-guarantee-title">30-Day Money-Back Guarantee</div>' +
-                '<div class="pbrd-oc-guarantee-sub">If Paybyrd doesn\u2019t deliver, you don\u2019t pay. Every commission refunded.</div>' +
+            '<div class="pbrd-oc-perf-layout">' +
+              '<div class="pbrd-oc-perf-chart">' +
+                '<div class="pbrd-oc-perf-big">98.2%</div>' +
+                '<div class="pbrd-oc-perf-sub">Approval rate</div>' +
+                '<div class="pbrd-oc-perf-bars">' +
+                  '<div class="pbrd-oc-perf-bar-row"><span>Paybyrd</span><div class="pbrd-oc-perf-bar-track"><div class="pbrd-oc-perf-bar-fill" style="width:98.2%;background:linear-gradient(90deg,rgba(16,185,129,0.4),rgba(16,185,129,0.8))"></div></div><span>98.2%</span></div>' +
+                  '<div class="pbrd-oc-perf-bar-row"><span>Industry avg</span><div class="pbrd-oc-perf-bar-track"><div class="pbrd-oc-perf-bar-fill" style="width:91%;background:rgba(26,26,46,0.12)"></div></div><span>91%</span></div>' +
+                '</div>' +
+              '</div>' +
+              '<div class="pbrd-oc-perf-logos">' +
+                '<div class="pbrd-oc-perf-logos-label">Trusted by</div>' +
+                '<div class="pbrd-oc-perf-logos-row">' +
+                  '<img src="' + LOGOS + '69d9242bbde99c4b80e41dcc_tap-logo.svg" alt="TAP">' +
+                  '<img src="' + LOGOS + '69d9242bbde99c4b80e41dce_vila-gale.svg" alt="Vila Gal\u00E9">' +
+                  '<img src="' + LOGOS + '69d9242bbde99c4b80e41dcd_kuanto-logo.svg" alt="KuantoKusta">' +
+                  '<img src="' + LOGOS + '69d9242bbde99c4b80e41dd1_WINK.svg" alt="Wi\u00F1k">' +
+                '</div>' +
               '</div>' +
             '</div>' +
           '</div>' +
         '</div>' +
 
-        /* Card 4: Human support */
+        /* Card 5: Guarantee */
+        '<div class="pbrd-oc-feature-card">' +
+          '<div class="pbrd-oc-feature-label">Guarantee</div>' +
+          '<h3>30 days to decide.<br>Risk-free.</h3>' +
+          '<p>Not happy? Full refund, no questions asked.</p>' +
+          '<div class="pbrd-oc-feature-viz">' +
+            '<div class="pbrd-oc-guarantee">' +
+              shieldSVG +
+              '<div class="pbrd-oc-guarantee-text">' +
+                '<div class="pbrd-oc-guarantee-title">Money-Back Guarantee</div>' +
+                '<div class="pbrd-oc-guarantee-sub">Every commission refunded. No fine print.</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+
+        /* Card 6: Support */
         '<div class="pbrd-oc-feature-card">' +
           '<div class="pbrd-oc-feature-label">Support</div>' +
           '<h3>A team that picks up<br>the phone</h3>' +
-          '<p>Real humans. Based in Europe. Not a chatbot, not a ticket queue.</p>' +
+          '<p>Real humans. Based in Europe.</p>' +
           '<div class="pbrd-oc-feature-viz">' +
             '<div class="pbrd-oc-support-metrics">' +
-              '<div class="pbrd-oc-support-metric"><div class="pbrd-oc-support-val">&lt;2h</div><div class="pbrd-oc-support-lbl">Avg. response</div></div>' +
+              '<div class="pbrd-oc-support-metric"><div class="pbrd-oc-support-val">&lt;2h</div><div class="pbrd-oc-support-lbl">Response</div></div>' +
               '<div class="pbrd-oc-support-metric"><div class="pbrd-oc-support-val">98%</div><div class="pbrd-oc-support-lbl">Satisfaction</div></div>' +
               '<div class="pbrd-oc-support-metric"><div class="pbrd-oc-support-val">24/7</div><div class="pbrd-oc-support-lbl">Monitoring</div></div>' +
             '</div>' +
-            '<div class="pbrd-oc-support-note">' + heartSVG + 'Dedicated account manager for every merchant</div>' +
+            '<div class="pbrd-oc-support-note">' + heartSVG + 'Dedicated account manager included</div>' +
           '</div>' +
         '</div>' +
 
