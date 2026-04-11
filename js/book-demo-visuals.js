@@ -191,6 +191,15 @@
 
     var fieldsets = form.querySelectorAll("fieldset");
 
+    function alignVisual() {
+      var counter = document.querySelector(".pbrd-demo-step-count");
+      if (!counter || window.innerWidth < 768) return;
+      var counterRect = counter.getBoundingClientRect();
+      var colRect = imageCol.getBoundingClientRect();
+      var offset = counterRect.top - colRect.top;
+      vizWrap.style.marginTop = Math.max(0, offset) + "px";
+    }
+
     function updateVisual() {
       fieldsets.forEach(function (fs) {
         var stepName = fs.getAttribute("if-step");
@@ -207,10 +216,14 @@
             vizWrap.innerHTML = visuals[stepName];
             vizWrap.style.opacity = "1";
             vizWrap.style.transform = "translateY(0)";
+            requestAnimationFrame(alignVisual);
           }, 300);
         }
       });
     }
+
+    /* Initial alignment */
+    requestAnimationFrame(alignVisual);
 
     // MutationObserver for step changes
     new MutationObserver(updateVisual).observe(form, { attributes: true, childList: true, subtree: true });

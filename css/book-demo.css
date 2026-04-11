@@ -141,11 +141,6 @@
   padding-top: 0 !important;
 }
 
-.pbrd-demo-image-col .pbrd-demo-visual {
-  position: sticky;
-  top: 100px;
-}
-
 .pbrd-demo-image-col .u-image-wrapper {
   aspect-ratio: auto !important;
   width: 328px !important;
