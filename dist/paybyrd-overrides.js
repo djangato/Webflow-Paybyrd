@@ -2010,10 +2010,10 @@
         /* Steps 1-6: align with the step counter */
         vizWrap.style.marginTop = Math.max(0, counter.getBoundingClientRect().top - colRect.top) + "px";
       } else {
-        /* Landing step: align with just below the heading */
-        var heading = activeFs.querySelector("h1, h2, h3");
-        if (heading) {
-          vizWrap.style.marginTop = Math.max(0, heading.getBoundingClientRect().bottom - colRect.top + 24) + "px";
+        /* Landing step: align with just below the legend/title */
+        var legend = activeFs.querySelector("legend, h1, h2, h3");
+        if (legend) {
+          vizWrap.style.marginTop = Math.max(0, legend.getBoundingClientRect().bottom - colRect.top + 24) + "px";
         } else {
           vizWrap.style.marginTop = "0px";
         }
