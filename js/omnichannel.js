@@ -316,14 +316,14 @@
       '</div>',
 
       /* 1: Cross-Channel Returns */
-      '<div class="pbrd-oc-overlay-card" style="top:10%;right:8%">' +
+      '<div class="pbrd-oc-overlay-card" style="bottom:30%;left:6%">' +
         '<div class="pbrd-oc-overlay-badge pbrd-oc-overlay-warn">\u21BB Refund in progress</div>' +
         '<div class="pbrd-oc-overlay-row"><span>Original</span><span>Online \u2022 \u20AC89.00</span></div>' +
         '<div class="pbrd-oc-overlay-row"><span>Return at</span><span>Porto Store POS</span></div>' +
         '<div class="pbrd-oc-overlay-row"><span>Card match</span><span style="color:rgba(120,255,180,0.8)">\u2713 Verified</span></div>' +
       '</div>' +
-      '<div class="pbrd-oc-overlay-card pbrd-oc-overlay-sm" style="bottom:18%;left:8%">' +
-        '<div style="font-size:0.6875rem;font-weight:600;color:#fff">\u20AC89.00 refunded</div>' +
+      '<div class="pbrd-oc-overlay-card pbrd-oc-overlay-sm" style="bottom:12%;right:6%">' +
+        '<div class="pbrd-oc-overlay-badge pbrd-oc-overlay-success">\u2713 \u20AC89.00 refunded</div>' +
         '<div style="font-size:0.5625rem;color:rgba(120,255,180,0.7)">No receipt needed \u2022 Auto-matched</div>' +
       '</div>',
 
@@ -365,35 +365,35 @@
       '</div>'
     ];
 
-    /* Find slide image containers and add overlays */
-    var slides = document.querySelectorAll(".slider-4_item, [data-swiper-slide-index]");
-    if (!slides.length) {
-      /* Try alternative: find all images inside the carousel section */
-      var carouselSection = document.querySelector("[class*='slider-4']");
-      if (carouselSection) slides = carouselSection.querySelectorAll("[class*='item'], .swiper-slide");
+    /* Find slides by data-swiper-slide-index for correct matching */
+    var allSlides = document.querySelectorAll("[data-swiper-slide-index]");
+    if (!allSlides.length) {
+      allSlides = document.querySelectorAll(".slider-4_item, .swiper-slide");
     }
 
-    slides.forEach(function (slide, i) {
-      if (i >= overlays.length) return;
-      /* Find the image wrapper inside the slide */
-      var imgWrap = slide.querySelector("[class*='image'], [class*='column-2'], img");
-      if (!imgWrap) imgWrap = slide;
+    var added = 0;
+    allSlides.forEach(function (slide) {
+      var idx = parseInt(slide.getAttribute("data-swiper-slide-index"));
+      if (isNaN(idx)) idx = Array.prototype.indexOf.call(allSlides, slide);
+      if (idx < 0 || idx >= overlays.length) return;
+      if (slide.querySelector(".pbrd-oc-overlays")) return; /* Skip if already injected */
 
-      /* Make sure the container is positioned for absolute children */
-      var container = imgWrap.closest("[class*='image']") || imgWrap.parentElement || slide;
+      /* Find the image area inside the slide */
+      var img = slide.querySelector("img");
+      var container = img ? (img.closest("[class*='image']") || img.parentElement) : slide;
+
       if (window.getComputedStyle(container).position === "static") {
         container.style.position = "relative";
       }
-      container.style.overflow = "visible";
 
-      /* Inject overlay */
       var overlayWrap = document.createElement("div");
       overlayWrap.className = "pbrd-oc-overlays";
-      overlayWrap.innerHTML = overlays[i];
+      overlayWrap.innerHTML = overlays[idx];
       container.appendChild(overlayWrap);
+      added++;
     });
 
-    console.log("[Paybyrd] Carousel overlays added to " + slides.length + " slides");
+    console.log("[Paybyrd] Carousel overlays added to " + added + " slides");
   }
 
   /* ═══════════════════════════════════════════ */
