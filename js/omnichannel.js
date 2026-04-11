@@ -295,7 +295,31 @@
       }
     });
 
-    console.log("[Paybyrd] Carousel text enhanced");
+    /* ─── Replace images with transparent versions ─── */
+    var ASSET_BASE = "https://djangato.github.io/Webflow-Paybyrd/assets/omnichannel/";
+    var imageMap = {
+      "69d9242bbde99c4b80e41c01": ASSET_BASE + "69d9242bbde99c4b80e41c01_paybyrd-tab-01-removebg.png",
+      "69d9242bbde99c4b80e41bfb": ASSET_BASE + "69d9242bbde99c4b80e41bfb_paybyrd-tab-02-removebg.png",
+      "69d9242bbde99c4b80e41c00": ASSET_BASE + "69d9242bbde99c4b80e41c00_paybyrd-tab-03-removebg.png",
+      "69d9242bbde99c4b80e41bfd": ASSET_BASE + "69d9242bbde99c4b80e41bfd_paybyrd-tab-04-removebg.png",
+      "69d9242bbde99c4b80e41bff": ASSET_BASE + "69d9242bbde99c4b80e41bff_paybyrd-tab-05-removebg.png",
+      "69d9242bbde99c4b80e41bfc": ASSET_BASE + "69d9242bbde99c4b80e41bfc_paybyrd-tab-06-removebg.png"
+    };
+
+    document.querySelectorAll("img").forEach(function (img) {
+      var src = img.src || img.getAttribute("src") || "";
+      for (var id in imageMap) {
+        if (src.includes(id)) {
+          img.src = imageMap[id];
+          img.srcset = "";
+          img.removeAttribute("srcset");
+          img.removeAttribute("sizes");
+          break;
+        }
+      }
+    });
+
+    console.log("[Paybyrd] Carousel images + text enhanced");
 
     /* ─── Image Overlays ─── */
     addCarouselOverlays();
