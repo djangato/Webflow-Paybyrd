@@ -4,18 +4,7 @@
   if (!window.location.pathname.includes("/book-demo")) return;
 
   var LOGOS_CDN = "https://cdn.prod.website-files.com/69d9242bbde99c4b80e41aeb/";
-  var ASSET_BASE = "https://djangato.github.io/Webflow-Paybyrd/assets/product/";
-
-  // Portrait product screenshots per step
-  var stepImages = {
-    "Book a Call": ASSET_BASE + "dashboard-dark.jpg",
-    "Payment Channels": ASSET_BASE + "dashboard-dark.jpg",
-    "Message": ASSET_BASE + "analytics-dark.jpg",
-    "Payment Volume": ASSET_BASE + "analytics-dark.jpg",
-    "Company Details": ASSET_BASE + "transactions-dark.jpg",
-    "Person Details": ASSET_BASE + "transactions-dark.jpg",
-    "Contact Details": ASSET_BASE + "dashboard-dark.jpg"
-  };
+  // Image swapping is now handled by book-demo-visuals.js
 
   var lockSVG = '<svg viewBox="0 0 16 16" fill="none"><path d="M5 7V5a3 3 0 016 0v2M3 7h10a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1V8a1 1 0 011-1z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>';
   var checkSVG = '<svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -122,24 +111,7 @@
       }
     }
 
-    // ─── 6. Find the right-side image for dynamic swapping ─── //
-    var imageCol = document.querySelector(".u-layout-column-2.u-display-none-medium");
-    var rightImage = imageCol ? imageCol.querySelector(".u-image") : null;
-    if (imageCol) imageCol.classList.add("pbrd-demo-image-col");
-
-    function swapImage(stepName) {
-      if (!rightImage || !stepImages[stepName]) return;
-      var newSrc = stepImages[stepName];
-      if (rightImage.src.indexOf(newSrc) !== -1) return; // same image
-      rightImage.classList.add("fading");
-      setTimeout(function () {
-        rightImage.src = newSrc;
-        rightImage.srcset = "";
-        rightImage.classList.remove("fading");
-      }, 350);
-    }
-
-    // ─── 7. Track step changes for progress bar + image swap ─── //
+    // ─── 6. Track step changes for progress bar ─── //
     var observer = new MutationObserver(function () {
       fieldsets.forEach(function (fs, idx) {
         var stepName = fs.getAttribute("if-step");
@@ -150,7 +122,6 @@
         if (style.display !== "none" && style.visibility !== "hidden") {
           var pct = stepNum === 0 ? 0 : (stepNum / totalSteps) * 100;
           progressFill.style.width = pct + "%";
-          swapImage(stepName);
         }
       });
     });
