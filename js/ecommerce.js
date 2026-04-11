@@ -85,6 +85,99 @@
       var col = ctaWrap.querySelector("[class*='column-1'], [class*='content']") || ctaWrap;
       col.appendChild(strip);
     }
+
+    /* ─── Hero Dashboard Overlay on image ─── */
+    var heroImg = document.querySelector("img[src*='hero-10'], img[src*='hero']");
+    if (heroImg) {
+      var imgParent = heroImg.closest("[class*='image']") || heroImg.parentElement;
+      imgParent.style.position = "relative";
+      imgParent.style.overflow = "visible";
+
+      var dashboard = document.createElement("div");
+      dashboard.className = "pbrd-ec-hero-dash";
+      dashboard.innerHTML =
+        /* Live metrics panel */
+        '<div class="pbrd-ec-hero-panel">' +
+          '<div class="pbrd-ec-hero-panel-header">' +
+            '<div class="pbrd-ec-hero-live-dot"></div>' +
+            '<span>Live Checkout Analytics</span>' +
+          '</div>' +
+
+          /* Conversion funnel mini */
+          '<div class="pbrd-ec-hero-funnel">' +
+            '<div class="pbrd-ec-hero-funnel-row">' +
+              '<span>Visitors</span>' +
+              '<div class="pbrd-ec-hero-funnel-bar"><div class="pbrd-ec-hero-funnel-fill" style="--bar-w:100%"></div></div>' +
+              '<span>12,847</span>' +
+            '</div>' +
+            '<div class="pbrd-ec-hero-funnel-row">' +
+              '<span>Cart</span>' +
+              '<div class="pbrd-ec-hero-funnel-bar"><div class="pbrd-ec-hero-funnel-fill" style="--bar-w:68%"></div></div>' +
+              '<span>8,736</span>' +
+            '</div>' +
+            '<div class="pbrd-ec-hero-funnel-row">' +
+              '<span>Checkout</span>' +
+              '<div class="pbrd-ec-hero-funnel-bar"><div class="pbrd-ec-hero-funnel-fill" style="--bar-w:52%;background:linear-gradient(90deg,rgba(120,180,255,0.4),rgba(120,180,255,0.7))"></div></div>' +
+              '<span>6,680</span>' +
+            '</div>' +
+            '<div class="pbrd-ec-hero-funnel-row">' +
+              '<span>Paid</span>' +
+              '<div class="pbrd-ec-hero-funnel-bar"><div class="pbrd-ec-hero-funnel-fill" style="--bar-w:44%;background:linear-gradient(90deg,rgba(16,185,129,0.4),rgba(16,185,129,0.8))"></div></div>' +
+              '<span>5,653</span>' +
+            '</div>' +
+          '</div>' +
+
+          /* Bottom stats */
+          '<div class="pbrd-ec-hero-stats">' +
+            '<div class="pbrd-ec-hero-stat"><div class="pbrd-ec-hero-stat-val">92.7%</div><div class="pbrd-ec-hero-stat-lbl">Approval</div></div>' +
+            '<div class="pbrd-ec-hero-stat"><div class="pbrd-ec-hero-stat-val">2.1s</div><div class="pbrd-ec-hero-stat-lbl">Avg Speed</div></div>' +
+            '<div class="pbrd-ec-hero-stat"><div class="pbrd-ec-hero-stat-val">\u20AC142</div><div class="pbrd-ec-hero-stat-lbl">Avg Order</div></div>' +
+          '</div>' +
+        '</div>' +
+
+        /* Floating success notification */
+        '<div class="pbrd-ec-hero-notif">' +
+          '<div style="display:flex;align-items:center;gap:8px">' +
+            '<div class="pbrd-ec-hero-notif-icon">' + checkSVG + '</div>' +
+            '<div>' +
+              '<div style="font-size:0.6875rem;font-weight:600;color:#fff">\u20AC89.00 received</div>' +
+              '<div style="font-size:0.5625rem;color:rgba(255,255,255,0.4)">Visa \u2022\u2022\u2022\u2022 4821 \u2022 just now</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+
+      imgParent.appendChild(dashboard);
+
+      /* Animate funnel bars on load */
+      setTimeout(function () {
+        dashboard.querySelectorAll(".pbrd-ec-hero-funnel-fill").forEach(function (f) {
+          f.classList.add("pbrd-ec-animate");
+        });
+      }, 500);
+
+      /* Cycle the notification with different amounts */
+      var notifEl = dashboard.querySelector(".pbrd-ec-hero-notif");
+      var notifs = [
+        { amount: "\u20AC89.00", method: "Visa \u2022\u2022\u2022\u2022 4821", time: "just now" },
+        { amount: "\u20AC245.50", method: "Mastercard \u2022\u2022\u2022\u2022 9103", time: "2s ago" },
+        { amount: "\u20AC32.00", method: "MBWay", time: "5s ago" },
+        { amount: "\u20AC178.90", method: "PayPal", time: "8s ago" },
+        { amount: "\u20AC67.00", method: "Klarna", time: "12s ago" }
+      ];
+      var notifIdx = 0;
+      setInterval(function () {
+        notifIdx = (notifIdx + 1) % notifs.length;
+        var n = notifs[notifIdx];
+        notifEl.style.opacity = "0";
+        notifEl.style.transform = "translateY(8px)";
+        setTimeout(function () {
+          notifEl.querySelector("[style*='font-weight:600']").textContent = n.amount + " received";
+          notifEl.querySelector("[style*='color:rgba']").textContent = n.method + " \u2022 " + n.time;
+          notifEl.style.opacity = "1";
+          notifEl.style.transform = "translateY(0)";
+        }, 300);
+      }, 3000);
+    }
   }
 
   /* ═══════════════════════════════════════════ */
