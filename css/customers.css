@@ -344,7 +344,7 @@
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.25) 40%, transparent 70%);
+  background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 35%, rgba(0,0,0,0.15) 60%, transparent 100%);
   pointer-events: none;
 }
 
@@ -353,7 +353,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 28px 24px;
+  padding: 32px 28px;
   z-index: 2;
 }
 
@@ -364,18 +364,18 @@
   letter-spacing: 0.08em;
   padding: 5px 12px;
   border-radius: 100px;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.9);
   display: inline-block;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .pbrd-carousel-logo {
-  height: 28px;
+  height: 32px;
   width: auto;
-  max-width: 140px;
+  max-width: 160px;
   object-fit: contain;
   filter: brightness(0) invert(1);
   opacity: 0.95;
@@ -392,24 +392,25 @@
 .pbrd-carousel-card[data-customer="redeexpressos"] .pbrd-carousel-logo { height: 34px; max-width: 170px; }
 
 .pbrd-carousel-name {
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.45);
-  margin: 0 0 6px;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0 0 8px;
   letter-spacing: 0.01em;
 }
 
 .pbrd-carousel-stat {
-  font-size: 0.8125rem;
-  color: rgba(120, 180, 255, 0.8);
+  font-size: 0.9375rem;
+  color: rgba(120, 180, 255, 0.9);
   font-weight: 600;
-  margin: 0 0 8px;
+  margin: 0 0 10px;
+  line-height: 1.3;
 }
 
 .pbrd-carousel-desc {
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.65);
   margin: 0;
   max-height: 0;
   overflow: hidden;
@@ -418,7 +419,7 @@
 }
 
 .pbrd-carousel-card.active .pbrd-carousel-desc {
-  max-height: 80px;
+  max-height: 100px;
   opacity: 1;
 }
 

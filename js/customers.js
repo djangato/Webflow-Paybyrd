@@ -211,10 +211,16 @@
     if (!lightbox) return;
     var track = lightbox.querySelector(".pbrd-carousel-track");
     var cards = lightbox.querySelectorAll(".pbrd-carousel-card");
-    var cardWidth = 360; // card flex-basis + gap
 
-    // Center the active card
-    var offset = (window.innerWidth / 2) - (340 / 2) - (idx * cardWidth);
+    // Measure actual card width + gap for accurate centering
+    var firstCard = cards[0];
+    var cardRect = firstCard.getBoundingClientRect();
+    var gap = 20; // matches CSS gap
+    var cardWidth = cardRect.width + gap;
+    var activeWidth = cardRect.width; // will scale to 1.0 for active
+
+    // Center the active card in the viewport
+    var offset = (window.innerWidth / 2) - (activeWidth / 2) - (idx * cardWidth);
     track.style.transform = "translateX(" + offset + "px)";
 
     // Update active states
