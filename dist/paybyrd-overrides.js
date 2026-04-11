@@ -3353,40 +3353,143 @@
     var heading = section.querySelector("h2, h3");
     if (heading) heading.textContent = "Every abandoned cart is revenue walking out the door.";
 
-    /* Override ALL paragraphs in this section */
+    /* Override first paragraph, hide extras */
     var pCount = 0;
     section.querySelectorAll("p").forEach(function (p) {
       if (p.textContent.length > 20) {
         if (pCount === 0) {
-          p.textContent = "68% of online carts are abandoned. The #1 reason? A checkout that\u2019s too slow, too complex, or doesn\u2019t offer the right payment method. Fix the checkout, fix the revenue.";
+          p.textContent = "Your customer found the product, added it to cart, entered their details \u2014 then left. Not because they changed their mind, but because your checkout was too slow, asked for too much, or didn\u2019t offer their preferred payment method. That\u2019s not a lost sale. That\u2019s a leak you can fix today.";
         } else {
-          p.style.display = "none"; /* Hide any additional paragraphs */
+          p.style.display = "none";
         }
         pCount++;
       }
     });
 
-    /* Add impact stat cards */
-    var grid = document.createElement("div");
-    grid.className = "pbrd-ec-impact-grid";
-    grid.innerHTML =
-      '<div class="pbrd-ec-impact-card">' +
-        '<div class="pbrd-ec-impact-num">2.3s</div>' +
-        '<div class="pbrd-ec-impact-text">Average checkout time. Industry average is 4.2s. <strong>Every second above 3s costs you 7% in conversions.</strong></div>' +
-      '</div>' +
-      '<div class="pbrd-ec-impact-card">' +
-        '<div class="pbrd-ec-impact-num">35+</div>' +
-        '<div class="pbrd-ec-impact-text">Payment methods from one integration. Cards, wallets, BNPL, local methods, bank transfers \u2014 <strong>your customer always finds their preference.</strong></div>' +
-      '</div>' +
-      '<div class="pbrd-ec-impact-card">' +
-        '<div class="pbrd-ec-impact-num">-19%</div>' +
-        '<div class="pbrd-ec-impact-text">Average cart abandonment reduction within 30 days of switching. <strong>That\u2019s real revenue recovered.</strong></div>' +
+    /* ─── Tabbed Product Showcase ─── */
+    var ICON = BASE + "icons/";
+    var showcase = document.createElement("div");
+    showcase.className = "pbrd-ec-showcase";
+
+    var tabs = [
+      {
+        id: "integrate",
+        label: "Integrate",
+        icon: '<svg viewBox="0 0 20 20" fill="none"><path d="M10 2v6m0 0l3-3m-3 3L7 5M10 18v-6m0 0l3 3m-3-3l-3 3M2 10h6m0 0L5 7m3 3L5 13M18 10h-6m0 0l3-3m-3 3l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
+        title: "Connect in hours, not months",
+        desc: "Whether you need a plug-and-play setup or a deep custom integration, Paybyrd connects to your stack in hours. Pre-built plugins for every major platform. Full REST API for everything else.",
+        viz:
+          '<div class="pbrd-ec-viz-integrations">' +
+            '<div class="pbrd-ec-viz-int-row">' +
+              '<div class="pbrd-ec-viz-int-item pbrd-ec-viz-pop" style="--d:0.1s"><img src="' + ICON + 'woocommerce.svg" alt="WooCommerce"><span>WooCommerce</span></div>' +
+              '<div class="pbrd-ec-viz-int-item pbrd-ec-viz-pop" style="--d:0.2s"><img src="' + ICON + 'magento.svg" alt="Magento"><span>Magento</span></div>' +
+              '<div class="pbrd-ec-viz-int-item pbrd-ec-viz-pop" style="--d:0.3s"><img src="' + ICON + 'prestashop.svg" alt="PrestaShop"><span>PrestaShop</span></div>' +
+            '</div>' +
+            '<div class="pbrd-ec-viz-int-row">' +
+              '<div class="pbrd-ec-viz-int-item pbrd-ec-viz-pop" style="--d:0.4s"><img src="' + ICON + 'sap.svg" alt="SAP"><span>SAP</span></div>' +
+              '<div class="pbrd-ec-viz-int-item pbrd-ec-viz-pop" style="--d:0.5s"><img src="' + ICON + 'oracle.svg" alt="Oracle"><span>Oracle</span></div>' +
+              '<div class="pbrd-ec-viz-int-item pbrd-ec-viz-pop" style="--d:0.6s;border-color:rgba(120,180,255,0.2);color:rgba(120,180,255,0.8)"><span style="font-size:1rem;font-weight:700">{ }</span><span>REST API</span></div>' +
+            '</div>' +
+            '<div class="pbrd-ec-viz-int-stat">Average integration time: <strong>4 hours</strong></div>' +
+          '</div>'
+      },
+      {
+        id: "getpaid",
+        label: "Get Paid",
+        icon: '<svg viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 8h16" stroke="currentColor" stroke-width="1.5"/></svg>',
+        title: "Every way your customer wants to pay",
+        desc: "Cards, wallets, BNPL, bank transfers, local methods \u2014 35+ options through one integration. Auto-detect country and show the right methods. Your customer always finds their preference.",
+        viz:
+          '<div class="pbrd-ec-viz-methods">' +
+            '<div class="pbrd-ec-viz-method-row">' +
+              '<div class="pbrd-ec-viz-method pbrd-ec-viz-pop" style="--d:0.1s"><img src="' + ICON + 'visa.png" alt="Visa"><span>Visa</span><div class="pbrd-ec-viz-toggle on"></div></div>' +
+              '<div class="pbrd-ec-viz-method pbrd-ec-viz-pop" style="--d:0.15s"><img src="' + ICON + 'mastercard.png" alt="Mastercard"><span>Mastercard</span><div class="pbrd-ec-viz-toggle on"></div></div>' +
+            '</div>' +
+            '<div class="pbrd-ec-viz-method-row">' +
+              '<div class="pbrd-ec-viz-method pbrd-ec-viz-pop" style="--d:0.2s"><img src="' + ICON + 'applepay.png" alt="Apple Pay"><span>Apple Pay</span><div class="pbrd-ec-viz-toggle on"></div></div>' +
+              '<div class="pbrd-ec-viz-method pbrd-ec-viz-pop" style="--d:0.25s"><img src="' + ICON + 'googlepay.png" alt="Google Pay"><span>Google Pay</span><div class="pbrd-ec-viz-toggle on"></div></div>' +
+            '</div>' +
+            '<div class="pbrd-ec-viz-method-row">' +
+              '<div class="pbrd-ec-viz-method pbrd-ec-viz-pop" style="--d:0.3s"><img src="' + ICON + 'klarna.png" alt="Klarna"><span>Klarna</span><div class="pbrd-ec-viz-toggle on"></div></div>' +
+              '<div class="pbrd-ec-viz-method pbrd-ec-viz-pop" style="--d:0.35s"><img src="' + ICON + 'mbway.png" alt="MBWay"><span>MBWay</span><div class="pbrd-ec-viz-toggle on"></div></div>' +
+            '</div>' +
+            '<div class="pbrd-ec-viz-method-row">' +
+              '<div class="pbrd-ec-viz-method pbrd-ec-viz-pop" style="--d:0.4s"><img src="' + ICON + 'paypal.png" alt="PayPal"><span>PayPal</span><div class="pbrd-ec-viz-toggle on"></div></div>' +
+              '<div class="pbrd-ec-viz-method pbrd-ec-viz-pop" style="--d:0.45s"><img src="' + ICON + 'ideal.png" alt="iDEAL"><span>iDEAL</span><div class="pbrd-ec-viz-toggle on"></div></div>' +
+            '</div>' +
+          '</div>'
+      },
+      {
+        id: "optimize",
+        label: "Optimize",
+        icon: '<svg viewBox="0 0 20 20" fill="none"><path d="M3 17l4-6 3 3 5-8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+        title: "See what\u2019s working. Fix what isn\u2019t.",
+        desc: "Real-time conversion funnels by device, country, payment method, and campaign. Know exactly where customers drop off \u2014 and why. No guessing, no waiting for reports.",
+        viz:
+          '<div class="pbrd-ec-viz-dashboard">' +
+            '<div class="pbrd-ec-viz-dash-header"><span class="pbrd-ec-viz-dash-nav">Sales</span><span class="pbrd-ec-viz-dash-nav active">Conversion</span><span class="pbrd-ec-viz-dash-nav">Refunds</span></div>' +
+            '<div class="pbrd-ec-viz-funnel">' +
+              '<div class="pbrd-ec-viz-funnel-step"><span>Visitors</span><div class="pbrd-ec-viz-funnel-bar" style="--bar-w:100%"></div><span>12,847</span></div>' +
+              '<div class="pbrd-ec-viz-funnel-step"><span>Add to Cart</span><div class="pbrd-ec-viz-funnel-bar" style="--bar-w:68%"></div><span>8,736</span></div>' +
+              '<div class="pbrd-ec-viz-funnel-step"><span>Checkout</span><div class="pbrd-ec-viz-funnel-bar" style="--bar-w:52%;background:rgba(120,180,255,0.5)"></div><span>6,680</span></div>' +
+              '<div class="pbrd-ec-viz-funnel-step"><span>Paid</span><div class="pbrd-ec-viz-funnel-bar" style="--bar-w:44%;background:rgba(16,185,129,0.6)"></div><span>5,653</span></div>' +
+            '</div>' +
+            '<div class="pbrd-ec-viz-dash-insight">' + checkSVG + ' Checkout \u2192 Paid conversion is <strong>84.6%</strong> \u2014 4.2% above your industry</div>' +
+          '</div>'
+      },
+      {
+        id: "manage",
+        label: "Manage",
+        icon: '<svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M10 6v4l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
+        title: "Refunds, chargebacks, reconciliation \u2014 handled.",
+        desc: "One dashboard for every transaction across every channel. Process refunds in seconds, fight chargebacks with data, and close your books in hours instead of days.",
+        viz:
+          '<div class="pbrd-ec-viz-manage">' +
+            '<div class="pbrd-ec-viz-tx-list">' +
+              '<div class="pbrd-ec-viz-tx"><div class="pbrd-ec-viz-tx-status paid">Paid</div><span>\u20AC89.00</span><span>Visa \u2022\u20224821</span><span>2 min ago</span></div>' +
+              '<div class="pbrd-ec-viz-tx"><div class="pbrd-ec-viz-tx-status refund">Refund</div><span>\u20AC32.50</span><span>MBWay</span><span>15 min ago</span></div>' +
+              '<div class="pbrd-ec-viz-tx"><div class="pbrd-ec-viz-tx-status paid">Paid</div><span>\u20AC245.00</span><span>PayPal</span><span>22 min ago</span></div>' +
+              '<div class="pbrd-ec-viz-tx"><div class="pbrd-ec-viz-tx-status paid">Paid</div><span>\u20AC67.90</span><span>Klarna</span><span>35 min ago</span></div>' +
+            '</div>' +
+            '<div class="pbrd-ec-viz-manage-stats">' +
+              '<div class="pbrd-ec-viz-manage-stat"><span class="pbrd-ec-viz-manage-val">\u20AC1.4M</span><span class="pbrd-ec-viz-manage-lbl">Today\u2019s volume</span></div>' +
+              '<div class="pbrd-ec-viz-manage-stat"><span class="pbrd-ec-viz-manage-val">0.12%</span><span class="pbrd-ec-viz-manage-lbl">Chargeback rate</span></div>' +
+            '</div>' +
+          '</div>'
+      }
+    ];
+
+    var tabsHTML = tabs.map(function (t, i) {
+      return '<button class="pbrd-ec-tab' + (i === 0 ? ' active' : '') + '" data-tab="' + t.id + '">' + t.icon + '<span>' + t.label + '</span></button>';
+    }).join("");
+
+    var panelsHTML = tabs.map(function (t, i) {
+      return '<div class="pbrd-ec-panel' + (i === 0 ? ' active' : '') + '" data-panel="' + t.id + '">' +
+        '<div class="pbrd-ec-panel-text">' +
+          '<h3>' + t.title + '</h3>' +
+          '<p>' + t.desc + '</p>' +
+        '</div>' +
+        '<div class="pbrd-ec-panel-viz">' + t.viz + '</div>' +
       '</div>';
+    }).join("");
+
+    showcase.innerHTML =
+      '<div class="pbrd-ec-showcase-tabs">' + tabsHTML + '</div>' +
+      '<div class="pbrd-ec-showcase-panels">' + panelsHTML + '</div>';
 
     var container = section.querySelector(".u-container, [class*='container']") || section;
-    container.appendChild(grid);
+    container.appendChild(showcase);
 
-    observeReveal(".pbrd-ec-impact-card", 150, grid);
+    /* Tab switching */
+    showcase.querySelectorAll(".pbrd-ec-tab").forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        showcase.querySelectorAll(".pbrd-ec-tab").forEach(function (t) { t.classList.remove("active"); });
+        showcase.querySelectorAll(".pbrd-ec-panel").forEach(function (p) { p.classList.remove("active"); });
+        tab.classList.add("active");
+        var panel = showcase.querySelector('[data-panel="' + tab.dataset.tab + '"]');
+        if (panel) panel.classList.add("active");
+      });
+    });
   }
 
   /* ═══════════════════════════════════════════ */
