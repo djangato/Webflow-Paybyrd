@@ -3903,7 +3903,7 @@ a.glowing_button_link .glowing_button_text {
 
 .pbrd-oc-journey {
   background: #0a0a0f;
-  padding: 120px 24px;
+  padding: 80px 24px;
   color: #fff;
   position: relative;
   z-index: 1;
@@ -4198,6 +4198,21 @@ a.glowing_button_link .glowing_button_text {
   height: 14px;
   flex-shrink: 0;
   color: #10b981;
+}
+
+/* ─── Carousel section — prevent excessive height ─── */
+[class*='slider-4_component'],
+[class*='slider-4_wrap'] {
+  min-height: auto !important;
+  height: auto !important;
+}
+
+/* Trim dashboard sections below carousel */
+.slider_wrap,
+[class*='slider_wrap'] {
+  min-height: auto !important;
+  padding-top: 60px !important;
+  padding-bottom: 60px !important;
 }
 
 /* ─── Carousel image container — remove Webflow gray bg ─── */
