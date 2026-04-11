@@ -11,6 +11,8 @@
   color: #fff;
   background: #0a0a0f;
   border-radius: 24px;
+  position: relative;
+  z-index: 10;
 }
 .pbrd-pricing-section * { box-sizing: border-box; }
 
@@ -258,6 +260,10 @@
   padding: 100px 24px 80px;
   font-family: inherit;
   color: #fff;
+  background: #0a0a0f;
+  border-radius: 24px;
+  position: relative;
+  z-index: 10;
 }
 .pbrd-pos-section * { box-sizing: border-box; }
 
