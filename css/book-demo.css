@@ -1,0 +1,145 @@
+/* Paybyrd — Book Demo Page Enhancement */
+
+/* ─── Progress Bar ─── */
+.pbrd-demo-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 9999;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.pbrd-demo-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #FF6B35, #FF8C42);
+  border-radius: 0 3px 3px 0;
+  transition: width 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* ─── Step Counter ─── */
+.pbrd-demo-step-count {
+  font-size: 0.6875rem;
+  color: rgba(255, 255, 255, 0.25);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  margin-bottom: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── Step micro-copy — why we ask ─── */
+.pbrd-demo-hint {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.3);
+  line-height: 1.5;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.pbrd-demo-hint svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: rgba(255, 255, 255, 0.2);
+}
+
+/* ─── Social Proof Strip (below form) ─── */
+.pbrd-demo-proof {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 20px 0;
+  margin-top: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.pbrd-demo-proof-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.6875rem;
+  color: rgba(255, 255, 255, 0.3);
+  font-weight: 500;
+}
+
+.pbrd-demo-proof-item svg {
+  width: 14px;
+  height: 14px;
+  color: rgba(120, 255, 180, 0.5);
+}
+
+/* ─── Submit button override ─── */
+.submit_button_wrap {
+  background: #FF6B35 !important;
+  border-color: #FF6B35 !important;
+  transition: all 0.25s ease !important;
+}
+
+.submit_button_wrap:hover {
+  background: #FF7D4A !important;
+  box-shadow: 0 8px 28px rgba(255, 107, 53, 0.3) !important;
+}
+
+.submit_button_text {
+  color: #fff !important;
+}
+
+.submit_button_icon path {
+  stroke: #fff !important;
+}
+
+/* ─── Next button styling ─── */
+[data-wf--button-form-next--variant] .button_main_element {
+  background: #FF6B35 !important;
+  border-color: #FF6B35 !important;
+}
+
+[data-wf--button-form-next--variant]:hover .button_main_element {
+  background: #FF7D4A !important;
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.25) !important;
+}
+
+[data-wf--button-form-next--variant] .button_main_text {
+  color: #fff !important;
+}
+
+/* ─── Customer logos strip ─── */
+.pbrd-demo-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  padding: 24px 0;
+  opacity: 0.4;
+}
+
+.pbrd-demo-logos img {
+  height: 18px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.6;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .pbrd-demo-proof {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .pbrd-demo-logos {
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .pbrd-demo-logos img { height: 14px; }
+}
