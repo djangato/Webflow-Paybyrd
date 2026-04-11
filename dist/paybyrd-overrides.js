@@ -2457,63 +2457,56 @@
       }
     ];
 
-    /* Find carousel section */
-    var carousel = document.querySelector(".slider-4_component, [class*='slider-4']");
-    if (!carousel) return;
+    /* Find all headings and text on the page that match slide content */
+    var origTitles = [
+      "Order Online, Pick up in-store",
+      "Buy Online, Return in-store",
+      "Pay with a QR code",
+      "No Card? No Problem",
+      "Self-Service Kiosk",
+      "Automatic Loyalty"
+    ];
 
-    var carouselSection = carousel.closest("section") || carousel.closest("[class*='section']");
-    if (!carouselSection) return;
+    /* Walk ALL text nodes and headings on the page to find and replace */
+    var allEls = document.querySelectorAll("h1, h2, h3, h4, h5, h6, p, span, div, legend, a");
+    allEls.forEach(function (el) {
+      var txt = el.textContent.trim();
+      for (var i = 0; i < origTitles.length; i++) {
+        /* Match heading text (partial match for flexibility) */
+        if (txt.toLowerCase().includes(origTitles[i].toLowerCase().substring(0, 15)) && el.children.length === 0) {
+          if (el.tagName === "H1" || el.tagName === "H2" || el.tagName === "H3" || el.tagName === "H4" || el.tagName === "LEGEND") {
+            el.textContent = slideData[i].title;
 
-    /* Inject section header above carousel */
-    var header = document.createElement("div");
-    header.className = "pbrd-oc-carousel-header";
-    header.innerHTML =
-      '<div class="pbrd-oc-journey-label">Omnichannel Capabilities</div>' +
-      '<h2 style="font-size:clamp(1.75rem,3.5vw,2.75rem);font-weight:600;letter-spacing:-0.025em;line-height:1.15;margin:0 0 8px;color:#1a1a2e">Make payments invisible.<br>Focus on delivering great experiences.</h2>' +
-      '<p style="font-size:1.0625rem;line-height:1.6;color:rgba(26,26,46,0.45);max-width:520px;margin:0 0 48px">Six ways Paybyrd connects your channels into one seamless experience for your customers \u2014 and one unified dashboard for you.</p>';
+            /* Find sibling or nearby paragraph for description */
+            var parent = el.parentElement;
+            if (parent) {
+              var desc = parent.querySelector("p");
+              if (desc) desc.textContent = slideData[i].desc;
 
-    /* Find the heading inside the section and replace it or add above carousel */
-    var existingH2 = carouselSection.querySelector("h2");
-    if (existingH2) {
-      var existingHeader = existingH2.closest("[class*='header'], [class*='wrap']") || existingH2.parentElement;
-      existingHeader.replaceWith(header);
-    } else {
-      carouselSection.insertBefore(header, carouselSection.firstChild);
-    }
+              /* Add stat badge if not present */
+              if (!parent.querySelector(".pbrd-oc-slide-stat")) {
+                var badge = document.createElement("div");
+                badge.className = "pbrd-oc-slide-stat";
+                badge.innerHTML = checkSVG + '<span>' + slideData[i].stat + '</span>';
+                parent.appendChild(badge);
+              }
+            }
+          }
+          break;
+        }
+      }
 
-    /* Override slide text content */
-    var slides = carouselSection.querySelectorAll(".slider-4_item, [data-swiper-slide-index]");
-    slides.forEach(function (slide, i) {
-      if (i >= slideData.length) return;
-      var d = slideData[i];
-
-      /* Find and override heading */
-      var heading = slide.querySelector("h2, h3, [class*='heading'], [class*='label_text']");
-      if (heading) heading.textContent = d.title;
-
-      /* Find and override description */
-      var desc = slide.querySelector("p, [class*='description'], [class*='text']");
-      if (desc) desc.textContent = d.desc;
-
-      /* Inject stat badge if not already present */
-      if (!slide.querySelector(".pbrd-oc-slide-stat")) {
-        var statBadge = document.createElement("div");
-        statBadge.className = "pbrd-oc-slide-stat";
-        statBadge.innerHTML = checkSVG + '<span>' + d.stat + '</span>';
-        var textArea = heading ? heading.parentElement : slide;
-        textArea.appendChild(statBadge);
+      /* Also override the main section heading */
+      if (txt.toLowerCase().includes("make payments invisible") && el.tagName === "H2") {
+        el.innerHTML = "Make payments invisible.<br>Focus on delivering great experiences.";
+        var sub = el.parentElement ? el.parentElement.querySelector("p") : null;
+        if (sub) {
+          sub.textContent = "Six ways Paybyrd connects your channels into one seamless experience for your customers \u2014 and one unified dashboard for you.";
+        }
       }
     });
 
-    /* Also override the tab link text if present */
-    var tabLinks = carouselSection.querySelectorAll(".slider-4_link_item");
-    var tabNames = ["Click & Collect", "Cross-Channel Returns", "QR Payments", "Payment Links", "Self-Service", "Smart Loyalty"];
-    tabLinks.forEach(function (link, i) {
-      if (i < tabNames.length) {
-        var linkText = link.querySelector("[class*='text'], span, p");
-        if (linkText) linkText.textContent = tabNames[i];
-      }
-    });
+    console.log("[Paybyrd] Carousel text enhanced");
   }
 
   /* ═══════════════════════════════════════════ */
