@@ -153,18 +153,18 @@
       '<div class="pbrd-sv-card pbrd-sv-card-hero" style="animation:pbrd-sv-up 0.5s ease both">' +
         '<div class="pbrd-sv-label">Payment Methods</div>' +
         '<div class="pbrd-sv-method-grid">' +
-          '<div class="pbrd-sv-method pbrd-sv-method-card" style="--d:0.05s;--bg:#fff;--tc:#1A1F71">VISA</div>' +
-          '<div class="pbrd-sv-method pbrd-sv-method-card" style="--d:0.1s;--bg:#fff;--tc:#EB001B">MC</div>' +
-          '<div class="pbrd-sv-method pbrd-sv-method-card" style="--d:0.15s;--bg:#fff;--tc:#006FCF">AMEX</div>' +
-          '<div class="pbrd-sv-method pbrd-sv-method-card" style="--d:0.2s;--bg:#fff;--tc:#000">AP</div>' +
-          '<div class="pbrd-sv-method pbrd-sv-method-card" style="--d:0.25s;--bg:#fff;--tc:#4285F4">GP</div>' +
-          '<div class="pbrd-sv-method pbrd-sv-method-card" style="--d:0.3s;--bg:#fff;--tc:#003087">PP</div>' +
-          '<div class="pbrd-sv-method pbrd-sv-method-card" style="--d:0.35s;--bg:#fff;--tc:#D4002A">MBW</div>' +
-          '<div class="pbrd-sv-method pbrd-sv-method-card" style="--d:0.4s;--bg:#fff;--tc:#CC0066">iD</div>' +
-          '<div class="pbrd-sv-method pbrd-sv-method-card" style="--d:0.45s;--bg:#fff;--tc:#32BCAD">PIX</div>' +
-          '<div class="pbrd-sv-method pbrd-sv-method-card" style="--d:0.5s;--bg:#FFB3C7;--tc:#0A0A0A">K</div>' +
-          '<div class="pbrd-sv-method pbrd-sv-method-card" style="--d:0.55s;--bg:#fff;--tc:#2D6CA2">SEPA</div>' +
-          '<div class="pbrd-sv-method pbrd-sv-method-card" style="--d:0.6s;--bg:#fff;--tc:#1F3B7A">MB</div>' +
+          '<div class="pbrd-sv-method" style="--d:0.05s;--bg:#1A1F71">VISA</div>' +
+          '<div class="pbrd-sv-method" style="--d:0.1s;--bg:#EB001B">MC</div>' +
+          '<div class="pbrd-sv-method" style="--d:0.15s;--bg:#006FCF">AMEX</div>' +
+          '<div class="pbrd-sv-method" style="--d:0.2s;--bg:#000">AP</div>' +
+          '<div class="pbrd-sv-method" style="--d:0.25s;--bg:#4285F4">GP</div>' +
+          '<div class="pbrd-sv-method" style="--d:0.3s;--bg:#003087">PP</div>' +
+          '<div class="pbrd-sv-method" style="--d:0.35s;--bg:#D4002A">MBW</div>' +
+          '<div class="pbrd-sv-method" style="--d:0.4s;--bg:#CC0066">iD</div>' +
+          '<div class="pbrd-sv-method" style="--d:0.45s;--bg:#32BCAD">PIX</div>' +
+          '<div class="pbrd-sv-method" style="--d:0.5s;--bg:#FFB3C7">K</div>' +
+          '<div class="pbrd-sv-method" style="--d:0.55s;--bg:#2D6CA2">SEPA</div>' +
+          '<div class="pbrd-sv-method" style="--d:0.6s;--bg:#1F3B7A">MB</div>' +
         '</div>' +
       '</div>' +
       '<div class="pbrd-sv-row">' +
