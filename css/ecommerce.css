@@ -1114,204 +1114,217 @@
 
 /* Reuses .pbrd-oc-int-pill from omnichannel */
 
-/* Live Dashboard Mockup */
+/* Live Dashboard Mockup — High Fidelity */
 .pbrd-ec-live-dash {
-  background: #fff;
+  background: #F9FAFB;
   border-radius: 12px;
-  box-shadow: 0 16px 56px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(0, 0, 0, 0.06);
-  max-width: 560px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
+  max-width: 600px;
   margin: 0 auto;
-  font-family: inherit;
+  font-family: Inter, -apple-system, sans-serif;
   overflow: hidden;
   display: flex;
 }
 
 /* Sidebar */
 .pbrd-ec-ld-sidebar {
-  width: 120px;
-  background: #faf9f7;
-  border-right: 1px solid rgba(26, 26, 46, 0.06);
+  width: 130px;
+  background: #fff;
+  border-right: 1px solid #E5E7EB;
   padding: 12px 8px;
   flex-shrink: 0;
 }
 
 .pbrd-ec-ld-logo {
-  font-size: 1rem;
-  color: #5046e5;
-  margin-bottom: 16px;
-  padding-left: 4px;
+  width: 20px;
+  height: 20px;
+  margin: 0 0 14px 6px;
 }
 
-.pbrd-ec-ld-sidebar-section {
+.pbrd-ec-ld-logo svg { width: 100%; height: 100%; }
+
+.pbrd-ec-ld-sidebar-label {
   font-size: 0.375rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: rgba(26, 26, 46, 0.25);
-  padding: 8px 6px 4px;
+  letter-spacing: 0.08em;
+  color: #9CA3AF;
+  padding: 10px 8px 4px;
 }
 
 .pbrd-ec-ld-sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   font-size: 0.5625rem;
-  color: rgba(26, 26, 46, 0.45);
+  color: #6B7280;
   padding: 5px 8px;
   border-radius: 6px;
   margin-bottom: 1px;
+  font-weight: 500;
 }
 
+.pbrd-ec-ld-sidebar-item svg { flex-shrink: 0; }
+
 .pbrd-ec-ld-sidebar-item.active {
-  background: #5046e5;
-  color: #fff;
+  background: #EDE9FE;
+  color: #7C3AED;
   font-weight: 600;
 }
+
+.pbrd-ec-ld-sidebar-item.active svg { color: #7C3AED; }
 
 /* Main area */
 .pbrd-ec-ld-main {
   flex: 1;
   min-width: 0;
+  background: #F9FAFB;
 }
 
 .pbrd-ec-ld-topbar {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  padding: 12px 16px;
-  border-bottom: 1px solid rgba(26, 26, 46, 0.06);
+  padding: 14px 16px 10px;
+  background: #fff;
+  border-bottom: 1px solid #E5E7EB;
 }
 
 .pbrd-ec-ld-greeting {
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 600;
-  color: #1a1a2e;
+  color: #111827;
+}
+
+.pbrd-ec-ld-sub {
+  font-size: 0.5625rem;
+  color: #6B7280;
+  margin-top: 2px;
 }
 
 .pbrd-ec-ld-search {
-  font-size: 0.5rem;
-  color: rgba(26, 26, 46, 0.25);
-  background: rgba(26, 26, 46, 0.03);
-  border: 1px solid rgba(26, 26, 46, 0.06);
-  border-radius: 6px;
-  padding: 4px 10px;
-}
-
-/* Content grid */
-.pbrd-ec-ld-content {
   display: flex;
-  gap: 1px;
-  background: rgba(26, 26, 46, 0.06);
+  align-items: center;
+  gap: 5px;
+  font-size: 0.5rem;
+  color: #9CA3AF;
+  background: #F3F4F6;
+  border-radius: 6px;
+  padding: 5px 10px;
 }
 
-.pbrd-ec-ld-left {
+/* Volume cards */
+.pbrd-ec-ld-cards {
+  display: flex;
+  gap: 8px;
+  padding: 12px 14px 8px;
+}
+
+.pbrd-ec-ld-vol-card {
   flex: 1;
-  background: #fff;
-  padding: 14px;
+  border-radius: 10px;
+  padding: 12px 14px;
+  color: #fff;
 }
 
-.pbrd-ec-ld-right {
-  width: 170px;
-  background: #fff;
-  flex-shrink: 0;
+.pbrd-ec-ld-vol-card.blue {
+  background: linear-gradient(135deg, #2B6FED, #1E4FCC);
+  box-shadow: 0 4px 12px rgba(43, 111, 237, 0.2);
 }
 
-.pbrd-ec-ld-payments,
-.pbrd-ec-ld-acceptance {
-  padding: 12px;
-  border-bottom: 1px solid rgba(26, 26, 46, 0.06);
+.pbrd-ec-ld-vol-card.red {
+  background: linear-gradient(135deg, #EF4444, #DC2626);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
 }
 
-.pbrd-ec-ld-acceptance { border-bottom: none; }
-
-.pbrd-ec-ld-card-label {
+.pbrd-ec-ld-vol-label {
   font-size: 0.4375rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 4px;
+}
+
+.pbrd-ec-ld-vol-amount {
+  font-size: 1.125rem;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: rgba(26, 26, 46, 0.25);
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
   margin-bottom: 8px;
 }
 
-/* Volume card */
-.pbrd-ec-ld-volume {
-  background: linear-gradient(135deg, #5046e5, #7c3aed);
-  border-radius: 10px;
-  padding: 14px;
-  margin-bottom: 10px;
-}
-
-.pbrd-ec-ld-volume .pbrd-ec-ld-card-label {
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.pbrd-ec-ld-big {
-  font-size: 1.375rem;
-  font-weight: 800;
-  color: #fff;
-  letter-spacing: -0.02em;
-  font-variant-numeric: tabular-nums;
-}
-
-.pbrd-ec-ld-vol-row {
-  display: flex;
-  gap: 12px;
-  margin-top: 8px;
-}
-
-.pbrd-ec-ld-vol-row span {
-  font-size: 0.5rem;
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.pbrd-ec-ld-vol-row strong {
-  color: rgba(255, 255, 255, 0.8);
-}
-
-/* Currencies below volume */
-.pbrd-ec-ld-currencies {
+.pbrd-ec-ld-vol-metas {
   display: flex;
   gap: 10px;
-  padding: 8px 0;
+  font-size: 0.4375rem;
+  color: rgba(255, 255, 255, 0.6);
 }
 
-.pbrd-ec-ld-currencies span {
+.pbrd-ec-ld-vol-metas strong {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Bottom panels */
+.pbrd-ec-ld-bottom {
+  display: flex;
+  gap: 8px;
+  padding: 0 14px 14px;
+}
+
+.pbrd-ec-ld-panel {
+  flex: 1;
+  background: #fff;
+  border-radius: 10px;
+  padding: 12px;
+  border: 1px solid #E5E7EB;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.pbrd-ec-ld-panel-header {
   font-size: 0.5625rem;
-  color: rgba(26, 26, 46, 0.4);
-  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pbrd-ec-ld-badge {
+  font-size: 0.4375rem;
+  font-weight: 700;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.08);
+  padding: 2px 6px;
+  border-radius: 100px;
 }
 
 /* Acceptance bars */
 .pbrd-ec-ld-accept {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 7px;
 }
 
 .pbrd-ec-ld-accept-row {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.625rem;
-  color: rgba(26, 26, 46, 0.5);
+  font-size: 0.5625rem;
+  color: #6B7280;
 }
 
 .pbrd-ec-ld-accept-row span:first-child {
-  width: 56px;
-  flex-shrink: 0;
-  font-weight: 500;
-}
-
-.pbrd-ec-ld-accept-row span:last-child {
   width: 28px;
-  text-align: right;
-  font-weight: 700;
-  color: rgba(26, 26, 46, 0.75);
-  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+  font-weight: 600;
+  color: #111827;
 }
 
 .pbrd-ec-ld-bar {
   flex: 1;
   height: 8px;
   border-radius: 4px;
-  background: rgba(26, 26, 46, 0.04);
+  background: #F3F4F6;
   overflow: hidden;
 }
 
@@ -1320,25 +1333,36 @@
   border-radius: 4px;
   width: 0;
   transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-  opacity: 0.8;
 }
+
+.pbrd-ec-ld-pct {
+  width: 28px;
+  text-align: right;
+  font-weight: 700;
+  font-size: 0.5rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.pbrd-ec-ld-pct.green { color: #059669; }
+.pbrd-ec-ld-pct.yellow { color: #D97706; }
+.pbrd-ec-ld-pct.red { color: #DC2626; }
+.pbrd-ec-ld-pct.purple { color: #7C3AED; }
+.pbrd-ec-ld-pct.blue { color: #2B6FED; }
 
 /* Transactions */
 .pbrd-ec-ld-txs {
   display: flex;
   flex-direction: column;
-  gap: 2px;
 }
 
 .pbrd-ec-ld-tx {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 10px;
-  border-radius: 8px;
-  font-size: 0.625rem;
-  color: rgba(26, 26, 46, 0.4);
-  border-bottom: 1px solid rgba(26, 26, 46, 0.04);
+  gap: 8px;
+  padding: 6px 0;
+  font-size: 0.5625rem;
+  color: #6B7280;
+  border-bottom: 1px solid #F3F4F6;
 }
 
 .pbrd-ec-ld-tx:last-child { border-bottom: none; }
@@ -1350,24 +1374,26 @@
   flex-shrink: 0;
 }
 
-.pbrd-ec-ld-tx-a {
-  font-weight: 600;
-  color: #1a1a2e;
-  font-variant-numeric: tabular-nums;
-  width: 44px;
-}
-
-.pbrd-ec-ld-tx span:nth-child(3) {
+.pbrd-ec-ld-tx span:nth-child(2) {
   flex: 1;
+  color: #111827;
+  font-weight: 500;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
+.pbrd-ec-ld-tx-a {
+  font-weight: 600;
+  color: #111827;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
 @media (max-width: 768px) {
   .pbrd-ec-ld-sidebar { display: none; }
-  .pbrd-ec-ld-content { flex-direction: column; }
-  .pbrd-ec-ld-right { width: 100%; }
+  .pbrd-ec-ld-bottom { flex-direction: column; }
+  .pbrd-ec-ld-cards { flex-direction: column; }
   .pbrd-ec-live-dash { max-width: 100%; }
 }
 

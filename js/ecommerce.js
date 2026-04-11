@@ -664,64 +664,72 @@
       dash.innerHTML =
         /* Sidebar */
         '<div class="pbrd-ec-ld-sidebar">' +
-          '<div class="pbrd-ec-ld-logo">\u25C8</div>' +
-          '<div class="pbrd-ec-ld-sidebar-section">DASHBOARD</div>' +
-          '<div class="pbrd-ec-ld-sidebar-item active">Dashboard</div>' +
-          '<div class="pbrd-ec-ld-sidebar-section">PAYMENTS</div>' +
-          '<div class="pbrd-ec-ld-sidebar-item">Transactions</div>' +
-          '<div class="pbrd-ec-ld-sidebar-item">Payouts</div>' +
-          '<div class="pbrd-ec-ld-sidebar-item">Orders</div>' +
-          '<div class="pbrd-ec-ld-sidebar-item">Chargebacks</div>' +
-          '<div class="pbrd-ec-ld-sidebar-item">PayLink</div>' +
-          '<div class="pbrd-ec-ld-sidebar-section">INSIGHTS</div>' +
-          '<div class="pbrd-ec-ld-sidebar-item">Business Intelligence</div>' +
-          '<div class="pbrd-ec-ld-sidebar-item">Activity Log</div>' +
+          '<div class="pbrd-ec-ld-logo"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="#8B5CF6"/></svg></div>' +
+          '<div class="pbrd-ec-ld-sidebar-label">DASHBOARD</div>' +
+          '<div class="pbrd-ec-ld-sidebar-item active"><svg viewBox="0 0 20 20" fill="currentColor" width="14" height="14"><rect x="2" y="2" width="7" height="7" rx="1.5"/><rect x="11" y="2" width="7" height="7" rx="1.5"/><rect x="2" y="11" width="7" height="7" rx="1.5"/><rect x="11" y="11" width="7" height="7" rx="1.5"/></svg>Dashboard</div>' +
+          '<div class="pbrd-ec-ld-sidebar-label">PAYMENTS</div>' +
+          '<div class="pbrd-ec-ld-sidebar-item"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" width="14" height="14"><path d="M3 7h14M3 11h14M3 15h10" stroke-width="1.5" stroke-linecap="round"/></svg>Transactions</div>' +
+          '<div class="pbrd-ec-ld-sidebar-item"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" width="14" height="14"><path d="M10 2v16M6 6l4-4 4 4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Payouts</div>' +
+          '<div class="pbrd-ec-ld-sidebar-item"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" width="14" height="14"><rect x="3" y="5" width="14" height="10" rx="2" stroke-width="1.5"/></svg>Orders</div>' +
+          '<div class="pbrd-ec-ld-sidebar-item"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" width="14" height="14"><path d="M10 2l7 4v4c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z" stroke-width="1.5"/></svg>Chargebacks</div>' +
+          '<div class="pbrd-ec-ld-sidebar-item"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" width="14" height="14"><path d="M15 7l-5 5-3-3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="10" r="8" stroke-width="1.5"/></svg>PayLink</div>' +
+          '<div class="pbrd-ec-ld-sidebar-label">INSIGHTS</div>' +
+          '<div class="pbrd-ec-ld-sidebar-item"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" width="14" height="14"><path d="M3 17l4-6 3 3 5-8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Business Intelligence</div>' +
+          '<div class="pbrd-ec-ld-sidebar-item"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" width="14" height="14"><circle cx="10" cy="10" r="7" stroke-width="1.5"/><path d="M10 6v4l3 2" stroke-width="1.5" stroke-linecap="round"/></svg>Activity Log</div>' +
         '</div>' +
 
-        /* Main content */
+        /* Main */
         '<div class="pbrd-ec-ld-main">' +
+          /* Top bar */
           '<div class="pbrd-ec-ld-topbar">' +
-            '<div class="pbrd-ec-ld-greeting">Good morning, aires.sebastiao</div>' +
-            '<div class="pbrd-ec-ld-search">Search transactions...</div>' +
+            '<div>' +
+              '<div class="pbrd-ec-ld-greeting">Good morning, aires.sebastiao</div>' +
+              '<div class="pbrd-ec-ld-sub">Here\u2019s your business overview.</div>' +
+            '</div>' +
+            '<div class="pbrd-ec-ld-search"><svg viewBox="0 0 16 16" fill="none" width="10" height="10"><circle cx="7" cy="7" r="5" stroke="#9CA3AF" stroke-width="1.5"/><path d="M11 11l3 3" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/></svg>Search transactions, orders...</div>' +
           '</div>' +
 
-          '<div class="pbrd-ec-ld-content">' +
-            /* Left: Volume */
-            '<div class="pbrd-ec-ld-left">' +
-              '<div class="pbrd-ec-ld-volume">' +
-                '<div class="pbrd-ec-ld-card-label">EUR Total Volume</div>' +
-                '<div class="pbrd-ec-ld-big" id="pbrd-ec-ld-vol">\u20AC2,315,238</div>' +
-                '<div class="pbrd-ec-ld-vol-row">' +
-                  '<span>Transactions <strong>21,044</strong></span>' +
-                  '<span>Avg \u20AC110.02</span>' +
-                '</div>' +
-              '</div>' +
-              '<div class="pbrd-ec-ld-currencies">' +
-                '<span>\uD83C\uDDE7\uD83C\uDDF7 R$5.7M</span>' +
-                '<span>\uD83C\uDDFA\uD83C\uDDF8 $949K</span>' +
-                '<span>\uD83C\uDDEC\uD83C\uDDE7 \u00A3167K</span>' +
+          /* Volume cards row */
+          '<div class="pbrd-ec-ld-cards">' +
+            '<div class="pbrd-ec-ld-vol-card blue">' +
+              '<div class="pbrd-ec-ld-vol-label">EUR Total Volume</div>' +
+              '<div class="pbrd-ec-ld-vol-amount" id="pbrd-ec-ld-vol">\u20AC2,315,238.19</div>' +
+              '<div class="pbrd-ec-ld-vol-metas">' +
+                '<span>Transactions <strong>21,044</strong></span>' +
+                '<span>Avg \u20AC110.02</span>' +
+                '<span>Total <strong>22,979</strong></span>' +
               '</div>' +
             '</div>' +
-
-            /* Right: Payments + Acceptance */
-            '<div class="pbrd-ec-ld-right">' +
-              '<div class="pbrd-ec-ld-payments">' +
-                '<div class="pbrd-ec-ld-card-label">Latest Payments</div>' +
-                '<div class="pbrd-ec-ld-txs" id="pbrd-ec-ld-txs">' +
-                  '<div class="pbrd-ec-ld-tx"><span class="pbrd-ec-ld-tx-dot" style="background:#10b981"></span><span class="pbrd-ec-ld-tx-a">\u20AC22.20</span><span>VG Evora</span></div>' +
-                  '<div class="pbrd-ec-ld-tx"><span class="pbrd-ec-ld-tx-dot" style="background:#10b981"></span><span class="pbrd-ec-ld-tx-a">\u20AC12.50</span><span>VG Pal\u00E1cio</span></div>' +
-                  '<div class="pbrd-ec-ld-tx"><span class="pbrd-ec-ld-tx-dot" style="background:#10b981"></span><span class="pbrd-ec-ld-tx-a">\u20AC73.20</span><span>VG Collection</span></div>' +
-                  '<div class="pbrd-ec-ld-tx"><span class="pbrd-ec-ld-tx-dot" style="background:#f59e0b"></span><span class="pbrd-ec-ld-tx-a">\u20AC62.00</span><span>SMY St Eulalia</span></div>' +
-                '</div>' +
+            '<div class="pbrd-ec-ld-vol-card red">' +
+              '<div class="pbrd-ec-ld-vol-label">EUR Refund Volume</div>' +
+              '<div class="pbrd-ec-ld-vol-amount">\u20AC47,664.24</div>' +
+              '<div class="pbrd-ec-ld-vol-metas">' +
+                '<span><strong>200</strong></span>' +
+                '<span>\u20AC2,357,175</span>' +
               '</div>' +
-              '<div class="pbrd-ec-ld-acceptance">' +
-                '<div class="pbrd-ec-ld-card-label">Payment Acceptance</div>' +
-                '<div class="pbrd-ec-ld-accept">' +
-                  '<div class="pbrd-ec-ld-accept-row"><span>EUR</span><div class="pbrd-ec-ld-bar"><div class="pbrd-ec-ld-bar-fill" style="--bar-w:96%;background:#10b981"></div></div><span>96%</span></div>' +
-                  '<div class="pbrd-ec-ld-accept-row"><span>BRL</span><div class="pbrd-ec-ld-bar"><div class="pbrd-ec-ld-bar-fill" style="--bar-w:82%;background:#f59e0b"></div></div><span>82%</span></div>' +
-                  '<div class="pbrd-ec-ld-accept-row"><span>USD</span><div class="pbrd-ec-ld-bar"><div class="pbrd-ec-ld-bar-fill" style="--bar-w:88%;background:#EB001B"></div></div><span>88%</span></div>' +
-                  '<div class="pbrd-ec-ld-accept-row"><span>AOA</span><div class="pbrd-ec-ld-bar"><div class="pbrd-ec-ld-bar-fill" style="--bar-w:71%;background:#5046e5"></div></div><span>71%</span></div>' +
-                '</div>' +
+            '</div>' +
+          '</div>' +
+
+          /* Bottom row: Latest Payments + Acceptance */
+          '<div class="pbrd-ec-ld-bottom">' +
+            '<div class="pbrd-ec-ld-panel">' +
+              '<div class="pbrd-ec-ld-panel-header">Latest Payments</div>' +
+              '<div class="pbrd-ec-ld-txs" id="pbrd-ec-ld-txs">' +
+                '<div class="pbrd-ec-ld-tx"><span class="pbrd-ec-ld-tx-dot" style="background:#10b981"></span><span>VG Evora</span><span class="pbrd-ec-ld-tx-a">\u20AC22.20</span></div>' +
+                '<div class="pbrd-ec-ld-tx"><span class="pbrd-ec-ld-tx-dot" style="background:#10b981"></span><span>VG Pal\u00E1cio dos Arcos</span><span class="pbrd-ec-ld-tx-a">\u20AC12.50</span></div>' +
+                '<div class="pbrd-ec-ld-tx"><span class="pbrd-ec-ld-tx-dot" style="background:#10b981"></span><span>VG Collection Elvas</span><span class="pbrd-ec-ld-tx-a">\u20AC73.20</span></div>' +
+                '<div class="pbrd-ec-ld-tx"><span class="pbrd-ec-ld-tx-dot" style="background:#f59e0b"></span><span>SMY St Eulalia</span><span class="pbrd-ec-ld-tx-a">\u20AC62.00</span></div>' +
+                '<div class="pbrd-ec-ld-tx"><span class="pbrd-ec-ld-tx-dot" style="background:#10b981"></span><span>Vila Gal\u00E9 Cascais</span><span class="pbrd-ec-ld-tx-a">\u20AC128.60</span></div>' +
+              '</div>' +
+            '</div>' +
+            '<div class="pbrd-ec-ld-panel">' +
+              '<div class="pbrd-ec-ld-panel-header">Payment Acceptance<span class="pbrd-ec-ld-badge">92.7%</span></div>' +
+              '<div class="pbrd-ec-ld-accept">' +
+                '<div class="pbrd-ec-ld-accept-row"><span>EUR</span><div class="pbrd-ec-ld-bar"><div class="pbrd-ec-ld-bar-fill" style="--bar-w:96%;background:#10b981"></div></div><span class="pbrd-ec-ld-pct green">96%</span></div>' +
+                '<div class="pbrd-ec-ld-accept-row"><span>BRL</span><div class="pbrd-ec-ld-bar"><div class="pbrd-ec-ld-bar-fill" style="--bar-w:82%;background:#F59E0B"></div></div><span class="pbrd-ec-ld-pct yellow">82%</span></div>' +
+                '<div class="pbrd-ec-ld-accept-row"><span>USD</span><div class="pbrd-ec-ld-bar"><div class="pbrd-ec-ld-bar-fill" style="--bar-w:88%;background:#EF4444"></div></div><span class="pbrd-ec-ld-pct red">88%</span></div>' +
+                '<div class="pbrd-ec-ld-accept-row"><span>AOA</span><div class="pbrd-ec-ld-bar"><div class="pbrd-ec-ld-bar-fill" style="--bar-w:71%;background:#8B5CF6"></div></div><span class="pbrd-ec-ld-pct purple">71%</span></div>' +
+                '<div class="pbrd-ec-ld-accept-row"><span>PLN</span><div class="pbrd-ec-ld-bar"><div class="pbrd-ec-ld-bar-fill" style="--bar-w:100%;background:#2B6FED"></div></div><span class="pbrd-ec-ld-pct blue">100%</span></div>' +
               '</div>' +
             '</div>' +
           '</div>' +
