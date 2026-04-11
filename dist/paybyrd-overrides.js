@@ -1756,20 +1756,29 @@
         '</div>' +
       '</div>',
 
-    "Contact Details": /* Almost done */
+    "Contact Details": /* Confidence builder — last step */
       '<div class="pbrd-dv-landing">' +
-        '<div class="pbrd-dv-card" style="text-align:center;padding:28px 24px">' +
-          '<div style="font-size:2.5rem;font-weight:200;color:#fff;letter-spacing:-0.03em;margin-bottom:4px">15 min</div>' +
-          '<div class="pbrd-dv-label" style="margin-bottom:16px">Is all it takes</div>' +
-          '<div style="display:flex;flex-direction:column;gap:8px;text-align:left">' +
-            '<div class="pbrd-dv-card-sm" style="animation:pbrd-dv-slide-up 0.4s ease 0.1s both;display:flex;align-items:center;gap:8px"><span class="pbrd-dv-dot pbrd-dv-dot-green" style="flex-shrink:0"></span><span style="font-size:0.6875rem;color:rgba(255,255,255,0.6)">Custom rate proposal</span></div>' +
-            '<div class="pbrd-dv-card-sm" style="animation:pbrd-dv-slide-up 0.4s ease 0.2s both;display:flex;align-items:center;gap:8px"><span class="pbrd-dv-dot pbrd-dv-dot-green" style="flex-shrink:0"></span><span style="font-size:0.6875rem;color:rgba(255,255,255,0.6)">Approval rate analysis</span></div>' +
-            '<div class="pbrd-dv-card-sm" style="animation:pbrd-dv-slide-up 0.4s ease 0.3s both;display:flex;align-items:center;gap:8px"><span class="pbrd-dv-dot pbrd-dv-dot-green" style="flex-shrink:0"></span><span style="font-size:0.6875rem;color:rgba(255,255,255,0.6)">Go-live timeline</span></div>' +
+        '<div class="pbrd-dv-card">' +
+          '<div class="pbrd-dv-label">What happens next</div>' +
+          '<div style="display:flex;flex-direction:column;gap:14px;margin-top:14px">' +
+            '<div style="display:flex;gap:12px;align-items:flex-start;animation:pbrd-dv-slide-up 0.4s ease 0.1s both">' +
+              '<div style="width:28px;height:28px;border-radius:50%;background:rgba(80,100,220,0.15);border:1px solid rgba(80,100,220,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.6875rem;font-weight:700;color:rgba(120,150,255,0.9)">1</div>' +
+              '<div><div style="font-size:0.8125rem;color:rgba(255,255,255,0.8);font-weight:500">We\u2019ll call you within 24h</div><div style="font-size:0.6875rem;color:rgba(255,255,255,0.3);margin-top:2px">A payments expert reviews your setup</div></div>' +
+            '</div>' +
+            '<div style="display:flex;gap:12px;align-items:flex-start;animation:pbrd-dv-slide-up 0.4s ease 0.25s both">' +
+              '<div style="width:28px;height:28px;border-radius:50%;background:rgba(80,100,220,0.15);border:1px solid rgba(80,100,220,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.6875rem;font-weight:700;color:rgba(120,150,255,0.9)">2</div>' +
+              '<div><div style="font-size:0.8125rem;color:rgba(255,255,255,0.8);font-weight:500">Custom proposal in 48h</div><div style="font-size:0.6875rem;color:rgba(255,255,255,0.3);margin-top:2px">Rates, methods, and savings tailored to you</div></div>' +
+            '</div>' +
+            '<div style="display:flex;gap:12px;align-items:flex-start;animation:pbrd-dv-slide-up 0.4s ease 0.4s both">' +
+              '<div style="width:28px;height:28px;border-radius:50%;background:rgba(120,255,180,0.1);border:1px solid rgba(120,255,180,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.6875rem;font-weight:700;color:rgba(120,255,180,0.8)">3</div>' +
+              '<div><div style="font-size:0.8125rem;color:rgba(255,255,255,0.8);font-weight:500">Go live in under 4 hours</div><div style="font-size:0.6875rem;color:rgba(255,255,255,0.3);margin-top:2px">Same-day integration, zero downtime</div></div>' +
+            '</div>' +
           '</div>' +
         '</div>' +
-        '<div class="pbrd-dv-card">' +
-          '<div class="pbrd-dv-status-row">' +
-            '<div class="pbrd-dv-status"><span class="pbrd-dv-dot pbrd-dv-dot-green"></span>30-day money-back guarantee</div>' +
+        '<div class="pbrd-dv-card" style="animation:pbrd-dv-slide-up 0.5s ease 0.5s both">' +
+          '<div class="pbrd-dv-approval">' +
+            '<svg class="pbrd-dv-approval-ring" viewBox="0 0 40 40"><circle class="pbrd-dv-approval-track" cx="20" cy="20" r="18"/><circle class="pbrd-dv-approval-fill" cx="20" cy="20" r="18"/></svg>' +
+            '<div><div class="pbrd-dv-approval-text">30 days</div><div class="pbrd-dv-approval-label">Money-back guarantee</div></div>' +
           '</div>' +
         '</div>' +
       '</div>'
