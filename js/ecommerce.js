@@ -246,11 +246,11 @@
 
     var tabs = [
       {
-        id: "integrate",
-        label: "Integrate",
-        icon: '<svg viewBox="0 0 20 20" fill="none"><path d="M10 2v6m0 0l3-3m-3 3L7 5M10 18v-6m0 0l3 3m-3-3l-3 3M2 10h6m0 0L5 7m3 3L5 13M18 10h-6m0 0l3-3m-3 3l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
-        title: "Connect in hours, not months",
-        desc: "Whether you need a plug-and-play setup or a deep custom integration, Paybyrd connects to your stack in hours. Pre-built plugins for every major platform. Full REST API for everything else.",
+        id: "launch",
+        label: "Launch",
+        icon: '<svg viewBox="0 0 20 20" fill="none"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z" stroke="currentColor" stroke-width="1.2"/><path d="M12 15l-3-3c1-4 4-7 9-9-2 5-5 8-9 9l3 3z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+        title: "Your checkout, live before lunch",
+        desc: "Stop waiting on engineering sprints. Paybyrd connects to your stack with pre-built plugins or a clean API \u2014 and most merchants are processing real payments within the same business day.",
         viz:
           '<div class="pbrd-ec-viz-integrations">' +
             '<div class="pbrd-ec-viz-int-row">' +
@@ -267,11 +267,11 @@
           '</div>'
       },
       {
-        id: "getpaid",
-        label: "Get Paid",
-        icon: '<svg viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 8h16" stroke="currentColor" stroke-width="1.5"/></svg>',
-        title: "Every way your customer wants to pay",
-        desc: "Cards, wallets, BNPL, bank transfers, local methods \u2014 35+ options through one integration. Auto-detect country and show the right methods. Your customer always finds their preference.",
+        id: "convert",
+        label: "Convert",
+        icon: '<svg viewBox="0 0 20 20" fill="none"><path d="M16 4l-6 6M16 4h-5M16 4v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 16l6-6M4 16h5M4 16v-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+        title: "The checkout where nobody leaves",
+        desc: "Every payment method your customer trusts \u2014 auto-detected by country and device. Cards, wallets, BNPL, bank transfers. The right option is always one tap away.",
         viz:
           '<div class="pbrd-ec-viz-methods">' +
             '<div class="pbrd-ec-viz-method-row">' +
@@ -293,11 +293,11 @@
           '</div>'
       },
       {
-        id: "optimize",
-        label: "Optimize",
-        icon: '<svg viewBox="0 0 20 20" fill="none"><path d="M3 17l4-6 3 3 5-8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-        title: "See what\u2019s working. Fix what isn\u2019t.",
-        desc: "Real-time conversion funnels by device, country, payment method, and campaign. Know exactly where customers drop off \u2014 and why. No guessing, no waiting for reports.",
+        id: "understand",
+        label: "Understand",
+        icon: '<svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M10 6v4.5l3 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
+        title: "Stop guessing why customers leave",
+        desc: "See your entire conversion funnel in real time \u2014 by device, country, payment method, and campaign. Paybyrd doesn\u2019t just process payments. It tells you where the money is leaking.",
         viz:
           '<div class="pbrd-ec-viz-dashboard">' +
             '<div class="pbrd-ec-viz-dash-header"><span class="pbrd-ec-viz-dash-nav">Sales</span><span class="pbrd-ec-viz-dash-nav active">Conversion</span><span class="pbrd-ec-viz-dash-nav">Refunds</span></div>' +
@@ -311,11 +311,11 @@
           '</div>'
       },
       {
-        id: "manage",
-        label: "Manage",
-        icon: '<svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M10 6v4l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
-        title: "Refunds, chargebacks, reconciliation \u2014 handled.",
-        desc: "One dashboard for every transaction across every channel. Process refunds in seconds, fight chargebacks with data, and close your books in hours instead of days.",
+        id: "control",
+        label: "Control",
+        icon: '<svg viewBox="0 0 20 20" fill="none"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="7" cy="5" r="2" fill="currentColor"/><circle cx="13" cy="10" r="2" fill="currentColor"/><circle cx="9" cy="15" r="2" fill="currentColor"/></svg>',
+        title: "Every euro accounted for. Instantly.",
+        desc: "Refunds in one click. Chargebacks fought with data. Reconciliation that takes hours, not days. One screen for every transaction, every channel, every market.",
         viz:
           '<div class="pbrd-ec-viz-manage">' +
             '<div class="pbrd-ec-viz-tx-list">' +
