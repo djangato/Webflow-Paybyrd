@@ -851,39 +851,105 @@
 .pbrd-ec-bv-status.paid { color: #10b981; background: rgba(16, 185, 129, 0.1); }
 .pbrd-ec-bv-status.refund { color: #f59e0b; background: rgba(245, 158, 11, 0.1); }
 
-/* Payment link */
-.pbrd-ec-bv-link {
+/* Tall card — spans 2 rows */
+.pbrd-ec-bento-tall {
+  grid-row: span 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.pbrd-ec-bento-tall .pbrd-ec-bento-viz {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Payment link mockup */
+.pbrd-ec-bv-link-viz {
+  padding: 16px !important;
+}
+
+.pbrd-ec-bv-link-mock {
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px 24px;
   text-align: center;
-  padding: 12px 0;
+  max-width: 220px;
+  margin: 0 auto;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
 }
 
-.pbrd-ec-bv-link-amount {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: #fff;
-  letter-spacing: -0.03em;
+.pbrd-ec-bv-link-success-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #10b981;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
 }
 
-.pbrd-ec-bv-link-curr {
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.3);
+.pbrd-ec-bv-link-success-icon svg {
+  width: 20px;
+  height: 20px;
+  color: #10b981;
+}
+
+.pbrd-ec-bv-link-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 4px;
+}
+
+.pbrd-ec-bv-link-amount-row {
+  font-size: 0.8125rem;
+  color: rgba(26, 26, 46, 0.4);
+  margin-bottom: 16px;
+}
+
+.pbrd-ec-bv-link-url-box {
+  text-align: left;
   margin-bottom: 12px;
 }
 
-.pbrd-ec-bv-link-channels {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
+.pbrd-ec-bv-link-url-label {
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: rgba(26, 26, 46, 0.35);
+  margin-bottom: 4px;
 }
 
-.pbrd-ec-bv-link-channels span {
-  font-size: 0.5625rem;
+.pbrd-ec-bv-link-url {
+  font-size: 0.6875rem;
+  color: #5046e5;
+  background: rgba(80, 70, 229, 0.04);
+  border: 1px solid rgba(80, 70, 229, 0.12);
+  border-radius: 8px;
+  padding: 8px 10px;
+  word-break: break-all;
+  font-family: monospace;
+}
+
+.pbrd-ec-bv-link-btn-copy {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(26, 26, 46, 0.12);
+  font-size: 0.75rem;
   font-weight: 600;
-  padding: 4px 10px;
-  border-radius: 100px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  color: rgba(255, 255, 255, 0.5);
+  color: #1a1a2e;
+  margin-bottom: 8px;
+}
+
+.pbrd-ec-bv-link-btn-share {
+  padding: 8px;
+  border-radius: 8px;
+  background: #5046e5;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #fff;
 }
 
 /* Shield / Security */
@@ -972,6 +1038,7 @@
 @media (max-width: 900px) {
   .pbrd-ec-bento { grid-template-columns: 1fr; }
   .pbrd-ec-bento-lg, .pbrd-ec-bento-wide { grid-column: span 1; }
+  .pbrd-ec-bento-tall { grid-row: span 1; }
   .pbrd-ec-bento-wide-inner { flex-direction: column; gap: 20px; }
   .pbrd-ec-bento-wide-inner .pbrd-ec-bento-viz { width: 100%; }
 }
@@ -988,17 +1055,22 @@
 }
 
 .pbrd-ec-data-stat p {
-  font-size: 1.375rem;
-  line-height: 1.5;
-  color: rgba(26, 26, 46, 0.5);
+  font-size: 1.75rem;
+  line-height: 1.4;
+  color: rgba(26, 26, 46, 0.4);
   margin: 0 auto;
-  max-width: 700px;
-  font-weight: 400;
+  max-width: 740px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
 }
 
 .pbrd-ec-data-stat strong {
   color: #1a1a2e;
   font-weight: 700;
+  background: linear-gradient(135deg, #1a1a2e, #5046e5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 /* ═══════════════════════════════════════════ */

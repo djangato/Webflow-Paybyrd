@@ -3609,14 +3609,20 @@
         '</div>' +
 
         /* Row 2: Pay Links + Security + Global */
-        '<div class="pbrd-ec-bento-card">' +
+        '<div class="pbrd-ec-bento-card pbrd-ec-bento-tall">' +
           '<h3>Send a link. Get paid.</h3>' +
           '<p>Payment links via WhatsApp, SMS, email. Perfect for phone orders and remote sales.</p>' +
-          '<div class="pbrd-ec-bento-viz">' +
-            '<div class="pbrd-ec-bv-link">' +
-              '<div class="pbrd-ec-bv-link-amount">\u20AC64</div>' +
-              '<div class="pbrd-ec-bv-link-curr">EUR</div>' +
-              '<div class="pbrd-ec-bv-link-channels"><span>WhatsApp</span><span>SMS</span><span>Email</span></div>' +
+          '<div class="pbrd-ec-bento-viz pbrd-ec-bv-link-viz">' +
+            '<div class="pbrd-ec-bv-link-mock">' +
+              '<div class="pbrd-ec-bv-link-success-icon">' + checkSVG + '</div>' +
+              '<div class="pbrd-ec-bv-link-title">Link Created!</div>' +
+              '<div class="pbrd-ec-bv-link-amount-row">EUR 64.00</div>' +
+              '<div class="pbrd-ec-bv-link-url-box">' +
+                '<div class="pbrd-ec-bv-link-url-label">Payment Link</div>' +
+                '<div class="pbrd-ec-bv-link-url">https://link.paybyrd.com/chk9Dc</div>' +
+              '</div>' +
+              '<div class="pbrd-ec-bv-link-btn-copy">Copy Link</div>' +
+              '<div class="pbrd-ec-bv-link-btn-share">Share via WhatsApp, Email\u2026</div>' +
             '</div>' +
           '</div>' +
         '</div>' +
@@ -3756,10 +3762,25 @@
     var h = section.querySelector("h2, h3");
     if (h) h.textContent = "Plug in today. Not next quarter.";
 
-    var paragraphs = section.querySelectorAll("p");
-    paragraphs.forEach(function (p) {
-      if (p.textContent.length > 30 && p.textContent.length < 200) {
+    /* Override only the first short paragraph */
+    var overridden = false;
+    section.querySelectorAll("p").forEach(function (p) {
+      if (!overridden && p.textContent.length > 30 && p.textContent.length < 200) {
         p.textContent = "Pre-built integrations for every major e-commerce platform. Your developer spends hours, not months. Full REST API for custom builds.";
+        overridden = true;
+      }
+    });
+
+    /* Scale down/hide the oversized dashboard image */
+    section.querySelectorAll("img").forEach(function (img) {
+      var src = (img.getAttribute("src") || "").toLowerCase();
+      if (src.indexOf("dashboard") !== -1 || src.indexOf("statistics") !== -1 || src.indexOf("paybyrd") !== -1) {
+        img.style.maxHeight = "320px";
+        img.style.width = "auto";
+        img.style.margin = "0 auto";
+        img.style.display = "block";
+        img.style.borderRadius = "16px";
+        img.style.opacity = "0.85";
       }
     });
 
