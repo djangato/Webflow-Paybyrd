@@ -770,6 +770,24 @@
           f.style.width = f.style.getPropertyValue("--bar-w");
         });
       }, 500);
+
+      /* Rotate greeting name */
+      var greetNames = [
+        "aires.sebastiao", "ana.ferreira", "f.al-lawr",
+        "sophie.vandijk", "c.munger", "luca.bianchi"
+      ];
+      var greetIdx = 0;
+      var greetEl = dash.querySelector(".pbrd-ec-ld-greeting");
+      if (greetEl) {
+        setInterval(function () {
+          greetIdx = (greetIdx + 1) % greetNames.length;
+          greetEl.style.opacity = "0";
+          setTimeout(function () {
+            greetEl.textContent = "Good morning, " + greetNames[greetIdx];
+            greetEl.style.opacity = "1";
+          }, 400);
+        }, 3000);
+      }
     }
 
     /* Add integration pills */

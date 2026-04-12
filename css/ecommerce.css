@@ -1200,6 +1200,7 @@
   font-size: 0.9375rem;
   font-weight: 600;
   color: #111827;
+  transition: opacity 0.4s ease;
 }
 
 .pbrd-ec-ld-sub {
