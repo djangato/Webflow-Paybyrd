@@ -4450,28 +4450,27 @@
     var section = document.createElement("section");
     section.className = "pbrd-ec-testimonials";
 
-    var playSVG = '<svg viewBox="0 0 48 48" width="48" height="48" fill="none"><circle cx="24" cy="24" r="24" fill="rgba(255,255,255,0.9)"/><path d="M20 16l12 8-12 8V16z" fill="#111"/></svg>';
-
     var cardsHTML = testimonials.map(function (t, idx) {
       return '<div class="pbrd-ec-tvcard pbrd-ec-reveal" id="pbrd-ec-tv' + idx + '">' +
-        '<div class="pbrd-ec-tv-visual">' +
-          '<img src="' + t.poster + '" alt="' + t.company + '" class="pbrd-ec-tv-poster" loading="lazy">' +
-          '<video class="pbrd-ec-tv-video" preload="none" playsinline muted poster="' + t.poster + '">' +
+        /* Video side */
+        '<div class="pbrd-ec-tv-video-side">' +
+          '<video class="pbrd-ec-tv-video" preload="none" loop playsinline muted poster="' + t.poster + '">' +
             '<source src="' + t.video + '" type="video/mp4">' +
           '</video>' +
-          '<div class="pbrd-ec-tv-play">' + playSVG + '</div>' +
-          '<div class="pbrd-ec-tv-gradient"></div>' +
-          '<div class="pbrd-ec-tv-overlay">' +
-            '<div class="pbrd-ec-tv-quote">\u201C' + t.quote + '\u201D</div>' +
-            '<div class="pbrd-ec-tv-divider"></div>' +
-            '<div class="pbrd-ec-tv-attr">' +
-              '<img src="' + t.logo + '" alt="' + t.company + '" class="pbrd-ec-tv-logo">' +
-              '<div class="pbrd-ec-tv-info">' +
-                '<div class="pbrd-ec-tv-name">' + t.name + '</div>' +
-                '<div class="pbrd-ec-tv-title">' + t.title + ', ' + t.company + '</div>' +
-              '</div>' +
-              '<div class="pbrd-ec-tv-stat">' + t.stat + '</div>' +
+        '</div>' +
+        /* Quote card side */
+        '<div class="pbrd-ec-tv-card-side">' +
+          '<div class="pbrd-ec-tv-card-top">' +
+            '<img src="' + t.logo + '" alt="' + t.company + '" class="pbrd-ec-tv-logo">' +
+            '<div class="pbrd-ec-tv-card-company">' + t.company + '</div>' +
+          '</div>' +
+          '<div class="pbrd-ec-tv-quote">\u201C' + t.quote + '\u201D</div>' +
+          '<div class="pbrd-ec-tv-card-bottom">' +
+            '<div class="pbrd-ec-tv-info">' +
+              '<div class="pbrd-ec-tv-name">' + t.name + '</div>' +
+              '<div class="pbrd-ec-tv-title">' + t.title + '</div>' +
             '</div>' +
+            '<div class="pbrd-ec-tv-stat">' + t.stat + '</div>' +
           '</div>' +
         '</div>' +
       '</div>';
@@ -4495,61 +4494,41 @@
 
     observeReveal(".pbrd-ec-reveal", 150, section);
 
-    /* Video play/pause logic */
-    section.querySelectorAll(".pbrd-ec-tvcard").forEach(function (card) {
-      var video = card.querySelector(".pbrd-ec-tv-video");
-      var playBtn = card.querySelector(".pbrd-ec-tv-play");
-      var overlay = card.querySelector(".pbrd-ec-tv-overlay");
-      var poster = card.querySelector(".pbrd-ec-tv-poster");
-      var playing = false;
-
-      playBtn.addEventListener("click", function () {
-        if (!playing) {
-          video.play();
-          playing = true;
-          playBtn.style.opacity = "0";
-          poster.style.opacity = "0";
-          overlay.style.opacity = "0.3";
-          video.style.opacity = "1";
-        } else {
-          video.pause();
-          playing = false;
-          playBtn.style.opacity = "1";
-          poster.style.opacity = "1";
-          overlay.style.opacity = "1";
-          video.style.opacity = "0";
-        }
-      });
-
-      /* Also toggle on video click */
-      video.addEventListener("click", function () { playBtn.click(); });
-
-      video.addEventListener("ended", function () {
-        playing = false;
-        playBtn.style.opacity = "1";
-        poster.style.opacity = "1";
-        overlay.style.opacity = "1";
-        video.style.opacity = "0";
-      });
-    });
-
-    /* Pause videos when scrolled away */
+    /* Autoplay videos when visible, pause when not */
     if ("IntersectionObserver" in window) {
       section.querySelectorAll(".pbrd-ec-tv-video").forEach(function (vid) {
         new IntersectionObserver(function (entries) {
-          if (!entries[0].isIntersecting && !vid.paused) {
+          if (entries[0].isIntersecting) {
+            vid.play().catch(function () {});
+          } else {
             vid.pause();
-            var card = vid.closest(".pbrd-ec-tvcard");
-            if (card) {
-              card.querySelector(".pbrd-ec-tv-play").style.opacity = "1";
-              card.querySelector(".pbrd-ec-tv-poster").style.opacity = "1";
-              card.querySelector(".pbrd-ec-tv-overlay").style.opacity = "1";
-              vid.style.opacity = "0";
-            }
           }
-        }, { threshold: 0.1 }).observe(vid);
+        }, { threshold: 0.3 }).observe(vid);
       });
     }
+
+    /* Click video to expand fullscreen */
+    section.querySelectorAll(".pbrd-ec-tv-video-side").forEach(function (side) {
+      side.addEventListener("click", function () {
+        var vid = side.querySelector("video");
+        if (!vid) return;
+        /* Unmute for expanded view */
+        vid.muted = false;
+        if (vid.requestFullscreen) vid.requestFullscreen();
+        else if (vid.webkitEnterFullScreen) vid.webkitEnterFullScreen();
+
+        /* Re-mute when exiting fullscreen */
+        function onFSChange() {
+          if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+            vid.muted = true;
+            document.removeEventListener("fullscreenchange", onFSChange);
+            document.removeEventListener("webkitfullscreenchange", onFSChange);
+          }
+        }
+        document.addEventListener("fullscreenchange", onFSChange);
+        document.addEventListener("webkitfullscreenchange", onFSChange);
+      });
+    });
   }
 
   /* ═══════════════════════════════════════════ */
