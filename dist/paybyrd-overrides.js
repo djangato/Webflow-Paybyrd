@@ -4478,7 +4478,317 @@
   }
 
   /* ═══════════════════════════════════════════ */
-  /* Section 9: CTA Enhancement                */
+  /* Section 9: AI Support Enhancement         */
+  /* ═══════════════════════════════════════════ */
+
+  function enhanceAI() {
+    var section = findSectionByHeading("let ai support");
+    if (!section) return;
+
+    var container = section.querySelector(".u-container, [class*='container']") || section;
+    var children = container.children;
+    for (var c = 0; c < children.length; c++) children[c].style.display = "none";
+
+    var aiWrap = document.createElement("div");
+    aiWrap.className = "pbrd-ec-ai-wrap";
+
+    /* ── Chat scenarios ── */
+    var chatScenarios = [
+      { user: "I\u2019d like a refund for order #ORD-29471", lookup: "Let me look that up\u2026", oid: "#ORD-29471", amt: "\u20AC89.00", stat: "Delivered", offer: "Found it \u2014 delivered April 8. Want me to process the refund?", action: "Process Refund", success: "Refund of \u20AC89.00 processed. You\u2019ll see it in 3\u20135 business days.", newStat: "Refunded" },
+      { user: "Where is my order #ORD-31205?", lookup: "Checking tracking now\u2026", oid: "#ORD-31205", amt: "\u20AC245.50", stat: "In Transit", offer: "Shipped via DHL. Currently in Amsterdam. ETA: April 14.", action: "Get Tracking Link", success: "Tracking link sent to your email.", newStat: "Tracked" },
+      { user: "Change payment to PayPal for #ORD-30882", lookup: "Let me check\u2026", oid: "#ORD-30882", amt: "\u20AC156.00", stat: "Pending", offer: "This order hasn\u2019t been charged. I can switch to PayPal.", action: "Switch to PayPal", success: "Payment updated to PayPal. Confirmation email sent.", newStat: "Updated" }
+    ];
+
+    /* ── Search scenarios ── */
+    var searchScenarios = [
+      { query: "refunds over EUR 100 last week", hint: "Showing 4 refunds > \u20AC100, Apr 5\u201312", results: [
+        { s: "refund", n: "Ana Ferreira", a: "\u20AC245.50", m: "Visa \u2022\u20224821", t: "Apr 11" },
+        { s: "refund", n: "Lukas Weber", a: "\u20AC189.00", m: "PayPal", t: "Apr 10" },
+        { s: "refund", n: "Sophie van Dijk", a: "\u20AC127.30", m: "iDEAL", t: "Apr 8" },
+        { s: "refund", n: "Carlos Mendes", a: "\u20AC312.00", m: "Multibanco", t: "Apr 6" }
+      ], detail: { id: "TXN-847291", a: "\u20AC245.50", cust: "Ana Ferreira", meth: "Visa \u2022\u20224821", stat: "Refunded", date: "April 11, 2026" } },
+      { query: "failed payments today Klarna", hint: "2 failed Klarna transactions found today", results: [
+        { s: "failed", n: "Emma Schmidt", a: "\u20AC67.90", m: "Klarna", t: "14:32" },
+        { s: "failed", n: "Faisal Al-Lawr", a: "\u20AC156.00", m: "Klarna", t: "11:07" },
+        { s: "paid", n: "Marta Silva", a: "\u20AC42.00", m: "Klarna", t: "09:45" },
+        { s: "paid", n: "Jan de Vries", a: "\u20AC89.00", m: "Klarna", t: "08:21" }
+      ], detail: { id: "TXN-847305", a: "\u20AC67.90", cust: "Emma Schmidt", meth: "Klarna", stat: "Failed", date: "April 12, 2026" } },
+      { query: "top customers by volume this month", hint: "Ranked by total volume, April 2026", results: [
+        { s: "paid", n: "Vila Gal\u00E9 Hotels", a: "\u20AC12,450", m: "Multi-method", t: "47 txns" },
+        { s: "paid", n: "Porto Digital", a: "\u20AC8,320", m: "Multi-method", t: "31 txns" },
+        { s: "paid", n: "Worten Online", a: "\u20AC6,180", m: "Multi-method", t: "28 txns" },
+        { s: "paid", n: "Fnac Portugal", a: "\u20AC4,970", m: "Multi-method", t: "19 txns" }
+      ], detail: { id: "CUST-00412", a: "\u20AC12,450", cust: "Vila Gal\u00E9 Hotels", meth: "Visa, PayPal, MBWay", stat: "Active", date: "Since Mar 2024" } }
+    ];
+
+    /* Build result rows HTML */
+    var resultRowsHTML = "";
+    for (var ri = 0; ri < 4; ri++) {
+      resultRowsHTML +=
+        '<div class="pbrd-ec-ai-result" id="pbrd-ai-r' + ri + '">' +
+          '<span class="pbrd-ec-ai-r-dot" id="pbrd-ai-rs' + ri + '"></span>' +
+          '<span class="pbrd-ec-ai-r-name" id="pbrd-ai-rn' + ri + '"></span>' +
+          '<span class="pbrd-ec-ai-r-amt" id="pbrd-ai-ra' + ri + '"></span>' +
+          '<span class="pbrd-ec-ai-r-meth" id="pbrd-ai-rm' + ri + '"></span>' +
+          '<span class="pbrd-ec-ai-r-time" id="pbrd-ai-rt' + ri + '"></span>' +
+        '</div>';
+    }
+
+    aiWrap.innerHTML =
+      /* Header */
+      '<div class="pbrd-ec-ai-header">' +
+        '<h2>AI that turns support tickets into revenue</h2>' +
+        '<p>Every refund request is a retention opportunity. Every search is buying intent. Paybyrd\u2019s AI handles both \u2014 instantly, 24/7, in 30+ languages.</p>' +
+      '</div>' +
+
+      '<div class="pbrd-ec-ai-grid">' +
+
+        /* ── Card 1: Chat ── */
+        '<div class="pbrd-ec-ai-card pbrd-ec-ai-dark pbrd-ec-reveal">' +
+          '<div class="pbrd-ec-ai-visual">' +
+            '<div class="pbrd-ec-ai-chat" id="pbrd-ai-chat">' +
+              '<div class="pbrd-ec-ai-chat-head">' +
+                '<div class="pbrd-ec-ai-chat-avatar">P</div>' +
+                '<div><div class="pbrd-ec-ai-chat-name">Paybyrd Assistant</div>' +
+                '<div class="pbrd-ec-ai-chat-status"><span class="pbrd-ec-ai-dot-live"></span>Online</div></div>' +
+              '</div>' +
+              '<div class="pbrd-ec-ai-chat-body">' +
+                '<div class="pbrd-ec-ai-msg bot" id="pbrd-ai-m0"><span>Hi! How can I help you today?</span></div>' +
+                '<div class="pbrd-ec-ai-msg user" id="pbrd-ai-m1"><span id="pbrd-ai-m1t"></span></div>' +
+                '<div class="pbrd-ec-ai-typing" id="pbrd-ai-typing"><span></span><span></span><span></span></div>' +
+                '<div class="pbrd-ec-ai-msg bot" id="pbrd-ai-m2"><span id="pbrd-ai-m2t"></span></div>' +
+                '<div class="pbrd-ec-ai-msg bot" id="pbrd-ai-m3">' +
+                  '<div class="pbrd-ec-ai-order">' +
+                    '<div class="pbrd-ec-ai-order-row"><span>Order</span><span id="pbrd-ai-oid"></span></div>' +
+                    '<div class="pbrd-ec-ai-order-row"><span>Amount</span><span id="pbrd-ai-oamt"></span></div>' +
+                    '<div class="pbrd-ec-ai-order-row"><span>Status</span><span id="pbrd-ai-ostat"></span></div>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="pbrd-ec-ai-msg bot" id="pbrd-ai-m4"><span id="pbrd-ai-m4t"></span></div>' +
+                '<div class="pbrd-ec-ai-msg bot" id="pbrd-ai-m5"><div class="pbrd-ec-ai-action" id="pbrd-ai-act"></div></div>' +
+                '<div class="pbrd-ec-ai-msg bot" id="pbrd-ai-m6"><span class="pbrd-ec-ai-success-icon">' + checkSVG + '</span><span id="pbrd-ai-m6t"></span></div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="pbrd-ec-ai-body">' +
+            '<h3>Conversational AI that resolves, not deflects</h3>' +
+            '<p>Your AI assistant pulls live order data, processes refunds, and updates shipping \u2014 no agent needed. Handles 73% of tickets automatically.</p>' +
+            '<ul class="pbrd-ec-chk-bullets">' +
+              '<li>' + checkSVG + 'Processes refunds and cancellations in real time</li>' +
+              '<li>' + checkSVG + 'Pulls live order, payment, and shipping data</li>' +
+              '<li>' + checkSVG + 'Escalates complex cases with full context</li>' +
+            '</ul>' +
+          '</div>' +
+        '</div>' +
+
+        /* ── Card 2: Search ── */
+        '<div class="pbrd-ec-ai-card pbrd-ec-ai-light pbrd-ec-reveal">' +
+          '<div class="pbrd-ec-ai-visual">' +
+            '<div class="pbrd-ec-ai-search" id="pbrd-ai-search">' +
+              '<div class="pbrd-ec-ai-search-bar">' +
+                '<svg viewBox="0 0 16 16" fill="none" width="14" height="14"><circle cx="7" cy="7" r="5" stroke="#9CA3AF" stroke-width="1.5"/><path d="M11 11l3 3" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/></svg>' +
+                '<span id="pbrd-ai-sq"></span><span class="pbrd-ec-ai-cursor">|</span>' +
+              '</div>' +
+              '<div class="pbrd-ec-ai-hint" id="pbrd-ai-hint"></div>' +
+              '<div class="pbrd-ec-ai-results">' + resultRowsHTML + '</div>' +
+              '<div class="pbrd-ec-ai-detail" id="pbrd-ai-detail">' +
+                '<div class="pbrd-ec-ai-detail-head"><strong id="pbrd-ai-dt"></strong></div>' +
+                '<div class="pbrd-ec-ai-detail-rows">' +
+                  '<div class="pbrd-ec-ai-detail-row"><span>ID</span><span id="pbrd-ai-did"></span></div>' +
+                  '<div class="pbrd-ec-ai-detail-row"><span>Amount</span><span id="pbrd-ai-da"></span></div>' +
+                  '<div class="pbrd-ec-ai-detail-row"><span>Customer</span><span id="pbrd-ai-dc"></span></div>' +
+                  '<div class="pbrd-ec-ai-detail-row"><span>Method</span><span id="pbrd-ai-dm"></span></div>' +
+                  '<div class="pbrd-ec-ai-detail-row"><span>Status</span><span id="pbrd-ai-ds"></span></div>' +
+                  '<div class="pbrd-ec-ai-detail-row"><span>Date</span><span id="pbrd-ai-dd"></span></div>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="pbrd-ec-ai-body">' +
+            '<h3>Find any transaction in seconds</h3>' +
+            '<p>Natural language search across millions of transactions. Ask \u201Crefunds over \u20AC100 last week\u201D and get instant results \u2014 no filters, no dropdowns.</p>' +
+            '<ul class="pbrd-ec-chk-bullets">' +
+              '<li>' + checkSVG + 'Natural language \u2014 search like you think</li>' +
+              '<li>' + checkSVG + 'Cross-references orders, customers, and payments</li>' +
+              '<li>' + checkSVG + 'Instant drill-down with one-click actions</li>' +
+            '</ul>' +
+          '</div>' +
+        '</div>' +
+
+      '</div>';
+
+    container.appendChild(aiWrap);
+    section.style.background = "#fff";
+    observeReveal(".pbrd-ec-reveal", 150, aiWrap);
+
+    /* ── Chat animation ── */
+    var chatIdx = 0;
+    var msgs = ["pbrd-ai-m0","pbrd-ai-m1","pbrd-ai-m2","pbrd-ai-m3","pbrd-ai-m4","pbrd-ai-m5","pbrd-ai-m6"];
+
+    function hideAllMsgs() {
+      msgs.forEach(function (id) { var el = document.getElementById(id); if (el) el.style.opacity = "0"; });
+      var typing = document.getElementById("pbrd-ai-typing");
+      if (typing) typing.style.display = "none";
+    }
+
+    function showMsg(id, cb, delay) {
+      setTimeout(function () {
+        var el = document.getElementById(id);
+        if (el) el.style.opacity = "1";
+        if (cb) cb();
+      }, delay || 0);
+    }
+
+    function runChatAnim() {
+      var s = chatScenarios[chatIdx % chatScenarios.length];
+      chatIdx++;
+      hideAllMsgs();
+
+      /* Reset text */
+      var m1t = document.getElementById("pbrd-ai-m1t");
+      var m2t = document.getElementById("pbrd-ai-m2t");
+      var m4t = document.getElementById("pbrd-ai-m4t");
+      var m6t = document.getElementById("pbrd-ai-m6t");
+      var oid = document.getElementById("pbrd-ai-oid");
+      var oamt = document.getElementById("pbrd-ai-oamt");
+      var ostat = document.getElementById("pbrd-ai-ostat");
+      var act = document.getElementById("pbrd-ai-act");
+      var typing = document.getElementById("pbrd-ai-typing");
+      if (m1t) m1t.textContent = "";
+      if (m2t) m2t.textContent = "";
+      if (m4t) m4t.textContent = "";
+      if (m6t) m6t.textContent = "";
+
+      showMsg("pbrd-ai-m0", function () {
+        /* User types */
+        showMsg("pbrd-ai-m1", function () {
+          typeText(m1t, s.user, 400, function () {
+            /* Typing indicator */
+            if (typing) { typing.style.display = "flex"; typing.style.opacity = "1"; }
+            setTimeout(function () {
+              if (typing) typing.style.display = "none";
+              /* Bot: lookup */
+              if (m2t) m2t.textContent = s.lookup;
+              showMsg("pbrd-ai-m2", function () {
+                /* Order card */
+                if (oid) oid.textContent = s.oid;
+                if (oamt) oamt.textContent = s.amt;
+                if (ostat) { ostat.textContent = s.stat; ostat.className = ""; }
+                showMsg("pbrd-ai-m3", function () {
+                  /* Bot: offer */
+                  if (m4t) m4t.textContent = s.offer;
+                  showMsg("pbrd-ai-m4", function () {
+                    /* Action button */
+                    if (act) act.innerHTML = '<div class="pbrd-ec-ai-act-btn">' + s.action + '</div>';
+                    showMsg("pbrd-ai-m5", function () {
+                      setTimeout(function () {
+                        /* "Click" the button */
+                        var btn = act ? act.querySelector(".pbrd-ec-ai-act-btn") : null;
+                        if (btn) btn.style.background = "#059669";
+                        setTimeout(function () {
+                          /* Success */
+                          if (m6t) m6t.textContent = s.success;
+                          if (ostat) { ostat.textContent = s.newStat; ostat.style.color = "#059669"; }
+                          showMsg("pbrd-ai-m6", function () {
+                            setTimeout(runChatAnim, 3000);
+                          }, 0);
+                        }, 800);
+                      }, 1500);
+                    }, 600);
+                  }, 800);
+                }, 700);
+              }, 600);
+            }, 1200);
+          });
+        }, 0);
+      }, 600);
+    }
+
+    /* ── Search animation ── */
+    var srchIdx = 0;
+
+    function runSearchAnim() {
+      var s = searchScenarios[srchIdx % searchScenarios.length];
+      srchIdx++;
+
+      var sq = document.getElementById("pbrd-ai-sq");
+      var hint = document.getElementById("pbrd-ai-hint");
+      var detail = document.getElementById("pbrd-ai-detail");
+      if (sq) sq.textContent = "";
+      if (hint) { hint.textContent = ""; hint.style.opacity = "0"; }
+      if (detail) detail.style.opacity = "0";
+      for (var i = 0; i < 4; i++) {
+        var row = document.getElementById("pbrd-ai-r" + i);
+        if (row) { row.style.opacity = "0"; row.classList.remove("active"); }
+      }
+
+      /* Type query */
+      setTimeout(function () {
+        typeText(sq, s.query, 400, function () {
+          /* Show hint */
+          if (hint) { hint.textContent = "AI: " + s.hint; hint.style.opacity = "1"; }
+          /* Show results staggered */
+          var rDelay = 300;
+          s.results.forEach(function (r, idx) {
+            setTimeout(function () {
+              var row = document.getElementById("pbrd-ai-r" + idx);
+              var dot = document.getElementById("pbrd-ai-rs" + idx);
+              var rn = document.getElementById("pbrd-ai-rn" + idx);
+              var ra = document.getElementById("pbrd-ai-ra" + idx);
+              var rm = document.getElementById("pbrd-ai-rm" + idx);
+              var rt = document.getElementById("pbrd-ai-rt" + idx);
+              if (dot) { dot.className = "pbrd-ec-ai-r-dot " + r.s; }
+              if (rn) rn.textContent = r.n;
+              if (ra) ra.textContent = r.a;
+              if (rm) rm.textContent = r.m;
+              if (rt) rt.textContent = r.t;
+              if (row) row.style.opacity = "1";
+            }, rDelay * (idx + 1));
+          });
+
+          /* "Click" first result */
+          setTimeout(function () {
+            var firstRow = document.getElementById("pbrd-ai-r0");
+            if (firstRow) firstRow.classList.add("active");
+            /* Show detail */
+            setTimeout(function () {
+              var dt = document.getElementById("pbrd-ai-dt");
+              var did = document.getElementById("pbrd-ai-did");
+              var da = document.getElementById("pbrd-ai-da");
+              var dc = document.getElementById("pbrd-ai-dc");
+              var dm = document.getElementById("pbrd-ai-dm");
+              var ds = document.getElementById("pbrd-ai-ds");
+              var dd = document.getElementById("pbrd-ai-dd");
+              if (dt) dt.textContent = s.detail.cust;
+              if (did) did.textContent = s.detail.id;
+              if (da) da.textContent = s.detail.a;
+              if (dc) dc.textContent = s.detail.cust;
+              if (dm) dm.textContent = s.detail.meth;
+              if (ds) { ds.textContent = s.detail.stat; ds.className = "pbrd-ec-ai-r-dot " + (s.detail.stat === "Refunded" || s.detail.stat === "Failed" ? (s.detail.stat === "Failed" ? "failed" : "refund") : "paid"); }
+              if (dd) dd.textContent = s.detail.date;
+              if (detail) detail.style.opacity = "1";
+              /* Wait then restart */
+              setTimeout(runSearchAnim, 3500);
+            }, 500);
+          }, 2000);
+        });
+      }, 500);
+    }
+
+    /* ── Trigger on scroll ── */
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) {
+          runChatAnim();
+          runSearchAnim();
+          this.disconnect();
+        }
+      }, { threshold: 0.15 }).observe(aiWrap);
+    }
+  }
+
+  /* ═══════════════════════════════════════════ */
+  /* Section 10: CTA Enhancement               */
   /* ═══════════════════════════════════════════ */
 
   function enhanceCTA() {
@@ -4525,6 +4835,7 @@
     enhanceIntegrations();
     enhanceJourney();
     buildTestimonials();
+    enhanceAI();
     enhanceCTA();
     console.log("[Paybyrd] E-commerce enhancements loaded");
   }
