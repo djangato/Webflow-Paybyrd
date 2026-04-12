@@ -6420,10 +6420,13 @@ a.glowing_button_link .glowing_button_text {
   justify-content: center;
   gap: 16px;
   flex-wrap: wrap;
-  margin-top: 56px;
+  margin-top: 80px;
+  padding-top: 40px;
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
+  position: relative;
+  z-index: 3;
 }
 
 /* Reuses .pbrd-oc-int-pill from omnichannel */
@@ -6436,8 +6439,7 @@ a.glowing_button_link .glowing_button_text {
   width: 900px;
   position: absolute;
   right: 2%;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 0;
   font-family: Inter, -apple-system, sans-serif;
   overflow: hidden;
   display: flex;
