@@ -1308,8 +1308,8 @@
       },
       {
         quote: "700+ routes, thousands of daily ticket purchases \u2014 and every single one needs to clear instantly. Paybyrd gave us the speed and reliability our passengers expect, with zero downtime during peak booking windows.",
-        name: "Pedro Santos",
-        title: "Head of Digital",
+        name: "Nelson Silva",
+        title: "General Manager & IT Director",
         company: "Rede Expressos",
         stat: "Seamless ticketing across 700+ routes",
         logo: LOGOS + "69d9242bbde99c4b80e41dd3_rede%20expresso.png",
