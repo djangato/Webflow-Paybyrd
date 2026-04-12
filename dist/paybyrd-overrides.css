@@ -6420,7 +6420,7 @@ a.glowing_button_link .glowing_button_text {
   justify-content: center;
   gap: 16px;
   flex-wrap: wrap;
-  margin-top: 32px;
+  margin-top: 56px;
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
@@ -6446,10 +6446,10 @@ a.glowing_button_link .glowing_button_text {
 
 /* Sidebar */
 .pbrd-ec-ld-sidebar {
-  width: 160px;
+  width: 170px;
   background: #fff;
   border-right: 1px solid #E5E7EB;
-  padding: 12px 8px;
+  padding: 18px 10px;
   flex-shrink: 0;
 }
 
@@ -6476,9 +6476,9 @@ a.glowing_button_link .glowing_button_text {
   gap: 8px;
   font-size: 0.625rem;
   color: #6B7280;
-  padding: 5px 8px;
+  padding: 7px 8px;
   border-radius: 6px;
-  margin-bottom: 1px;
+  margin-bottom: 2px;
   font-weight: 500;
 }
 
@@ -6503,7 +6503,7 @@ a.glowing_button_link .glowing_button_text {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  padding: 14px 16px 10px;
+  padding: 18px 18px 14px;
   background: #fff;
   border-bottom: 1px solid #E5E7EB;
 }
@@ -6534,14 +6534,14 @@ a.glowing_button_link .glowing_button_text {
 /* Volume cards */
 .pbrd-ec-ld-cards {
   display: flex;
-  gap: 8px;
-  padding: 12px 14px 8px;
+  gap: 10px;
+  padding: 16px 16px 10px;
 }
 
 .pbrd-ec-ld-vol-card {
   flex: 1;
   border-radius: 10px;
-  padding: 12px 14px;
+  padding: 16px 16px;
   color: #fff;
 }
 
@@ -6584,15 +6584,15 @@ a.glowing_button_link .glowing_button_text {
 /* Bottom panels */
 .pbrd-ec-ld-bottom {
   display: flex;
-  gap: 8px;
-  padding: 0 14px 14px;
+  gap: 10px;
+  padding: 4px 16px 18px;
 }
 
 .pbrd-ec-ld-panel {
   flex: 1;
   background: #fff;
   border-radius: 10px;
-  padding: 12px;
+  padding: 14px;
   border: 1px solid #E5E7EB;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
@@ -6620,7 +6620,7 @@ a.glowing_button_link .glowing_button_text {
 .pbrd-ec-ld-accept {
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 9px;
 }
 
 .pbrd-ec-ld-accept-row {
@@ -6677,7 +6677,7 @@ a.glowing_button_link .glowing_button_text {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 0;
+  padding: 8px 0;
   font-size: 0.5625rem;
   color: #6B7280;
   border-bottom: 1px solid #F3F4F6;
