@@ -6982,6 +6982,9 @@ a.glowing_button_link .glowing_button_text {
 
 .pbrd-ec-chk-bullets li svg {
   flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: #8B5CF6;
 }
 
 .pbrd-ec-chk-link {
@@ -7283,10 +7286,7 @@ a.glowing_button_link .glowing_button_text {
   margin-top: 4px;
 }
 
-/* Checkout card check bullets color */
-.pbrd-ec-chk-bullets li svg {
-  color: #8B5CF6;
-}
+
 
 /* Responsive */
 @media (max-width: 768px) {
