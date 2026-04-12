@@ -6431,11 +6431,11 @@ a.glowing_button_link .glowing_button_text {
 /* Live Dashboard Mockup — High Fidelity */
 .pbrd-ec-live-dash {
   background: #F9FAFB;
-  border-radius: 12px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
-  width: 744px;
+  border-radius: 14px;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.06), 0 0 120px rgba(43, 111, 237, 0.1);
+  width: 900px;
   position: absolute;
-  right: 15%;
+  right: 2%;
   top: 50%;
   transform: translateY(-50%);
   font-family: Inter, -apple-system, sans-serif;
