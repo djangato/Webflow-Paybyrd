@@ -4040,7 +4040,7 @@
             '<div class="pbrd-ec-chk-form-overlay">' +
               '<div class="pbrd-ec-paybyrd-chk" id="pbrd-ec-live-chk">' +
                 '<div class="pbrd-ec-pchk-head">' +
-                  '<img src="' + LOGOS + '69d9242bbde99c4b80e41dcc_tap-logo.svg" alt="TAP" style="height:6px;max-height:6px;width:auto;filter:brightness(10)">' +
+                  '<img src="' + LOGOS + '69d9242bbde99c4b80e41dcc_tap-logo.svg" alt="TAP" style="height:8px;max-height:8px;width:auto;filter:brightness(10)">' +
                   '<div class="pbrd-ec-pchk-amount">\u20AC347.00</div>' +
                   '<div class="pbrd-ec-pchk-ref">Order #TAP-29471</div>' +
                 '</div>' +
@@ -4200,6 +4200,19 @@
     newSection.appendChild(wrap);
     observeReveal(".pbrd-ec-reveal", 150, wrap);
 
+    /* ─── Shared typing animation ─── */
+    function typeText(el, text, delay, cb) {
+      var i = 0;
+      function tick() {
+        if (i <= text.length) {
+          el.textContent = text.substring(0, i);
+          i++;
+          setTimeout(tick, 60 + Math.random() * 40);
+        } else if (cb) { setTimeout(cb, delay || 300); }
+      }
+      tick();
+    }
+
     /* ─── Checkout form fill animation ─── */
     var chkEl = document.getElementById("pbrd-ec-live-chk");
     if (chkEl) {
@@ -4208,18 +4221,6 @@
       var cvcEl = document.getElementById("pbrd-pchk-cvc");
       var nameEl = document.getElementById("pbrd-pchk-name");
       var btnEl = document.getElementById("pbrd-pchk-btn");
-
-      function typeText(el, text, delay, cb) {
-        var i = 0;
-        function tick() {
-          if (i <= text.length) {
-            el.textContent = text.substring(0, i);
-            i++;
-            setTimeout(tick, 60 + Math.random() * 40);
-          } else if (cb) { setTimeout(cb, delay || 300); }
-        }
-        tick();
-      }
 
       function runCheckoutAnim() {
         /* Reset */
