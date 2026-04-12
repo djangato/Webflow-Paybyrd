@@ -4038,30 +4038,27 @@
           '<div class="pbrd-ec-chk-card-visual pbrd-ec-chk-vis-checkout">' +
             '<img src="' + BASE + 'ecommerce/tapcheckout.png" alt="TAP Air Portugal" class="pbrd-ec-chk-bg-img">' +
             '<div class="pbrd-ec-chk-form-overlay">' +
-              '<div class="pbrd-ec-paybyrd-chk">' +
-                /* Dark header with logo + amount */
+              '<div class="pbrd-ec-paybyrd-chk" id="pbrd-ec-live-chk">' +
                 '<div class="pbrd-ec-pchk-head">' +
-                  '<img src="' + LOGOS + '69d9242bbde99c4b80e41dcc_tap-logo.svg" alt="TAP" style="height:16px;filter:brightness(10)">' +
+                  '<img src="' + LOGOS + '69d9242bbde99c4b80e41dcc_tap-logo.svg" alt="TAP" style="height:12px;filter:brightness(10)">' +
                   '<div class="pbrd-ec-pchk-amount">\u20AC347.00</div>' +
                   '<div class="pbrd-ec-pchk-ref">Order #TAP-29471</div>' +
                 '</div>' +
-                /* Payment method tabs */
                 '<div class="pbrd-ec-pchk-tabs">' +
-                  '<div class="pbrd-ec-pchk-tab active"><img src="' + ICON + 'visa.png" style="height:14px"></div>' +
-                  '<div class="pbrd-ec-pchk-tab"><img src="' + ICON + 'applepay.png" style="height:14px"></div>' +
-                  '<div class="pbrd-ec-pchk-tab"><img src="' + ICON + 'mbway.png" style="height:14px"></div>' +
-                  '<div class="pbrd-ec-pchk-tab"><img src="' + ICON + 'paypal.png" style="height:14px"></div>' +
+                  '<div class="pbrd-ec-pchk-tab active"><img src="' + ICON + 'visa.png" style="height:12px"></div>' +
+                  '<div class="pbrd-ec-pchk-tab"><img src="' + ICON + 'applepay.png" style="height:12px"></div>' +
+                  '<div class="pbrd-ec-pchk-tab"><img src="' + ICON + 'mbway.png" style="height:12px"></div>' +
+                  '<div class="pbrd-ec-pchk-tab"><img src="' + ICON + 'paypal.png" style="height:12px"></div>' +
                 '</div>' +
-                /* Card form */
                 '<div class="pbrd-ec-pchk-form">' +
-                  '<div class="pbrd-ec-pchk-field"><label>Card number</label><div class="pbrd-ec-pchk-input">4821 3829 \u2022\u2022\u2022\u2022 7392</div></div>' +
+                  '<div class="pbrd-ec-pchk-field"><label>Card number</label><div class="pbrd-ec-pchk-input" id="pbrd-pchk-card"></div></div>' +
                   '<div class="pbrd-ec-pchk-row">' +
-                    '<div class="pbrd-ec-pchk-field"><label>Expiry</label><div class="pbrd-ec-pchk-input">09 / 28</div></div>' +
-                    '<div class="pbrd-ec-pchk-field"><label>CVC</label><div class="pbrd-ec-pchk-input">\u2022\u2022\u2022</div></div>' +
+                    '<div class="pbrd-ec-pchk-field"><label>Expiry</label><div class="pbrd-ec-pchk-input" id="pbrd-pchk-exp"></div></div>' +
+                    '<div class="pbrd-ec-pchk-field"><label>CVC</label><div class="pbrd-ec-pchk-input" id="pbrd-pchk-cvc"></div></div>' +
                   '</div>' +
-                  '<div class="pbrd-ec-pchk-field"><label>Cardholder name</label><div class="pbrd-ec-pchk-input">Ana Ferreira</div></div>' +
+                  '<div class="pbrd-ec-pchk-field"><label>Name</label><div class="pbrd-ec-pchk-input" id="pbrd-pchk-name"></div></div>' +
                 '</div>' +
-                '<div class="pbrd-ec-pchk-btn">Pay \u20AC347.00</div>' +
+                '<div class="pbrd-ec-pchk-btn" id="pbrd-pchk-btn">Pay \u20AC347.00</div>' +
                 '<div class="pbrd-ec-pchk-powered">Powered by <strong>Paybyrd</strong></div>' +
               '</div>' +
             '</div>' +
@@ -4205,8 +4202,72 @@
       '</div>';
 
     newSection.appendChild(wrap);
-
     observeReveal(".pbrd-ec-reveal", 150, wrap);
+
+    /* ─── Checkout form fill animation ─── */
+    var chkEl = document.getElementById("pbrd-ec-live-chk");
+    if (chkEl) {
+      var cardEl = document.getElementById("pbrd-pchk-card");
+      var expEl = document.getElementById("pbrd-pchk-exp");
+      var cvcEl = document.getElementById("pbrd-pchk-cvc");
+      var nameEl = document.getElementById("pbrd-pchk-name");
+      var btnEl = document.getElementById("pbrd-pchk-btn");
+
+      function typeText(el, text, delay, cb) {
+        var i = 0;
+        function tick() {
+          if (i <= text.length) {
+            el.textContent = text.substring(0, i);
+            i++;
+            setTimeout(tick, 60 + Math.random() * 40);
+          } else if (cb) { setTimeout(cb, delay || 300); }
+        }
+        tick();
+      }
+
+      function runCheckoutAnim() {
+        /* Reset */
+        cardEl.textContent = "";
+        expEl.textContent = "";
+        cvcEl.textContent = "";
+        nameEl.textContent = "";
+        btnEl.textContent = "Pay \u20AC347.00";
+        btnEl.style.background = "";
+        chkEl.querySelector(".pbrd-ec-pchk-form").style.display = "";
+
+        /* Type card → expiry → cvc → name → pay → success */
+        setTimeout(function () {
+          typeText(cardEl, "4821 3829 4455 7392", 400, function () {
+            typeText(expEl, "09/28", 300, function () {
+              typeText(cvcEl, "\u2022\u2022\u2022", 300, function () {
+                typeText(nameEl, "Ana Ferreira", 600, function () {
+                  /* Click pay */
+                  btnEl.textContent = "Processing\u2026";
+                  btnEl.style.opacity = "0.7";
+                  setTimeout(function () {
+                    btnEl.textContent = "\u2713 Payment successful";
+                    btnEl.style.background = "#059669";
+                    btnEl.style.opacity = "1";
+                    /* Wait then restart */
+                    setTimeout(runCheckoutAnim, 3000);
+                  }, 1800);
+                });
+              });
+            });
+          });
+        }, 800);
+      }
+
+      /* Only animate when visible */
+      if ("IntersectionObserver" in window) {
+        new IntersectionObserver(function (entries) {
+          if (entries[0].isIntersecting) {
+            runCheckoutAnim();
+            this.disconnect();
+          }
+        }, { threshold: 0.3 }).observe(chkEl);
+      }
+    }
   }
 
   /* ═══════════════════════════════════════════ */
