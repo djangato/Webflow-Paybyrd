@@ -6505,7 +6505,7 @@ a.glowing_button_link .glowing_button_text {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  padding: 18px 18px 14px;
+  padding: 20px 18px 16px;
   background: #fff;
   border-bottom: 1px solid #E5E7EB;
 }
@@ -6544,7 +6544,7 @@ a.glowing_button_link .glowing_button_text {
 .pbrd-ec-ld-vol-card {
   flex: 1;
   border-radius: 10px;
-  padding: 16px 16px;
+  padding: 18px 16px;
   color: #fff;
 }
 
@@ -6588,14 +6588,14 @@ a.glowing_button_link .glowing_button_text {
 .pbrd-ec-ld-bottom {
   display: flex;
   gap: 10px;
-  padding: 4px 16px 18px;
+  padding: 6px 16px 22px;
 }
 
 .pbrd-ec-ld-panel {
   flex: 1;
   background: #fff;
   border-radius: 10px;
-  padding: 14px;
+  padding: 16px;
   border: 1px solid #E5E7EB;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
@@ -6604,7 +6604,7 @@ a.glowing_button_link .glowing_button_text {
   font-size: 0.5625rem;
   font-weight: 600;
   color: #111827;
-  margin-bottom: 10px;
+  margin-bottom: 14px;
   display: flex;
   align-items: center;
   justify-content: space-between;

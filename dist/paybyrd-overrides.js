@@ -3810,7 +3810,7 @@
           /* Top bar */
           '<div class="pbrd-ec-ld-topbar">' +
             '<div>' +
-              '<div class="pbrd-ec-ld-greeting">Good morning, aires.sebastiao</div>' +
+              '<div class="pbrd-ec-ld-greeting">Good morning, Ana Ferreira</div>' +
               '<div class="pbrd-ec-ld-sub">Here\u2019s your business overview.</div>' +
             '</div>' +
             '<div class="pbrd-ec-ld-search"><svg viewBox="0 0 16 16" fill="none" width="10" height="10"><circle cx="7" cy="7" r="5" stroke="#9CA3AF" stroke-width="1.5"/><path d="M11 11l3 3" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/></svg>Search transactions, orders...</div>' +
@@ -3900,8 +3900,8 @@
 
       /* Rotate greeting name */
       var greetNames = [
-        "aires.sebastiao", "ana.ferreira", "f.al-lawr",
-        "sophie.vandijk", "c.munger", "luca.bianchi"
+        "Ana Ferreira", "Faisal Al-Lawr",
+        "Sophie van Dijk", "Charlie Munger", "Luca Bianchi"
       ];
       var greetIdx = 0;
       var greetEl = dash.querySelector(".pbrd-ec-ld-greeting");
