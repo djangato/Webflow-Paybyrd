@@ -6584,6 +6584,48 @@ a.glowing_button_link .glowing_button_text {
   color: rgba(255, 255, 255, 0.9);
 }
 
+/* Currency volume counters */
+.pbrd-ec-ld-currencies {
+  display: flex;
+  gap: 0;
+  padding: 0 16px;
+  margin-bottom: 8px;
+}
+
+.pbrd-ec-ld-cur {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 10px;
+  background: #fff;
+  border: 1px solid #F3F4F6;
+  font-size: 0.5rem;
+}
+
+.pbrd-ec-ld-cur:first-child { border-radius: 8px 0 0 8px; }
+.pbrd-ec-ld-cur:last-child { border-radius: 0 8px 8px 0; }
+.pbrd-ec-ld-cur + .pbrd-ec-ld-cur { border-left: none; }
+
+.pbrd-ec-ld-cur-flag {
+  font-size: 0.625rem;
+  line-height: 1;
+}
+
+.pbrd-ec-ld-cur-code {
+  font-weight: 700;
+  color: #374151;
+  font-size: 0.4375rem;
+  letter-spacing: 0.03em;
+}
+
+.pbrd-ec-ld-cur-val {
+  color: #111827;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  margin-left: auto;
+}
+
 /* Bottom panels */
 .pbrd-ec-ld-bottom {
   display: flex;
