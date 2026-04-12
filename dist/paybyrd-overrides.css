@@ -6433,9 +6433,8 @@ a.glowing_button_link .glowing_button_text {
   background: #F9FAFB;
   border-radius: 12px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
-  width: 680px;
-  margin-left: auto;
-  margin-right: -40px;
+  width: 780px;
+  margin: 40px auto 0;
   font-family: Inter, -apple-system, sans-serif;
   overflow: hidden;
   display: flex;
@@ -6445,7 +6444,7 @@ a.glowing_button_link .glowing_button_text {
 
 /* Sidebar */
 .pbrd-ec-ld-sidebar {
-  width: 150px;
+  width: 160px;
   background: #fff;
   border-right: 1px solid #E5E7EB;
   padding: 12px 8px;
@@ -6472,8 +6471,8 @@ a.glowing_button_link .glowing_button_text {
 .pbrd-ec-ld-sidebar-item {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.5625rem;
+  gap: 8px;
+  font-size: 0.625rem;
   color: #6B7280;
   padding: 5px 8px;
   border-radius: 6px;
@@ -6508,7 +6507,7 @@ a.glowing_button_link .glowing_button_text {
 }
 
 .pbrd-ec-ld-greeting {
-  font-size: 0.8125rem;
+  font-size: 0.9375rem;
   font-weight: 600;
   color: #111827;
 }
@@ -6562,7 +6561,7 @@ a.glowing_button_link .glowing_button_text {
 }
 
 .pbrd-ec-ld-vol-amount {
-  font-size: 1.375rem;
+  font-size: 1.625rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
@@ -6708,7 +6707,7 @@ a.glowing_button_link .glowing_button_text {
 }
 
 @media (max-width: 900px) {
-  .pbrd-ec-live-dash { width: 100%; margin-right: 0; }
+  .pbrd-ec-live-dash { width: 100%; }
 }
 
 @media (max-width: 768px) {
