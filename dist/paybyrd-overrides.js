@@ -4411,48 +4411,71 @@
   /* ═══════════════════════════════════════════ */
 
   function buildTestimonials() {
+    var CUST = BASE + "customers/";
     var testimonials = [
       {
         quote: "Paybyrd gave us what no other provider could \u2014 a single integration handling 20+ payment methods across 90 markets, with approval rates that recovered millions in revenue we were leaving on the table.",
         name: "Jo\u00E3o Frias",
-        title: "Head of Payments, TAP Air Portugal",
-        logo: LOGOS + "69d9242bbde99c4b80e41dcc_tap-logo.svg"
+        title: "Head of Payments",
+        company: "TAP Air Portugal",
+        stat: "Millions unlocked in new revenue",
+        logo: LOGOS + "69d9242bbde99c4b80e41dcc_tap-logo.svg",
+        video: CUST + "tap.mp4",
+        poster: CUST + "tap-poster.jpg"
       },
       {
-        quote: "Cart abandonment was our biggest leak. After implementing Paybyrd\u2019s checkout with Klarna and local methods like MBWay, we saw conversion jump meaningfully. The right payment method at the right moment makes all the difference.",
+        quote: "Cart abandonment was our biggest leak. After implementing Paybyrd\u2019s checkout with Klarna and local methods like MBWay, we saw conversion jump meaningfully. The right payment method at the right moment changes everything.",
         name: "Rita Faria",
-        title: "CEO, KuantoKusta",
-        logo: LOGOS + "69d9242bbde99c4b80e41dcd_kuanto-logo.svg"
+        title: "CEO",
+        company: "KuantoKusta",
+        stat: "Higher checkout conversion with BNPL",
+        logo: LOGOS + "69d9242bbde99c4b80e41dcd_kuanto-logo.svg",
+        video: CUST + "kuantokusta.mp4",
+        poster: CUST + "kuantokusta-poster.jpg"
       },
       {
-        quote: "Our drop-off rate used to spike at the final step. Since switching to Paybyrd, abandonment dropped 19% and support tickets fell by half. The checkout just works \u2014 fast, clean, and exactly how we want it to look.",
-        name: "Pedro Estiv\u00E3o",
-        title: "Revenue Manager, Alfagar",
-        logo: ""
+        quote: "700+ routes, thousands of daily ticket purchases \u2014 and every single one needs to clear instantly. Paybyrd gave us the speed and reliability our passengers expect, with zero downtime during peak booking windows.",
+        name: "Pedro Santos",
+        title: "Head of Digital",
+        company: "Rede Expressos",
+        stat: "Seamless ticketing across 700+ routes",
+        logo: LOGOS + "69d9242bbde99c4b80e41dd3_rede%20expresso.png",
+        video: CUST + "redeexpressos.mp4",
+        poster: CUST + "redeexpressos-poster.jpg"
       }
     ];
 
-    /* Find existing testimonial section and replace it */
     var existingTestimonial = findSectionByHeading("drop-off") || findSectionByHeading("testimonial");
 
     var section = document.createElement("section");
     section.className = "pbrd-ec-testimonials";
 
-    var left = [testimonials[0], testimonials[2]];
-    var right = [testimonials[1]];
+    var playSVG = '<svg viewBox="0 0 48 48" width="48" height="48" fill="none"><circle cx="24" cy="24" r="24" fill="rgba(255,255,255,0.9)"/><path d="M20 16l12 8-12 8V16z" fill="#111"/></svg>';
 
-    function buildCard(t) {
-      var logoHTML = t.logo ? '<img class="pbrd-ec-tcard-logo" src="' + t.logo + '" alt="' + t.title.split(", ").pop() + '" loading="lazy">' : '';
-      return '<div class="pbrd-ec-tcard">' +
-        '<div class="pbrd-ec-tcard-quote">\u201C</div>' +
-        '<p class="pbrd-ec-tcard-text">' + t.quote + '</p>' +
-        '<div class="pbrd-ec-tcard-divider"></div>' +
-        '<div class="pbrd-ec-tcard-attr">' +
-          '<div><div class="pbrd-ec-tcard-name">' + t.name + '</div><div class="pbrd-ec-tcard-title">' + t.title + '</div></div>' +
-          logoHTML +
+    var cardsHTML = testimonials.map(function (t, idx) {
+      return '<div class="pbrd-ec-tvcard pbrd-ec-reveal" id="pbrd-ec-tv' + idx + '">' +
+        '<div class="pbrd-ec-tv-visual">' +
+          '<img src="' + t.poster + '" alt="' + t.company + '" class="pbrd-ec-tv-poster" loading="lazy">' +
+          '<video class="pbrd-ec-tv-video" preload="none" playsinline muted poster="' + t.poster + '">' +
+            '<source src="' + t.video + '" type="video/mp4">' +
+          '</video>' +
+          '<div class="pbrd-ec-tv-play">' + playSVG + '</div>' +
+          '<div class="pbrd-ec-tv-gradient"></div>' +
+          '<div class="pbrd-ec-tv-overlay">' +
+            '<div class="pbrd-ec-tv-quote">\u201C' + t.quote + '\u201D</div>' +
+            '<div class="pbrd-ec-tv-divider"></div>' +
+            '<div class="pbrd-ec-tv-attr">' +
+              '<img src="' + t.logo + '" alt="' + t.company + '" class="pbrd-ec-tv-logo">' +
+              '<div class="pbrd-ec-tv-info">' +
+                '<div class="pbrd-ec-tv-name">' + t.name + '</div>' +
+                '<div class="pbrd-ec-tv-title">' + t.title + ', ' + t.company + '</div>' +
+              '</div>' +
+              '<div class="pbrd-ec-tv-stat">' + t.stat + '</div>' +
+            '</div>' +
+          '</div>' +
         '</div>' +
       '</div>';
-    }
+    }).join("");
 
     section.innerHTML =
       '<div class="pbrd-ec-testimonials-inner">' +
@@ -4460,21 +4483,73 @@
           '<h2>What merchants say.</h2>' +
           '<p>Don\u2019t take our word for it.</p>' +
         '</div>' +
-        '<div class="pbrd-ec-testimonials-grid">' +
-          '<div class="pbrd-ec-testimonials-col">' + left.map(buildCard).join("") + '</div>' +
-          '<div class="pbrd-ec-testimonials-col">' + right.map(buildCard).join("") + '</div>' +
-        '</div>' +
+        '<div class="pbrd-ec-tv-grid">' + cardsHTML + '</div>' +
       '</div>';
 
     if (existingTestimonial) {
       existingTestimonial.replaceWith(section);
     } else {
-      /* Insert before FAQ or footer */
       var faq = findSectionByHeading("frequently asked");
       if (faq) faq.insertAdjacentElement("beforebegin", section);
     }
 
-    observeReveal(".pbrd-ec-tcard", 150, section);
+    observeReveal(".pbrd-ec-reveal", 150, section);
+
+    /* Video play/pause logic */
+    section.querySelectorAll(".pbrd-ec-tvcard").forEach(function (card) {
+      var video = card.querySelector(".pbrd-ec-tv-video");
+      var playBtn = card.querySelector(".pbrd-ec-tv-play");
+      var overlay = card.querySelector(".pbrd-ec-tv-overlay");
+      var poster = card.querySelector(".pbrd-ec-tv-poster");
+      var playing = false;
+
+      playBtn.addEventListener("click", function () {
+        if (!playing) {
+          video.play();
+          playing = true;
+          playBtn.style.opacity = "0";
+          poster.style.opacity = "0";
+          overlay.style.opacity = "0.3";
+          video.style.opacity = "1";
+        } else {
+          video.pause();
+          playing = false;
+          playBtn.style.opacity = "1";
+          poster.style.opacity = "1";
+          overlay.style.opacity = "1";
+          video.style.opacity = "0";
+        }
+      });
+
+      /* Also toggle on video click */
+      video.addEventListener("click", function () { playBtn.click(); });
+
+      video.addEventListener("ended", function () {
+        playing = false;
+        playBtn.style.opacity = "1";
+        poster.style.opacity = "1";
+        overlay.style.opacity = "1";
+        video.style.opacity = "0";
+      });
+    });
+
+    /* Pause videos when scrolled away */
+    if ("IntersectionObserver" in window) {
+      section.querySelectorAll(".pbrd-ec-tv-video").forEach(function (vid) {
+        new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting && !vid.paused) {
+            vid.pause();
+            var card = vid.closest(".pbrd-ec-tvcard");
+            if (card) {
+              card.querySelector(".pbrd-ec-tv-play").style.opacity = "1";
+              card.querySelector(".pbrd-ec-tv-poster").style.opacity = "1";
+              card.querySelector(".pbrd-ec-tv-overlay").style.opacity = "1";
+              vid.style.opacity = "0";
+            }
+          }
+        }, { threshold: 0.1 }).observe(vid);
+      });
+    }
   }
 
   /* ═══════════════════════════════════════════ */
