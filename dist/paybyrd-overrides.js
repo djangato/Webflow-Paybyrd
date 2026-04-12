@@ -4078,24 +4078,24 @@
         /* Card 2: Custom Components */
         '<div class="pbrd-ec-chk-card pbrd-ec-reveal">' +
           '<div class="pbrd-ec-chk-card-visual">' +
-            '<div class="pbrd-ec-chk-components">' +
+            '<div class="pbrd-ec-chk-components" id="pbrd-ec-comp-vis">' +
               '<div class="pbrd-ec-chk-comp-block pbrd-ec-chk-comp-pop" style="--d:0.1s">' +
                 '<div class="pbrd-ec-chk-comp-label">Payment Method Selector</div>' +
-                '<div class="pbrd-ec-chk-comp-methods">' +
+                '<div class="pbrd-ec-chk-comp-methods" id="pbrd-comp-pills">' +
                   '<div class="pbrd-ec-chk-comp-pill active">Card</div>' +
                   '<div class="pbrd-ec-chk-comp-pill">MBWay</div>' +
                   '<div class="pbrd-ec-chk-comp-pill">PayPal</div>' +
                 '</div>' +
               '</div>' +
               '<div class="pbrd-ec-chk-comp-block pbrd-ec-chk-comp-pop" style="--d:0.25s">' +
-                '<div class="pbrd-ec-chk-comp-label">Card Input</div>' +
-                '<div class="pbrd-ec-chk-comp-input"><span>4821 3829 \u2022\u2022\u2022\u2022 \u2022\u2022\u2022\u2022</span></div>' +
+                '<div class="pbrd-ec-chk-comp-label" id="pbrd-comp-field-label">Card Input</div>' +
+                '<div class="pbrd-ec-chk-comp-input"><span id="pbrd-comp-input"></span></div>' +
               '</div>' +
               '<div class="pbrd-ec-chk-comp-block pbrd-ec-chk-comp-pop" style="--d:0.4s">' +
                 '<div class="pbrd-ec-chk-comp-label">Submit Button</div>' +
-                '<div class="pbrd-ec-chk-comp-submit">Pay now</div>' +
+                '<div class="pbrd-ec-chk-comp-submit" id="pbrd-comp-submit">Pay now</div>' +
               '</div>' +
-              '<div class="pbrd-ec-chk-comp-code pbrd-ec-chk-comp-pop" style="--d:0.55s">' +
+              '<div class="pbrd-ec-chk-comp-code pbrd-ec-chk-comp-pop" style="--d:0.55s" id="pbrd-comp-code">' +
                 '<span class="pbrd-ec-chk-code-ln">1</span><span style="color:#c678dd">import</span> { PaybyrdCheckout } <span style="color:#c678dd">from</span> <span style="color:#98c379">\'@paybyrd/sdk\'</span>' +
                 '<br><span class="pbrd-ec-chk-code-ln">2</span>' +
                 '<br><span class="pbrd-ec-chk-code-ln">3</span><span style="color:#c678dd">const</span> checkout = <span style="color:#c678dd">new</span> <span style="color:#e5c07b">PaybyrdCheckout</span>({' +
@@ -4333,6 +4333,64 @@
             this.disconnect();
           }
         }, { threshold: 0.3 }).observe(mobChk);
+      }
+    }
+
+    /* ─── Components card animation ─── */
+    var compVis = document.getElementById("pbrd-ec-comp-vis");
+    if (compVis) {
+      var compPills = document.getElementById("pbrd-comp-pills");
+      var compInput = document.getElementById("pbrd-comp-input");
+      var compLabel = document.getElementById("pbrd-comp-field-label");
+      var compSubmit = document.getElementById("pbrd-comp-submit");
+
+      var compMethods = [
+        { pill: 0, label: "Card Input", value: "4821 3829 \u2022\u2022\u2022\u2022 7392", btn: "Pay now" },
+        { pill: 1, label: "Phone Number", value: "+351 912 345 678", btn: "Confirm with MBWay" },
+        { pill: 2, label: "Email Address", value: "ana@ferreira.pt", btn: "Continue to PayPal" }
+      ];
+      var compIdx = 0;
+
+      function runCompAnim() {
+        var m = compMethods[compIdx % compMethods.length];
+        compIdx++;
+
+        /* Switch pill */
+        var pills = compPills.querySelectorAll(".pbrd-ec-chk-comp-pill");
+        pills.forEach(function (p) { p.classList.remove("active"); });
+        if (pills[m.pill]) pills[m.pill].classList.add("active");
+
+        /* Update label */
+        compLabel.textContent = m.label;
+        compInput.textContent = "";
+        compSubmit.textContent = m.btn;
+        compSubmit.style.background = "";
+        compSubmit.style.color = "";
+
+        /* Type value */
+        setTimeout(function () {
+          typeText(compInput, m.value, 500, function () {
+            /* Submit */
+            compSubmit.style.opacity = "0.7";
+            compSubmit.textContent = "Processing\u2026";
+            setTimeout(function () {
+              compSubmit.textContent = "\u2713 Success";
+              compSubmit.style.background = "#059669";
+              compSubmit.style.color = "#fff";
+              compSubmit.style.opacity = "1";
+              setTimeout(runCompAnim, 2500);
+            }, 1400);
+          });
+        }, 600);
+      }
+
+      if ("IntersectionObserver" in window) {
+        new IntersectionObserver(function (entries) {
+          if (entries[0].isIntersecting) {
+            runCompAnim();
+            this.disconnect();
+          }
+        }, { threshold: 0.3 }).observe(compVis);
       }
     }
   }

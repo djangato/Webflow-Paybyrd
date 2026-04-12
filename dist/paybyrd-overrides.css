@@ -7214,6 +7214,7 @@ a.glowing_button_link .glowing_button_text {
   border-radius: 8px;
   font-weight: 600;
   font-size: 0.8125rem;
+  transition: background 0.4s, opacity 0.3s;
 }
 
 /* Code snippet */
