@@ -1919,6 +1919,9 @@
     var ctaSection = findSectionByHeading("cut abandonment") || findSectionByHeading("boost conversions");
     if (!ctaSection) return;
 
+    /* Unify background on the Webflow parent section */
+    ctaSection.style.background = "#0a0a0f";
+
     /* Replace its content */
     var container = ctaSection.querySelector(".u-container, [class*='container']") || ctaSection;
 
