@@ -1869,19 +1869,7 @@
     }
     items += '</div>';
 
-    /* Still have questions CTA */
-    var bottom = '<div class="pbrd-ec-faq-bottom">' +
-      '<div class="pbrd-ec-faq-bottom-card">' +
-        '<div class="pbrd-ec-faq-bottom-icon">' +
-          '<svg viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
-        '</div>' +
-        '<h4>Still have questions?</h4>' +
-        '<p>Book a 15-minute call with our payments team. We\u2019ll answer anything \u2014 no pitch deck, just your data.</p>' +
-        '<a href="/book-demo" class="pbrd-ec-faq-contact-btn">Talk to an expert \u2192</a>' +
-      '</div>' +
-    '</div>';
-
-    wrap.innerHTML = header + filters + items + bottom;
+    wrap.innerHTML = header + filters + items;
     container.appendChild(wrap);
 
     /* ── Accordion behaviour ── */
