@@ -866,20 +866,25 @@
   /* ═══════════════════════════════════════════ */
 
   function enhanceJourney() {
+    console.log("[Paybyrd] enhanceJourney: starting");
+
     /* Find the heading */
     var heading = null;
     document.querySelectorAll("h2").forEach(function (h) {
       if (h.textContent.toLowerCase().includes("every part of the journey")) heading = h;
     });
-    if (!heading) return;
+    console.log("[Paybyrd] enhanceJourney: heading=", heading);
+    if (!heading) { console.log("[Paybyrd] enhanceJourney: NO HEADING FOUND"); return; }
 
     /* Find the section and hide it entirely */
     var section = heading.closest("section") || heading.closest(".u-section") || heading.closest("[class*='section']");
-    if (!section) return;
+    console.log("[Paybyrd] enhanceJourney: section=", section, "class=", section && section.className);
+    if (!section) { console.log("[Paybyrd] enhanceJourney: NO SECTION FOUND"); return; }
     section.style.display = "none";
 
     /* Also hide the wrapper div around it (Webflow wraps sections in divs) */
     var sectionParent = section.parentElement;
+    console.log("[Paybyrd] enhanceJourney: parent=", sectionParent && sectionParent.tagName, "children=", sectionParent && sectionParent.children.length);
     if (sectionParent && sectionParent.tagName === "DIV" && sectionParent.children.length === 1) {
       sectionParent.style.display = "none";
     }
@@ -890,6 +895,7 @@
     newSection.style.background = "#fff";
     newSection.style.padding = "80px 0";
     var insertTarget = sectionParent && sectionParent.style.display === "none" ? sectionParent : section;
+    console.log("[Paybyrd] enhanceJourney: insertTarget=", insertTarget, "nextSibling=", insertTarget.nextSibling);
     insertTarget.insertAdjacentElement("afterend", newSection);
 
     var wrap = document.createElement("div");
@@ -1184,21 +1190,11 @@
   /* ═══════════════════════════════════════════ */
 
   function init() {
-    try {
-      enhanceHero();
-      buildLogos();
-      enhanceProblem();
-      enhanceBenefits();
-      /* Section 5: "Data that drives" — enhance copy only */
-      enhanceDataSection();
-      enhanceIntegrations();
-      enhanceJourney();
-      buildTestimonials();
-      enhanceCTA();
-      console.log("[Paybyrd] E-commerce enhancements loaded");
-    } catch (err) {
-      console.error("[Paybyrd] E-commerce error:", err);
-    }
+    var fns = [enhanceHero, buildLogos, enhanceProblem, enhanceBenefits, enhanceDataSection, enhanceIntegrations, enhanceJourney, buildTestimonials, enhanceCTA];
+    fns.forEach(function (fn) {
+      try { fn(); console.log("[Paybyrd] OK: " + fn.name); } catch (e) { console.error("[Paybyrd] FAIL: " + fn.name, e); }
+    });
+    console.log("[Paybyrd] E-commerce enhancements loaded");
   }
 
   if (document.readyState === "complete") {
