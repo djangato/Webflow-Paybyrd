@@ -1119,9 +1119,9 @@
   background: #F9FAFB;
   border-radius: 12px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
-  width: 620px;
+  width: 744px;
   position: absolute;
-  right: 5%;
+  right: 15%;
   top: 50%;
   transform: translateY(-50%);
   font-family: Inter, -apple-system, sans-serif;
