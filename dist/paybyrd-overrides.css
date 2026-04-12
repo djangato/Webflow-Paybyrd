@@ -8640,12 +8640,13 @@ a.glowing_button_link .glowing_button_text {
 /* ═══════════════════════════════════════════ */
 
 .pbrd-ec-cta {
-  background: #0a0a0f;
+  background: #111;
   padding: 80px 24px;
   text-align: center;
   color: #fff;
   position: relative;
   z-index: 1;
+  border-radius: 16px;
 }
 
 .pbrd-ec-cta h2 {
