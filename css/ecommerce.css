@@ -2880,7 +2880,7 @@
 .pbrd-ec-faq-header h2 {
   font-size: clamp(2rem, 3.5vw, 2.75rem);
   font-weight: 700;
-  color: #111;
+  color: #fff;
   letter-spacing: -0.025em;
   line-height: 1.12;
   margin: 0 0 12px;
@@ -2888,7 +2888,7 @@
 
 .pbrd-ec-faq-header p {
   font-size: 1rem;
-  color: #6B7280;
+  color: rgba(255,255,255,0.5);
   line-height: 1.6;
   max-width: 480px;
   margin: 0 auto;
@@ -2906,9 +2906,9 @@
 .pbrd-ec-faq-filter {
   padding: 6px 16px;
   border-radius: 100px;
-  border: 1px solid #E5E7EB;
-  background: #fff;
-  color: #6B7280;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: transparent;
+  color: rgba(255,255,255,0.5);
   font-size: 0.8125rem;
   font-weight: 500;
   cursor: pointer;
@@ -2917,21 +2917,20 @@
 }
 
 .pbrd-ec-faq-filter:hover {
-  border-color: #D1D5DB;
-  color: #374151;
-  background: #F9FAFB;
+  border-color: rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.8);
 }
 
 .pbrd-ec-faq-filter--active {
-  background: #111;
-  color: #fff;
-  border-color: #111;
+  background: #fff;
+  color: #111;
+  border-color: #fff;
 }
 
 .pbrd-ec-faq-filter--active:hover {
-  background: #222;
-  color: #fff;
-  border-color: #222;
+  background: #f0f0f0;
+  color: #111;
+  border-color: #f0f0f0;
 }
 
 /* ─── FAQ list ─── */
@@ -2942,7 +2941,7 @@
 }
 
 .pbrd-ec-faq-item {
-  border-bottom: 1px solid #F0F0F0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
   opacity: 0;
   transform: translateY(12px);
   transition: opacity 0.4s ease, transform 0.4s ease;
@@ -2975,12 +2974,12 @@
   gap: 12px;
   font-size: 1rem;
   font-weight: 500;
-  color: #1F2937;
+  color: rgba(255,255,255,0.8);
   line-height: 1.4;
 }
 
 .pbrd-ec-faq-q:hover .pbrd-ec-faq-q-left {
-  color: #000;
+  color: #fff;
 }
 
 /* Category dots */
@@ -3001,14 +3000,14 @@
 .pbrd-ec-faq-chevron {
   width: 20px;
   height: 20px;
-  color: #9CA3AF;
+  color: rgba(255,255,255,0.3);
   flex-shrink: 0;
   transition: transform 0.3s ease, color 0.2s ease;
 }
 
 .pbrd-ec-faq-item--open .pbrd-ec-faq-chevron {
   transform: rotate(180deg);
-  color: #4B5563;
+  color: rgba(255,255,255,0.6);
 }
 
 /* ─── Answer panel ─── */
@@ -3027,7 +3026,7 @@
 
 .pbrd-ec-faq-a p {
   font-size: 0.9375rem;
-  color: #6B7280;
+  color: rgba(255,255,255,0.45);
   line-height: 1.7;
   margin: 0;
 }
@@ -3038,8 +3037,8 @@
 }
 
 .pbrd-ec-faq-bottom-card {
-  background: #F9FAFB;
-  border: 1px solid #E5E7EB;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
   border-radius: 16px;
   padding: 36px;
   text-align: center;
@@ -3049,7 +3048,7 @@
   width: 48px;
   height: 48px;
   border-radius: 12px;
-  background: #111;
+  background: rgba(255,255,255,0.1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3065,13 +3064,13 @@
 .pbrd-ec-faq-bottom-card h4 {
   font-size: 1.125rem;
   font-weight: 600;
-  color: #111;
+  color: #fff;
   margin: 0 0 8px;
 }
 
 .pbrd-ec-faq-bottom-card p {
   font-size: 0.875rem;
-  color: #6B7280;
+  color: rgba(255,255,255,0.45);
   line-height: 1.6;
   max-width: 400px;
   margin: 0 auto 20px;
@@ -3083,8 +3082,8 @@
   gap: 6px;
   padding: 12px 28px;
   border-radius: 100px;
-  background: #111;
-  color: #fff;
+  background: #fff;
+  color: #111;
   font-size: 0.875rem;
   font-weight: 600;
   text-decoration: none;
@@ -3093,9 +3092,9 @@
 }
 
 .pbrd-ec-faq-contact-btn:hover {
-  background: #222;
+  background: #f0f0f0;
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.1);
 }
 
 /* ═══════════════════════════════════════════ */
