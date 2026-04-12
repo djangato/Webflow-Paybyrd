@@ -3993,28 +3993,31 @@
   /* ═══════════════════════════════════════════ */
 
   function enhanceJourney() {
-    /* Find the section container by matching the h2 heading */
+    /* Find the heading */
     var heading = null;
     document.querySelectorAll("h2").forEach(function (h) {
       if (h.textContent.toLowerCase().includes("every part of the journey")) heading = h;
     });
     if (!heading) return;
 
-    /* Walk up to the u-container or section-level wrapper */
-    var container = heading.closest(".u-container") || heading.closest("[class*='container']");
-    var section = heading.closest("section") || heading.closest(".u-section");
+    /* Find the section and hide it entirely */
+    var section = heading.closest("section") || heading.closest(".u-section") || heading.closest("[class*='section']");
     if (!section) return;
+    section.style.display = "none";
 
-    /* Hide original container content, keep section spacers intact */
-    if (container) {
-      container.style.display = "none";
-    } else {
-      Array.from(section.children).forEach(function (c) {
-        if (!c.classList.contains("u-section-spacer") && !c.classList.contains("u-background-slot")) {
-          c.style.display = "none";
-        }
-      });
+    /* Also hide the wrapper div around it (Webflow wraps sections in divs) */
+    var sectionParent = section.parentElement;
+    if (sectionParent && sectionParent.tagName === "DIV" && sectionParent.children.length === 1) {
+      sectionParent.style.display = "none";
     }
+
+    /* Create a new standalone section and insert it where the old one was */
+    var newSection = document.createElement("section");
+    newSection.className = "pbrd-ec-checkout-section";
+    newSection.style.background = "#fff";
+    newSection.style.padding = "80px 0";
+    var insertTarget = sectionParent && sectionParent.style.display === "none" ? sectionParent : section;
+    insertTarget.insertAdjacentElement("afterend", newSection);
 
     var wrap = document.createElement("div");
     wrap.className = "pbrd-ec-checkout";
@@ -4192,9 +4195,7 @@
 
       '</div>';
 
-    section.appendChild(wrap);
-    section.style.background = "#fff";
-    section.style.padding = "80px 0";
+    newSection.appendChild(wrap);
 
     observeReveal(".pbrd-ec-reveal", 150, wrap);
   }
