@@ -1323,8 +1323,6 @@
     var section = document.createElement("section");
     section.className = "pbrd-ec-testimonials";
 
-    var playSVG = '<svg viewBox="0 0 48 48" width="48" height="48" fill="none"><circle cx="24" cy="24" r="24" fill="rgba(255,255,255,0.9)"/><path d="M20 16l12 8-12 8V16z" fill="#111"/></svg>';
-
     var cardsHTML = testimonials.map(function (t, idx) {
       return '<div class="pbrd-ec-tvcard pbrd-ec-reveal" data-tv-idx="' + idx + '">' +
         /* IG header: avatar + name */
@@ -1335,12 +1333,13 @@
             '<div class="pbrd-ec-tv-title">' + t.title + ' \u2022 ' + t.company + '</div>' +
           '</div>' +
         '</div>' +
-        /* Video/image area */
+        /* Video area — autoplay */
         '<div class="pbrd-ec-tv-visual">' +
-          '<img src="' + t.poster + '" alt="' + t.company + '" class="pbrd-ec-tv-poster" loading="lazy">' +
-          '<div class="pbrd-ec-tv-play">' + playSVG + '</div>' +
+          '<video class="pbrd-ec-tv-vid" loop playsinline muted preload="none" poster="' + t.poster + '">' +
+            '<source src="' + t.video + '" type="video/mp4">' +
+          '</video>' +
         '</div>' +
-        /* Caption area below image */
+        /* Caption area below */
         '<div class="pbrd-ec-tv-caption">' +
           '<div class="pbrd-ec-tv-quote"><strong>' + t.name.split(" ")[0].toLowerCase() + '</strong> \u201C' + t.quote + '\u201D</div>' +
           '<div class="pbrd-ec-tv-tags">' + t.tags + '</div>' +
@@ -1373,19 +1372,29 @@
       '<div class="pbrd-ec-tv-modal-backdrop"></div>' +
       '<div class="pbrd-ec-tv-modal-content">' +
         '<div class="pbrd-ec-tv-modal-close">\u2715</div>' +
+        /* Video side */
         '<div class="pbrd-ec-tv-modal-video">' +
-          '<video id="pbrd-tv-modal-vid" playsinline preload="none"></video>' +
+          '<video id="pbrd-tv-modal-vid" playsinline loop preload="none"></video>' +
         '</div>' +
+        /* IG right panel */
         '<div class="pbrd-ec-tv-modal-card">' +
-          '<div class="pbrd-ec-tv-modal-card-top">' +
-            '<img id="pbrd-tv-modal-logo" alt="">' +
-            '<div id="pbrd-tv-modal-company"></div>' +
+          /* IG header */
+          '<div class="pbrd-ec-tv-modal-ig-header">' +
+            '<img id="pbrd-tv-modal-logo" alt="" class="pbrd-ec-tv-modal-avatar">' +
+            '<div class="pbrd-ec-tv-modal-ig-meta">' +
+              '<div id="pbrd-tv-modal-name" class="pbrd-ec-tv-modal-ig-name"></div>' +
+              '<div id="pbrd-tv-modal-title" class="pbrd-ec-tv-modal-ig-title"></div>' +
+            '</div>' +
           '</div>' +
-          '<div class="pbrd-ec-tv-modal-quote" id="pbrd-tv-modal-quote"></div>' +
-          '<div class="pbrd-ec-tv-modal-card-bottom">' +
-            '<div><div class="pbrd-ec-tv-modal-name" id="pbrd-tv-modal-name"></div>' +
-            '<div class="pbrd-ec-tv-modal-title" id="pbrd-tv-modal-title"></div></div>' +
+          /* Caption */
+          '<div class="pbrd-ec-tv-modal-caption">' +
+            '<div class="pbrd-ec-tv-modal-quote" id="pbrd-tv-modal-quote"></div>' +
+            '<div class="pbrd-ec-tv-modal-tags" id="pbrd-tv-modal-tags"></div>' +
+          '</div>' +
+          /* Bottom stats */
+          '<div class="pbrd-ec-tv-modal-bottom">' +
             '<div class="pbrd-ec-tv-modal-stat" id="pbrd-tv-modal-stat"></div>' +
+            '<div class="pbrd-ec-tv-modal-powered">Powered by <strong>Paybyrd</strong></div>' +
           '</div>' +
         '</div>' +
       '</div>';
@@ -1398,10 +1407,10 @@
       modalVid.src = t.video;
       modalVid.poster = t.poster;
       document.getElementById("pbrd-tv-modal-logo").src = t.logo;
-      document.getElementById("pbrd-tv-modal-company").textContent = t.company;
-      document.getElementById("pbrd-tv-modal-quote").textContent = "\u201C" + t.quote + "\u201D";
       document.getElementById("pbrd-tv-modal-name").textContent = t.name;
-      document.getElementById("pbrd-tv-modal-title").textContent = t.title + ", " + t.company;
+      document.getElementById("pbrd-tv-modal-title").textContent = t.title + " \u2022 " + t.company;
+      document.getElementById("pbrd-tv-modal-quote").innerHTML = '<strong>' + t.name.split(" ")[0].toLowerCase() + '</strong> \u201C' + t.quote + '\u201D';
+      document.getElementById("pbrd-tv-modal-tags").textContent = t.tags;
       document.getElementById("pbrd-tv-modal-stat").textContent = t.stat;
       modal.classList.add("active");
       document.body.style.overflow = "hidden";
@@ -1428,6 +1437,19 @@
         openModal(idx);
       });
     });
+
+    /* Autoplay card videos when visible */
+    if ("IntersectionObserver" in window) {
+      section.querySelectorAll(".pbrd-ec-tv-vid").forEach(function (vid) {
+        new IntersectionObserver(function (entries) {
+          if (entries[0].isIntersecting) {
+            vid.play().catch(function () {});
+          } else {
+            vid.pause();
+          }
+        }, { threshold: 0.3 }).observe(vid);
+      });
+    }
   }
 
   /* ═══════════════════════════════════════════ */
