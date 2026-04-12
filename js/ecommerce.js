@@ -1768,6 +1768,164 @@
   /* Section 10: CTA Enhancement               */
   /* ═══════════════════════════════════════════ */
 
+  /* ═══════════════════════════════════════════ */
+  /* Section 10: FAQ Enhancement                */
+  /* ═══════════════════════════════════════════ */
+
+  function enhanceFAQ() {
+    var section = findSectionByHeading("frequently asked");
+    if (!section) return;
+
+    var container = section.querySelector(".u-container, [class*='container']") || section;
+    var children = container.children;
+    for (var c = 0; c < children.length; c++) children[c].style.display = "none";
+
+    var faqs = [
+      {
+        cat: "Integration",
+        q: "Can I keep my current e-commerce stack?",
+        a: "Absolutely. Paybyrd plugs directly into Shopify, Magento, WooCommerce and any custom stack via a single API. Most merchants go live in under 4 hours \u2014 no re-platforming, no retraining your team, no disruption to your existing workflows."
+      },
+      {
+        cat: "Integration",
+        q: "What payment methods do you support?",
+        a: "Over 40 local and global methods \u2014 Visa, Mastercard, Apple Pay, Google Pay, Klarna, iDEAL, Sofort, MBWay, Pix, Boleto, OXXO and more. Paybyrd automatically surfaces the right methods per market so your customers always see a familiar checkout."
+      },
+      {
+        cat: "Performance",
+        q: "How do you improve my approval rates?",
+        a: "Multi-acquirer routing sends each transaction to the acquirer most likely to approve it. Local acquiring means cards are processed in-country, not cross-border. The result: 4\u20137% higher authorization rates and 10\u201315% lower cross-border fees. We consistently outperform Adyen, Checkout.com and Nuvei in head-to-head comparisons."
+      },
+      {
+        cat: "Performance",
+        q: "How does Paybyrd reduce fraud and chargebacks?",
+        a: "AI-powered screening with velocity checks, shared risk databases, and airtight 3D Secure flows catch fraud before it happens. Our merchants see up to a 16.8% reduction in chargebacks \u2014 meaning less revenue lost and lower processor risk fees."
+      },
+      {
+        cat: "Performance",
+        q: "Will Paybyrd help reduce my cart abandonment?",
+        a: "Yes. The #1 cause of checkout abandonment is friction. Paybyrd provides embedded checkout forms, one-click payments, digital wallets and mobile-first flows that remove every unnecessary step. Faster checkout = higher conversion."
+      },
+      {
+        cat: "Operations",
+        q: "How do refunds work?",
+        a: "Instant. With direct acquirer connectivity, refunds process immediately across most European issuers. Customers get an ARN reference as proof on the spot \u2014 fewer support tickets, fewer disputes, higher trust."
+      },
+      {
+        cat: "Operations",
+        q: "Can I reconcile all my channels in one place?",
+        a: "Yes. Paybyrd\u2019s AI-powered dashboards unify reconciliation across D2C, marketplaces, BNPL and POS. Drill down by channel, SKU, market, or even shift. Gross settlement means predictable payouts \u2014 no more guessing what the fees were."
+      },
+      {
+        cat: "Security",
+        q: "How do you handle PCI compliance?",
+        a: "Paybyrd\u2019s tokenized vault and modular APIs drastically reduce your PCI scope. Your checkout stays PCI-compliant without your team maintaining payment connections, sensitive card data, or regulatory burden. We handle PSD2, SCA, and GDPR so you don\u2019t have to."
+      },
+      {
+        cat: "Growth",
+        q: "Can I expand internationally without payment expertise?",
+        a: "That\u2019s exactly what Paybyrd is built for. We process in 192+ currencies with local acquiring in key markets. Our building-block architecture means you can launch in a new country with the right payment methods, compliance and routing \u2014 all from the same API."
+      },
+      {
+        cat: "Growth",
+        q: "What makes Paybyrd different from Adyen or Stripe?",
+        a: "We\u2019re not trying to be the biggest \u2014 we\u2019re built to be the best for merchants who need more than a generic solution. Premier partner approach: dedicated support, tailored routing strategies, and modular tech that adapts to your business. Our approval rates consistently beat the large processors by 1.7\u20134.9%."
+      }
+    ];
+
+    var categories = ["All", "Integration", "Performance", "Operations", "Security", "Growth"];
+
+    var wrap = document.createElement("div");
+    wrap.className = "pbrd-ec-faq-wrap";
+
+    /* Header */
+    var header = '<div class="pbrd-ec-faq-header">' +
+      '<div class="pbrd-oc-journey-label" style="color:rgba(120,255,180,0.7)">FAQ</div>' +
+      '<h2>Everything you need to know</h2>' +
+      '<p>Get answers to the questions merchants ask most before switching to Paybyrd.</p>' +
+    '</div>';
+
+    /* Category filters */
+    var filters = '<div class="pbrd-ec-faq-filters">';
+    for (var f = 0; f < categories.length; f++) {
+      filters += '<button class="pbrd-ec-faq-filter' + (f === 0 ? ' pbrd-ec-faq-filter--active' : '') + '" data-cat="' + categories[f] + '">' + categories[f] + '</button>';
+    }
+    filters += '</div>';
+
+    /* FAQ items */
+    var items = '<div class="pbrd-ec-faq-list">';
+    for (var i = 0; i < faqs.length; i++) {
+      var faq = faqs[i];
+      items += '<div class="pbrd-ec-faq-item pbrd-ec-faq-reveal" data-cat="' + faq.cat + '">' +
+        '<button class="pbrd-ec-faq-q">' +
+          '<div class="pbrd-ec-faq-q-left">' +
+            '<span class="pbrd-ec-faq-cat-dot pbrd-ec-faq-cat--' + faq.cat.toLowerCase() + '"></span>' +
+            '<span>' + faq.q + '</span>' +
+          '</div>' +
+          '<svg class="pbrd-ec-faq-chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+        '</button>' +
+        '<div class="pbrd-ec-faq-a"><p>' + faq.a + '</p></div>' +
+      '</div>';
+    }
+    items += '</div>';
+
+    /* Still have questions CTA */
+    var bottom = '<div class="pbrd-ec-faq-bottom">' +
+      '<div class="pbrd-ec-faq-bottom-card">' +
+        '<div class="pbrd-ec-faq-bottom-icon">' +
+          '<svg viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+        '</div>' +
+        '<h4>Still have questions?</h4>' +
+        '<p>Book a 15-minute call with our payments team. We\u2019ll answer anything \u2014 no pitch deck, just your data.</p>' +
+        '<a href="/book-demo" class="pbrd-ec-faq-contact-btn">Talk to an expert \u2192</a>' +
+      '</div>' +
+    '</div>';
+
+    wrap.innerHTML = header + filters + items + bottom;
+    container.appendChild(wrap);
+
+    /* ── Accordion behaviour ── */
+    var allItems = wrap.querySelectorAll(".pbrd-ec-faq-item");
+    wrap.querySelectorAll(".pbrd-ec-faq-q").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var item = btn.parentElement;
+        var isOpen = item.classList.contains("pbrd-ec-faq-item--open");
+        /* Close all */
+        allItems.forEach(function (it) { it.classList.remove("pbrd-ec-faq-item--open"); });
+        /* Toggle clicked */
+        if (!isOpen) item.classList.add("pbrd-ec-faq-item--open");
+      });
+    });
+
+    /* ── Category filter behaviour ── */
+    var filterBtns = wrap.querySelectorAll(".pbrd-ec-faq-filter");
+    filterBtns.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        filterBtns.forEach(function (b) { b.classList.remove("pbrd-ec-faq-filter--active"); });
+        btn.classList.add("pbrd-ec-faq-filter--active");
+        var cat = btn.getAttribute("data-cat");
+        allItems.forEach(function (item) {
+          if (cat === "All" || item.getAttribute("data-cat") === cat) {
+            item.style.display = "";
+          } else {
+            item.style.display = "none";
+            item.classList.remove("pbrd-ec-faq-item--open");
+          }
+        });
+      });
+    });
+
+    /* Auto-open first item */
+    if (allItems.length) allItems[0].classList.add("pbrd-ec-faq-item--open");
+
+    /* Scroll-reveal stagger */
+    observeReveal(".pbrd-ec-faq-reveal", 80, wrap);
+  }
+
+  /* ═══════════════════════════════════════════ */
+  /* Section 11: CTA Enhancement                */
+  /* ═══════════════════════════════════════════ */
+
   function enhanceCTA() {
     /* Find existing CTA banner */
     var ctaSection = findSectionByHeading("cut abandonment") || findSectionByHeading("boost conversions");
@@ -1813,6 +1971,7 @@
     enhanceJourney();
     buildTestimonials();
     enhanceAI();
+    enhanceFAQ();
     enhanceCTA();
     console.log("[Paybyrd] E-commerce enhancements loaded");
   }
