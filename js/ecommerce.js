@@ -1291,7 +1291,7 @@
         name: "Jo\u00E3o Frias",
         title: "Head of Payments",
         company: "TAP Air Portugal",
-        stat: "Millions unlocked in new revenue",
+        tags: "#payments #aviation #global #20markets #revenuerecovery",
         logo: LOGOS + "69d9242bbde99c4b80e41dcc_tap-logo.svg",
         video: CUST + "tap.mp4",
         poster: CUST + "tap-poster.jpg"
@@ -1301,7 +1301,7 @@
         name: "Rita Faria",
         title: "CEO",
         company: "KuantoKusta",
-        stat: "Higher checkout conversion with BNPL",
+        tags: "#ecommerce #conversion #BNPL #checkout #MBWay",
         logo: LOGOS + "69d9242bbde99c4b80e41dcd_kuanto-logo.svg",
         video: CUST + "kuantokusta.mp4",
         poster: CUST + "kuantokusta-poster.jpg"
@@ -1311,7 +1311,7 @@
         name: "Nelson Silva",
         title: "General Manager & IT Director",
         company: "Rede Expressos",
-        stat: "Seamless ticketing across 700+ routes",
+        tags: "#transport #ticketing #reliability #700routes #zerdowntime",
         logo: LOGOS + "69d9242bbde99c4b80e41dd3_rede%20expresso.png",
         video: CUST + "redeexpressos.mp4",
         poster: CUST + "redeexpressos-poster.jpg"
@@ -1327,23 +1327,23 @@
 
     var cardsHTML = testimonials.map(function (t, idx) {
       return '<div class="pbrd-ec-tvcard pbrd-ec-reveal" data-tv-idx="' + idx + '">' +
+        /* IG header: avatar + name */
+        '<div class="pbrd-ec-tv-ig-header">' +
+          '<img src="' + t.logo + '" alt="' + t.company + '" class="pbrd-ec-tv-logo">' +
+          '<div class="pbrd-ec-tv-ig-meta">' +
+            '<div class="pbrd-ec-tv-name">' + t.name + '</div>' +
+            '<div class="pbrd-ec-tv-title">' + t.title + ' \u2022 ' + t.company + '</div>' +
+          '</div>' +
+        '</div>' +
+        /* Video/image area */
         '<div class="pbrd-ec-tv-visual">' +
           '<img src="' + t.poster + '" alt="' + t.company + '" class="pbrd-ec-tv-poster" loading="lazy">' +
           '<div class="pbrd-ec-tv-play">' + playSVG + '</div>' +
-          '<div class="pbrd-ec-tv-gradient"></div>' +
-          '<div class="pbrd-ec-tv-overlay">' +
-            /* IG-style: logo + name header at top */
-            '<div class="pbrd-ec-tv-ig-header">' +
-              '<img src="' + t.logo + '" alt="' + t.company + '" class="pbrd-ec-tv-logo">' +
-              '<div class="pbrd-ec-tv-ig-meta">' +
-                '<div class="pbrd-ec-tv-name">' + t.name + '</div>' +
-                '<div class="pbrd-ec-tv-title">' + t.title + ', ' + t.company + '</div>' +
-              '</div>' +
-            '</div>' +
-            /* Caption-style quote */
-            '<div class="pbrd-ec-tv-quote">\u201C' + t.quote + '\u201D</div>' +
-            '<div class="pbrd-ec-tv-stat-tag">' + t.stat + '</div>' +
-          '</div>' +
+        '</div>' +
+        /* Caption area below image */
+        '<div class="pbrd-ec-tv-caption">' +
+          '<div class="pbrd-ec-tv-quote"><strong>' + t.name.split(" ")[0].toLowerCase() + '</strong> \u201C' + t.quote + '\u201D</div>' +
+          '<div class="pbrd-ec-tv-tags">' + t.tags + '</div>' +
         '</div>' +
       '</div>';
     }).join("");
