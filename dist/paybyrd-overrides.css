@@ -7979,55 +7979,53 @@ a.glowing_button_link .glowing_button_text {
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 20px;
+  padding: 18px;
   z-index: 2;
 }
 
-.pbrd-ec-tv-quote {
-  font-size: 0.8125rem;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.9);
-  font-style: italic;
-  margin-bottom: 14px;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.pbrd-ec-tv-divider {
-  height: 1px;
-  background: rgba(255, 255, 255, 0.15);
-  margin-bottom: 12px;
-}
-
-.pbrd-ec-tv-attr {
+/* IG-style header: logo + name/title */
+.pbrd-ec-tv-ig-header {
   display: flex;
   align-items: center;
   gap: 10px;
+  margin-bottom: 10px;
 }
 
 .pbrd-ec-tv-logo {
-  height: 18px;
-  width: auto;
-  max-width: 56px;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
   object-fit: contain;
-  filter: brightness(10);
-  opacity: 0.7;
+  background: #fff;
+  padding: 2px;
   flex-shrink: 0;
 }
 
-.pbrd-ec-tv-info { flex: 1; min-width: 0; }
+.pbrd-ec-tv-ig-meta { flex: 1; min-width: 0; }
 
 .pbrd-ec-tv-name {
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 700;
   color: #fff;
 }
 
 .pbrd-ec-tv-title {
   font-size: 0.5625rem;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.pbrd-ec-tv-quote {
+  font-size: 0.75rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 8px;
+}
+
+.pbrd-ec-tv-stat-tag {
+  display: inline-block;
+  font-size: 0.5625rem;
+  font-weight: 600;
+  color: rgba(120, 255, 180, 0.8);
 }
 
 /* ── Instagram-style Modal ── */

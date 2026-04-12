@@ -1332,15 +1332,17 @@
           '<div class="pbrd-ec-tv-play">' + playSVG + '</div>' +
           '<div class="pbrd-ec-tv-gradient"></div>' +
           '<div class="pbrd-ec-tv-overlay">' +
-            '<div class="pbrd-ec-tv-quote">\u201C' + t.quote + '\u201D</div>' +
-            '<div class="pbrd-ec-tv-divider"></div>' +
-            '<div class="pbrd-ec-tv-attr">' +
+            /* IG-style: logo + name header at top */
+            '<div class="pbrd-ec-tv-ig-header">' +
               '<img src="' + t.logo + '" alt="' + t.company + '" class="pbrd-ec-tv-logo">' +
-              '<div class="pbrd-ec-tv-info">' +
+              '<div class="pbrd-ec-tv-ig-meta">' +
                 '<div class="pbrd-ec-tv-name">' + t.name + '</div>' +
                 '<div class="pbrd-ec-tv-title">' + t.title + ', ' + t.company + '</div>' +
               '</div>' +
             '</div>' +
+            /* Caption-style quote */
+            '<div class="pbrd-ec-tv-quote">\u201C' + t.quote + '\u201D</div>' +
+            '<div class="pbrd-ec-tv-stat-tag">' + t.stat + '</div>' +
           '</div>' +
         '</div>' +
       '</div>';
