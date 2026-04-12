@@ -4631,12 +4631,9 @@
       if (typing) typing.style.display = "none";
     }
 
-    function showMsg(id, cb, delay) {
-      setTimeout(function () {
-        var el = document.getElementById(id);
-        if (el) el.style.opacity = "1";
-        if (cb) cb();
-      }, delay || 0);
+    function showMsg(id) {
+      var el = document.getElementById(id);
+      if (el) el.style.opacity = "1";
     }
 
     function runChatAnim() {
@@ -4644,7 +4641,6 @@
       chatIdx++;
       hideAllMsgs();
 
-      /* Reset text */
       var m1t = document.getElementById("pbrd-ai-m1t");
       var m2t = document.getElementById("pbrd-ai-m2t");
       var m4t = document.getElementById("pbrd-ai-m4t");
@@ -4659,49 +4655,55 @@
       if (m4t) m4t.textContent = "";
       if (m6t) m6t.textContent = "";
 
-      showMsg("pbrd-ai-m0", function () {
-        /* User types */
-        showMsg("pbrd-ai-m1", function () {
-          typeText(m1t, s.user, 400, function () {
-            /* Typing indicator */
-            if (typing) { typing.style.display = "flex"; typing.style.opacity = "1"; }
+      var t = 0;
+      /* Step 1: Show greeting */
+      t += 600;
+      setTimeout(function () { showMsg("pbrd-ai-m0"); }, t);
+
+      /* Step 2: Show user msg bubble and type */
+      t += 800;
+      setTimeout(function () {
+        showMsg("pbrd-ai-m1");
+        if (m1t) typeText(m1t, s.user, 0, function () {
+          /* Step 3: Typing dots */
+          if (typing) { typing.style.display = "flex"; typing.style.opacity = "1"; }
+          setTimeout(function () {
+            if (typing) typing.style.display = "none";
+            /* Step 4: Bot lookup */
+            if (m2t) m2t.textContent = s.lookup;
+            showMsg("pbrd-ai-m2");
+            /* Step 5: Order card */
             setTimeout(function () {
-              if (typing) typing.style.display = "none";
-              /* Bot: lookup */
-              if (m2t) m2t.textContent = s.lookup;
-              showMsg("pbrd-ai-m2", function () {
-                /* Order card */
-                if (oid) oid.textContent = s.oid;
-                if (oamt) oamt.textContent = s.amt;
-                if (ostat) { ostat.textContent = s.stat; ostat.className = ""; }
-                showMsg("pbrd-ai-m3", function () {
-                  /* Bot: offer */
-                  if (m4t) m4t.textContent = s.offer;
-                  showMsg("pbrd-ai-m4", function () {
-                    /* Action button */
-                    if (act) act.innerHTML = '<div class="pbrd-ec-ai-act-btn">' + s.action + '</div>';
-                    showMsg("pbrd-ai-m5", function () {
-                      setTimeout(function () {
-                        /* "Click" the button */
-                        var btn = act ? act.querySelector(".pbrd-ec-ai-act-btn") : null;
-                        if (btn) btn.style.background = "#059669";
-                        setTimeout(function () {
-                          /* Success */
-                          if (m6t) m6t.textContent = s.success;
-                          if (ostat) { ostat.textContent = s.newStat; ostat.style.color = "#059669"; }
-                          showMsg("pbrd-ai-m6", function () {
-                            setTimeout(runChatAnim, 3000);
-                          }, 0);
-                        }, 800);
-                      }, 1500);
-                    }, 600);
-                  }, 800);
+              if (oid) oid.textContent = s.oid;
+              if (oamt) oamt.textContent = s.amt;
+              if (ostat) { ostat.textContent = s.stat; ostat.style.color = ""; }
+              showMsg("pbrd-ai-m3");
+              /* Step 6: Bot offer */
+              setTimeout(function () {
+                if (m4t) m4t.textContent = s.offer;
+                showMsg("pbrd-ai-m4");
+                /* Step 7: Action button */
+                setTimeout(function () {
+                  if (act) act.innerHTML = '<div class="pbrd-ec-ai-act-btn">' + s.action + '</div>';
+                  showMsg("pbrd-ai-m5");
+                  /* Step 8: Click button */
+                  setTimeout(function () {
+                    var btn = act ? act.querySelector(".pbrd-ec-ai-act-btn") : null;
+                    if (btn) btn.style.background = "#059669";
+                    /* Step 9: Success */
+                    setTimeout(function () {
+                      if (m6t) m6t.textContent = s.success;
+                      if (ostat) { ostat.textContent = s.newStat; ostat.style.color = "#059669"; }
+                      showMsg("pbrd-ai-m6");
+                      setTimeout(runChatAnim, 3000);
+                    }, 800);
+                  }, 1500);
                 }, 700);
-              }, 600);
-            }, 1200);
-          });
-        }, 0);
-      }, 600);
+              }, 800);
+            }, 700);
+          }, 1200);
+        });
+      }, t);
     }
 
     /* ── Search animation ── */
