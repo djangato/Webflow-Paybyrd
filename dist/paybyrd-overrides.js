@@ -5160,8 +5160,9 @@
     var ctaSection = findSectionByHeading("cut abandonment") || findSectionByHeading("boost conversions");
     if (!ctaSection) return;
 
-    /* Make Webflow parent section transparent — white space around CTA */
-    ctaSection.style.background = "transparent";
+    /* White space around CTA — island effect */
+    ctaSection.style.background = "#fff";
+    ctaSection.style.padding = "48px 24px";
 
     /* Replace its content */
     var container = ctaSection.querySelector(".u-container, [class*='container']") || ctaSection;

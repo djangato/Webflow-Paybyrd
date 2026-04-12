@@ -8646,7 +8646,9 @@ a.glowing_button_link .glowing_button_text {
   color: #fff;
   position: relative;
   z-index: 1;
-  border-radius: 16px;
+  border-radius: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 .pbrd-ec-cta h2 {
