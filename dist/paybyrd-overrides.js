@@ -4130,9 +4130,9 @@
                     '<div class="pbrd-ec-mob-amount">\u20AC89.00</div>' +
                   '</div>' +
                   '<div class="pbrd-ec-mob-tabs">' +
-                    '<div class="pbrd-ec-mob-tab" id="pbrd-mob-t0"><img src="' + ICON + 'visa.png" style="height:10px;width:auto"></div>' +
-                    '<div class="pbrd-ec-mob-tab" id="pbrd-mob-t1"><img src="' + ICON + 'applepay.png" style="height:10px;width:auto"></div>' +
-                    '<div class="pbrd-ec-mob-tab active" id="pbrd-mob-t2"><img src="' + ICON + 'mbway.png" style="height:10px;width:auto"></div>' +
+                    '<div class="pbrd-ec-mob-tab" id="pbrd-mob-t0"><img src="' + ICON + 'visa.png" style="height:15px;width:auto"></div>' +
+                    '<div class="pbrd-ec-mob-tab" id="pbrd-mob-t1"><img src="' + ICON + 'applepay.png" style="height:15px;width:auto"></div>' +
+                    '<div class="pbrd-ec-mob-tab active" id="pbrd-mob-t2"><img src="' + ICON + 'mbway.png" style="height:15px;width:auto"></div>' +
                   '</div>' +
                   '<div class="pbrd-ec-mob-form" id="pbrd-mob-form">' +
                     '<div class="pbrd-ec-mob-field"><label>Phone number</label><div class="pbrd-ec-mob-input" id="pbrd-mob-phone"></div></div>' +
