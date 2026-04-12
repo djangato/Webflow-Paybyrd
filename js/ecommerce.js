@@ -1181,21 +1181,31 @@
             });
           }, 600);
         } else {
-          /* Apple Pay — no form, show Apple Pay button */
-          mobForm.style.display = "none";
-          mobBtn.innerHTML = '<img src="' + ICON + 'applepay.png" style="height:14px;vertical-align:middle;margin-right:4px;filter:brightness(10)"> Pay';
-          mobBtn.style.background = "#111";
-          mobBtn.style.opacity = "1";
+          /* Apple Pay — show dedicated Apple Pay button */
+          mobForm.innerHTML = '<div class="pbrd-ec-mob-applepay-btn" id="pbrd-mob-apple-btn">' +
+            '<svg viewBox="0 0 24 24" width="16" height="16" fill="#fff"><path d="M17.72 7.54c-.48.56-1.27.99-2.04.93-.1-.77.28-1.59.72-2.1.48-.55 1.33-.96 2.02-.99.08.8-.23 1.59-.7 2.16zm.7 1.11c-1.13-.07-2.1.64-2.63.64-.54 0-1.35-.61-2.24-.59-1.15.02-2.22.67-2.81 1.7-1.2 2.08-.31 5.16.85 6.85.57.83 1.25 1.76 2.15 1.73.86-.04 1.18-.56 2.22-.56 1.04 0 1.33.56 2.23.54.93-.02 1.51-.84 2.08-1.68.65-.96.92-1.89.93-1.94-.02-.01-1.79-.69-1.81-2.73-.02-1.7 1.39-2.52 1.46-2.56-.8-1.18-2.04-1.31-2.48-1.34l.05-.06z"/></svg>' +
+            ' Pay' +
+          '</div>';
+          mobForm.style.display = "";
+          mobBtn.style.display = "none";
           setTimeout(function () {
-            mobBtn.style.opacity = "0.7";
-            mobBtn.textContent = "Processing\u2026";
+            var appleBtn = document.getElementById("pbrd-mob-apple-btn");
+            if (appleBtn) {
+              appleBtn.style.opacity = "0.7";
+              appleBtn.innerHTML = 'Processing\u2026';
+            }
             setTimeout(function () {
-              mobBtn.textContent = "\u2713 Paid";
-              mobBtn.style.background = "#059669";
-              mobBtn.style.opacity = "1";
-              setTimeout(runMobAnim, 2500);
+              if (appleBtn) {
+                appleBtn.innerHTML = '\u2713 Paid';
+                appleBtn.style.background = "#059669";
+                appleBtn.style.opacity = "1";
+              }
+              setTimeout(function () {
+                mobBtn.style.display = "";
+                runMobAnim();
+              }, 2500);
             }, 1200);
-          }, 1000);
+          }, 1500);
         }
       }
 
