@@ -866,27 +866,28 @@
   /* ═══════════════════════════════════════════ */
 
   function enhanceJourney() {
-    /* Find the section by matching one of the card-level headings */
-    var section = null;
-    var cardTexts = ["web checkout", "mobile", "customer service", "subscription"];
-    document.querySelectorAll("h3, h4").forEach(function (h) {
-      if (section) return;
-      var txt = h.textContent.toLowerCase();
-      for (var i = 0; i < cardTexts.length; i++) {
-        if (txt.includes(cardTexts[i])) {
-          section = h.closest("section") || h.closest("[class*='section']");
-          break;
-        }
-      }
+    /* Find the section container by matching the h2 heading */
+    var heading = null;
+    document.querySelectorAll("h2").forEach(function (h) {
+      if (h.textContent.toLowerCase().includes("every part of the journey")) heading = h;
     });
-    if (!section) {
-      /* Fallback: try the section heading */
-      section = findSectionByHeading("every part") || findSectionByHeading("e-commerce payments");
-    }
+    if (!heading) return;
+
+    /* Walk up to the u-container or section-level wrapper */
+    var container = heading.closest(".u-container") || heading.closest("[class*='container']");
+    var section = heading.closest("section") || heading.closest(".u-section");
     if (!section) return;
 
-    /* Hide original content */
-    Array.from(section.children).forEach(function (c) { c.style.display = "none"; });
+    /* Hide original container content, keep section spacers intact */
+    if (container) {
+      container.style.display = "none";
+    } else {
+      Array.from(section.children).forEach(function (c) {
+        if (!c.classList.contains("u-section-spacer") && !c.classList.contains("u-background-slot")) {
+          c.style.display = "none";
+        }
+      });
+    }
 
     var wrap = document.createElement("div");
     wrap.className = "pbrd-ec-checkout";
