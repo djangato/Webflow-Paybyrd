@@ -48,6 +48,19 @@
     });
   }
 
+  /* ─── Shared typing animation ─── */
+  function typeText(el, text, delay, cb) {
+    var i = 0;
+    function tick() {
+      if (i <= text.length) {
+        el.textContent = text.substring(0, i);
+        i++;
+        setTimeout(tick, 60 + Math.random() * 40);
+      } else if (cb) { setTimeout(cb, delay || 300); }
+    }
+    tick();
+  }
+
   /* ═══════════════════════════════════════════ */
   /* Section 1: Hero Enhancement                */
   /* ═══════════════════════════════════════════ */
@@ -1072,19 +1085,6 @@
 
     newSection.appendChild(wrap);
     observeReveal(".pbrd-ec-reveal", 150, wrap);
-
-    /* ─── Shared typing animation ─── */
-    function typeText(el, text, delay, cb) {
-      var i = 0;
-      function tick() {
-        if (i <= text.length) {
-          el.textContent = text.substring(0, i);
-          i++;
-          setTimeout(tick, 60 + Math.random() * 40);
-        } else if (cb) { setTimeout(cb, delay || 300); }
-      }
-      tick();
-    }
 
     /* ─── Checkout form fill animation ─── */
     var chkEl = document.getElementById("pbrd-ec-live-chk");
