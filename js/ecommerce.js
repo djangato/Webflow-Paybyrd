@@ -255,13 +255,20 @@
           '<div class="pbrd-ec-viz-integrations">' +
             '<div class="pbrd-ec-viz-int-row">' +
               '<div class="pbrd-ec-viz-int-item pbrd-ec-viz-pop" style="--d:0.1s"><img src="' + ICON + 'woocommerce.svg" alt="WooCommerce"><span>WooCommerce</span></div>' +
-              '<div class="pbrd-ec-viz-int-item pbrd-ec-viz-pop" style="--d:0.2s"><img src="' + ICON + 'magento.svg" alt="Magento"><span>Magento</span></div>' +
-              '<div class="pbrd-ec-viz-int-item pbrd-ec-viz-pop" style="--d:0.3s"><img src="' + ICON + 'prestashop.svg" alt="PrestaShop"><span>PrestaShop</span></div>' +
+              '<div class="pbrd-ec-viz-int-item pbrd-ec-viz-pop" style="--d:0.15s"><img src="' + ICON + 'magento.svg" alt="Magento"><span>Magento</span></div>' +
+              '<div class="pbrd-ec-viz-int-item pbrd-ec-viz-pop" style="--d:0.2s"><img src="' + ICON + 'prestashop.svg" alt="PrestaShop"><span>PrestaShop</span></div>' +
+              '<div class="pbrd-ec-viz-int-item pbrd-ec-viz-pop" style="--d:0.25s"><img src="' + ICON + 'sap.svg" alt="SAP"><span>SAP</span></div>' +
             '</div>' +
             '<div class="pbrd-ec-viz-int-row">' +
-              '<div class="pbrd-ec-viz-int-item pbrd-ec-viz-pop" style="--d:0.4s"><img src="' + ICON + 'sap.svg" alt="SAP"><span>SAP</span></div>' +
-              '<div class="pbrd-ec-viz-int-item pbrd-ec-viz-pop" style="--d:0.5s"><img src="' + ICON + 'oracle.svg" alt="Oracle"><span>Oracle</span></div>' +
-              '<div class="pbrd-ec-viz-int-item pbrd-ec-viz-pop" style="--d:0.6s;border-color:rgba(120,180,255,0.2);color:rgba(120,180,255,0.8)"><span style="font-size:1rem;font-weight:700">{ }</span><span>REST API</span></div>' +
+              '<div class="pbrd-ec-viz-int-item pbrd-ec-viz-pop" style="--d:0.3s"><img src="' + ICON + 'oracle.svg" alt="Oracle"><span>Oracle</span></div>' +
+              '<div class="pbrd-ec-viz-int-item pbrd-ec-viz-pop" style="--d:0.35s"><img src="' + ICON + 'moloni.svg" alt="Moloni"><span>Moloni</span></div>' +
+              '<div class="pbrd-ec-viz-int-item pbrd-ec-viz-pop" style="--d:0.4s"><img src="' + ICON + 'newhotel.svg" alt="Newhotel"><span>Newhotel</span></div>' +
+              '<div class="pbrd-ec-viz-int-item pbrd-ec-viz-pop" style="--d:0.45s"><img src="' + ICON + 'whatsapp.svg" alt="WhatsApp"><span>WhatsApp</span></div>' +
+            '</div>' +
+            '<div class="pbrd-ec-viz-int-row">' +
+              '<div class="pbrd-ec-viz-int-item pbrd-ec-viz-pop" style="--d:0.5s;border-color:rgba(120,180,255,0.2);color:rgba(120,180,255,0.8)"><span style="font-size:1rem;font-weight:700">{ }</span><span>REST API</span></div>' +
+              '<div class="pbrd-ec-viz-int-item pbrd-ec-viz-pop" style="--d:0.55s;border-color:rgba(120,180,255,0.2);color:rgba(120,180,255,0.8)"><span style="font-size:0.75rem;font-weight:700">&lt;/&gt;</span><span>Webhooks</span></div>' +
+              '<div class="pbrd-ec-viz-int-item pbrd-ec-viz-pop" style="--d:0.6s;border-color:rgba(120,180,255,0.2);color:rgba(120,180,255,0.8)"><span style="font-size:0.75rem;font-weight:700">SDK</span><span>Libraries</span></div>' +
             '</div>' +
             '<div class="pbrd-ec-viz-int-stat">Average integration time: <strong>4 hours</strong></div>' +
           '</div>'
@@ -373,6 +380,40 @@
     } else {
       showcaseVisible = true;
     }
+
+    /* ─── Scroll-triggered tab auto-advance ─── */
+    var tabIds = tabs.map(function (t) { return t.id; });
+    var scrollTabIdx = 0;
+    var scrollTabPaused = false;
+    var scrollTabTimer = null;
+
+    function activateTab(idx) {
+      var allTabs = showcase.querySelectorAll(".pbrd-ec-tab");
+      var allPanels = showcase.querySelectorAll(".pbrd-ec-panel");
+      allTabs.forEach(function (t) { t.classList.remove("active"); });
+      allPanels.forEach(function (p) { p.classList.remove("active"); });
+      if (allTabs[idx]) allTabs[idx].classList.add("active");
+      var panel = showcase.querySelector('[data-panel="' + tabIds[idx] + '"]');
+      if (panel) panel.classList.add("active");
+      scrollTabIdx = idx;
+    }
+
+    /* Pause auto-scroll on manual click, resume after 8s */
+    showcase.querySelectorAll(".pbrd-ec-tab").forEach(function (tab, i) {
+      tab.addEventListener("click", function () {
+        scrollTabPaused = true;
+        scrollTabIdx = i;
+        clearTimeout(scrollTabTimer);
+        scrollTabTimer = setTimeout(function () { scrollTabPaused = false; }, 8000);
+      });
+    });
+
+    /* Advance tab every 4s while showcase is in view */
+    setInterval(function () {
+      if (!showcaseVisible || scrollTabPaused) return;
+      scrollTabIdx = (scrollTabIdx + 1) % tabIds.length;
+      activateTab(scrollTabIdx);
+    }, 4000);
 
     /* Convert: toggles cycle */
     var toggles = showcase.querySelectorAll(".pbrd-ec-viz-toggle");
