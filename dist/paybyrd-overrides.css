@@ -7267,65 +7267,89 @@ a.glowing_button_link .glowing_button_text {
   padding: 4px 10px 12px;
 }
 
-.pbrd-ec-chk-phone-header {
-  font-size: 0.8125rem;
-  font-weight: 700;
-  color: #111;
+/* Mobile Paybyrd checkout inside phone */
+.pbrd-ec-mob-head {
   text-align: center;
-  margin-bottom: 14px;
+  padding: 6px 0 8px;
+  border-bottom: 1px solid #F3F4F6;
 }
 
-.pbrd-ec-chk-phone-wallet {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
-  border-radius: 10px;
-  border: 1px solid #E5E7EB;
-  margin-bottom: 8px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: #374151;
+.pbrd-ec-mob-powered {
+  font-size: 0.4375rem;
+  color: #9CA3AF;
 }
 
-.pbrd-ec-chk-phone-wallet img {
-  width: 20px;
-  height: 20px;
-  border-radius: 4px;
-  object-fit: contain;
-}
-
-.pbrd-ec-chk-phone-check {
-  margin-left: auto;
-  color: #8B5CF6;
-  font-weight: 700;
-}
-
-.pbrd-ec-chk-phone-total {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 0 4px;
-  border-top: 1px solid #F3F4F6;
-  margin-top: 6px;
-  font-size: 0.75rem;
+.pbrd-ec-mob-powered strong {
   color: #6B7280;
 }
 
-.pbrd-ec-chk-phone-total strong {
-  font-size: 1rem;
+.pbrd-ec-mob-amount {
+  font-size: 1.125rem;
+  font-weight: 700;
   color: #111;
+  margin-top: 2px;
 }
 
-.pbrd-ec-chk-phone-btn {
-  background: #111;
+.pbrd-ec-mob-tabs {
+  display: flex;
+  border-bottom: 1px solid #F3F4F6;
+}
+
+.pbrd-ec-mob-tab {
+  flex: 1;
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.3;
+  transition: opacity 0.3s;
+}
+
+.pbrd-ec-mob-tab.active {
+  opacity: 1;
+  border-bottom: 2px solid #8B5CF6;
+}
+
+.pbrd-ec-mob-tab img {
+  height: 10px !important;
+  width: auto;
+}
+
+.pbrd-ec-mob-form {
+  padding: 10px 10px 4px;
+}
+
+.pbrd-ec-mob-field label {
+  display: block;
+  font-size: 0.4375rem;
+  font-weight: 600;
+  color: #9CA3AF;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 3px;
+}
+
+.pbrd-ec-mob-input {
+  background: #F3F4F6;
+  border: 1px solid #E5E7EB;
+  border-radius: 6px;
+  padding: 7px 8px;
+  font-size: 0.6875rem;
+  color: #111;
+  font-variant-numeric: tabular-nums;
+  min-height: 1em;
+}
+
+.pbrd-ec-mob-btn {
+  margin: 6px 10px 10px;
+  background: #8B5CF6;
   color: #fff;
   text-align: center;
-  padding: 10px;
-  border-radius: 10px;
-  font-weight: 600;
-  font-size: 0.75rem;
-  margin-top: 8px;
+  padding: 9px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.6875rem;
+  transition: background 0.4s, opacity 0.3s;
 }
 
 /* Card 4: Recurring timeline */

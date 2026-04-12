@@ -994,27 +994,23 @@
         '<div class="pbrd-ec-chk-card pbrd-ec-reveal">' +
           '<div class="pbrd-ec-chk-card-visual">' +
             '<div class="pbrd-ec-chk-mobile-visual">' +
-              '<div class="pbrd-ec-chk-phone">' +
+              '<div class="pbrd-ec-chk-phone" id="pbrd-ec-mob-chk">' +
                 '<div class="pbrd-ec-chk-phone-notch"></div>' +
                 '<div class="pbrd-ec-chk-phone-screen">' +
-                  '<div class="pbrd-ec-chk-phone-header">Checkout</div>' +
-                  '<div class="pbrd-ec-chk-phone-wallet pbrd-ec-chk-comp-pop" style="--d:0.2s">' +
-                    '<img src="' + ICON + 'applepay.png" alt="Apple Pay" style="height:20px">' +
-                    '<span>Apple Pay</span>' +
-                    '<span class="pbrd-ec-chk-phone-check">\u2713</span>' +
+                  /* Mini Paybyrd checkout inside phone */
+                  '<div class="pbrd-ec-mob-head">' +
+                    '<span class="pbrd-ec-mob-powered">Powered by <strong>Paybyrd</strong></span>' +
+                    '<div class="pbrd-ec-mob-amount">\u20AC89.00</div>' +
                   '</div>' +
-                  '<div class="pbrd-ec-chk-phone-wallet pbrd-ec-chk-comp-pop" style="--d:0.35s">' +
-                    '<img src="' + ICON + 'googlepay.png" alt="Google Pay" style="height:20px">' +
-                    '<span>Google Pay</span>' +
+                  '<div class="pbrd-ec-mob-tabs">' +
+                    '<div class="pbrd-ec-mob-tab" id="pbrd-mob-t0"><img src="' + ICON + 'visa.png" style="height:10px;width:auto"></div>' +
+                    '<div class="pbrd-ec-mob-tab" id="pbrd-mob-t1"><img src="' + ICON + 'applepay.png" style="height:10px;width:auto"></div>' +
+                    '<div class="pbrd-ec-mob-tab active" id="pbrd-mob-t2"><img src="' + ICON + 'mbway.png" style="height:10px;width:auto"></div>' +
                   '</div>' +
-                  '<div class="pbrd-ec-chk-phone-wallet pbrd-ec-chk-comp-pop" style="--d:0.5s">' +
-                    '<img src="' + ICON + 'mbway.png" alt="MBWay" style="height:20px">' +
-                    '<span>MBWay</span>' +
+                  '<div class="pbrd-ec-mob-form" id="pbrd-mob-form">' +
+                    '<div class="pbrd-ec-mob-field"><label>Phone number</label><div class="pbrd-ec-mob-input" id="pbrd-mob-phone"></div></div>' +
                   '</div>' +
-                  '<div class="pbrd-ec-chk-phone-total pbrd-ec-chk-comp-pop" style="--d:0.65s">' +
-                    '<span>Total</span><strong>\u20AC89.00</strong>' +
-                  '</div>' +
-                  '<div class="pbrd-ec-chk-phone-btn pbrd-ec-chk-comp-pop" style="--d:0.8s">Pay with Apple Pay</div>' +
+                  '<div class="pbrd-ec-mob-btn" id="pbrd-mob-btn">Pay with MBWay</div>' +
                 '</div>' +
               '</div>' +
             '</div>' +
@@ -1139,6 +1135,77 @@
             this.disconnect();
           }
         }, { threshold: 0.3 }).observe(chkEl);
+      }
+    }
+
+    /* ─── Mobile checkout animation ─── */
+    var mobChk = document.getElementById("pbrd-ec-mob-chk");
+    if (mobChk) {
+      var mobPhone = document.getElementById("pbrd-mob-phone");
+      var mobBtn = document.getElementById("pbrd-mob-btn");
+      var mobForm = document.getElementById("pbrd-mob-form");
+      var mobTabs = [document.getElementById("pbrd-mob-t0"), document.getElementById("pbrd-mob-t1"), document.getElementById("pbrd-mob-t2")];
+
+      var mobMethods = [
+        { tab: 2, label: "MBWay", field: "Phone number", value: "+351 912 345 678", btn: "Pay with MBWay" },
+        { tab: 0, label: "Card", field: "Card number", value: "4821 3829 \u2022\u2022\u2022\u2022 7392", btn: "Pay \u20AC89.00" },
+        { tab: 1, label: "Apple Pay", field: "", value: "", btn: "Pay with Apple Pay" }
+      ];
+      var mobIdx = 0;
+
+      function runMobAnim() {
+        var m = mobMethods[mobIdx % mobMethods.length];
+        mobIdx++;
+
+        /* Switch tab */
+        mobTabs.forEach(function (t) { if (t) t.classList.remove("active"); });
+        if (mobTabs[m.tab]) mobTabs[m.tab].classList.add("active");
+
+        /* Update form */
+        if (m.field) {
+          mobForm.style.display = "";
+          mobForm.innerHTML = '<div class="pbrd-ec-mob-field"><label>' + m.field + '</label><div class="pbrd-ec-mob-input" id="pbrd-mob-val"></div></div>';
+          mobBtn.textContent = m.btn;
+          mobBtn.style.background = "";
+          var valEl = document.getElementById("pbrd-mob-val");
+          setTimeout(function () {
+            typeText(valEl, m.value, 500, function () {
+              mobBtn.style.opacity = "0.7";
+              mobBtn.textContent = "Processing\u2026";
+              setTimeout(function () {
+                mobBtn.textContent = "\u2713 Paid";
+                mobBtn.style.background = "#059669";
+                mobBtn.style.opacity = "1";
+                setTimeout(runMobAnim, 2500);
+              }, 1500);
+            });
+          }, 600);
+        } else {
+          /* Apple Pay — no form, instant */
+          mobForm.style.display = "none";
+          mobBtn.textContent = m.btn;
+          mobBtn.style.background = "#111";
+          mobBtn.style.opacity = "1";
+          setTimeout(function () {
+            mobBtn.style.opacity = "0.7";
+            mobBtn.textContent = "Processing\u2026";
+            setTimeout(function () {
+              mobBtn.textContent = "\u2713 Paid";
+              mobBtn.style.background = "#059669";
+              mobBtn.style.opacity = "1";
+              setTimeout(runMobAnim, 2500);
+            }, 1200);
+          }, 1000);
+        }
+      }
+
+      if ("IntersectionObserver" in window) {
+        new IntersectionObserver(function (entries) {
+          if (entries[0].isIntersecting) {
+            runMobAnim();
+            this.disconnect();
+          }
+        }, { threshold: 0.3 }).observe(mobChk);
       }
     }
   }
