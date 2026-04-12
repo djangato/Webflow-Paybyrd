@@ -6433,12 +6433,14 @@ a.glowing_button_link .glowing_button_text {
   background: #F9FAFB;
   border-radius: 12px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
-  width: 100%;
-  max-width: 100%;
+  width: 620px;
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
   font-family: Inter, -apple-system, sans-serif;
   overflow: hidden;
   display: flex;
-  position: relative;
   z-index: 2;
 }
 
@@ -6707,7 +6709,7 @@ a.glowing_button_link .glowing_button_text {
 }
 
 @media (max-width: 900px) {
-  .pbrd-ec-live-dash { width: 100%; }
+  .pbrd-ec-live-dash { width: 100%; position: relative; right: auto; top: auto; transform: none; margin-top: 24px; }
 }
 
 @media (max-width: 768px) {
