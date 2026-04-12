@@ -1784,7 +1784,7 @@
       {
         cat: "Integration",
         q: "Can I keep my current e-commerce stack?",
-        a: "Absolutely. Paybyrd plugs directly into Shopify, Magento, WooCommerce and any custom stack via a single API. Most merchants go live in under 4 hours \u2014 no re-platforming, no retraining your team, no disruption to your existing workflows."
+        a: "Absolutely. Paybyrd plugs directly into Magento, WooCommerce, PrestaShop and any custom stack via a single API. Most merchants go live in under 4 hours \u2014 no re-platforming, no retraining your team, no disruption to your existing workflows."
       },
       {
         cat: "Integration",
