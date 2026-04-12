@@ -913,7 +913,7 @@
             '<div class="pbrd-ec-chk-form-overlay">' +
               '<div class="pbrd-ec-paybyrd-chk" id="pbrd-ec-live-chk">' +
                 '<div class="pbrd-ec-pchk-head">' +
-                  '<img src="' + LOGOS + '69d9242bbde99c4b80e41dcc_tap-logo.svg" alt="TAP" style="height:12px;filter:brightness(10)">' +
+                  '<img src="' + LOGOS + '69d9242bbde99c4b80e41dcc_tap-logo.svg" alt="TAP" style="height:6px;max-height:6px;width:auto;filter:brightness(10)">' +
                   '<div class="pbrd-ec-pchk-amount">\u20AC347.00</div>' +
                   '<div class="pbrd-ec-pchk-ref">Order #TAP-29471</div>' +
                 '</div>' +
