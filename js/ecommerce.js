@@ -862,47 +862,122 @@
   }
 
   /* ═══════════════════════════════════════════ */
-  /* Section 7: Payment Journey Copy Override   */
+  /* Section 7: Checkout Experience (Mollie-style) */
   /* ═══════════════════════════════════════════ */
 
   function enhanceJourney() {
-    var journeyCopy = [
-      {
-        search: "web checkout",
-        title: "Your brand, their preferred way to pay",
-        desc: "Fully customizable hosted checkout. Supports 35+ methods, auto-detects country, remembers returning shoppers. Conversion rates 23% higher than generic checkouts."
-      },
-      {
-        search: "mobile",
-        title: "Thumb-friendly payments that convert",
-        desc: "Apple Pay, Google Pay, one-tap checkout. 67% of e-commerce traffic is mobile \u2014 your checkout should be built for thumbs, not mice."
-      },
-      {
-        search: "customer service",
-        title: "Turn support into revenue",
-        desc: "Send payment links via WhatsApp, SMS, or email in seconds. Handle refunds, partial captures, and chargebacks from one screen."
-      },
-      {
-        search: "subscription",
-        title: "Recurring revenue on autopilot",
-        desc: "Tokenized billing that handles retries, dunning, and card updates automatically. Reduce involuntary churn by up to 30%."
-      }
-    ];
-
-    var allH3 = document.querySelectorAll("h3, h4");
-    allH3.forEach(function (h) {
+    /* Find the section with the 4-card grid */
+    var section = null;
+    document.querySelectorAll("h2, h3").forEach(function (h) {
       var txt = h.textContent.toLowerCase();
-      journeyCopy.forEach(function (j) {
-        if (txt.includes(j.search.toLowerCase()) && h.children.length === 0) {
-          h.textContent = j.title;
-          var parent = h.parentElement;
-          if (parent) {
-            var desc = parent.querySelector("p");
-            if (desc) desc.textContent = j.desc;
-          }
-        }
-      });
+      if (txt.includes("every part of the journey") || txt.includes("e-commerce payments")) {
+        section = h.closest("section") || h.closest("[class*='section']") || h.parentElement;
+      }
     });
+    if (!section) return;
+
+    /* Hide original content */
+    Array.from(section.children).forEach(function (c) { c.style.display = "none"; });
+
+    var wrap = document.createElement("div");
+    wrap.className = "pbrd-ec-checkout";
+    wrap.innerHTML =
+      /* Section header */
+      '<div class="pbrd-ec-chk-header">' +
+        '<h2 class="pbrd-ec-chk-title">Offer every customer a seamless checkout experience</h2>' +
+        '<p class="pbrd-ec-chk-sub">Create a branded checkout tailored to your customers\u2019 needs with our no-code solution and customisable checkout components.</p>' +
+      '</div>' +
+
+      /* Two cards */
+      '<div class="pbrd-ec-chk-grid">' +
+
+        /* Card 1: Prebuilt Checkout with TAP image */
+        '<div class="pbrd-ec-chk-card pbrd-ec-reveal">' +
+          '<div class="pbrd-ec-chk-card-visual">' +
+            '<img src="' + BASE + 'ecommerce/tapcheckout.png" alt="TAP Air Portugal checkout" class="pbrd-ec-chk-bg-img">' +
+            '<div class="pbrd-ec-chk-form-overlay">' +
+              '<div class="pbrd-ec-chk-form-mockup">' +
+                '<div class="pbrd-ec-chk-form-brand">' +
+                  '<img src="' + LOGOS + '69d9242bbde99c4b80e41dcc_tap-logo.svg" alt="TAP" style="height:18px">' +
+                  '<span>TAP Air Portugal</span>' +
+                '</div>' +
+                '<div class="pbrd-ec-chk-form-amount">\u20AC347.00</div>' +
+                '<div class="pbrd-ec-chk-form-field"><span>Card number</span><span>4821 \u2022\u2022\u2022\u2022 \u2022\u2022\u2022\u2022 7392</span></div>' +
+                '<div class="pbrd-ec-chk-form-row">' +
+                  '<div class="pbrd-ec-chk-form-field half"><span>Expiry</span><span>09/28</span></div>' +
+                  '<div class="pbrd-ec-chk-form-field half"><span>CVC</span><span>\u2022\u2022\u2022</span></div>' +
+                '</div>' +
+                '<div class="pbrd-ec-chk-form-btn">Pay \u20AC347.00</div>' +
+                '<div class="pbrd-ec-chk-form-methods">' +
+                  '<img src="' + ICON + 'visa.png" alt="Visa">' +
+                  '<img src="' + ICON + 'mastercard.png" alt="Mastercard">' +
+                  '<img src="' + ICON + 'applepay.png" alt="Apple Pay">' +
+                  '<img src="' + ICON + 'mbway.png" alt="MBWay">' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="pbrd-ec-chk-card-body">' +
+            '<h3>Launch quickly with a prebuilt checkout</h3>' +
+            '<p>Start in minutes with a prebuilt, no-code checkout optimised for conversion.</p>' +
+            '<ul class="pbrd-ec-chk-bullets">' +
+              '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M13.5 4.5l-7 7L3 8" stroke="#8B5CF6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Launch in minutes</li>' +
+              '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M13.5 4.5l-7 7L3 8" stroke="#8B5CF6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Avoid development work</li>' +
+              '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M13.5 4.5l-7 7L3 8" stroke="#8B5CF6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Customise to your brand</li>' +
+            '</ul>' +
+            '<a class="pbrd-ec-chk-link" href="/e-commerce">Preview prebuilt checkout <span>\u2192</span></a>' +
+          '</div>' +
+        '</div>' +
+
+        /* Card 2: Custom Components */
+        '<div class="pbrd-ec-chk-card pbrd-ec-reveal">' +
+          '<div class="pbrd-ec-chk-card-visual">' +
+            '<div class="pbrd-ec-chk-components">' +
+              '<div class="pbrd-ec-chk-comp-block pbrd-ec-chk-comp-pop" style="--d:0.1s">' +
+                '<div class="pbrd-ec-chk-comp-label">Payment Method Selector</div>' +
+                '<div class="pbrd-ec-chk-comp-methods">' +
+                  '<div class="pbrd-ec-chk-comp-pill active">Card</div>' +
+                  '<div class="pbrd-ec-chk-comp-pill">MBWay</div>' +
+                  '<div class="pbrd-ec-chk-comp-pill">PayPal</div>' +
+                '</div>' +
+              '</div>' +
+              '<div class="pbrd-ec-chk-comp-block pbrd-ec-chk-comp-pop" style="--d:0.25s">' +
+                '<div class="pbrd-ec-chk-comp-label">Card Input</div>' +
+                '<div class="pbrd-ec-chk-comp-input"><span>4821 3829 \u2022\u2022\u2022\u2022 \u2022\u2022\u2022\u2022</span></div>' +
+              '</div>' +
+              '<div class="pbrd-ec-chk-comp-block pbrd-ec-chk-comp-pop" style="--d:0.4s">' +
+                '<div class="pbrd-ec-chk-comp-label">Submit Button</div>' +
+                '<div class="pbrd-ec-chk-comp-submit">Pay now</div>' +
+              '</div>' +
+              '<div class="pbrd-ec-chk-comp-code pbrd-ec-chk-comp-pop" style="--d:0.55s">' +
+                '<span class="pbrd-ec-chk-code-ln">1</span><span style="color:#c678dd">import</span> { PaybyrdCheckout } <span style="color:#c678dd">from</span> <span style="color:#98c379">\'@paybyrd/sdk\'</span>' +
+                '<br><span class="pbrd-ec-chk-code-ln">2</span>' +
+                '<br><span class="pbrd-ec-chk-code-ln">3</span><span style="color:#c678dd">const</span> checkout = <span style="color:#c678dd">new</span> <span style="color:#e5c07b">PaybyrdCheckout</span>({' +
+                '<br><span class="pbrd-ec-chk-code-ln">4</span>  amount: <span style="color:#d19a66">34700</span>,' +
+                '<br><span class="pbrd-ec-chk-code-ln">5</span>  currency: <span style="color:#98c379">\'EUR\'</span>' +
+                '<br><span class="pbrd-ec-chk-code-ln">6</span>})' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="pbrd-ec-chk-card-body">' +
+            '<h3>Build your own with custom components</h3>' +
+            '<p>Use custom blocks to design a secure payment experience that drives conversion.</p>' +
+            '<ul class="pbrd-ec-chk-bullets">' +
+              '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M13.5 4.5l-7 7L3 8" stroke="#8B5CF6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Brand your checkout experience</li>' +
+              '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M13.5 4.5l-7 7L3 8" stroke="#8B5CF6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Optimise to fit all your customers</li>' +
+              '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M13.5 4.5l-7 7L3 8" stroke="#8B5CF6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Save details for seamless payments</li>' +
+            '</ul>' +
+            '<a class="pbrd-ec-chk-link" href="/e-commerce">Preview custom checkout <span>\u2192</span></a>' +
+          '</div>' +
+        '</div>' +
+
+      '</div>';
+
+    section.appendChild(wrap);
+    section.style.background = "#fff";
+    section.style.padding = "80px 0";
+
+    observeReveal(".pbrd-ec-reveal", 150, wrap);
   }
 
   /* ═══════════════════════════════════════════ */
