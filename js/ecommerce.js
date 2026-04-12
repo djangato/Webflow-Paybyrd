@@ -908,26 +908,21 @@
 
         /* Card 1: Prebuilt Checkout with TAP image */
         '<div class="pbrd-ec-chk-card pbrd-ec-reveal">' +
-          '<div class="pbrd-ec-chk-card-visual">' +
-            '<img src="' + BASE + 'ecommerce/tapcheckout.png" alt="TAP Air Portugal checkout" class="pbrd-ec-chk-bg-img">' +
+          '<div class="pbrd-ec-chk-card-visual pbrd-ec-chk-vis-checkout">' +
+            '<img src="' + BASE + 'ecommerce/tapcheckout.png" alt="TAP Air Portugal" class="pbrd-ec-chk-bg-img">' +
             '<div class="pbrd-ec-chk-form-overlay">' +
-              '<div class="pbrd-ec-chk-form-mockup">' +
-                '<div class="pbrd-ec-chk-form-brand">' +
-                  '<img src="' + LOGOS + '69d9242bbde99c4b80e41dcc_tap-logo.svg" alt="TAP" style="height:18px">' +
-                  '<span>TAP Air Portugal</span>' +
-                '</div>' +
-                '<div class="pbrd-ec-chk-form-amount">\u20AC347.00</div>' +
-                '<div class="pbrd-ec-chk-form-field"><span>Card number</span><span>4821 \u2022\u2022\u2022\u2022 \u2022\u2022\u2022\u2022 7392</span></div>' +
-                '<div class="pbrd-ec-chk-form-row">' +
-                  '<div class="pbrd-ec-chk-form-field half"><span>Expiry</span><span>09/28</span></div>' +
-                  '<div class="pbrd-ec-chk-form-field half"><span>CVC</span><span>\u2022\u2022\u2022</span></div>' +
-                '</div>' +
-                '<div class="pbrd-ec-chk-form-btn">Pay \u20AC347.00</div>' +
-                '<div class="pbrd-ec-chk-form-methods">' +
-                  '<img src="' + ICON + 'visa.png" alt="Visa">' +
-                  '<img src="' + ICON + 'mastercard.png" alt="Mastercard">' +
-                  '<img src="' + ICON + 'applepay.png" alt="Apple Pay">' +
-                  '<img src="' + ICON + 'mbway.png" alt="MBWay">' +
+              '<div class="pbrd-oc-chk-container" style="width:210px;padding:16px;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:14px;box-shadow:0 16px 48px rgba(0,0,0,0.2)">' +
+                '<div class="pbrd-oc-chk-brand"><img src="' + LOGOS + '69d9242bbde99c4b80e41dcc_tap-logo.svg" alt="TAP"><span class="pbrd-oc-chk-brand-label">Powered by Paybyrd</span></div>' +
+                '<div class="pbrd-oc-chk-header">Enter card details</div>' +
+                '<div class="pbrd-oc-chk-form">' +
+                  '<div class="pbrd-oc-chk-field"><span class="pbrd-oc-chk-field-label">Name</span><span class="pbrd-oc-chk-field-val">Ana Ferreira</span></div>' +
+                  '<div class="pbrd-oc-chk-field"><span class="pbrd-oc-chk-field-label">Card</span><span class="pbrd-oc-chk-field-val">4821 \u2022\u2022\u2022\u2022 \u2022\u2022\u2022\u2022 7392</span></div>' +
+                  '<div class="pbrd-oc-chk-field-row">' +
+                    '<div class="pbrd-oc-chk-field"><span class="pbrd-oc-chk-field-label">Expiry</span><span class="pbrd-oc-chk-field-val">09/28</span></div>' +
+                    '<div class="pbrd-oc-chk-field"><span class="pbrd-oc-chk-field-label">CVV</span><span class="pbrd-oc-chk-field-val">\u2022\u2022\u2022</span></div>' +
+                  '</div>' +
+                  '<div class="pbrd-oc-chk-amount"><span>Total</span><span>\u20AC347.00</span></div>' +
+                  '<div class="pbrd-oc-chk-btn" style="background:#E4002B">Pay Now</div>' +
                 '</div>' +
               '</div>' +
             '</div>' +

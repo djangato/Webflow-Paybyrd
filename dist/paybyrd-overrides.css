@@ -6836,8 +6836,13 @@ a.glowing_button_link .glowing_button_text {
 /* Visual area */
 .pbrd-ec-chk-card-visual {
   position: relative;
-  height: 320px;
+  height: 300px;
   overflow: hidden;
+  background: #F3F4F6;
+}
+
+/* Card 1: TAP checkout visual */
+.pbrd-ec-chk-vis-checkout {
   background: #1a1a2e;
 }
 
@@ -6845,14 +6850,14 @@ a.glowing_button_link .glowing_button_text {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
-  filter: brightness(0.7);
+  object-position: center 30%;
+  filter: brightness(0.75);
 }
 
 /* Payment form overlay on TAP image */
 .pbrd-ec-chk-form-overlay {
   position: absolute;
-  right: 24px;
+  right: 20px;
   top: 50%;
   transform: translateY(-50%);
 }
@@ -7010,7 +7015,7 @@ a.glowing_button_link .glowing_button_text {
   flex-direction: column;
   gap: 12px;
   justify-content: center;
-  background: linear-gradient(145deg, #f0edf8, #e8e4f0);
+  background: linear-gradient(145deg, #faf9fd, #f3f0f8);
 }
 
 .pbrd-ec-chk-comp-block {
@@ -7109,7 +7114,7 @@ a.glowing_button_link .glowing_button_text {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(145deg, #111827, #1e293b);
+  background: linear-gradient(145deg, #f8fafc, #eef2f7);
   padding: 24px;
 }
 
@@ -7118,7 +7123,7 @@ a.glowing_button_link .glowing_button_text {
   background: #fff;
   border-radius: 24px;
   padding: 8px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.04);
 }
 
 .pbrd-ec-chk-phone-notch {
@@ -7155,7 +7160,10 @@ a.glowing_button_link .glowing_button_text {
 }
 
 .pbrd-ec-chk-phone-wallet img {
+  width: 20px;
+  height: 20px;
   border-radius: 4px;
+  object-fit: contain;
 }
 
 .pbrd-ec-chk-phone-check {
@@ -7199,7 +7207,7 @@ a.glowing_button_link .glowing_button_text {
   justify-content: center;
   gap: 16px;
   padding: 28px 24px;
-  background: linear-gradient(145deg, #f0fdf4, #ecfdf5);
+  background: linear-gradient(145deg, #f8fdfb, #f0faf5);
 }
 
 .pbrd-ec-chk-rec-timeline {
