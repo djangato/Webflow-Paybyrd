@@ -4038,23 +4038,35 @@
           '<div class="pbrd-ec-chk-card-visual pbrd-ec-chk-vis-checkout">' +
             '<img src="' + BASE + 'ecommerce/tapcheckout.png" alt="TAP Air Portugal" class="pbrd-ec-chk-bg-img">' +
             '<div class="pbrd-ec-chk-form-overlay">' +
-              '<div class="pbrd-oc-chk-container" style="width:210px;padding:16px;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:14px;box-shadow:0 16px 48px rgba(0,0,0,0.2)">' +
-                '<div class="pbrd-oc-chk-brand"><img src="' + LOGOS + '69d9242bbde99c4b80e41dcc_tap-logo.svg" alt="TAP"><span class="pbrd-oc-chk-brand-label">Powered by Paybyrd</span></div>' +
-                '<div class="pbrd-oc-chk-header">Enter card details</div>' +
-                '<div class="pbrd-oc-chk-form">' +
-                  '<div class="pbrd-oc-chk-field"><span class="pbrd-oc-chk-field-label">Name</span><span class="pbrd-oc-chk-field-val">Ana Ferreira</span></div>' +
-                  '<div class="pbrd-oc-chk-field"><span class="pbrd-oc-chk-field-label">Card</span><span class="pbrd-oc-chk-field-val">4821 \u2022\u2022\u2022\u2022 \u2022\u2022\u2022\u2022 7392</span></div>' +
-                  '<div class="pbrd-oc-chk-field-row">' +
-                    '<div class="pbrd-oc-chk-field"><span class="pbrd-oc-chk-field-label">Expiry</span><span class="pbrd-oc-chk-field-val">09/28</span></div>' +
-                    '<div class="pbrd-oc-chk-field"><span class="pbrd-oc-chk-field-label">CVV</span><span class="pbrd-oc-chk-field-val">\u2022\u2022\u2022</span></div>' +
-                  '</div>' +
-                  '<div class="pbrd-oc-chk-amount"><span>Total</span><span>\u20AC347.00</span></div>' +
-                  '<div class="pbrd-oc-chk-btn" style="background:#E4002B">Pay Now</div>' +
+              '<div class="pbrd-ec-paybyrd-chk">' +
+                /* Dark header with logo + amount */
+                '<div class="pbrd-ec-pchk-head">' +
+                  '<img src="' + LOGOS + '69d9242bbde99c4b80e41dcc_tap-logo.svg" alt="TAP" style="height:16px;filter:brightness(10)">' +
+                  '<div class="pbrd-ec-pchk-amount">\u20AC347.00</div>' +
+                  '<div class="pbrd-ec-pchk-ref">Order #TAP-29471</div>' +
                 '</div>' +
+                /* Payment method tabs */
+                '<div class="pbrd-ec-pchk-tabs">' +
+                  '<div class="pbrd-ec-pchk-tab active"><img src="' + ICON + 'visa.png" style="height:14px"></div>' +
+                  '<div class="pbrd-ec-pchk-tab"><img src="' + ICON + 'applepay.png" style="height:14px"></div>' +
+                  '<div class="pbrd-ec-pchk-tab"><img src="' + ICON + 'mbway.png" style="height:14px"></div>' +
+                  '<div class="pbrd-ec-pchk-tab"><img src="' + ICON + 'paypal.png" style="height:14px"></div>' +
+                '</div>' +
+                /* Card form */
+                '<div class="pbrd-ec-pchk-form">' +
+                  '<div class="pbrd-ec-pchk-field"><label>Card number</label><div class="pbrd-ec-pchk-input">4821 3829 \u2022\u2022\u2022\u2022 7392</div></div>' +
+                  '<div class="pbrd-ec-pchk-row">' +
+                    '<div class="pbrd-ec-pchk-field"><label>Expiry</label><div class="pbrd-ec-pchk-input">09 / 28</div></div>' +
+                    '<div class="pbrd-ec-pchk-field"><label>CVC</label><div class="pbrd-ec-pchk-input">\u2022\u2022\u2022</div></div>' +
+                  '</div>' +
+                  '<div class="pbrd-ec-pchk-field"><label>Cardholder name</label><div class="pbrd-ec-pchk-input">Ana Ferreira</div></div>' +
+                '</div>' +
+                '<div class="pbrd-ec-pchk-btn">Pay \u20AC347.00</div>' +
+                '<div class="pbrd-ec-pchk-powered">Powered by <strong>Paybyrd</strong></div>' +
               '</div>' +
             '</div>' +
           '</div>' +
-          '<div class="pbrd-ec-chk-card-body">' +
+          '<div class="pbrd-ec-chk-card-body pbrd-ec-chk-body-glass">' +
             '<h3>Your brand, their preferred way to pay</h3>' +
             '<p>A fully branded checkout that feels native to your store. Auto-detects country, remembers returning shoppers, supports 35+ methods.</p>' +
             '<ul class="pbrd-ec-chk-bullets">' +
@@ -4096,7 +4108,7 @@
               '</div>' +
             '</div>' +
           '</div>' +
-          '<div class="pbrd-ec-chk-card-body">' +
+          '<div class="pbrd-ec-chk-card-body pbrd-ec-chk-body-glass">' +
             '<h3>Build your own with drop-in components</h3>' +
             '<p>Full control over every pixel. Drop pre-certified PCI components into your own UI \u2014 method selector, card fields, tokenisation \u2014 all from one SDK.</p>' +
             '<ul class="pbrd-ec-chk-bullets">' +
@@ -4137,7 +4149,7 @@
               '</div>' +
             '</div>' +
           '</div>' +
-          '<div class="pbrd-ec-chk-card-body">' +
+          '<div class="pbrd-ec-chk-card-body pbrd-ec-chk-body-glass">' +
             '<h3>Thumb-friendly payments that convert</h3>' +
             '<p>67% of e-commerce traffic is mobile. Your checkout should be built for thumbs, not mice. One-tap wallets, biometric auth, zero typing.</p>' +
             '<ul class="pbrd-ec-chk-bullets">' +
@@ -4178,7 +4190,7 @@
               '</div>' +
             '</div>' +
           '</div>' +
-          '<div class="pbrd-ec-chk-card-body">' +
+          '<div class="pbrd-ec-chk-card-body pbrd-ec-chk-body-glass">' +
             '<h3>Recurring revenue on autopilot</h3>' +
             '<p>Tokenised billing that handles retries, dunning, and card updates automatically. Stop losing subscribers to expired cards.</p>' +
             '<ul class="pbrd-ec-chk-bullets">' +
