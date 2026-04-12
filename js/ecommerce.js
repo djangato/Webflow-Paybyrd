@@ -1149,7 +1149,7 @@
       var mobMethods = [
         { tab: 2, label: "MBWay", field: "Phone number", value: "+351 912 345 678", btn: "Pay with MBWay" },
         { tab: 0, label: "Card", field: "Card number", value: "4821 3829 \u2022\u2022\u2022\u2022 7392", btn: "Pay \u20AC89.00" },
-        { tab: 1, label: "Apple Pay", field: "", value: "", btn: "Pay with Apple Pay" }
+        { tab: 1, label: "Apple Pay", field: "", value: "", btn: "apple" }
       ];
       var mobIdx = 0;
 
@@ -1181,9 +1181,9 @@
             });
           }, 600);
         } else {
-          /* Apple Pay — no form, instant */
+          /* Apple Pay — no form, show Apple Pay button */
           mobForm.style.display = "none";
-          mobBtn.textContent = m.btn;
+          mobBtn.innerHTML = '<img src="' + ICON + 'applepay.png" style="height:14px;vertical-align:middle;margin-right:4px;filter:brightness(10)"> Pay';
           mobBtn.style.background = "#111";
           mobBtn.style.opacity = "1";
           setTimeout(function () {
