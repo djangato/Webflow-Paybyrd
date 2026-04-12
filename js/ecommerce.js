@@ -866,14 +866,23 @@
   /* ═══════════════════════════════════════════ */
 
   function enhanceJourney() {
-    /* Find the section with the 4-card grid */
+    /* Find the section by matching one of the card-level headings */
     var section = null;
-    document.querySelectorAll("h2, h3").forEach(function (h) {
+    var cardTexts = ["web checkout", "mobile", "customer service", "subscription"];
+    document.querySelectorAll("h3, h4").forEach(function (h) {
+      if (section) return;
       var txt = h.textContent.toLowerCase();
-      if (txt.includes("every part of the journey") || txt.includes("e-commerce payments")) {
-        section = h.closest("section") || h.closest("[class*='section']") || h.parentElement;
+      for (var i = 0; i < cardTexts.length; i++) {
+        if (txt.includes(cardTexts[i])) {
+          section = h.closest("section") || h.closest("[class*='section']");
+          break;
+        }
       }
     });
+    if (!section) {
+      /* Fallback: try the section heading */
+      section = findSectionByHeading("every part") || findSectionByHeading("e-commerce payments");
+    }
     if (!section) return;
 
     /* Hide original content */
@@ -888,7 +897,7 @@
         '<p class="pbrd-ec-chk-sub">Create a branded checkout tailored to your customers\u2019 needs with our no-code solution and customisable checkout components.</p>' +
       '</div>' +
 
-      /* Two cards */
+      /* Four cards — 2x2 grid */
       '<div class="pbrd-ec-chk-grid">' +
 
         /* Card 1: Prebuilt Checkout with TAP image */
@@ -918,14 +927,14 @@
             '</div>' +
           '</div>' +
           '<div class="pbrd-ec-chk-card-body">' +
-            '<h3>Launch quickly with a prebuilt checkout</h3>' +
-            '<p>Start in minutes with a prebuilt, no-code checkout optimised for conversion.</p>' +
+            '<h3>Your brand, their preferred way to pay</h3>' +
+            '<p>A fully branded checkout that feels native to your store. Auto-detects country, remembers returning shoppers, supports 35+ methods.</p>' +
             '<ul class="pbrd-ec-chk-bullets">' +
-              '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M13.5 4.5l-7 7L3 8" stroke="#8B5CF6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Launch in minutes</li>' +
-              '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M13.5 4.5l-7 7L3 8" stroke="#8B5CF6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Avoid development work</li>' +
-              '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M13.5 4.5l-7 7L3 8" stroke="#8B5CF6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Customise to your brand</li>' +
+              '<li>' + checkSVG + 'Launch in minutes, no developers needed</li>' +
+              '<li>' + checkSVG + '23% higher conversion vs generic checkouts</li>' +
+              '<li>' + checkSVG + 'Full brand control \u2014 colours, logo, domain</li>' +
             '</ul>' +
-            '<a class="pbrd-ec-chk-link" href="/e-commerce">Preview prebuilt checkout <span>\u2192</span></a>' +
+            '<a class="pbrd-ec-chk-link" href="/e-commerce">Explore hosted checkout <span>\u2192</span></a>' +
           '</div>' +
         '</div>' +
 
@@ -960,14 +969,96 @@
             '</div>' +
           '</div>' +
           '<div class="pbrd-ec-chk-card-body">' +
-            '<h3>Build your own with custom components</h3>' +
-            '<p>Use custom blocks to design a secure payment experience that drives conversion.</p>' +
+            '<h3>Build your own with drop-in components</h3>' +
+            '<p>Full control over every pixel. Drop pre-certified PCI components into your own UI \u2014 method selector, card fields, tokenisation \u2014 all from one SDK.</p>' +
             '<ul class="pbrd-ec-chk-bullets">' +
-              '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M13.5 4.5l-7 7L3 8" stroke="#8B5CF6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Brand your checkout experience</li>' +
-              '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M13.5 4.5l-7 7L3 8" stroke="#8B5CF6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Optimise to fit all your customers</li>' +
-              '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M13.5 4.5l-7 7L3 8" stroke="#8B5CF6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Save details for seamless payments</li>' +
+              '<li>' + checkSVG + 'PCI-compliant without the audit burden</li>' +
+              '<li>' + checkSVG + 'Match your design system exactly</li>' +
+              '<li>' + checkSVG + 'Tokenise cards for one-click repeat purchases</li>' +
             '</ul>' +
-            '<a class="pbrd-ec-chk-link" href="/e-commerce">Preview custom checkout <span>\u2192</span></a>' +
+            '<a class="pbrd-ec-chk-link" href="/e-commerce">Explore components <span>\u2192</span></a>' +
+          '</div>' +
+        '</div>' +
+
+        /* Card 3: Mobile-first / Thumb-friendly */
+        '<div class="pbrd-ec-chk-card pbrd-ec-reveal">' +
+          '<div class="pbrd-ec-chk-card-visual">' +
+            '<div class="pbrd-ec-chk-mobile-visual">' +
+              '<div class="pbrd-ec-chk-phone">' +
+                '<div class="pbrd-ec-chk-phone-notch"></div>' +
+                '<div class="pbrd-ec-chk-phone-screen">' +
+                  '<div class="pbrd-ec-chk-phone-header">Checkout</div>' +
+                  '<div class="pbrd-ec-chk-phone-wallet pbrd-ec-chk-comp-pop" style="--d:0.2s">' +
+                    '<img src="' + ICON + 'applepay.png" alt="Apple Pay" style="height:20px">' +
+                    '<span>Apple Pay</span>' +
+                    '<span class="pbrd-ec-chk-phone-check">\u2713</span>' +
+                  '</div>' +
+                  '<div class="pbrd-ec-chk-phone-wallet pbrd-ec-chk-comp-pop" style="--d:0.35s">' +
+                    '<img src="' + ICON + 'googlepay.png" alt="Google Pay" style="height:20px">' +
+                    '<span>Google Pay</span>' +
+                  '</div>' +
+                  '<div class="pbrd-ec-chk-phone-wallet pbrd-ec-chk-comp-pop" style="--d:0.5s">' +
+                    '<img src="' + ICON + 'mbway.png" alt="MBWay" style="height:20px">' +
+                    '<span>MBWay</span>' +
+                  '</div>' +
+                  '<div class="pbrd-ec-chk-phone-total pbrd-ec-chk-comp-pop" style="--d:0.65s">' +
+                    '<span>Total</span><strong>\u20AC89.00</strong>' +
+                  '</div>' +
+                  '<div class="pbrd-ec-chk-phone-btn pbrd-ec-chk-comp-pop" style="--d:0.8s">Pay with Apple Pay</div>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="pbrd-ec-chk-card-body">' +
+            '<h3>Thumb-friendly payments that convert</h3>' +
+            '<p>67% of e-commerce traffic is mobile. Your checkout should be built for thumbs, not mice. One-tap wallets, biometric auth, zero typing.</p>' +
+            '<ul class="pbrd-ec-chk-bullets">' +
+              '<li>' + checkSVG + 'Apple Pay, Google Pay, MBWay in one tap</li>' +
+              '<li>' + checkSVG + 'Auto-detects device and shows best option</li>' +
+              '<li>' + checkSVG + 'Responsive down to 320px \u2014 every screen covered</li>' +
+            '</ul>' +
+            '<a class="pbrd-ec-chk-link" href="/e-commerce">See mobile experience <span>\u2192</span></a>' +
+          '</div>' +
+        '</div>' +
+
+        /* Card 4: Recurring / Subscriptions */
+        '<div class="pbrd-ec-chk-card pbrd-ec-reveal">' +
+          '<div class="pbrd-ec-chk-card-visual">' +
+            '<div class="pbrd-ec-chk-recurring-visual">' +
+              '<div class="pbrd-ec-chk-rec-timeline">' +
+                '<div class="pbrd-ec-chk-rec-event pbrd-ec-chk-comp-pop" style="--d:0.1s">' +
+                  '<div class="pbrd-ec-chk-rec-dot green"></div>' +
+                  '<div class="pbrd-ec-chk-rec-info"><strong>\u20AC29.99</strong> charged<span>Apr 1 \u2022 Visa \u2022\u20224821</span></div>' +
+                '</div>' +
+                '<div class="pbrd-ec-chk-rec-event pbrd-ec-chk-comp-pop" style="--d:0.25s">' +
+                  '<div class="pbrd-ec-chk-rec-dot green"></div>' +
+                  '<div class="pbrd-ec-chk-rec-info"><strong>\u20AC29.99</strong> charged<span>Mar 1 \u2022 Visa \u2022\u20224821</span></div>' +
+                '</div>' +
+                '<div class="pbrd-ec-chk-rec-event pbrd-ec-chk-comp-pop" style="--d:0.4s">' +
+                  '<div class="pbrd-ec-chk-rec-dot yellow"></div>' +
+                  '<div class="pbrd-ec-chk-rec-info"><strong>\u20AC29.99</strong> retry succeeded<span>Feb 3 \u2022 Auto-retry #2</span></div>' +
+                '</div>' +
+                '<div class="pbrd-ec-chk-rec-event pbrd-ec-chk-comp-pop" style="--d:0.55s">' +
+                  '<div class="pbrd-ec-chk-rec-dot green"></div>' +
+                  '<div class="pbrd-ec-chk-rec-info"><strong>\u20AC29.99</strong> charged<span>Jan 1 \u2022 Visa \u2022\u20224821</span></div>' +
+                '</div>' +
+              '</div>' +
+              '<div class="pbrd-ec-chk-rec-stat pbrd-ec-chk-comp-pop" style="--d:0.7s">' +
+                '<div class="pbrd-ec-chk-rec-stat-val">97.3%</div>' +
+                '<div class="pbrd-ec-chk-rec-stat-label">Collection rate</div>' +
+                '<div class="pbrd-ec-chk-rec-stat-sub">\u2191 4.1% from smart retries</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="pbrd-ec-chk-card-body">' +
+            '<h3>Recurring revenue on autopilot</h3>' +
+            '<p>Tokenised billing that handles retries, dunning, and card updates automatically. Stop losing subscribers to expired cards.</p>' +
+            '<ul class="pbrd-ec-chk-bullets">' +
+              '<li>' + checkSVG + 'Smart retry logic recovers 30% of failed charges</li>' +
+              '<li>' + checkSVG + 'Automatic card updater \u2014 never lose a subscriber</li>' +
+              '<li>' + checkSVG + 'SCA-ready with 3DS2 built in</li>' +
+            '</ul>' +
+            '<a class="pbrd-ec-chk-link" href="/e-commerce">Explore subscriptions <span>\u2192</span></a>' +
           '</div>' +
         '</div>' +
 

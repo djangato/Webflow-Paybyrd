@@ -1786,6 +1786,194 @@
   margin-right: 12px;
 }
 
+/* Card 3: Mobile phone mockup */
+.pbrd-ec-chk-mobile-visual {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, #111827, #1e293b);
+  padding: 24px;
+}
+
+.pbrd-ec-chk-phone {
+  width: 200px;
+  background: #fff;
+  border-radius: 24px;
+  padding: 8px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.pbrd-ec-chk-phone-notch {
+  width: 60px;
+  height: 4px;
+  background: #E5E7EB;
+  border-radius: 4px;
+  margin: 4px auto 10px;
+}
+
+.pbrd-ec-chk-phone-screen {
+  padding: 4px 10px 12px;
+}
+
+.pbrd-ec-chk-phone-header {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #111;
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.pbrd-ec-chk-phone-wallet {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #E5E7EB;
+  margin-bottom: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.pbrd-ec-chk-phone-wallet img {
+  border-radius: 4px;
+}
+
+.pbrd-ec-chk-phone-check {
+  margin-left: auto;
+  color: #8B5CF6;
+  font-weight: 700;
+}
+
+.pbrd-ec-chk-phone-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0 4px;
+  border-top: 1px solid #F3F4F6;
+  margin-top: 6px;
+  font-size: 0.75rem;
+  color: #6B7280;
+}
+
+.pbrd-ec-chk-phone-total strong {
+  font-size: 1rem;
+  color: #111;
+}
+
+.pbrd-ec-chk-phone-btn {
+  background: #111;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.75rem;
+  margin-top: 8px;
+}
+
+/* Card 4: Recurring timeline */
+.pbrd-ec-chk-recurring-visual {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  padding: 28px 24px;
+  background: linear-gradient(145deg, #f0fdf4, #ecfdf5);
+}
+
+.pbrd-ec-chk-rec-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+}
+
+.pbrd-ec-chk-rec-timeline::before {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: #D1D5DB;
+}
+
+.pbrd-ec-chk-rec-event {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 8px 0;
+  position: relative;
+}
+
+.pbrd-ec-chk-rec-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.pbrd-ec-chk-rec-dot.green { background: #10b981; box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15); }
+.pbrd-ec-chk-rec-dot.yellow { background: #F59E0B; box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15); }
+
+.pbrd-ec-chk-rec-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.8125rem;
+  color: #374151;
+}
+
+.pbrd-ec-chk-rec-info strong {
+  font-weight: 700;
+  color: #111;
+}
+
+.pbrd-ec-chk-rec-info span {
+  font-size: 0.6875rem;
+  color: #9CA3AF;
+}
+
+.pbrd-ec-chk-rec-stat {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(16, 185, 129, 0.15);
+}
+
+.pbrd-ec-chk-rec-stat-val {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #059669;
+  letter-spacing: -0.02em;
+}
+
+.pbrd-ec-chk-rec-stat-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #374151;
+  margin-top: 2px;
+}
+
+.pbrd-ec-chk-rec-stat-sub {
+  font-size: 0.6875rem;
+  color: #10b981;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+/* Checkout card check bullets color */
+.pbrd-ec-chk-bullets li svg {
+  color: #8B5CF6;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .pbrd-ec-chk-grid { grid-template-columns: 1fr; }
