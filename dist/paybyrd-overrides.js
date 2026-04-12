@@ -4450,27 +4450,24 @@
     var section = document.createElement("section");
     section.className = "pbrd-ec-testimonials";
 
+    var playSVG = '<svg viewBox="0 0 48 48" width="48" height="48" fill="none"><circle cx="24" cy="24" r="24" fill="rgba(255,255,255,0.9)"/><path d="M20 16l12 8-12 8V16z" fill="#111"/></svg>';
+
     var cardsHTML = testimonials.map(function (t, idx) {
-      return '<div class="pbrd-ec-tvcard pbrd-ec-reveal" id="pbrd-ec-tv' + idx + '">' +
-        /* Video side */
-        '<div class="pbrd-ec-tv-video-side">' +
-          '<video class="pbrd-ec-tv-video" preload="none" loop playsinline muted poster="' + t.poster + '">' +
-            '<source src="' + t.video + '" type="video/mp4">' +
-          '</video>' +
-        '</div>' +
-        /* Quote card side */
-        '<div class="pbrd-ec-tv-card-side">' +
-          '<div class="pbrd-ec-tv-card-top">' +
-            '<img src="' + t.logo + '" alt="' + t.company + '" class="pbrd-ec-tv-logo">' +
-            '<div class="pbrd-ec-tv-card-company">' + t.company + '</div>' +
-          '</div>' +
-          '<div class="pbrd-ec-tv-quote">\u201C' + t.quote + '\u201D</div>' +
-          '<div class="pbrd-ec-tv-card-bottom">' +
-            '<div class="pbrd-ec-tv-info">' +
-              '<div class="pbrd-ec-tv-name">' + t.name + '</div>' +
-              '<div class="pbrd-ec-tv-title">' + t.title + '</div>' +
+      return '<div class="pbrd-ec-tvcard pbrd-ec-reveal" data-tv-idx="' + idx + '">' +
+        '<div class="pbrd-ec-tv-visual">' +
+          '<img src="' + t.poster + '" alt="' + t.company + '" class="pbrd-ec-tv-poster" loading="lazy">' +
+          '<div class="pbrd-ec-tv-play">' + playSVG + '</div>' +
+          '<div class="pbrd-ec-tv-gradient"></div>' +
+          '<div class="pbrd-ec-tv-overlay">' +
+            '<div class="pbrd-ec-tv-quote">\u201C' + t.quote + '\u201D</div>' +
+            '<div class="pbrd-ec-tv-divider"></div>' +
+            '<div class="pbrd-ec-tv-attr">' +
+              '<img src="' + t.logo + '" alt="' + t.company + '" class="pbrd-ec-tv-logo">' +
+              '<div class="pbrd-ec-tv-info">' +
+                '<div class="pbrd-ec-tv-name">' + t.name + '</div>' +
+                '<div class="pbrd-ec-tv-title">' + t.title + ', ' + t.company + '</div>' +
+              '</div>' +
             '</div>' +
-            '<div class="pbrd-ec-tv-stat">' + t.stat + '</div>' +
           '</div>' +
         '</div>' +
       '</div>';
@@ -4494,39 +4491,66 @@
 
     observeReveal(".pbrd-ec-reveal", 150, section);
 
-    /* Autoplay videos when visible, pause when not */
-    if ("IntersectionObserver" in window) {
-      section.querySelectorAll(".pbrd-ec-tv-video").forEach(function (vid) {
-        new IntersectionObserver(function (entries) {
-          if (entries[0].isIntersecting) {
-            vid.play().catch(function () {});
-          } else {
-            vid.pause();
-          }
-        }, { threshold: 0.3 }).observe(vid);
-      });
+    /* ── Instagram-style lightbox modal ── */
+    var modal = document.createElement("div");
+    modal.className = "pbrd-ec-tv-modal";
+    modal.innerHTML =
+      '<div class="pbrd-ec-tv-modal-backdrop"></div>' +
+      '<div class="pbrd-ec-tv-modal-content">' +
+        '<div class="pbrd-ec-tv-modal-close">\u2715</div>' +
+        '<div class="pbrd-ec-tv-modal-video">' +
+          '<video id="pbrd-tv-modal-vid" playsinline preload="none"></video>' +
+        '</div>' +
+        '<div class="pbrd-ec-tv-modal-card">' +
+          '<div class="pbrd-ec-tv-modal-card-top">' +
+            '<img id="pbrd-tv-modal-logo" alt="">' +
+            '<div id="pbrd-tv-modal-company"></div>' +
+          '</div>' +
+          '<div class="pbrd-ec-tv-modal-quote" id="pbrd-tv-modal-quote"></div>' +
+          '<div class="pbrd-ec-tv-modal-card-bottom">' +
+            '<div><div class="pbrd-ec-tv-modal-name" id="pbrd-tv-modal-name"></div>' +
+            '<div class="pbrd-ec-tv-modal-title" id="pbrd-tv-modal-title"></div></div>' +
+            '<div class="pbrd-ec-tv-modal-stat" id="pbrd-tv-modal-stat"></div>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(modal);
+
+    var modalVid = document.getElementById("pbrd-tv-modal-vid");
+
+    function openModal(idx) {
+      var t = testimonials[idx];
+      modalVid.src = t.video;
+      modalVid.poster = t.poster;
+      document.getElementById("pbrd-tv-modal-logo").src = t.logo;
+      document.getElementById("pbrd-tv-modal-company").textContent = t.company;
+      document.getElementById("pbrd-tv-modal-quote").textContent = "\u201C" + t.quote + "\u201D";
+      document.getElementById("pbrd-tv-modal-name").textContent = t.name;
+      document.getElementById("pbrd-tv-modal-title").textContent = t.title + ", " + t.company;
+      document.getElementById("pbrd-tv-modal-stat").textContent = t.stat;
+      modal.classList.add("active");
+      document.body.style.overflow = "hidden";
+      modalVid.play().catch(function () {});
     }
 
-    /* Click video to expand fullscreen */
-    section.querySelectorAll(".pbrd-ec-tv-video-side").forEach(function (side) {
-      side.addEventListener("click", function () {
-        var vid = side.querySelector("video");
-        if (!vid) return;
-        /* Unmute for expanded view */
-        vid.muted = false;
-        if (vid.requestFullscreen) vid.requestFullscreen();
-        else if (vid.webkitEnterFullScreen) vid.webkitEnterFullScreen();
+    function closeModal() {
+      modal.classList.remove("active");
+      document.body.style.overflow = "";
+      modalVid.pause();
+      modalVid.src = "";
+    }
 
-        /* Re-mute when exiting fullscreen */
-        function onFSChange() {
-          if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-            vid.muted = true;
-            document.removeEventListener("fullscreenchange", onFSChange);
-            document.removeEventListener("webkitfullscreenchange", onFSChange);
-          }
-        }
-        document.addEventListener("fullscreenchange", onFSChange);
-        document.addEventListener("webkitfullscreenchange", onFSChange);
+    modal.querySelector(".pbrd-ec-tv-modal-close").addEventListener("click", closeModal);
+    modal.querySelector(".pbrd-ec-tv-modal-backdrop").addEventListener("click", closeModal);
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && modal.classList.contains("active")) closeModal();
+    });
+
+    /* Click card to open modal */
+    section.querySelectorAll(".pbrd-ec-tvcard").forEach(function (card) {
+      card.addEventListener("click", function () {
+        var idx = parseInt(card.getAttribute("data-tv-idx"), 10);
+        openModal(idx);
       });
     });
   }
