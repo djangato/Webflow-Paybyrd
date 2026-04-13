@@ -10366,17 +10366,18 @@ a.glowing_button_link .glowing_button_text {
 }
 
 .pbrd-pos-va-card {
-  background: #141418;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #18171e;
+  border: 1px solid rgba(99, 25, 240, 0.12);
   border-radius: 20px;
   padding: 0;
   overflow: hidden;
-  transition: border-color 0.3s ease, transform 0.3s ease;
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .pbrd-pos-va-card:hover {
-  border-color: rgba(99, 25, 240, 0.25);
+  border-color: rgba(99, 25, 240, 0.3);
   transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(99, 25, 240, 0.08);
 }
 
 .pbrd-pos-va-card-wide {
@@ -10390,22 +10391,39 @@ a.glowing_button_link .glowing_button_text {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 32px 16px 16px;
-  background: linear-gradient(180deg, rgba(99, 25, 240, 0.06) 0%, rgba(99, 25, 240, 0.02) 100%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 36px 16px 20px;
+  background: linear-gradient(180deg, rgba(99, 25, 240, 0.10) 0%, rgba(99, 25, 240, 0.03) 100%);
+  border-bottom: 1px solid rgba(99, 25, 240, 0.08);
+  position: relative;
+}
+
+/* Centered glow behind each graphic */
+.pbrd-pos-va-visual::after {
+  content: "";
+  position: absolute;
+  width: 200px;
+  height: 140px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse, rgba(99, 25, 240, 0.12) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 .pbrd-pos-va-visual-wide {
   border-bottom: none;
-  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  border-right: 1px solid rgba(99, 25, 240, 0.08);
   padding: 32px 24px;
-  background: linear-gradient(135deg, rgba(99, 25, 240, 0.06) 0%, rgba(99, 25, 240, 0.02) 100%);
+  background: linear-gradient(135deg, rgba(99, 25, 240, 0.10) 0%, rgba(99, 25, 240, 0.03) 100%);
 }
 
 .pbrd-pos-va-graphic {
   width: 100%;
   max-width: 280px;
   height: auto;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 0 20px rgba(99, 25, 240, 0.08));
 }
 
 /* ── Text body ── */
