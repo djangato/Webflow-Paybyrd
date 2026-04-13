@@ -11068,11 +11068,18 @@ a.glowing_button_link .glowing_button_text {
 }
 .pbrd-air-cta-ghost:hover { border-color:rgba(14,165,233,0.4); color:#0ea5e9 !important; }
 
+/* ── Hero subtitle ── */
+.pbrd-air-hero-sub {
+  font-size:1rem !important; color:rgba(255,255,255,0.45) !important;
+  line-height:1.6 !important; margin:12px 0 0 !important;
+  display:block !important; position:relative; z-index:2;
+}
+
 /* ── SVG Route Map + Feed ── */
 .pbrd-air-viz {
-  margin-top:40px; padding:0 24px;
+  margin-top:-60px; padding:0 24px;
   max-width:1200px; margin-left:auto; margin-right:auto;
-  width:100% !important;
+  width:100% !important; position:relative; z-index:1;
 }
 
 .pbrd-air-map-wrap {

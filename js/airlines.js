@@ -49,24 +49,34 @@
     var section = heading.closest("section") || heading.closest("[class*='section']");
     if (!section) return;
 
-    /* Hide the stock hero image */
+    /* Hide the stock hero image and its column */
     section.querySelectorAll("img").forEach(function(img) {
+      var wrap = img.closest("[class*='column'], [class*='layout-column']");
+      if (wrap && !wrap.contains(heading)) {
+        wrap.style.setProperty("display", "none", "important");
+      }
       img.style.setProperty("display", "none", "important");
     });
-    /* Also hide image wrappers */
     section.querySelectorAll("[class*='img_wrap'], [class*='image_wrap'], [class*='hero_img']").forEach(function(w) {
       w.style.setProperty("display", "none", "important");
     });
 
     /* Rewrite heading */
     heading.innerHTML = "The airline payment platform<br>that outperforms Adyen.";
+    heading.style.setProperty("position", "relative", "important");
+    heading.style.setProperty("z-index", "2", "important");
 
-    var subtitle = heading.nextElementSibling;
-    if (subtitle && subtitle.tagName === "P") {
-      subtitle.innerHTML = "Higher approval rates. Lower fraud. Zero downtime.<br>Ask TAP Air Portugal.";
-    }
+    /* Hide ALL sibling paragraphs in the heading's container (old Webflow copy) */
+    var parent = heading.parentElement;
+    parent.querySelectorAll("p").forEach(function(p) {
+      p.style.display = "none";
+    });
 
-    var parent = subtitle ? subtitle.parentElement : heading.parentElement;
+    /* Insert our own subtitle */
+    var subtitle = document.createElement("p");
+    subtitle.className = "pbrd-air-hero-sub";
+    subtitle.innerHTML = "Higher approval rates. Lower fraud. Zero downtime.<br>Ask TAP Air Portugal.";
+    parent.insertBefore(subtitle, heading.nextSibling);
 
     /* ── CTA row ── */
     var ctaRow = document.createElement("div");
@@ -74,7 +84,7 @@
     ctaRow.innerHTML =
       '<a href="/book-demo" class="pbrd-air-cta-primary">Book a 15-min Demo \u2192</a>' +
       '<a href="#benchmark" class="pbrd-air-cta-ghost">See the data \u2193</a>';
-    parent.insertBefore(ctaRow, (subtitle || heading).nextSibling);
+    parent.insertBefore(ctaRow, subtitle.nextSibling);
 
     /* ── Break out of Webflow's constrained column ── */
     /* The hero content is inside a layout column that caps width.
@@ -99,8 +109,8 @@
     var svgDots = "";
     routes.forEach(function(r, i) {
       svgPaths +=
-        '<path d="' + r.d + '" fill="none" stroke="rgba(14,165,233,0.12)" stroke-width="1" stroke-dasharray="4 4"/>' +
-        '<circle r="3" fill="#0ea5e9" opacity="0">' +
+        '<path d="' + r.d + '" fill="none" stroke="rgba(14,165,233,0.18)" stroke-width="1.2" stroke-dasharray="4 4"/>' +
+        '<circle r="4" fill="#0ea5e9" opacity="0">' +
           '<animateMotion dur="' + (3 + i * 0.5) + 's" begin="' + (i * 0.8) + 's" repeatCount="indefinite" path="' + r.d + '"/>' +
           '<animate attributeName="opacity" values="0;0.8;0.8;0" dur="' + (3 + i * 0.5) + 's" begin="' + (i * 0.8) + 's" repeatCount="indefinite"/>' +
         '</circle>';
@@ -115,7 +125,7 @@
       { x: 620, y: 130, n: "NRT" }, { x: 430, y: 290, n: "MPM" },
     ];
     cities.forEach(function(c) {
-      var r = c.main ? 5 : 2.5;
+      var r = c.main ? 6 : 3.5;
       var glow = c.main ? '<circle cx="' + c.x + '" cy="' + c.y + '" r="18" fill="rgba(14,165,233,0.08)"><animate attributeName="r" values="14;22;14" dur="3s" repeatCount="indefinite"/></circle>' : '';
       svgDots += glow +
         '<circle cx="' + c.x + '" cy="' + c.y + '" r="' + r + '" fill="' + (c.main ? '#0ea5e9' : 'rgba(14,165,233,0.5)') + '"/>' +
@@ -135,7 +145,10 @@
         '</div>' +
       '</div>';
 
-    /* Insert viz + ticker at SECTION level to escape Webflow column constraints */
+    /* Insert viz at section level, positioned to overlap under the heading */
+    section.style.setProperty("position", "relative", "important");
+    section.style.setProperty("overflow", "visible", "important");
+    section.style.setProperty("padding-bottom", "80px", "important");
     section.appendChild(vizWrap);
 
     var stats = ["+4.86% vs Checkout.com", "+3.16% vs Elavon", "+1.72% vs Adyen", "+4.92% vs Nuvei", "99.999% Uptime", "192+ Currencies", "16.8% Fewer Chargebacks"];
