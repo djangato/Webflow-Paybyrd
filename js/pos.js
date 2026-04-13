@@ -1172,9 +1172,36 @@
 
     form.parentNode.insertBefore(trust, form);
 
-    /* ── Style the submit button text ── */
-    var submitBtn = section.querySelector('input[type="submit"], button[type="submit"]');
+    /* ── Style all form inputs via JS for guaranteed override ── */
+    section.querySelectorAll("input:not([type=submit]):not([type=checkbox]):not([type=hidden]), textarea, select").forEach(function(el) {
+      el.style.setProperty("background", "#f5f5f7", "important");
+      el.style.setProperty("border", "1.5px solid #e0e0e5", "important");
+      el.style.setProperty("border-radius", "10px", "important");
+      el.style.setProperty("color", "#111", "important");
+      el.style.setProperty("padding", "12px 16px", "important");
+      el.addEventListener("focus", function() {
+        el.style.setProperty("border-color", "#6319f0", "important");
+        el.style.setProperty("box-shadow", "0 0 0 3px rgba(99,25,240,0.08)", "important");
+        el.style.setProperty("background", "#fff", "important");
+      });
+      el.addEventListener("blur", function() {
+        el.style.setProperty("border-color", "#e0e0e5", "important");
+        el.style.setProperty("box-shadow", "none", "important");
+        el.style.setProperty("background", "#f5f5f7", "important");
+      });
+    });
+
+    /* ── Find and restyle submit — could be input, button, or a.w-button ── */
+    var submitBtn = section.querySelector('input[type="submit"], button[type="submit"], .w-button, a.button, [data-wait]');
     if (submitBtn) {
+      submitBtn.style.setProperty("background", "#6319f0", "important");
+      submitBtn.style.setProperty("color", "#fff", "important");
+      submitBtn.style.setProperty("border", "none", "important");
+      submitBtn.style.setProperty("border-radius", "100px", "important");
+      submitBtn.style.setProperty("padding", "14px 48px", "important");
+      submitBtn.style.setProperty("font-size", "0.9375rem", "important");
+      submitBtn.style.setProperty("font-weight", "600", "important");
+      submitBtn.style.setProperty("cursor", "pointer", "important");
       if (submitBtn.tagName === "INPUT") {
         submitBtn.value = "Get my terminal \u2192";
       } else {
