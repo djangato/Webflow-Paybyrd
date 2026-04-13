@@ -5798,24 +5798,77 @@
       '<h2>Choose one of our devices.<br>Or simply use your own.</h2>' +
       '<p>Buy outright, rent monthly, or turn your own phone into a payment terminal. Every option includes a free SIM with data plan.</p>' +
 
-      /* ── SoftPOS banner ── */
-      '<div class="pbrd-pos-softpos-banner pbrd-pos-reveal">' +
-        '<div class="pbrd-pos-softpos-content">' +
-          '<div class="pbrd-pos-softpos-left">' +
-            '<div class="pbrd-pos-softpos-badge">FREE \u2014 NO HARDWARE NEEDED</div>' +
-            '<h3>Paybyrd SoftPOS</h3>' +
-            '<p>Turn any NFC-enabled phone into a payment terminal. Accept contactless cards, Apple Pay, and Google Pay \u2014 right from your pocket.</p>' +
-          '</div>' +
-          '<div class="pbrd-pos-softpos-right">' +
-            '<div class="pbrd-pos-softpos-perks">' +
-              '<span>' + checkSVG + ' Android + iPhone</span>' +
-              '<span>' + checkSVG + ' NFC contactless</span>' +
-              '<span>' + checkSVG + ' Digital receipts</span>' +
-              '<span>' + checkSVG + ' 30-second setup</span>' +
+      /* ── Paybyrd Tap — two-panel SoftPOS showcase ── */
+      '<div class="pbrd-pos-tap-heading pbrd-pos-reveal">' +
+        '<h3>Tap to Pay on your device</h3>' +
+        '<p>Offer customers quick, seamless contactless payments.</p>' +
+      '</div>' +
+      '<div class="pbrd-pos-tap-grid pbrd-pos-reveal">' +
+
+        /* ── iPhone panel ── */
+        '<div class="pbrd-pos-tap-panel">' +
+          '<div class="pbrd-pos-tap-visual">' +
+            '<div class="pbrd-pos-tap-phone">' +
+              /* Stylized phone SVG with NFC waves */
+              '<svg viewBox="0 0 200 360" fill="none" xmlns="http://www.w3.org/2000/svg" class="pbrd-pos-tap-device">' +
+                '<rect x="10" y="10" width="180" height="340" rx="28" fill="#111" stroke="rgba(99,25,240,0.2)" stroke-width="1.5"/>' +
+                '<rect x="20" y="50" width="160" height="260" rx="4" fill="#1a1a2e"/>' +
+                /* Screen content — amount */
+                '<text x="100" y="160" text-anchor="middle" fill="#fff" font-size="28" font-weight="700" font-family="system-ui">\u20AC17.25</text>' +
+                '<text x="100" y="185" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="11" font-family="system-ui">Ready to accept</text>' +
+                /* NFC icon on screen */
+                '<g transform="translate(85,200)">' +
+                  '<path d="M15 0 C20 5, 20 15, 15 20" stroke="rgba(99,25,240,0.6)" stroke-width="1.5" fill="none" class="pbrd-pos-nfc-wave1"/>' +
+                  '<path d="M15 -5 C25 5, 25 20, 15 25" stroke="rgba(99,25,240,0.4)" stroke-width="1.5" fill="none" class="pbrd-pos-nfc-wave2"/>' +
+                  '<path d="M15 -10 C30 5, 30 25, 15 30" stroke="rgba(99,25,240,0.25)" stroke-width="1.5" fill="none" class="pbrd-pos-nfc-wave3"/>' +
+                '</g>' +
+                /* Notch */
+                '<rect x="70" y="14" width="60" height="20" rx="10" fill="#000"/>' +
+              '</svg>' +
+              /* Floating card approaching */
+              '<svg viewBox="0 0 120 76" class="pbrd-pos-tap-card" xmlns="http://www.w3.org/2000/svg">' +
+                '<rect width="120" height="76" rx="8" fill="#e8e4ef"/>' +
+                '<rect x="12" y="18" width="22" height="16" rx="3" fill="rgba(99,25,240,0.2)" stroke="rgba(99,25,240,0.35)" stroke-width="0.8"/>' +
+                '<rect x="12" y="48" width="50" height="4" rx="2" fill="rgba(0,0,0,0.08)"/>' +
+                '<rect x="12" y="56" width="30" height="4" rx="2" fill="rgba(0,0,0,0.05)"/>' +
+              '</svg>' +
             '</div>' +
-            '<a href="/book-demo" class="pbrd-pos-softpos-cta">Get started free \u2192</a>' +
-            '<div class="pbrd-pos-softpos-note">iPhone market restrictions may apply</div>' +
           '</div>' +
+          '<h4>Tap to Pay on iPhone</h4>' +
+          '<p>Accept contactless payments right on your iPhone. No terminal needed.</p>' +
+          '<a href="/book-demo" class="pbrd-pos-tap-cta">Enable Tap to Pay on iPhone <span>\u203A</span></a>' +
+        '</div>' +
+
+        /* ── Android panel ── */
+        '<div class="pbrd-pos-tap-panel">' +
+          '<div class="pbrd-pos-tap-visual">' +
+            '<div class="pbrd-pos-tap-phone">' +
+              '<svg viewBox="0 0 200 360" fill="none" xmlns="http://www.w3.org/2000/svg" class="pbrd-pos-tap-device">' +
+                '<rect x="10" y="10" width="180" height="340" rx="24" fill="#111" stroke="rgba(99,25,240,0.2)" stroke-width="1.5"/>' +
+                '<rect x="20" y="40" width="160" height="280" rx="4" fill="#1a1a2e"/>' +
+                /* Screen — payment confirmation */
+                '<circle cx="100" cy="120" r="28" fill="none" stroke="rgba(99,25,240,0.5)" stroke-width="2" class="pbrd-pos-nfc-ring"/>' +
+                '<path d="M88 120 L96 128 L114 110" stroke="#6319f0" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>' +
+                '<text x="100" y="175" text-anchor="middle" fill="#fff" font-size="26" font-weight="700" font-family="system-ui">\u20AC17.25</text>' +
+                '<text x="100" y="198" text-anchor="middle" fill="rgba(99,25,240,0.7)" font-size="10" font-family="system-ui">Payment approved</text>' +
+                /* NFC pulse rings */
+                '<circle cx="100" cy="250" r="12" fill="none" stroke="rgba(99,25,240,0.3)" stroke-width="1" class="pbrd-pos-nfc-pulse1"/>' +
+                '<circle cx="100" cy="250" r="20" fill="none" stroke="rgba(99,25,240,0.2)" stroke-width="1" class="pbrd-pos-nfc-pulse2"/>' +
+                '<circle cx="100" cy="250" r="28" fill="none" stroke="rgba(99,25,240,0.1)" stroke-width="1" class="pbrd-pos-nfc-pulse3"/>' +
+              '</svg>' +
+              /* Floating wallet icon */
+              '<div class="pbrd-pos-tap-wallet">' +
+                '<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">' +
+                  '<rect x="4" y="10" width="40" height="28" rx="4" fill="rgba(99,25,240,0.08)" stroke="rgba(99,25,240,0.3)" stroke-width="1.2"/>' +
+                  '<circle cx="34" cy="24" r="4" fill="rgba(99,25,240,0.25)" stroke="rgba(99,25,240,0.5)" stroke-width="0.8"/>' +
+                  '<path d="M4 18 L44 18" stroke="rgba(99,25,240,0.15)" stroke-width="0.8"/>' +
+                '</svg>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+          '<h4>Tap to Pay on Android</h4>' +
+          '<p>Accept card and digital wallet payments on your Android device, anywhere.</p>' +
+          '<a href="/book-demo" class="pbrd-pos-tap-cta">Enable Android Tap to Pay <span>\u203A</span></a>' +
         '</div>' +
       '</div>' +
 
@@ -6050,19 +6103,22 @@
     if (!canvas) return;
     var ctx = canvas.getContext("2d");
     var dpr = window.devicePixelRatio || 1;
-    var W, H;
+    var W = 0, H = 0;
 
     function resize() {
-      var rect = canvas.parentElement.getBoundingClientRect();
-      W = rect.width;
-      H = rect.height;
+      var section = canvas.parentElement;
+      W = section.offsetWidth;
+      H = section.offsetHeight;
+      if (!W || !H) return;
       canvas.width = W * dpr;
       canvas.height = H * dpr;
       canvas.style.width = W + "px";
       canvas.style.height = H + "px";
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
-    resize();
+
+    /* Delay initial resize to let section layout settle */
+    setTimeout(resize, 300);
     window.addEventListener("resize", resize);
 
     /*
@@ -6153,8 +6209,8 @@
           y: c.oy + s.y * c.scale,
           m: s.m,                        /* magnitude = brightness + size */
           phase: Math.random() * Math.PI * 2,
-          twinkleSpeed: 0.3 + Math.random() * 0.8,
-          twinkleDepth: 0.3 + Math.random() * 0.4   /* how much it dims */
+          twinkleSpeed: 0.4 + Math.random() * 1.2,
+          twinkleDepth: 0.6 + Math.random() * 0.35   /* deep fade — nearly invisible at min */
         });
       });
       c.edges.forEach(function(e) {
@@ -6179,6 +6235,7 @@
 
     function draw() {
       if (!running) return;
+      if (!W || !H) { resize(); requestAnimationFrame(draw); return; }
       time += 0.016;
       ctx.clearRect(0, 0, W, H);
 
