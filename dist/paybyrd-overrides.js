@@ -6884,27 +6884,39 @@
     insertAfter.parentNode.insertBefore(stats, insertAfter.nextSibling);
 
     /* ── Animated payment icons floating behind heading ── */
-    var heroSection = heading.closest("section") || heading.closest("[class*='section']");
+    var heroSection = heading.closest("section") || heading.closest("[class*='section']") || heading.parentElement;
     if (heroSection) {
-      heroSection.style.position = "relative";
-      heroSection.style.overflow = "hidden";
+      heroSection.style.setProperty("position", "relative", "important");
+      heroSection.style.setProperty("overflow", "hidden", "important");
 
       var floatLayer = document.createElement("div");
       floatLayer.className = "pbrd-pm-hero-float";
+      floatLayer.setAttribute("style", "position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden;");
 
-      var symbols = ["\uD83D\uDCB3", "$", "\u20AC", "\u00A3", "\u00A5", "\u20BF", "NFC", "PAY", "\u26A1"];
-      symbols.forEach(function(s, i) {
+      var symbols = [
+        { t: "\uD83D\uDCB3", s: 20 }, { t: "$", s: 18 }, { t: "\u20AC", s: 22 },
+        { t: "\u00A3", s: 16 }, { t: "\u00A5", s: 18 }, { t: "\u20BF", s: 20 },
+        { t: "NFC", s: 11 }, { t: "PAY", s: 10 }, { t: "\u26A1", s: 16 },
+        { t: "\u20AC", s: 14 }, { t: "$", s: 12 }, { t: "\uD83D\uDCB3", s: 18 }
+      ];
+      symbols.forEach(function(sym, i) {
         var el = document.createElement("span");
-        el.className = "pbrd-pm-hero-symbol";
-        el.textContent = s;
-        el.style.left = (8 + Math.random() * 84) + "%";
-        el.style.animationDelay = (i * 1.1) + "s";
-        el.style.animationDuration = (8 + Math.random() * 6) + "s";
-        el.style.fontSize = (10 + Math.random() * 14) + "px";
+        el.textContent = sym.t;
+        el.setAttribute("style",
+          "position:absolute;bottom:-30px;color:rgba(96,165,250,0.07);font-weight:700;" +
+          "font-family:system-ui;pointer-events:none;font-size:" + sym.s + "px;" +
+          "left:" + (5 + Math.random() * 90) + "%;" +
+          "animation:pbrd-pm-float-up " + (10 + Math.random() * 8) + "s linear " + (i * 1.5) + "s infinite;"
+        );
         floatLayer.appendChild(el);
       });
 
       heroSection.insertBefore(floatLayer, heroSection.firstChild);
+
+      /* Ensure heading content is above float layer */
+      var headingWrap = heading.parentElement;
+      if (headingWrap) headingWrap.style.setProperty("position", "relative", "important");
+      if (headingWrap) headingWrap.style.setProperty("z-index", "1", "important");
     }
 
     observeReveal(".pbrd-pm-reveal", 100);
@@ -7143,9 +7155,23 @@
       tabsWrap.appendChild(btn);
     });
 
-    /* Insert tabs and counter before the grid */
-    gridContainer.parentNode.insertBefore(tabsWrap, gridContainer);
-    gridContainer.parentNode.insertBefore(counterEl, gridContainer);
+    /* Insert tabs and counter — find the right insertion point.
+       We want them ABOVE the grid but BELOW the hero heading/stats.
+       Best approach: find the section/wrapper that contains the grid,
+       then insert as the first children of that wrapper, or just above
+       the grid within its closest section-level parent. */
+    var gridSection = gridContainer.closest("section") || gridContainer.closest("[class*='section']");
+    var insertParent = gridSection || gridContainer.parentNode;
+
+    /* If the grid IS the section (or very close), insert as first children of grid */
+    if (insertParent === gridContainer || insertParent.children.length <= 2) {
+      gridContainer.insertBefore(counterEl, gridContainer.firstChild);
+      gridContainer.insertBefore(tabsWrap, gridContainer.firstChild);
+    } else {
+      /* Insert just before the grid within its parent section */
+      insertParent.insertBefore(counterEl, gridContainer);
+      insertParent.insertBefore(tabsWrap, gridContainer);
+    }
   }
 
   /* ═══════════════════════════════════════════ */
