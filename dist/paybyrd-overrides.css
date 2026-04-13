@@ -11069,36 +11069,20 @@ a.glowing_button_link .glowing_button_text {
 .pbrd-air-cta-ghost:hover { border-color:rgba(14,165,233,0.4); color:#0ea5e9 !important; }
 
 /* ── SVG Route Map + Feed ── */
-.pbrd-air-viz { margin-top:36px; }
+.pbrd-air-viz { margin-top:40px; }
 
 .pbrd-air-map-wrap {
-  display:grid; grid-template-columns:1fr 300px; gap:0;
-  border-radius:16px; overflow:hidden;
-  background:linear-gradient(135deg, rgba(14,165,233,0.03) 0%, rgba(0,0,0,0.2) 100%);
-  border:1px solid rgba(255,255,255,0.05);
-  min-height:300px;
+  position:relative; border-radius:20px; overflow:hidden;
+  background:linear-gradient(180deg, rgba(14,165,233,0.04) 0%, rgba(0,0,0,0.15) 100%);
+  border:1px solid rgba(255,255,255,0.06);
 }
 
-.pbrd-air-map-svg { display:block; width:100%; height:100%; min-height:300px; }
+.pbrd-air-map-svg { display:block; width:100%; height:auto; }
 
 .pbrd-air-txn-feed {
-  display:flex; flex-direction:column; gap:4px; padding:16px;
-  border-left:1px solid rgba(255,255,255,0.04);
-  background:rgba(0,0,0,0.2);
-  justify-content:center;
-}
-
-.pbrd-air-txn-feed::before {
-  content:"LIVE TRANSACTIONS";
-  font-size:0.5625rem; font-weight:700; letter-spacing:0.1em;
-  color:rgba(14,165,233,0.5); margin-bottom:8px;
-  display:flex; align-items:center; gap:6px;
-}
-
-.pbrd-air-txn-feed::after {
-  content:""; width:5px; height:5px; border-radius:50%; background:#22c55e;
-  box-shadow:0 0 6px rgba(34,197,94,0.5); position:absolute; top:20px; right:20px;
-  animation:pbrd-air-blink 2s ease-in-out infinite;
+  position:absolute; top:20px; right:20px; bottom:20px; width:260px;
+  display:flex; flex-direction:column; gap:5px; z-index:2;
+  justify-content:flex-end;
 }
 
 .pbrd-air-txn {
@@ -11239,7 +11223,6 @@ a.glowing_button_link .glowing_button_text {
 
 /* ═══ RESPONSIVE ═══ */
 @media (max-width:768px) {
-  .pbrd-air-map-wrap { grid-template-columns:1fr; }
   .pbrd-air-txn-feed { display:none; }
   .pbrd-air-leak-grid { grid-template-columns:1fr 1fr; }
   .pbrd-air-leak-card { border-bottom:1px solid rgba(255,255,255,0.04); }

@@ -7519,17 +7519,17 @@
     var vizWrap = document.createElement("div");
     vizWrap.className = "pbrd-air-viz pbrd-air-reveal";
 
-    /* SVG routes */
+    /* SVG routes — from Lisbon hub outward */
+    var LIS = "250,200";
     var routes = [
-      /* from Lisbon hub outward */
-      { d: "M220,180 Q300,100 400,120", lbl: "LIS \u2192 LHR" },
-      { d: "M220,180 Q160,80 100,100", lbl: "LIS \u2192 JFK" },
-      { d: "M220,180 Q300,130 420,140", lbl: "LIS \u2192 FRA" },
-      { d: "M220,180 Q180,250 150,300", lbl: "LIS \u2192 GRU" },
-      { d: "M220,180 Q350,150 500,180", lbl: "LIS \u2192 DXB" },
-      { d: "M220,180 Q280,250 320,280", lbl: "LIS \u2192 LUA" },
-      { d: "M220,180 Q400,90 550,130", lbl: "LIS \u2192 NRT" },
-      { d: "M220,180 Q350,220 380,260", lbl: "LIS \u2192 MPM" },
+      { d: "M" + LIS + " Q340,110 440,120" },   /* LIS→LHR */
+      { d: "M" + LIS + " Q160,100 70,110" },     /* LIS→JFK */
+      { d: "M" + LIS + " Q350,140 460,150" },    /* LIS→FRA */
+      { d: "M" + LIS + " Q190,280 140,330" },    /* LIS→GRU */
+      { d: "M" + LIS + " Q400,160 560,190" },    /* LIS→DXB */
+      { d: "M" + LIS + " Q310,280 360,310" },    /* LIS→LUA */
+      { d: "M" + LIS + " Q450,80 620,130" },     /* LIS→NRT */
+      { d: "M" + LIS + " Q400,240 430,290" },    /* LIS→MPM */
     ];
 
     var svgPaths = "";
@@ -7545,11 +7545,11 @@
 
     /* City dots */
     var cities = [
-      { x: 220, y: 180, n: "LIS", main: true },
-      { x: 400, y: 120, n: "LHR" }, { x: 100, y: 100, n: "JFK" },
-      { x: 420, y: 140, n: "FRA" }, { x: 150, y: 300, n: "GRU" },
-      { x: 500, y: 180, n: "DXB" }, { x: 320, y: 280, n: "LUA" },
-      { x: 550, y: 130, n: "NRT" }, { x: 380, y: 260, n: "MPM" },
+      { x: 250, y: 200, n: "LIS", main: true },
+      { x: 440, y: 120, n: "LHR" }, { x: 70, y: 110, n: "JFK" },
+      { x: 460, y: 150, n: "FRA" }, { x: 140, y: 330, n: "GRU" },
+      { x: 560, y: 190, n: "DXB" }, { x: 360, y: 310, n: "LUA" },
+      { x: 620, y: 130, n: "NRT" }, { x: 430, y: 290, n: "MPM" },
     ];
     cities.forEach(function(c) {
       var r = c.main ? 5 : 2.5;
@@ -7561,10 +7561,9 @@
 
     vizWrap.innerHTML =
       '<div class="pbrd-air-map-wrap">' +
-        '<svg viewBox="0 0 620 340" fill="none" class="pbrd-air-map-svg" preserveAspectRatio="xMidYMid meet">' +
-          /* Subtle background pattern */
-          '<defs><pattern id="pbrd-grid" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="0.5" fill="rgba(255,255,255,0.04)"/></pattern></defs>' +
-          '<rect width="620" height="340" fill="url(#pbrd-grid)"/>' +
+        '<svg viewBox="0 0 700 380" fill="none" class="pbrd-air-map-svg" preserveAspectRatio="xMidYMid meet">' +
+          '<defs><pattern id="pbrd-grid" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="12" cy="12" r="0.5" fill="rgba(255,255,255,0.04)"/></pattern></defs>' +
+          '<rect width="700" height="380" fill="url(#pbrd-grid)"/>' +
           svgPaths + svgDots +
         '</svg>' +
         '<div class="pbrd-air-txn-feed" id="pbrd-air-feed"></div>' +
