@@ -64,7 +64,7 @@
     var section = findSectionByHeading("evolve in-person");
     if (!section) return;
 
-    section.style.background = "#111";
+    section.style.background = "#0a0a0f";
     var container = section.querySelector(".u-container, [class*='container']") || section;
     hideChildren(container);
 
@@ -219,7 +219,7 @@
     if (!anchor) { console.log("[Paybyrd] FAIL: enhancePlatform — no anchor found"); return; }
 
     var newSection = document.createElement("section");
-    newSection.style.background = "#111";
+    newSection.style.background = "#0a0a0f";
     newSection.style.padding = "80px 0";
     anchor.insertAdjacentElement("afterend", newSection);
 
@@ -443,7 +443,7 @@
     var target = secOffer || secTab || secEagle || secRenegade;
     if (!target) return;
 
-    target.style.background = "#111";
+    target.style.background = "#0a0a0f";
     var container = target.querySelector(".u-container, [class*='container']") || target;
     hideChildren(container);
 
@@ -623,7 +623,7 @@
     var section = findSectionByHeading("sounds interesting") || findSectionByHeading("contact us today");
     if (!section) return;
 
-    section.style.background = "#111";
+    section.style.background = "#0a0a0f";
     var form = section.querySelector("form");
     if (!form) return;
 
