@@ -7561,7 +7561,10 @@
 
     vizWrap.innerHTML =
       '<div class="pbrd-air-map-wrap">' +
-        '<svg viewBox="0 0 620 340" fill="none" class="pbrd-air-map-svg">' +
+        '<svg viewBox="0 0 620 340" fill="none" class="pbrd-air-map-svg" preserveAspectRatio="xMidYMid meet">' +
+          /* Subtle background pattern */
+          '<defs><pattern id="pbrd-grid" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="0.5" fill="rgba(255,255,255,0.04)"/></pattern></defs>' +
+          '<rect width="620" height="340" fill="url(#pbrd-grid)"/>' +
           svgPaths + svgDots +
         '</svg>' +
         '<div class="pbrd-air-txn-feed" id="pbrd-air-feed"></div>' +
