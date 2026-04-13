@@ -6419,16 +6419,24 @@
       btn.style.setProperty("color", "#fff", "important");
       btn.style.setProperty("border", "none", "important");
       btn.style.setProperty("border-radius", "100px", "important");
-      btn.style.setProperty("padding", "14px 48px", "important");
-      btn.style.setProperty("font-size", "0.9375rem", "important");
+      btn.style.setProperty("padding", "12px 32px", "important");
+      btn.style.setProperty("font-size", "0.875rem", "important");
       btn.style.setProperty("font-weight", "600", "important");
       btn.style.setProperty("cursor", "pointer", "important");
+      btn.style.setProperty("white-space", "nowrap", "important");
+      btn.style.setProperty("min-width", "auto", "important");
+      btn.style.setProperty("width", "auto", "important");
+      btn.style.setProperty("height", "auto", "important");
+      btn.style.setProperty("line-height", "1.4", "important");
+      btn.style.setProperty("display", "inline-flex", "important");
+      btn.style.setProperty("align-items", "center", "important");
+      btn.style.setProperty("justify-content", "center", "important");
 
       if (text === "next" || text === "submit" || text === "send") {
         if (btn.tagName === "INPUT") {
-          btn.value = "Get my terminal \u2192";
+          btn.value = "Continue \u2192";
         } else {
-          btn.textContent = "Get my terminal \u2192";
+          btn.textContent = "Continue \u2192";
         }
       }
     });
