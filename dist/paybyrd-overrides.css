@@ -10657,24 +10657,30 @@ a.glowing_button_link .glowing_button_text {
   background: linear-gradient(90deg, transparent, #6319f0, transparent);
 }
 
-/* ── Form inputs ── */
-.pbrd-pos-form-input {
+/* ── Form inputs — high specificity via section class ── */
+.pbrd-pos-contact-section input:not([type="submit"]):not([type="checkbox"]),
+.pbrd-pos-contact-section textarea,
+.pbrd-pos-contact-section select {
   background: #f5f5f7 !important;
-  border: 1px solid #e5e5ea !important;
+  border: 1.5px solid #e0e0e5 !important;
   border-radius: 10px !important;
   color: #111 !important;
   padding: 12px 16px !important;
   font-size: 0.9375rem !important;
   transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
 }
-.pbrd-pos-form-input:focus {
+.pbrd-pos-contact-section input:not([type="submit"]):not([type="checkbox"]):focus,
+.pbrd-pos-contact-section textarea:focus,
+.pbrd-pos-contact-section select:focus {
   border-color: #6319f0 !important;
   box-shadow: 0 0 0 3px rgba(99, 25, 240, 0.08) !important;
   outline: none !important;
+  background: #fff !important;
 }
 
 /* ── Submit button ── */
-.pbrd-pos-form-submit {
+.pbrd-pos-contact-section input[type="submit"],
+.pbrd-pos-contact-section button[type="submit"] {
   background: #6319f0 !important;
   color: #fff !important;
   border: none !important;
@@ -10684,9 +10690,9 @@ a.glowing_button_link .glowing_button_text {
   font-weight: 600 !important;
   cursor: pointer !important;
   transition: all 0.25s ease !important;
-  letter-spacing: 0.01em !important;
 }
-.pbrd-pos-form-submit:hover {
+.pbrd-pos-contact-section input[type="submit"]:hover,
+.pbrd-pos-contact-section button[type="submit"]:hover {
   background: #5214d4 !important;
   box-shadow: 0 6px 24px rgba(99, 25, 240, 0.25) !important;
   transform: translateY(-1px) !important;
