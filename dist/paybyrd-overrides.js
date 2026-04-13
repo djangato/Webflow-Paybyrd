@@ -5369,10 +5369,10 @@
     hideChildren(container);
 
     var terminals = [
-      { name: "Paybyrd Rawhide", model: "PAX A920 Pro", img: "lineup-rawhide.png", desc: "The all-rounder. Counter, table, delivery.", pills: ["Android 10", '5.5" HD', "4G + WiFi"] },
-      { name: "Paybyrd Renegade", model: "PAX A77", img: "lineup-renegade.png", desc: "Compact powerhouse. Built for speed.", pills: ["Android 10", '5.5" HD', "Scanner"] },
-      { name: "Paybyrd Maverick", model: "Sunmi V3", img: "lineup-maverick.png", desc: "Print receipts on the move.", pills: ["Android 12", "Printer", "NFC"] },
-      { name: "Paybyrd Titan", model: "Sunmi T3 Pro", img: "lineup-titan.png", desc: "Self-service desktop. Kiosk-ready.", pills: ["Android 12", '15.6" Touch', "IP65"] }
+      { name: "Paybyrd Rawhide", model: "PAX A920 Pro", video: "a920-video.mp4", poster: "a920-render.png", desc: "The all-rounder. Counter, table, delivery.", pills: ["Android 10", '5.5" HD', "4G + WiFi"] },
+      { name: "Paybyrd Renegade", model: "PAX A77", video: "a77-video.mp4", poster: "a77-render.png", desc: "Compact powerhouse. Built for speed.", pills: ["Android 10", '5.5" HD', "Scanner"] },
+      { name: "Paybyrd Maverick", model: "Sunmi V3", video: "sunmi-v3-video.mp4", poster: "sunmi-v3-render.png", desc: "Print receipts on the move.", pills: ["Android 12", "Printer", "NFC"] },
+      { name: "Paybyrd Titan", model: "Sunmi T3 Pro", video: null, poster: "t3-render.png", desc: "Self-service desktop. Kiosk-ready.", pills: ["Android 12", '15.6" Touch', "IP65"] }
     ];
 
     var wrap = document.createElement("div");
@@ -5391,8 +5391,11 @@
       for (var p = 0; p < t.pills.length; p++) {
         pills += '<span class="pbrd-pos-tcard-pill">' + t.pills[p] + '</span>';
       }
+      var media = t.video
+        ? '<video autoplay muted loop playsinline preload="metadata" poster="' + BASE + t.poster + '" style="max-height:260px;width:auto;object-fit:contain"><source src="' + BASE + t.video + '" type="video/mp4"></video>'
+        : '<img src="' + BASE + t.poster + '" alt="' + t.name + '" loading="lazy">';
       grid += '<div class="pbrd-pos-tcard pbrd-pos-reveal">' +
-        '<div class="pbrd-pos-tcard-img"><img src="' + BASE + t.img + '" alt="' + t.name + '" loading="lazy"></div>' +
+        '<div class="pbrd-pos-tcard-img">' + media + '</div>' +
         '<div class="pbrd-pos-tcard-body">' +
           '<div class="pbrd-pos-tcard-name">' + t.name + '</div>' +
           '<div class="pbrd-pos-tcard-model">' + t.model + '</div>' +
@@ -5670,7 +5673,7 @@
       {
         tab: "Rawhide", name: "Paybyrd Rawhide", model: "PAX A920 Pro",
         desc: "Combines sleek design with powerful performance. A beautiful portable solution with high-resolution touchscreen, 4G and Wi-Fi connectivity, supporting all payment types. Ideal for retail and hospitality.",
-        video: "a920-video.mp4", poster: "a920-render.png",
+        img: "lineup-rawhide.png",
         specs: [
           ["OS", "Android 10"], ["Security", "PCI 6 SRED"], ["Display", '5.5" HD Touchscreen'],
           ["Connectivity", "4G / Wi-Fi / Bluetooth"], ["Camera", "8MP Rear"], ["Printer", "Built-in thermal"],
@@ -5680,7 +5683,7 @@
       {
         tab: "Renegade", name: "Paybyrd Renegade", model: "PAX A77",
         desc: "A compact, handheld payment terminal that delivers reliable performance on the go. 4G and Wi-Fi capabilities with a user-friendly interface, perfect for businesses that need mobile efficiency.",
-        video: "a77-video.mp4", poster: "a77-render.png",
+        img: "lineup-renegade.png",
         specs: [
           ["OS", "Android 10"], ["Security", "PCI 5 SRED"], ["Display", '5.5" HD Touchscreen'],
           ["Connectivity", "4G / Wi-Fi / Bluetooth"], ["Camera", "13MP Rear / 5MP Front"], ["Scanner", "Professional barcode"],
@@ -5690,7 +5693,7 @@
       {
         tab: "Maverick", name: "Paybyrd Maverick", model: "Sunmi V3",
         desc: "Built for speed with an integrated high-speed printer. The go-to terminal for restaurants, delivery, and any business that needs receipts on the spot.",
-        video: "sunmi-v3-video.mp4", poster: "sunmi-v3-render.png",
+        img: "lineup-maverick.png",
         specs: [
           ["OS", "Android 12"], ["Security", "PCI 5"], ["Display", '6" HD Touchscreen'],
           ["Connectivity", "4G / Wi-Fi / Bluetooth"], ["Printer", "High-speed thermal"], ["Camera", "Rear autofocus"],
@@ -5700,7 +5703,7 @@
       {
         tab: "Titan", name: "Paybyrd Titan", model: "Sunmi T3 Pro",
         desc: "A versatile, all-in-one desktop terminal designed for seamless integration with vending machines and self-service kiosks. Large touch screen with multiple connectivity options including contactless, chip, and magnetic stripe.",
-        video: null, poster: "t3-render.png",
+        img: "lineup-titan.png",
         specs: [
           ["OS", "Android 12"], ["Security", "PCI 6.x SRED"], ["Display", '15.6" FHD Touchscreen'],
           ["Connectivity", "Ethernet / Wi-Fi / 4G"], ["Rating", "IP65 IK09"], ["Camera", "2MP Front"],
@@ -5727,12 +5730,7 @@
     var contents = '';
     for (var i = 0; i < terminals.length; i++) {
       var tm = terminals[i];
-      var visual = '';
-      if (tm.video) {
-        visual = '<video autoplay muted loop playsinline preload="metadata" poster="' + BASE + tm.poster + '"><source src="' + BASE + tm.video + '" type="video/mp4"></video>';
-      } else {
-        visual = '<img src="' + BASE + tm.poster + '" alt="' + tm.name + '" loading="lazy">';
-      }
+      var visual = '<img src="' + BASE + tm.img + '" alt="' + tm.name + '" loading="lazy">';
 
       var specRows = '';
       for (var s = 0; s < tm.specs.length; s++) {
@@ -5761,12 +5759,7 @@
         wrap.querySelectorAll(".pbrd-pos-tab-content").forEach(function (c) { c.classList.remove("pbrd-pos-tab-active"); });
         btn.classList.add("pbrd-pos-tab--active");
         var content = wrap.querySelector('.pbrd-pos-tab-content[data-tab="' + idx + '"]');
-        if (content) {
-          content.classList.add("pbrd-pos-tab-active");
-          /* Play video if exists */
-          var vid = content.querySelector("video");
-          if (vid) { vid.currentTime = 0; vid.play(); }
-        }
+        if (content) content.classList.add("pbrd-pos-tab-active");
       });
     });
   }
