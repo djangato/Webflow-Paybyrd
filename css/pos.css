@@ -1256,17 +1256,17 @@
 
 /* Image area — dominant, square feel */
 .pbrd-pos-pc-img-white {
-  aspect-ratio: 1 / 0.85;
+  aspect-ratio: 1 / 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 32px 24px;
+  padding: 20px;
   background: #F7F7F8;
 }
 
 .pbrd-pos-pc-img-white img {
-  max-height: 80%;
-  max-width: 75%;
+  width: 70%;
+  height: auto;
   object-fit: contain;
   transition: transform 0.4s ease;
 }
