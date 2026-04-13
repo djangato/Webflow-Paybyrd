@@ -7014,11 +7014,23 @@
     /* ── Add missing payment methods: NuPay, Ethereum, Bitcoin ── */
     var newMethods = [
       { name: "NuPay", type: "Digital Wallet", region: "Worldwide",
-        icon: '<svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="16" fill="rgba(130,50,220,0.15)" stroke="rgba(130,50,220,0.4)" stroke-width="1.5"/><text x="20" y="25" text-anchor="middle" fill="rgba(130,50,220,0.9)" font-size="14" font-weight="700" font-family="system-ui">N</text></svg>' },
+        icon: '<svg viewBox="0 0 64 64" width="64" height="64" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+          '<rect width="64" height="64" rx="14" fill="#820AD1"/>' +
+          '<path d="M18 44V20h4.5l13 16.5V20H40v24h-4.5L22.5 27.5V44H18Z" fill="#fff"/>' +
+          '</svg>' },
       { name: "Ethereum", type: "Cryptocurrency", region: "Worldwide",
-        icon: '<svg viewBox="0 0 40 40" fill="none"><path d="M20 4 L32 20 L20 28 L8 20 Z" fill="rgba(98,126,234,0.12)" stroke="rgba(98,126,234,0.5)" stroke-width="1"/><path d="M20 28 L32 20 L20 36 L8 20 Z" fill="rgba(98,126,234,0.06)" stroke="rgba(98,126,234,0.3)" stroke-width="1"/></svg>' },
+        icon: '<svg viewBox="0 0 64 64" width="64" height="64" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+          '<rect width="64" height="64" rx="14" fill="#627EEA"/>' +
+          '<path d="M32 8 L48 32 L32 42 L16 32 Z" fill="rgba(255,255,255,0.9)"/>' +
+          '<path d="M32 42 L48 32 L32 56 L16 32 Z" fill="rgba(255,255,255,0.6)"/>' +
+          '<path d="M32 8 L32 26 L46 32 Z" fill="rgba(255,255,255,0.7)"/>' +
+          '<path d="M32 8 L32 26 L18 32 Z" fill="rgba(255,255,255,1)"/>' +
+          '</svg>' },
       { name: "Bitcoin", type: "Cryptocurrency", region: "Worldwide",
-        icon: '<svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="16" fill="rgba(247,147,26,0.1)" stroke="rgba(247,147,26,0.4)" stroke-width="1.5"/><text x="20" y="26" text-anchor="middle" fill="rgba(247,147,26,0.9)" font-size="16" font-weight="800" font-family="system-ui">\u20BF</text></svg>' }
+        icon: '<svg viewBox="0 0 64 64" width="64" height="64" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+          '<rect width="64" height="64" rx="14" fill="#F7931A"/>' +
+          '<path d="M42.5 28.2c.6-4-2.4-6.2-6.6-7.6l1.4-5.4-3.3-.8-1.3 5.3c-.9-.2-1.8-.4-2.6-.6l1.3-5.3-3.3-.8-1.4 5.4c-.7-.2-1.4-.3-2.1-.5l-4.5-1.1-.9 3.5s2.4.6 2.4.6c1.3.3 1.6 1.2 1.5 1.9l-1.5 6.2c.1 0 .2 0 .3.1l-.3-.1-2.2 8.7c-.2.4-.6 1.1-1.5.8 0 0-2.4-.6-2.4-.6l-1.7 3.8 4.3 1.1c.8.2 1.6.4 2.3.6l-1.4 5.5 3.3.8 1.4-5.4c.9.2 1.8.5 2.6.7l-1.3 5.4 3.3.8 1.4-5.5c5.7 1.1 10 .6 11.8-4.5 1.5-4.1-.1-6.5-3-8 2.1-.5 3.7-1.9 4.2-4.8Z" fill="#fff"/>' +
+          '</svg>' }
     ];
 
     /* Clone a card to use as template */
@@ -7028,13 +7040,14 @@
       /* Clear and set content — find the text elements */
       var imgs = newCard.querySelectorAll("img");
       imgs.forEach(function(img) { img.style.display = "none"; });
-      /* Insert SVG icon */
+      /* Insert SVG icon — match Webflow's 64px size */
       var imgWrap = newCard.querySelector("[class*='image']") || newCard.querySelector("img");
       if (imgWrap) {
         var iconDiv = document.createElement("div");
         iconDiv.innerHTML = pm.icon;
-        iconDiv.style.width = "40px";
-        iconDiv.style.height = "40px";
+        iconDiv.style.width = "64px";
+        iconDiv.style.height = "64px";
+        iconDiv.style.flexShrink = "0";
         var parent = imgWrap.parentElement || imgWrap;
         parent.insertBefore(iconDiv, imgWrap);
       }
