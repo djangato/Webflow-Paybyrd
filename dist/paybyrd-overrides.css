@@ -10758,3 +10758,328 @@ a.glowing_button_link .glowing_button_text {
   .pbrd-pos-pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
   .pbrd-pos-trust { gap: 20px; flex-direction: column; align-items: center; }
 }
+/* Paybyrd — Payment Methods Page Styles */
+
+/* ═══════════════════════════════════════════ */
+/* Foundation                                  */
+/* ═══════════════════════════════════════════ */
+
+/* ── Scroll-reveal base ── */
+.pbrd-pm-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.pbrd-pm-reveal.pbrd-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ═══════════════════════════════════════════ */
+/* Section 1: Hero Enhancement                 */
+/* ═══════════════════════════════════════════ */
+
+.pbrd-pm-hero-kicker {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #2563eb;
+  margin-bottom: 12px;
+}
+
+.pbrd-pm-hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+
+.pbrd-pm-hero-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.pbrd-pm-hero-stat-val {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111;
+  font-variant-numeric: tabular-nums;
+}
+
+.pbrd-pm-hero-stat-lbl {
+  font-size: 0.6875rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Divider between stats */
+.pbrd-pm-hero-stat + .pbrd-pm-hero-stat {
+  position: relative;
+  padding-left: 40px;
+}
+.pbrd-pm-hero-stat + .pbrd-pm-hero-stat::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 32px;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+/* ═══════════════════════════════════════════ */
+/* Section 2: Payment Grid — Category Tabs     */
+/* ═══════════════════════════════════════════ */
+
+.pbrd-pm-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.pbrd-pm-tab {
+  padding: 8px 20px;
+  border-radius: 100px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #fff;
+  color: #555;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: inherit;
+}
+
+.pbrd-pm-tab:hover {
+  border-color: rgba(37, 99, 235, 0.3);
+  color: #2563eb;
+}
+
+.pbrd-pm-tab.pbrd-pm-tab--active {
+  background: #2563eb;
+  color: #fff;
+  border-color: #2563eb;
+}
+
+/* Card counter */
+.pbrd-pm-counter {
+  text-align: center;
+  font-size: 0.75rem;
+  color: #aaa;
+  margin-bottom: 20px;
+}
+
+/* ── Enhanced card styles ── */
+.pbrd-pm-card-enhanced {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
+  border-radius: 16px !important;
+}
+.pbrd-pm-card-enhanced:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 12px 32px rgba(37, 99, 235, 0.08) !important;
+  border-color: rgba(37, 99, 235, 0.15) !important;
+}
+
+/* Filter hide/show */
+.pbrd-pm-card-hidden {
+  display: none !important;
+}
+
+/* Badge overrides */
+.pbrd-pm-badge-latest {
+  background: linear-gradient(135deg, #10b981, #059669) !important;
+  color: #fff !important;
+}
+.pbrd-pm-badge-coming {
+  background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+  color: #fff !important;
+}
+
+/* Region badge */
+.pbrd-pm-region {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.6875rem;
+  color: #888;
+}
+
+/* ═══════════════════════════════════════════ */
+/* Section 3: Integration — Enhanced           */
+/* ═══════════════════════════════════════════ */
+
+.pbrd-pm-int-stats {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+.pbrd-pm-int-stat {
+  text-align: center;
+}
+
+.pbrd-pm-int-stat-val {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.pbrd-pm-int-stat-lbl {
+  font-size: 0.6875rem;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.pbrd-pm-int-pills {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+.pbrd-pm-int-pill {
+  padding: 6px 14px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.pbrd-pm-int-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 32px;
+  padding: 12px 28px;
+  border-radius: 100px;
+  background: #2563eb;
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+.pbrd-pm-int-cta:hover {
+  background: #1d4ed8;
+  box-shadow: 0 6px 24px rgba(37, 99, 235, 0.3);
+  transform: translateY(-1px);
+}
+
+.pbrd-pm-int-footer {
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* ═══════════════════════════════════════════ */
+/* Section 4: Contact Form                     */
+/* ═══════════════════════════════════════════ */
+
+.pbrd-pm-contact-section {
+  background: #f8f9fc !important;
+  padding: 60px 0 !important;
+  position: relative;
+}
+
+.pbrd-pm-contact-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent, #2563eb, transparent);
+}
+
+.pbrd-pm-contact-section input:not([type="submit"]):not([type="checkbox"]):not([type="radio"]):not([type="hidden"]),
+.pbrd-pm-contact-section textarea,
+.pbrd-pm-contact-section select {
+  background: #f5f5f7 !important;
+  border: 1.5px solid #e0e0e5 !important;
+  border-radius: 10px !important;
+  color: #111 !important;
+  padding: 12px 16px !important;
+  font-size: 0.9375rem !important;
+}
+
+.pbrd-pm-contact-section input:not([type="submit"]):not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):focus,
+.pbrd-pm-contact-section textarea:focus {
+  border-color: #2563eb !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08) !important;
+  outline: none !important;
+  background: #fff !important;
+}
+
+.pbrd-pm-trust {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.pbrd-pm-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pbrd-pm-trust-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(37, 99, 235, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.pbrd-pm-trust-icon svg {
+  width: 18px;
+  height: 18px;
+  color: #2563eb;
+}
+
+.pbrd-pm-trust-val {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #111;
+}
+
+.pbrd-pm-trust-lbl {
+  display: block;
+  font-size: 0.625rem;
+  color: #999;
+}
+
+/* ═══════════════════════════════════════════ */
+/* Responsive                                  */
+/* ═══════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .pbrd-pm-hero-stats { gap: 20px; }
+  .pbrd-pm-hero-stat + .pbrd-pm-hero-stat { padding-left: 20px; }
+  .pbrd-pm-hero-stat + .pbrd-pm-hero-stat::before { height: 24px; }
+  .pbrd-pm-hero-stat-val { font-size: 1.25rem; }
+  .pbrd-pm-int-stats { gap: 24px; }
+  .pbrd-pm-trust { gap: 20px; flex-direction: column; align-items: center; }
+}
