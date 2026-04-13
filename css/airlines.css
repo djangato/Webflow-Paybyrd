@@ -32,7 +32,7 @@
 
 /* ── SVG Route Map + Feed ── */
 .pbrd-air-viz {
-  margin-top:-60px; padding:0 24px;
+  margin-top:-220px; padding:0 24px;
   max-width:1200px; margin-left:auto; margin-right:auto;
   width:100% !important; position:relative; z-index:1;
 }
