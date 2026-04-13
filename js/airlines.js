@@ -68,11 +68,10 @@
       '<span class="pbrd-air-hero-proof">Trusted by TAP Air Portugal & Europe\u2019s leading carriers</span>';
     parent.insertBefore(ctaWrap, (subtitle || heading).nextSibling);
 
-    /* ── Animated Globe Canvas ── */
+    /* ── Live Transaction Feed (no canvas — pure HTML) ── */
     var globeWrap = document.createElement("div");
     globeWrap.className = "pbrd-air-globe-wrap pbrd-air-reveal";
     globeWrap.innerHTML =
-      '<canvas id="pbrd-air-globe" class="pbrd-air-globe-canvas"></canvas>' +
       '<div class="pbrd-air-txn-feed" id="pbrd-air-txn-feed"></div>';
     parent.insertBefore(globeWrap, ctaWrap.nextSibling);
 
@@ -108,149 +107,10 @@
       '</div>';
     parent.insertBefore(ticker, globeWrap.nextSibling);
 
-    /* ── Init globe canvas ── */
-    setTimeout(function() { initGlobe(); initTransactionFeed(); }, 500);
+    /* ── Init transaction feed ── */
+    setTimeout(function() { initTransactionFeed(); }, 500);
 
     observeReveal(".pbrd-air-reveal", 120);
-  }
-
-  /* ── Globe: flat-projection with flight arcs ── */
-  function initGlobe() {
-    var canvas = document.getElementById("pbrd-air-globe");
-    if (!canvas) return;
-    var ctx = canvas.getContext("2d");
-    var dpr = window.devicePixelRatio || 1;
-    var W, H;
-
-    function resize() {
-      var rect = canvas.parentElement.getBoundingClientRect();
-      W = rect.width; H = 280;
-      canvas.width = W * dpr; canvas.height = H * dpr;
-      canvas.style.width = W + "px"; canvas.style.height = H + "px";
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    }
-    resize();
-    window.addEventListener("resize", resize);
-
-    /* City coordinates (normalized 0-1 on a flat map projection) */
-    var cities = [
-      { name: "LIS", x: 0.44, y: 0.38 },  /* Lisbon */
-      { name: "LHR", x: 0.47, y: 0.30 },  /* London */
-      { name: "CDG", x: 0.49, y: 0.32 },  /* Paris */
-      { name: "FRA", x: 0.51, y: 0.31 },  /* Frankfurt */
-      { name: "JFK", x: 0.25, y: 0.35 },  /* New York */
-      { name: "GRU", x: 0.32, y: 0.65 },  /* São Paulo */
-      { name: "DXB", x: 0.62, y: 0.42 },  /* Dubai */
-      { name: "NRT", x: 0.85, y: 0.36 },  /* Tokyo */
-      { name: "SIN", x: 0.76, y: 0.55 },  /* Singapore */
-      { name: "LAX", x: 0.12, y: 0.37 },  /* LA */
-      { name: "MPM", x: 0.58, y: 0.62 },  /* Maputo */
-      { name: "LUA", x: 0.52, y: 0.58 },  /* Luanda */
-    ];
-
-    /* Flight routes (index pairs) */
-    var routes = [
-      [0, 1], [0, 2], [0, 4], [0, 5], [0, 10], [0, 11],
-      [1, 4], [1, 6], [2, 6], [3, 7], [6, 8], [4, 9],
-      [5, 11], [1, 3], [0, 6], [0, 8]
-    ];
-
-    /* Active flight pulses */
-    var flights = [];
-    function spawnFlight() {
-      var r = routes[Math.floor(Math.random() * routes.length)];
-      flights.push({ from: r[0], to: r[1], t: 0, speed: 0.003 + Math.random() * 0.004 });
-      if (flights.length > 6) flights.shift();
-    }
-    setInterval(spawnFlight, 1200);
-    spawnFlight(); spawnFlight(); spawnFlight();
-
-    var time = 0;
-    var running = true;
-
-    function draw() {
-      if (!running) { requestAnimationFrame(draw); return; }
-      time += 0.016;
-      ctx.clearRect(0, 0, W, H);
-
-      /* ── Grid dots (world map hint) ── */
-      for (var gx = 0; gx < W; gx += 18) {
-        for (var gy = 0; gy < H; gy += 18) {
-          ctx.beginPath();
-          ctx.arc(gx, gy, 0.4, 0, Math.PI * 2);
-          ctx.fillStyle = "rgba(255,255,255,0.03)";
-          ctx.fill();
-        }
-      }
-
-      /* ── Route lines ── */
-      routes.forEach(function(r) {
-        var a = cities[r[0]], b = cities[r[1]];
-        var ax = a.x * W, ay = a.y * H, bx = b.x * W, by = b.y * H;
-        ctx.beginPath();
-        ctx.moveTo(ax, ay);
-        /* Curved arc */
-        var mx = (ax + bx) / 2, my = (ay + by) / 2 - Math.abs(bx - ax) * 0.15;
-        ctx.quadraticCurveTo(mx, my, bx, by);
-        ctx.strokeStyle = "rgba(14,165,233,0.06)";
-        ctx.lineWidth = 0.8;
-        ctx.stroke();
-      });
-
-      /* ── City dots ── */
-      cities.forEach(function(c) {
-        var cx = c.x * W, cy = c.y * H;
-        /* Outer glow */
-        var g = ctx.createRadialGradient(cx, cy, 0, cx, cy, 8);
-        g.addColorStop(0, "rgba(14,165,233,0.15)");
-        g.addColorStop(1, "transparent");
-        ctx.beginPath(); ctx.arc(cx, cy, 8, 0, Math.PI * 2);
-        ctx.fillStyle = g; ctx.fill();
-        /* Core dot */
-        ctx.beginPath(); ctx.arc(cx, cy, 2, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(14,165,233,0.6)"; ctx.fill();
-        /* Label */
-        ctx.font = "600 7px system-ui";
-        ctx.fillStyle = "rgba(255,255,255,0.2)";
-        ctx.fillText(c.name, cx + 5, cy - 5);
-      });
-
-      /* ── Flying pulses along routes ── */
-      flights.forEach(function(f) {
-        f.t += f.speed;
-        if (f.t > 1) { f.t = 0; var nr = routes[Math.floor(Math.random() * routes.length)]; f.from = nr[0]; f.to = nr[1]; }
-
-        var a = cities[f.from], b = cities[f.to];
-        var ax = a.x * W, ay = a.y * H, bx = b.x * W, by = b.y * H;
-        var mx = (ax + bx) / 2, my = (ay + by) / 2 - Math.abs(bx - ax) * 0.15;
-
-        /* Quadratic bezier point at t */
-        var t = f.t;
-        var px = (1 - t) * (1 - t) * ax + 2 * (1 - t) * t * mx + t * t * bx;
-        var py = (1 - t) * (1 - t) * ay + 2 * (1 - t) * t * my + t * t * by;
-
-        /* Trail */
-        var tg = ctx.createRadialGradient(px, py, 0, px, py, 12);
-        tg.addColorStop(0, "rgba(14,165,233,0.5)");
-        tg.addColorStop(0.4, "rgba(14,165,233,0.1)");
-        tg.addColorStop(1, "transparent");
-        ctx.beginPath(); ctx.arc(px, py, 12, 0, Math.PI * 2);
-        ctx.fillStyle = tg; ctx.fill();
-
-        /* Core */
-        ctx.beginPath(); ctx.arc(px, py, 2.5, 0, Math.PI * 2);
-        ctx.fillStyle = "#0ea5e9"; ctx.fill();
-      });
-
-      requestAnimationFrame(draw);
-    }
-
-    var obs = new IntersectionObserver(function(entries) {
-      running = entries[0].isIntersecting;
-    }, { threshold: 0.05 });
-    obs.observe(canvas.parentElement);
-
-    draw();
   }
 
   /* ── Live transaction feed — simulated airline payments ── */

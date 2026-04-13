@@ -11104,31 +11104,20 @@ a.glowing_button_link .glowing_button_text {
   letter-spacing: 0.01em;
 }
 
-/* ── Globe wrapper ── */
+/* ── Transaction feed ── */
 .pbrd-air-globe-wrap {
-  position: relative;
-  margin-top: 40px;
-  border-radius: 20px;
-  overflow: hidden;
+  margin-top: 32px;
+  border-radius: 16px;
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 16px;
+  min-height: 160px;
 }
 
-.pbrd-air-globe-canvas {
-  display: block;
-  width: 100%;
-}
-
-/* ── Transaction feed overlay ── */
 .pbrd-air-txn-feed {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 320px;
   display: flex;
   flex-direction: column;
   gap: 6px;
-  z-index: 2;
 }
 
 .pbrd-air-txn-item {
@@ -11492,7 +11481,7 @@ a.glowing_button_link .glowing_button_text {
 /* ═══════════════════════════════════════════ */
 
 @media (max-width: 768px) {
-  .pbrd-air-txn-feed { display: none; }
+  .pbrd-air-txn-item { font-size: 0.625rem; }
   .pbrd-air-funnel { max-width: 100%; }
   .pbrd-air-funnel-val { font-size: 1.25rem; }
   .pbrd-air-testimonial { padding: 32px 24px; }
