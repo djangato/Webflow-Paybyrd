@@ -124,12 +124,15 @@
 
     vizWrap.innerHTML =
       '<div class="pbrd-air-map-wrap">' +
+        '<div class="pbrd-air-map-left">' +
         '<svg viewBox="0 0 700 380" fill="none" class="pbrd-air-map-svg" preserveAspectRatio="xMidYMid meet">' +
-          '<defs><pattern id="pbrd-grid" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="12" cy="12" r="0.5" fill="rgba(255,255,255,0.04)"/></pattern></defs>' +
-          '<rect width="700" height="380" fill="url(#pbrd-grid)"/>' +
           svgPaths + svgDots +
         '</svg>' +
-        '<div class="pbrd-air-txn-feed" id="pbrd-air-feed"></div>' +
+        '</div>' + /* close map-left */
+        '<div class="pbrd-air-txn-feed">' +
+          '<div class="pbrd-air-txn-feed-header"><div class="pbrd-air-txn-feed-dot"></div>LIVE TRANSACTIONS</div>' +
+          '<div id="pbrd-air-feed"></div>' +
+        '</div>' +
       '</div>';
 
     /* Insert viz + ticker at SECTION level to escape Webflow column constraints */
@@ -176,7 +179,7 @@
         '<span class="pbrd-air-txn-t">' + t.t + '</span>';
       feed.insertBefore(el, feed.firstChild);
       setTimeout(function() { el.classList.remove("pbrd-air-txn--in"); }, 50);
-      while (feed.children.length > 5) feed.removeChild(feed.lastChild);
+      while (feed.children.length > 6) feed.removeChild(feed.lastChild);
     }
     add(); setTimeout(add, 600);
     setInterval(add, 2800);

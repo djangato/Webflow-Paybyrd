@@ -31,17 +31,31 @@
 }
 
 .pbrd-air-map-wrap {
-  position:relative; border-radius:20px; overflow:hidden;
-  background:linear-gradient(180deg, rgba(14,165,233,0.04) 0%, rgba(0,0,0,0.15) 100%);
-  border:1px solid rgba(255,255,255,0.06);
+  display:grid; grid-template-columns:1fr 320px; gap:20px; align-items:center;
+}
+
+.pbrd-air-map-left {
+  position:relative;
 }
 
 .pbrd-air-map-svg { display:block; width:100%; height:auto; }
 
 .pbrd-air-txn-feed {
-  position:absolute; top:20px; right:20px; bottom:20px; width:260px;
-  display:flex; flex-direction:column; gap:5px; z-index:2;
-  justify-content:flex-end;
+  display:flex; flex-direction:column; gap:5px;
+  background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06);
+  border-radius:16px; padding:20px;
+}
+
+.pbrd-air-txn-feed-header {
+  display:flex; align-items:center; gap:8px; margin-bottom:10px;
+  font-size:0.625rem; font-weight:700; letter-spacing:0.1em;
+  color:rgba(14,165,233,0.5); text-transform:uppercase;
+}
+
+.pbrd-air-txn-feed-dot {
+  width:6px; height:6px; border-radius:50%; background:#22c55e;
+  box-shadow:0 0 8px rgba(34,197,94,0.5);
+  animation:pbrd-air-blink 2s ease-in-out infinite;
 }
 
 .pbrd-air-txn {
@@ -183,6 +197,7 @@
 
 /* ═══ RESPONSIVE ═══ */
 @media (max-width:768px) {
+  .pbrd-air-map-wrap { grid-template-columns:1fr; }
   .pbrd-air-txn-feed { display:none; }
   .pbrd-air-leak-grid { grid-template-columns:1fr 1fr; }
   .pbrd-air-leak-card { border-bottom:1px solid rgba(255,255,255,0.04); }
