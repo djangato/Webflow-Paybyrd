@@ -9860,15 +9860,15 @@ a.glowing_button_link .glowing_button_text {
 
 /* ── Section-level constellation canvas ── */
 .pbrd-pos-pricing-canvas {
-  position: absolute;
+  position: absolute !important;
   inset: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 0;
+  z-index: 0 !important;
 }
 
-.pbrd-pos-pricing-section > * {
+.pbrd-pos-pricing-section > *:not(.pbrd-pos-pricing-canvas) {
   position: relative;
   z-index: 1;
 }
