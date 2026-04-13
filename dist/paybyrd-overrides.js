@@ -7162,26 +7162,36 @@
       tabsWrap.appendChild(btn);
     });
 
-    /* Insert tabs and counter — walk up from grid to find a visible
-       ancestor that we can insert before. Look for u-grid, u-layout, or section. */
-    var insertTarget = gridContainer;
-    var insertParent = gridContainer.parentElement;
-
-    /* Walk up to find a good insertion point — skip display:contents wrappers */
-    while (insertParent) {
-      var pcs = window.getComputedStyle(insertParent);
-      if (pcs.display !== "contents" && insertParent.tagName !== "BODY") {
-        insertTarget = insertParent.contains(gridContainer) ? insertTarget : gridContainer;
+    /* Insert tabs and counter ABOVE the grid.
+       The grid lives inside: u-grid > u-grid-wrapper > u-layout-column > u-layout
+       We need to go up to u-layout level and insert before it, because
+       the intermediary wrappers use display:contents. */
+    var layoutAncestor = gridContainer;
+    var safety = 0;
+    while (layoutAncestor && safety < 15) {
+      safety++;
+      var p = layoutAncestor.parentElement;
+      if (!p || p.tagName === "BODY") break;
+      /* Stop when we find a parent that is NOT display:contents and has meaningful layout */
+      var pcs = window.getComputedStyle(p);
+      if (pcs.display !== "contents" && p.children.length > 1) {
         break;
       }
-      insertTarget = insertParent;
-      insertParent = insertParent.parentElement;
+      if (pcs.display !== "contents" && p.className && (p.className.indexOf("section") > -1 || p.className.indexOf("container") > -1)) {
+        break;
+      }
+      layoutAncestor = p;
     }
 
-    /* Insert before the grid's visible ancestor */
-    if (insertTarget && insertTarget.parentElement) {
-      insertTarget.parentElement.insertBefore(counterEl, insertTarget);
-      insertTarget.parentElement.insertBefore(tabsWrap, counterEl);
+    /* Create a wrapper div for tabs + counter so they don't get affected by parent grid */
+    var filterWrap = document.createElement("div");
+    filterWrap.setAttribute("style", "width:100%;grid-column:1/-1;margin-bottom:12px;");
+    filterWrap.appendChild(tabsWrap);
+    filterWrap.appendChild(counterEl);
+
+    /* Insert before the layout ancestor */
+    if (layoutAncestor && layoutAncestor.parentElement) {
+      layoutAncestor.parentElement.insertBefore(filterWrap, layoutAncestor);
     }
   }
 
@@ -7316,22 +7326,39 @@
   /* ═══════════════════════════════════════════ */
 
   function fixFooter() {
-    var footer = document.querySelector("footer, [class*='footer']");
-    if (!footer) return;
+    /* Find all footer-like sections at the bottom of the page */
+    var footers = document.querySelectorAll("footer, [class*='footer'], [class*='Footer']");
+    if (footers.length === 0) {
+      /* Try the last section on the page */
+      var allSections = document.querySelectorAll("section, [class*='section']");
+      if (allSections.length > 0) {
+        var lastSection = allSections[allSections.length - 1];
+        if (lastSection.textContent.toLowerCase().indexOf("privacy") > -1 ||
+            lastSection.textContent.toLowerCase().indexOf("terms") > -1 ||
+            lastSection.textContent.toLowerCase().indexOf("copyright") > -1) {
+          footers = [lastSection];
+        }
+      }
+    }
 
-    /* Ensure footer text is visible on dark bg */
-    footer.querySelectorAll("a").forEach(function(a) {
-      var cs = window.getComputedStyle(a);
-      if (cs.color === "rgb(0, 0, 0)" || cs.color === "rgba(0, 0, 0, 0)") {
-        a.style.setProperty("color", "rgba(255,255,255,0.5)", "important");
-      }
-    });
-    footer.querySelectorAll("p, span, div").forEach(function(el) {
-      if (el.children.length > 2) return;
-      var cs = window.getComputedStyle(el);
-      if (cs.color === "rgb(0, 0, 0)" || cs.color === "rgba(0, 0, 0, 0)") {
-        el.style.setProperty("color", "rgba(255,255,255,0.35)", "important");
-      }
+    footers.forEach(function(footer) {
+      /* Force all text to be visible */
+      footer.querySelectorAll("*").forEach(function(el) {
+        var cs = window.getComputedStyle(el);
+        var r = parseInt(cs.color);
+        /* If text color is very dark (near black) on what's likely a dark bg */
+        if (cs.color.indexOf("rgb(0,") === 0 || cs.color === "rgb(0, 0, 0)" ||
+            cs.color.indexOf("rgba(0,") === 0) {
+          if (el.tagName === "A") {
+            el.style.setProperty("color", "rgba(255,255,255,0.5)", "important");
+          } else {
+            el.style.setProperty("color", "rgba(255,255,255,0.35)", "important");
+          }
+        }
+      });
+
+      /* Make sure footer has decent padding and separation */
+      footer.style.setProperty("border-top", "1px solid rgba(255,255,255,0.06)", "important");
     });
   }
 
