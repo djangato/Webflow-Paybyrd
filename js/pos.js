@@ -604,7 +604,6 @@
             '<div class="pbrd-pos-pc-price-line"><span class="pbrd-pos-pc-price-main">\u20AC295</span></div>' +
             '<div class="pbrd-pos-pc-btns">' +
               '<a href="/book-demo" class="pbrd-pos-pc-btn-primary">Order now</a>' +
-              '<a href="/pos" class="pbrd-pos-pc-btn-secondary">Learn more \u203A</a>' +
             '</div>' +
             '<ul class="pbrd-pos-pc-list">' +
               '<li>' + checkSVG + ' Compact and lightweight</li>' +
@@ -626,7 +625,6 @@
             '<div class="pbrd-pos-pc-price-line"><span class="pbrd-pos-pc-price-main">\u20AC395</span></div>' +
             '<div class="pbrd-pos-pc-btns">' +
               '<a href="/book-demo" class="pbrd-pos-pc-btn-primary">Order now</a>' +
-              '<a href="/pos" class="pbrd-pos-pc-btn-secondary">Learn more \u203A</a>' +
             '</div>' +
             '<ul class="pbrd-pos-pc-list">' +
               '<li>' + checkSVG + ' Fast, secure transactions</li>' +
@@ -647,7 +645,6 @@
             '<div class="pbrd-pos-pc-price-line"><span class="pbrd-pos-pc-price-main">\u20AC890</span></div>' +
             '<div class="pbrd-pos-pc-btns">' +
               '<a href="/book-demo" class="pbrd-pos-pc-btn-primary">Order now</a>' +
-              '<a href="/pos" class="pbrd-pos-pc-btn-secondary">Learn more \u203A</a>' +
             '</div>' +
             '<ul class="pbrd-pos-pc-list">' +
               '<li>' + checkSVG + ' Ethernet connection for reliability</li>' +
