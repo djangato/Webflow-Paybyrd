@@ -577,7 +577,7 @@
 
       /* ── SoftPOS banner ── */
       '<div class="pbrd-pos-softpos-banner pbrd-pos-reveal">' +
-        '<div class="pbrd-pos-softpos-glow"></div>' +
+        '<canvas class="pbrd-pos-softpos-canvas" id="pbrd-softpos-canvas"></canvas>' +
         '<div class="pbrd-pos-softpos-content">' +
           '<div class="pbrd-pos-softpos-left">' +
             '<div class="pbrd-pos-softpos-badge">FREE \u2014 NO HARDWARE NEEDED</div>' +
@@ -822,6 +822,167 @@
   /* Init                                        */
   /* ═══════════════════════════════════════════ */
 
+  /* ─── SoftPOS constellation canvas ─── */
+  function initSoftPOSCanvas() {
+    var canvas = document.getElementById("pbrd-softpos-canvas");
+    if (!canvas) return;
+    var ctx = canvas.getContext("2d");
+    var dpr = window.devicePixelRatio || 1;
+    var W, H;
+
+    function resize() {
+      var rect = canvas.parentElement.getBoundingClientRect();
+      W = rect.width;
+      H = rect.height;
+      canvas.width = W * dpr;
+      canvas.height = H * dpr;
+      canvas.style.width = W + "px";
+      canvas.style.height = H + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    resize();
+    window.addEventListener("resize", resize);
+
+    /* ── Nodes: fixed constellation points ── */
+    var nodeCount = 28;
+    var nodes = [];
+    for (var i = 0; i < nodeCount; i++) {
+      nodes.push({
+        x: Math.random() * 1.2 - 0.1,   /* normalized 0-1 with overflow */
+        y: Math.random() * 1.2 - 0.1,
+        r: 0.8 + Math.random() * 1.2,    /* radius */
+        pulse: Math.random() * Math.PI * 2,
+        speed: 0.3 + Math.random() * 0.7
+      });
+    }
+
+    /* ── Edges: connect nearby nodes ── */
+    var edges = [];
+    for (var a = 0; a < nodes.length; a++) {
+      for (var b = a + 1; b < nodes.length; b++) {
+        var dx = nodes[a].x - nodes[b].x;
+        var dy = nodes[a].y - nodes[b].y;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 0.28) {
+          edges.push({ a: a, b: b, dist: dist });
+        }
+      }
+    }
+
+    /* ── Traveling light pulses along edges ── */
+    var pulseCount = 8;
+    var pulses = [];
+    for (var p = 0; p < pulseCount; p++) {
+      pulses.push({
+        edge: Math.floor(Math.random() * edges.length),
+        t: Math.random(),               /* 0→1 position along edge */
+        speed: 0.15 + Math.random() * 0.3,
+        dir: Math.random() > 0.5 ? 1 : -1
+      });
+    }
+
+    var green = { r: 120, g: 255, b: 180 };
+    var purple = { r: 160, g: 100, b: 255 };
+
+    function lerpColor(t) {
+      return {
+        r: green.r + (purple.r - green.r) * t,
+        g: green.g + (purple.g - green.g) * t,
+        b: green.b + (purple.b - green.b) * t
+      };
+    }
+
+    var time = 0;
+    var running = true;
+
+    function draw() {
+      if (!running) return;
+      time += 0.016;
+      ctx.clearRect(0, 0, W, H);
+
+      /* Draw edges */
+      for (var e = 0; e < edges.length; e++) {
+        var edge = edges[e];
+        var na = nodes[edge.a];
+        var nb = nodes[edge.b];
+        var ax = na.x * W, ay = na.y * H;
+        var bx = nb.x * W, by = nb.y * H;
+        var alpha = 0.04 + 0.02 * Math.sin(time * 0.5 + e);
+        var c = lerpColor(na.x);
+        ctx.beginPath();
+        ctx.moveTo(ax, ay);
+        ctx.lineTo(bx, by);
+        ctx.strokeStyle = "rgba(" + Math.round(c.r) + "," + Math.round(c.g) + "," + Math.round(c.b) + "," + alpha + ")";
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      }
+
+      /* Draw nodes */
+      for (var n = 0; n < nodes.length; n++) {
+        var nd = nodes[n];
+        var nx = nd.x * W, ny = nd.y * H;
+        var glow = 0.15 + 0.15 * Math.sin(time * nd.speed + nd.pulse);
+        var c2 = lerpColor(nd.x);
+
+        /* Outer glow */
+        var grad = ctx.createRadialGradient(nx, ny, 0, nx, ny, nd.r * 4);
+        grad.addColorStop(0, "rgba(" + Math.round(c2.r) + "," + Math.round(c2.g) + "," + Math.round(c2.b) + "," + (glow * 0.6) + ")");
+        grad.addColorStop(1, "transparent");
+        ctx.beginPath();
+        ctx.arc(nx, ny, nd.r * 4, 0, Math.PI * 2);
+        ctx.fillStyle = grad;
+        ctx.fill();
+
+        /* Core dot */
+        ctx.beginPath();
+        ctx.arc(nx, ny, nd.r, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(" + Math.round(c2.r) + "," + Math.round(c2.g) + "," + Math.round(c2.b) + "," + (glow + 0.2) + ")";
+        ctx.fill();
+      }
+
+      /* Draw traveling pulses */
+      for (var pp = 0; pp < pulses.length; pp++) {
+        var pl = pulses[pp];
+        pl.t += pl.speed * 0.016 * pl.dir;
+        if (pl.t > 1 || pl.t < 0) {
+          pl.dir *= -1;
+          pl.t = Math.max(0, Math.min(1, pl.t));
+          /* Occasionally jump to a different edge */
+          if (Math.random() > 0.5) {
+            pl.edge = Math.floor(Math.random() * edges.length);
+          }
+        }
+        var pe = edges[pl.edge];
+        if (!pe) continue;
+        var pa = nodes[pe.a];
+        var pb = nodes[pe.b];
+        var px = (pa.x + (pb.x - pa.x) * pl.t) * W;
+        var py = (pa.y + (pb.y - pa.y) * pl.t) * H;
+
+        var pg = ctx.createRadialGradient(px, py, 0, px, py, 12);
+        var pc = lerpColor(pl.t);
+        pg.addColorStop(0, "rgba(" + Math.round(pc.r) + "," + Math.round(pc.g) + "," + Math.round(pc.b) + ",0.7)");
+        pg.addColorStop(0.5, "rgba(" + Math.round(pc.r) + "," + Math.round(pc.g) + "," + Math.round(pc.b) + ",0.15)");
+        pg.addColorStop(1, "transparent");
+        ctx.beginPath();
+        ctx.arc(px, py, 12, 0, Math.PI * 2);
+        ctx.fillStyle = pg;
+        ctx.fill();
+      }
+
+      requestAnimationFrame(draw);
+    }
+
+    /* Only animate when banner is in viewport */
+    var observer = new IntersectionObserver(function(entries) {
+      running = entries[0].isIntersecting;
+      if (running) draw();
+    }, { threshold: 0.1 });
+    observer.observe(canvas.parentElement);
+
+    draw();
+  }
+
   function init() {
     fixCopy();
     enhanceHero();
@@ -832,6 +993,7 @@
     enhanceRental();
     buildValueAdds();
     enhanceContact();
+    initSoftPOSCanvas();
     console.log("[Paybyrd] POS enhancements loaded");
   }
 

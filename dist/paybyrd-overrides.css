@@ -9863,26 +9863,63 @@ a.glowing_button_link .glowing_button_text {
   position: relative;
   margin-top: 40px;
   margin-bottom: 40px;
-  padding: 36px 40px;
-  background: #0a0a0f;
+  padding: 48px 40px;
+  background: #07060c;
   border-radius: 20px;
   overflow: hidden;
+  border: 1px solid rgba(160, 100, 255, 0.08);
 }
 
-.pbrd-pos-softpos-glow {
+/* ── Canvas constellation background ── */
+.pbrd-pos-softpos-canvas {
   position: absolute;
-  top: -60px;
-  right: -60px;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(160, 100, 255, 0.2) 0%, transparent 70%);
+  inset: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Ambient edge glow ── */
+.pbrd-pos-softpos-banner::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 20px;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(120, 255, 180, 0.15) 0%,
+    transparent 40%,
+    transparent 60%,
+    rgba(160, 100, 255, 0.12) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Subtle corner accents ── */
+.pbrd-pos-softpos-banner::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 20px;
+  background:
+    radial-gradient(ellipse 200px 120px at 0% 0%, rgba(120, 255, 180, 0.04) 0%, transparent 100%),
+    radial-gradient(ellipse 200px 120px at 100% 100%, rgba(160, 100, 255, 0.04) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .pbrd-pos-softpos-content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
