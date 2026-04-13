@@ -6134,8 +6134,8 @@
     var softposGraphic =
       '<svg viewBox="0 0 280 220" fill="none" xmlns="http://www.w3.org/2000/svg" class="pbrd-pos-va-graphic">' +
         /* Phone body */
-        '<rect x="100" y="20" width="80" height="160" rx="12" fill="#2a2a3a" stroke="rgba(99,25,240,0.5)" stroke-width="1.5"/>' +
-        '<rect x="106" y="30" width="68" height="140" rx="8" fill="#161620"/>' +
+        '<rect x="100" y="20" width="80" height="160" rx="12" fill="#1a1a2e" stroke="rgba(0,0,0,0.15)" stroke-width="1"/>' +
+        '<rect x="106" y="30" width="68" height="140" rx="8" fill="#111"/>' +
         /* Screen content */
         '<text x="140" y="80" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="7" font-family="system-ui">READY</text>' +
         '<text x="140" y="105" text-anchor="middle" fill="#fff" font-size="20" font-weight="400" font-family="system-ui">\u20AC9.50</text>' +
@@ -6146,16 +6146,16 @@
           '<path d="M12 -5 C24 3, 24 21, 12 29" stroke="rgba(99,25,240,0.2)" stroke-width="1.2" fill="none" class="pbrd-pos-nfc-wave3"/>' +
         '</g>' +
         /* Punch hole camera */
-        '<circle cx="140" cy="35" r="2.5" fill="#0a0a12" stroke="rgba(99,25,240,0.15)" stroke-width="0.5"/>' +
+        '<circle cx="140" cy="35" r="2.5" fill="#0a0a12" stroke="rgba(0,0,0,0.2)" stroke-width="0.5"/>' +
         /* NFC pulse rings emanating from phone */
-        '<circle cx="140" cy="100" r="55" fill="none" stroke="rgba(99,25,240,0.15)" stroke-width="1" class="pbrd-pos-va-pulse1"/>' +
-        '<circle cx="140" cy="100" r="75" fill="none" stroke="rgba(99,25,240,0.10)" stroke-width="0.8" class="pbrd-pos-va-pulse2"/>' +
-        '<circle cx="140" cy="100" r="95" fill="none" stroke="rgba(99,25,240,0.06)" stroke-width="0.8" class="pbrd-pos-va-pulse3"/>' +
+        '<circle cx="140" cy="100" r="55" fill="none" stroke="rgba(99,25,240,0.18)" stroke-width="1" class="pbrd-pos-va-pulse1"/>' +
+        '<circle cx="140" cy="100" r="75" fill="none" stroke="rgba(99,25,240,0.12)" stroke-width="0.8" class="pbrd-pos-va-pulse2"/>' +
+        '<circle cx="140" cy="100" r="95" fill="none" stroke="rgba(99,25,240,0.07)" stroke-width="0.8" class="pbrd-pos-va-pulse3"/>' +
         /* Contactless card floating in from left */
         '<g class="pbrd-pos-va-float-card">' +
-          '<rect x="18" y="68" width="60" height="38" rx="5" fill="rgba(99,25,240,0.12)" stroke="rgba(99,25,240,0.35)" stroke-width="1"/>' +
-          '<rect x="24" y="76" width="14" height="10" rx="2" fill="rgba(200,180,130,0.35)" stroke="rgba(200,180,130,0.5)" stroke-width="0.5"/>' +
-          '<rect x="24" y="94" width="30" height="2" rx="1" fill="rgba(255,255,255,0.1)"/>' +
+          '<rect x="18" y="68" width="60" height="38" rx="5" fill="#fff" stroke="rgba(0,0,0,0.1)" stroke-width="0.8"/>' +
+          '<rect x="24" y="76" width="14" height="10" rx="2" fill="rgba(200,180,130,0.5)" stroke="rgba(180,160,100,0.6)" stroke-width="0.5"/>' +
+          '<rect x="24" y="94" width="30" height="2" rx="1" fill="rgba(0,0,0,0.06)"/>' +
           '<g transform="translate(56,70)">' +
             '<path d="M6 3 C8 5, 8 9, 6 11" stroke="rgba(255,255,255,0.15)" stroke-width="0.6" fill="none"/>' +
             '<path d="M6 1 C10 4, 10 10, 6 13" stroke="rgba(255,255,255,0.1)" stroke-width="0.6" fill="none"/>' +
@@ -6170,37 +6170,37 @@
     var dccGraphic =
       '<svg viewBox="0 0 280 220" fill="none" xmlns="http://www.w3.org/2000/svg" class="pbrd-pos-va-graphic">' +
         /* Central amount */
-        '<text x="140" y="98" text-anchor="middle" fill="#fff" font-size="24" font-weight="400" font-family="system-ui" class="pbrd-pos-va-dcc-amount">\u20AC25.00</text>' +
-        '<text x="140" y="116" text-anchor="middle" fill="rgba(99,25,240,0.7)" font-size="8" font-weight="500" font-family="system-ui">ORIGINAL AMOUNT</text>' +
+        '<text x="140" y="98" text-anchor="middle" fill="#111" font-size="24" font-weight="600" font-family="system-ui" class="pbrd-pos-va-dcc-amount">\u20AC25.00</text>' +
+        '<text x="140" y="116" text-anchor="middle" fill="#6319f0" font-size="8" font-weight="500" font-family="system-ui">ORIGINAL AMOUNT</text>' +
         /* Orbit ring */
-        '<circle cx="140" cy="105" r="70" fill="none" stroke="rgba(99,25,240,0.14)" stroke-width="0.8" stroke-dasharray="3 4"/>' +
+        '<circle cx="140" cy="105" r="70" fill="none" stroke="rgba(99,25,240,0.15)" stroke-width="0.8" stroke-dasharray="3 4"/>' +
         '<circle cx="140" cy="105" r="90" fill="none" stroke="rgba(99,25,240,0.08)" stroke-width="0.5" stroke-dasharray="2 6"/>' +
         /* Orbiting currency symbols */
         '<g class="pbrd-pos-va-orbit" style="--orbit-r:70px;--orbit-cx:140px;--orbit-cy:105px">' +
           /* GBP */
           '<g class="pbrd-pos-va-currency pbrd-pos-va-cur1">' +
-            '<circle r="18" fill="rgba(99,25,240,0.15)" stroke="rgba(99,25,240,0.4)" stroke-width="1"/>' +
-            '<text y="5" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="13" font-weight="700" font-family="system-ui">\u00A3</text>' +
+            '<circle r="18" fill="#fff" stroke="rgba(99,25,240,0.3)" stroke-width="1.2"/>' +
+            '<text y="5" text-anchor="middle" fill="#6319f0" font-size="13" font-weight="700" font-family="system-ui">\u00A3</text>' +
           '</g>' +
           /* USD */
           '<g class="pbrd-pos-va-currency pbrd-pos-va-cur2">' +
-            '<circle r="18" fill="rgba(99,25,240,0.15)" stroke="rgba(99,25,240,0.4)" stroke-width="1"/>' +
-            '<text y="5" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="13" font-weight="700" font-family="system-ui">$</text>' +
+            '<circle r="18" fill="#fff" stroke="rgba(99,25,240,0.3)" stroke-width="1.2"/>' +
+            '<text y="5" text-anchor="middle" fill="#6319f0" font-size="13" font-weight="700" font-family="system-ui">$</text>' +
           '</g>' +
           /* JPY */
           '<g class="pbrd-pos-va-currency pbrd-pos-va-cur3">' +
-            '<circle r="18" fill="rgba(99,25,240,0.15)" stroke="rgba(99,25,240,0.4)" stroke-width="1"/>' +
-            '<text y="5" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="13" font-weight="700" font-family="system-ui">\u00A5</text>' +
+            '<circle r="18" fill="#fff" stroke="rgba(99,25,240,0.3)" stroke-width="1.2"/>' +
+            '<text y="5" text-anchor="middle" fill="#6319f0" font-size="13" font-weight="700" font-family="system-ui">\u00A5</text>' +
           '</g>' +
           /* CHF */
           '<g class="pbrd-pos-va-currency pbrd-pos-va-cur4">' +
-            '<circle r="15" fill="rgba(99,25,240,0.10)" stroke="rgba(99,25,240,0.3)" stroke-width="0.8"/>' +
-            '<text y="4" text-anchor="middle" fill="rgba(255,255,255,0.65)" font-size="9" font-weight="700" font-family="system-ui">CHF</text>' +
+            '<circle r="15" fill="#fff" stroke="rgba(99,25,240,0.2)" stroke-width="1"/>' +
+            '<text y="4" text-anchor="middle" fill="rgba(99,25,240,0.7)" font-size="9" font-weight="700" font-family="system-ui">CHF</text>' +
           '</g>' +
           /* SEK */
           '<g class="pbrd-pos-va-currency pbrd-pos-va-cur5">' +
-            '<circle r="14" fill="rgba(99,25,240,0.08)" stroke="rgba(99,25,240,0.25)" stroke-width="0.7"/>' +
-            '<text y="4" text-anchor="middle" fill="rgba(255,255,255,0.55)" font-size="9" font-weight="700" font-family="system-ui">kr</text>' +
+            '<circle r="14" fill="#fff" stroke="rgba(99,25,240,0.15)" stroke-width="0.8"/>' +
+            '<text y="4" text-anchor="middle" fill="rgba(99,25,240,0.6)" font-size="9" font-weight="700" font-family="system-ui">kr</text>' +
           '</g>' +
         '</g>' +
         /* Conversion arrow */
@@ -6210,7 +6210,7 @@
         '</g>' +
         /* Converted amount that cycles */
         '<text x="140" y="185" text-anchor="middle" fill="#6319f0" font-size="16" font-weight="700" font-family="system-ui" class="pbrd-pos-va-converted">\u00A321.40</text>' +
-        '<text x="140" y="200" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="7" font-weight="500" font-family="system-ui" class="pbrd-pos-va-converted-label">CUSTOMER PAYS IN HOME CURRENCY</text>' +
+        '<text x="140" y="200" text-anchor="middle" fill="rgba(0,0,0,0.35)" font-size="7" font-weight="500" font-family="system-ui" class="pbrd-pos-va-converted-label">CUSTOMER PAYS IN HOME CURRENCY</text>' +
       '</svg>';
 
     /* ── InstaTax animated graphic: receipt + refund flow ── */
@@ -6218,19 +6218,19 @@
       '<svg viewBox="0 0 280 220" fill="none" xmlns="http://www.w3.org/2000/svg" class="pbrd-pos-va-graphic">' +
         /* Receipt on left */
         '<g class="pbrd-pos-va-receipt">' +
-          '<rect x="30" y="30" width="90" height="130" rx="4" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.15)" stroke-width="0.8"/>' +
+          '<rect x="30" y="30" width="90" height="130" rx="4" fill="#fff" stroke="rgba(0,0,0,0.1)" stroke-width="0.8"/>' +
           /* Zigzag bottom */
-          '<path d="M30 160 L37 155 L44 160 L51 155 L58 160 L65 155 L72 160 L79 155 L86 160 L93 155 L100 160 L107 155 L114 160 L120 155" stroke="rgba(255,255,255,0.15)" stroke-width="0.8" fill="none"/>' +
+          '<path d="M30 160 L37 155 L44 160 L51 155 L58 160 L65 155 L72 160 L79 155 L86 160 L93 155 L100 160 L107 155 L114 160 L120 155" stroke="rgba(0,0,0,0.1)" stroke-width="0.8" fill="none"/>' +
           /* Receipt lines */
-          '<text x="75" y="50" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="6" font-family="system-ui" font-weight="600">PURCHASE</text>' +
-          '<rect x="42" y="58" width="66" height="1" fill="rgba(255,255,255,0.1)"/>' +
-          '<text x="44" y="72" fill="rgba(255,255,255,0.35)" font-size="6" font-family="system-ui">Items</text>' +
-          '<text x="106" y="72" text-anchor="end" fill="rgba(255,255,255,0.5)" font-size="6" font-family="system-ui">\u20AC250.00</text>' +
-          '<text x="44" y="84" fill="rgba(255,255,255,0.35)" font-size="6" font-family="system-ui">VAT (21%)</text>' +
+          '<text x="75" y="50" text-anchor="middle" fill="rgba(0,0,0,0.6)" font-size="6" font-family="system-ui" font-weight="600">PURCHASE</text>' +
+          '<rect x="42" y="58" width="66" height="1" fill="rgba(0,0,0,0.08)"/>' +
+          '<text x="44" y="72" fill="rgba(0,0,0,0.4)" font-size="6" font-family="system-ui">Items</text>' +
+          '<text x="106" y="72" text-anchor="end" fill="rgba(0,0,0,0.6)" font-size="6" font-family="system-ui">\u20AC250.00</text>' +
+          '<text x="44" y="84" fill="rgba(0,0,0,0.4)" font-size="6" font-family="system-ui">VAT (21%)</text>' +
           '<text x="106" y="84" text-anchor="end" fill="rgba(99,25,240,0.7)" font-size="6" font-weight="700" font-family="system-ui" class="pbrd-pos-va-tax-highlight">\u20AC52.50</text>' +
-          '<rect x="42" y="90" width="66" height="1" fill="rgba(255,255,255,0.1)"/>' +
-          '<text x="44" y="104" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="600" font-family="system-ui">Total</text>' +
-          '<text x="106" y="104" text-anchor="end" fill="#fff" font-size="7" font-weight="700" font-family="system-ui">\u20AC302.50</text>' +
+          '<rect x="42" y="90" width="66" height="1" fill="rgba(0,0,0,0.08)"/>' +
+          '<text x="44" y="104" fill="rgba(0,0,0,0.7)" font-size="7" font-weight="600" font-family="system-ui">Total</text>' +
+          '<text x="106" y="104" text-anchor="end" fill="#111" font-size="7" font-weight="700" font-family="system-ui">\u20AC302.50</text>' +
           /* Tourist card detected badge */
           '<rect x="42" y="115" width="66" height="18" rx="9" fill="rgba(99,25,240,0.12)" class="pbrd-pos-va-detect-badge"/>' +
           '<text x="75" y="127" text-anchor="middle" fill="rgba(99,25,240,0.8)" font-size="5.5" font-weight="600" font-family="system-ui" class="pbrd-pos-va-detect-badge">\uD83C\uDF0D Tourist Card Detected</text>' +
@@ -6249,12 +6249,12 @@
         /* Tourist / person icon on right */
         '<g transform="translate(178,20)" class="pbrd-pos-va-tourist">' +
           /* Person silhouette */
-          '<circle cx="40" cy="18" r="14" fill="rgba(99,25,240,0.12)" stroke="rgba(99,25,240,0.3)" stroke-width="1"/>' +
-          '<circle cx="40" cy="15" r="5" fill="rgba(255,255,255,0.25)"/>' +
-          '<path d="M30 30 C30 22, 50 22, 50 30" fill="rgba(255,255,255,0.15)"/>' +
+          '<circle cx="40" cy="18" r="14" fill="rgba(99,25,240,0.08)" stroke="rgba(99,25,240,0.2)" stroke-width="1"/>' +
+          '<circle cx="40" cy="15" r="5" fill="rgba(0,0,0,0.15)"/>' +
+          '<path d="M30 30 C30 22, 50 22, 50 30" fill="rgba(0,0,0,0.08)"/>' +
           /* Passport / flag hint */
-          '<rect x="24" y="38" width="32" height="22" rx="2" fill="rgba(99,25,240,0.1)" stroke="rgba(99,25,240,0.25)" stroke-width="0.6"/>' +
-          '<text x="40" y="52" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="6" font-family="system-ui">\uD83C\uDDEC\uD83C\uDDE7</text>' +
+          '<rect x="24" y="38" width="32" height="22" rx="2" fill="#fff" stroke="rgba(99,25,240,0.2)" stroke-width="0.6"/>' +
+          '<text x="40" y="52" text-anchor="middle" fill="rgba(0,0,0,0.5)" font-size="6" font-family="system-ui">\uD83C\uDDEC\uD83C\uDDE7</text>' +
           /* Refund received */
           '<rect x="14" y="72" width="52" height="24" rx="12" fill="rgba(99,25,240,0.12)" stroke="rgba(99,25,240,0.25)" stroke-width="0.6" class="pbrd-pos-va-refund-badge"/>' +
           '<text x="40" y="87" text-anchor="middle" fill="#6319f0" font-size="8" font-weight="700" font-family="system-ui" class="pbrd-pos-va-refund-badge">+\u20AC52.50</text>' +
@@ -6262,14 +6262,14 @@
 
         /* Bottom timeline */
         '<g transform="translate(30,180)">' +
-          '<line x1="0" y1="5" x2="220" y2="5" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>' +
+          '<line x1="0" y1="5" x2="220" y2="5" stroke="rgba(0,0,0,0.08)" stroke-width="1"/>' +
           /* Step dots */
           '<circle cx="20" cy="5" r="3" fill="rgba(99,25,240,0.5)" class="pbrd-pos-va-step1"/>' +
-          '<text x="20" y="20" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="5" font-family="system-ui">Purchase</text>' +
+          '<text x="20" y="20" text-anchor="middle" fill="rgba(0,0,0,0.4)" font-size="5" font-family="system-ui">Purchase</text>' +
           '<circle cx="110" cy="5" r="3" fill="rgba(99,25,240,0.3)" class="pbrd-pos-va-step2"/>' +
-          '<text x="110" y="20" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="5" font-family="system-ui">Auto-detect</text>' +
+          '<text x="110" y="20" text-anchor="middle" fill="rgba(0,0,0,0.4)" font-size="5" font-family="system-ui">Auto-detect</text>' +
           '<circle cx="200" cy="5" r="3" fill="rgba(99,25,240,0.3)" class="pbrd-pos-va-step3"/>' +
-          '<text x="200" y="20" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="5" font-family="system-ui">Refund sent</text>' +
+          '<text x="200" y="20" text-anchor="middle" fill="rgba(0,0,0,0.4)" font-size="5" font-family="system-ui">Refund sent</text>' +
           /* Animated progress line */
           '<line x1="20" y1="5" x2="200" y2="5" stroke="#6319f0" stroke-width="1.5" stroke-linecap="round" class="pbrd-pos-va-timeline-fill"/>' +
         '</g>' +
