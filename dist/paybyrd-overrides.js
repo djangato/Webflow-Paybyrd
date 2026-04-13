@@ -5309,8 +5309,8 @@
     /* Visual column */
     var visualCol = '<div class="pbrd-pos-hero-visual">' +
       '<div class="pbrd-pos-hero-glow"></div>' +
-      '<video class="pbrd-pos-hero-video" id="pbrd-pos-hero-vid" autoplay muted loop playsinline preload="auto" poster="' + BASE + 'a920-render.png">' +
-        '<source src="' + BASE + 'a920-video.mp4" type="video/mp4">' +
+      '<video class="pbrd-pos-hero-video" id="pbrd-pos-hero-vid" autoplay muted loop playsinline preload="auto" poster="' + BASE + 'sunmi-v3-render.png">' +
+        '<source src="' + BASE + 'sunmi-v3-video.mp4" type="video/mp4">' +
       '</video>' +
     '</div>';
 
@@ -5416,16 +5416,29 @@
   /* ═══════════════════════════════════════════ */
 
   function enhancePlatform() {
-    var section = findSectionByHeading("versatile and adaptable devices");
-    if (!section) {
-      /* Fallback: search more broadly */
-      section = findSectionByHeading("smart pos");
-    }
-    if (!section) { console.log("[Paybyrd] FAIL: enhancePlatform — section not found"); return; }
+    /* Find ALL sections with these headings and hide them */
+    var found = [];
+    document.querySelectorAll("h2, h3").forEach(function (h) {
+      var txt = h.textContent.toLowerCase();
+      if (txt.includes("smart pos") || txt.includes("versatile and adaptable") ||
+          txt.includes("remote transaction") || txt.includes("achieve ideal") ||
+          txt.includes("tokenisation") || txt.includes("customer insights")) {
+        var sec = h.closest("section") || h.closest("[class*='section']") || h.parentElement;
+        if (sec && found.indexOf(sec) === -1) found.push(sec);
+      }
+    });
 
-    section.style.background = "#111";
-    var container = section.querySelector(".u-container, [class*='container']") || section;
-    hideChildren(container);
+    /* Hide all found sections */
+    found.forEach(function (s) { s.style.display = "none"; });
+
+    /* Create new standalone section after the last hidden one */
+    var anchor = found.length ? found[found.length - 1] : null;
+    if (!anchor) { console.log("[Paybyrd] FAIL: enhancePlatform — no anchor found"); return; }
+
+    var newSection = document.createElement("section");
+    newSection.style.background = "#111";
+    newSection.style.padding = "80px 0";
+    anchor.insertAdjacentElement("afterend", newSection);
 
     var appSVG = '<svg viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="16" height="16" rx="4" stroke="currentColor" stroke-width="1.5"/><path d="M7 7h6M7 10h4M7 13h5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>';
     var otaSVG = '<svg viewBox="0 0 20 20" fill="none"><path d="M10 2v8m0 0l-3-3m3 3l3-3M4 14v2a2 2 0 002 2h8a2 2 0 002-2v-2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -5459,7 +5472,7 @@
         '</div>' +
       '</div>';
 
-    container.appendChild(wrap);
+    newSection.appendChild(wrap);
     observeReveal(".pbrd-pos-reveal", 120, wrap);
 
     /* Animate diagram loop */
@@ -5504,19 +5517,16 @@
   /* ═══════════════════════════════════════════ */
 
   function buildUseCases() {
-    /* Find and merge Remote Transactions + Tokenisation sections */
-    var sec1 = findSectionByHeading("achieve ideal") || findSectionByHeading("remote transaction");
-    var sec2 = findSectionByHeading("customer insights") || findSectionByHeading("tokenisation");
-    if (!sec1 && !sec2) return;
+    /* These sections were already hidden by enhancePlatform.
+       Insert a new section after the platform section we just created. */
+    var platformSection = document.querySelector(".pbrd-pos-platform-wrap");
+    var anchor = platformSection ? platformSection.closest("section") : null;
+    if (!anchor) { console.log("[Paybyrd] FAIL: buildUseCases — no anchor"); return; }
 
-    var target = sec1 || sec2;
-    target.style.background = "#fff";
-    target.style.padding = "80px 0";
-    var container = target.querySelector(".u-container, [class*='container']") || target;
-    hideChildren(container);
-
-    /* Hide second section if separate */
-    if (sec2 && sec2 !== target) sec2.style.display = "none";
+    var newSection = document.createElement("section");
+    newSection.style.background = "#fff";
+    newSection.style.padding = "80px 0";
+    anchor.insertAdjacentElement("afterend", newSection);
 
     var wrap = document.createElement("div");
     wrap.className = "pbrd-pos-cases-wrap";
@@ -5593,7 +5603,7 @@
         '</div>' +
       '</div>';
 
-    container.appendChild(wrap);
+    newSection.appendChild(wrap);
     observeReveal(".pbrd-pos-reveal", 120, wrap);
 
     /* Animate signal bars */
@@ -5769,13 +5779,19 @@
   /* ═══════════════════════════════════════════ */
 
   function enhanceRental() {
-    var section = findSectionByHeading("rental option");
-    if (!section) { console.log("[Paybyrd] FAIL: enhanceRental — section not found"); return; }
+    /* Hide original rental section */
+    var origSection = findSectionByHeading("rental option");
+    if (origSection) origSection.style.display = "none";
 
-    section.style.background = "#fff";
-    section.style.padding = "80px 0";
-    var container = section.querySelector(".u-container, [class*='container']") || section;
-    hideChildren(container);
+    /* Insert after specs section */
+    var specsSection = document.querySelector(".pbrd-pos-specs-wrap");
+    var anchor = specsSection ? specsSection.closest("section") : origSection;
+    if (!anchor) { console.log("[Paybyrd] FAIL: enhanceRental — no anchor"); return; }
+
+    var newSection = document.createElement("section");
+    newSection.style.background = "#fff";
+    newSection.style.padding = "80px 0";
+    anchor.insertAdjacentElement("afterend", newSection);
 
     var wrap = document.createElement("div");
     wrap.className = "pbrd-pos-rental-wrap";
@@ -5812,7 +5828,7 @@
       '</div>' +
       '<a href="/book-demo" class="pbrd-pos-rental-cta">Get a Quote \u2192</a>';
 
-    container.appendChild(wrap);
+    newSection.appendChild(wrap);
     observeReveal(".pbrd-pos-reveal", 150, wrap);
   }
 

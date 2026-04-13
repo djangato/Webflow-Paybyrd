@@ -9029,7 +9029,7 @@ a.glowing_button_link .glowing_button_text {
 /* Card image area */
 .pbrd-pos-tcard-img {
   position: relative;
-  height: 260px;
+  height: 306px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9039,7 +9039,7 @@ a.glowing_button_link .glowing_button_text {
 
 .pbrd-pos-tcard-img img,
 .pbrd-pos-tcard-img video {
-  max-height: 220px;
+  max-height: 260px;
   width: auto;
   object-fit: contain;
   transition: transform 0.4s ease;
