@@ -9775,7 +9775,7 @@ a.glowing_button_link .glowing_button_text {
 /* ═══════════════════════════════════════════ */
 
 .pbrd-pos-rental-wrap {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
   text-align: center;
@@ -10002,21 +10002,18 @@ a.glowing_button_link .glowing_button_text {
 
 /* Image area */
 .pbrd-pos-pc-img-white {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 32px 24px !important;
-  background: #F7F7F8 !important;
-  min-height: 260px !important;
-  max-height: 260px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px;
+  background: #F7F7F8;
 }
 
 .pbrd-pos-pc-img-white img {
-  height: 210px !important;
-  width: auto !important;
-  max-width: 90% !important;
-  max-height: 210px !important;
-  object-fit: contain !important;
+  height: 200px;
+  width: auto;
+  max-width: 85%;
+  object-fit: contain;
   transition: transform 0.4s ease;
 }
 
@@ -10026,7 +10023,7 @@ a.glowing_button_link .glowing_button_text {
 
 /* Body — compact */
 .pbrd-pos-pc-body-white {
-  padding: 14px 16px 16px !important;
+  padding: 20px 24px 24px;
   text-align: center;
 }
 
@@ -10081,30 +10078,33 @@ a.glowing_button_link .glowing_button_text {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
-/* Feature list — compact */
+/* Feature list */
 .pbrd-pos-pc-list {
   list-style: none;
-  margin: 0;
-  padding: 0;
+  margin: 16px 0 0;
+  padding: 16px 0 0;
+  border-top: 1px solid #F0F0F0;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
+  text-align: left;
 }
 
 .pbrd-pos-pc-list li {
   display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.75rem;
-  color: #6B7280;
-  line-height: 1.35;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.8125rem;
+  color: #374151;
+  line-height: 1.4;
 }
 
 .pbrd-pos-pc-list li svg {
-  width: 12px;
-  height: 12px;
-  color: #9CA3AF;
+  width: 14px;
+  height: 14px;
+  color: #111;
   flex-shrink: 0;
+  margin-top: 1px;
 }
 
 .pbrd-pos-rental-cta {

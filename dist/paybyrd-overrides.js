@@ -5826,6 +5826,12 @@
             '<div class="pbrd-pos-pc-sub">Handheld Terminal</div>' +
             '<div class="pbrd-pos-pc-price-line"><span class="pbrd-pos-pc-price-main pbrd-pos-price-buy">\u20AC295</span><span class="pbrd-pos-pc-price-main pbrd-pos-price-rent" style="display:none">\u20AC18<span class="pbrd-pos-pc-period">/mo</span></span></div>' +
             '<a href="/book-demo" class="pbrd-pos-pc-btn-primary">Order now</a>' +
+            '<ul class="pbrd-pos-pc-list">' +
+              '<li>' + checkSVG + ' Accept cards and wallets</li>' +
+              '<li>' + checkSVG + ' Always online 4G / WiFi</li>' +
+              '<li>' + checkSVG + ' Front-facing NFC</li>' +
+              '<li>' + checkSVG + ' Digital receipts via QR or email</li>' +
+            '</ul>' +
           '</div>' +
         '</div>' +
 
@@ -5838,6 +5844,12 @@
             '<div class="pbrd-pos-pc-sub">Mobile POS Terminal</div>' +
             '<div class="pbrd-pos-pc-price-line"><span class="pbrd-pos-pc-price-main pbrd-pos-price-buy">\u20AC395</span><span class="pbrd-pos-pc-price-main pbrd-pos-price-rent" style="display:none">\u20AC22<span class="pbrd-pos-pc-period">/mo</span></span></div>' +
             '<a href="/book-demo" class="pbrd-pos-pc-btn-primary">Order now</a>' +
+            '<ul class="pbrd-pos-pc-list">' +
+              '<li>' + checkSVG + ' Embedded receipt printer</li>' +
+              '<li>' + checkSVG + ' Lightweight and portable</li>' +
+              '<li>' + checkSVG + ' 4G + Wi-Fi + Bluetooth</li>' +
+              '<li>' + checkSVG + ' Starting \u20AC22/mo per active terminal</li>' +
+            '</ul>' +
           '</div>' +
         '</div>' +
 
@@ -5849,6 +5861,12 @@
             '<div class="pbrd-pos-pc-sub">Mobile POS Terminal</div>' +
             '<div class="pbrd-pos-pc-price-line"><span class="pbrd-pos-pc-price-main pbrd-pos-price-buy">\u20AC450</span><span class="pbrd-pos-pc-price-main pbrd-pos-price-rent" style="display:none">\u20AC25<span class="pbrd-pos-pc-period">/mo</span></span></div>' +
             '<a href="/book-demo" class="pbrd-pos-pc-btn-primary">Order now</a>' +
+            '<ul class="pbrd-pos-pc-list">' +
+              '<li>' + checkSVG + ' High-speed thermal printer</li>' +
+              '<li>' + checkSVG + ' Android 12</li>' +
+              '<li>' + checkSVG + ' NFC contactless</li>' +
+              '<li>' + checkSVG + ' Starting \u20AC25/mo per active terminal</li>' +
+            '</ul>' +
           '</div>' +
         '</div>' +
 
@@ -5860,6 +5878,12 @@
             '<div class="pbrd-pos-pc-sub">Fixed POS Terminal</div>' +
             '<div class="pbrd-pos-pc-price-line"><span class="pbrd-pos-pc-price-main pbrd-pos-price-buy">\u20AC890</span><span class="pbrd-pos-pc-price-main pbrd-pos-price-rent" style="display:none">\u20AC45<span class="pbrd-pos-pc-period">/mo</span></span></div>' +
             '<a href="/book-demo" class="pbrd-pos-pc-btn-primary">Order now</a>' +
+            '<ul class="pbrd-pos-pc-list">' +
+              '<li>' + checkSVG + ' Ethernet for reliability</li>' +
+              '<li>' + checkSVG + ' Vandal-proof and easy to mount</li>' +
+              '<li>' + checkSVG + ' Ideal for kiosks and unattended payment</li>' +
+              '<li>' + checkSVG + ' Starting \u20AC45/mo per active terminal</li>' +
+            '</ul>' +
           '</div>' +
         '</div>' +
 
