@@ -7515,7 +7515,9 @@
       '<a href="#benchmark" class="pbrd-air-cta-ghost">See the data \u2193</a>';
     parent.insertBefore(ctaRow, (subtitle || heading).nextSibling);
 
-    /* ── SVG flight route map + transaction feed ── */
+    /* ── Break out of Webflow's constrained column ── */
+    /* The hero content is inside a layout column that caps width.
+       We need to insert our viz OUTSIDE that column, at the section level. */
     var vizWrap = document.createElement("div");
     vizWrap.className = "pbrd-air-viz pbrd-air-reveal";
 
@@ -7569,9 +7571,9 @@
         '<div class="pbrd-air-txn-feed" id="pbrd-air-feed"></div>' +
       '</div>';
 
-    parent.insertBefore(vizWrap, ctaRow.nextSibling);
+    /* Insert viz + ticker at SECTION level to escape Webflow column constraints */
+    section.appendChild(vizWrap);
 
-    /* ── Infinite ticker strip ── */
     var stats = ["+4.86% vs Checkout.com", "+3.16% vs Elavon", "+1.72% vs Adyen", "+4.92% vs Nuvei", "99.999% Uptime", "192+ Currencies", "16.8% Fewer Chargebacks"];
     var tickerHTML = stats.concat(stats).map(function(s) {
       return '<span class="pbrd-air-tick">' + s + '</span><span class="pbrd-air-tick-dot">\u00b7</span>';
@@ -7579,7 +7581,7 @@
     var ticker = document.createElement("div");
     ticker.className = "pbrd-air-ticker-strip pbrd-air-reveal";
     ticker.innerHTML = '<div class="pbrd-air-ticker-track">' + tickerHTML + '</div>';
-    parent.insertBefore(ticker, vizWrap.nextSibling);
+    section.appendChild(ticker);
 
     /* Init feed */
     setTimeout(initFeed, 600);
