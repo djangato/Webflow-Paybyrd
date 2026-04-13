@@ -569,65 +569,60 @@
     wrap.className = "pbrd-pos-rental-wrap";
 
     var devices = [
-      { name: "Tap Terminal", model: "SoftPOS", buy: null, rent: "Free", img: "a77.png", tag: null, desc: "Turn your own Android phone into a payment terminal.", perks: ["Your own NFC phone", "Zero hardware cost", "30-second setup", "Contactless payments"] },
-      { name: "Rawhide", model: "PAX A920 Pro", buy: "395", rent: "22", img: "lineup-rawhide.png", tag: "Most popular", desc: "The all-rounder for counter, table, and delivery.", perks: ['5.5" HD touchscreen', "4G + Wi-Fi + Bluetooth", "Built-in thermal printer", "5150mAh battery"] },
-      { name: "Maverick", model: "Sunmi V3", buy: "450", rent: "25", img: "lineup-maverick.png", tag: null, desc: "High-speed printer built in. Made for restaurants.", perks: ["Android 12", "High-speed thermal printer", "NFC contactless", "5000mAh battery"] },
-      { name: "Titan", model: "Sunmi T3 Pro", buy: "890", rent: "45", img: "lineup-titan.png", tag: "Enterprise", desc: "Desktop powerhouse for kiosks and self-service.", perks: ['15.6" FHD touchscreen', "IP65 weather rated", "Ethernet + Wi-Fi + 4G", "Built-in 80mm printer"] }
+      { name: "SoftPOS", sub: "Your phone, your terminal", buy: null, rent: "Free", img: "a77.png", useTransparent: true, desc: "Accept contactless payments on any NFC-enabled Android or iPhone. No hardware needed.", note: "iPhone market restrictions may apply", perks: ["Accept cards and wallets", "Works on Android + iPhone", "NFC contactless", "Digital receipts via QR or email"] },
+      { name: "Renegade", sub: "Handheld POS Terminal", buy: "295", rent: "18", img: "a920.png", useTransparent: true, desc: "Compact, fast, and portable. Perfect for mobile businesses and queue-busting.", perks: ["Fast, secure transactions", "Lightweight and portable", "Front-facing NFC", "Starting \u20AC18 per month per active terminal"] },
+      { name: "Rawhide", sub: "Mobile POS Terminal", buy: "395", rent: "22", img: "a920.png", useTransparent: true, tag: "Most popular", desc: "The all-rounder with built-in printer. Counter, table, delivery.", perks: ["Fast, secure transactions", "Lightweight and portable", "Embedded receipt printer", "Starting \u20AC22 per month per active terminal"] },
+      { name: "Maverick", sub: "Mobile POS Terminal", buy: "450", rent: "25", img: "sunmi-v3.png", useTransparent: true, desc: "High-speed printer built in. The go-to for restaurants and delivery.", perks: ["High-speed thermal printer", "Android 12", "NFC contactless", "Starting \u20AC25 per month per active terminal"] },
+      { name: "Titan", sub: "Fixed POS Terminal", buy: "890", rent: "45", img: "t3-pro-front.png", useTransparent: true, desc: "Desktop powerhouse for kiosks, counters, and self-service.", perks: ["Ethernet connection for reliability", "Vandal-proof and easy to mount", "Ideal for kiosks and unattended payment", "Starting \u20AC45 per month per active terminal"] }
     ];
 
     wrap.innerHTML =
       '<div class="pbrd-pos-section-label">PRICING</div>' +
       '<h2>Choose one of our devices.<br>Or simply use your own.</h2>' +
-      '<p>Buy outright, rent monthly, or turn your own phone into a payment terminal with SoftPOS. Every option includes a free SIM with data plan.</p>';
+      '<p>Buy outright, rent monthly, or turn your own phone into a payment terminal. Every option includes free SIM with data plan.</p>';
 
     var grid = '<div class="pbrd-pos-pricing-grid">';
     for (var d = 0; d < devices.length; d++) {
       var dev = devices[d];
-      var tagHtml = dev.tag ? '<div class="pbrd-pos-pc-tag' + (dev.tag === "Most popular" ? ' pbrd-pos-pc-tag--pop' : '') + '">' + dev.tag + '</div>' : '';
 
-      var priceArea = '';
+      /* Price line */
+      var priceLine = '';
       if (dev.buy) {
-        priceArea =
-          '<div class="pbrd-pos-pc-toggle" data-card="' + d + '">' +
-            '<button class="pbrd-pos-pc-toggle-btn pbrd-pos-pc-toggle--active" data-mode="buy">Buy</button>' +
-            '<button class="pbrd-pos-pc-toggle-btn" data-mode="rent">Rent</button>' +
-          '</div>' +
-          '<div class="pbrd-pos-pc-price-wrap">' +
-            '<div class="pbrd-pos-pc-price pbrd-pos-pc-price--buy">' +
-              '<span class="pbrd-pos-pc-currency">\u20AC</span><span class="pbrd-pos-pc-amount">' + dev.buy + '</span>' +
-              '<span class="pbrd-pos-pc-period">one-time</span>' +
-            '</div>' +
-            '<div class="pbrd-pos-pc-price pbrd-pos-pc-price--rent" style="display:none">' +
-              '<span class="pbrd-pos-pc-currency">\u20AC</span><span class="pbrd-pos-pc-amount">' + dev.rent + '</span>' +
-              '<span class="pbrd-pos-pc-period">/month</span>' +
-            '</div>' +
-          '</div>';
+        priceLine = '<div class="pbrd-pos-pc-price-line"><span class="pbrd-pos-pc-price-main">\u20AC' + dev.buy + '.00</span><span class="pbrd-pos-pc-price-sep">/</span><span class="pbrd-pos-pc-price-alt">\u20AC' + dev.rent + '/mo</span></div>';
       } else {
-        priceArea =
-          '<div class="pbrd-pos-pc-price-wrap">' +
-            '<div class="pbrd-pos-pc-price pbrd-pos-pc-price--free">' +
-              '<span class="pbrd-pos-pc-amount">Free</span>' +
-              '<span class="pbrd-pos-pc-period">no hardware cost</span>' +
-            '</div>' +
-          '</div>';
+        priceLine = '<div class="pbrd-pos-pc-price-line"><span class="pbrd-pos-pc-price-main pbrd-pos-pc-price-free">Free</span></div>';
       }
 
+      /* Buttons */
+      var btns = '';
+      if (dev.buy) {
+        btns = '<div class="pbrd-pos-pc-btns">' +
+          '<a href="/book-demo" class="pbrd-pos-pc-btn-primary">Order now</a>' +
+          '<a href="/book-demo" class="pbrd-pos-pc-btn-secondary">Learn more \u203A</a>' +
+        '</div>';
+      } else {
+        btns = '<div class="pbrd-pos-pc-btns">' +
+          '<a href="/book-demo" class="pbrd-pos-pc-btn-primary">Get started</a>' +
+          '<a href="/book-demo" class="pbrd-pos-pc-btn-secondary">Learn more \u203A</a>' +
+        '</div>';
+      }
+
+      /* Perks */
       var perksHtml = '';
       for (var p = 0; p < dev.perks.length; p++) {
-        perksHtml += '<div class="pbrd-pos-pc-perk">' + checkSVG + '<span>' + dev.perks[p] + '</span></div>';
+        perksHtml += '<li>' + checkSVG + ' ' + dev.perks[p] + '</li>';
       }
 
       grid += '<div class="pbrd-pos-pricing-card pbrd-pos-reveal">' +
-        tagHtml +
-        '<div class="pbrd-pos-pc-img"><img src="' + BASE + dev.img + '" alt="' + dev.name + '" loading="lazy"></div>' +
-        '<div class="pbrd-pos-pc-body">' +
-          '<h4 class="pbrd-pos-pc-name">' + dev.name + '</h4>' +
-          '<div class="pbrd-pos-pc-model">' + dev.model + '</div>' +
-          '<p class="pbrd-pos-pc-desc">' + dev.desc + '</p>' +
-          priceArea +
-          '<div class="pbrd-pos-pc-perks">' + perksHtml + '</div>' +
-          '<div class="pbrd-pos-pc-includes">' + checkSVG + ' Free SIM + data \u00b7 OTA updates \u00b7 Dashboard</div>' +
-          '<a href="/book-demo" class="pbrd-pos-pc-order">Order now \u2192</a>' +
+        (dev.tag ? '<div class="pbrd-pos-pc-tag">' + dev.tag + '</div>' : '') +
+        '<div class="pbrd-pos-pc-img-white"><img src="' + BASE + dev.img + '" alt="' + dev.name + '" loading="lazy"></div>' +
+        '<div class="pbrd-pos-pc-body-white">' +
+          '<h4>' + dev.name + '</h4>' +
+          '<div class="pbrd-pos-pc-sub">' + dev.sub + '</div>' +
+          priceLine +
+          btns +
+          '<ul class="pbrd-pos-pc-list">' + perksHtml + '</ul>' +
+          (dev.note ? '<div class="pbrd-pos-pc-note">' + dev.note + '</div>' : '') +
         '</div>' +
       '</div>';
     }
@@ -637,28 +632,6 @@
     newSection.appendChild(wrap);
     observeReveal(".pbrd-pos-reveal", 150, wrap);
 
-    /* Toggle buy/rent behaviour */
-    wrap.querySelectorAll(".pbrd-pos-pc-toggle").forEach(function (toggle) {
-      toggle.querySelectorAll(".pbrd-pos-pc-toggle-btn").forEach(function (btn) {
-        btn.addEventListener("click", function () {
-          var card = btn.closest(".pbrd-pos-pricing-card");
-          var mode = btn.getAttribute("data-mode");
-          /* Toggle buttons */
-          toggle.querySelectorAll(".pbrd-pos-pc-toggle-btn").forEach(function (b) { b.classList.remove("pbrd-pos-pc-toggle--active"); });
-          btn.classList.add("pbrd-pos-pc-toggle--active");
-          /* Toggle prices */
-          var buyPrice = card.querySelector(".pbrd-pos-pc-price--buy");
-          var rentPrice = card.querySelector(".pbrd-pos-pc-price--rent");
-          if (mode === "buy") {
-            buyPrice.style.display = "";
-            rentPrice.style.display = "none";
-          } else {
-            buyPrice.style.display = "none";
-            rentPrice.style.display = "";
-          }
-        });
-      });
-    });
   }
 
   /* ═══════════════════════════════════════════ */
