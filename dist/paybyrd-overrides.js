@@ -7518,15 +7518,24 @@
       p.style.setProperty("display", "none", "important");
     });
 
-    /* Insert our own subtitle */
+    /* Insert our own subtitle — INLINE styles to guarantee visibility */
     var subtitle = document.createElement("p");
-    subtitle.className = "pbrd-air-hero-sub";
+    subtitle.setAttribute("style",
+      "font-size:1rem !important;color:rgba(255,255,255,0.55) !important;" +
+      "line-height:1.6 !important;margin:16px 0 0 0 !important;" +
+      "display:block !important;position:relative !important;z-index:2 !important;" +
+      "max-width:420px !important;padding:0 !important;"
+    );
     subtitle.innerHTML = "Higher approval rates. Lower fraud. Zero downtime.<br>Ask TAP Air Portugal.";
     parent.insertBefore(subtitle, heading.nextSibling);
 
-    /* ── CTA row ── */
+    /* ── CTA row — INLINE styles ── */
     var ctaRow = document.createElement("div");
-    ctaRow.className = "pbrd-air-hero-actions pbrd-air-reveal";
+    ctaRow.setAttribute("style",
+      "display:flex !important;align-items:center !important;gap:14px !important;" +
+      "margin:20px 0 0 0 !important;flex-wrap:wrap !important;" +
+      "position:relative !important;z-index:2 !important;"
+    );
     ctaRow.innerHTML =
       '<a href="/book-demo" class="pbrd-air-cta-primary">Book a 15-min Demo \u2192</a>' +
       '<a href="#benchmark" class="pbrd-air-cta-ghost">See the data \u2193</a>';
