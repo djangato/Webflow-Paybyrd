@@ -561,8 +561,10 @@
     if (!anchor) { console.log("[Paybyrd] FAIL: enhanceRental — no anchor"); return; }
 
     var newSection = document.createElement("section");
-    newSection.style.background = "#fff";
+    newSection.className = "pbrd-pos-pricing-section";
     newSection.style.padding = "80px 0";
+    newSection.style.position = "relative";
+    newSection.style.overflow = "hidden";
     anchor.insertAdjacentElement("afterend", newSection);
 
     var wrap = document.createElement("div");
@@ -575,20 +577,23 @@
 
       /* ── SoftPOS banner ── */
       '<div class="pbrd-pos-softpos-banner pbrd-pos-reveal">' +
-        '<div class="pbrd-pos-softpos-left">' +
-          '<div class="pbrd-pos-softpos-badge">FREE</div>' +
-          '<h3>SoftPOS</h3>' +
-          '<p>Turn your own phone into a payment terminal. Accept contactless payments on any NFC-enabled Android or iPhone \u2014 no hardware needed.</p>' +
-          '<div class="pbrd-pos-softpos-perks">' +
-            '<span>' + checkSVG + ' Android + iPhone</span>' +
-            '<span>' + checkSVG + ' NFC contactless</span>' +
-            '<span>' + checkSVG + ' Digital receipts</span>' +
-            '<span>' + checkSVG + ' Zero hardware cost</span>' +
+        '<div class="pbrd-pos-softpos-glow"></div>' +
+        '<div class="pbrd-pos-softpos-content">' +
+          '<div class="pbrd-pos-softpos-left">' +
+            '<div class="pbrd-pos-softpos-badge">FREE \u2014 NO HARDWARE NEEDED</div>' +
+            '<h3>Paybyrd SoftPOS</h3>' +
+            '<p>Turn any NFC-enabled phone into a payment terminal. Accept contactless cards, Apple Pay, and Google Pay \u2014 right from your pocket.</p>' +
           '</div>' +
-          '<div class="pbrd-pos-softpos-note">iPhone market restrictions may apply</div>' +
-        '</div>' +
-        '<div class="pbrd-pos-softpos-right">' +
-          '<a href="/book-demo" class="pbrd-pos-pc-btn-primary">Get started free \u2192</a>' +
+          '<div class="pbrd-pos-softpos-right">' +
+            '<div class="pbrd-pos-softpos-perks">' +
+              '<span>' + checkSVG + ' Android + iPhone</span>' +
+              '<span>' + checkSVG + ' NFC contactless</span>' +
+              '<span>' + checkSVG + ' Digital receipts</span>' +
+              '<span>' + checkSVG + ' 30-second setup</span>' +
+            '</div>' +
+            '<a href="/book-demo" class="pbrd-pos-softpos-cta">Get started free \u2192</a>' +
+            '<div class="pbrd-pos-softpos-note">iPhone market restrictions may apply</div>' +
+          '</div>' +
         '</div>' +
       '</div>' +
 
@@ -619,8 +624,7 @@
         '</div>' +
 
         /* Rawhide */
-        '<div class="pbrd-pos-pricing-card pbrd-pos-pricing-card--featured pbrd-pos-reveal">' +
-          '<div class="pbrd-pos-pc-tag">Most popular</div>' +
+        '<div class="pbrd-pos-pricing-card pbrd-pos-reveal">' +
           '<div class="pbrd-pos-pc-img-white"><img src="' + BASE + 'a920.png" alt="Rawhide" loading="lazy"></div>' +
           '<div class="pbrd-pos-pc-body-white">' +
             '<h4>Rawhide</h4>' +
@@ -637,7 +641,8 @@
         '</div>' +
 
         /* Maverick */
-        '<div class="pbrd-pos-pricing-card pbrd-pos-reveal">' +
+        '<div class="pbrd-pos-pricing-card pbrd-pos-pricing-card--featured pbrd-pos-reveal">' +
+          '<div class="pbrd-pos-pc-tag">Most popular</div>' +
           '<div class="pbrd-pos-pc-img-white"><img src="' + BASE + 'sunmi-v3.png" alt="Maverick" loading="lazy"></div>' +
           '<div class="pbrd-pos-pc-body-white">' +
             '<h4>Maverick</h4>' +
