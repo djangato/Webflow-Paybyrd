@@ -231,7 +231,7 @@
 
     /* ── Architecture diagram SVG ── */
     var architectureSVG =
-      '<svg viewBox="0 0 440 380" fill="none" xmlns="http://www.w3.org/2000/svg" class="pbrd-pos-arch-svg">' +
+      '<svg viewBox="0 0 440 400" fill="none" xmlns="http://www.w3.org/2000/svg" class="pbrd-pos-arch-svg">' +
 
         /* ── Central hub: Paybyrd SDK ── */
         '<rect x="160" y="140" width="120" height="60" rx="14" fill="rgba(99,25,240,0.12)" stroke="rgba(99,25,240,0.4)" stroke-width="1.5" class="pbrd-pos-arch-hub"/>' +
@@ -266,47 +266,67 @@
         '<line x1="220" y1="200" x2="220" y2="240" stroke="rgba(99,25,240,0.15)" stroke-width="1"/>' +
         '<text x="220" y="258" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="7" font-weight="500" font-family="system-ui">PAYMENT METHODS</text>' +
 
-        /* Method pills */
+        /* Method pills with mini icons */
         '<g transform="translate(45,270)">' +
-          '<rect x="0" y="0" width="50" height="22" rx="11" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="0.6" class="pbrd-pos-arch-method pbrd-pos-arch-m1"/>' +
-          '<text x="25" y="15" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="500" font-family="system-ui">Card</text>' +
+          /* Card — credit card icon */
+          '<rect x="0" y="0" width="56" height="26" rx="13" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)" stroke-width="0.6" class="pbrd-pos-arch-method pbrd-pos-arch-m1"/>' +
+          '<rect x="10" y="7" width="12" height="8" rx="1.5" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="0.8"/><line x1="10" y1="11" x2="22" y2="11" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>' +
+          '<text x="38" y="17" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="7" font-weight="600" font-family="system-ui">Card</text>' +
 
-          '<rect x="58" y="0" width="58" height="22" rx="11" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="0.6" class="pbrd-pos-arch-method pbrd-pos-arch-m2"/>' +
-          '<text x="87" y="15" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="500" font-family="system-ui">MB WAY</text>' +
+          /* MB WAY — phone icon */
+          '<rect x="64" y="0" width="68" height="26" rx="13" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)" stroke-width="0.6" class="pbrd-pos-arch-method pbrd-pos-arch-m2"/>' +
+          '<rect x="74" y="6" width="8" height="13" rx="2" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="0.7"/><circle cx="78" cy="16" r="1" fill="rgba(255,255,255,0.3)"/>' +
+          '<text x="103" y="17" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="7" font-weight="600" font-family="system-ui">MB WAY</text>' +
 
-          '<rect x="124" y="0" width="52" height="22" rx="11" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="0.6" class="pbrd-pos-arch-method pbrd-pos-arch-m3"/>' +
-          '<text x="150" y="15" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="500" font-family="system-ui">PayPal</text>' +
+          /* PayPal — P icon */
+          '<rect x="140" y="0" width="60" height="26" rx="13" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)" stroke-width="0.6" class="pbrd-pos-arch-method pbrd-pos-arch-m3"/>' +
+          '<text x="154" y="18" fill="rgba(0,112,186,0.7)" font-size="11" font-weight="800" font-family="system-ui">P</text>' +
+          '<text x="180" y="17" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="7" font-weight="600" font-family="system-ui">PayPal</text>' +
 
-          '<rect x="184" y="0" width="52" height="22" rx="11" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="0.6" class="pbrd-pos-arch-method pbrd-pos-arch-m4"/>' +
-          '<text x="210" y="15" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="500" font-family="system-ui">Klarna</text>' +
+          /* Klarna — K badge */
+          '<rect x="208" y="0" width="60" height="26" rx="13" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)" stroke-width="0.6" class="pbrd-pos-arch-method pbrd-pos-arch-m4"/>' +
+          '<circle cx="222" cy="13" r="6" fill="rgba(255,182,193,0.15)"/><text x="222" y="16" text-anchor="middle" fill="rgba(255,182,193,0.8)" font-size="8" font-weight="800" font-family="system-ui">K</text>' +
+          '<text x="248" y="17" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="7" font-weight="600" font-family="system-ui">Klarna</text>' +
 
-          '<rect x="244" y="0" width="54" height="22" rx="11" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="0.6" class="pbrd-pos-arch-method pbrd-pos-arch-m5"/>' +
-          '<text x="271" y="15" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="500" font-family="system-ui">SEPA</text>' +
-
-          '<rect x="306" y="0" width="44" height="22" rx="11" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="0.6" class="pbrd-pos-arch-method pbrd-pos-arch-m6"/>' +
-          '<text x="328" y="15" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="500" font-family="system-ui">iDeal</text>' +
+          /* SEPA — euro bank icon */
+          '<rect x="276" y="0" width="54" height="26" rx="13" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)" stroke-width="0.6" class="pbrd-pos-arch-method pbrd-pos-arch-m5"/>' +
+          '<path d="M288 8 L292 6 L296 8 L296 18 L288 18 Z" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="0.7"/><line x1="287" y1="18" x2="297" y2="18" stroke="rgba(255,255,255,0.3)" stroke-width="0.6"/>' +
+          '<text x="313" y="17" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="7" font-weight="600" font-family="system-ui">SEPA</text>' +
 
           /* Second row */
-          '<rect x="60" y="30" width="62" height="22" rx="11" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="0.6" class="pbrd-pos-arch-method pbrd-pos-arch-m7"/>' +
-          '<text x="91" y="45" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="500" font-family="system-ui">Revolut</text>' +
+          /* iDeal */
+          '<rect x="30" y="34" width="54" height="26" rx="13" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)" stroke-width="0.6" class="pbrd-pos-arch-method pbrd-pos-arch-m6"/>' +
+          '<circle cx="44" cy="47" r="5" fill="none" stroke="rgba(204,0,102,0.5)" stroke-width="0.8"/><text x="44" y="50" text-anchor="middle" fill="rgba(204,0,102,0.6)" font-size="6" font-weight="800" font-family="system-ui">i</text>' +
+          '<text x="68" y="51" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="7" font-weight="600" font-family="system-ui">iDeal</text>' +
 
-          '<rect x="130" y="30" width="56" height="22" rx="11" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="0.6" class="pbrd-pos-arch-method pbrd-pos-arch-m8"/>' +
-          '<text x="158" y="45" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="500" font-family="system-ui">Pay Link</text>' +
+          /* Revolut */
+          '<rect x="92" y="34" width="66" height="26" rx="13" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)" stroke-width="0.6" class="pbrd-pos-arch-method pbrd-pos-arch-m7"/>' +
+          '<circle cx="106" cy="47" r="5" fill="rgba(0,0,0,0.3)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/><text x="106" y="50" text-anchor="middle" fill="#fff" font-size="6" font-weight="700" font-family="system-ui">R</text>' +
+          '<text x="138" y="51" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="7" font-weight="600" font-family="system-ui">Revolut</text>' +
 
-          '<rect x="194" y="30" width="44" height="22" rx="11" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="0.6" class="pbrd-pos-arch-method pbrd-pos-arch-m9"/>' +
-          '<text x="216" y="45" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="500" font-family="system-ui">Floa</text>' +
+          /* Pay Link — link icon */
+          '<rect x="166" y="34" width="66" height="26" rx="13" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)" stroke-width="0.6" class="pbrd-pos-arch-method pbrd-pos-arch-m8"/>' +
+          '<path d="M178 44 C178 41, 182 41, 182 44 M180 50 C180 53, 184 53, 184 50" stroke="rgba(99,25,240,0.5)" stroke-width="0.8" fill="none"/><line x1="181" y1="44" x2="181" y2="50" stroke="rgba(99,25,240,0.4)" stroke-width="0.6"/>' +
+          '<text x="210" y="51" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="7" font-weight="600" font-family="system-ui">Pay Link</text>' +
 
-          '<rect x="246" y="30" width="44" height="22" rx="11" fill="rgba(99,25,240,0.1)" stroke="rgba(99,25,240,0.25)" stroke-width="0.6"/>' +
-          '<text x="268" y="45" text-anchor="middle" fill="rgba(99,25,240,0.7)" font-size="7" font-weight="600" font-family="system-ui">+4</text>' +
+          /* +More */
+          '<rect x="240" y="34" width="50" height="26" rx="13" fill="rgba(99,25,240,0.08)" stroke="rgba(99,25,240,0.25)" stroke-width="0.8" class="pbrd-pos-arch-method pbrd-pos-arch-m9"/>' +
+          '<text x="265" y="51" text-anchor="middle" fill="rgba(99,25,240,0.8)" font-size="8" font-weight="700" font-family="system-ui">+5 more</text>' +
         '</g>' +
 
-        /* ── Transaction types along the bottom ── */
-        '<g transform="translate(65,360)">' +
-          '<text x="0" y="0" fill="rgba(255,255,255,0.2)" font-size="6" font-family="system-ui" letter-spacing="0.5">PAYMENT</text>' +
-          '<text x="60" y="0" fill="rgba(255,255,255,0.2)" font-size="6" font-family="system-ui" letter-spacing="0.5">PRE-AUTH</text>' +
-          '<text x="120" y="0" fill="rgba(255,255,255,0.2)" font-size="6" font-family="system-ui" letter-spacing="0.5">REFUND</text>' +
-          '<text x="175" y="0" fill="rgba(255,255,255,0.2)" font-size="6" font-family="system-ui" letter-spacing="0.5">CAPTURE</text>' +
-          '<text x="240" y="0" fill="rgba(255,255,255,0.2)" font-size="6" font-family="system-ui" letter-spacing="0.5">TOKENIZE</text>' +
+        /* ── Transaction types — readable, white ── */
+        '<g transform="translate(50,368)">' +
+          '<rect x="0" y="-10" width="340" height="22" rx="4" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>' +
+          '<text x="25" y="4" text-anchor="middle" fill="rgba(255,255,255,0.55)" font-size="7" font-weight="600" font-family="system-ui" letter-spacing="0.3">PAYMENT</text>' +
+          '<text x="5" y="4" text-anchor="middle" fill="rgba(255,255,255,0.15)" font-size="8" font-family="system-ui">\u00b7</text>' +
+          '<text x="93" y="4" text-anchor="middle" fill="rgba(255,255,255,0.55)" font-size="7" font-weight="600" font-family="system-ui" letter-spacing="0.3">PRE-AUTH</text>' +
+          '<text x="60" y="4" text-anchor="middle" fill="rgba(255,255,255,0.15)" font-size="8" font-family="system-ui">\u00b7</text>' +
+          '<text x="161" y="4" text-anchor="middle" fill="rgba(255,255,255,0.55)" font-size="7" font-weight="600" font-family="system-ui" letter-spacing="0.3">REFUND</text>' +
+          '<text x="130" y="4" text-anchor="middle" fill="rgba(255,255,255,0.15)" font-size="8" font-family="system-ui">\u00b7</text>' +
+          '<text x="232" y="4" text-anchor="middle" fill="rgba(255,255,255,0.55)" font-size="7" font-weight="600" font-family="system-ui" letter-spacing="0.3">CAPTURE</text>' +
+          '<text x="199" y="4" text-anchor="middle" fill="rgba(255,255,255,0.15)" font-size="8" font-family="system-ui">\u00b7</text>' +
+          '<text x="310" y="4" text-anchor="middle" fill="rgba(255,255,255,0.55)" font-size="7" font-weight="600" font-family="system-ui" letter-spacing="0.3">TOKENIZE</text>' +
+          '<text x="273" y="4" text-anchor="middle" fill="rgba(255,255,255,0.15)" font-size="8" font-family="system-ui">\u00b7</text>' +
         '</g>' +
       '</svg>';
 
