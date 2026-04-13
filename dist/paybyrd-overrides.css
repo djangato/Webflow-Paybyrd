@@ -10794,7 +10794,9 @@ a.glowing_button_link .glowing_button_text {
   display: flex;
   justify-content: center;
   gap: 40px;
-  margin-top: 32px;
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
   flex-wrap: wrap;
 }
 

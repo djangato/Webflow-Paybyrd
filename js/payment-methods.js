@@ -70,11 +70,21 @@
     heading.innerHTML = "Every way your customers<br>want to pay.";
     heading.style.color = "#fff";
 
-    /* Find and rewrite subtitle if exists, or create one */
+    /* Find subtitle — could be next sibling or inside a wrapper */
     var subtitle = heading.nextElementSibling;
     if (subtitle && subtitle.tagName === "P") {
-      subtitle.textContent = "From global card networks to local wallets — accept payments however your customers prefer. One integration, worldwide coverage.";
+      subtitle.textContent = "From global card networks to local wallets \u2014 accept payments however your customers prefer. One integration, worldwide coverage.";
       subtitle.style.color = "rgba(255,255,255,0.5)";
+    } else {
+      /* Create subtitle if none found */
+      subtitle = document.createElement("p");
+      subtitle.textContent = "From global card networks to local wallets \u2014 accept payments however your customers prefer. One integration, worldwide coverage.";
+      subtitle.style.color = "rgba(255,255,255,0.5)";
+      subtitle.style.fontSize = "1rem";
+      subtitle.style.lineHeight = "1.6";
+      subtitle.style.maxWidth = "600px";
+      subtitle.style.margin = "12px auto 0";
+      heading.parentNode.insertBefore(subtitle, heading.nextSibling);
     }
 
     /* Add stat strip */
@@ -90,8 +100,8 @@
         '<span class="pbrd-pm-hero-stat-lbl">Countries</span>' +
       '</div>' +
       '<div class="pbrd-pm-hero-stat pbrd-pm-reveal">' +
-        '<span class="pbrd-pm-hero-stat-val">Cards, Wallets & Local</span>' +
-        '<span class="pbrd-pm-hero-stat-lbl">Full Coverage</span>' +
+        '<span class="pbrd-pm-hero-stat-val">Full</span>' +
+        '<span class="pbrd-pm-hero-stat-lbl">Cards, Wallets & Local</span>' +
       '</div>' +
       '<div class="pbrd-pm-hero-stat pbrd-pm-reveal">' +
         '<span class="pbrd-pm-hero-stat-val">Instant</span>' +
@@ -110,36 +120,29 @@
   /* ═══════════════════════════════════════════ */
 
   function enhanceGrid() {
-    /* Find the payment method cards — they contain payment method names */
-    var allCards = document.querySelectorAll("[class*='card-5'], [class*='card_5']");
-    /* Filter to only top-level card wrappers (not nested children) */
+    /* Strategy: find the grid that contains payment method cards.
+       Look for the first u-grid (or grid-like container) in the first section
+       that has children containing known payment method names. */
+    var knownMethods = ["visa", "mastercard", "paypal", "google pay", "apple pay", "klarna", "sepa"];
+    var gridContainer = null;
     var cards = [];
-    var seenParents = [];
-    allCards.forEach(function(c) {
-      /* Only take the outermost card-5 element */
-      var parent = c.parentElement;
-      if (c.querySelector("[class*='card-5'], [class*='card_5']")) return; /* skip if it has card children */
-      cards.push(c);
+
+    document.querySelectorAll("[class*='grid']").forEach(function(g) {
+      if (gridContainer) return;
+      var children = g.children;
+      if (children.length < 5) return; /* payment grid should have many items */
+      var text = g.textContent.toLowerCase();
+      var matches = knownMethods.filter(function(m) { return text.includes(m); });
+      if (matches.length >= 3) {
+        gridContainer = g;
+        cards = Array.prototype.slice.call(children);
+      }
     });
 
-    /* If we found too many or zero, try finding the grid directly */
-    if (cards.length === 0 || cards.length > 30) {
-      /* Find the first grid after the hero heading */
-      var heroH = document.querySelector("h1");
-      if (heroH) {
-        var section = heroH.closest("section") || heroH.closest("[class*='section']");
-        if (section) {
-          var grid = section.querySelector("[class*='grid']");
-          if (grid) {
-            cards = Array.prototype.slice.call(grid.children);
-          }
-        }
-      }
+    if (!gridContainer || cards.length === 0) {
+      console.log("[Paybyrd] Payment grid not found");
+      return;
     }
-    if (cards.length === 0) return;
-
-    /* Determine grid container */
-    var gridContainer = cards[0].parentElement;
 
     /* Categorize cards by reading their content */
     var categories = {
