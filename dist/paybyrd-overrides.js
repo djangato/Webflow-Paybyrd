@@ -6927,82 +6927,75 @@
   /* ═══════════════════════════════════════════ */
 
   function enhanceGrid() {
-    /* Strategy: find grid by looking at all elements with display:grid in the
-       first section, or by finding a container with many card-like children
-       near payment method keywords. */
-    var knownMethods = ["visa", "mastercard", "paypal", "google pay", "apple pay", "klarna", "sepa"];
+    /*
+     * Elegant approach: find a leaf text node with exact payment method name,
+     * then walk UP the DOM to find the level where siblings represent other
+     * payment method cards. That parent = the grid.
+     */
+    var targetNames = ["Visa", "Mastercard", "Google Pay", "Apple Pay", "PayPal", "Klarna"];
     var gridContainer = null;
     var cards = [];
 
-    /* Try multiple selectors */
-    var selectors = [
-      ".u-grid",
-      "[class*='grid']",
-      "[class*='card-5']"
-    ];
-
-    for (var s = 0; s < selectors.length; s++) {
-      if (gridContainer) break;
-      document.querySelectorAll(selectors[s]).forEach(function(g) {
-        if (gridContainer) return;
-        /* For card-5, go to parent */
-        var container = (selectors[s].includes("card")) ? g.parentElement : g;
-        if (!container) return;
-        var children = container.children;
-        if (children.length < 5) return;
-        var text = container.textContent.toLowerCase();
-        var matches = knownMethods.filter(function(m) { return text.includes(m); });
-        if (matches.length >= 3) {
-          gridContainer = container;
-          cards = Array.prototype.slice.call(children);
+    /* Step 1: Find a leaf element whose trimmed text is exactly a payment method name */
+    var seedEl = null;
+    for (var n = 0; n < targetNames.length; n++) {
+      if (seedEl) break;
+      var allEls = document.querySelectorAll("div, span, p, h3, h4, h5");
+      for (var e = 0; e < allEls.length; e++) {
+        var el = allEls[e];
+        /* Must be a leaf-ish element — few or no child elements */
+        if (el.children.length > 2) continue;
+        /* Text must match exactly (not a parent that contains it somewhere) */
+        var directText = el.textContent.trim();
+        if (directText === targetNames[n]) {
+          seedEl = el;
+          console.log("[Paybyrd] Seed found: '" + targetNames[n] + "' in <" + el.tagName + "> class='" + el.className + "'");
+          break;
         }
-      });
+      }
     }
 
-    /* Last resort: scan ALL divs for grid display with many children containing payment keywords */
-    if (!gridContainer) {
-      var allDivs = document.querySelectorAll("div");
-      allDivs.forEach(function(el) {
-        if (gridContainer) return;
-        if (el.children.length < 5) return;
-        var cs = window.getComputedStyle(el);
-        if (cs.display === "grid" || cs.display === "flex") {
-          var text = el.textContent.toLowerCase();
-          if (text.includes("visa") && text.includes("mastercard")) {
-            gridContainer = el;
-            cards = Array.prototype.slice.call(el.children);
-            console.log("[Paybyrd] Grid found via computed style scan. Class: " + el.className + " Children: " + el.children.length);
-          }
-        }
-      });
-    }
-
-    /* Nuclear option: find any element containing "Visa" and walk up to find the grid parent */
-    if (!gridContainer) {
-      document.querySelectorAll("div, span, p").forEach(function(el) {
-        if (gridContainer) return;
-        if (el.textContent.trim() === "Visa") {
-          /* Walk up to find the grid-like ancestor */
-          var parent = el.parentElement;
-          for (var depth = 0; depth < 8 && parent; depth++) {
-            if (parent.children.length >= 10) {
-              gridContainer = parent;
-              cards = Array.prototype.slice.call(parent.children);
-              console.log("[Paybyrd] Grid found via Visa walkup at depth " + depth + ". Class: " + parent.className + " Tag: " + parent.tagName + " Children: " + parent.children.length);
-              break;
-            }
-            parent = parent.parentElement;
-          }
-        }
-      });
-    }
-
-    if (!gridContainer || cards.length === 0) {
-      console.log("[Paybyrd] Payment grid not found. Tried all selectors.");
+    if (!seedEl) {
+      console.log("[Paybyrd] No seed payment method element found");
       return;
     }
 
-    console.log("[Paybyrd] Found payment grid with " + cards.length + " cards");
+    /* Step 2: Walk up from seedEl. At each level, check if the parent's children
+       collectively contain multiple different payment method names.
+       The grid is where siblings each represent ONE card. */
+    var walker = seedEl;
+    for (var depth = 0; depth < 12; depth++) {
+      var parent = walker.parentElement;
+      if (!parent) break;
+      var children = Array.prototype.slice.call(parent.children);
+
+      /* Count how many children each contain EXACTLY ONE unique payment method name */
+      var childMethodCount = 0;
+      children.forEach(function(child) {
+        var txt = child.textContent;
+        var hasMethod = targetNames.some(function(name) { return txt.indexOf(name) > -1; });
+        if (hasMethod) childMethodCount++;
+      });
+
+      console.log("[Paybyrd] Walkup depth=" + depth + " tag=" + parent.tagName +
+        " class='" + (parent.className || "").substring(0, 40) + "'" +
+        " children=" + children.length + " methodChildren=" + childMethodCount);
+
+      /* The grid: most children contain a payment method name, and there are many (>=10) */
+      if (childMethodCount >= 8 && children.length >= 10) {
+        gridContainer = parent;
+        cards = children;
+        console.log("[Paybyrd] Grid found at depth " + depth + "! " + cards.length + " cards.");
+        break;
+      }
+
+      walker = parent;
+    }
+
+    if (!gridContainer || cards.length === 0) {
+      console.log("[Paybyrd] Grid not found after walkup.");
+      return;
+    }
 
     /* ── Add missing payment methods: NuPay, Ethereum, Bitcoin ── */
     var newMethods = [
