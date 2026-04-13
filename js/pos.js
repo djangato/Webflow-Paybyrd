@@ -1125,10 +1125,7 @@
     var section = findSectionByHeading("sounds interesting") || findSectionByHeading("contact us today");
     if (!section) return;
 
-    /* White background with purple accent top border */
-    section.style.background = "#fff";
-    section.style.position = "relative";
-    section.style.paddingTop = "80px";
+    section.classList.add("pbrd-pos-contact-section");
 
     /* Make all text dark */
     section.querySelectorAll("h1,h2,h3,h4,h5").forEach(function(el) {
@@ -1141,36 +1138,32 @@
       el.style.color = "#333";
     });
 
-    /* Style form inputs for white bg */
-    section.querySelectorAll("input, textarea, select").forEach(function(el) {
-      el.style.background = "#f5f5f7";
-      el.style.border = "1px solid #e0e0e0";
-      el.style.color = "#111";
-      el.style.borderRadius = "10px";
+    /* Wrap form in a card */
+    var form = section.querySelector("form");
+    if (!form) return;
+
+    var formCard = document.createElement("div");
+    formCard.className = "pbrd-pos-form-card";
+    form.parentNode.insertBefore(formCard, form);
+    formCard.appendChild(form);
+
+    /* Style form inputs */
+    section.querySelectorAll("input:not([type=submit]):not([type=checkbox]), textarea, select").forEach(function(el) {
+      el.classList.add("pbrd-pos-form-input");
     });
 
     /* Style submit button */
     var submitBtn = section.querySelector('input[type="submit"], button[type="submit"]');
     if (submitBtn) {
-      submitBtn.style.background = "#6319f0";
-      submitBtn.style.color = "#fff";
-      submitBtn.style.border = "none";
-      submitBtn.style.borderRadius = "100px";
-      submitBtn.style.padding = "14px 40px";
-      submitBtn.style.fontSize = "0.9375rem";
-      submitBtn.style.fontWeight = "600";
-      submitBtn.style.cursor = "pointer";
+      submitBtn.classList.add("pbrd-pos-form-submit");
     }
 
-    var form = section.querySelector("form");
-    if (!form) return;
+    /* Remove Webflow error messages that show next to fields */
+    section.querySelectorAll('[data-visible-on]').forEach(function(el) {
+      el.style.display = "none";
+    });
 
-    /* Insert decorative top divider */
-    var divider = document.createElement("div");
-    divider.className = "pbrd-pos-contact-divider";
-    section.insertBefore(divider, section.firstChild);
-
-    /* Insert trust badges before the form */
+    /* Insert trust strip above the form card */
     var trust = document.createElement("div");
     trust.className = "pbrd-pos-trust";
     trust.innerHTML =
@@ -1187,7 +1180,7 @@
         '<div><span class="pbrd-pos-trust-val">PCI Level 1</span><span class="pbrd-pos-trust-lbl">DSS certified</span></div>' +
       '</div>';
 
-    form.parentNode.insertBefore(trust, form);
+    formCard.parentNode.insertBefore(trust, formCard);
   }
 
   /* ═══════════════════════════════════════════ */

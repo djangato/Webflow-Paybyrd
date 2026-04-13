@@ -10637,8 +10637,16 @@ a.glowing_button_link .glowing_button_text {
 /* Section 7: Contact trust badges             */
 /* ═══════════════════════════════════════════ */
 
-/* ── Contact section divider ── */
-.pbrd-pos-contact-divider {
+/* ── Contact section ── */
+.pbrd-pos-contact-section {
+  background: #f8f7fc !important;
+  padding: 60px 0 60px !important;
+  position: relative;
+}
+
+/* Purple accent line at top */
+.pbrd-pos-contact-section::before {
+  content: "";
   position: absolute;
   top: 0;
   left: 50%;
@@ -10649,23 +10657,68 @@ a.glowing_button_link .glowing_button_text {
   background: linear-gradient(90deg, transparent, #6319f0, transparent);
 }
 
+/* ── Form card wrapper ── */
+.pbrd-pos-form-card {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 20px;
+  padding: 36px 40px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+}
+
+/* ── Form inputs ── */
+.pbrd-pos-form-input {
+  background: #f5f5f7 !important;
+  border: 1px solid #e5e5ea !important;
+  border-radius: 10px !important;
+  color: #111 !important;
+  padding: 12px 16px !important;
+  font-size: 0.9375rem !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+.pbrd-pos-form-input:focus {
+  border-color: #6319f0 !important;
+  box-shadow: 0 0 0 3px rgba(99, 25, 240, 0.08) !important;
+  outline: none !important;
+}
+
+/* ── Submit button ── */
+.pbrd-pos-form-submit {
+  background: #6319f0 !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 100px !important;
+  padding: 14px 48px !important;
+  font-size: 0.9375rem !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all 0.25s ease !important;
+  letter-spacing: 0.01em !important;
+}
+.pbrd-pos-form-submit:hover {
+  background: #5214d4 !important;
+  box-shadow: 0 6px 24px rgba(99, 25, 240, 0.25) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* ── Trust badges ── */
 .pbrd-pos-trust {
   display: flex;
   justify-content: center;
-  gap: 48px;
-  margin-bottom: 40px;
+  gap: 40px;
+  margin-bottom: 28px;
   flex-wrap: wrap;
 }
 
 .pbrd-pos-trust-item {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .pbrd-pos-trust-icon {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   border-radius: 10px;
   background: rgba(99, 25, 240, 0.06);
   display: flex;
@@ -10675,21 +10728,21 @@ a.glowing_button_link .glowing_button_text {
 }
 
 .pbrd-pos-trust-icon svg {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   color: #6319f0;
 }
 
 .pbrd-pos-trust-val {
   display: block;
-  font-size: 0.9375rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   color: #111;
 }
 
 .pbrd-pos-trust-lbl {
   display: block;
-  font-size: 0.6875rem;
+  font-size: 0.625rem;
   color: #999;
 }
 
