@@ -55,15 +55,26 @@
     kicker.textContent = "PAYMENT METHODS";
     heading.parentNode.insertBefore(kicker, heading);
 
+    /* Hide original Webflow kicker if it exists above our heading */
+    var prev = heading.previousElementSibling;
+    while (prev) {
+      var pt = prev.textContent.toLowerCase().trim();
+      if (pt === "payment methods" || pt.includes("payment method")) {
+        prev.style.display = "none";
+        break;
+      }
+      prev = prev.previousElementSibling;
+    }
+
     /* Rewrite heading */
     heading.innerHTML = "Every way your customers<br>want to pay.";
-    heading.style.color = "#111";
+    heading.style.color = "#fff";
 
     /* Find and rewrite subtitle if exists, or create one */
     var subtitle = heading.nextElementSibling;
     if (subtitle && subtitle.tagName === "P") {
       subtitle.textContent = "From global card networks to local wallets — accept payments however your customers prefer. One integration, worldwide coverage.";
-      subtitle.style.color = "#555";
+      subtitle.style.color = "rgba(255,255,255,0.5)";
     }
 
     /* Add stat strip */
@@ -99,12 +110,31 @@
   /* ═══════════════════════════════════════════ */
 
   function enhanceGrid() {
-    /* Find all payment method cards */
-    var cards = document.querySelectorAll(".card-5_wrap, [class*='card-5']");
-    if (cards.length === 0) {
-      /* Fallback: try finding cards in the grid near the hero */
-      var grid = document.querySelector(".u-grid, [class*='grid']");
-      if (grid) cards = grid.children;
+    /* Find the payment method cards — they contain payment method names */
+    var allCards = document.querySelectorAll("[class*='card-5'], [class*='card_5']");
+    /* Filter to only top-level card wrappers (not nested children) */
+    var cards = [];
+    var seenParents = [];
+    allCards.forEach(function(c) {
+      /* Only take the outermost card-5 element */
+      var parent = c.parentElement;
+      if (c.querySelector("[class*='card-5'], [class*='card_5']")) return; /* skip if it has card children */
+      cards.push(c);
+    });
+
+    /* If we found too many or zero, try finding the grid directly */
+    if (cards.length === 0 || cards.length > 30) {
+      /* Find the first grid after the hero heading */
+      var heroH = document.querySelector("h1");
+      if (heroH) {
+        var section = heroH.closest("section") || heroH.closest("[class*='section']");
+        if (section) {
+          var grid = section.querySelector("[class*='grid']");
+          if (grid) {
+            cards = Array.prototype.slice.call(grid.children);
+          }
+        }
+      }
     }
     if (cards.length === 0) return;
 
@@ -267,7 +297,6 @@
     section.querySelectorAll("h1,h2,h3").forEach(function (h) {
       if (h.textContent.toLowerCase().includes("missing")) {
         h.innerHTML = "Can\u2019t find what you need?";
-        h.style.color = "#111";
       }
     });
 
@@ -275,36 +304,24 @@
     section.querySelectorAll("p").forEach(function (p) {
       if (p.textContent.toLowerCase().includes("open-source api") || p.textContent.toLowerCase().includes("tailored solution")) {
         p.textContent = "Our open API supports any payment method or integration. Tell us what you need \u2014 we\u2019ll make it happen.";
-        p.style.color = "#555";
       }
     });
 
-    /* Style text */
-    section.querySelectorAll("label").forEach(function (el) {
-      el.style.color = "#333";
-    });
-    section.querySelectorAll("h1,h2,h3,h4,h5").forEach(function (el) {
-      el.style.color = "#111";
-    });
-    section.querySelectorAll("p").forEach(function (el) {
-      if (!el.closest("form")) el.style.color = "#555";
-    });
-
-    /* Style form inputs via JS */
+    /* Style form inputs via JS for dark theme */
     section.querySelectorAll("input:not([type=submit]):not([type=checkbox]):not([type=radio]):not([type=hidden]), textarea, select").forEach(function (el) {
-      el.style.setProperty("background", "#f5f5f7", "important");
-      el.style.setProperty("border", "1.5px solid #e0e0e5", "important");
+      el.style.setProperty("background", "rgba(255,255,255,0.05)", "important");
+      el.style.setProperty("border", "1.5px solid rgba(255,255,255,0.1)", "important");
       el.style.setProperty("border-radius", "10px", "important");
-      el.style.setProperty("color", "#111", "important");
+      el.style.setProperty("color", "#fff", "important");
       el.addEventListener("focus", function () {
-        el.style.setProperty("border-color", "#2563eb", "important");
-        el.style.setProperty("box-shadow", "0 0 0 3px rgba(37,99,235,0.08)", "important");
-        el.style.setProperty("background", "#fff", "important");
+        el.style.setProperty("border-color", "#60a5fa", "important");
+        el.style.setProperty("box-shadow", "0 0 0 3px rgba(96,165,250,0.1)", "important");
+        el.style.setProperty("background", "rgba(255,255,255,0.08)", "important");
       });
       el.addEventListener("blur", function () {
-        el.style.setProperty("border-color", "#e0e0e5", "important");
+        el.style.setProperty("border-color", "rgba(255,255,255,0.1)", "important");
         el.style.setProperty("box-shadow", "none", "important");
-        el.style.setProperty("background", "#f5f5f7", "important");
+        el.style.setProperty("background", "rgba(255,255,255,0.05)", "important");
       });
     });
 
