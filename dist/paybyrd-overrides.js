@@ -6044,7 +6044,7 @@
   /* Init                                        */
   /* ═══════════════════════════════════════════ */
 
-  /* ─── Pricing section — elegant constellation ─── */
+  /* ─── Pricing section — real constellation starfield ─── */
   function initPricingCanvas() {
     var canvas = document.getElementById("pbrd-pricing-canvas");
     if (!canvas) return;
@@ -6065,38 +6065,112 @@
     resize();
     window.addEventListener("resize", resize);
 
-    /* ── Sparse elegant nodes ── */
-    var nodes = [];
-    for (var i = 0; i < 14; i++) {
-      nodes.push({
+    /*
+     * Real constellation patterns — normalized coords [0-1]
+     * Each placed in a region of the section so they don't overlap content
+     */
+    var constellations = [
+      /* ── Orion (top-left) ── */
+      { ox: 0.03, oy: 0.02, scale: 0.16, stars: [
+        { x: 0.3, y: 0.0, m: 1.8 },   /* Betelgeuse */
+        { x: 0.7, y: 0.05, m: 1.4 },   /* Bellatrix */
+        { x: 0.35, y: 0.4, m: 1.0 },   /* Belt 1 */
+        { x: 0.5, y: 0.42, m: 1.2 },   /* Belt 2 (Alnilam) */
+        { x: 0.65, y: 0.44, m: 1.0 },  /* Belt 3 */
+        { x: 0.25, y: 0.85, m: 1.5 },  /* Saiph */
+        { x: 0.75, y: 0.9, m: 1.9 },   /* Rigel */
+      ], edges: [[0,2],[1,4],[2,3],[3,4],[2,5],[4,6]] },
+
+      /* ── Cassiopeia W (top-right) ── */
+      { ox: 0.78, oy: 0.01, scale: 0.18, stars: [
+        { x: 0.0, y: 0.3, m: 1.4 },
+        { x: 0.22, y: 0.0, m: 1.6 },
+        { x: 0.45, y: 0.35, m: 1.8 },  /* Gamma — brightest */
+        { x: 0.68, y: 0.05, m: 1.3 },
+        { x: 0.9, y: 0.4, m: 1.5 },
+      ], edges: [[0,1],[1,2],[2,3],[3,4]] },
+
+      /* ── Leo (mid-left edge) ── */
+      { ox: 0.0, oy: 0.35, scale: 0.14, stars: [
+        { x: 0.0, y: 0.5, m: 1.7 },    /* Regulus */
+        { x: 0.25, y: 0.2, m: 1.1 },
+        { x: 0.5, y: 0.0, m: 1.3 },
+        { x: 0.7, y: 0.15, m: 1.0 },
+        { x: 0.85, y: 0.4, m: 1.2 },
+        { x: 0.6, y: 0.7, m: 1.0 },
+        { x: 0.3, y: 0.8, m: 0.9 },
+      ], edges: [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,0]] },
+
+      /* ── Lyra (mid-right edge) ── */
+      { ox: 0.86, oy: 0.38, scale: 0.11, stars: [
+        { x: 0.5, y: 0.0, m: 2.0 },    /* Vega — very bright */
+        { x: 0.3, y: 0.45, m: 0.9 },
+        { x: 0.7, y: 0.45, m: 0.9 },
+        { x: 0.2, y: 0.9, m: 0.8 },
+        { x: 0.8, y: 0.9, m: 0.8 },
+      ], edges: [[0,1],[0,2],[1,3],[2,4],[3,4]] },
+
+      /* ── Crux / Southern Cross (bottom-left) ── */
+      { ox: 0.08, oy: 0.72, scale: 0.10, stars: [
+        { x: 0.5, y: 0.0, m: 1.6 },
+        { x: 0.0, y: 0.5, m: 1.3 },
+        { x: 1.0, y: 0.5, m: 1.3 },
+        { x: 0.5, y: 1.0, m: 1.5 },
+      ], edges: [[0,3],[1,2]] },
+
+      /* ── Gemini (bottom-right) ── */
+      { ox: 0.76, oy: 0.7, scale: 0.15, stars: [
+        { x: 0.15, y: 0.0, m: 1.7 },   /* Castor */
+        { x: 0.3, y: 0.05, m: 1.8 },   /* Pollux */
+        { x: 0.1, y: 0.35, m: 0.9 },
+        { x: 0.35, y: 0.4, m: 1.0 },
+        { x: 0.0, y: 0.7, m: 0.8 },
+        { x: 0.25, y: 0.75, m: 0.9 },
+        { x: 0.45, y: 0.95, m: 1.1 },
+      ], edges: [[0,2],[2,4],[1,3],[3,5],[5,6]] },
+
+      /* ── Ursa Minor (center-top, very faint behind heading) ── */
+      { ox: 0.4, oy: 0.05, scale: 0.12, stars: [
+        { x: 0.9, y: 0.0, m: 1.9 },    /* Polaris */
+        { x: 0.75, y: 0.3, m: 0.8 },
+        { x: 0.6, y: 0.2, m: 0.7 },
+        { x: 0.35, y: 0.5, m: 0.9 },
+        { x: 0.2, y: 0.7, m: 0.8 },
+        { x: 0.4, y: 0.85, m: 0.7 },
+        { x: 0.15, y: 1.0, m: 0.9 },
+      ], edges: [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6]] },
+    ];
+
+    /* Flatten into renderable arrays */
+    var allStars = [];
+    var allEdges = [];
+
+    constellations.forEach(function(c) {
+      var baseIdx = allStars.length;
+      c.stars.forEach(function(s) {
+        allStars.push({
+          x: c.ox + s.x * c.scale,
+          y: c.oy + s.y * c.scale,
+          m: s.m,                        /* magnitude = brightness + size */
+          phase: Math.random() * Math.PI * 2,
+          twinkleSpeed: 0.3 + Math.random() * 0.8,
+          twinkleDepth: 0.3 + Math.random() * 0.4   /* how much it dims */
+        });
+      });
+      c.edges.forEach(function(e) {
+        allEdges.push({ a: baseIdx + e[0], b: baseIdx + e[1] });
+      });
+    });
+
+    /* Ambient dust — tiny background stars */
+    var dust = [];
+    for (var d = 0; d < 60; d++) {
+      dust.push({
         x: Math.random(),
         y: Math.random(),
-        r: 0.6 + Math.random() * 0.8,
+        r: 0.3 + Math.random() * 0.4,
         phase: Math.random() * Math.PI * 2,
-        speed: 0.2 + Math.random() * 0.4
-      });
-    }
-
-    /* ── Connect nearby pairs ── */
-    var edges = [];
-    for (var a = 0; a < nodes.length; a++) {
-      for (var b = a + 1; b < nodes.length; b++) {
-        var dx = nodes[a].x - nodes[b].x;
-        var dy = nodes[a].y - nodes[b].y;
-        if (Math.sqrt(dx * dx + dy * dy) < 0.32) {
-          edges.push({ a: a, b: b });
-        }
-      }
-    }
-
-    /* ── 3 slow-traveling light pulses ── */
-    var pulses = [];
-    for (var p = 0; p < 3; p++) {
-      pulses.push({
-        edge: Math.floor(Math.random() * edges.length),
-        t: Math.random(),
-        speed: 0.08 + Math.random() * 0.12,
-        dir: 1
+        speed: 0.5 + Math.random() * 1.5
       });
     }
 
@@ -6108,64 +6182,68 @@
       time += 0.016;
       ctx.clearRect(0, 0, W, H);
 
-      /* Edges — very faint purple hairlines */
-      for (var e = 0; e < edges.length; e++) {
-        var edge = edges[e];
-        var na = nodes[edge.a], nb = nodes[edge.b];
-        var alpha = 0.025 + 0.015 * Math.sin(time * 0.4 + e);
+      /* ── Background dust — tiny twinkling specks ── */
+      for (var dd = 0; dd < dust.length; dd++) {
+        var dt = dust[dd];
+        var da = 0.04 + 0.04 * Math.sin(time * dt.speed + dt.phase);
         ctx.beginPath();
-        ctx.moveTo(na.x * W, na.y * H);
-        ctx.lineTo(nb.x * W, nb.y * H);
-        ctx.strokeStyle = "rgba(140,100,220," + alpha + ")";
+        ctx.arc(dt.x * W, dt.y * H, dt.r, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(160,130,220," + da + ")";
+        ctx.fill();
+      }
+
+      /* ── Constellation lines — ethereal hairlines ── */
+      for (var e = 0; e < allEdges.length; e++) {
+        var edge = allEdges[e];
+        var sa = allStars[edge.a], sb = allStars[edge.b];
+        /* Line opacity influenced by both stars' current brightness */
+        var gA = 1 - allStars[edge.a].twinkleDepth * (0.5 + 0.5 * Math.sin(time * sa.twinkleSpeed + sa.phase));
+        var gB = 1 - allStars[edge.b].twinkleDepth * (0.5 + 0.5 * Math.sin(time * sb.twinkleSpeed + sb.phase));
+        var lineAlpha = Math.min(gA, gB) * 0.06;
+
+        ctx.beginPath();
+        ctx.moveTo(sa.x * W, sa.y * H);
+        ctx.lineTo(sb.x * W, sb.y * H);
+        ctx.strokeStyle = "rgba(140,100,220," + lineAlpha + ")";
         ctx.lineWidth = 0.5;
         ctx.stroke();
       }
 
-      /* Nodes — soft purple dots with gentle pulse */
-      for (var n = 0; n < nodes.length; n++) {
-        var nd = nodes[n];
-        var nx = nd.x * W, ny = nd.y * H;
-        var glow = 0.06 + 0.06 * Math.sin(time * nd.speed + nd.phase);
+      /* ── Stars — twinkle with glow halo ── */
+      for (var s = 0; s < allStars.length; s++) {
+        var star = allStars[s];
+        var sx = star.x * W, sy = star.y * H;
 
-        var grad = ctx.createRadialGradient(nx, ny, 0, nx, ny, nd.r * 5);
-        grad.addColorStop(0, "rgba(140,100,220," + (glow * 0.8) + ")");
-        grad.addColorStop(1, "transparent");
+        /* Twinkle: smooth sinusoidal oscillation */
+        var brightness = 1 - star.twinkleDepth * (0.5 + 0.5 * Math.sin(time * star.twinkleSpeed + star.phase));
+        var baseAlpha = 0.12 + 0.18 * (star.m / 2.0);   /* brighter stars = higher magnitude */
+        var alpha = baseAlpha * brightness;
+        var radius = star.m * 0.7;
+
+        /* Soft halo */
+        var haloR = radius * 6;
+        var halo = ctx.createRadialGradient(sx, sy, 0, sx, sy, haloR);
+        halo.addColorStop(0, "rgba(160,100,255," + (alpha * 0.5) + ")");
+        halo.addColorStop(0.4, "rgba(160,100,255," + (alpha * 0.15) + ")");
+        halo.addColorStop(1, "transparent");
         ctx.beginPath();
-        ctx.arc(nx, ny, nd.r * 5, 0, Math.PI * 2);
-        ctx.fillStyle = grad;
+        ctx.arc(sx, sy, haloR, 0, Math.PI * 2);
+        ctx.fillStyle = halo;
         ctx.fill();
 
+        /* Star core */
         ctx.beginPath();
-        ctx.arc(nx, ny, nd.r, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(140,100,220," + (glow + 0.1) + ")";
+        ctx.arc(sx, sy, radius, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(160,120,240," + (alpha + 0.08) + ")";
         ctx.fill();
-      }
 
-      /* Traveling pulses — slow, graceful */
-      for (var pp = 0; pp < pulses.length; pp++) {
-        var pl = pulses[pp];
-        pl.t += pl.speed * 0.016 * pl.dir;
-        if (pl.t > 1 || pl.t < 0) {
-          pl.dir *= -1;
-          pl.t = Math.max(0, Math.min(1, pl.t));
-          if (Math.random() > 0.4) {
-            pl.edge = Math.floor(Math.random() * edges.length);
-          }
+        /* Bright center pinpoint for major stars */
+        if (star.m > 1.5) {
+          ctx.beginPath();
+          ctx.arc(sx, sy, 0.5, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(220,200,255," + (alpha * 1.5) + ")";
+          ctx.fill();
         }
-        var pe = edges[pl.edge];
-        if (!pe) continue;
-        var pa = nodes[pe.a], pb = nodes[pe.b];
-        var px = (pa.x + (pb.x - pa.x) * pl.t) * W;
-        var py = (pa.y + (pb.y - pa.y) * pl.t) * H;
-
-        var pg = ctx.createRadialGradient(px, py, 0, px, py, 18);
-        pg.addColorStop(0, "rgba(160,100,255,0.35)");
-        pg.addColorStop(0.4, "rgba(160,100,255,0.08)");
-        pg.addColorStop(1, "transparent");
-        ctx.beginPath();
-        ctx.arc(px, py, 18, 0, Math.PI * 2);
-        ctx.fillStyle = pg;
-        ctx.fill();
       }
 
       requestAnimationFrame(draw);
