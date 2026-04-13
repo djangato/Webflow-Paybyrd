@@ -114,39 +114,52 @@
     insertAfter.parentNode.insertBefore(stats, insertAfter.nextSibling);
 
     /* ── Animated payment icons floating behind heading ── */
-    var heroSection = heading.closest("section") || heading.closest("[class*='section']") || heading.parentElement;
-    if (heroSection) {
-      heroSection.style.setProperty("position", "relative", "important");
-      heroSection.style.setProperty("overflow", "hidden", "important");
+    /* Find a real positioned ancestor — skip display:contents wrappers */
+    var heroWrap = heading.parentElement;
+    while (heroWrap && heroWrap.tagName !== "BODY") {
+      var hcs = window.getComputedStyle(heroWrap);
+      if (hcs.display !== "contents" && hcs.display !== "inline") break;
+      heroWrap = heroWrap.parentElement;
+    }
+    if (heroWrap && heroWrap.tagName !== "BODY") {
+      heroWrap.style.setProperty("position", "relative", "important");
+      heroWrap.style.setProperty("overflow", "hidden", "important");
 
       var floatLayer = document.createElement("div");
-      floatLayer.className = "pbrd-pm-hero-float";
-      floatLayer.setAttribute("style", "position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden;");
+      floatLayer.setAttribute("style",
+        "position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;"
+      );
 
-      var symbols = [
-        { t: "\uD83D\uDCB3", s: 20 }, { t: "$", s: 18 }, { t: "\u20AC", s: 22 },
-        { t: "\u00A3", s: 16 }, { t: "\u00A5", s: 18 }, { t: "\u20BF", s: 20 },
-        { t: "NFC", s: 11 }, { t: "PAY", s: 10 }, { t: "\u26A1", s: 16 },
-        { t: "\u20AC", s: 14 }, { t: "$", s: 12 }, { t: "\uD83D\uDCB3", s: 18 }
-      ];
+      var symbols = ["$", "\u20AC", "\u00A3", "\u00A5", "\u20BF", "NFC", "PAY", "\u26A1", "$", "\u20AC", "\u00A5", "\u20BF"];
       symbols.forEach(function(sym, i) {
         var el = document.createElement("span");
-        el.textContent = sym.t;
+        el.textContent = sym;
+        var size = 12 + Math.floor(Math.random() * 14);
+        var left = 5 + Math.floor(Math.random() * 90);
+        var dur = 10 + Math.floor(Math.random() * 8);
+        var delay = i * 1.5;
         el.setAttribute("style",
-          "position:absolute;bottom:-30px;color:rgba(96,165,250,0.07);font-weight:700;" +
-          "font-family:system-ui;pointer-events:none;font-size:" + sym.s + "px;" +
-          "left:" + (5 + Math.random() * 90) + "%;" +
-          "animation:pbrd-pm-float-up " + (10 + Math.random() * 8) + "s linear " + (i * 1.5) + "s infinite;"
+          "position:absolute;bottom:-30px;font-weight:700;font-family:system-ui,sans-serif;" +
+          "pointer-events:none;color:rgba(96,165,250,0.08);" +
+          "font-size:" + size + "px;left:" + left + "%;" +
+          "animation:pbrd-pm-float-up " + dur + "s linear " + delay + "s infinite;"
         );
         floatLayer.appendChild(el);
       });
 
-      heroSection.insertBefore(floatLayer, heroSection.firstChild);
+      heroWrap.insertBefore(floatLayer, heroWrap.firstChild);
 
-      /* Ensure heading content is above float layer */
-      var headingWrap = heading.parentElement;
-      if (headingWrap) headingWrap.style.setProperty("position", "relative", "important");
-      if (headingWrap) headingWrap.style.setProperty("z-index", "1", "important");
+      /* Keep heading content above */
+      heading.style.setProperty("position", "relative", "important");
+      heading.style.setProperty("z-index", "1", "important");
+      if (subtitle) {
+        subtitle.style.setProperty("position", "relative", "important");
+        subtitle.style.setProperty("z-index", "1", "important");
+      }
+      stats.style.setProperty("position", "relative", "important");
+      stats.style.setProperty("z-index", "1", "important");
+      kicker.style.setProperty("position", "relative", "important");
+      kicker.style.setProperty("z-index", "1", "important");
     }
 
     observeReveal(".pbrd-pm-reveal", 100);
@@ -211,8 +224,9 @@
         " class='" + (parent.className || "").substring(0, 40) + "'" +
         " children=" + children.length + " methodChildren=" + childMethodCount);
 
-      /* The grid: most children contain a payment method name, and there are many (>=10) */
-      if (childMethodCount >= 8 && children.length >= 10) {
+      /* The grid: multiple children contain payment method names, and there are many children.
+         At depth 4 we see 20 children with 5 matches — that's our grid. */
+      if (childMethodCount >= 4 && children.length >= 15) {
         gridContainer = parent;
         cards = children;
         console.log("[Paybyrd] Grid found at depth " + depth + "! " + cards.length + " cards.");
@@ -378,22 +392,26 @@
       tabsWrap.appendChild(btn);
     });
 
-    /* Insert tabs and counter — find the right insertion point.
-       We want them ABOVE the grid but BELOW the hero heading/stats.
-       Best approach: find the section/wrapper that contains the grid,
-       then insert as the first children of that wrapper, or just above
-       the grid within its closest section-level parent. */
-    var gridSection = gridContainer.closest("section") || gridContainer.closest("[class*='section']");
-    var insertParent = gridSection || gridContainer.parentNode;
+    /* Insert tabs and counter — walk up from grid to find a visible
+       ancestor that we can insert before. Look for u-grid, u-layout, or section. */
+    var insertTarget = gridContainer;
+    var insertParent = gridContainer.parentElement;
 
-    /* If the grid IS the section (or very close), insert as first children of grid */
-    if (insertParent === gridContainer || insertParent.children.length <= 2) {
-      gridContainer.insertBefore(counterEl, gridContainer.firstChild);
-      gridContainer.insertBefore(tabsWrap, gridContainer.firstChild);
-    } else {
-      /* Insert just before the grid within its parent section */
-      insertParent.insertBefore(counterEl, gridContainer);
-      insertParent.insertBefore(tabsWrap, gridContainer);
+    /* Walk up to find a good insertion point — skip display:contents wrappers */
+    while (insertParent) {
+      var pcs = window.getComputedStyle(insertParent);
+      if (pcs.display !== "contents" && insertParent.tagName !== "BODY") {
+        insertTarget = insertParent.contains(gridContainer) ? insertTarget : gridContainer;
+        break;
+      }
+      insertTarget = insertParent;
+      insertParent = insertParent.parentElement;
+    }
+
+    /* Insert before the grid's visible ancestor */
+    if (insertTarget && insertTarget.parentElement) {
+      insertTarget.parentElement.insertBefore(counterEl, insertTarget);
+      insertTarget.parentElement.insertBefore(tabsWrap, counterEl);
     }
   }
 

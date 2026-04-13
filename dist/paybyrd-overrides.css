@@ -11021,18 +11021,7 @@ a.glowing_button_link .glowing_button_text {
 .pbrd-pm-contact-section {
   padding: 60px 0 !important;
   position: relative;
-}
-
-.pbrd-pm-contact-section::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 3px;
-  border-radius: 2px;
-  background: linear-gradient(90deg, transparent, #2563eb, transparent);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .pbrd-pm-contact-section input:not([type="submit"]):not([type="checkbox"]):not([type="radio"]):not([type="hidden"]),
