@@ -584,7 +584,7 @@
       /* ── Paybyrd Tap — two-panel SoftPOS showcase ── */
       '<div class="pbrd-pos-tap-heading pbrd-pos-reveal">' +
         '<h3>Tap to Pay on your device</h3>' +
-        '<p>Offer customers quick, seamless contactless payments.</p>' +
+        '<p>Turn any smartphone into a payment terminal. No hardware needed.</p>' +
       '</div>' +
       '<div class="pbrd-pos-tap-grid pbrd-pos-reveal">' +
 
