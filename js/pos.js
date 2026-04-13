@@ -229,69 +229,109 @@
     var wrap = document.createElement("div");
     wrap.className = "pbrd-pos-platform-wrap";
 
+    /* ── Architecture diagram SVG ── */
+    var architectureSVG =
+      '<svg viewBox="0 0 440 380" fill="none" xmlns="http://www.w3.org/2000/svg" class="pbrd-pos-arch-svg">' +
+
+        /* ── Central hub: Paybyrd SDK ── */
+        '<rect x="160" y="140" width="120" height="60" rx="14" fill="rgba(99,25,240,0.12)" stroke="rgba(99,25,240,0.4)" stroke-width="1.5" class="pbrd-pos-arch-hub"/>' +
+        '<text x="220" y="166" text-anchor="middle" fill="#6319f0" font-size="10" font-weight="700" font-family="system-ui">PAYBYRD SDK</text>' +
+        '<text x="220" y="182" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="7" font-family="system-ui">Payment Engine</text>' +
+
+        /* ── Top: Your POS App ── */
+        '<rect x="170" y="20" width="100" height="44" rx="10" fill="rgba(59,130,246,0.1)" stroke="rgba(59,130,246,0.3)" stroke-width="1"/>' +
+        '<text x="220" y="40" text-anchor="middle" fill="rgba(59,130,246,0.9)" font-size="8" font-weight="600" font-family="system-ui">YOUR POS APP</text>' +
+        '<text x="220" y="52" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="6" font-family="system-ui">Android Intent / JS SDK</text>' +
+        /* Arrow down */
+        '<line x1="220" y1="64" x2="220" y2="140" stroke="rgba(59,130,246,0.2)" stroke-width="1" stroke-dasharray="4 3"/>' +
+        '<circle cx="220" cy="100" r="3" fill="rgba(59,130,246,0.6)" class="pbrd-pos-arch-dot pbrd-pos-arch-dot1"/>' +
+
+        /* ── Left: Remote API (Cloud) ── */
+        '<rect x="10" y="148" width="100" height="44" rx="10" fill="rgba(160,100,255,0.08)" stroke="rgba(160,100,255,0.25)" stroke-width="1"/>' +
+        '<text x="60" y="167" text-anchor="middle" fill="rgba(160,100,255,0.8)" font-size="8" font-weight="600" font-family="system-ui">REMOTE API</text>' +
+        '<text x="60" y="179" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="6" font-family="system-ui">Cloud \u2192 Any Terminal</text>' +
+        /* Arrow right */
+        '<line x1="110" y1="170" x2="160" y2="170" stroke="rgba(160,100,255,0.2)" stroke-width="1" stroke-dasharray="4 3"/>' +
+        '<circle cx="135" cy="170" r="3" fill="rgba(160,100,255,0.6)" class="pbrd-pos-arch-dot pbrd-pos-arch-dot2"/>' +
+
+        /* ── Right: Fleet Dashboard ── */
+        '<rect x="330" y="148" width="100" height="44" rx="10" fill="rgba(245,158,11,0.08)" stroke="rgba(245,158,11,0.25)" stroke-width="1"/>' +
+        '<text x="380" y="167" text-anchor="middle" fill="rgba(245,158,11,0.8)" font-size="8" font-weight="600" font-family="system-ui">DASHBOARD</text>' +
+        '<text x="380" y="179" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="6" font-family="system-ui">OTA \u00b7 Config \u00b7 Monitor</text>' +
+        /* Arrow left */
+        '<line x1="330" y1="170" x2="280" y2="170" stroke="rgba(245,158,11,0.2)" stroke-width="1" stroke-dasharray="4 3"/>' +
+        '<circle cx="305" cy="170" r="3" fill="rgba(245,158,11,0.6)" class="pbrd-pos-arch-dot pbrd-pos-arch-dot3"/>' +
+
+        /* ── Bottom: Payment Methods fan ── */
+        '<line x1="220" y1="200" x2="220" y2="240" stroke="rgba(99,25,240,0.15)" stroke-width="1"/>' +
+        '<text x="220" y="258" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="7" font-weight="500" font-family="system-ui">PAYMENT METHODS</text>' +
+
+        /* Method pills */
+        '<g transform="translate(45,270)">' +
+          '<rect x="0" y="0" width="50" height="22" rx="11" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="0.6" class="pbrd-pos-arch-method pbrd-pos-arch-m1"/>' +
+          '<text x="25" y="15" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="500" font-family="system-ui">Card</text>' +
+
+          '<rect x="58" y="0" width="58" height="22" rx="11" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="0.6" class="pbrd-pos-arch-method pbrd-pos-arch-m2"/>' +
+          '<text x="87" y="15" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="500" font-family="system-ui">MB WAY</text>' +
+
+          '<rect x="124" y="0" width="52" height="22" rx="11" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="0.6" class="pbrd-pos-arch-method pbrd-pos-arch-m3"/>' +
+          '<text x="150" y="15" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="500" font-family="system-ui">PayPal</text>' +
+
+          '<rect x="184" y="0" width="52" height="22" rx="11" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="0.6" class="pbrd-pos-arch-method pbrd-pos-arch-m4"/>' +
+          '<text x="210" y="15" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="500" font-family="system-ui">Klarna</text>' +
+
+          '<rect x="244" y="0" width="54" height="22" rx="11" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="0.6" class="pbrd-pos-arch-method pbrd-pos-arch-m5"/>' +
+          '<text x="271" y="15" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="500" font-family="system-ui">SEPA</text>' +
+
+          '<rect x="306" y="0" width="44" height="22" rx="11" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="0.6" class="pbrd-pos-arch-method pbrd-pos-arch-m6"/>' +
+          '<text x="328" y="15" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="500" font-family="system-ui">iDeal</text>' +
+
+          /* Second row */
+          '<rect x="60" y="30" width="62" height="22" rx="11" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="0.6" class="pbrd-pos-arch-method pbrd-pos-arch-m7"/>' +
+          '<text x="91" y="45" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="500" font-family="system-ui">Revolut</text>' +
+
+          '<rect x="130" y="30" width="56" height="22" rx="11" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="0.6" class="pbrd-pos-arch-method pbrd-pos-arch-m8"/>' +
+          '<text x="158" y="45" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="500" font-family="system-ui">Pay Link</text>' +
+
+          '<rect x="194" y="30" width="44" height="22" rx="11" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="0.6" class="pbrd-pos-arch-method pbrd-pos-arch-m9"/>' +
+          '<text x="216" y="45" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="500" font-family="system-ui">Floa</text>' +
+
+          '<rect x="246" y="30" width="44" height="22" rx="11" fill="rgba(99,25,240,0.1)" stroke="rgba(99,25,240,0.25)" stroke-width="0.6"/>' +
+          '<text x="268" y="45" text-anchor="middle" fill="rgba(99,25,240,0.7)" font-size="7" font-weight="600" font-family="system-ui">+4</text>' +
+        '</g>' +
+
+        /* ── Transaction types along the bottom ── */
+        '<g transform="translate(65,360)">' +
+          '<text x="0" y="0" fill="rgba(255,255,255,0.2)" font-size="6" font-family="system-ui" letter-spacing="0.5">PAYMENT</text>' +
+          '<text x="60" y="0" fill="rgba(255,255,255,0.2)" font-size="6" font-family="system-ui" letter-spacing="0.5">PRE-AUTH</text>' +
+          '<text x="120" y="0" fill="rgba(255,255,255,0.2)" font-size="6" font-family="system-ui" letter-spacing="0.5">REFUND</text>' +
+          '<text x="175" y="0" fill="rgba(255,255,255,0.2)" font-size="6" font-family="system-ui" letter-spacing="0.5">CAPTURE</text>' +
+          '<text x="240" y="0" fill="rgba(255,255,255,0.2)" font-size="6" font-family="system-ui" letter-spacing="0.5">TOKENIZE</text>' +
+        '</g>' +
+      '</svg>';
+
     wrap.innerHTML =
       '<div class="pbrd-pos-platform-header">' +
         '<div class="pbrd-pos-section-label">PLATFORM INTELLIGENCE</div>' +
         '<h2>One app store. Infinite possibilities.</h2>' +
-        '<p>Every Paybyrd terminal runs Android \u2014 your POS app, loyalty program, inventory system, and payment processing all live on one device. No external hardware. No dongles.</p>' +
+        '<p>Every Paybyrd terminal runs Android. Your POS, loyalty, and inventory apps live alongside our payment SDK on one device. No dongles, no external hardware.</p>' +
       '</div>' +
       '<div class="pbrd-pos-platform-grid">' +
         '<div class="pbrd-pos-features">' +
-          '<div class="pbrd-pos-feature pbrd-pos-reveal"><div class="pbrd-pos-feature-icon">' + appSVG + '</div><div><h4>App-to-App Integration</h4><p>Your POS software calls Paybyrd\u2019s payment SDK directly. One tap to pay, instant response back to your app.</p></div></div>' +
-          '<div class="pbrd-pos-feature pbrd-pos-reveal"><div class="pbrd-pos-feature-icon">' + otaSVG + '</div><div><h4>Over-the-Air Updates</h4><p>New features, security patches, and Android updates push automatically. Your fleet stays current without a single site visit.</p></div></div>' +
-          '<div class="pbrd-pos-feature pbrd-pos-reveal"><div class="pbrd-pos-feature-icon">' + remoteSVG + '</div><div><h4>Remote Fleet Management</h4><p>Configure, monitor, and troubleshoot every terminal from one dashboard. Push new apps across your entire fleet in seconds.</p></div></div>' +
+          '<div class="pbrd-pos-feature pbrd-pos-reveal"><div class="pbrd-pos-feature-icon">' + appSVG + '</div><div><h4>Android Payment SDK</h4><p>Your app calls our SDK via Android Intents or JavaScript. We handle PCI compliance, card reading, and authorization \u2014 you get a simple APPROVED/DECLINED callback. Also available as a JS SDK for web-based POS apps.</p></div></div>' +
+          '<div class="pbrd-pos-feature pbrd-pos-reveal"><div class="pbrd-pos-feature-icon">' + remoteSVG + '</div><div><h4>Remote Transactions</h4><p>Trigger a payment on any terminal from the cloud. Just pass the serial number via REST API \u2014 the terminal prompts the cardholder, and you receive the result via webhook. No cables, no pairing.</p></div></div>' +
+          '<div class="pbrd-pos-feature pbrd-pos-reveal"><div class="pbrd-pos-feature-icon">' + otaSVG + '</div><div><h4>OTA Fleet Management</h4><p>Push updates, deploy apps, and configure settings across your entire fleet from one dashboard. Every terminal stays current without a single site visit.</p></div></div>' +
+          '<div class="pbrd-pos-feature pbrd-pos-reveal"><div class="pbrd-pos-feature-icon"><svg viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.5"/><rect x="11" y="2" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.5"/><rect x="2" y="11" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.5"/><rect x="11" y="11" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.5"/></svg></div><div><h4>10+ Payment Methods</h4><p>Card, MB WAY, SEPA, iDeal, PayPal, Klarna, Revolut Pay, Pay by Link, Floa, Multicaixa \u2014 all on one terminal. Pre-auth with partial capture, tokenization, and split payments included.</p></div></div>' +
         '</div>' +
-        '<div class="pbrd-pos-diagram" id="pbrd-pos-diagram">' +
-          '<div class="pbrd-pos-diagram-row">' +
-            '<div class="pbrd-pos-app-icon pbrd-pos-app-pos" id="pbrd-pos-icon-pos"><svg viewBox="0 0 20 20" fill="none" style="width:20px;height:20px;color:rgba(255,255,255,0.5)"><rect x="3" y="2" width="14" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M7 6h6M7 9h4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><div style="font-size:0.5rem;margin-top:4px">POS</div></div>' +
-            '<div class="pbrd-pos-diagram-arrow"><div class="pbrd-pos-diagram-arrow-pulse" id="pbrd-pos-arrow"></div></div>' +
-            '<div class="pbrd-pos-app-icon pbrd-pos-app-pbrd" id="pbrd-pos-icon-pbrd"><svg viewBox="0 0 20 20" fill="none" style="width:20px;height:20px;color:rgba(255,255,255,0.5)"><path d="M10 2l7 4v8l-7 4-7-4V6l7-4z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg><div style="font-size:0.5rem;margin-top:4px">PAYBYRD</div></div>' +
-          '</div>' +
-          '<div class="pbrd-pos-diagram-response" id="pbrd-pos-resp">' +
-            checkSVG +
-            '<span><strong>APPROVED</strong> \u00b7 Contactless \u00b7 0.8s</span>' +
-          '</div>' +
+        '<div class="pbrd-pos-diagram">' +
+          architectureSVG +
         '</div>' +
       '</div>';
 
     newSection.appendChild(wrap);
     observeReveal(".pbrd-pos-reveal", 120, wrap);
 
-    /* Animate diagram loop */
-    function runDiagramLoop() {
-      var posIcon = document.getElementById("pbrd-pos-icon-pos");
-      var pbrdIcon = document.getElementById("pbrd-pos-icon-pbrd");
-      var arrow = document.getElementById("pbrd-pos-arrow");
-      var resp = document.getElementById("pbrd-pos-resp");
-      if (!posIcon || !arrow || !resp) return;
-
-      /* Reset */
-      posIcon.classList.remove("pbrd-pos-app-active");
-      pbrdIcon.classList.remove("pbrd-pos-app-active");
-      arrow.classList.remove("pbrd-pos-arrow-go");
-      resp.classList.remove("pbrd-pos-resp-show");
-
-      /* Step 1: POS icon glows */
-      setTimeout(function () { posIcon.classList.add("pbrd-pos-app-active"); }, 200);
-      /* Step 2: Arrow pulses */
-      setTimeout(function () { void arrow.offsetWidth; arrow.classList.add("pbrd-pos-arrow-go"); }, 800);
-      /* Step 3: Paybyrd icon glows */
-      setTimeout(function () { pbrdIcon.classList.add("pbrd-pos-app-active"); }, 1400);
-      /* Step 4: Response slides up */
-      setTimeout(function () { resp.classList.add("pbrd-pos-resp-show"); }, 1800);
-      /* Step 5: Reset and repeat */
-      setTimeout(runDiagramLoop, 4500);
-    }
-
-    /* Trigger on scroll */
-    if ("IntersectionObserver" in window) {
-      new IntersectionObserver(function (entries) {
-        if (entries[0].isIntersecting) {
-          runDiagramLoop();
-          this.disconnect();
-        }
-      }, { threshold: 0.2 }).observe(wrap);
-    }
+    /* CSS handles all animations now */
   }
 
   /* ═══════════════════════════════════════════ */
