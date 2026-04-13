@@ -1278,13 +1278,14 @@
 /* Body — compact */
 .pbrd-pos-pc-body-white {
   padding: 16px 20px 20px;
+  text-align: center;
 }
 
 .pbrd-pos-pc-body-white h4 {
-  font-size: 1.0625rem;
+  font-size: 1.125rem;
   font-weight: 700;
   color: #111;
-  margin: 0 0 4px;
+  margin: 0 0 2px;
 }
 
 .pbrd-pos-pc-sub {
@@ -1312,12 +1313,10 @@
 
 /* Order button */
 .pbrd-pos-pc-btn-primary {
-  width: 100%;
-  display: flex;
-  margin-bottom: 14px;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 16px;
+  padding: 10px 32px;
   border-radius: 8px;
   background: #111;
   color: #fff;
