@@ -77,6 +77,32 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
+/* ── Hero floating payment symbols ── */
+.pbrd-pm-hero-float {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.pbrd-pm-hero-symbol {
+  position: absolute;
+  bottom: -30px;
+  color: rgba(96, 165, 250, 0.08);
+  font-weight: 700;
+  font-family: system-ui, sans-serif;
+  animation: pbrd-pm-float-up linear infinite;
+  pointer-events: none;
+}
+
+@keyframes pbrd-pm-float-up {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-500px) rotate(20deg); opacity: 0; }
+}
+
 /* ═══════════════════════════════════════════ */
 /* Section 2: Payment Grid — Category Tabs     */
 /* ═══════════════════════════════════════════ */

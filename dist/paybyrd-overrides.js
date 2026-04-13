@@ -6839,6 +6839,7 @@
     /* Rewrite heading */
     heading.innerHTML = "Every way your customers<br>want to pay.";
     heading.style.color = "#fff";
+    heading.style.marginBottom = "16px";
 
     /* Find subtitle — could be next sibling or inside a wrapper */
     var subtitle = heading.nextElementSibling;
@@ -6881,6 +6882,30 @@
     /* Insert after subtitle or heading */
     var insertAfter = subtitle || heading;
     insertAfter.parentNode.insertBefore(stats, insertAfter.nextSibling);
+
+    /* ── Animated payment icons floating behind heading ── */
+    var heroSection = heading.closest("section") || heading.closest("[class*='section']");
+    if (heroSection) {
+      heroSection.style.position = "relative";
+      heroSection.style.overflow = "hidden";
+
+      var floatLayer = document.createElement("div");
+      floatLayer.className = "pbrd-pm-hero-float";
+
+      var symbols = ["\uD83D\uDCB3", "$", "\u20AC", "\u00A3", "\u00A5", "\u20BF", "NFC", "PAY", "\u26A1"];
+      symbols.forEach(function(s, i) {
+        var el = document.createElement("span");
+        el.className = "pbrd-pm-hero-symbol";
+        el.textContent = s;
+        el.style.left = (8 + Math.random() * 84) + "%";
+        el.style.animationDelay = (i * 1.1) + "s";
+        el.style.animationDuration = (8 + Math.random() * 6) + "s";
+        el.style.fontSize = (10 + Math.random() * 14) + "px";
+        floatLayer.appendChild(el);
+      });
+
+      heroSection.insertBefore(floatLayer, heroSection.firstChild);
+    }
 
     observeReveal(".pbrd-pm-reveal", 100);
   }
@@ -6954,11 +6979,11 @@
 
     /* ── Add missing payment methods: NuPay, Ethereum, Bitcoin ── */
     var newMethods = [
-      { name: "NuPay", type: "Digital Wallet", badge: "Latest", region: "Worldwide",
+      { name: "NuPay", type: "Digital Wallet", region: "Worldwide",
         icon: '<svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="16" fill="rgba(130,50,220,0.15)" stroke="rgba(130,50,220,0.4)" stroke-width="1.5"/><text x="20" y="25" text-anchor="middle" fill="rgba(130,50,220,0.9)" font-size="14" font-weight="700" font-family="system-ui">N</text></svg>' },
-      { name: "Ethereum", type: "Cryptocurrency", badge: "Coming Soon", region: "Worldwide",
+      { name: "Ethereum", type: "Cryptocurrency", region: "Worldwide",
         icon: '<svg viewBox="0 0 40 40" fill="none"><path d="M20 4 L32 20 L20 28 L8 20 Z" fill="rgba(98,126,234,0.12)" stroke="rgba(98,126,234,0.5)" stroke-width="1"/><path d="M20 28 L32 20 L20 36 L8 20 Z" fill="rgba(98,126,234,0.06)" stroke="rgba(98,126,234,0.3)" stroke-width="1"/></svg>' },
-      { name: "Bitcoin", type: "Cryptocurrency", badge: "Coming Soon", region: "Worldwide",
+      { name: "Bitcoin", type: "Cryptocurrency", region: "Worldwide",
         icon: '<svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="16" fill="rgba(247,147,26,0.1)" stroke="rgba(247,147,26,0.4)" stroke-width="1.5"/><text x="20" y="26" text-anchor="middle" fill="rgba(247,147,26,0.9)" font-size="16" font-weight="800" font-family="system-ui">\u20BF</text></svg>' }
     ];
 
@@ -6993,11 +7018,9 @@
           typeSet = true;
         }
       });
-      /* Update badge */
+      /* Hide badges on new cards (no badge needed) */
       newCard.querySelectorAll("[class*='tag'], [class*='badge'], [class*='gradient']").forEach(function(badge) {
-        badge.textContent = pm.badge;
-        if (pm.badge === "Coming Soon") badge.classList.add("pbrd-pm-badge-coming");
-        if (pm.badge === "Latest") badge.classList.add("pbrd-pm-badge-latest");
+        badge.style.display = "none";
       });
       gridContainer.appendChild(newCard);
       cards.push(newCard);
@@ -7046,11 +7069,14 @@
         categories.crypto.push(card);
       }
 
-      /* Enhance badge styling */
+      /* Enhance badge styling — remove "Coming Soon", style "Latest" */
       card.querySelectorAll("[class*='tag'], [class*='badge'], [class*='gradient']").forEach(function (badge) {
-        var bt = badge.textContent.toLowerCase();
-        if (bt.includes("latest")) badge.classList.add("pbrd-pm-badge-latest");
-        if (bt.includes("coming")) badge.classList.add("pbrd-pm-badge-coming");
+        var bt = badge.textContent.toLowerCase().trim();
+        if (bt.includes("coming soon")) {
+          badge.style.display = "none";
+        } else if (bt.includes("latest")) {
+          badge.classList.add("pbrd-pm-badge-latest");
+        }
       });
     });
 
@@ -7162,14 +7188,14 @@
     /* Rewrite heading */
     section.querySelectorAll("h1,h2,h3").forEach(function (h) {
       if (h.textContent.toLowerCase().includes("missing")) {
-        h.innerHTML = "Can\u2019t find what you need?";
+        h.innerHTML = "Need a specific payment method<br>or integration?";
       }
     });
 
     /* Rewrite subtitle */
     section.querySelectorAll("p").forEach(function (p) {
       if (p.textContent.toLowerCase().includes("open-source api") || p.textContent.toLowerCase().includes("tailored solution")) {
-        p.textContent = "Our open API supports any payment method or integration. Tell us what you need \u2014 we\u2019ll make it happen.";
+        p.textContent = "We add new payment methods every month. If yours isn\u2019t listed yet, our open REST API can connect anything \u2014 or we\u2019ll build the integration for you.";
       }
     });
 
@@ -7233,11 +7259,36 @@
   /* Init                                        */
   /* ═══════════════════════════════════════════ */
 
+  /* ═══════════════════════════════════════════ */
+  /* Footer fix                                  */
+  /* ═══════════════════════════════════════════ */
+
+  function fixFooter() {
+    var footer = document.querySelector("footer, [class*='footer']");
+    if (!footer) return;
+
+    /* Ensure footer text is visible on dark bg */
+    footer.querySelectorAll("a").forEach(function(a) {
+      var cs = window.getComputedStyle(a);
+      if (cs.color === "rgb(0, 0, 0)" || cs.color === "rgba(0, 0, 0, 0)") {
+        a.style.setProperty("color", "rgba(255,255,255,0.5)", "important");
+      }
+    });
+    footer.querySelectorAll("p, span, div").forEach(function(el) {
+      if (el.children.length > 2) return;
+      var cs = window.getComputedStyle(el);
+      if (cs.color === "rgb(0, 0, 0)" || cs.color === "rgba(0, 0, 0, 0)") {
+        el.style.setProperty("color", "rgba(255,255,255,0.35)", "important");
+      }
+    });
+  }
+
   function init() {
     enhanceHero();
     enhanceGrid();
     enhanceIntegration();
     enhanceContact();
+    fixFooter();
     console.log("[Paybyrd] Payment Methods enhancements loaded");
   }
 
