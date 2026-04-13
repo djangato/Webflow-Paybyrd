@@ -1254,19 +1254,19 @@
   white-space: nowrap;
 }
 
-/* Image area — dominant, square feel */
+/* Image area */
 .pbrd-pos-pc-img-white {
-  aspect-ratio: 1 / 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 24px;
   background: #F7F7F8;
+  min-height: 220px;
 }
 
 .pbrd-pos-pc-img-white img {
-  width: 70%;
-  height: auto;
+  height: 180px;
+  width: auto;
   object-fit: contain;
   transition: transform 0.4s ease;
 }
