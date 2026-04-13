@@ -6890,114 +6890,209 @@
   /* ═══════════════════════════════════════════ */
 
   function enhanceGrid() {
-    /* Strategy: find the grid that contains payment method cards.
-       Look for the first u-grid (or grid-like container) in the first section
-       that has children containing known payment method names. */
+    /* Strategy: find grid by looking at all elements with display:grid in the
+       first section, or by finding a container with many card-like children
+       near payment method keywords. */
     var knownMethods = ["visa", "mastercard", "paypal", "google pay", "apple pay", "klarna", "sepa"];
     var gridContainer = null;
     var cards = [];
 
-    document.querySelectorAll("[class*='grid']").forEach(function(g) {
-      if (gridContainer) return;
-      var children = g.children;
-      if (children.length < 5) return; /* payment grid should have many items */
-      var text = g.textContent.toLowerCase();
-      var matches = knownMethods.filter(function(m) { return text.includes(m); });
-      if (matches.length >= 3) {
-        gridContainer = g;
-        cards = Array.prototype.slice.call(children);
+    /* Try multiple selectors */
+    var selectors = [
+      ".u-grid",
+      "[class*='grid']",
+      "[class*='card-5']"
+    ];
+
+    for (var s = 0; s < selectors.length; s++) {
+      if (gridContainer) break;
+      document.querySelectorAll(selectors[s]).forEach(function(g) {
+        if (gridContainer) return;
+        /* For card-5, go to parent */
+        var container = (selectors[s].includes("card")) ? g.parentElement : g;
+        if (!container) return;
+        var children = container.children;
+        if (children.length < 5) return;
+        var text = container.textContent.toLowerCase();
+        var matches = knownMethods.filter(function(m) { return text.includes(m); });
+        if (matches.length >= 3) {
+          gridContainer = container;
+          cards = Array.prototype.slice.call(children);
+        }
+      });
+    }
+
+    /* Last resort: find the section with the hero heading and grab its grid */
+    if (!gridContainer) {
+      var heroH = document.querySelector("h1");
+      if (heroH) {
+        var sec = heroH.closest("section") || heroH.closest("[class*='section']");
+        if (sec) {
+          /* Get all direct children that look like cards */
+          var allEls = sec.querySelectorAll("div");
+          allEls.forEach(function(el) {
+            if (gridContainer) return;
+            var cs = window.getComputedStyle(el);
+            if (cs.display === "grid" && el.children.length >= 5) {
+              var text = el.textContent.toLowerCase();
+              if (text.includes("visa") && text.includes("mastercard")) {
+                gridContainer = el;
+                cards = Array.prototype.slice.call(el.children);
+              }
+            }
+          });
+        }
       }
-    });
+    }
 
     if (!gridContainer || cards.length === 0) {
-      console.log("[Paybyrd] Payment grid not found");
+      console.log("[Paybyrd] Payment grid not found. Tried all selectors.");
       return;
     }
 
-    /* Categorize cards by reading their content */
+    console.log("[Paybyrd] Found payment grid with " + cards.length + " cards");
+
+    /* ── Add missing payment methods: NuPay, Ethereum, Bitcoin ── */
+    var newMethods = [
+      { name: "NuPay", type: "Digital Wallet", badge: "Latest", region: "Worldwide",
+        icon: '<svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="16" fill="rgba(130,50,220,0.15)" stroke="rgba(130,50,220,0.4)" stroke-width="1.5"/><text x="20" y="25" text-anchor="middle" fill="rgba(130,50,220,0.9)" font-size="14" font-weight="700" font-family="system-ui">N</text></svg>' },
+      { name: "Ethereum", type: "Cryptocurrency", badge: "Coming Soon", region: "Worldwide",
+        icon: '<svg viewBox="0 0 40 40" fill="none"><path d="M20 4 L32 20 L20 28 L8 20 Z" fill="rgba(98,126,234,0.12)" stroke="rgba(98,126,234,0.5)" stroke-width="1"/><path d="M20 28 L32 20 L20 36 L8 20 Z" fill="rgba(98,126,234,0.06)" stroke="rgba(98,126,234,0.3)" stroke-width="1"/></svg>' },
+      { name: "Bitcoin", type: "Cryptocurrency", badge: "Coming Soon", region: "Worldwide",
+        icon: '<svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="16" fill="rgba(247,147,26,0.1)" stroke="rgba(247,147,26,0.4)" stroke-width="1.5"/><text x="20" y="26" text-anchor="middle" fill="rgba(247,147,26,0.9)" font-size="16" font-weight="800" font-family="system-ui">\u20BF</text></svg>' }
+    ];
+
+    /* Clone a card to use as template */
+    var templateCard = cards[0];
+    newMethods.forEach(function(pm) {
+      var newCard = templateCard.cloneNode(true);
+      /* Clear and set content — find the text elements */
+      var imgs = newCard.querySelectorAll("img");
+      imgs.forEach(function(img) { img.style.display = "none"; });
+      /* Insert SVG icon */
+      var imgWrap = newCard.querySelector("[class*='image']") || newCard.querySelector("img");
+      if (imgWrap) {
+        var iconDiv = document.createElement("div");
+        iconDiv.innerHTML = pm.icon;
+        iconDiv.style.width = "40px";
+        iconDiv.style.height = "40px";
+        var parent = imgWrap.parentElement || imgWrap;
+        parent.insertBefore(iconDiv, imgWrap);
+      }
+      /* Update text content */
+      var allText = newCard.querySelectorAll("div, span, p");
+      var nameSet = false, typeSet = false;
+      allText.forEach(function(el) {
+        if (el.children.length > 0) return;
+        var t = el.textContent.trim();
+        if (!nameSet && t.length > 0 && t.length < 30 && !t.includes("Coming") && !t.includes("Latest") && !t.includes("Worldwide") && !t.includes("Europe") && !t.includes("Mobile") && !t.includes("Credit")) {
+          el.textContent = pm.name;
+          nameSet = true;
+        } else if (!typeSet && (t.includes("Mobile") || t.includes("Credit") || t.includes("Debit") || t.includes("Buy Now"))) {
+          el.textContent = pm.type;
+          typeSet = true;
+        }
+      });
+      /* Update badge */
+      newCard.querySelectorAll("[class*='tag'], [class*='badge'], [class*='gradient']").forEach(function(badge) {
+        badge.textContent = pm.badge;
+        if (pm.badge === "Coming Soon") badge.classList.add("pbrd-pm-badge-coming");
+        if (pm.badge === "Latest") badge.classList.add("pbrd-pm-badge-latest");
+      });
+      gridContainer.appendChild(newCard);
+      cards.push(newCard);
+    });
+
+    /* ── Categorize all cards ── */
     var categories = {
       "all": [],
       "cards": [],
       "wallets": [],
       "local": [],
-      "bnpl": []
+      "bnpl": [],
+      "crypto": []
     };
 
-    var cardWalletNames = ["google pay", "samsung pay", "apple pay", "revolut pay", "paypal"];
-    var cardNames = ["visa", "mastercard", "american express", "discover", "diners club", "china union pay"];
+    var cardWalletNames = ["google pay", "samsung pay", "apple pay", "revolut pay", "paypal", "nupay"];
+    var cardNetworkNames = ["visa", "mastercard", "american express", "discover", "diners club", "china union pay"];
     var localNames = ["mbway", "multibanco", "ideal", "multicaixa", "pix", "sepa"];
     var bnplNames = ["klarna", "floa"];
+    var cryptoNames = ["ethereum", "bitcoin"];
 
     cards.forEach(function (card) {
       var text = card.textContent.toLowerCase();
       card.classList.add("pbrd-pm-card-enhanced");
-      card.classList.add("pbrd-pm-reveal");
-      card.setAttribute("data-pm-category", "all");
+      card.setAttribute("data-pm-cat", "all");
       categories.all.push(card);
 
-      if (cardNames.some(function (n) { return text.includes(n); })) {
-        card.setAttribute("data-pm-category", card.getAttribute("data-pm-category") + " cards");
+      if (cardNetworkNames.some(function (n) { return text.includes(n); })) {
+        card.setAttribute("data-pm-cat", card.getAttribute("data-pm-cat") + " cards");
         categories.cards.push(card);
       }
       if (cardWalletNames.some(function (n) { return text.includes(n); })) {
-        card.setAttribute("data-pm-category", card.getAttribute("data-pm-category") + " wallets");
+        card.setAttribute("data-pm-cat", card.getAttribute("data-pm-cat") + " wallets");
         categories.wallets.push(card);
       }
       if (localNames.some(function (n) { return text.includes(n); })) {
-        card.setAttribute("data-pm-category", card.getAttribute("data-pm-category") + " local");
+        card.setAttribute("data-pm-cat", card.getAttribute("data-pm-cat") + " local");
         categories.local.push(card);
       }
       if (bnplNames.some(function (n) { return text.includes(n); })) {
-        card.setAttribute("data-pm-category", card.getAttribute("data-pm-category") + " bnpl");
+        card.setAttribute("data-pm-cat", card.getAttribute("data-pm-cat") + " bnpl");
         categories.bnpl.push(card);
+      }
+      if (cryptoNames.some(function (n) { return text.includes(n); })) {
+        card.setAttribute("data-pm-cat", card.getAttribute("data-pm-cat") + " crypto");
+        categories.crypto.push(card);
       }
 
       /* Enhance badge styling */
-      card.querySelectorAll("[class*='tag'], [class*='badge']").forEach(function (badge) {
+      card.querySelectorAll("[class*='tag'], [class*='badge'], [class*='gradient']").forEach(function (badge) {
         var bt = badge.textContent.toLowerCase();
         if (bt.includes("latest")) badge.classList.add("pbrd-pm-badge-latest");
         if (bt.includes("coming")) badge.classList.add("pbrd-pm-badge-coming");
       });
     });
 
-    /* Build category tabs */
+    /* ── Build category tabs ── */
     var tabData = [
-      { key: "all", label: "All", count: categories.all.length },
-      { key: "cards", label: "Cards", count: categories.cards.length },
-      { key: "wallets", label: "Digital Wallets", count: categories.wallets.length },
-      { key: "local", label: "Local Methods", count: categories.local.length },
-      { key: "bnpl", label: "Buy Now Pay Later", count: categories.bnpl.length }
+      { key: "all", label: "All (" + categories.all.length + ")" },
+      { key: "cards", label: "Cards" },
+      { key: "wallets", label: "Digital Wallets" },
+      { key: "local", label: "Local Methods" },
+      { key: "bnpl", label: "Buy Now Pay Later" },
+      { key: "crypto", label: "Crypto" }
     ];
 
     var tabsWrap = document.createElement("div");
-    tabsWrap.className = "pbrd-pm-tabs pbrd-pm-reveal";
+    tabsWrap.className = "pbrd-pm-tabs";
 
     var counterEl = document.createElement("div");
     counterEl.className = "pbrd-pm-counter";
     counterEl.textContent = "Showing " + categories.all.length + " of " + categories.all.length + " methods";
 
     tabData.forEach(function (t) {
+      /* Skip empty categories */
+      if (t.key !== "all" && categories[t.key] && categories[t.key].length === 0) return;
+
       var btn = document.createElement("button");
       btn.className = "pbrd-pm-tab" + (t.key === "all" ? " pbrd-pm-tab--active" : "");
       btn.textContent = t.label;
-      btn.setAttribute("data-filter", t.key);
 
       btn.addEventListener("click", function () {
-        /* Update active tab */
         tabsWrap.querySelectorAll(".pbrd-pm-tab").forEach(function (b) {
           b.classList.remove("pbrd-pm-tab--active");
         });
         btn.classList.add("pbrd-pm-tab--active");
 
-        /* Filter cards */
         var visibleCount = 0;
         cards.forEach(function (card) {
-          var cats = card.getAttribute("data-pm-category") || "";
-          if (t.key === "all" || cats.includes(t.key)) {
-            card.classList.remove("pbrd-pm-card-hidden");
+          var cats = card.getAttribute("data-pm-cat") || "";
+          if (t.key === "all" || cats.indexOf(t.key) > -1) {
+            card.style.display = "";
             visibleCount++;
           } else {
-            card.classList.add("pbrd-pm-card-hidden");
+            card.style.display = "none";
           }
         });
 
@@ -7010,8 +7105,6 @@
     /* Insert tabs and counter before the grid */
     gridContainer.parentNode.insertBefore(tabsWrap, gridContainer);
     gridContainer.parentNode.insertBefore(counterEl, gridContainer);
-
-    observeReveal(".pbrd-pm-reveal", 80);
   }
 
   /* ═══════════════════════════════════════════ */
