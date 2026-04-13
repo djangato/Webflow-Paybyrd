@@ -5281,7 +5281,7 @@
     var section = findSectionByHeading("evolve in-person");
     if (!section) return;
 
-    section.style.background = "#08060e";
+    section.style.background = "#111";
     var container = section.querySelector(".u-container, [class*='container']") || section;
     hideChildren(container);
 
@@ -5363,15 +5363,16 @@
     }
     if (!section) return;
 
-    section.style.background = "#08060e";
+    section.style.background = "#fff";
+    section.style.padding = "80px 0";
     var container = section.querySelector(".u-container, [class*='container']") || section;
     hideChildren(container);
 
     var terminals = [
-      { name: "Paybyrd Rawhide", model: "PAX A920 Pro", img: "a920-render.png", desc: "The all-rounder. Counter, table, delivery.", pills: ["Android 10", '5.5" HD', "4G + WiFi"] },
-      { name: "Paybyrd Renegade", model: "PAX A77", img: "a77-render.png", desc: "Compact powerhouse. Built for speed.", pills: ["Android 10", '5.5" HD', "Scanner"] },
-      { name: "Paybyrd Maverick", model: "Sunmi V3", img: "sunmi-v3-render.png", desc: "Print receipts on the move.", pills: ["Android 12", "Printer", "NFC"] },
-      { name: "Paybyrd Titan", model: "Sunmi T3 Pro", img: "t3-render.png", desc: "Self-service desktop. Kiosk-ready.", pills: ["Android 12", '15.6" Touch', "IP65"] }
+      { name: "Paybyrd Rawhide", model: "PAX A920 Pro", video: "a920-video.mp4", poster: "a920-render.png", desc: "The all-rounder. Counter, table, delivery.", pills: ["Android 10", '5.5" HD', "4G + WiFi"] },
+      { name: "Paybyrd Renegade", model: "PAX A77", video: "a77-video.mp4", poster: "a77-render.png", desc: "Compact powerhouse. Built for speed.", pills: ["Android 10", '5.5" HD', "Scanner"] },
+      { name: "Paybyrd Maverick", model: "Sunmi V3", video: "sunmi-v3-video.mp4", poster: "sunmi-v3-render.png", desc: "Print receipts on the move.", pills: ["Android 12", "Printer", "NFC"] },
+      { name: "Paybyrd Titan", model: "Sunmi T3 Pro", video: null, poster: "t3-render.png", desc: "Self-service desktop. Kiosk-ready.", pills: ["Android 12", '15.6" Touch', "IP65"] }
     ];
 
     var wrap = document.createElement("div");
@@ -5390,8 +5391,11 @@
       for (var p = 0; p < t.pills.length; p++) {
         pills += '<span class="pbrd-pos-tcard-pill">' + t.pills[p] + '</span>';
       }
+      var media = t.video
+        ? '<video autoplay muted loop playsinline preload="metadata" poster="' + BASE + t.poster + '" style="max-height:220px;width:auto;object-fit:contain"><source src="' + BASE + t.video + '" type="video/mp4"></video>'
+        : '<img src="' + BASE + t.poster + '" alt="' + t.name + '" loading="lazy">';
       grid += '<div class="pbrd-pos-tcard pbrd-pos-reveal">' +
-        '<div class="pbrd-pos-tcard-img"><img src="' + BASE + t.img + '" alt="' + t.name + '" loading="lazy"></div>' +
+        '<div class="pbrd-pos-tcard-img">' + media + '</div>' +
         '<div class="pbrd-pos-tcard-body">' +
           '<div class="pbrd-pos-tcard-name">' + t.name + '</div>' +
           '<div class="pbrd-pos-tcard-model">' + t.model + '</div>' +
@@ -5412,10 +5416,14 @@
   /* ═══════════════════════════════════════════ */
 
   function enhancePlatform() {
-    var section = findSectionByHeading("versatile and adaptable") || findSectionByHeading("smart pos");
-    if (!section) return;
+    var section = findSectionByHeading("versatile and adaptable devices");
+    if (!section) {
+      /* Fallback: search more broadly */
+      section = findSectionByHeading("smart pos");
+    }
+    if (!section) { console.log("[Paybyrd] FAIL: enhancePlatform — section not found"); return; }
 
-    section.style.background = "#08060e";
+    section.style.background = "#111";
     var container = section.querySelector(".u-container, [class*='container']") || section;
     hideChildren(container);
 
@@ -5502,7 +5510,8 @@
     if (!sec1 && !sec2) return;
 
     var target = sec1 || sec2;
-    target.style.background = "#08060e";
+    target.style.background = "#fff";
+    target.style.padding = "80px 0";
     var container = target.querySelector(".u-container, [class*='container']") || target;
     hideChildren(container);
 
@@ -5521,39 +5530,47 @@
       '<div class="pbrd-pos-bento">' +
         /* Row 1 */
         '<div class="pbrd-pos-bento-card pbrd-pos-bento-wide pbrd-pos-reveal">' +
-          '<h4>Restaurants & Hospitality</h4>' +
-          '<p>Table payment, tip screen, split bills. Your waiter carries the terminal, not a folder.</p>' +
-          '<div class="pbrd-pos-tip-mock">' +
-            '<div class="pbrd-pos-tip-amount" id="pbrd-pos-tip-amt">EUR 47.90</div>' +
-            '<div class="pbrd-pos-tip-options">' +
-              '<div class="pbrd-pos-tip-btn" data-pct="10">10%</div>' +
-              '<div class="pbrd-pos-tip-btn pbrd-pos-tip-active" data-pct="15">15%</div>' +
-              '<div class="pbrd-pos-tip-btn" data-pct="20">20%</div>' +
+          '<div class="pbrd-pos-bento-inner">' +
+            '<div><h4>Restaurants & Hospitality</h4>' +
+            '<p>Table payment, tip screen, split bills. Your waiter carries the terminal to the table \u2014 no folder, no waiting.</p>' +
+            '<div class="pbrd-pos-bento-stats"><div class="pbrd-pos-bento-stat"><span class="pbrd-pos-bento-stat-val">+54%</span><span class="pbrd-pos-bento-stat-lbl">Higher tip rate</span></div><div class="pbrd-pos-bento-stat"><span class="pbrd-pos-bento-stat-val">12s</span><span class="pbrd-pos-bento-stat-lbl">Avg. pay time</span></div></div></div>' +
+            '<div class="pbrd-pos-tip-mock">' +
+              '<div style="font-size:0.625rem;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px">Add a tip?</div>' +
+              '<div class="pbrd-pos-tip-amount" id="pbrd-pos-tip-amt">EUR 47.90</div>' +
+              '<div class="pbrd-pos-tip-options">' +
+                '<div class="pbrd-pos-tip-btn" data-pct="10">10%</div>' +
+                '<div class="pbrd-pos-tip-btn pbrd-pos-tip-active" data-pct="15">15%</div>' +
+                '<div class="pbrd-pos-tip-btn" data-pct="20">20%</div>' +
+                '<div class="pbrd-pos-tip-btn" data-pct="0">No tip</div>' +
+              '</div>' +
+              '<div class="pbrd-pos-tip-total">Total: <span id="pbrd-pos-tip-total">EUR 55.09</span></div>' +
+              '<div class="pbrd-pos-tip-bar"><div class="pbrd-pos-tip-bar-fill" style="width:78%"></div></div>' +
+              '<div style="display:flex;justify-content:space-between;font-size:0.5625rem;color:rgba(255,255,255,0.25);margin-top:4px"><span>Subtotal EUR 47.90</span><span>Tip EUR 7.19</span></div>' +
             '</div>' +
-            '<div class="pbrd-pos-tip-total">Total: <span id="pbrd-pos-tip-total">EUR 55.09</span></div>' +
           '</div>' +
         '</div>' +
         '<div class="pbrd-pos-bento-card pbrd-pos-reveal">' +
           '<h4>Retail</h4>' +
           '<p>Queue-busting. Staff walk the floor with handheld terminals and close sales on the spot.</p>' +
-          '<div style="display:flex;flex-direction:column;gap:6px;margin-top:8px">' +
-            '<div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:rgba(120,255,180,0.04);border:1px solid rgba(120,255,180,0.1);border-radius:8px;font-size:0.75rem;color:rgba(255,255,255,0.6)">' + checkSVG + ' <span style="color:rgba(120,255,180,0.8);font-weight:600">EUR 89.99</span> <span style="color:rgba(255,255,255,0.3)">Visa Contactless</span></div>' +
-            '<div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:rgba(120,255,180,0.04);border:1px solid rgba(120,255,180,0.1);border-radius:8px;font-size:0.75rem;color:rgba(255,255,255,0.6)">' + checkSVG + ' <span style="color:rgba(120,255,180,0.8);font-weight:600">EUR 245.00</span> <span style="color:rgba(255,255,255,0.3)">Apple Pay</span></div>' +
-            '<div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:rgba(120,255,180,0.04);border:1px solid rgba(120,255,180,0.1);border-radius:8px;font-size:0.75rem;color:rgba(255,255,255,0.6)">' + checkSVG + ' <span style="color:rgba(120,255,180,0.8);font-weight:600">EUR 32.50</span> <span style="color:rgba(255,255,255,0.3)">MBWay</span></div>' +
+          '<div class="pbrd-pos-bento-txlist">' +
+            '<div class="pbrd-pos-bento-tx">' + checkSVG + '<div><span class="pbrd-pos-bento-tx-amt">EUR 89.99</span><span class="pbrd-pos-bento-tx-method">Visa Contactless</span></div><span class="pbrd-pos-bento-tx-time">2s ago</span></div>' +
+            '<div class="pbrd-pos-bento-tx">' + checkSVG + '<div><span class="pbrd-pos-bento-tx-amt">EUR 245.00</span><span class="pbrd-pos-bento-tx-method">Apple Pay</span></div><span class="pbrd-pos-bento-tx-time">14s ago</span></div>' +
+            '<div class="pbrd-pos-bento-tx">' + checkSVG + '<div><span class="pbrd-pos-bento-tx-amt">EUR 32.50</span><span class="pbrd-pos-bento-tx-method">MBWay</span></div><span class="pbrd-pos-bento-tx-time">28s ago</span></div>' +
+            '<div class="pbrd-pos-bento-tx">' + checkSVG + '<div><span class="pbrd-pos-bento-tx-amt">EUR 178.00</span><span class="pbrd-pos-bento-tx-method">Mastercard PIN</span></div><span class="pbrd-pos-bento-tx-time">41s ago</span></div>' +
           '</div>' +
         '</div>' +
         /* Row 2 */
         '<div class="pbrd-pos-bento-card pbrd-pos-reveal">' +
           '<h4>Self-Service Kiosks</h4>' +
-          '<p>Unattended, 24/7. Parking, vending, hotel check-in.</p>' +
+          '<p>Unattended, 24/7. Parking, vending, hotel check-in \u2014 powered by the Titan desktop terminal.</p>' +
           '<div class="pbrd-pos-wave-wrap">' +
             '<div class="pbrd-pos-wave"><span class="pbrd-pos-wave-ring"></span></div>' +
           '</div>' +
-          '<div style="text-align:center;font-size:0.6875rem;color:rgba(160,100,255,0.6);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;margin-top:8px">Tap to Pay</div>' +
+          '<div style="text-align:center;font-size:0.625rem;color:rgba(255,255,255,0.35);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;margin-top:12px">Tap to Pay \u00b7 IP65 Rated</div>' +
         '</div>' +
         '<div class="pbrd-pos-bento-card pbrd-pos-reveal">' +
           '<h4>Events & Markets</h4>' +
-          '<p>Pop-up stands, food trucks, festivals. 4G means no Wi-Fi needed.</p>' +
+          '<p>Pop-up stands, food trucks, festivals. Built-in 4G SIM means zero Wi-Fi dependency.</p>' +
           '<div class="pbrd-pos-signal" id="pbrd-pos-signal">' +
             '<div class="pbrd-pos-signal-bar" style="height:8px"></div>' +
             '<div class="pbrd-pos-signal-bar" style="height:12px"></div>' +
@@ -5561,14 +5578,17 @@
             '<div class="pbrd-pos-signal-bar" style="height:20px"></div>' +
             '<span class="pbrd-pos-signal-label">4G Connected</span>' +
           '</div>' +
+          '<div class="pbrd-pos-bento-stats" style="margin-top:16px"><div class="pbrd-pos-bento-stat"><span class="pbrd-pos-bento-stat-val">0</span><span class="pbrd-pos-bento-stat-lbl">Setup needed</span></div><div class="pbrd-pos-bento-stat"><span class="pbrd-pos-bento-stat-val">Free</span><span class="pbrd-pos-bento-stat-lbl">Data plan</span></div></div>' +
         '</div>' +
         '<div class="pbrd-pos-bento-card pbrd-pos-reveal">' +
-          '<h4>Delivery</h4>' +
-          '<p>Payment at the door. Contactless, PIN, or QR \u2014 customer\u2019s choice.</p>' +
-          '<div style="display:flex;gap:12px;justify-content:center;margin-top:16px">' +
-            '<div style="padding:6px 14px;border-radius:8px;background:rgba(160,100,255,0.1);border:1px solid rgba(160,100,255,0.2);font-size:0.6875rem;color:rgba(160,100,255,0.8);font-weight:600">Contactless</div>' +
-            '<div style="padding:6px 14px;border-radius:8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);font-size:0.6875rem;color:rgba(255,255,255,0.5);font-weight:500">Chip & PIN</div>' +
-            '<div style="padding:6px 14px;border-radius:8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);font-size:0.6875rem;color:rgba(255,255,255,0.5);font-weight:500">QR Code</div>' +
+          '<h4>Delivery & Mobility</h4>' +
+          '<p>Payment at the door. Contactless, PIN, or QR \u2014 customer\u2019s choice. Receipt printed on the spot.</p>' +
+          '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px">' +
+            '<div class="pbrd-pos-method-pill pbrd-pos-method-active">Contactless</div>' +
+            '<div class="pbrd-pos-method-pill">Chip & PIN</div>' +
+            '<div class="pbrd-pos-method-pill">QR Code</div>' +
+            '<div class="pbrd-pos-method-pill">Google Pay</div>' +
+            '<div class="pbrd-pos-method-pill">Apple Pay</div>' +
           '</div>' +
         '</div>' +
       '</div>';
@@ -5630,7 +5650,7 @@
     var target = secOffer || secTab || secEagle || secRenegade;
     if (!target) return;
 
-    target.style.background = "#08060e";
+    target.style.background = "#111";
     var container = target.querySelector(".u-container, [class*='container']") || target;
     hideChildren(container);
 
@@ -5749,10 +5769,11 @@
   /* ═══════════════════════════════════════════ */
 
   function enhanceRental() {
-    var section = findSectionByHeading("rental");
-    if (!section) return;
+    var section = findSectionByHeading("rental option");
+    if (!section) { console.log("[Paybyrd] FAIL: enhanceRental — section not found"); return; }
 
-    section.style.background = "#08060e";
+    section.style.background = "#fff";
+    section.style.padding = "80px 0";
     var container = section.querySelector(".u-container, [class*='container']") || section;
     hideChildren(container);
 
@@ -5803,7 +5824,7 @@
     var section = findSectionByHeading("sounds interesting") || findSectionByHeading("contact us today");
     if (!section) return;
 
-    section.style.background = "#08060e";
+    section.style.background = "#111";
     var form = section.querySelector("form");
     if (!form) return;
 
