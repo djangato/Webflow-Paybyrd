@@ -6255,9 +6255,10 @@
           /* Passport / flag hint */
           '<rect x="24" y="38" width="32" height="22" rx="2" fill="#fff" stroke="rgba(99,25,240,0.2)" stroke-width="0.6"/>' +
           '<text x="40" y="52" text-anchor="middle" fill="rgba(0,0,0,0.5)" font-size="6" font-family="system-ui">\uD83C\uDDEC\uD83C\uDDE7</text>' +
-          /* Refund received */
-          '<rect x="14" y="72" width="52" height="24" rx="12" fill="rgba(99,25,240,0.12)" stroke="rgba(99,25,240,0.25)" stroke-width="0.6" class="pbrd-pos-va-refund-badge"/>' +
-          '<text x="40" y="87" text-anchor="middle" fill="#6319f0" font-size="8" font-weight="700" font-family="system-ui" class="pbrd-pos-va-refund-badge">+\u20AC52.50</text>' +
+          /* Refund received — instant */
+          '<rect x="10" y="72" width="60" height="28" rx="14" fill="rgba(99,25,240,0.12)" stroke="rgba(99,25,240,0.3)" stroke-width="0.8" class="pbrd-pos-va-refund-badge"/>' +
+          '<text x="40" y="85" text-anchor="middle" fill="#6319f0" font-size="5" font-weight="700" font-family="system-ui" letter-spacing="0.5" class="pbrd-pos-va-refund-badge">\u26A1 INSTANT</text>' +
+          '<text x="40" y="95" text-anchor="middle" fill="#6319f0" font-size="9" font-weight="700" font-family="system-ui" class="pbrd-pos-va-refund-badge">+\u20AC52.50</text>' +
         '</g>' +
 
         /* Bottom timeline */
@@ -6269,7 +6270,7 @@
           '<circle cx="110" cy="5" r="3" fill="rgba(99,25,240,0.3)" class="pbrd-pos-va-step2"/>' +
           '<text x="110" y="20" text-anchor="middle" fill="rgba(0,0,0,0.4)" font-size="5" font-family="system-ui">Auto-detect</text>' +
           '<circle cx="200" cy="5" r="3" fill="rgba(99,25,240,0.3)" class="pbrd-pos-va-step3"/>' +
-          '<text x="200" y="20" text-anchor="middle" fill="rgba(0,0,0,0.4)" font-size="5" font-family="system-ui">Refund sent</text>' +
+          '<text x="200" y="20" text-anchor="middle" fill="rgba(0,0,0,0.4)" font-size="5" font-family="system-ui">Instant refund</text>' +
           /* Animated progress line */
           '<line x1="20" y1="5" x2="200" y2="5" stroke="#6319f0" stroke-width="1.5" stroke-linecap="round" class="pbrd-pos-va-timeline-fill"/>' +
         '</g>' +
@@ -6318,7 +6319,7 @@
           '<div class="pbrd-pos-va-body">' +
             '<div class="pbrd-pos-va-label" style="background:rgba(99,25,240,0.12);color:#6319f0">EXCLUSIVE</div>' +
             '<h4>Paybyrd InstaTax\u2122</h4>' +
-            '<p>Terminal auto-detects tourist cards, offers VAT refund on-screen. No apps, no paper, no staff training. Tourist gets refunded in days. You unlock a new revenue stream.</p>' +
+            '<p>Terminal auto-detects tourist cards, offers VAT refund on-screen. No apps, no paper, no staff training. Tourist gets an immediate refund at the point of sale. You unlock a new revenue stream.</p>' +
             '<div class="pbrd-pos-va-stats">' +
               '<div><span class="pbrd-pos-va-stat-val">50%</span><span class="pbrd-pos-va-stat-lbl">Higher revenue vs legacy</span></div>' +
               '<div><span class="pbrd-pos-va-stat-val">40%</span><span class="pbrd-pos-va-stat-lbl">Higher return rate</span></div>' +
@@ -6341,17 +6342,67 @@
     var section = findSectionByHeading("sounds interesting") || findSectionByHeading("contact us today");
     if (!section) return;
 
-    section.style.background = "#0a0a0f";
+    /* White background with purple accent top border */
+    section.style.background = "#fff";
+    section.style.position = "relative";
+    section.style.paddingTop = "80px";
+
+    /* Make all text dark */
+    section.querySelectorAll("h1,h2,h3,h4,h5").forEach(function(el) {
+      el.style.color = "#111";
+    });
+    section.querySelectorAll("p").forEach(function(el) {
+      if (!el.closest("form")) el.style.color = "#555";
+    });
+    section.querySelectorAll("label").forEach(function(el) {
+      el.style.color = "#333";
+    });
+
+    /* Style form inputs for white bg */
+    section.querySelectorAll("input, textarea, select").forEach(function(el) {
+      el.style.background = "#f5f5f7";
+      el.style.border = "1px solid #e0e0e0";
+      el.style.color = "#111";
+      el.style.borderRadius = "10px";
+    });
+
+    /* Style submit button */
+    var submitBtn = section.querySelector('input[type="submit"], button[type="submit"]');
+    if (submitBtn) {
+      submitBtn.style.background = "#6319f0";
+      submitBtn.style.color = "#fff";
+      submitBtn.style.border = "none";
+      submitBtn.style.borderRadius = "100px";
+      submitBtn.style.padding = "14px 40px";
+      submitBtn.style.fontSize = "0.9375rem";
+      submitBtn.style.fontWeight = "600";
+      submitBtn.style.cursor = "pointer";
+    }
+
     var form = section.querySelector("form");
     if (!form) return;
+
+    /* Insert decorative top divider */
+    var divider = document.createElement("div");
+    divider.className = "pbrd-pos-contact-divider";
+    section.insertBefore(divider, section.firstChild);
 
     /* Insert trust badges before the form */
     var trust = document.createElement("div");
     trust.className = "pbrd-pos-trust";
     trust.innerHTML =
-      '<div class="pbrd-pos-trust-item">' + checkSVG + '<span>Android POS pioneer since 2016</span></div>' +
-      '<div class="pbrd-pos-trust-item">' + checkSVG + '<span>10,000+ terminals deployed</span></div>' +
-      '<div class="pbrd-pos-trust-item">' + checkSVG + '<span>PCI DSS Level 1 certified</span></div>';
+      '<div class="pbrd-pos-trust-item">' +
+        '<div class="pbrd-pos-trust-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v5c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z" stroke="currentColor" stroke-width="1.5"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>' +
+        '<div><span class="pbrd-pos-trust-val">Since 2016</span><span class="pbrd-pos-trust-lbl">Android POS pioneer</span></div>' +
+      '</div>' +
+      '<div class="pbrd-pos-trust-item">' +
+        '<div class="pbrd-pos-trust-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="7" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M12 11v4M9 15h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2" stroke="currentColor" stroke-width="1.5"/></svg></div>' +
+        '<div><span class="pbrd-pos-trust-val">10,000+</span><span class="pbrd-pos-trust-lbl">Terminals deployed</span></div>' +
+      '</div>' +
+      '<div class="pbrd-pos-trust-item">' +
+        '<div class="pbrd-pos-trust-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M8 12l2.5 2.5L16 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>' +
+        '<div><span class="pbrd-pos-trust-val">PCI Level 1</span><span class="pbrd-pos-trust-lbl">DSS certified</span></div>' +
+      '</div>';
 
     form.parentNode.insertBefore(trust, form);
   }

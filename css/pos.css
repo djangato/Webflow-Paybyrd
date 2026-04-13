@@ -1891,26 +1891,60 @@
 /* Section 7: Contact trust badges             */
 /* ═══════════════════════════════════════════ */
 
+/* ── Contact section divider ── */
+.pbrd-pos-contact-divider {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent, #6319f0, transparent);
+}
+
 .pbrd-pos-trust {
   display: flex;
   justify-content: center;
-  gap: 32px;
-  margin-bottom: 24px;
+  gap: 48px;
+  margin-bottom: 40px;
   flex-wrap: wrap;
 }
 
 .pbrd-pos-trust-item {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 0.8125rem;
-  color: rgba(255, 255, 255, 0.45);
+  gap: 12px;
 }
 
-.pbrd-pos-trust-item svg {
-  width: 16px;
-  height: 16px;
-  color: rgba(160, 100, 255, 0.7);
+.pbrd-pos-trust-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(99, 25, 240, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.pbrd-pos-trust-icon svg {
+  width: 20px;
+  height: 20px;
+  color: #6319f0;
+}
+
+.pbrd-pos-trust-val {
+  display: block;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #111;
+}
+
+.pbrd-pos-trust-lbl {
+  display: block;
+  font-size: 0.6875rem;
+  color: #999;
 }
 
 /* ═══════════════════════════════════════════ */
@@ -1944,5 +1978,5 @@
   .pbrd-pos-tab { padding: 10px 14px; font-size: 0.75rem; }
   .pbrd-pos-rental-cards { grid-template-columns: 1fr; }
   .pbrd-pos-pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
-  .pbrd-pos-trust { gap: 16px; }
+  .pbrd-pos-trust { gap: 20px; flex-direction: column; align-items: center; }
 }
