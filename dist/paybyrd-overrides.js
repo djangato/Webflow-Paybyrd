@@ -7255,12 +7255,33 @@
     var section = findSectionByHeading("missing a payment method") || findSectionByHeading("we've got you");
     if (!section) return;
 
-    section.classList.add("pbrd-pm-contact-section");
+    /* ── Detect if section bg is light or dark ── */
+    var sectionBg = window.getComputedStyle(section).backgroundColor;
+    var isLight = true;
+    if (sectionBg) {
+      var match = sectionBg.match(/\d+/g);
+      if (match && match.length >= 3) {
+        var brightness = (parseInt(match[0]) * 299 + parseInt(match[1]) * 587 + parseInt(match[2]) * 114) / 1000;
+        isLight = brightness > 128;
+      }
+    }
+
+    var textColor = isLight ? "#111" : "#fff";
+    var subtextColor = isLight ? "#555" : "rgba(255,255,255,0.5)";
+    var inputBg = isLight ? "#f5f5f7" : "rgba(255,255,255,0.05)";
+    var inputBorder = isLight ? "#ddd" : "rgba(255,255,255,0.1)";
+    var inputText = isLight ? "#111" : "#fff";
+    var inputFocusBg = isLight ? "#fff" : "rgba(255,255,255,0.08)";
+    var iconBg = isLight ? "rgba(37,99,235,0.08)" : "rgba(96,165,250,0.1)";
+    var iconColor = isLight ? "#2563eb" : "#60a5fa";
+    var trustValColor = isLight ? "#111" : "#fff";
+    var trustLblColor = isLight ? "#888" : "rgba(255,255,255,0.4)";
 
     /* Rewrite heading */
     section.querySelectorAll("h1,h2,h3").forEach(function (h) {
       if (h.textContent.toLowerCase().includes("missing")) {
         h.innerHTML = "Need a specific payment method<br>or integration?";
+        h.style.setProperty("color", textColor, "important");
       }
     });
 
@@ -7268,24 +7289,30 @@
     section.querySelectorAll("p").forEach(function (p) {
       if (p.textContent.toLowerCase().includes("open-source api") || p.textContent.toLowerCase().includes("tailored solution")) {
         p.textContent = "We add new payment methods every month. If yours isn\u2019t listed yet, our open REST API can connect anything \u2014 or we\u2019ll build the integration for you.";
+        p.style.setProperty("color", subtextColor, "important");
       }
     });
 
-    /* Style form inputs via JS for dark theme */
+    /* Labels */
+    section.querySelectorAll("label").forEach(function (el) {
+      el.style.setProperty("color", textColor, "important");
+    });
+
+    /* Style form inputs — adaptive to bg */
     section.querySelectorAll("input:not([type=submit]):not([type=checkbox]):not([type=radio]):not([type=hidden]), textarea, select").forEach(function (el) {
-      el.style.setProperty("background", "rgba(255,255,255,0.05)", "important");
-      el.style.setProperty("border", "1.5px solid rgba(255,255,255,0.1)", "important");
+      el.style.setProperty("background", inputBg, "important");
+      el.style.setProperty("border", "1.5px solid " + inputBorder, "important");
       el.style.setProperty("border-radius", "10px", "important");
-      el.style.setProperty("color", "#fff", "important");
+      el.style.setProperty("color", inputText, "important");
       el.addEventListener("focus", function () {
-        el.style.setProperty("border-color", "#60a5fa", "important");
-        el.style.setProperty("box-shadow", "0 0 0 3px rgba(96,165,250,0.1)", "important");
-        el.style.setProperty("background", "rgba(255,255,255,0.08)", "important");
+        el.style.setProperty("border-color", "#2563eb", "important");
+        el.style.setProperty("box-shadow", "0 0 0 3px rgba(37,99,235,0.1)", "important");
+        el.style.setProperty("background", inputFocusBg, "important");
       });
       el.addEventListener("blur", function () {
-        el.style.setProperty("border-color", "rgba(255,255,255,0.1)", "important");
+        el.style.setProperty("border-color", inputBorder, "important");
         el.style.setProperty("box-shadow", "none", "important");
-        el.style.setProperty("background", "rgba(255,255,255,0.05)", "important");
+        el.style.setProperty("background", inputBg, "important");
       });
     });
 
@@ -7304,25 +7331,32 @@
       btn.style.setProperty("white-space", "nowrap", "important");
     });
 
-    /* Insert trust badges */
+    /* Insert trust badges — inline styles for guaranteed visibility */
     var form = section.querySelector("form");
     if (!form) return;
 
     var trust = document.createElement("div");
-    trust.className = "pbrd-pm-trust";
-    trust.innerHTML =
-      '<div class="pbrd-pm-trust-item">' +
-        '<div class="pbrd-pm-trust-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>' +
-        '<div><span class="pbrd-pm-trust-val">99.9%</span><span class="pbrd-pm-trust-lbl">Uptime SLA</span></div>' +
-      '</div>' +
-      '<div class="pbrd-pm-trust-item">' +
-        '<div class="pbrd-pm-trust-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v5c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z" stroke="currentColor" stroke-width="1.5"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>' +
-        '<div><span class="pbrd-pm-trust-val">PCI Level 1</span><span class="pbrd-pm-trust-lbl">DSS Certified</span></div>' +
-      '</div>' +
-      '<div class="pbrd-pm-trust-item">' +
-        '<div class="pbrd-pm-trust-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="currentColor" stroke-width="1.5"/></svg></div>' +
-        '<div><span class="pbrd-pm-trust-val">24/7</span><span class="pbrd-pm-trust-lbl">Support</span></div>' +
-      '</div>';
+    trust.setAttribute("style", "display:flex;justify-content:center;gap:32px;margin-bottom:24px;flex-wrap:wrap;");
+
+    var badges = [
+      { icon: '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>', val: "99.9%", lbl: "Uptime SLA" },
+      { icon: '<svg viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v5c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z" stroke="currentColor" stroke-width="1.5"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>', val: "PCI Level 1", lbl: "DSS Certified" },
+      { icon: '<svg viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="currentColor" stroke-width="1.5"/></svg>', val: "24/7", lbl: "Support" }
+    ];
+
+    badges.forEach(function(b) {
+      var item = document.createElement("div");
+      item.setAttribute("style", "display:flex;align-items:center;gap:10px;");
+      item.innerHTML =
+        '<div style="width:36px;height:36px;border-radius:10px;background:' + iconBg + ';display:flex;align-items:center;justify-content:center;flex-shrink:0;color:' + iconColor + '">' +
+          '<div style="width:18px;height:18px;">' + b.icon + '</div>' +
+        '</div>' +
+        '<div>' +
+          '<div style="font-size:0.8125rem;font-weight:700;color:' + trustValColor + ';">' + b.val + '</div>' +
+          '<div style="font-size:0.625rem;color:' + trustLblColor + ';">' + b.lbl + '</div>' +
+        '</div>';
+      trust.appendChild(item);
+    });
 
     form.parentNode.insertBefore(trust, form);
   }
