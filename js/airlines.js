@@ -66,10 +66,17 @@
     heading.style.setProperty("position", "relative", "important");
     heading.style.setProperty("z-index", "2", "important");
 
-    /* Hide ALL sibling paragraphs in the heading's container (old Webflow copy) */
+    /* Hide ALL old Webflow copy in the entire hero section */
     var parent = heading.parentElement;
+    section.querySelectorAll("p").forEach(function(p) {
+      var t = p.textContent.toLowerCase();
+      if (t.includes("frictionless") || t.includes("future-proof") || t.includes("sacrificing") || t.includes("behind the scenes")) {
+        p.style.setProperty("display", "none", "important");
+      }
+    });
+    /* Also hide any paragraphs in heading's direct parent */
     parent.querySelectorAll("p").forEach(function(p) {
-      p.style.display = "none";
+      p.style.setProperty("display", "none", "important");
     });
 
     /* Insert our own subtitle */
