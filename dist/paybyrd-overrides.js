@@ -5805,32 +5805,105 @@
       '</div>' +
       '<div class="pbrd-pos-tap-grid pbrd-pos-reveal">' +
 
-        /* ── iPhone panel ── */
+        /* ══════ iPhone 17 panel ══════ */
         '<div class="pbrd-pos-tap-panel">' +
           '<div class="pbrd-pos-tap-visual">' +
             '<div class="pbrd-pos-tap-phone">' +
-              /* Stylized phone SVG with NFC waves */
-              '<svg viewBox="0 0 200 360" fill="none" xmlns="http://www.w3.org/2000/svg" class="pbrd-pos-tap-device">' +
-                '<rect x="10" y="10" width="180" height="340" rx="28" fill="#111" stroke="rgba(99,25,240,0.2)" stroke-width="1.5"/>' +
-                '<rect x="20" y="50" width="160" height="260" rx="4" fill="#1a1a2e"/>' +
-                /* Screen content — amount */
-                '<text x="100" y="160" text-anchor="middle" fill="#fff" font-size="28" font-weight="700" font-family="system-ui">\u20AC17.25</text>' +
-                '<text x="100" y="185" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="11" font-family="system-ui">Ready to accept</text>' +
-                /* NFC icon on screen */
-                '<g transform="translate(85,200)">' +
-                  '<path d="M15 0 C20 5, 20 15, 15 20" stroke="rgba(99,25,240,0.6)" stroke-width="1.5" fill="none" class="pbrd-pos-nfc-wave1"/>' +
-                  '<path d="M15 -5 C25 5, 25 20, 15 25" stroke="rgba(99,25,240,0.4)" stroke-width="1.5" fill="none" class="pbrd-pos-nfc-wave2"/>' +
-                  '<path d="M15 -10 C30 5, 30 25, 15 30" stroke="rgba(99,25,240,0.25)" stroke-width="1.5" fill="none" class="pbrd-pos-nfc-wave3"/>' +
+              '<svg viewBox="0 0 220 440" fill="none" xmlns="http://www.w3.org/2000/svg" class="pbrd-pos-tap-device pbrd-pos-tap-iphone">' +
+                /* iPhone body — flat edges, titanium frame */
+                '<rect x="8" y="8" width="204" height="424" rx="36" fill="#1a1a1e"/>' +
+                '<rect x="8" y="8" width="204" height="424" rx="36" fill="none" stroke="rgba(180,180,190,0.3)" stroke-width="1.5"/>' +
+                /* Screen */
+                '<rect x="14" y="14" width="192" height="412" rx="32" fill="#000"/>' +
+                /* Dynamic Island */
+                '<rect x="78" y="22" width="64" height="22" rx="11" fill="#1a1a1e"/>' +
+                /* Camera dot in island */
+                '<circle cx="124" cy="33" r="4" fill="#0a0a0e" stroke="rgba(40,40,50,0.5)" stroke-width="0.5"/>' +
+
+                /* ── Screen Step 1: Amount entry (visible 0-2s) ── */
+                '<g class="pbrd-pos-txn-step pbrd-pos-txn-s1">' +
+                  '<text x="110" y="110" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="10" font-family="system-ui" font-weight="500">CHARGE AMOUNT</text>' +
+                  '<text x="110" y="175" text-anchor="middle" fill="#fff" font-size="42" font-weight="200" font-family="system-ui" letter-spacing="-1">\u20AC17.25</text>' +
+                  /* iOS-style keypad hint */
+                  '<g transform="translate(50,220)" fill="rgba(255,255,255,0.06)">' +
+                    '<rect width="44" height="36" rx="6"/>' +
+                    '<rect x="50" width="44" height="36" rx="6"/>' +
+                    '<rect x="100" width="44" height="36" rx="6"/>' +
+                    '<rect y="42" width="44" height="36" rx="6"/>' +
+                    '<rect x="50" y="42" width="44" height="36" rx="6"/>' +
+                    '<rect x="100" y="42" width="44" height="36" rx="6"/>' +
+                  '</g>' +
+                  '<text x="72" y="246" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="16" font-family="system-ui">1</text>' +
+                  '<text x="122" y="246" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="16" font-family="system-ui">2</text>' +
+                  '<text x="172" y="246" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="16" font-family="system-ui">3</text>' +
+                  /* Charge button */
+                  '<rect x="40" y="340" width="140" height="40" rx="20" fill="#6319f0"/>' +
+                  '<text x="110" y="365" text-anchor="middle" fill="#fff" font-size="13" font-weight="600" font-family="system-ui">Charge</text>' +
                 '</g>' +
-                /* Notch */
-                '<rect x="70" y="14" width="60" height="20" rx="10" fill="#000"/>' +
+
+                /* ── Screen Step 2: Ready to tap (visible 2-4.5s) ── */
+                '<g class="pbrd-pos-txn-step pbrd-pos-txn-s2">' +
+                  '<text x="110" y="100" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="10" font-family="system-ui" font-weight="500">TOTAL</text>' +
+                  '<text x="110" y="130" text-anchor="middle" fill="#fff" font-size="32" font-weight="300" font-family="system-ui">\u20AC17.25</text>' +
+                  /* NFC contactless icon — large */
+                  '<g transform="translate(82,170)">' +
+                    '<path d="M28 8 C34 14, 34 30, 28 36" stroke="rgba(99,25,240,0.7)" stroke-width="2" fill="none" class="pbrd-pos-nfc-wave1"/>' +
+                    '<path d="M28 0 C40 12, 40 32, 28 44" stroke="rgba(99,25,240,0.5)" stroke-width="2" fill="none" class="pbrd-pos-nfc-wave2"/>' +
+                    '<path d="M28 -6 C46 10, 46 36, 28 50" stroke="rgba(99,25,240,0.3)" stroke-width="2" fill="none" class="pbrd-pos-nfc-wave3"/>' +
+                  '</g>' +
+                  '<text x="110" y="260" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="11" font-family="system-ui">Hold card near iPhone</text>' +
+                  /* Subtle bottom bar — iOS style */
+                  '<rect x="60" y="390" width="100" height="4" rx="2" fill="rgba(255,255,255,0.15)"/>' +
+                '</g>' +
+
+                /* ── Screen Step 3: Processing (visible 4.5-6s) ── */
+                '<g class="pbrd-pos-txn-step pbrd-pos-txn-s3">' +
+                  '<text x="110" y="140" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="11" font-family="system-ui">Processing\u2026</text>' +
+                  /* Spinner ring */
+                  '<circle cx="110" cy="200" r="24" fill="none" stroke="rgba(99,25,240,0.15)" stroke-width="2.5"/>' +
+                  '<path d="M110 176 A24 24 0 0 1 134 200" stroke="#6319f0" stroke-width="2.5" fill="none" stroke-linecap="round" class="pbrd-pos-spinner"/>' +
+                  '<text x="110" y="260" text-anchor="middle" fill="#fff" font-size="28" font-weight="300" font-family="system-ui">\u20AC17.25</text>' +
+                '</g>' +
+
+                /* ── Screen Step 4: Approved (visible 6-8s) ── */
+                '<g class="pbrd-pos-txn-step pbrd-pos-txn-s4">' +
+                  /* Large success circle */
+                  '<circle cx="110" cy="175" r="40" fill="rgba(99,25,240,0.08)" stroke="#6319f0" stroke-width="2" class="pbrd-pos-success-ring"/>' +
+                  '<path d="M94 175 L106 187 L128 163" stroke="#6319f0" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" class="pbrd-pos-checkmark"/>' +
+                  '<text x="110" y="250" text-anchor="middle" fill="#fff" font-size="28" font-weight="300" font-family="system-ui">\u20AC17.25</text>' +
+                  '<text x="110" y="278" text-anchor="middle" fill="rgba(99,25,240,0.8)" font-size="12" font-weight="600" font-family="system-ui">Approved</text>' +
+                  /* Done button */
+                  '<rect x="40" y="340" width="140" height="40" rx="20" fill="rgba(99,25,240,0.1)" stroke="rgba(99,25,240,0.3)" stroke-width="1"/>' +
+                  '<text x="110" y="365" text-anchor="middle" fill="#6319f0" font-size="13" font-weight="600" font-family="system-ui">New Sale</text>' +
+                '</g>' +
+
+                /* Status bar */
+                '<text x="30" y="47" fill="rgba(255,255,255,0.4)" font-size="9" font-weight="600" font-family="system-ui">9:41</text>' +
+                '<g transform="translate(170,38)">' +
+                  '<rect x="0" y="0" width="16" height="8" rx="2" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.8"/>' +
+                  '<rect x="1.5" y="1.5" width="10" height="5" rx="1" fill="rgba(255,255,255,0.3)"/>' +
+                  '<rect x="16.5" y="2" width="1.5" height="4" rx="0.5" fill="rgba(255,255,255,0.2)"/>' +
+                '</g>' +
               '</svg>' +
-              /* Floating card approaching */
-              '<svg viewBox="0 0 120 76" class="pbrd-pos-tap-card" xmlns="http://www.w3.org/2000/svg">' +
-                '<rect width="120" height="76" rx="8" fill="#e8e4ef"/>' +
-                '<rect x="12" y="18" width="22" height="16" rx="3" fill="rgba(99,25,240,0.2)" stroke="rgba(99,25,240,0.35)" stroke-width="0.8"/>' +
-                '<rect x="12" y="48" width="50" height="4" rx="2" fill="rgba(0,0,0,0.08)"/>' +
-                '<rect x="12" y="56" width="30" height="4" rx="2" fill="rgba(0,0,0,0.05)"/>' +
+              /* Floating contactless card */
+              '<svg viewBox="0 0 130 82" class="pbrd-pos-tap-card" xmlns="http://www.w3.org/2000/svg">' +
+                '<rect width="130" height="82" rx="10" fill="#e8e4ef" stroke="rgba(0,0,0,0.06)" stroke-width="0.5"/>' +
+                /* EMV chip */
+                '<rect x="14" y="22" width="24" height="18" rx="3" fill="rgba(200,180,130,0.4)" stroke="rgba(180,160,100,0.5)" stroke-width="0.6"/>' +
+                '<line x1="14" y1="28" x2="38" y2="28" stroke="rgba(180,160,100,0.3)" stroke-width="0.4"/>' +
+                '<line x1="14" y1="34" x2="38" y2="34" stroke="rgba(180,160,100,0.3)" stroke-width="0.4"/>' +
+                '<line x1="26" y1="22" x2="26" y2="40" stroke="rgba(180,160,100,0.3)" stroke-width="0.4"/>' +
+                /* Contactless symbol on card */
+                '<g transform="translate(96,20)">' +
+                  '<path d="M8 4 C11 7, 11 13, 8 16" stroke="rgba(0,0,0,0.15)" stroke-width="1" fill="none"/>' +
+                  '<path d="M8 1 C14 6, 14 14, 8 19" stroke="rgba(0,0,0,0.1)" stroke-width="1" fill="none"/>' +
+                '</g>' +
+                /* Card number dots */
+                '<g fill="rgba(0,0,0,0.12)">' +
+                  '<circle cx="14" cy="56" r="2"/><circle cx="20" cy="56" r="2"/><circle cx="26" cy="56" r="2"/><circle cx="32" cy="56" r="2"/>' +
+                  '<text x="42" y="59" font-size="9" font-family="system-ui" fill="rgba(0,0,0,0.2)">4821</text>' +
+                '</g>' +
+                '<text x="14" y="74" font-size="7" font-family="system-ui" fill="rgba(0,0,0,0.15)" letter-spacing="0.5">J. ANDERSON</text>' +
               '</svg>' +
             '</div>' +
           '</div>' +
@@ -5839,31 +5912,101 @@
           '<a href="/book-demo" class="pbrd-pos-tap-cta">Enable Tap to Pay on iPhone <span>\u203A</span></a>' +
         '</div>' +
 
-        /* ── Android panel ── */
+        /* ══════ Samsung Galaxy panel ══════ */
         '<div class="pbrd-pos-tap-panel">' +
           '<div class="pbrd-pos-tap-visual">' +
             '<div class="pbrd-pos-tap-phone">' +
-              '<svg viewBox="0 0 200 360" fill="none" xmlns="http://www.w3.org/2000/svg" class="pbrd-pos-tap-device">' +
-                '<rect x="10" y="10" width="180" height="340" rx="24" fill="#111" stroke="rgba(99,25,240,0.2)" stroke-width="1.5"/>' +
-                '<rect x="20" y="40" width="160" height="280" rx="4" fill="#1a1a2e"/>' +
-                /* Screen — payment confirmation */
-                '<circle cx="100" cy="120" r="28" fill="none" stroke="rgba(99,25,240,0.5)" stroke-width="2" class="pbrd-pos-nfc-ring"/>' +
-                '<path d="M88 120 L96 128 L114 110" stroke="#6319f0" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>' +
-                '<text x="100" y="175" text-anchor="middle" fill="#fff" font-size="26" font-weight="700" font-family="system-ui">\u20AC17.25</text>' +
-                '<text x="100" y="198" text-anchor="middle" fill="rgba(99,25,240,0.7)" font-size="10" font-family="system-ui">Payment approved</text>' +
-                /* NFC pulse rings */
-                '<circle cx="100" cy="250" r="12" fill="none" stroke="rgba(99,25,240,0.3)" stroke-width="1" class="pbrd-pos-nfc-pulse1"/>' +
-                '<circle cx="100" cy="250" r="20" fill="none" stroke="rgba(99,25,240,0.2)" stroke-width="1" class="pbrd-pos-nfc-pulse2"/>' +
-                '<circle cx="100" cy="250" r="28" fill="none" stroke="rgba(99,25,240,0.1)" stroke-width="1" class="pbrd-pos-nfc-pulse3"/>' +
+              '<svg viewBox="0 0 220 440" fill="none" xmlns="http://www.w3.org/2000/svg" class="pbrd-pos-tap-device pbrd-pos-tap-android">' +
+                /* Galaxy body — slimmer bezels, subtle curve feel */
+                '<rect x="6" y="6" width="208" height="428" rx="30" fill="#111114"/>' +
+                '<rect x="6" y="6" width="208" height="428" rx="30" fill="none" stroke="rgba(150,150,160,0.2)" stroke-width="1"/>' +
+                /* Screen — edge to edge */
+                '<rect x="10" y="10" width="200" height="420" rx="28" fill="#0a0a10"/>' +
+                /* Punch-hole camera — top center */
+                '<circle cx="110" cy="26" r="5" fill="#111114" stroke="rgba(30,30,40,0.5)" stroke-width="0.5"/>' +
+
+                /* ── Screen Step 1: Samsung Pay UI — amount (0-2s) ── */
+                '<g class="pbrd-pos-txn-step pbrd-pos-txn-s1">' +
+                  /* Samsung One UI style header */
+                  '<text x="28" y="60" fill="rgba(255,255,255,0.5)" font-size="10" font-family="system-ui" font-weight="500">Paybyrd Terminal</text>' +
+                  '<text x="110" y="120" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="10" font-family="system-ui">Enter amount</text>' +
+                  '<text x="110" y="170" text-anchor="middle" fill="#fff" font-size="44" font-weight="200" font-family="system-ui" letter-spacing="-1">\u20AC17.25</text>' +
+                  /* Material-style numpad */
+                  '<g transform="translate(30,210)">' +
+                    '<circle cx="30" cy="20" r="22" fill="rgba(255,255,255,0.03)"/>' +
+                    '<circle cx="80" cy="20" r="22" fill="rgba(255,255,255,0.03)"/>' +
+                    '<circle cx="130" cy="20" r="22" fill="rgba(255,255,255,0.03)"/>' +
+                    '<circle cx="30" cy="68" r="22" fill="rgba(255,255,255,0.03)"/>' +
+                    '<circle cx="80" cy="68" r="22" fill="rgba(255,255,255,0.03)"/>' +
+                    '<circle cx="130" cy="68" r="22" fill="rgba(255,255,255,0.03)"/>' +
+                  '</g>' +
+                  '<text x="60" y="236" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="16" font-family="system-ui">1</text>' +
+                  '<text x="110" y="236" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="16" font-family="system-ui">2</text>' +
+                  '<text x="160" y="236" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="16" font-family="system-ui">3</text>' +
+                  /* Charge button — Samsung rounded rectangle */
+                  '<rect x="30" y="350" width="160" height="44" rx="22" fill="#6319f0"/>' +
+                  '<text x="110" y="377" text-anchor="middle" fill="#fff" font-size="14" font-weight="600" font-family="system-ui">Charge</text>' +
+                '</g>' +
+
+                /* ── Screen Step 2: NFC ready (2-4.5s) ── */
+                '<g class="pbrd-pos-txn-step pbrd-pos-txn-s2">' +
+                  '<text x="110" y="90" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="10" font-family="system-ui" font-weight="500">\u20AC17.25</text>' +
+                  /* Large NFC target area */
+                  '<circle cx="110" cy="200" r="50" fill="rgba(99,25,240,0.04)" stroke="rgba(99,25,240,0.1)" stroke-width="1" stroke-dasharray="4 3"/>' +
+                  '<circle cx="110" cy="200" r="30" fill="rgba(99,25,240,0.06)"/>' +
+                  /* NFC waves from center */
+                  '<g transform="translate(92,178)">' +
+                    '<path d="M18 6 C24 12, 24 28, 18 34" stroke="rgba(99,25,240,0.6)" stroke-width="2" fill="none" class="pbrd-pos-nfc-wave1"/>' +
+                    '<path d="M18 0 C30 10, 30 32, 18 42" stroke="rgba(99,25,240,0.4)" stroke-width="2" fill="none" class="pbrd-pos-nfc-wave2"/>' +
+                  '</g>' +
+                  '<text x="110" y="290" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="11" font-family="system-ui">Tap card or device</text>' +
+                  /* Samsung nav bar */
+                  '<rect x="85" y="410" width="50" height="3" rx="1.5" fill="rgba(255,255,255,0.12)"/>' +
+                '</g>' +
+
+                /* ── Screen Step 3: Reading card (4.5-6s) ── */
+                '<g class="pbrd-pos-txn-step pbrd-pos-txn-s3">' +
+                  '<text x="110" y="140" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="11" font-family="system-ui">Reading card\u2026</text>' +
+                  /* Pulsing rings */
+                  '<circle cx="110" cy="210" r="18" fill="none" stroke="rgba(99,25,240,0.5)" stroke-width="2" class="pbrd-pos-nfc-pulse1"/>' +
+                  '<circle cx="110" cy="210" r="30" fill="none" stroke="rgba(99,25,240,0.3)" stroke-width="1.5" class="pbrd-pos-nfc-pulse2"/>' +
+                  '<circle cx="110" cy="210" r="42" fill="none" stroke="rgba(99,25,240,0.15)" stroke-width="1" class="pbrd-pos-nfc-pulse3"/>' +
+                  '<text x="110" y="280" text-anchor="middle" fill="#fff" font-size="28" font-weight="300" font-family="system-ui">\u20AC17.25</text>' +
+                '</g>' +
+
+                /* ── Screen Step 4: Approved (6-8s) ── */
+                '<g class="pbrd-pos-txn-step pbrd-pos-txn-s4">' +
+                  /* Success */
+                  '<circle cx="110" cy="165" r="42" fill="rgba(99,25,240,0.06)" stroke="#6319f0" stroke-width="2" class="pbrd-pos-success-ring"/>' +
+                  '<path d="M92 165 L106 179 L130 153" stroke="#6319f0" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" class="pbrd-pos-checkmark"/>' +
+                  '<text x="110" y="240" text-anchor="middle" fill="#fff" font-size="30" font-weight="300" font-family="system-ui">\u20AC17.25</text>' +
+                  '<text x="110" y="268" text-anchor="middle" fill="rgba(99,25,240,0.8)" font-size="12" font-weight="600" font-family="system-ui">Payment Successful</text>' +
+                  /* Receipt / New sale buttons */
+                  '<rect x="30" y="310" width="70" height="36" rx="18" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>' +
+                  '<text x="65" y="333" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="10" font-family="system-ui">Receipt</text>' +
+                  '<rect x="120" y="310" width="70" height="36" rx="18" fill="rgba(99,25,240,0.1)" stroke="rgba(99,25,240,0.3)" stroke-width="0.8"/>' +
+                  '<text x="155" y="333" text-anchor="middle" fill="#6319f0" font-size="10" font-weight="600" font-family="system-ui">New Sale</text>' +
+                  /* Samsung nav bar */
+                  '<rect x="85" y="410" width="50" height="3" rx="1.5" fill="rgba(255,255,255,0.12)"/>' +
+                '</g>' +
+
+                /* Status bar */
+                '<text x="24" y="46" fill="rgba(255,255,255,0.35)" font-size="9" font-weight="500" font-family="system-ui">12:30</text>' +
+                '<g transform="translate(170,38)">' +
+                  '<rect x="0" y="0" width="16" height="8" rx="2" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="0.7"/>' +
+                  '<rect x="1.5" y="1.5" width="11" height="5" rx="1" fill="rgba(255,255,255,0.25)"/>' +
+                '</g>' +
               '</svg>' +
-              /* Floating wallet icon */
-              '<div class="pbrd-pos-tap-wallet">' +
-                '<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">' +
-                  '<rect x="4" y="10" width="40" height="28" rx="4" fill="rgba(99,25,240,0.08)" stroke="rgba(99,25,240,0.3)" stroke-width="1.2"/>' +
-                  '<circle cx="34" cy="24" r="4" fill="rgba(99,25,240,0.25)" stroke="rgba(99,25,240,0.5)" stroke-width="0.8"/>' +
-                  '<path d="M4 18 L44 18" stroke="rgba(99,25,240,0.15)" stroke-width="0.8"/>' +
-                '</svg>' +
-              '</div>' +
+              /* Floating digital wallet card */
+              '<svg viewBox="0 0 110 70" class="pbrd-pos-tap-wallet-card" xmlns="http://www.w3.org/2000/svg">' +
+                '<rect width="110" height="70" rx="10" fill="#1a1a2e" stroke="rgba(99,25,240,0.2)" stroke-width="0.8"/>' +
+                /* Google Pay / wallet style */
+                '<circle cx="22" cy="22" r="8" fill="rgba(99,25,240,0.15)" stroke="rgba(99,25,240,0.3)" stroke-width="0.6"/>' +
+                '<text x="22" y="25" text-anchor="middle" fill="rgba(99,25,240,0.5)" font-size="8" font-weight="700" font-family="system-ui">G</text>' +
+                '<text x="38" y="25" fill="rgba(255,255,255,0.4)" font-size="8" font-family="system-ui">Pay</text>' +
+                '<text x="14" y="46" fill="rgba(255,255,255,0.2)" font-size="7" font-family="system-ui" letter-spacing="2">\u2022\u2022\u2022\u2022  4821</text>' +
+                '<rect x="14" y="54" width="30" height="3" rx="1.5" fill="rgba(255,255,255,0.06)"/>' +
+              '</svg>' +
             '</div>' +
           '</div>' +
           '<h4>Tap to Pay on Android</h4>' +

@@ -1238,6 +1238,100 @@
   50% { stroke: rgba(99, 25, 240, 0.7); }
 }
 
+/* ── Transaction flow step animation (8s total loop) ── */
+.pbrd-pos-txn-step { opacity: 0; }
+.pbrd-pos-txn-s1 { animation: pbrd-txn-s1 8s ease-in-out infinite; }
+.pbrd-pos-txn-s2 { animation: pbrd-txn-s2 8s ease-in-out infinite; }
+.pbrd-pos-txn-s3 { animation: pbrd-txn-s3 8s ease-in-out infinite; }
+.pbrd-pos-txn-s4 { animation: pbrd-txn-s4 8s ease-in-out infinite; }
+
+/* Step 1: 0–25% (amount entry) */
+@keyframes pbrd-txn-s1 {
+  0% { opacity: 0; }
+  3% { opacity: 1; }
+  22% { opacity: 1; }
+  27% { opacity: 0; }
+  100% { opacity: 0; }
+}
+/* Step 2: 25–56% (ready to tap) */
+@keyframes pbrd-txn-s2 {
+  0%, 24% { opacity: 0; }
+  29% { opacity: 1; }
+  53% { opacity: 1; }
+  58% { opacity: 0; }
+  100% { opacity: 0; }
+}
+/* Step 3: 56–75% (processing) */
+@keyframes pbrd-txn-s3 {
+  0%, 55% { opacity: 0; }
+  60% { opacity: 1; }
+  72% { opacity: 1; }
+  77% { opacity: 0; }
+  100% { opacity: 0; }
+}
+/* Step 4: 75–100% (approved) */
+@keyframes pbrd-txn-s4 {
+  0%, 74% { opacity: 0; }
+  79% { opacity: 1; }
+  95% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Spinner rotation */
+.pbrd-pos-spinner {
+  transform-origin: 110px 200px;
+  animation: pbrd-spin 1s linear infinite;
+}
+@keyframes pbrd-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Checkmark draw-in */
+.pbrd-pos-checkmark {
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+  animation: pbrd-check-draw 0.5s ease-out forwards;
+}
+.pbrd-pos-txn-s4 .pbrd-pos-checkmark {
+  animation: pbrd-check-draw 0.5s ease-out 0.3s forwards;
+}
+@keyframes pbrd-check-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+/* Success ring scale-in */
+.pbrd-pos-success-ring {
+  transform-origin: center;
+  animation: pbrd-ring-pop 0.4s ease-out forwards;
+}
+@keyframes pbrd-ring-pop {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ── Device-specific styling ── */
+.pbrd-pos-tap-iphone {
+  filter: drop-shadow(0 12px 32px rgba(0, 0, 0, 0.18));
+}
+.pbrd-pos-tap-android {
+  filter: drop-shadow(0 12px 32px rgba(0, 0, 0, 0.15));
+}
+
+/* Samsung floating wallet card */
+.pbrd-pos-tap-wallet-card {
+  position: absolute;
+  width: 78px;
+  right: -30px;
+  top: 40%;
+  transform: translateY(-50%) rotate(6deg);
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+  animation: pbrd-tap-wallet-float 3.5s ease-in-out infinite;
+}
+@keyframes pbrd-tap-wallet-float {
+  0%, 100% { transform: translateY(-50%) rotate(6deg) translateX(0); }
+  50% { transform: translateY(-50%) rotate(4deg) translateX(-6px); }
+}
+
 .pbrd-pos-tap-panel h4 {
   font-size: 1.125rem;
   font-weight: 700;
