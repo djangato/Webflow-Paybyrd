@@ -9901,17 +9901,17 @@ a.glowing_button_link .glowing_button_text {
 
 /* Image area */
 .pbrd-pos-pc-img {
-  height: 200px;
+  height: 140px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: #0a0a0f;
   overflow: hidden;
-  padding: 16px;
+  padding: 8px;
 }
 
 .pbrd-pos-pc-img img {
-  max-height: 170px;
+  max-height: 120px;
   width: auto;
   object-fit: contain;
   transition: transform 0.4s ease;
@@ -9923,14 +9923,14 @@ a.glowing_button_link .glowing_button_text {
 
 /* Body */
 .pbrd-pos-pc-body {
-  padding: 24px;
+  padding: 16px 20px 20px;
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 
 .pbrd-pos-pc-name {
-  font-size: 1.25rem;
+  font-size: 1.0625rem;
   font-weight: 700;
   color: #fff;
   margin: 0 0 2px;
@@ -9946,10 +9946,10 @@ a.glowing_button_link .glowing_button_text {
 }
 
 .pbrd-pos-pc-desc {
-  font-size: 0.8125rem;
-  color: rgba(255, 255, 255, 0.35);
-  line-height: 1.5;
-  margin: 0 0 16px;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.3);
+  line-height: 1.45;
+  margin: 0 0 12px;
 }
 
 /* Buy/Rent toggle */
@@ -9958,7 +9958,7 @@ a.glowing_button_link .glowing_button_text {
   background: rgba(255, 255, 255, 0.04);
   border-radius: 8px;
   padding: 3px;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
@@ -9982,7 +9982,7 @@ a.glowing_button_link .glowing_button_text {
 
 /* Price display */
 .pbrd-pos-pc-price-wrap {
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .pbrd-pos-pc-price {
@@ -9998,7 +9998,7 @@ a.glowing_button_link .glowing_button_text {
 }
 
 .pbrd-pos-pc-amount {
-  font-size: 2.25rem;
+  font-size: 1.75rem;
   font-weight: 800;
   color: #fff;
   letter-spacing: -0.03em;
@@ -10020,23 +10020,23 @@ a.glowing_button_link .glowing_button_text {
 .pbrd-pos-pc-perks {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-bottom: 16px;
+  gap: 5px;
+  margin-bottom: 12px;
   flex: 1;
 }
 
 .pbrd-pos-pc-perk {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 0.8125rem;
-  color: rgba(255, 255, 255, 0.55);
+  gap: 6px;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .pbrd-pos-pc-perk svg {
-  width: 14px;
-  height: 14px;
-  color: rgba(120, 255, 180, 0.6);
+  width: 12px;
+  height: 12px;
+  color: rgba(120, 255, 180, 0.5);
   flex-shrink: 0;
 }
 
@@ -10045,11 +10045,11 @@ a.glowing_button_link .glowing_button_text {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.6875rem;
-  color: rgba(255, 255, 255, 0.25);
-  padding-top: 14px;
+  font-size: 0.625rem;
+  color: rgba(255, 255, 255, 0.2);
+  padding-top: 10px;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .pbrd-pos-pc-includes svg {
@@ -10065,7 +10065,7 @@ a.glowing_button_link .glowing_button_text {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  padding: 12px;
+  padding: 10px;
   border-radius: 10px;
   background: rgba(160, 100, 255, 0.9);
   color: #fff;
