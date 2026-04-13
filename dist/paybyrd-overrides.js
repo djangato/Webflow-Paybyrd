@@ -5309,9 +5309,7 @@
     /* Visual column */
     var visualCol = '<div class="pbrd-pos-hero-visual">' +
       '<div class="pbrd-pos-hero-glow"></div>' +
-      '<video class="pbrd-pos-hero-video" id="pbrd-pos-hero-vid" autoplay muted loop playsinline preload="auto" poster="' + BASE + 'sunmi-v3-render.png">' +
-        '<source src="' + BASE + 'sunmi-v3-video.mp4" type="video/mp4">' +
-      '</video>' +
+      '<img class="pbrd-pos-hero-video" id="pbrd-pos-hero-vid" src="' + BASE + 'sunmi-v3-hero.gif" alt="Sunmi V3 Terminal">' +
     '</div>';
 
     wrap.innerHTML = textCol + visualCol;
