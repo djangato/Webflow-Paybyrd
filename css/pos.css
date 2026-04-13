@@ -267,7 +267,7 @@
 /* Terminal card */
 .pbrd-pos-tcard {
   position: relative;
-  background: #111;
+  background: #0a0a0f;
   border-radius: 20px;
   overflow: hidden;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
@@ -288,7 +288,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: #111;
+  background: #0a0a0f;
 }
 
 .pbrd-pos-tcard-img img,

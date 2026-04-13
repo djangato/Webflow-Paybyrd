@@ -152,10 +152,10 @@
     hideChildren(container);
 
     var terminals = [
-      { name: "Paybyrd Rawhide", model: "PAX A920 Pro", video: "a920-video.mp4", poster: "a920-render.png", desc: "The all-rounder. Counter, table, delivery.", pills: ["Android 10", '5.5" HD', "4G + WiFi"] },
-      { name: "Paybyrd Renegade", model: "PAX A77", video: "a77-video.mp4", poster: "a77-render.png", desc: "Compact powerhouse. Built for speed.", pills: ["Android 10", '5.5" HD', "Scanner"] },
-      { name: "Paybyrd Maverick", model: "Sunmi V3", video: "sunmi-v3-video.mp4", poster: "sunmi-v3-render.png", desc: "Print receipts on the move.", pills: ["Android 12", "Printer", "NFC"] },
-      { name: "Paybyrd Titan", model: "Sunmi T3 Pro", video: null, poster: "t3-render.png", desc: "Self-service desktop. Kiosk-ready.", pills: ["Android 12", '15.6" Touch', "IP65"] }
+      { name: "Paybyrd Rawhide", model: "PAX A920 Pro", img: "lineup-rawhide.png", desc: "The all-rounder. Counter, table, delivery.", pills: ["Android 10", '5.5" HD', "4G + WiFi"] },
+      { name: "Paybyrd Renegade", model: "PAX A77", img: "lineup-renegade.png", desc: "Compact powerhouse. Built for speed.", pills: ["Android 10", '5.5" HD', "Scanner"] },
+      { name: "Paybyrd Maverick", model: "Sunmi V3", img: "lineup-maverick.png", desc: "Print receipts on the move.", pills: ["Android 12", "Printer", "NFC"] },
+      { name: "Paybyrd Titan", model: "Sunmi T3 Pro", img: "lineup-titan.png", desc: "Self-service desktop. Kiosk-ready.", pills: ["Android 12", '15.6" Touch', "IP65"] }
     ];
 
     var wrap = document.createElement("div");
@@ -174,11 +174,8 @@
       for (var p = 0; p < t.pills.length; p++) {
         pills += '<span class="pbrd-pos-tcard-pill">' + t.pills[p] + '</span>';
       }
-      var media = t.video
-        ? '<video autoplay muted loop playsinline preload="metadata" poster="' + BASE + t.poster + '" style="max-height:220px;width:auto;object-fit:contain"><source src="' + BASE + t.video + '" type="video/mp4"></video>'
-        : '<img src="' + BASE + t.poster + '" alt="' + t.name + '" loading="lazy">';
       grid += '<div class="pbrd-pos-tcard pbrd-pos-reveal">' +
-        '<div class="pbrd-pos-tcard-img">' + media + '</div>' +
+        '<div class="pbrd-pos-tcard-img"><img src="' + BASE + t.img + '" alt="' + t.name + '" loading="lazy"></div>' +
         '<div class="pbrd-pos-tcard-body">' +
           '<div class="pbrd-pos-tcard-name">' + t.name + '</div>' +
           '<div class="pbrd-pos-tcard-model">' + t.model + '</div>' +
