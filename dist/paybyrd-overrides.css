@@ -9853,233 +9853,214 @@ a.glowing_button_link .glowing_button_text {
   flex-shrink: 0;
 }
 
-/* ─── Pricing grid ─── */
+/* ─── Pricing grid (Mollie-style, white bg) ─── */
 .pbrd-pos-pricing-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
   margin-top: 48px;
+  border: 1px solid #E5E7EB;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
 }
 
 .pbrd-pos-pricing-card {
-  background: #0a0a0f;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 20px;
-  overflow: hidden;
   position: relative;
   display: flex;
   flex-direction: column;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border-right: 1px solid #E5E7EB;
+  transition: box-shadow 0.3s ease;
+}
+
+.pbrd-pos-pricing-card:last-child {
+  border-right: none;
 }
 
 .pbrd-pos-pricing-card:hover {
-  border-color: rgba(160, 100, 255, 0.2);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  transform: translateY(-6px);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
+  z-index: 2;
 }
 
 /* Tag */
 .pbrd-pos-pc-tag {
   position: absolute;
-  top: 14px;
-  right: 14px;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
   padding: 4px 12px;
   border-radius: 100px;
-  background: rgba(255, 255, 255, 0.06);
-  color: rgba(255, 255, 255, 0.5);
+  background: #111;
+  color: #fff;
   font-size: 0.5625rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   z-index: 2;
+  white-space: nowrap;
 }
 
-.pbrd-pos-pc-tag--pop {
-  background: rgba(160, 100, 255, 0.9);
-  color: #fff;
-}
-
-/* Image area */
-.pbrd-pos-pc-img {
-  height: 140px;
+/* Image area — white bg with product photo */
+.pbrd-pos-pc-img-white {
+  height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #0a0a0f;
-  overflow: hidden;
-  padding: 8px;
+  padding: 24px 16px;
+  background: #FAFAFA;
+  border-bottom: 1px solid #F0F0F0;
 }
 
-.pbrd-pos-pc-img img {
-  max-height: 120px;
-  width: auto;
+.pbrd-pos-pc-img-white img {
+  max-height: 160px;
+  max-width: 100%;
   object-fit: contain;
   transition: transform 0.4s ease;
 }
 
-.pbrd-pos-pricing-card:hover .pbrd-pos-pc-img img {
-  transform: scale(1.05);
+.pbrd-pos-pricing-card:hover .pbrd-pos-pc-img-white img {
+  transform: scale(1.06);
 }
 
 /* Body */
-.pbrd-pos-pc-body {
-  padding: 16px 20px 20px;
+.pbrd-pos-pc-body-white {
+  padding: 24px 20px;
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 
-.pbrd-pos-pc-name {
-  font-size: 1.0625rem;
+.pbrd-pos-pc-body-white h4 {
+  font-size: 1.25rem;
   font-weight: 700;
-  color: #fff;
+  color: #111;
   margin: 0 0 2px;
 }
 
-.pbrd-pos-pc-model {
+.pbrd-pos-pc-sub {
   font-size: 0.6875rem;
-  color: rgba(160, 100, 255, 0.6);
-  font-weight: 500;
+  color: #9CA3AF;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-bottom: 8px;
-}
-
-.pbrd-pos-pc-desc {
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.3);
-  line-height: 1.45;
-  margin: 0 0 12px;
-}
-
-/* Buy/Rent toggle */
-.pbrd-pos-pc-toggle {
-  display: inline-flex;
-  background: rgba(255, 255, 255, 0.04);
-  border-radius: 8px;
-  padding: 3px;
-  margin-bottom: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.pbrd-pos-pc-toggle-btn {
-  padding: 5px 16px;
-  border: none;
-  border-radius: 6px;
-  background: transparent;
-  color: rgba(255, 255, 255, 0.4);
-  font-size: 0.75rem;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: inherit;
-  transition: all 0.2s ease;
-}
-
-.pbrd-pos-pc-toggle--active {
-  background: rgba(160, 100, 255, 0.9);
-  color: #fff;
-}
-
-/* Price display */
-.pbrd-pos-pc-price-wrap {
+  letter-spacing: 0.04em;
   margin-bottom: 12px;
 }
 
-.pbrd-pos-pc-price {
+/* Price line */
+.pbrd-pos-pc-price-line {
   display: flex;
   align-items: baseline;
-  gap: 2px;
+  gap: 6px;
+  margin-bottom: 16px;
 }
 
-.pbrd-pos-pc-currency {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #fff;
-}
-
-.pbrd-pos-pc-amount {
-  font-size: 1.75rem;
+.pbrd-pos-pc-price-main {
+  font-size: 1.375rem;
   font-weight: 800;
-  color: #fff;
-  letter-spacing: -0.03em;
-  line-height: 1;
+  color: #111;
+  letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
 }
 
-.pbrd-pos-pc-price--free .pbrd-pos-pc-amount {
-  color: rgba(120, 255, 180, 0.9);
+.pbrd-pos-pc-price-free {
+  color: #111;
 }
 
-.pbrd-pos-pc-period {
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.3);
-  margin-left: 4px;
+.pbrd-pos-pc-price-sep {
+  color: #D1D5DB;
+  font-size: 1rem;
 }
 
-/* Perks */
-.pbrd-pos-pc-perks {
+.pbrd-pos-pc-price-alt {
+  font-size: 0.8125rem;
+  color: #9CA3AF;
+  font-weight: 500;
+}
+
+/* Buttons */
+.pbrd-pos-pc-btns {
   display: flex;
-  flex-direction: column;
-  gap: 5px;
-  margin-bottom: 12px;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.pbrd-pos-pc-btn-primary {
   flex: 1;
-}
-
-.pbrd-pos-pc-perk {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.pbrd-pos-pc-perk svg {
-  width: 12px;
-  height: 12px;
-  color: rgba(120, 255, 180, 0.5);
-  flex-shrink: 0;
-}
-
-/* Included line */
-.pbrd-pos-pc-includes {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.625rem;
-  color: rgba(255, 255, 255, 0.2);
-  padding-top: 10px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  margin-bottom: 12px;
-}
-
-.pbrd-pos-pc-includes svg {
-  width: 12px;
-  height: 12px;
-  color: rgba(160, 100, 255, 0.5);
-  flex-shrink: 0;
-}
-
-/* Order button */
-.pbrd-pos-pc-order {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 10px;
-  border-radius: 10px;
-  background: rgba(160, 100, 255, 0.9);
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #111;
   color: #fff;
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   text-decoration: none;
-  transition: all 0.25s ease;
+  transition: all 0.2s ease;
   font-family: inherit;
 }
 
-.pbrd-pos-pc-order:hover {
-  background: rgba(160, 100, 255, 1);
-  box-shadow: 0 4px 20px rgba(160, 100, 255, 0.3);
-  transform: translateY(-1px);
+.pbrd-pos-pc-btn-primary:hover {
+  background: #222;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.pbrd-pos-pc-btn-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid #E5E7EB;
+  color: #374151;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.pbrd-pos-pc-btn-secondary:hover {
+  border-color: #D1D5DB;
+  background: #F9FAFB;
+}
+
+/* Feature list */
+.pbrd-pos-pc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.pbrd-pos-pc-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.8125rem;
+  color: #4B5563;
+  line-height: 1.4;
+}
+
+.pbrd-pos-pc-list li svg {
+  width: 14px;
+  height: 14px;
+  color: #111;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* Note */
+.pbrd-pos-pc-note {
+  font-size: 0.6875rem;
+  color: #9CA3AF;
+  font-style: italic;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #F0F0F0;
 }
 
 .pbrd-pos-rental-cta {
@@ -10292,7 +10273,9 @@ a.glowing_button_link .glowing_button_text {
   .pbrd-pos-lineup-grid { grid-template-columns: repeat(2, 1fr); }
   .pbrd-pos-tab-content.pbrd-pos-tab-active { grid-template-columns: 1fr; }
   .pbrd-pos-spec-visual { min-height: 260px; }
-  .pbrd-pos-pricing-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .pbrd-pos-pricing-grid { grid-template-columns: repeat(2, 1fr); border-radius: 12px; }
+  .pbrd-pos-pricing-card:nth-child(2) { border-right: none; }
+  .pbrd-pos-pricing-card:nth-child(-n+2) { border-bottom: 1px solid #E5E7EB; }
   .pbrd-pos-valueadd-grid { grid-template-columns: 1fr; }
   .pbrd-pos-va-card-wide { grid-column: span 1; }
   .pbrd-pos-va-features { grid-template-columns: 1fr; }
@@ -10311,6 +10294,8 @@ a.glowing_button_link .glowing_button_text {
   .pbrd-pos-bento-inner { grid-template-columns: 1fr; }
   .pbrd-pos-tab { padding: 10px 14px; font-size: 0.75rem; }
   .pbrd-pos-rental-cards { grid-template-columns: 1fr; }
-  .pbrd-pos-pricing-grid { grid-template-columns: 1fr; max-width: 380px; margin-left: auto; margin-right: auto; }
+  .pbrd-pos-pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
+  .pbrd-pos-pricing-card { border-right: none; border-bottom: 1px solid #E5E7EB; }
+  .pbrd-pos-pricing-card:last-child { border-bottom: none; }
   .pbrd-pos-trust { gap: 16px; }
 }
