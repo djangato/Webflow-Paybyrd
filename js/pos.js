@@ -968,10 +968,10 @@
       /* ── Background dust — tiny twinkling specks ── */
       for (var dd = 0; dd < dust.length; dd++) {
         var dt = dust[dd];
-        var da = 0.04 + 0.04 * Math.sin(time * dt.speed + dt.phase);
+        var da = 0.08 + 0.07 * Math.sin(time * dt.speed + dt.phase);
         ctx.beginPath();
         ctx.arc(dt.x * W, dt.y * H, dt.r, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(160,130,220," + da + ")";
+        ctx.fillStyle = "rgba(99,25,240," + da + ")";
         ctx.fill();
       }
 
@@ -979,16 +979,15 @@
       for (var e = 0; e < allEdges.length; e++) {
         var edge = allEdges[e];
         var sa = allStars[edge.a], sb = allStars[edge.b];
-        /* Line opacity influenced by both stars' current brightness */
         var gA = 1 - allStars[edge.a].twinkleDepth * (0.5 + 0.5 * Math.sin(time * sa.twinkleSpeed + sa.phase));
         var gB = 1 - allStars[edge.b].twinkleDepth * (0.5 + 0.5 * Math.sin(time * sb.twinkleSpeed + sb.phase));
-        var lineAlpha = Math.min(gA, gB) * 0.06;
+        var lineAlpha = Math.min(gA, gB) * 0.14;
 
         ctx.beginPath();
         ctx.moveTo(sa.x * W, sa.y * H);
         ctx.lineTo(sb.x * W, sb.y * H);
-        ctx.strokeStyle = "rgba(140,100,220," + lineAlpha + ")";
-        ctx.lineWidth = 0.5;
+        ctx.strokeStyle = "rgba(99,25,240," + lineAlpha + ")";
+        ctx.lineWidth = 0.6;
         ctx.stroke();
       }
 
@@ -999,15 +998,15 @@
 
         /* Twinkle: smooth sinusoidal oscillation */
         var brightness = 1 - star.twinkleDepth * (0.5 + 0.5 * Math.sin(time * star.twinkleSpeed + star.phase));
-        var baseAlpha = 0.12 + 0.18 * (star.m / 2.0);   /* brighter stars = higher magnitude */
+        var baseAlpha = 0.25 + 0.35 * (star.m / 2.0);
         var alpha = baseAlpha * brightness;
-        var radius = star.m * 0.7;
+        var radius = star.m * 0.9;
 
         /* Soft halo */
-        var haloR = radius * 6;
+        var haloR = radius * 7;
         var halo = ctx.createRadialGradient(sx, sy, 0, sx, sy, haloR);
-        halo.addColorStop(0, "rgba(160,100,255," + (alpha * 0.5) + ")");
-        halo.addColorStop(0.4, "rgba(160,100,255," + (alpha * 0.15) + ")");
+        halo.addColorStop(0, "rgba(99,25,240," + (alpha * 0.6) + ")");
+        halo.addColorStop(0.4, "rgba(99,25,240," + (alpha * 0.18) + ")");
         halo.addColorStop(1, "transparent");
         ctx.beginPath();
         ctx.arc(sx, sy, haloR, 0, Math.PI * 2);
@@ -1017,14 +1016,14 @@
         /* Star core */
         ctx.beginPath();
         ctx.arc(sx, sy, radius, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(160,120,240," + (alpha + 0.08) + ")";
+        ctx.fillStyle = "rgba(99,25,240," + (alpha + 0.15) + ")";
         ctx.fill();
 
         /* Bright center pinpoint for major stars */
         if (star.m > 1.5) {
           ctx.beginPath();
-          ctx.arc(sx, sy, 0.5, 0, Math.PI * 2);
-          ctx.fillStyle = "rgba(220,200,255," + (alpha * 1.5) + ")";
+          ctx.arc(sx, sy, 0.6, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(130,60,255," + (alpha * 1.8) + ")";
           ctx.fill();
         }
       }
