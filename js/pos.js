@@ -64,7 +64,7 @@
     var section = findSectionByHeading("evolve in-person");
     if (!section) return;
 
-    section.style.background = "#0a0a0f";
+    section.style.background = "#000";
     var container = section.querySelector(".u-container, [class*='container']") || section;
     hideChildren(container);
 
@@ -91,8 +91,9 @@
 
     /* Visual column */
     var visualCol = '<div class="pbrd-pos-hero-visual">' +
-      '<div class="pbrd-pos-hero-glow"></div>' +
-      '<img class="pbrd-pos-hero-video" id="pbrd-pos-hero-vid" src="' + BASE + 'sunmi-v3-hero.gif" alt="Sunmi V3 Terminal">' +
+      '<video class="pbrd-pos-hero-video" id="pbrd-pos-hero-vid" autoplay muted loop playsinline preload="auto">' +
+        '<source src="' + BASE + 'sunmi-v3-hero.mp4" type="video/mp4">' +
+      '</video>' +
     '</div>';
 
     wrap.innerHTML = textCol + visualCol;
