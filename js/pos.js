@@ -568,67 +568,99 @@
     var wrap = document.createElement("div");
     wrap.className = "pbrd-pos-rental-wrap";
 
-    var devices = [
-      { name: "SoftPOS", sub: "Your phone, your terminal", buy: null, rent: "Free", img: "a77.png", useTransparent: true, desc: "Accept contactless payments on any NFC-enabled Android or iPhone. No hardware needed.", note: "iPhone market restrictions may apply", perks: ["Accept cards and wallets", "Works on Android + iPhone", "NFC contactless", "Digital receipts via QR or email"] },
-      { name: "Renegade", sub: "Handheld POS Terminal", buy: "295", rent: "18", img: "a920.png", useTransparent: true, desc: "Compact, fast, and portable. Perfect for mobile businesses and queue-busting.", perks: ["Fast, secure transactions", "Lightweight and portable", "Front-facing NFC", "Starting \u20AC18 per month per active terminal"] },
-      { name: "Rawhide", sub: "Mobile POS Terminal", buy: "395", rent: "22", img: "a920.png", useTransparent: true, tag: "Most popular", desc: "The all-rounder with built-in printer. Counter, table, delivery.", perks: ["Fast, secure transactions", "Lightweight and portable", "Embedded receipt printer", "Starting \u20AC22 per month per active terminal"] },
-      { name: "Maverick", sub: "Mobile POS Terminal", buy: "450", rent: "25", img: "sunmi-v3.png", useTransparent: true, desc: "High-speed printer built in. The go-to for restaurants and delivery.", perks: ["High-speed thermal printer", "Android 12", "NFC contactless", "Starting \u20AC25 per month per active terminal"] },
-      { name: "Titan", sub: "Fixed POS Terminal", buy: "890", rent: "45", img: "t3-pro-front.png", useTransparent: true, desc: "Desktop powerhouse for kiosks, counters, and self-service.", perks: ["Ethernet connection for reliability", "Vandal-proof and easy to mount", "Ideal for kiosks and unattended payment", "Starting \u20AC45 per month per active terminal"] }
-    ];
-
     wrap.innerHTML =
       '<div class="pbrd-pos-section-label">PRICING</div>' +
       '<h2>Choose one of our devices.<br>Or simply use your own.</h2>' +
-      '<p>Buy outright, rent monthly, or turn your own phone into a payment terminal. Every option includes free SIM with data plan.</p>';
+      '<p>Buy outright, rent monthly, or turn your own phone into a payment terminal. Every option includes a free SIM with data plan.</p>' +
 
-    var grid = '<div class="pbrd-pos-pricing-grid">';
-    for (var d = 0; d < devices.length; d++) {
-      var dev = devices[d];
-
-      /* Price line */
-      var priceLine = '';
-      if (dev.buy) {
-        priceLine = '<div class="pbrd-pos-pc-price-line"><span class="pbrd-pos-pc-price-main">\u20AC' + dev.buy + '.00</span><span class="pbrd-pos-pc-price-sep">/</span><span class="pbrd-pos-pc-price-alt">\u20AC' + dev.rent + '/mo</span></div>';
-      } else {
-        priceLine = '<div class="pbrd-pos-pc-price-line"><span class="pbrd-pos-pc-price-main pbrd-pos-pc-price-free">Free</span></div>';
-      }
-
-      /* Buttons */
-      var btns = '';
-      if (dev.buy) {
-        btns = '<div class="pbrd-pos-pc-btns">' +
-          '<a href="/book-demo" class="pbrd-pos-pc-btn-primary">Order now</a>' +
-          '<a href="/book-demo" class="pbrd-pos-pc-btn-secondary">Learn more \u203A</a>' +
-        '</div>';
-      } else {
-        btns = '<div class="pbrd-pos-pc-btns">' +
-          '<a href="/book-demo" class="pbrd-pos-pc-btn-primary">Get started</a>' +
-          '<a href="/book-demo" class="pbrd-pos-pc-btn-secondary">Learn more \u203A</a>' +
-        '</div>';
-      }
-
-      /* Perks */
-      var perksHtml = '';
-      for (var p = 0; p < dev.perks.length; p++) {
-        perksHtml += '<li>' + checkSVG + ' ' + dev.perks[p] + '</li>';
-      }
-
-      grid += '<div class="pbrd-pos-pricing-card pbrd-pos-reveal">' +
-        (dev.tag ? '<div class="pbrd-pos-pc-tag">' + dev.tag + '</div>' : '') +
-        '<div class="pbrd-pos-pc-img-white"><img src="' + BASE + dev.img + '" alt="' + dev.name + '" loading="lazy"></div>' +
-        '<div class="pbrd-pos-pc-body-white">' +
-          '<h4>' + dev.name + '</h4>' +
-          '<div class="pbrd-pos-pc-sub">' + dev.sub + '</div>' +
-          priceLine +
-          btns +
-          '<ul class="pbrd-pos-pc-list">' + perksHtml + '</ul>' +
-          (dev.note ? '<div class="pbrd-pos-pc-note">' + dev.note + '</div>' : '') +
+      /* ── SoftPOS banner ── */
+      '<div class="pbrd-pos-softpos-banner pbrd-pos-reveal">' +
+        '<div class="pbrd-pos-softpos-left">' +
+          '<div class="pbrd-pos-softpos-badge">FREE</div>' +
+          '<h3>SoftPOS</h3>' +
+          '<p>Turn your own phone into a payment terminal. Accept contactless payments on any NFC-enabled Android or iPhone \u2014 no hardware needed.</p>' +
+          '<div class="pbrd-pos-softpos-perks">' +
+            '<span>' + checkSVG + ' Android + iPhone</span>' +
+            '<span>' + checkSVG + ' NFC contactless</span>' +
+            '<span>' + checkSVG + ' Digital receipts</span>' +
+            '<span>' + checkSVG + ' Zero hardware cost</span>' +
+          '</div>' +
+          '<div class="pbrd-pos-softpos-note">iPhone market restrictions may apply</div>' +
         '</div>' +
-      '</div>';
-    }
-    grid += '</div>';
+        '<div class="pbrd-pos-softpos-right">' +
+          '<a href="/book-demo" class="pbrd-pos-pc-btn-primary">Get started free \u2192</a>' +
+        '</div>' +
+      '</div>' +
 
-    wrap.innerHTML += grid;
+      /* ── 3 terminal cards ── */
+      '<div class="pbrd-pos-pricing-grid">' +
+
+        /* Renegade */
+        '<div class="pbrd-pos-pricing-card pbrd-pos-reveal">' +
+          '<div class="pbrd-pos-pc-img-white"><img src="' + BASE + 'a77.png" alt="Renegade" loading="lazy"></div>' +
+          '<div class="pbrd-pos-pc-body-white">' +
+            '<h4>Renegade</h4>' +
+            '<div class="pbrd-pos-pc-sub">Handheld POS Terminal</div>' +
+            '<div class="pbrd-pos-pc-price-line"><span class="pbrd-pos-pc-price-main">\u20AC295</span></div>' +
+            '<div class="pbrd-pos-pc-btns">' +
+              '<a href="/book-demo" class="pbrd-pos-pc-btn-primary">Order now</a>' +
+              '<a href="/pos" class="pbrd-pos-pc-btn-secondary">Learn more \u203A</a>' +
+            '</div>' +
+            '<ul class="pbrd-pos-pc-list">' +
+              '<li>' + checkSVG + ' Compact and lightweight</li>' +
+              '<li>' + checkSVG + ' Always online 4G / WiFi</li>' +
+              '<li>' + checkSVG + ' Front-facing NFC</li>' +
+              '<li>' + checkSVG + ' Digital receipts via QR or email</li>' +
+            '</ul>' +
+            '<div class="pbrd-pos-pc-rental">Starting \u20AC18 per month per active terminal</div>' +
+          '</div>' +
+        '</div>' +
+
+        /* Rawhide */
+        '<div class="pbrd-pos-pricing-card pbrd-pos-pricing-card--featured pbrd-pos-reveal">' +
+          '<div class="pbrd-pos-pc-tag">Most popular</div>' +
+          '<div class="pbrd-pos-pc-img-white"><img src="' + BASE + 'a920.png" alt="Rawhide" loading="lazy"></div>' +
+          '<div class="pbrd-pos-pc-body-white">' +
+            '<h4>Rawhide</h4>' +
+            '<div class="pbrd-pos-pc-sub">Mobile POS Terminal</div>' +
+            '<div class="pbrd-pos-pc-price-line"><span class="pbrd-pos-pc-price-main">\u20AC395</span></div>' +
+            '<div class="pbrd-pos-pc-btns">' +
+              '<a href="/book-demo" class="pbrd-pos-pc-btn-primary">Order now</a>' +
+              '<a href="/pos" class="pbrd-pos-pc-btn-secondary">Learn more \u203A</a>' +
+            '</div>' +
+            '<ul class="pbrd-pos-pc-list">' +
+              '<li>' + checkSVG + ' Fast, secure transactions</li>' +
+              '<li>' + checkSVG + ' Lightweight and portable</li>' +
+              '<li>' + checkSVG + ' Embedded receipt printer</li>' +
+              '<li>' + checkSVG + ' Starting \u20AC22/mo per active terminal</li>' +
+            '</ul>' +
+            '<div class="pbrd-pos-pc-rental">Starting \u20AC22 per month per active terminal</div>' +
+          '</div>' +
+        '</div>' +
+
+        /* Titan */
+        '<div class="pbrd-pos-pricing-card pbrd-pos-reveal">' +
+          '<div class="pbrd-pos-pc-img-white"><img src="' + BASE + 't3-pro-front.png" alt="Titan" loading="lazy"></div>' +
+          '<div class="pbrd-pos-pc-body-white">' +
+            '<h4>Titan</h4>' +
+            '<div class="pbrd-pos-pc-sub">Fixed POS Terminal</div>' +
+            '<div class="pbrd-pos-pc-price-line"><span class="pbrd-pos-pc-price-main">\u20AC890</span></div>' +
+            '<div class="pbrd-pos-pc-btns">' +
+              '<a href="/book-demo" class="pbrd-pos-pc-btn-primary">Order now</a>' +
+              '<a href="/pos" class="pbrd-pos-pc-btn-secondary">Learn more \u203A</a>' +
+            '</div>' +
+            '<ul class="pbrd-pos-pc-list">' +
+              '<li>' + checkSVG + ' Ethernet connection for reliability</li>' +
+              '<li>' + checkSVG + ' Vandal-proof and easy to mount</li>' +
+              '<li>' + checkSVG + ' Ideal for kiosks and unattended payment</li>' +
+              '<li>' + checkSVG + ' Starting \u20AC45/mo per active terminal</li>' +
+            '</ul>' +
+            '<div class="pbrd-pos-pc-rental">Starting \u20AC45 per month per active terminal</div>' +
+          '</div>' +
+        '</div>' +
+
+      '</div>';
+
     newSection.appendChild(wrap);
     observeReveal(".pbrd-pos-reveal", 150, wrap);
 
