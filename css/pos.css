@@ -1997,6 +1997,23 @@
   color: #999;
 }
 
+/* Speed icon — orange accent */
+.pbrd-pos-trust-icon--speed {
+  background: rgba(255, 107, 53, 0.08);
+}
+.pbrd-pos-trust-icon--speed svg {
+  color: #FF6B35;
+}
+
+/* Form bottom note */
+.pbrd-pos-form-note {
+  font-size: 0.75rem;
+  color: #aaa !important;
+  text-align: center;
+  margin-top: 16px;
+  line-height: 1.5;
+}
+
 /* ═══════════════════════════════════════════ */
 /* Responsive                                  */
 /* ═══════════════════════════════════════════ */

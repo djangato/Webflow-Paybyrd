@@ -1127,28 +1127,30 @@
 
     section.classList.add("pbrd-pos-contact-section");
 
-    /* Make all text dark */
-    section.querySelectorAll("h1,h2,h3,h4,h5").forEach(function(el) {
-      el.style.color = "#111";
+    /* ── Rewrite the heading + copy ── */
+    var headings = section.querySelectorAll("h1,h2,h3");
+    headings.forEach(function(el) {
+      if (el.textContent.toLowerCase().indexOf("sounds interesting") > -1 ||
+          el.textContent.toLowerCase().indexOf("contact us") > -1) {
+        el.innerHTML = 'Get your terminal<br>in 48 hours.';
+        el.style.color = "#111";
+      }
     });
+
+    /* Replace the paragraph copy */
     section.querySelectorAll("p").forEach(function(el) {
-      if (!el.closest("form")) el.style.color = "#555";
+      if (!el.closest("form") && el.textContent.indexOf("personalized") > -1) {
+        el.innerHTML = 'Tell us about your business. We\u2019ll recommend the right device, handle the setup, and have you accepting payments by the end of the week.';
+        el.style.color = "#555";
+      }
     });
+
+    /* Style labels */
     section.querySelectorAll("label").forEach(function(el) {
       el.style.color = "#333";
     });
 
-    /* Style form inputs — don't wrap, just add classes */
-    section.querySelectorAll("input:not([type=submit]):not([type=checkbox]), textarea, select").forEach(function(el) {
-      el.classList.add("pbrd-pos-form-input");
-    });
-
-    var submitBtn = section.querySelector('input[type="submit"], button[type="submit"]');
-    if (submitBtn) {
-      submitBtn.classList.add("pbrd-pos-form-submit");
-    }
-
-    /* Insert trust badges above the form */
+    /* ── Insert trust + promise strip above form ── */
     var form = section.querySelector("form");
     if (!form) return;
 
@@ -1156,19 +1158,35 @@
     trust.className = "pbrd-pos-trust";
     trust.innerHTML =
       '<div class="pbrd-pos-trust-item">' +
+        '<div class="pbrd-pos-trust-icon pbrd-pos-trust-icon--speed"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>' +
+        '<div><span class="pbrd-pos-trust-val">48h delivery</span><span class="pbrd-pos-trust-lbl">Terminal at your door</span></div>' +
+      '</div>' +
+      '<div class="pbrd-pos-trust-item">' +
+        '<div class="pbrd-pos-trust-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="currentColor" stroke-width="1.5"/></svg></div>' +
+        '<div><span class="pbrd-pos-trust-val">Free consult</span><span class="pbrd-pos-trust-lbl">We\u2019ll call you back</span></div>' +
+      '</div>' +
+      '<div class="pbrd-pos-trust-item">' +
         '<div class="pbrd-pos-trust-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v5c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z" stroke="currentColor" stroke-width="1.5"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>' +
-        '<div><span class="pbrd-pos-trust-val">Since 2016</span><span class="pbrd-pos-trust-lbl">Android POS pioneer</span></div>' +
-      '</div>' +
-      '<div class="pbrd-pos-trust-item">' +
-        '<div class="pbrd-pos-trust-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="7" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M12 11v4M9 15h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2" stroke="currentColor" stroke-width="1.5"/></svg></div>' +
-        '<div><span class="pbrd-pos-trust-val">10,000+</span><span class="pbrd-pos-trust-lbl">Terminals deployed</span></div>' +
-      '</div>' +
-      '<div class="pbrd-pos-trust-item">' +
-        '<div class="pbrd-pos-trust-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M8 12l2.5 2.5L16 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>' +
-        '<div><span class="pbrd-pos-trust-val">PCI Level 1</span><span class="pbrd-pos-trust-lbl">DSS certified</span></div>' +
+        '<div><span class="pbrd-pos-trust-val">No commitment</span><span class="pbrd-pos-trust-lbl">Cancel anytime</span></div>' +
       '</div>';
 
     form.parentNode.insertBefore(trust, form);
+
+    /* ── Style the submit button text ── */
+    var submitBtn = section.querySelector('input[type="submit"], button[type="submit"]');
+    if (submitBtn) {
+      if (submitBtn.tagName === "INPUT") {
+        submitBtn.value = "Get my terminal \u2192";
+      } else {
+        submitBtn.textContent = "Get my terminal \u2192";
+      }
+    }
+
+    /* ── Add bottom note under form ── */
+    var note = document.createElement("p");
+    note.className = "pbrd-pos-form-note";
+    note.innerHTML = 'Typically responds within 2 hours during business days. Free SIM + data plan included with every terminal.';
+    form.parentNode.insertBefore(note, form.nextSibling);
   }
 
   /* ═══════════════════════════════════════════ */
