@@ -1256,18 +1256,21 @@
 
 /* Image area */
 .pbrd-pos-pc-img-white {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  background: #F7F7F8;
-  min-height: 220px;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 32px 24px !important;
+  background: #F7F7F8 !important;
+  min-height: 260px !important;
+  max-height: 260px !important;
 }
 
 .pbrd-pos-pc-img-white img {
-  height: 180px;
-  width: auto;
-  object-fit: contain;
+  height: 210px !important;
+  width: auto !important;
+  max-width: 90% !important;
+  max-height: 210px !important;
+  object-fit: contain !important;
   transition: transform 0.4s ease;
 }
 
@@ -1277,7 +1280,7 @@
 
 /* Body — compact */
 .pbrd-pos-pc-body-white {
-  padding: 16px 20px 20px;
+  padding: 14px 16px 16px !important;
   text-align: center;
 }
 
