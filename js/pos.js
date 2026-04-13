@@ -901,7 +901,6 @@
   /* ═══════════════════════════════════════════ */
 
   function buildValueAdds() {
-    /* Insert after rental/pricing section */
     var pricingWrap = document.querySelector(".pbrd-pos-rental-wrap");
     var anchor = pricingWrap ? pricingWrap.closest("section") : null;
     if (!anchor) return;
@@ -911,12 +910,153 @@
     newSection.style.padding = "80px 0";
     anchor.insertAdjacentElement("afterend", newSection);
 
-    var phoneSVG = '<svg viewBox="0 0 24 24" fill="none"><rect x="5" y="1" width="14" height="22" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M10 18h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
-    var globeSVG = '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M2 12h20M12 2c2.5 3 4 6.5 4 10s-1.5 7-4 10c-2.5-3-4-6.5-4-10s1.5-7 4-10z" stroke="currentColor" stroke-width="1.5"/></svg>';
-    var refundSVG = '<svg viewBox="0 0 24 24" fill="none"><path d="M12 2v4m0 12v4M2 12h4m12 0h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="12" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M10.5 10.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5h0c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5M12 9v-.5M12 15.5v-.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>';
-
     var wrap = document.createElement("div");
     wrap.className = "pbrd-pos-valueadd-wrap";
+
+    /* ── SoftPOS animated graphic: phone + NFC waves + tapping card ── */
+    var softposGraphic =
+      '<svg viewBox="0 0 280 220" fill="none" xmlns="http://www.w3.org/2000/svg" class="pbrd-pos-va-graphic">' +
+        /* Phone body */
+        '<rect x="100" y="20" width="80" height="160" rx="12" fill="#1a1a2e" stroke="rgba(99,25,240,0.3)" stroke-width="1"/>' +
+        '<rect x="106" y="30" width="68" height="140" rx="8" fill="#0d0d18"/>' +
+        /* Screen content */
+        '<text x="140" y="80" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="7" font-family="system-ui">READY</text>' +
+        '<text x="140" y="105" text-anchor="middle" fill="#fff" font-size="18" font-weight="300" font-family="system-ui">\u20AC9.50</text>' +
+        /* NFC symbol on screen */
+        '<g transform="translate(128,115)">' +
+          '<path d="M12 3 C16 7, 16 17, 12 21" stroke="rgba(99,25,240,0.6)" stroke-width="1.2" fill="none" class="pbrd-pos-nfc-wave1"/>' +
+          '<path d="M12 -1 C20 5, 20 19, 12 25" stroke="rgba(99,25,240,0.4)" stroke-width="1.2" fill="none" class="pbrd-pos-nfc-wave2"/>' +
+          '<path d="M12 -5 C24 3, 24 21, 12 29" stroke="rgba(99,25,240,0.2)" stroke-width="1.2" fill="none" class="pbrd-pos-nfc-wave3"/>' +
+        '</g>' +
+        /* Punch hole camera */
+        '<circle cx="140" cy="35" r="2.5" fill="#0a0a12" stroke="rgba(99,25,240,0.15)" stroke-width="0.5"/>' +
+        /* NFC pulse rings emanating from phone */
+        '<circle cx="140" cy="100" r="55" fill="none" stroke="rgba(99,25,240,0.08)" stroke-width="0.8" class="pbrd-pos-va-pulse1"/>' +
+        '<circle cx="140" cy="100" r="75" fill="none" stroke="rgba(99,25,240,0.04)" stroke-width="0.8" class="pbrd-pos-va-pulse2"/>' +
+        '<circle cx="140" cy="100" r="95" fill="none" stroke="rgba(99,25,240,0.02)" stroke-width="0.8" class="pbrd-pos-va-pulse3"/>' +
+        /* Contactless card floating in from left */
+        '<g class="pbrd-pos-va-float-card">' +
+          '<rect x="18" y="68" width="60" height="38" rx="5" fill="rgba(99,25,240,0.08)" stroke="rgba(99,25,240,0.25)" stroke-width="0.8"/>' +
+          '<rect x="24" y="76" width="14" height="10" rx="2" fill="rgba(200,180,130,0.25)" stroke="rgba(200,180,130,0.35)" stroke-width="0.4"/>' +
+          '<rect x="24" y="94" width="30" height="2" rx="1" fill="rgba(255,255,255,0.06)"/>' +
+          '<g transform="translate(56,70)">' +
+            '<path d="M6 3 C8 5, 8 9, 6 11" stroke="rgba(255,255,255,0.15)" stroke-width="0.6" fill="none"/>' +
+            '<path d="M6 1 C10 4, 10 10, 6 13" stroke="rgba(255,255,255,0.1)" stroke-width="0.6" fill="none"/>' +
+          '</g>' +
+        '</g>' +
+        /* Check animation after tap */
+        '<circle cx="140" cy="200" r="8" fill="rgba(99,25,240,0.1)" class="pbrd-pos-va-done-dot"/>' +
+        '<text x="140" y="204" text-anchor="middle" fill="rgba(99,25,240,0.6)" font-size="9" font-family="system-ui" font-weight="600" class="pbrd-pos-va-done-dot">\u2713</text>' +
+      '</svg>';
+
+    /* ── DCC animated graphic: currency conversion wheel ── */
+    var dccGraphic =
+      '<svg viewBox="0 0 280 220" fill="none" xmlns="http://www.w3.org/2000/svg" class="pbrd-pos-va-graphic">' +
+        /* Central amount */
+        '<text x="140" y="98" text-anchor="middle" fill="#fff" font-size="22" font-weight="300" font-family="system-ui" class="pbrd-pos-va-dcc-amount">\u20AC25.00</text>' +
+        '<text x="140" y="116" text-anchor="middle" fill="rgba(99,25,240,0.5)" font-size="8" font-family="system-ui">ORIGINAL AMOUNT</text>' +
+        /* Orbit ring */
+        '<circle cx="140" cy="105" r="70" fill="none" stroke="rgba(99,25,240,0.08)" stroke-width="0.8" stroke-dasharray="3 4"/>' +
+        '<circle cx="140" cy="105" r="90" fill="none" stroke="rgba(99,25,240,0.04)" stroke-width="0.5" stroke-dasharray="2 6"/>' +
+        /* Orbiting currency symbols */
+        '<g class="pbrd-pos-va-orbit" style="--orbit-r:70px;--orbit-cx:140px;--orbit-cy:105px">' +
+          /* GBP */
+          '<g class="pbrd-pos-va-currency pbrd-pos-va-cur1">' +
+            '<circle r="16" fill="rgba(99,25,240,0.12)" stroke="rgba(99,25,240,0.25)" stroke-width="0.8"/>' +
+            '<text y="5" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="12" font-weight="600" font-family="system-ui">\u00A3</text>' +
+          '</g>' +
+          /* USD */
+          '<g class="pbrd-pos-va-currency pbrd-pos-va-cur2">' +
+            '<circle r="16" fill="rgba(99,25,240,0.12)" stroke="rgba(99,25,240,0.25)" stroke-width="0.8"/>' +
+            '<text y="5" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="12" font-weight="600" font-family="system-ui">$</text>' +
+          '</g>' +
+          /* JPY */
+          '<g class="pbrd-pos-va-currency pbrd-pos-va-cur3">' +
+            '<circle r="16" fill="rgba(99,25,240,0.12)" stroke="rgba(99,25,240,0.25)" stroke-width="0.8"/>' +
+            '<text y="5" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="12" font-weight="600" font-family="system-ui">\u00A5</text>' +
+          '</g>' +
+          /* CHF */
+          '<g class="pbrd-pos-va-currency pbrd-pos-va-cur4">' +
+            '<circle r="14" fill="rgba(99,25,240,0.08)" stroke="rgba(99,25,240,0.18)" stroke-width="0.6"/>' +
+            '<text y="4" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="9" font-weight="600" font-family="system-ui">CHF</text>' +
+          '</g>' +
+          /* SEK */
+          '<g class="pbrd-pos-va-currency pbrd-pos-va-cur5">' +
+            '<circle r="13" fill="rgba(99,25,240,0.06)" stroke="rgba(99,25,240,0.14)" stroke-width="0.5"/>' +
+            '<text y="4" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="8" font-weight="600" font-family="system-ui">kr</text>' +
+          '</g>' +
+        '</g>' +
+        /* Conversion arrow */
+        '<g class="pbrd-pos-va-convert-arrow">' +
+          '<path d="M140 130 L140 160" stroke="rgba(99,25,240,0.4)" stroke-width="1" stroke-dasharray="3 2"/>' +
+          '<path d="M135 155 L140 163 L145 155" fill="rgba(99,25,240,0.4)"/>' +
+        '</g>' +
+        /* Converted amount that cycles */
+        '<text x="140" y="185" text-anchor="middle" fill="rgba(99,25,240,0.8)" font-size="14" font-weight="600" font-family="system-ui" class="pbrd-pos-va-converted">\u00A321.40</text>' +
+        '<text x="140" y="200" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-size="7" font-family="system-ui" class="pbrd-pos-va-converted-label">CUSTOMER PAYS IN HOME CURRENCY</text>' +
+      '</svg>';
+
+    /* ── InstaTax animated graphic: receipt + refund flow ── */
+    var instaTaxGraphic =
+      '<svg viewBox="0 0 280 220" fill="none" xmlns="http://www.w3.org/2000/svg" class="pbrd-pos-va-graphic">' +
+        /* Receipt on left */
+        '<g class="pbrd-pos-va-receipt">' +
+          '<rect x="30" y="30" width="90" height="130" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)" stroke-width="0.6"/>' +
+          /* Zigzag bottom */
+          '<path d="M30 160 L37 155 L44 160 L51 155 L58 160 L65 155 L72 160 L79 155 L86 160 L93 155 L100 160 L107 155 L114 160 L120 155" stroke="rgba(255,255,255,0.1)" stroke-width="0.6" fill="none"/>' +
+          /* Receipt lines */
+          '<text x="75" y="50" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="6" font-family="system-ui" font-weight="600">PURCHASE</text>' +
+          '<rect x="42" y="58" width="66" height="1" fill="rgba(255,255,255,0.06)"/>' +
+          '<text x="44" y="72" fill="rgba(255,255,255,0.2)" font-size="6" font-family="system-ui">Items</text>' +
+          '<text x="106" y="72" text-anchor="end" fill="rgba(255,255,255,0.3)" font-size="6" font-family="system-ui">\u20AC250.00</text>' +
+          '<text x="44" y="84" fill="rgba(255,255,255,0.2)" font-size="6" font-family="system-ui">VAT (21%)</text>' +
+          '<text x="106" y="84" text-anchor="end" fill="rgba(99,25,240,0.7)" font-size="6" font-weight="700" font-family="system-ui" class="pbrd-pos-va-tax-highlight">\u20AC52.50</text>' +
+          '<rect x="42" y="90" width="66" height="1" fill="rgba(255,255,255,0.06)"/>' +
+          '<text x="44" y="104" fill="rgba(255,255,255,0.3)" font-size="7" font-weight="600" font-family="system-ui">Total</text>' +
+          '<text x="106" y="104" text-anchor="end" fill="#fff" font-size="7" font-weight="600" font-family="system-ui">\u20AC302.50</text>' +
+          /* Tourist card detected badge */
+          '<rect x="42" y="115" width="66" height="18" rx="9" fill="rgba(99,25,240,0.12)" class="pbrd-pos-va-detect-badge"/>' +
+          '<text x="75" y="127" text-anchor="middle" fill="rgba(99,25,240,0.8)" font-size="5.5" font-weight="600" font-family="system-ui" class="pbrd-pos-va-detect-badge">\uD83C\uDF0D Tourist Card Detected</text>' +
+        '</g>' +
+
+        /* Animated refund arrow — curves from receipt to tourist */
+        '<g class="pbrd-pos-va-refund-flow">' +
+          '<path d="M120 90 C155 90, 155 60, 170 55" stroke="rgba(99,25,240,0.4)" stroke-width="1.2" fill="none" stroke-dasharray="4 3" class="pbrd-pos-va-refund-path"/>' +
+          '<circle r="4" fill="#6319f0" class="pbrd-pos-va-refund-dot">' +
+            '<animateMotion dur="2s" repeatCount="indefinite" path="M120 90 C155 90, 155 60, 170 55" begin="0s"/>' +
+          '</circle>' +
+          /* Refund amount traveling */
+          '<text x="150" y="68" text-anchor="middle" fill="rgba(99,25,240,0.9)" font-size="9" font-weight="700" font-family="system-ui" class="pbrd-pos-va-refund-amount">\u20AC52.50</text>' +
+        '</g>' +
+
+        /* Tourist / person icon on right */
+        '<g transform="translate(178,20)" class="pbrd-pos-va-tourist">' +
+          /* Person silhouette */
+          '<circle cx="40" cy="18" r="14" fill="rgba(99,25,240,0.08)" stroke="rgba(99,25,240,0.2)" stroke-width="0.8"/>' +
+          '<circle cx="40" cy="15" r="5" fill="rgba(255,255,255,0.15)"/>' +
+          '<path d="M30 30 C30 22, 50 22, 50 30" fill="rgba(255,255,255,0.08)"/>' +
+          /* Passport / flag hint */
+          '<rect x="24" y="38" width="32" height="22" rx="2" fill="rgba(99,25,240,0.06)" stroke="rgba(99,25,240,0.15)" stroke-width="0.5"/>' +
+          '<text x="40" y="52" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-size="6" font-family="system-ui">\uD83C\uDDEC\uD83C\uDDE7</text>' +
+          /* Refund received */
+          '<rect x="14" y="72" width="52" height="24" rx="12" fill="rgba(99,25,240,0.12)" stroke="rgba(99,25,240,0.25)" stroke-width="0.6" class="pbrd-pos-va-refund-badge"/>' +
+          '<text x="40" y="87" text-anchor="middle" fill="#6319f0" font-size="8" font-weight="700" font-family="system-ui" class="pbrd-pos-va-refund-badge">+\u20AC52.50</text>' +
+        '</g>' +
+
+        /* Bottom timeline */
+        '<g transform="translate(30,180)">' +
+          '<line x1="0" y1="5" x2="220" y2="5" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>' +
+          /* Step dots */
+          '<circle cx="20" cy="5" r="3" fill="rgba(99,25,240,0.5)" class="pbrd-pos-va-step1"/>' +
+          '<text x="20" y="20" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-size="5" font-family="system-ui">Purchase</text>' +
+          '<circle cx="110" cy="5" r="3" fill="rgba(99,25,240,0.3)" class="pbrd-pos-va-step2"/>' +
+          '<text x="110" y="20" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-size="5" font-family="system-ui">Auto-detect</text>' +
+          '<circle cx="200" cy="5" r="3" fill="rgba(99,25,240,0.3)" class="pbrd-pos-va-step3"/>' +
+          '<text x="200" y="20" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-size="5" font-family="system-ui">Refund sent</text>' +
+          /* Animated progress line */
+          '<line x1="20" y1="5" x2="200" y2="5" stroke="#6319f0" stroke-width="1.5" stroke-linecap="round" class="pbrd-pos-va-timeline-fill"/>' +
+        '</g>' +
+      '</svg>';
 
     wrap.innerHTML =
       '<div class="pbrd-pos-valueadd-header">' +
@@ -925,52 +1065,51 @@
         '<p>Every Paybyrd terminal unlocks capabilities that turn payments into a revenue engine.</p>' +
       '</div>' +
       '<div class="pbrd-pos-valueadd-grid">' +
-        /* SoftPOS */
+
+        /* ── SoftPOS card ── */
         '<div class="pbrd-pos-va-card pbrd-pos-reveal">' +
-          '<div class="pbrd-pos-va-icon">' + phoneSVG + '</div>' +
-          '<div class="pbrd-pos-va-label">NEW</div>' +
-          '<h4>SoftPOS</h4>' +
-          '<p class="pbrd-pos-va-tagline">Your phone is your terminal.</p>' +
-          '<p>Accept contactless payments on any NFC-enabled Android phone or tablet \u2014 no dedicated hardware needed. Download the Paybyrd app, tap, and get paid. Perfect for pop-ups, deliveries, or businesses just getting started.</p>' +
-          '<div class="pbrd-pos-va-stats">' +
-            '<div><span class="pbrd-pos-va-stat-val">\u20AC0</span><span class="pbrd-pos-va-stat-lbl">Hardware cost</span></div>' +
-            '<div><span class="pbrd-pos-va-stat-val">30s</span><span class="pbrd-pos-va-stat-lbl">Setup time</span></div>' +
-            '<div><span class="pbrd-pos-va-stat-val">NFC</span><span class="pbrd-pos-va-stat-lbl">Contactless</span></div>' +
+          '<div class="pbrd-pos-va-visual">' + softposGraphic + '</div>' +
+          '<div class="pbrd-pos-va-body">' +
+            '<div class="pbrd-pos-va-label">NEW</div>' +
+            '<h4>SoftPOS</h4>' +
+            '<p>Turn any NFC phone into a terminal. Zero hardware, 30-second setup.</p>' +
+            '<div class="pbrd-pos-va-stats">' +
+              '<div><span class="pbrd-pos-va-stat-val">\u20AC0</span><span class="pbrd-pos-va-stat-lbl">Hardware</span></div>' +
+              '<div><span class="pbrd-pos-va-stat-val">30s</span><span class="pbrd-pos-va-stat-lbl">Setup</span></div>' +
+              '<div><span class="pbrd-pos-va-stat-val">NFC</span><span class="pbrd-pos-va-stat-lbl">Tap to pay</span></div>' +
+            '</div>' +
           '</div>' +
         '</div>' +
-        /* DCC */
+
+        /* ── DCC card ── */
         '<div class="pbrd-pos-va-card pbrd-pos-reveal">' +
-          '<div class="pbrd-pos-va-icon">' + globeSVG + '</div>' +
-          '<h4>Dynamic Currency Conversion</h4>' +
-          '<p class="pbrd-pos-va-tagline">Let tourists pay in their own currency.</p>' +
-          '<p>When a foreign card is detected, the terminal automatically offers to convert the amount to the cardholder\u2019s home currency at transparent rates. Tourists love the clarity \u2014 and you earn up to 80% of the DCC revenue share on every converted transaction.</p>' +
-          '<div class="pbrd-pos-va-stats">' +
-            '<div><span class="pbrd-pos-va-stat-val">80%</span><span class="pbrd-pos-va-stat-lbl">Revenue share</span></div>' +
-            '<div><span class="pbrd-pos-va-stat-val">192+</span><span class="pbrd-pos-va-stat-lbl">Currencies</span></div>' +
-            '<div><span class="pbrd-pos-va-stat-val">Auto</span><span class="pbrd-pos-va-stat-lbl">Detection</span></div>' +
+          '<div class="pbrd-pos-va-visual">' + dccGraphic + '</div>' +
+          '<div class="pbrd-pos-va-body">' +
+            '<h4>Dynamic Currency Conversion</h4>' +
+            '<p>Foreign cards auto-detected. Tourists pay in their currency. You earn up to 80% of the conversion margin.</p>' +
+            '<div class="pbrd-pos-va-stats">' +
+              '<div><span class="pbrd-pos-va-stat-val">80%</span><span class="pbrd-pos-va-stat-lbl">Revenue share</span></div>' +
+              '<div><span class="pbrd-pos-va-stat-val">192+</span><span class="pbrd-pos-va-stat-lbl">Currencies</span></div>' +
+              '<div><span class="pbrd-pos-va-stat-val">Auto</span><span class="pbrd-pos-va-stat-lbl">Detection</span></div>' +
+            '</div>' +
           '</div>' +
         '</div>' +
-        /* Instant TaxFree */
+
+        /* ── InstaTax card — full width ── */
         '<div class="pbrd-pos-va-card pbrd-pos-va-card-wide pbrd-pos-reveal">' +
-          '<div class="pbrd-pos-va-icon">' + refundSVG + '</div>' +
-          '<div class="pbrd-pos-va-label" style="background:rgba(120,255,180,0.1);color:rgba(120,255,180,0.9)">EXCLUSIVE</div>' +
-          '<h4>Paybyrd InstaTax\u2122</h4>' +
-          '<p class="pbrd-pos-va-tagline">Automated tax refunds. Zero staff training. New revenue stream.</p>' +
-          '<p>Our terminal automatically detects eligible tourist cards and offers a VAT refund directly on screen \u2014 no apps to download, no paper forms, no employee involvement. The refund processes instantly and the tourist gets paid within days. Merchants unlock a completely new income stream without lifting a finger.</p>' +
-          '<div class="pbrd-pos-va-features">' +
-            '<div class="pbrd-pos-va-feat">' + checkSVG + '<span>Auto-detects eligible tourist cards</span></div>' +
-            '<div class="pbrd-pos-va-feat">' + checkSVG + '<span>Refund offered on-screen \u2014 zero staff training</span></div>' +
-            '<div class="pbrd-pos-va-feat">' + checkSVG + '<span>Tourist gets paid in days, not months</span></div>' +
-            '<div class="pbrd-pos-va-feat">' + checkSVG + '<span>New revenue stream for merchants</span></div>' +
-            '<div class="pbrd-pos-va-feat">' + checkSVG + '<span>No apps, no paper, no extra hardware</span></div>' +
-            '<div class="pbrd-pos-va-feat">' + checkSVG + '<span>Works on all Paybyrd Android terminals</span></div>' +
-          '</div>' +
-          '<div class="pbrd-pos-va-stats" style="margin-top:20px">' +
-            '<div><span class="pbrd-pos-va-stat-val">50%</span><span class="pbrd-pos-va-stat-lbl">Higher merchant revenue vs legacy</span></div>' +
-            '<div><span class="pbrd-pos-va-stat-val">40%</span><span class="pbrd-pos-va-stat-lbl">Higher return rate</span></div>' +
-            '<div><span class="pbrd-pos-va-stat-val">1M+</span><span class="pbrd-pos-va-stat-lbl">Tourists served</span></div>' +
+          '<div class="pbrd-pos-va-visual pbrd-pos-va-visual-wide">' + instaTaxGraphic + '</div>' +
+          '<div class="pbrd-pos-va-body">' +
+            '<div class="pbrd-pos-va-label" style="background:rgba(99,25,240,0.12);color:#6319f0">EXCLUSIVE</div>' +
+            '<h4>Paybyrd InstaTax\u2122</h4>' +
+            '<p>Terminal auto-detects tourist cards, offers VAT refund on-screen. No apps, no paper, no staff training. Tourist gets refunded in days. You unlock a new revenue stream.</p>' +
+            '<div class="pbrd-pos-va-stats">' +
+              '<div><span class="pbrd-pos-va-stat-val">50%</span><span class="pbrd-pos-va-stat-lbl">Higher revenue vs legacy</span></div>' +
+              '<div><span class="pbrd-pos-va-stat-val">40%</span><span class="pbrd-pos-va-stat-lbl">Higher return rate</span></div>' +
+              '<div><span class="pbrd-pos-va-stat-val">1M+</span><span class="pbrd-pos-va-stat-lbl">Tourists served</span></div>' +
+            '</div>' +
           '</div>' +
         '</div>' +
+
       '</div>';
 
     newSection.appendChild(wrap);
