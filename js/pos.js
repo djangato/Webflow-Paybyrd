@@ -592,7 +592,13 @@
         '</div>' +
       '</div>' +
 
-      /* ── 3 terminal cards ── */
+      /* ── Buy / Rent toggle ── */
+      '<div class="pbrd-pos-mode-toggle" id="pbrd-pos-mode-toggle">' +
+        '<button class="pbrd-pos-mode-btn pbrd-pos-mode--active" data-mode="buy">Purchase</button>' +
+        '<button class="pbrd-pos-mode-btn" data-mode="rent">Rental</button>' +
+      '</div>' +
+
+      /* ── 4 terminal cards ── */
       '<div class="pbrd-pos-pricing-grid">' +
 
         /* Renegade */
@@ -600,18 +606,14 @@
           '<div class="pbrd-pos-pc-img-white"><img src="' + BASE + 'a77.png" alt="Renegade" loading="lazy"></div>' +
           '<div class="pbrd-pos-pc-body-white">' +
             '<h4>Renegade</h4>' +
-            '<div class="pbrd-pos-pc-sub">Handheld POS Terminal</div>' +
-            '<div class="pbrd-pos-pc-price-line"><span class="pbrd-pos-pc-price-main">\u20AC295</span></div>' +
-            '<div class="pbrd-pos-pc-btns">' +
-              '<a href="/book-demo" class="pbrd-pos-pc-btn-primary">Order now</a>' +
-            '</div>' +
+            '<div class="pbrd-pos-pc-sub">Handheld Terminal</div>' +
+            '<div class="pbrd-pos-pc-price-line"><span class="pbrd-pos-pc-price-main pbrd-pos-price-buy">\u20AC295</span><span class="pbrd-pos-pc-price-main pbrd-pos-price-rent" style="display:none">\u20AC18<span class="pbrd-pos-pc-period">/mo</span></span></div>' +
+            '<a href="/book-demo" class="pbrd-pos-pc-btn-primary">Order now</a>' +
             '<ul class="pbrd-pos-pc-list">' +
               '<li>' + checkSVG + ' Compact and lightweight</li>' +
               '<li>' + checkSVG + ' Always online 4G / WiFi</li>' +
               '<li>' + checkSVG + ' Front-facing NFC</li>' +
-              '<li>' + checkSVG + ' Digital receipts via QR or email</li>' +
             '</ul>' +
-            '<div class="pbrd-pos-pc-rental">Starting \u20AC18 per month per active terminal</div>' +
           '</div>' +
         '</div>' +
 
@@ -622,17 +624,29 @@
           '<div class="pbrd-pos-pc-body-white">' +
             '<h4>Rawhide</h4>' +
             '<div class="pbrd-pos-pc-sub">Mobile POS Terminal</div>' +
-            '<div class="pbrd-pos-pc-price-line"><span class="pbrd-pos-pc-price-main">\u20AC395</span></div>' +
-            '<div class="pbrd-pos-pc-btns">' +
-              '<a href="/book-demo" class="pbrd-pos-pc-btn-primary">Order now</a>' +
-            '</div>' +
+            '<div class="pbrd-pos-pc-price-line"><span class="pbrd-pos-pc-price-main pbrd-pos-price-buy">\u20AC395</span><span class="pbrd-pos-pc-price-main pbrd-pos-price-rent" style="display:none">\u20AC22<span class="pbrd-pos-pc-period">/mo</span></span></div>' +
+            '<a href="/book-demo" class="pbrd-pos-pc-btn-primary">Order now</a>' +
             '<ul class="pbrd-pos-pc-list">' +
-              '<li>' + checkSVG + ' Fast, secure transactions</li>' +
-              '<li>' + checkSVG + ' Lightweight and portable</li>' +
               '<li>' + checkSVG + ' Embedded receipt printer</li>' +
-              '<li>' + checkSVG + ' Starting \u20AC22/mo per active terminal</li>' +
+              '<li>' + checkSVG + ' Lightweight and portable</li>' +
+              '<li>' + checkSVG + ' 4G + Wi-Fi + Bluetooth</li>' +
             '</ul>' +
-            '<div class="pbrd-pos-pc-rental">Starting \u20AC22 per month per active terminal</div>' +
+          '</div>' +
+        '</div>' +
+
+        /* Maverick */
+        '<div class="pbrd-pos-pricing-card pbrd-pos-reveal">' +
+          '<div class="pbrd-pos-pc-img-white"><img src="' + BASE + 'sunmi-v3.png" alt="Maverick" loading="lazy"></div>' +
+          '<div class="pbrd-pos-pc-body-white">' +
+            '<h4>Maverick</h4>' +
+            '<div class="pbrd-pos-pc-sub">Mobile POS Terminal</div>' +
+            '<div class="pbrd-pos-pc-price-line"><span class="pbrd-pos-pc-price-main pbrd-pos-price-buy">\u20AC450</span><span class="pbrd-pos-pc-price-main pbrd-pos-price-rent" style="display:none">\u20AC25<span class="pbrd-pos-pc-period">/mo</span></span></div>' +
+            '<a href="/book-demo" class="pbrd-pos-pc-btn-primary">Order now</a>' +
+            '<ul class="pbrd-pos-pc-list">' +
+              '<li>' + checkSVG + ' High-speed thermal printer</li>' +
+              '<li>' + checkSVG + ' Android 12</li>' +
+              '<li>' + checkSVG + ' NFC contactless</li>' +
+            '</ul>' +
           '</div>' +
         '</div>' +
 
@@ -642,17 +656,13 @@
           '<div class="pbrd-pos-pc-body-white">' +
             '<h4>Titan</h4>' +
             '<div class="pbrd-pos-pc-sub">Fixed POS Terminal</div>' +
-            '<div class="pbrd-pos-pc-price-line"><span class="pbrd-pos-pc-price-main">\u20AC890</span></div>' +
-            '<div class="pbrd-pos-pc-btns">' +
-              '<a href="/book-demo" class="pbrd-pos-pc-btn-primary">Order now</a>' +
-            '</div>' +
+            '<div class="pbrd-pos-pc-price-line"><span class="pbrd-pos-pc-price-main pbrd-pos-price-buy">\u20AC890</span><span class="pbrd-pos-pc-price-main pbrd-pos-price-rent" style="display:none">\u20AC45<span class="pbrd-pos-pc-period">/mo</span></span></div>' +
+            '<a href="/book-demo" class="pbrd-pos-pc-btn-primary">Order now</a>' +
             '<ul class="pbrd-pos-pc-list">' +
-              '<li>' + checkSVG + ' Ethernet connection for reliability</li>' +
-              '<li>' + checkSVG + ' Vandal-proof and easy to mount</li>' +
-              '<li>' + checkSVG + ' Ideal for kiosks and unattended payment</li>' +
-              '<li>' + checkSVG + ' Starting \u20AC45/mo per active terminal</li>' +
+              '<li>' + checkSVG + ' Ethernet for reliability</li>' +
+              '<li>' + checkSVG + ' IP65 vandal-proof</li>' +
+              '<li>' + checkSVG + ' Ideal for kiosks</li>' +
             '</ul>' +
-            '<div class="pbrd-pos-pc-rental">Starting \u20AC45 per month per active terminal</div>' +
           '</div>' +
         '</div>' +
 
@@ -661,6 +671,19 @@
     newSection.appendChild(wrap);
     observeReveal(".pbrd-pos-reveal", 150, wrap);
 
+    /* Buy/Rent toggle */
+    var toggleWrap = document.getElementById("pbrd-pos-mode-toggle");
+    if (toggleWrap) {
+      toggleWrap.querySelectorAll(".pbrd-pos-mode-btn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var mode = btn.getAttribute("data-mode");
+          toggleWrap.querySelectorAll(".pbrd-pos-mode-btn").forEach(function (b) { b.classList.remove("pbrd-pos-mode--active"); });
+          btn.classList.add("pbrd-pos-mode--active");
+          wrap.querySelectorAll(".pbrd-pos-price-buy").forEach(function (el) { el.style.display = mode === "buy" ? "" : "none"; });
+          wrap.querySelectorAll(".pbrd-pos-price-rent").forEach(function (el) { el.style.display = mode === "rent" ? "" : "none"; });
+        });
+      });
+    }
   }
 
   /* ═══════════════════════════════════════════ */
