@@ -7014,10 +7014,7 @@
     /* ── Add missing payment methods: NuPay, Ethereum, Bitcoin ── */
     var newMethods = [
       { name: "NuPay", type: "Digital Wallet", region: "Worldwide",
-        icon: '<svg viewBox="0 0 64 64" width="64" height="64" fill="none" xmlns="http://www.w3.org/2000/svg">' +
-          '<rect width="64" height="64" rx="14" fill="#820AD1"/>' +
-          '<path d="M18 44V20h4.5l13 16.5V20H40v24h-4.5L22.5 27.5V44H18Z" fill="#fff"/>' +
-          '</svg>' },
+        icon: '<img src="https://djangato.github.io/Webflow-Paybyrd/assets/pos/nupay.png" width="64" height="64" alt="NuPay" style="border-radius:14px;object-fit:contain;">' },
       { name: "Ethereum", type: "Cryptocurrency", region: "Worldwide",
         icon: '<svg viewBox="0 0 64 64" width="64" height="64" fill="none" xmlns="http://www.w3.org/2000/svg">' +
           '<rect width="64" height="64" rx="14" fill="#627EEA"/>' +
@@ -7339,39 +7336,55 @@
   /* ═══════════════════════════════════════════ */
 
   function fixFooter() {
-    /* Find all footer-like sections at the bottom of the page */
-    var footers = document.querySelectorAll("footer, [class*='footer'], [class*='Footer']");
-    if (footers.length === 0) {
-      /* Try the last section on the page */
-      var allSections = document.querySelectorAll("section, [class*='section']");
-      if (allSections.length > 0) {
-        var lastSection = allSections[allSections.length - 1];
-        if (lastSection.textContent.toLowerCase().indexOf("privacy") > -1 ||
-            lastSection.textContent.toLowerCase().indexOf("terms") > -1 ||
-            lastSection.textContent.toLowerCase().indexOf("copyright") > -1) {
-          footers = [lastSection];
-        }
-      }
-    }
+    /* Find footer by its unique heading text, or by footer tag */
+    var footerSections = [];
 
-    footers.forEach(function(footer) {
-      /* Force all text to be visible */
+    /* Method 1: find by "Finally, a payment provider" heading */
+    document.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach(function(h) {
+      if (h.textContent.toLowerCase().indexOf("finally") > -1 && h.textContent.toLowerCase().indexOf("payment provider") > -1) {
+        var sec = h.closest("section") || h.closest("[class*='section']") || h.parentElement;
+        if (sec) footerSections.push(sec);
+      }
+    });
+
+    /* Method 2: footer tag */
+    document.querySelectorAll("footer").forEach(function(f) {
+      footerSections.push(f);
+    });
+
+    /* Method 3: sections containing privacy/terms links near bottom */
+    document.querySelectorAll("a").forEach(function(a) {
+      if (a.textContent.toLowerCase().indexOf("privacy policy") > -1) {
+        var sec = a.closest("section") || a.closest("[class*='section']") || a.closest("footer");
+        if (sec && footerSections.indexOf(sec) === -1) footerSections.push(sec);
+      }
+    });
+
+    footerSections.forEach(function(footer) {
+      /* Check if footer bg is dark — if so, fix text colors */
+      var bg = window.getComputedStyle(footer).backgroundColor;
+      var isDark = !bg || bg === "rgba(0, 0, 0, 0)" || bg.indexOf("rgb(0,") > -1 ||
+                   bg.indexOf("rgb(10,") > -1 || bg.indexOf("rgb(17,") > -1 ||
+                   bg.indexOf("rgb(8,") > -1;
+
+      /* Also check: if most text is dark on a dark bg */
       footer.querySelectorAll("*").forEach(function(el) {
+        if (el.children.length > 5) return; /* skip containers */
         var cs = window.getComputedStyle(el);
-        var r = parseInt(cs.color);
-        /* If text color is very dark (near black) on what's likely a dark bg */
-        if (cs.color.indexOf("rgb(0,") === 0 || cs.color === "rgb(0, 0, 0)" ||
-            cs.color.indexOf("rgba(0,") === 0) {
+        var col = cs.color;
+        /* Fix invisible text: very dark color on dark background */
+        var isBlackText = col === "rgb(0, 0, 0)" || col.indexOf("rgb(17,") > -1 ||
+                          col.indexOf("rgb(0, 0, 0)") > -1;
+        if (isBlackText) {
           if (el.tagName === "A") {
-            el.style.setProperty("color", "rgba(255,255,255,0.5)", "important");
+            el.style.setProperty("color", "rgba(255,255,255,0.55)", "important");
+          } else if (el.tagName === "H1" || el.tagName === "H2" || el.tagName === "H3" || el.tagName === "H4") {
+            el.style.setProperty("color", "#fff", "important");
           } else {
-            el.style.setProperty("color", "rgba(255,255,255,0.35)", "important");
+            el.style.setProperty("color", "rgba(255,255,255,0.4)", "important");
           }
         }
       });
-
-      /* Make sure footer has decent padding and separation */
-      footer.style.setProperty("border-top", "1px solid rgba(255,255,255,0.06)", "important");
     });
   }
 
