@@ -6947,27 +6947,42 @@
       });
     }
 
-    /* Last resort: find the section with the hero heading and grab its grid */
+    /* Last resort: scan ALL divs for grid display with many children containing payment keywords */
     if (!gridContainer) {
-      var heroH = document.querySelector("h1");
-      if (heroH) {
-        var sec = heroH.closest("section") || heroH.closest("[class*='section']");
-        if (sec) {
-          /* Get all direct children that look like cards */
-          var allEls = sec.querySelectorAll("div");
-          allEls.forEach(function(el) {
-            if (gridContainer) return;
-            var cs = window.getComputedStyle(el);
-            if (cs.display === "grid" && el.children.length >= 5) {
-              var text = el.textContent.toLowerCase();
-              if (text.includes("visa") && text.includes("mastercard")) {
-                gridContainer = el;
-                cards = Array.prototype.slice.call(el.children);
-              }
-            }
-          });
+      var allDivs = document.querySelectorAll("div");
+      allDivs.forEach(function(el) {
+        if (gridContainer) return;
+        if (el.children.length < 5) return;
+        var cs = window.getComputedStyle(el);
+        if (cs.display === "grid" || cs.display === "flex") {
+          var text = el.textContent.toLowerCase();
+          if (text.includes("visa") && text.includes("mastercard")) {
+            gridContainer = el;
+            cards = Array.prototype.slice.call(el.children);
+            console.log("[Paybyrd] Grid found via computed style scan. Class: " + el.className + " Children: " + el.children.length);
+          }
         }
-      }
+      });
+    }
+
+    /* Nuclear option: find any element containing "Visa" and walk up to find the grid parent */
+    if (!gridContainer) {
+      document.querySelectorAll("div, span, p").forEach(function(el) {
+        if (gridContainer) return;
+        if (el.textContent.trim() === "Visa") {
+          /* Walk up to find the grid-like ancestor */
+          var parent = el.parentElement;
+          for (var depth = 0; depth < 8 && parent; depth++) {
+            if (parent.children.length >= 10) {
+              gridContainer = parent;
+              cards = Array.prototype.slice.call(parent.children);
+              console.log("[Paybyrd] Grid found via Visa walkup at depth " + depth + ". Class: " + parent.className + " Tag: " + parent.tagName + " Children: " + parent.children.length);
+              break;
+            }
+            parent = parent.parentElement;
+          }
+        }
+      });
     }
 
     if (!gridContainer || cards.length === 0) {
