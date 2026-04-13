@@ -1191,23 +1191,30 @@
       });
     });
 
-    /* ── Find and restyle submit — could be input, button, or a.w-button ── */
-    var submitBtn = section.querySelector('input[type="submit"], button[type="submit"], .w-button, a.button, [data-wait]');
-    if (submitBtn) {
-      submitBtn.style.setProperty("background", "#6319f0", "important");
-      submitBtn.style.setProperty("color", "#fff", "important");
-      submitBtn.style.setProperty("border", "none", "important");
-      submitBtn.style.setProperty("border-radius", "100px", "important");
-      submitBtn.style.setProperty("padding", "14px 48px", "important");
-      submitBtn.style.setProperty("font-size", "0.9375rem", "important");
-      submitBtn.style.setProperty("font-weight", "600", "important");
-      submitBtn.style.setProperty("cursor", "pointer", "important");
-      if (submitBtn.tagName === "INPUT") {
-        submitBtn.value = "Get my terminal \u2192";
-      } else {
-        submitBtn.textContent = "Get my terminal \u2192";
+    /* ── Find and restyle ALL buttons in the form area ── */
+    section.querySelectorAll('input[type="submit"], button[type="submit"], .w-button, a.button, [data-wait], button, .w-slider-arrow-left, .w-slider-arrow-right').forEach(function(btn) {
+      /* Skip if it's not visible or is a back/prev button */
+      if (btn.offsetHeight === 0) return;
+      var text = (btn.value || btn.textContent || "").toLowerCase().trim();
+      if (text === "back" || text === "previous") return;
+
+      btn.style.setProperty("background", "#6319f0", "important");
+      btn.style.setProperty("color", "#fff", "important");
+      btn.style.setProperty("border", "none", "important");
+      btn.style.setProperty("border-radius", "100px", "important");
+      btn.style.setProperty("padding", "14px 48px", "important");
+      btn.style.setProperty("font-size", "0.9375rem", "important");
+      btn.style.setProperty("font-weight", "600", "important");
+      btn.style.setProperty("cursor", "pointer", "important");
+
+      if (text === "next" || text === "submit" || text === "send") {
+        if (btn.tagName === "INPUT") {
+          btn.value = "Get my terminal \u2192";
+        } else {
+          btn.textContent = "Get my terminal \u2192";
+        }
       }
-    }
+    });
 
     /* ── Add bottom note under form ── */
     var note = document.createElement("p");
