@@ -680,7 +680,7 @@
         '<div class="pbrd-pos-va-card pbrd-pos-va-card-wide pbrd-pos-reveal">' +
           '<div class="pbrd-pos-va-icon">' + refundSVG + '</div>' +
           '<div class="pbrd-pos-va-label" style="background:rgba(120,255,180,0.1);color:rgba(120,255,180,0.9)">EXCLUSIVE</div>' +
-          '<h4>Paybyrd Instant TaxFree</h4>' +
+          '<h4>Paybyrd InstaTax\u2122</h4>' +
           '<p class="pbrd-pos-va-tagline">Automated tax refunds. Zero staff training. New revenue stream.</p>' +
           '<p>Our terminal automatically detects eligible tourist cards and offers a VAT refund directly on screen \u2014 no apps to download, no paper forms, no employee involvement. The refund processes instantly and the tourist gets paid within days. Merchants unlock a completely new income stream without lifting a finger.</p>' +
           '<div class="pbrd-pos-va-features">' +
