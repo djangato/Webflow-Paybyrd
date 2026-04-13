@@ -6355,32 +6355,20 @@
       el.style.color = "#333";
     });
 
-    /* Wrap form in a card */
-    var form = section.querySelector("form");
-    if (!form) return;
-
-    var formCard = document.createElement("div");
-    formCard.className = "pbrd-pos-form-card";
-    form.parentNode.insertBefore(formCard, form);
-    formCard.appendChild(form);
-
-    /* Style form inputs */
+    /* Style form inputs — don't wrap, just add classes */
     section.querySelectorAll("input:not([type=submit]):not([type=checkbox]), textarea, select").forEach(function(el) {
       el.classList.add("pbrd-pos-form-input");
     });
 
-    /* Style submit button */
     var submitBtn = section.querySelector('input[type="submit"], button[type="submit"]');
     if (submitBtn) {
       submitBtn.classList.add("pbrd-pos-form-submit");
     }
 
-    /* Remove Webflow error messages that show next to fields */
-    section.querySelectorAll('[data-visible-on]').forEach(function(el) {
-      el.style.display = "none";
-    });
+    /* Insert trust badges above the form */
+    var form = section.querySelector("form");
+    if (!form) return;
 
-    /* Insert trust strip above the form card */
     var trust = document.createElement("div");
     trust.className = "pbrd-pos-trust";
     trust.innerHTML =
@@ -6397,7 +6385,7 @@
         '<div><span class="pbrd-pos-trust-val">PCI Level 1</span><span class="pbrd-pos-trust-lbl">DSS certified</span></div>' +
       '</div>';
 
-    formCard.parentNode.insertBefore(trust, formCard);
+    form.parentNode.insertBefore(trust, form);
   }
 
   /* ═══════════════════════════════════════════ */
