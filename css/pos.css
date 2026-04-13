@@ -1107,6 +1107,102 @@
   flex-shrink: 0;
 }
 
+/* ─── Pricing grid ─── */
+.pbrd-pos-pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.pbrd-pos-pricing-card {
+  background: #F9FAFB;
+  border: 1px solid #E5E7EB;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.pbrd-pos-pricing-card:hover {
+  border-color: rgba(160, 100, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(160, 100, 255, 0.08);
+  transform: translateY(-3px);
+}
+
+.pbrd-pos-pricing-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 4px 10px;
+  border-radius: 100px;
+  background: rgba(160, 100, 255, 0.9);
+  color: #fff;
+  font-size: 0.5625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  z-index: 2;
+}
+
+.pbrd-pos-pricing-img {
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0a0a0f;
+  overflow: hidden;
+}
+
+.pbrd-pos-pricing-img img {
+  max-height: 150px;
+  width: auto;
+  object-fit: contain;
+}
+
+.pbrd-pos-pricing-body {
+  padding: 20px;
+}
+
+.pbrd-pos-price-row {
+  display: flex;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.pbrd-pos-price {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pbrd-pos-price-val {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #111;
+  font-variant-numeric: tabular-nums;
+}
+
+.pbrd-pos-price-free .pbrd-pos-price-val {
+  color: rgba(160, 100, 255, 0.9);
+}
+
+.pbrd-pos-price-lbl {
+  font-size: 0.625rem;
+  color: #9CA3AF;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.pbrd-pos-pricing-includes {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid #E5E7EB;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
 .pbrd-pos-rental-cta {
   display: inline-flex;
   align-items: center;
@@ -1127,6 +1223,160 @@
   background: rgba(160, 100, 255, 1);
   transform: translateY(-2px);
   box-shadow: 0 8px 32px rgba(160, 100, 255, 0.3);
+}
+
+/* ═══════════════════════════════════════════ */
+/* Value-Add Services                          */
+/* ═══════════════════════════════════════════ */
+
+.pbrd-pos-valueadd-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.pbrd-pos-valueadd-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.pbrd-pos-valueadd-header h2 {
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+  margin: 0 0 12px;
+}
+
+.pbrd-pos-valueadd-header p {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.6;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.pbrd-pos-valueadd-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.pbrd-pos-va-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
+  padding: 32px;
+  transition: border-color 0.3s ease;
+}
+
+.pbrd-pos-va-card:hover {
+  border-color: rgba(160, 100, 255, 0.15);
+}
+
+.pbrd-pos-va-card-wide {
+  grid-column: span 2;
+}
+
+.pbrd-pos-va-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(160, 100, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.pbrd-pos-va-icon svg {
+  width: 22px;
+  height: 22px;
+  color: rgba(160, 100, 255, 0.8);
+}
+
+.pbrd-pos-va-label {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 100px;
+  background: rgba(160, 100, 255, 0.1);
+  color: rgba(160, 100, 255, 0.9);
+  font-size: 0.5625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+}
+
+.pbrd-pos-va-card h4 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 4px;
+}
+
+.pbrd-pos-va-tagline {
+  font-size: 0.875rem;
+  color: rgba(160, 100, 255, 0.6);
+  font-weight: 500;
+  font-style: italic;
+  margin: 0 0 12px;
+}
+
+.pbrd-pos-va-card > p {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.65;
+  margin: 0 0 16px;
+}
+
+.pbrd-pos-va-stats {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.pbrd-pos-va-stats > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pbrd-pos-va-stat-val {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+}
+
+.pbrd-pos-va-stat-lbl {
+  font-size: 0.625rem;
+  color: rgba(255, 255, 255, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.pbrd-pos-va-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.pbrd-pos-va-feat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.pbrd-pos-va-feat svg {
+  width: 14px;
+  height: 14px;
+  color: rgba(120, 255, 180, 0.7);
+  flex-shrink: 0;
 }
 
 /* ═══════════════════════════════════════════ */
@@ -1163,6 +1413,10 @@
   .pbrd-pos-lineup-grid { grid-template-columns: repeat(2, 1fr); }
   .pbrd-pos-tab-content.pbrd-pos-tab-active { grid-template-columns: 1fr; }
   .pbrd-pos-spec-visual { min-height: 260px; }
+  .pbrd-pos-pricing-grid { grid-template-columns: repeat(2, 1fr); }
+  .pbrd-pos-valueadd-grid { grid-template-columns: 1fr; }
+  .pbrd-pos-va-card-wide { grid-column: span 1; }
+  .pbrd-pos-va-features { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 768px) {
@@ -1178,5 +1432,6 @@
   .pbrd-pos-bento-inner { grid-template-columns: 1fr; }
   .pbrd-pos-tab { padding: 10px 14px; font-size: 0.75rem; }
   .pbrd-pos-rental-cards { grid-template-columns: 1fr; }
+  .pbrd-pos-pricing-grid { grid-template-columns: 1fr; max-width: 360px; margin-left: auto; margin-right: auto; }
   .pbrd-pos-trust { gap: 16px; }
 }

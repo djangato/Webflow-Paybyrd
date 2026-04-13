@@ -572,33 +572,132 @@
       return '<div class="pbrd-pos-rental-perk">' + checkSVG + '<span>' + text + '</span></div>';
     };
 
+    var devices = [
+      { name: "Tap Terminal", model: "SoftPOS", buy: null, rent: "Free", img: "a77.png", note: "Use your own Android device", pills: ["Your phone", "NFC", "Zero hardware"] },
+      { name: "Rawhide", model: "PAX A920 Pro", buy: "\u20AC395", rent: "\u20AC22/mo", img: "lineup-rawhide.png", note: "Most popular", pills: ['5.5" HD', "4G + WiFi", "Printer"] },
+      { name: "Maverick", model: "Sunmi V3", buy: "\u20AC450", rent: "\u20AC25/mo", img: "lineup-maverick.png", note: "Built-in printer", pills: ["Android 12", "High-speed print", "NFC"] },
+      { name: "Titan", model: "Sunmi T3 Pro", buy: "\u20AC890", rent: "\u20AC45/mo", img: "lineup-titan.png", note: "Desktop & kiosk", pills: ['15.6" Touch', "IP65", "Ethernet"] }
+    ];
+
     wrap.innerHTML =
       '<div class="pbrd-pos-section-label">PRICING</div>' +
-      '<h2>Own it or rent it. Your call.</h2>' +
-      '<p>Whether you need terminals for a season or a lifetime \u2014 flexible options that scale with your business.</p>' +
-      '<div class="pbrd-pos-rental-cards">' +
-        '<div class="pbrd-pos-rental-card pbrd-pos-reveal">' +
-          '<h4>Purchase</h4>' +
-          '<p>One-time investment, long-term value. Full ownership of your terminal fleet.</p>' +
-          '<div class="pbrd-pos-rental-perks">' +
-            perk("One-time purchase") +
-            perk("Lifetime OTA updates") +
-            perk("Full device ownership") +
+      '<h2>Choose one of our devices.<br>Or simply use your own.</h2>' +
+      '<p>Buy outright, rent monthly, or turn your own phone into a payment terminal with SoftPOS. Every option includes a free SIM with data plan.</p>';
+
+    var grid = '<div class="pbrd-pos-pricing-grid">';
+    for (var d = 0; d < devices.length; d++) {
+      var dev = devices[d];
+      var priceRow = '';
+      if (dev.buy) {
+        priceRow = '<div class="pbrd-pos-price-row"><div class="pbrd-pos-price"><span class="pbrd-pos-price-val">' + dev.buy + '</span><span class="pbrd-pos-price-lbl">Purchase</span></div><div class="pbrd-pos-price"><span class="pbrd-pos-price-val">' + dev.rent + '</span><span class="pbrd-pos-price-lbl">Rental</span></div></div>';
+      } else {
+        priceRow = '<div class="pbrd-pos-price-row"><div class="pbrd-pos-price pbrd-pos-price-free"><span class="pbrd-pos-price-val">' + dev.rent + '</span><span class="pbrd-pos-price-lbl">No hardware cost</span></div></div>';
+      }
+      var pillsHtml = '';
+      for (var p = 0; p < dev.pills.length; p++) {
+        pillsHtml += '<span class="pbrd-pos-tcard-pill">' + dev.pills[p] + '</span>';
+      }
+      grid += '<div class="pbrd-pos-pricing-card pbrd-pos-reveal">' +
+        (dev.note === "Most popular" ? '<div class="pbrd-pos-pricing-badge">Most popular</div>' : '') +
+        '<div class="pbrd-pos-pricing-img"><img src="' + BASE + dev.img + '" alt="' + dev.name + '" loading="lazy"></div>' +
+        '<div class="pbrd-pos-pricing-body">' +
+          '<div class="pbrd-pos-tcard-name">' + dev.name + '</div>' +
+          '<div class="pbrd-pos-tcard-model">' + dev.model + '</div>' +
+          priceRow +
+          '<div class="pbrd-pos-tcard-pills" style="margin-top:12px">' + pillsHtml + '</div>' +
+          '<div class="pbrd-pos-pricing-includes">' +
             perk("Free SIM + data plan") +
+            perk("OTA updates") +
+            perk("Paybyrd dashboard") +
           '</div>' +
         '</div>' +
-        '<div class="pbrd-pos-rental-card pbrd-pos-reveal">' +
-          '<h4>Rental</h4>' +
-          '<p>Ideal for festivals, conferences, seasonal peaks, or testing new locations.</p>' +
-          '<div class="pbrd-pos-rental-perks">' +
-            perk("Flexible monthly terms") +
-            perk("Free replacement if damaged") +
-            perk("Cancel anytime") +
-            perk("Free SIM + data plan") +
-          '</div>' +
-        '</div>' +
-      '</div>' +
+      '</div>';
+    }
+    grid += '</div>';
+
+    wrap.innerHTML += grid +
       '<a href="/book-demo" class="pbrd-pos-rental-cta">Get a Quote \u2192</a>';
+
+    newSection.appendChild(wrap);
+    observeReveal(".pbrd-pos-reveal", 150, wrap);
+  }
+
+  /* ═══════════════════════════════════════════ */
+  /* Section 6b: Value-Add Services              */
+  /* ═══════════════════════════════════════════ */
+
+  function buildValueAdds() {
+    /* Insert after rental/pricing section */
+    var pricingWrap = document.querySelector(".pbrd-pos-rental-wrap");
+    var anchor = pricingWrap ? pricingWrap.closest("section") : null;
+    if (!anchor) return;
+
+    var newSection = document.createElement("section");
+    newSection.style.background = "#0a0a0f";
+    newSection.style.padding = "80px 0";
+    anchor.insertAdjacentElement("afterend", newSection);
+
+    var phoneSVG = '<svg viewBox="0 0 24 24" fill="none"><rect x="5" y="1" width="14" height="22" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M10 18h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
+    var globeSVG = '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M2 12h20M12 2c2.5 3 4 6.5 4 10s-1.5 7-4 10c-2.5-3-4-6.5-4-10s1.5-7 4-10z" stroke="currentColor" stroke-width="1.5"/></svg>';
+    var refundSVG = '<svg viewBox="0 0 24 24" fill="none"><path d="M12 2v4m0 12v4M2 12h4m12 0h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="12" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M10.5 10.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5h0c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5M12 9v-.5M12 15.5v-.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>';
+
+    var wrap = document.createElement("div");
+    wrap.className = "pbrd-pos-valueadd-wrap";
+
+    wrap.innerHTML =
+      '<div class="pbrd-pos-valueadd-header">' +
+        '<div class="pbrd-pos-section-label">BEYOND PAYMENTS</div>' +
+        '<h2>More than a terminal.</h2>' +
+        '<p>Every Paybyrd terminal unlocks capabilities that turn payments into a revenue engine.</p>' +
+      '</div>' +
+      '<div class="pbrd-pos-valueadd-grid">' +
+        /* SoftPOS */
+        '<div class="pbrd-pos-va-card pbrd-pos-reveal">' +
+          '<div class="pbrd-pos-va-icon">' + phoneSVG + '</div>' +
+          '<div class="pbrd-pos-va-label">NEW</div>' +
+          '<h4>SoftPOS</h4>' +
+          '<p class="pbrd-pos-va-tagline">Your phone is your terminal.</p>' +
+          '<p>Accept contactless payments on any NFC-enabled Android phone or tablet \u2014 no dedicated hardware needed. Download the Paybyrd app, tap, and get paid. Perfect for pop-ups, deliveries, or businesses just getting started.</p>' +
+          '<div class="pbrd-pos-va-stats">' +
+            '<div><span class="pbrd-pos-va-stat-val">\u20AC0</span><span class="pbrd-pos-va-stat-lbl">Hardware cost</span></div>' +
+            '<div><span class="pbrd-pos-va-stat-val">30s</span><span class="pbrd-pos-va-stat-lbl">Setup time</span></div>' +
+            '<div><span class="pbrd-pos-va-stat-val">NFC</span><span class="pbrd-pos-va-stat-lbl">Contactless</span></div>' +
+          '</div>' +
+        '</div>' +
+        /* DCC */
+        '<div class="pbrd-pos-va-card pbrd-pos-reveal">' +
+          '<div class="pbrd-pos-va-icon">' + globeSVG + '</div>' +
+          '<h4>Dynamic Currency Conversion</h4>' +
+          '<p class="pbrd-pos-va-tagline">Let tourists pay in their own currency.</p>' +
+          '<p>When a foreign card is detected, the terminal automatically offers to convert the amount to the cardholder\u2019s home currency at transparent rates. Tourists love the clarity \u2014 and you earn up to 80% of the DCC revenue share on every converted transaction.</p>' +
+          '<div class="pbrd-pos-va-stats">' +
+            '<div><span class="pbrd-pos-va-stat-val">80%</span><span class="pbrd-pos-va-stat-lbl">Revenue share</span></div>' +
+            '<div><span class="pbrd-pos-va-stat-val">192+</span><span class="pbrd-pos-va-stat-lbl">Currencies</span></div>' +
+            '<div><span class="pbrd-pos-va-stat-val">Auto</span><span class="pbrd-pos-va-stat-lbl">Detection</span></div>' +
+          '</div>' +
+        '</div>' +
+        /* Instant TaxFree */
+        '<div class="pbrd-pos-va-card pbrd-pos-va-card-wide pbrd-pos-reveal">' +
+          '<div class="pbrd-pos-va-icon">' + refundSVG + '</div>' +
+          '<div class="pbrd-pos-va-label" style="background:rgba(120,255,180,0.1);color:rgba(120,255,180,0.9)">EXCLUSIVE</div>' +
+          '<h4>Paybyrd Instant TaxFree</h4>' +
+          '<p class="pbrd-pos-va-tagline">Automated tax refunds. Zero staff training. New revenue stream.</p>' +
+          '<p>Our terminal automatically detects eligible tourist cards and offers a VAT refund directly on screen \u2014 no apps to download, no paper forms, no employee involvement. The refund processes instantly and the tourist gets paid within days. Merchants unlock a completely new income stream without lifting a finger.</p>' +
+          '<div class="pbrd-pos-va-features">' +
+            '<div class="pbrd-pos-va-feat">' + checkSVG + '<span>Auto-detects eligible tourist cards</span></div>' +
+            '<div class="pbrd-pos-va-feat">' + checkSVG + '<span>Refund offered on-screen \u2014 zero staff training</span></div>' +
+            '<div class="pbrd-pos-va-feat">' + checkSVG + '<span>Tourist gets paid in days, not months</span></div>' +
+            '<div class="pbrd-pos-va-feat">' + checkSVG + '<span>New revenue stream for merchants</span></div>' +
+            '<div class="pbrd-pos-va-feat">' + checkSVG + '<span>No apps, no paper, no extra hardware</span></div>' +
+            '<div class="pbrd-pos-va-feat">' + checkSVG + '<span>Works on all Paybyrd Android terminals</span></div>' +
+          '</div>' +
+          '<div class="pbrd-pos-va-stats" style="margin-top:20px">' +
+            '<div><span class="pbrd-pos-va-stat-val">50%</span><span class="pbrd-pos-va-stat-lbl">Higher merchant revenue vs legacy</span></div>' +
+            '<div><span class="pbrd-pos-va-stat-val">40%</span><span class="pbrd-pos-va-stat-lbl">Higher return rate</span></div>' +
+            '<div><span class="pbrd-pos-va-stat-val">1M+</span><span class="pbrd-pos-va-stat-lbl">Tourists served</span></div>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
 
     newSection.appendChild(wrap);
     observeReveal(".pbrd-pos-reveal", 150, wrap);
@@ -658,6 +757,7 @@
     buildUseCases();
     buildSpecTabs();
     enhanceRental();
+    buildValueAdds();
     enhanceContact();
     console.log("[Paybyrd] POS enhancements loaded");
   }
