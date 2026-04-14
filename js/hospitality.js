@@ -1591,7 +1591,9 @@
       var t = p.textContent.toLowerCase();
       if ((t.includes("every interaction") || t.includes("opportunity to learn")) && biIdx < 3) {
         var card = biCards[biIdx];
-        if (biIdx === 0) p.style.setProperty("margin-top", "-40px", "important");
+        if (biIdx === 0) {
+          p.style.setProperty("margin-top", "60px", "important");
+        }
         p.innerHTML =
           '<div style="background:#0e0e18;border-radius:12px;padding:16px;margin-bottom:12px;border:1px solid rgba(99,25,240,0.1);">' + card.svg + '</div>' +
           '<strong style="font-size:0.9375rem;color:#111;display:block;margin-bottom:4px;">' + card.title + '</strong>' +
