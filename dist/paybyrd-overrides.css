@@ -12137,8 +12137,10 @@ a.glowing_button_link .glowing_button_text {
 }
 
 .pbrd-hosp-map-svg {
-  width: 100%;
+  width: 90%;
   height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 /* ── Transaction Feed (right panel) ── */
