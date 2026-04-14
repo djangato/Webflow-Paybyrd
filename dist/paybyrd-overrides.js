@@ -8455,6 +8455,299 @@
   }
 
   /* ═══════════════════════════════════════════ */
+  /* 10. PASSENGER JOURNEY — AI Agent Showcase   */
+  /* ═══════════════════════════════════════════ */
+
+  function enhancePassengerJourney() {
+    var section = findSectionByHeading("designed for the passenger");
+    if (!section) return;
+
+    /* Collapse Webflow wrappers */
+    section.style.setProperty("padding", "60px 0", "important");
+    section.style.setProperty("background", "#0a0a0f", "important");
+    section.style.setProperty("overflow", "hidden", "important");
+    Array.prototype.forEach.call(section.children, function(child) {
+      if (!child.classList || !child.classList.contains("pbrd-air-pax-wrap")) {
+        child.style.setProperty("display", "none", "important");
+      }
+    });
+
+    var wrap = document.createElement("div");
+    wrap.className = "pbrd-air-pax-wrap";
+
+    /* ── Chat scenarios for AI Agent ── */
+    var chatScenarios = [
+      {
+        channel: "WhatsApp", channelIcon: "W",
+        user: "Hi, I need to change my flight LIS\u2192CDG tomorrow to Friday",
+        lookup: "Let me check your booking\u2026",
+        booking: { pnr: "TAP-X7K29", route: "LIS \u2192 CDG", date: "Apr 15", pax: "1 Adult", cls: "Business" },
+        offer: "I found a Business seat on TP442 departing Friday 09:40. \u20AC47 fare difference. Want me to rebook?",
+        action: "Confirm Rebooking",
+        success: "Done! New boarding pass sent to your WhatsApp. Seat 3A confirmed."
+      },
+      {
+        channel: "Chat Widget", channelIcon: "C",
+        user: "I want a refund for booking TAP-M3R81, my flight was cancelled",
+        lookup: "Checking your booking status\u2026",
+        booking: { pnr: "TAP-M3R81", route: "OPO \u2192 LHR", date: "Apr 12", pax: "2 Adults", cls: "Economy" },
+        offer: "Flight TP1360 was cancelled. You\u2019re eligible for a full refund of \u20AC312.00 or rebooking at no cost.",
+        action: "Process Refund",
+        success: "Refund of \u20AC312.00 initiated. You\u2019ll see it in 3\u20135 business days. Confirmation sent via email."
+      },
+      {
+        channel: "WhatsApp", channelIcon: "W",
+        user: "Can I upgrade to Business on my LIS\u2192JFK flight next week?",
+        lookup: "Searching available upgrades\u2026",
+        booking: { pnr: "TAP-R9F44", route: "LIS \u2192 JFK", date: "Apr 21", pax: "1 Adult", cls: "Economy" },
+        offer: "Business upgrade available for \u20AC680. Includes lounge access, 2x baggage, priority boarding. Pay now via link?",
+        action: "Send Pay-by-Link",
+        success: "Payment link sent! Once paid, your upgrade is instant. Enjoy the lounge \u2708\uFE0F"
+      }
+    ];
+
+    /* ── Journey touchpoints data ── */
+    var touchpoints = [
+      { icon: '<svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M3 9h18M9 3v18" stroke="currentColor" stroke-width="1.5"/></svg>',
+        title: "Website", sub: "Direct booking engine", stat: "42%", statLabel: "of revenue",
+        txns: ["LIS\u2192FNC \u20AC189", "OPO\u2192CDG \u20AC247", "LIS\u2192JFK \u20AC612"] },
+      { icon: '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M3 12h18M12 3c2.5 2.8 4 6 4 9s-1.5 6.2-4 9c-2.5-2.8-4-6-4-9s1.5-6.2 4-9z" stroke="currentColor" stroke-width="1.5"/></svg>',
+        title: "OTAs & GDS", sub: "Amadeus, Sabre, NDC", stat: "35%", statLabel: "of bookings",
+        txns: ["Booking.com \u20AC340", "Expedia \u20AC528", "Amadeus \u20AC195"] },
+      { icon: '<svg viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="currentColor" stroke-width="1.5"/></svg>',
+        title: "AI Agent", sub: "WhatsApp & Chat", stat: "73%", statLabel: "auto-resolved",
+        txns: ["Refund \u20AC312", "Rebooking \u20AC47", "Upgrade \u20AC680"] },
+      { icon: '<svg viewBox="0 0 24 24" fill="none"><rect x="2" y="6" width="20" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 10h20" stroke="currentColor" stroke-width="1.5"/><path d="M6 14h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
+        title: "At the Gate", sub: "POS & SoftPOS", stat: "100%", statLabel: "ancillary capture",
+        txns: ["Lounge \u20AC45", "Extra bag \u20AC35", "Upgrade \u20AC290"] }
+    ];
+
+    wrap.innerHTML =
+      '<div class="pbrd-air-pax-header pbrd-air-reveal">' +
+        '<div class="pbrd-air-section-label">AI-POWERED PASSENGER JOURNEY</div>' +
+        '<h2 class="pbrd-air-pax-h2">Every touchpoint is a revenue opportunity.<br>Our AI captures them all.</h2>' +
+        '<p class="pbrd-air-pax-sub">From booking to boarding gate \u2014 an autonomous AI agent handles refunds, rebookings, upsales, and pay-by-links across WhatsApp and your website chat. No human needed.</p>' +
+      '</div>' +
+
+      /* ── Two-card grid ── */
+      '<div class="pbrd-air-pax-grid">' +
+
+        /* Card 1: AI Chat Agent */
+        '<div class="pbrd-air-pax-card pbrd-air-reveal">' +
+          '<div class="pbrd-air-pax-visual">' +
+            '<div class="pbrd-air-pax-chat" id="pbrd-air-chat">' +
+              '<div class="pbrd-air-pax-chat-head">' +
+                '<div class="pbrd-air-pax-chat-avatar">P</div>' +
+                '<div>' +
+                  '<div class="pbrd-air-pax-chat-name">Paybyrd AI Agent</div>' +
+                  '<div class="pbrd-air-pax-chat-status"><span class="pbrd-air-pax-dot-live"></span><span id="pbrd-air-chat-channel">WhatsApp</span></div>' +
+                '</div>' +
+                '<div class="pbrd-air-pax-chat-badge" id="pbrd-air-chat-badge">AI</div>' +
+              '</div>' +
+              '<div class="pbrd-air-pax-chat-body" id="pbrd-air-chat-body">' +
+                '<div class="pbrd-air-pax-msg bot" id="pbrd-air-cm0"><span>Hi! I\u2019m your airline assistant. How can I help?</span></div>' +
+                '<div class="pbrd-air-pax-msg user" id="pbrd-air-cm1"><span id="pbrd-air-cm1t"></span></div>' +
+                '<div class="pbrd-air-pax-typing" id="pbrd-air-typing"><span></span><span></span><span></span></div>' +
+                '<div class="pbrd-air-pax-msg bot" id="pbrd-air-cm2"><span id="pbrd-air-cm2t"></span></div>' +
+                '<div class="pbrd-air-pax-msg bot" id="pbrd-air-cm3">' +
+                  '<div class="pbrd-air-pax-booking">' +
+                    '<div class="pbrd-air-pax-booking-row"><span>PNR</span><span id="pbrd-air-bpnr"></span></div>' +
+                    '<div class="pbrd-air-pax-booking-row"><span>Route</span><span id="pbrd-air-broute"></span></div>' +
+                    '<div class="pbrd-air-pax-booking-row"><span>Date</span><span id="pbrd-air-bdate"></span></div>' +
+                    '<div class="pbrd-air-pax-booking-row"><span>Passengers</span><span id="pbrd-air-bpax"></span></div>' +
+                    '<div class="pbrd-air-pax-booking-row"><span>Class</span><span id="pbrd-air-bcls"></span></div>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="pbrd-air-pax-msg bot" id="pbrd-air-cm4"><span id="pbrd-air-cm4t"></span></div>' +
+                '<div class="pbrd-air-pax-msg bot" id="pbrd-air-cm5"><div class="pbrd-air-pax-action" id="pbrd-air-cact"></div></div>' +
+                '<div class="pbrd-air-pax-msg bot" id="pbrd-air-cm6"><span class="pbrd-air-pax-success-icon"><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></span><span id="pbrd-air-cm6t"></span></div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="pbrd-air-pax-body">' +
+            '<h3>Autonomous AI agent across every channel</h3>' +
+            '<p>Your AI handles the full passenger lifecycle \u2014 rebookings, refunds, upgrades, and pay-by-links \u2014 via WhatsApp and website chat. 24/7, 30+ languages.</p>' +
+            '<ul class="pbrd-air-pax-bullets">' +
+              '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#6319f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Processes refunds and cancellations in real time</li>' +
+              '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#6319f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Sends pay-by-links for upgrades and ancillaries</li>' +
+              '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#6319f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Handles rebookings and schedule changes autonomously</li>' +
+            '</ul>' +
+          '</div>' +
+        '</div>' +
+
+        /* Card 2: Journey Touchpoints with live data */
+        '<div class="pbrd-air-pax-card pbrd-air-reveal">' +
+          '<div class="pbrd-air-pax-visual">' +
+            '<div class="pbrd-air-pax-journey" id="pbrd-air-journey">' +
+              '<div class="pbrd-air-pax-j-flow">' +
+                touchpoints.map(function(tp, idx) {
+                  return '<div class="pbrd-air-pax-j-node" id="pbrd-air-jn' + idx + '">' +
+                    '<div class="pbrd-air-pax-j-icon">' + tp.icon + '</div>' +
+                    '<div class="pbrd-air-pax-j-title">' + tp.title + '</div>' +
+                    '<div class="pbrd-air-pax-j-sub">' + tp.sub + '</div>' +
+                    '<div class="pbrd-air-pax-j-stat"><span class="pbrd-air-pax-j-stat-v">' + tp.stat + '</span><span class="pbrd-air-pax-j-stat-l">' + tp.statLabel + '</span></div>' +
+                    '<div class="pbrd-air-pax-j-txns" id="pbrd-air-jt' + idx + '">' +
+                      tp.txns.map(function(t) { return '<div class="pbrd-air-pax-j-txn">' + t + '</div>'; }).join("") +
+                    '</div>' +
+                  '</div>' +
+                  (idx < 3 ? '<div class="pbrd-air-pax-j-connector"><svg viewBox="0 0 40 24" width="40" height="24"><path d="M0 12h32" stroke="rgba(99,25,240,0.3)" stroke-width="1.5" stroke-dasharray="4 3"/><path d="M28 6l8 6-8 6" fill="none" stroke="rgba(99,25,240,0.4)" stroke-width="1.5"/></svg></div>' : '');
+                }).join("") +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="pbrd-air-pax-body">' +
+            '<h3>Every channel. One unified platform.</h3>' +
+            '<p>Website, OTAs, customer service, and gate \u2014 every transaction flows through a single payment engine with real-time reconciliation.</p>' +
+            '<ul class="pbrd-air-pax-bullets">' +
+              '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#6319f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Unified view across all sales channels</li>' +
+              '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#6319f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Amadeus, Sabre & NDC native integration</li>' +
+              '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#6319f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Gate POS captures ancillary revenue at boarding</li>' +
+            '</ul>' +
+          '</div>' +
+        '</div>' +
+
+      '</div>';
+
+    section.appendChild(wrap);
+
+    /* ═══ Chat animation ═══ */
+    var chatIdx = 0;
+    var chatRunning = false;
+    function runChat() {
+      if (chatRunning) return;
+      chatRunning = true;
+      var sc = chatScenarios[chatIdx % chatScenarios.length];
+      chatIdx++;
+
+      /* References */
+      var body = document.getElementById("pbrd-air-chat-body");
+      var channel = document.getElementById("pbrd-air-chat-channel");
+      var cm0 = document.getElementById("pbrd-air-cm0");
+      var cm1 = document.getElementById("pbrd-air-cm1");
+      var cm1t = document.getElementById("pbrd-air-cm1t");
+      var typing = document.getElementById("pbrd-air-typing");
+      var cm2 = document.getElementById("pbrd-air-cm2");
+      var cm2t = document.getElementById("pbrd-air-cm2t");
+      var cm3 = document.getElementById("pbrd-air-cm3");
+      var cm4 = document.getElementById("pbrd-air-cm4");
+      var cm4t = document.getElementById("pbrd-air-cm4t");
+      var cm5 = document.getElementById("pbrd-air-cm5");
+      var cact = document.getElementById("pbrd-air-cact");
+      var cm6 = document.getElementById("pbrd-air-cm6");
+      var cm6t = document.getElementById("pbrd-air-cm6t");
+
+      /* Reset all */
+      [cm0, cm1, cm2, cm3, cm4, cm5, cm6].forEach(function(el) { el.style.opacity = "0"; });
+      typing.style.display = "none";
+      if (body) body.scrollTop = 0;
+
+      channel.textContent = sc.channel;
+
+      /* Step flow */
+      setTimeout(function() { cm0.style.opacity = "1"; }, 400);
+      setTimeout(function() {
+        cm1t.textContent = sc.user;
+        cm1.style.opacity = "1";
+        if (body) body.scrollTop = body.scrollHeight;
+      }, 1200);
+      setTimeout(function() {
+        typing.style.display = "flex";
+        if (body) body.scrollTop = body.scrollHeight;
+      }, 2200);
+      setTimeout(function() {
+        typing.style.display = "none";
+        cm2t.textContent = sc.lookup;
+        cm2.style.opacity = "1";
+        if (body) body.scrollTop = body.scrollHeight;
+      }, 3600);
+      setTimeout(function() {
+        document.getElementById("pbrd-air-bpnr").textContent = sc.booking.pnr;
+        document.getElementById("pbrd-air-broute").textContent = sc.booking.route;
+        document.getElementById("pbrd-air-bdate").textContent = sc.booking.date;
+        document.getElementById("pbrd-air-bpax").textContent = sc.booking.pax;
+        document.getElementById("pbrd-air-bcls").textContent = sc.booking.cls;
+        cm3.style.opacity = "1";
+        if (body) body.scrollTop = body.scrollHeight;
+      }, 4600);
+      setTimeout(function() {
+        cm4t.textContent = sc.offer;
+        cm4.style.opacity = "1";
+        if (body) body.scrollTop = body.scrollHeight;
+      }, 6000);
+      setTimeout(function() {
+        cact.textContent = sc.action;
+        cact.className = "pbrd-air-pax-action";
+        cm5.style.opacity = "1";
+        if (body) body.scrollTop = body.scrollHeight;
+      }, 7200);
+      setTimeout(function() {
+        cact.classList.add("pbrd-air-pax-action--done");
+      }, 8600);
+      setTimeout(function() {
+        cm6t.textContent = sc.success;
+        cm6.style.opacity = "1";
+        if (body) body.scrollTop = body.scrollHeight;
+      }, 9400);
+      setTimeout(function() {
+        chatRunning = false;
+        runChat();
+      }, 13000);
+    }
+
+    /* ═══ Journey node pulse animation ═══ */
+    function animateJourney() {
+      var nodes = document.querySelectorAll(".pbrd-air-pax-j-node");
+      var txnEls = [];
+      for (var i = 0; i < 4; i++) txnEls.push(document.getElementById("pbrd-air-jt" + i));
+
+      /* Cycle active node */
+      var activeIdx = 0;
+      function cycleNode() {
+        nodes.forEach(function(n, i) {
+          if (i === activeIdx) {
+            n.classList.add("pbrd-air-pax-j-node--active");
+          } else {
+            n.classList.remove("pbrd-air-pax-j-node--active");
+          }
+        });
+
+        /* Animate txns in active node */
+        var txnContainer = txnEls[activeIdx];
+        if (txnContainer) {
+          var items = txnContainer.querySelectorAll(".pbrd-air-pax-j-txn");
+          items.forEach(function(item, idx) {
+            item.style.opacity = "0";
+            item.style.transform = "translateY(6px)";
+            setTimeout(function() {
+              item.style.transition = "opacity 0.4s, transform 0.4s";
+              item.style.opacity = "1";
+              item.style.transform = "translateY(0)";
+            }, 300 + idx * 250);
+          });
+        }
+
+        activeIdx = (activeIdx + 1) % nodes.length;
+        setTimeout(cycleNode, 3000);
+      }
+      cycleNode();
+    }
+
+    /* Trigger on scroll */
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function(entries) {
+        if (entries[0].isIntersecting) {
+          runChat();
+          animateJourney();
+          this.disconnect();
+        }
+      }, { threshold: 0.15 }).observe(wrap);
+    }
+
+    observeReveal(".pbrd-air-reveal", 120, section);
+  }
+
+
+  /* ═══════════════════════════════════════════ */
   /* Init                                        */
   /* ═══════════════════════════════════════════ */
 
@@ -8464,6 +8757,7 @@
     enhanceFeatures();
     buildFraudSection();
     buildTestimonial();
+    enhancePassengerJourney();
     enhanceDataSection();
     enhanceStackSection();
     enhanceBottomCTA();

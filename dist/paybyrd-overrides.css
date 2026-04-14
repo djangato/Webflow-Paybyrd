@@ -11548,6 +11548,185 @@ a.glowing_button_link .glowing_button_text {
 .pbrd-air-stack-card h5 { font-size:0.9375rem; font-weight:600; color:#fff; margin:0 0 8px; }
 .pbrd-air-stack-card p { font-size:0.8125rem; color:rgba(255,255,255,0.45); line-height:1.6; margin:0; }
 
+/* ═══ PASSENGER JOURNEY — AI AGENT ═══ */
+.pbrd-air-pax-wrap { max-width:1100px; margin:0 auto; padding:0 24px; }
+
+.pbrd-air-pax-header { text-align:center; margin-bottom:48px; }
+.pbrd-air-pax-h2 {
+  font-size:clamp(1.75rem,3.5vw,2.5rem); font-weight:700; color:#fff;
+  letter-spacing:-0.02em; margin:8px 0 14px; line-height:1.15;
+}
+.pbrd-air-pax-sub { font-size:1rem; color:rgba(255,255,255,0.4); max-width:600px; margin:0 auto; line-height:1.6; }
+
+/* Two-card grid */
+.pbrd-air-pax-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:24px;
+}
+
+.pbrd-air-pax-card {
+  border-radius:16px; overflow:hidden;
+  background:#0e0e18; border:1px solid rgba(255,255,255,0.06);
+}
+
+/* Visual area */
+.pbrd-air-pax-visual { height:380px; overflow:hidden; position:relative; }
+
+/* Body area */
+.pbrd-air-pax-body { padding:28px 28px 32px; }
+.pbrd-air-pax-body h3 { font-size:1.25rem; font-weight:700; color:#fff; margin:0 0 8px; }
+.pbrd-air-pax-body p { font-size:0.9375rem; color:rgba(255,255,255,0.5); line-height:1.5; margin:0 0 20px; }
+
+.pbrd-air-pax-bullets { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px; }
+.pbrd-air-pax-bullets li {
+  display:flex; align-items:center; gap:8px;
+  font-size:0.8125rem; color:rgba(255,255,255,0.7);
+}
+.pbrd-air-pax-bullets li svg { flex-shrink:0; }
+
+/* ── Chat Mockup ── */
+.pbrd-air-pax-chat { height:100%; display:flex; flex-direction:column; }
+
+.pbrd-air-pax-chat-head {
+  display:flex; align-items:center; gap:10px;
+  padding:12px 16px; border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.pbrd-air-pax-chat-avatar {
+  width:30px; height:30px; border-radius:50%;
+  background:linear-gradient(135deg,#6319f0,#7c3aed);
+  color:#fff; display:flex; align-items:center; justify-content:center;
+  font-size:0.75rem; font-weight:700;
+}
+.pbrd-air-pax-chat-name { font-size:0.75rem; font-weight:600; color:#fff; }
+.pbrd-air-pax-chat-status {
+  display:flex; align-items:center; gap:4px;
+  font-size:0.5625rem; color:rgba(255,255,255,0.4);
+}
+.pbrd-air-pax-dot-live {
+  width:6px; height:6px; border-radius:50%; background:#10b981;
+  animation:pbrd-air-pax-pulse 2s infinite;
+}
+@keyframes pbrd-air-pax-pulse {
+  0%,100% { opacity:1; } 50% { opacity:0.4; }
+}
+.pbrd-air-pax-chat-badge {
+  margin-left:auto; padding:2px 8px; border-radius:4px;
+  background:rgba(99,25,240,0.15); color:#6319f0;
+  font-size:0.5625rem; font-weight:700; letter-spacing:0.05em;
+}
+
+.pbrd-air-pax-chat-body {
+  flex:1; padding:12px 14px; display:flex; flex-direction:column;
+  gap:6px; overflow:hidden;
+}
+
+/* Messages */
+.pbrd-air-pax-msg {
+  max-width:85%; padding:8px 12px; border-radius:12px;
+  font-size:0.6875rem; line-height:1.5;
+  opacity:0; transition:opacity 0.4s;
+}
+.pbrd-air-pax-msg.bot {
+  background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.85);
+  align-self:flex-start; border-bottom-left-radius:4px;
+}
+.pbrd-air-pax-msg.user {
+  background:#6319f0; color:#fff;
+  align-self:flex-end; border-bottom-right-radius:4px;
+}
+
+/* Typing indicator */
+.pbrd-air-pax-typing {
+  display:none; align-self:flex-start; gap:4px;
+  padding:10px 14px; background:rgba(255,255,255,0.04);
+  border-radius:12px; border-bottom-left-radius:4px;
+}
+.pbrd-air-pax-typing span {
+  width:5px; height:5px; border-radius:50%;
+  background:rgba(255,255,255,0.3);
+  animation:pbrd-air-bounce 1.2s infinite;
+}
+.pbrd-air-pax-typing span:nth-child(2) { animation-delay:0.2s; }
+.pbrd-air-pax-typing span:nth-child(3) { animation-delay:0.4s; }
+@keyframes pbrd-air-bounce {
+  0%,80%,100% { transform:translateY(0); }
+  40% { transform:translateY(-4px); }
+}
+
+/* Booking card */
+.pbrd-air-pax-booking {
+  background:rgba(99,25,240,0.06); border-radius:8px;
+  padding:8px 10px; border:1px solid rgba(99,25,240,0.12);
+}
+.pbrd-air-pax-booking-row {
+  display:flex; justify-content:space-between;
+  font-size:0.625rem; padding:3px 0; color:rgba(255,255,255,0.4);
+}
+.pbrd-air-pax-booking-row span:last-child { font-weight:600; color:rgba(255,255,255,0.85); }
+
+/* Action button */
+.pbrd-air-pax-action {
+  display:inline-block; background:#6319f0; color:#fff;
+  padding:6px 14px; border-radius:6px;
+  font-size:0.625rem; font-weight:600; transition:background 0.3s;
+  cursor:pointer;
+}
+.pbrd-air-pax-action--done { background:#10b981; }
+
+/* Success icon */
+.pbrd-air-pax-success-icon { display:inline-flex; color:#10b981; margin-right:4px; }
+
+/* ── Journey Touchpoints ── */
+.pbrd-air-pax-journey {
+  height:100%; padding:20px 16px; display:flex; align-items:center;
+}
+.pbrd-air-pax-j-flow {
+  display:flex; align-items:flex-start; justify-content:center;
+  gap:0; width:100%;
+}
+
+.pbrd-air-pax-j-node {
+  display:flex; flex-direction:column; align-items:center;
+  padding:14px 10px; border-radius:12px;
+  border:1px solid rgba(255,255,255,0.04);
+  background:rgba(255,255,255,0.02);
+  transition:all 0.4s ease; flex:1; min-width:0;
+}
+.pbrd-air-pax-j-node--active {
+  border-color:rgba(99,25,240,0.3);
+  background:rgba(99,25,240,0.06);
+  box-shadow:0 0 20px rgba(99,25,240,0.1);
+}
+
+.pbrd-air-pax-j-icon {
+  width:32px; height:32px; color:rgba(255,255,255,0.3);
+  margin-bottom:8px; transition:color 0.4s;
+}
+.pbrd-air-pax-j-node--active .pbrd-air-pax-j-icon { color:#6319f0; }
+
+.pbrd-air-pax-j-title { font-size:0.6875rem; font-weight:600; color:#fff; margin-bottom:2px; text-align:center; }
+.pbrd-air-pax-j-sub { font-size:0.5625rem; color:rgba(255,255,255,0.3); margin-bottom:8px; text-align:center; }
+
+.pbrd-air-pax-j-stat { display:flex; flex-direction:column; align-items:center; margin-bottom:8px; }
+.pbrd-air-pax-j-stat-v { font-size:1.125rem; font-weight:700; color:#6319f0; }
+.pbrd-air-pax-j-stat-l { font-size:0.5rem; color:rgba(255,255,255,0.3); text-transform:uppercase; letter-spacing:0.05em; }
+
+/* Live transaction items */
+.pbrd-air-pax-j-txns {
+  display:flex; flex-direction:column; gap:3px; width:100%;
+}
+.pbrd-air-pax-j-txn {
+  padding:3px 6px; border-radius:4px;
+  background:rgba(99,25,240,0.06); border:1px solid rgba(99,25,240,0.08);
+  font-size:0.5625rem; color:rgba(255,255,255,0.5);
+  text-align:center; opacity:0; transition:opacity 0.4s, transform 0.4s;
+}
+.pbrd-air-pax-j-node--active .pbrd-air-pax-j-txn { border-color:rgba(99,25,240,0.2); }
+
+/* Connector arrows */
+.pbrd-air-pax-j-connector {
+  display:flex; align-items:center; padding-top:30px; flex-shrink:0;
+}
+
 /* ═══ DATA SECTION PARTICLES ═══ */
 @keyframes pbrd-air-data-float {
   0% { transform:translateY(0); opacity:0; }
@@ -11579,6 +11758,10 @@ a.glowing_button_link .glowing_button_text {
   .pbrd-air-bench-bar-wrap { width:100%; margin:0; }
   .pbrd-air-bench-name { width:auto; }
   .pbrd-air-hero-actions { flex-direction:column; align-items:flex-start; }
+  .pbrd-air-pax-grid { grid-template-columns:1fr; }
+  .pbrd-air-pax-j-flow { flex-wrap:wrap; gap:8px; }
+  .pbrd-air-pax-j-connector { display:none; }
+  .pbrd-air-pax-j-node { min-width:45%; }
 }
 
 @media (max-width:480px) {
