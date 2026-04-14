@@ -1652,7 +1652,7 @@
     section.querySelectorAll("p").forEach(function(p) {
       var t = p.textContent.toLowerCase();
       if (t.includes("personalized demo") || t.includes("payment specialist")) {
-        p.textContent = "Join Vila Gal\u00e9 and leading hotel groups. Get measurable results within 30 days.";
+        p.textContent = "Join Vila Gal\u00e9, Barcel\u00f3, Smy Onyria and leading hotel groups. Get measurable results within 30 days.";
       }
     });
     /* Style the CTA button */
