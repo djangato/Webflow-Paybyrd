@@ -235,9 +235,6 @@
     var dash = document.createElement("div");
     dash.className = "pbrd-air-leak-dash pbrd-air-reveal";
     dash.innerHTML =
-      /* Mini Paybyrd airplane + trail */
-      '<div class="pbrd-air-plane"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/pos/paybyrd-plane.png" alt="Paybyrd" style="width:100%;height:auto;"></div>' +
-      '<div class="pbrd-air-trail"><svg viewBox="0 0 900 300" preserveAspectRatio="none"><path d="M-150,280 C50,20 250,300 450,40 C550,180 750,60 900,200" fill="none" stroke="rgba(99,25,240,0.05)" stroke-width="1.5" stroke-dasharray="6 4" class="pbrd-air-trail-path"/></svg></div>' +
       '<div class="pbrd-air-leak-header">' +
         '<div class="pbrd-air-leak-dot pbrd-air-leak-dot--live"></div>' +
         '<span>Revenue Leakage Monitor</span>' +
@@ -281,6 +278,20 @@
     var lastP = null; paras.forEach(function(p) { if (p.style.display !== "none") lastP = p; });
     if (lastP) lastP.parentElement.insertBefore(dash, lastP.nextSibling);
     else section.appendChild(dash);
+
+    /* Add plane + trail at SECTION level so it flies freely */
+    section.style.setProperty("position", "relative", "important");
+    section.style.setProperty("overflow", "visible", "important");
+
+    var plane = document.createElement("div");
+    plane.className = "pbrd-air-plane";
+    plane.innerHTML = '<img src="https://djangato.github.io/Webflow-Paybyrd/assets/pos/paybyrd-plane.png" alt="Paybyrd" style="width:100%;height:auto;">';
+    section.appendChild(plane);
+
+    var trail = document.createElement("div");
+    trail.className = "pbrd-air-trail";
+    trail.innerHTML = '<svg viewBox="0 0 900 300" preserveAspectRatio="none"><path d="M-150,280 C50,20 250,300 450,40 C550,180 750,60 900,200" fill="none" stroke="rgba(99,25,240,0.05)" stroke-width="1.5" stroke-dasharray="6 4" class="pbrd-air-trail-path"/></svg>';
+    section.appendChild(trail);
 
     /* Animate rings + counters on scroll */
     if ("IntersectionObserver" in window) {
