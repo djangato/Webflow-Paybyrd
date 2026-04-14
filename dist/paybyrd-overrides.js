@@ -7831,27 +7831,80 @@
     s.className = "pbrd-air-test-section";
     s.innerHTML =
       '<div class="pbrd-air-test-wrap">' +
-        '<div class="pbrd-air-section-label" style="text-align:center;margin-bottom:8px">CASE STUDY \u2014 TAP AIR PORTUGAL</div>' +
-        '<div class="pbrd-air-test-card pbrd-air-reveal">' +
-          '<div class="pbrd-air-test-left">' +
-            '<div class="pbrd-air-test-metrics">' +
-              '<div class="pbrd-air-test-metric"><span class="pbrd-air-test-mv">+4.2%</span><span class="pbrd-air-test-ml">Authorization Rate Uplift</span></div>' +
-              '<div class="pbrd-air-test-metric"><span class="pbrd-air-test-mv">Real-time</span><span class="pbrd-air-test-ml">Multi-Channel Reconciliation</span></div>' +
-              '<div class="pbrd-air-test-metric"><span class="pbrd-air-test-mv">15%</span><span class="pbrd-air-test-ml">Lower Transaction Costs</span></div>' +
+
+        /* ── Top: large cinematic quote ── */
+        '<div class="pbrd-air-test-hero pbrd-air-reveal">' +
+          '<div class="pbrd-air-test-label">CASE STUDY</div>' +
+          '<div class="pbrd-air-test-airline">TAP Air Portugal</div>' +
+          '<blockquote class="pbrd-air-test-bigquote">' +
+            '\u201CWe used to spend hours reconciling ticket payments from different regions and systems. With Paybyrd, that\u2019s now handled in real time. Our costs dropped, and our team got their hours back.\u201D' +
+          '</blockquote>' +
+          '<div class="pbrd-air-test-author">' +
+            '<div class="pbrd-air-test-avatar">JF</div>' +
+            '<div>' +
+              '<div class="pbrd-air-test-name">Jo\u00E3o Frias</div>' +
+              '<div class="pbrd-air-test-role">Head of Payments</div>' +
             '</div>' +
           '</div>' +
-          '<div class="pbrd-air-test-right">' +
-            '<blockquote class="pbrd-air-test-quote">\u201CWe used to spend hours reconciling ticket payments from different regions and systems. With Paybyrd, that\u2019s now handled in real time. Our costs dropped, and our team got their hours back.\u201D</blockquote>' +
-            '<div class="pbrd-air-test-author">' +
-              '<div class="pbrd-air-test-avatar">JF</div>' +
-              '<div><div class="pbrd-air-test-name">Jo\u00E3o Frias</div><div class="pbrd-air-test-role">Head of Payments, TAP Air Portugal</div></div>' +
-            '</div>' +
+        '</div>' +
+
+        /* ── Bottom: animated results strip ── */
+        '<div class="pbrd-air-test-results pbrd-air-reveal">' +
+          '<div class="pbrd-air-test-result">' +
+            '<div class="pbrd-air-test-rv pbrd-air-test-countup" data-target="4.2" data-suffix="%" data-prefix="+">+0%</div>' +
+            '<div class="pbrd-air-test-rl">Authorization<br>Rate Uplift</div>' +
           '</div>' +
+          '<div class="pbrd-air-test-divider"></div>' +
+          '<div class="pbrd-air-test-result">' +
+            '<div class="pbrd-air-test-rv pbrd-air-test-countup" data-target="15" data-suffix="%" data-prefix="">0%</div>' +
+            '<div class="pbrd-air-test-rl">Lower Transaction<br>Costs</div>' +
+          '</div>' +
+          '<div class="pbrd-air-test-divider"></div>' +
+          '<div class="pbrd-air-test-result">' +
+            '<div class="pbrd-air-test-rv">Real-time</div>' +
+            '<div class="pbrd-air-test-rl">Multi-Channel<br>Reconciliation</div>' +
+          '</div>' +
+          '<div class="pbrd-air-test-divider"></div>' +
+          '<div class="pbrd-air-test-result">' +
+            '<div class="pbrd-air-test-rv pbrd-air-test-countup" data-target="192" data-suffix="+" data-prefix="">0+</div>' +
+            '<div class="pbrd-air-test-rl">Currencies<br>Supported</div>' +
+          '</div>' +
+        '</div>' +
+
+        /* ── CTA ── */
+        '<div class="pbrd-air-test-cta pbrd-air-reveal">' +
+          '<a href="/book-demo" class="pbrd-air-cta-primary">Get results like TAP \u2192</a>' +
         '</div>' +
       '</div>';
 
     anchor.parentNode.insertBefore(s, anchor);
-    observeReveal(".pbrd-air-reveal", 100, s);
+
+    /* Animate counters on scroll */
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function(entries) {
+        if (entries[0].isIntersecting) {
+          s.querySelectorAll(".pbrd-air-test-countup").forEach(function(el) {
+            var target = parseFloat(el.getAttribute("data-target"));
+            var suffix = el.getAttribute("data-suffix") || "";
+            var prefix = el.getAttribute("data-prefix") || "";
+            var isFloat = target % 1 !== 0;
+            var dur = 1800, startTime = null;
+            function step(ts) {
+              if (!startTime) startTime = ts;
+              var p = Math.min((ts - startTime) / dur, 1);
+              var eased = 1 - Math.pow(1 - p, 3);
+              var val = target * eased;
+              el.textContent = prefix + (isFloat ? val.toFixed(1) : Math.round(val)) + suffix;
+              if (p < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+          });
+          this.disconnect();
+        }
+      }, { threshold: 0.3 }).observe(s);
+    }
+
+    observeReveal(".pbrd-air-reveal", 150, s);
   }
 
   /* ═══════════════════════════════════════════ */
