@@ -117,6 +117,17 @@
       '<a href="#data" class="pbrd-hosp-cta-ghost">See the data \u2193</a>';
     parent.insertBefore(ctaRow, subtitle.nextSibling);
 
+    /* Stat ticker strip at bottom of hero */
+    var stats = ["99.999% Uptime", "192+ Currencies", "84% Abandonment Solved", "PCI Level 1", "DCC 80% Revenue Share", "4\u20137% Higher Auth Rates", "16.8% Fewer Chargebacks"];
+    var tickerHTML = stats.concat(stats).map(function(st) {
+      return '<span class="pbrd-hosp-tick">' + st + '</span><span class="pbrd-hosp-tick-dot">\u00b7</span>';
+    }).join("");
+    var ticker = document.createElement("div");
+    ticker.className = "pbrd-hosp-ticker-strip pbrd-hosp-reveal";
+    ticker.setAttribute("style", "position:relative;z-index:2;margin-top:32px;");
+    ticker.innerHTML = '<div class="pbrd-hosp-ticker-track">' + tickerHTML + '</div>';
+    section.appendChild(ticker);
+
     observeReveal(".pbrd-hosp-reveal", 120);
   }
 
@@ -167,12 +178,6 @@
         '<text x="' + (p.x + 6) + '" y="' + (p.y - 6) + '" fill="rgba(255,255,255,0.2)" font-size="7" font-weight="600" font-family="system-ui">' + p.name + '</text>';
     });
 
-    /* Stat ticker */
-    var stats = ["99.999% Uptime", "192+ Currencies", "84% Abandonment Solved", "PCI Level 1", "DCC 80% Revenue Share", "4\u20137% Higher Auth Rates", "16.8% Fewer Chargebacks"];
-    var tickerHTML = stats.concat(stats).map(function(st) {
-      return '<span class="pbrd-hosp-tick">' + st + '</span><span class="pbrd-hosp-tick-dot">\u00b7</span>';
-    }).join("");
-
     s.innerHTML =
       '<div class="pbrd-hosp-cmd-wrap">' +
         '<div class="pbrd-hosp-cmd-header pbrd-hosp-reveal">' +
@@ -189,9 +194,6 @@
             '<div class="pbrd-hosp-txn-feed-header"><div class="pbrd-hosp-txn-feed-dot"></div>LIVE TRANSACTIONS</div>' +
             '<div id="pbrd-hosp-feed"></div>' +
           '</div>' +
-        '</div>' +
-        '<div class="pbrd-hosp-ticker-strip pbrd-hosp-reveal">' +
-          '<div class="pbrd-hosp-ticker-track">' + tickerHTML + '</div>' +
         '</div>' +
       '</div>';
 
