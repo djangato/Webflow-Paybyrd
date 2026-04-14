@@ -1188,7 +1188,7 @@
 
             /* TAP logo */
             '<div class="pbrd-air-hf-logo" id="pbrd-air-hf-logo">' +
-              '<svg viewBox="0 0 80 24" width="80" height="24"><text x="0" y="18" font-family="system-ui,sans-serif" font-weight="800" font-size="16" fill="#1a1a2e">TAP</text><text x="42" y="14" font-family="system-ui,sans-serif" font-weight="500" font-size="6" fill="#8a8a9a">AIR PORTUGAL</text></svg>' +
+              '<img src="https://djangato.github.io/Webflow-Paybyrd/assets/airlines/tap-logo.png" alt="TAP Air Portugal" style="height:28px;width:auto;" />' +
             '</div>' +
 
             /* Header */
