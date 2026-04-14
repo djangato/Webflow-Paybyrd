@@ -698,9 +698,9 @@
     var section = findSectionByHeading("designed for the full guest");
     if (!section) return;
 
-    section.style.setProperty("padding", "60px 0", "important");
-    section.style.setProperty("background", "#0a0a0f", "important");
-    section.style.setProperty("overflow", "hidden", "important");
+    section.style.setProperty("padding", "80px 0", "important");
+    section.style.setProperty("background", "#ffffff", "important");
+    section.style.setProperty("overflow", "visible", "important");
     Array.prototype.forEach.call(section.children, function(child) {
       if (!child.classList || !child.classList.contains("pbrd-hosp-gj-wrap")) {
         child.style.setProperty("display", "none", "important");
@@ -710,269 +710,228 @@
     var wrap = document.createElement("div");
     wrap.className = "pbrd-hosp-gj-wrap";
 
-    /* ── Chat scenarios for AI Agent ── */
-    var chatScenarios = [
-      {
-        channel: "WhatsApp", channelIcon: "W",
-        user: "Can I add a late checkout to my stay at Cascais?",
-        lookup: "Checking your reservation\u2026",
-        booking: { pnr: "HTL-X7K29", hotel: "Cascais Resort", room: "412 Suite", checkout: "Apr 20", guests: "2 Adults" },
-        offer: "Late checkout until 4PM is available for \u20AC45. Shall I add it to your folio?",
-        action: "Confirm Late Checkout",
-        success: "Done! Late checkout confirmed until 4PM. Updated confirmation sent to your WhatsApp."
+    /* ── Scene data for each journey step ── */
+    var steps = [
+      { num: "01", title: "Online Booking", sub: "Direct & OTA checkout",
+        lines: [
+          { l: "Room", r: "Ocean View Suite" },
+          { l: "Dates", r: "Apr 21\u201325, 2026" },
+          { l: "Guests", r: "2 Adults" },
+          { l: "", r: "", divider: true },
+          { l: "4 nights \u00d7 \u20AC320", r: "\u20AC1,280.00" },
+          { l: "Breakfast package", r: "\u20AC180.00" },
+          { l: "City tax", r: "\u20AC28.00" },
+          { l: "", r: "", divider: true },
+          { l: "Total", r: "\u20AC1,488.00", bold: true }
+        ],
+        head: "BOOKING CONFIRMED",
+        foot: "VISA \u2022\u2022\u2022\u20224582 \u00b7 3DS Secured \u00b7 PNR: HTL-X7K29",
+        headColor: "#10b981"
       },
-      {
-        channel: "Chat Widget", channelIcon: "C",
-        user: "I want a refund for my cancelled booking HTL-M3R81",
-        lookup: "Checking booking status\u2026",
-        booking: { pnr: "HTL-M3R81", hotel: "Porto City Hotel", room: "207 Standard", checkout: "Apr 12-15", guests: "1 Adult" },
-        offer: "Booking was cancelled within policy. Full refund of \u20AC480.00 is eligible.",
-        action: "Process Refund",
-        success: "Refund of \u20AC480.00 initiated. 3\u20135 business days. ARN confirmation sent via email."
+      { num: "02", title: "Front Desk", sub: "Check-in & pre-auth",
+        lines: [
+          { l: "Guest", r: "Maria Santos" },
+          { l: "Reservation", r: "HTL-X7K29" },
+          { l: "", r: "", divider: true },
+          { l: "Card on file detected", r: "", step: true },
+          { l: "Pre-auth \u20AC500 requested", r: "", step: true },
+          { l: "Pre-auth APPROVED", r: "\u2713", step: true, green: true },
+          { l: "Room 412 assigned", r: "", step: true },
+          { l: "Digital key sent to phone", r: "", step: true }
+        ],
+        head: "FRONT DESK \u00b7 CHECK-IN",
+        foot: "Check-in complete \u00b7 Room key delivered via app",
+        headColor: "#6319f0"
       },
-      {
-        channel: "WhatsApp", channelIcon: "W",
-        user: "Can I upgrade my room at the Algarve property?",
-        lookup: "Searching available upgrades\u2026",
-        booking: { pnr: "HTL-R9F44", hotel: "Algarve Beach", room: "Standard", checkout: "Apr 21-25", guests: "2 Adults" },
-        offer: "Ocean View Suite available for \u20AC120/night extra. Includes breakfast and pool access. Pay now via link?",
-        action: "Send Pay-by-Link",
-        success: "Payment link sent! Once paid, your upgrade is instant. Enjoy the ocean view!"
+      { num: "03", title: "In-Stay Charges", sub: "Spa \u00b7 Restaurant \u00b7 Bar",
+        lines: [
+          { l: "Restaurant", r: "\u20AC87.50", time: "19:42" },
+          { l: "Spa treatment", r: "\u20AC195.00", time: "14:15" },
+          { l: "Minibar", r: "\u20AC32.00", time: "23:10" },
+          { l: "Room service", r: "\u20AC45.00", time: "08:30" },
+          { l: "Pool bar", r: "\u20AC28.50", time: "22:45" },
+          { l: "", r: "", divider: true },
+          { l: "Running total", r: "\u20AC388.00", bold: true },
+          { l: "Pre-auth remaining", r: "\u20AC112.00", dim: true }
+        ],
+        head: "LIVE GUEST FOLIO \u00b7 Room 412",
+        foot: "All charges auto-posted to PMS in real time",
+        headColor: "#f59e0b"
+      },
+      { num: "04", title: "AI Concierge", sub: "WhatsApp & chat",
+        lines: [
+          { l: "", r: "Can I get a late checkout tomorrow?", chat: "user" },
+          { l: "", r: "Checking availability for Room 412\u2026", chat: "bot" },
+          { l: "", r: "", divider: true },
+          { l: "Late checkout", r: "Until 4PM" },
+          { l: "Additional charge", r: "\u20AC45.00" },
+          { l: "", r: "", divider: true },
+          { l: "", r: "Late checkout until 4PM is available for \u20AC45. Shall I add it?", chat: "bot" },
+          { l: "", r: "\u2713 Confirmed \u00b7 Checkout extended to 4PM", chat: "success" }
+        ],
+        head: "AI CONCIERGE \u00b7 WhatsApp",
+        foot: "24/7 autonomous \u00b7 30+ languages \u00b7 No human needed",
+        headColor: "#25d366"
+      },
+      { num: "05", title: "Guest Support", sub: "Refunds & disputes",
+        lines: [
+          { l: "Booking", r: "HTL-M3R81" },
+          { l: "Guest", r: "Jo\u00e3o Silva" },
+          { l: "Amount", r: "\u20AC480.00" },
+          { l: "", r: "", divider: true },
+          { l: "Policy check", r: "\u2713 Within 48h", step: true, green: true },
+          { l: "Payment method", r: "VISA \u2022\u2022\u2022\u20220082", step: true },
+          { l: "Refund initiated", r: "\u2713", step: true, green: true },
+          { l: "ARN", r: "74829301847291", step: true },
+          { l: "ETA", r: "3\u20135 business days", step: true }
+        ],
+        head: "INSTANT REFUND",
+        foot: "Automatic policy validation \u00b7 Real-time ARN tracking",
+        headColor: "#ef4444"
+      },
+      { num: "06", title: "Group Settlement", sub: "Conferences & events",
+        lines: [
+          { l: "Room 401", r: "\u20AC2,340", check: true },
+          { l: "Room 402", r: "\u20AC1,890", check: true },
+          { l: "Room 403", r: "\u20AC3,120", check: true },
+          { l: "Room 404", r: "\u20AC2,670", check: true },
+          { l: "Room 405", r: "\u20AC1,560", check: true },
+          { l: "", r: "", divider: true },
+          { l: "Conference hall", r: "\u20AC4,500" },
+          { l: "Catering", r: "\u20AC8,200" },
+          { l: "", r: "", divider: true },
+          { l: "Group total", r: "\u20AC24,280", bold: true }
+        ],
+        head: "GROUP CHECKOUT \u00b7 Conference",
+        foot: "Single consolidated invoice \u00b7 Split billing available",
+        headColor: "#8b5cf6"
       }
     ];
 
-    /* ── Journey touchpoints data ── */
-    var touchpoints = [
-      { icon: '<svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.5"/><path d="M3 9h18M9 3v18" stroke="currentColor" stroke-width="1.5"/></svg>',
-        title: "Online Booking", sub: "Direct & OTA", stat: "38%", statLabel: "of revenue",
-        txns: ["Suite \u20AC420", "Standard \u20AC195", "Package \u20AC680"] },
-      { icon: '<svg viewBox="0 0 24 24" fill="none"><rect x="2" y="6" width="20" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 10h20" stroke="currentColor" stroke-width="1.5"/><path d="M6 14h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
-        title: "Front Desk", sub: "Check-in POS", stat: "100%", statLabel: "pre-auth rate",
-        txns: ["Pre-auth \u20AC500", "Deposit \u20AC200", "Upgrade \u20AC120"] },
-      { icon: '<svg viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v5c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z" stroke="currentColor" stroke-width="1.5"/></svg>',
-        title: "In-Stay", sub: "Spa \u00b7 Restaurant \u00b7 Bar", stat: "73%", statLabel: "revenue capture",
-        txns: ["Spa \u20AC95", "Dinner \u20AC187", "Minibar \u20AC32"] },
-      { icon: '<svg viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="3" y="3" width="18" height="18" rx="4" stroke="currentColor" stroke-width="1.5"/></svg>',
-        title: "Check-out", sub: "Unified billing", stat: "< 30s", statLabel: "checkout time",
-        txns: ["Folio \u20AC1,247", "Express \u20AC890", "Group \u20AC4,320"] }
-    ];
+    /* Build tabs */
+    var tabsHTML = steps.map(function(s, i) {
+      return '<div class="pbrd-hosp-gj-tab' + (i === 0 ? ' pbrd-hosp-gj-tab--active' : '') + '" data-idx="' + i + '">' +
+        '<span class="pbrd-hosp-gj-tab-num">' + s.num + '</span>' +
+        '<div class="pbrd-hosp-gj-tab-info">' +
+          '<span class="pbrd-hosp-gj-tab-title">' + s.title + '</span>' +
+          '<span class="pbrd-hosp-gj-tab-sub">' + s.sub + '</span>' +
+        '</div>' +
+      '</div>';
+    }).join("");
+
+    /* Build scene panels */
+    function buildScene(s, idx) {
+      var linesHTML = s.lines.map(function(ln, li) {
+        if (ln.divider) return '<div class="pbrd-hosp-gj-sc-div pbrd-hosp-gj-sc-a' + (li + 1) + '"></div>';
+        if (ln.chat === "user") return '<div class="pbrd-hosp-gj-sc-chat-user pbrd-hosp-gj-sc-a' + (li + 1) + '">' + ln.r + '</div>';
+        if (ln.chat === "bot") return '<div class="pbrd-hosp-gj-sc-chat-bot pbrd-hosp-gj-sc-a' + (li + 1) + '">' + ln.r + '</div>';
+        if (ln.chat === "success") return '<div class="pbrd-hosp-gj-sc-chat-ok pbrd-hosp-gj-sc-a' + (li + 1) + '">' + ln.r + '</div>';
+        var cls = "pbrd-hosp-gj-sc-row pbrd-hosp-gj-sc-a" + (li + 1);
+        if (ln.bold) cls += " pbrd-hosp-gj-sc-row--bold";
+        if (ln.dim) cls += " pbrd-hosp-gj-sc-row--dim";
+        if (ln.step) cls += " pbrd-hosp-gj-sc-row--step";
+        var rightHTML = ln.r;
+        if (ln.green) rightHTML = '<span style="color:#10b981">' + ln.r + '</span>';
+        if (ln.check) rightHTML = '<span style="color:rgba(255,255,255,0.5)">\u2713</span> ' + ln.r;
+        if (ln.time) rightHTML = '<span style="color:rgba(255,255,255,0.3);font-size:0.625rem;margin-right:8px">' + ln.time + '</span>' + ln.r;
+        return '<div class="' + cls + '"><span>' + ln.l + '</span><span>' + rightHTML + '</span></div>';
+      }).join("");
+
+      return '<div class="pbrd-hosp-gj-scene' + (idx === 0 ? ' pbrd-hosp-gj-scene--active' : '') + '" data-scene="' + idx + '">' +
+        '<div class="pbrd-hosp-gj-sc-head" style="color:' + s.headColor + '"><span class="pbrd-hosp-gj-sc-dot" style="background:' + s.headColor + '"></span>' + s.head + '</div>' +
+        linesHTML +
+        '<div class="pbrd-hosp-gj-sc-foot pbrd-hosp-gj-sc-a11">' + s.foot + '</div>' +
+      '</div>';
+    }
+
+    var scenesHTML = steps.map(function(s, i) { return buildScene(s, i); }).join("");
 
     wrap.innerHTML =
       '<div class="pbrd-hosp-gj-header pbrd-hosp-reveal">' +
-        '<div class="pbrd-hosp-section-label">AI-POWERED GUEST JOURNEY</div>' +
-        '<h2 class="pbrd-hosp-gj-h2">Every touchpoint is a revenue opportunity.<br>Our AI captures them all.</h2>' +
-        '<p class="pbrd-hosp-gj-sub">From booking to checkout \u2014 an autonomous AI agent handles billing questions, refunds, room charges, and upsells across WhatsApp and your website chat. No human needed.</p>' +
+        '<div class="pbrd-hosp-section-label" style="color:#6319f0">THE GUEST JOURNEY</div>' +
+        '<h2 class="pbrd-hosp-gj-h2">Six touchpoints. One platform.<br>Zero revenue left behind.</h2>' +
+        '<p class="pbrd-hosp-gj-sub">From the moment a guest books to the second they check out, every payment flows through Paybyrd. See exactly what happens at each step.</p>' +
       '</div>' +
 
-      /* ── Two-card grid ── */
-      '<div class="pbrd-hosp-gj-grid">' +
-
-        /* Card 1: AI Chat Agent */
-        '<div class="pbrd-hosp-gj-card pbrd-hosp-reveal">' +
-          '<div class="pbrd-hosp-gj-visual">' +
-            '<div class="pbrd-hosp-gj-chat" id="pbrd-hosp-chat">' +
-              '<div class="pbrd-hosp-gj-chat-head">' +
-                '<div class="pbrd-hosp-gj-chat-avatar">P</div>' +
-                '<div>' +
-                  '<div class="pbrd-hosp-gj-chat-name">Paybyrd AI Agent</div>' +
-                  '<div class="pbrd-hosp-gj-chat-status"><span class="pbrd-hosp-gj-dot-live"></span><span id="pbrd-hosp-chat-channel">WhatsApp</span></div>' +
-                '</div>' +
-                '<div class="pbrd-hosp-gj-chat-badge" id="pbrd-hosp-chat-badge">AI</div>' +
-              '</div>' +
-              '<div class="pbrd-hosp-gj-chat-body" id="pbrd-hosp-chat-body">' +
-                '<div class="pbrd-hosp-gj-msg bot" id="pbrd-hosp-cm0"><span>Hi! I\u2019m your hotel assistant. How can I help?</span></div>' +
-                '<div class="pbrd-hosp-gj-msg user" id="pbrd-hosp-cm1"><span id="pbrd-hosp-cm1t"></span></div>' +
-                '<div class="pbrd-hosp-gj-typing" id="pbrd-hosp-typing"><span></span><span></span><span></span></div>' +
-                '<div class="pbrd-hosp-gj-msg bot" id="pbrd-hosp-cm2"><span id="pbrd-hosp-cm2t"></span></div>' +
-                '<div class="pbrd-hosp-gj-msg bot" id="pbrd-hosp-cm3">' +
-                  '<div class="pbrd-hosp-gj-booking">' +
-                    '<div class="pbrd-hosp-gj-booking-row"><span>PNR</span><span id="pbrd-hosp-bpnr"></span></div>' +
-                    '<div class="pbrd-hosp-gj-booking-row"><span>Hotel</span><span id="pbrd-hosp-bhotel"></span></div>' +
-                    '<div class="pbrd-hosp-gj-booking-row"><span>Room</span><span id="pbrd-hosp-broom"></span></div>' +
-                    '<div class="pbrd-hosp-gj-booking-row"><span>Check-out</span><span id="pbrd-hosp-bcheckout"></span></div>' +
-                    '<div class="pbrd-hosp-gj-booking-row"><span>Guests</span><span id="pbrd-hosp-bguests"></span></div>' +
-                  '</div>' +
-                '</div>' +
-                '<div class="pbrd-hosp-gj-msg bot" id="pbrd-hosp-cm4"><span id="pbrd-hosp-cm4t"></span></div>' +
-                '<div class="pbrd-hosp-gj-msg bot" id="pbrd-hosp-cm5"><div class="pbrd-hosp-gj-action" id="pbrd-hosp-cact"></div></div>' +
-                '<div class="pbrd-hosp-gj-msg bot" id="pbrd-hosp-cm6"><span class="pbrd-hosp-gj-success-icon"><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></span><span id="pbrd-hosp-cm6t"></span></div>' +
-              '</div>' +
-            '</div>' +
-          '</div>' +
-          '<div class="pbrd-hosp-gj-body">' +
-            '<h3>Autonomous AI agent across every channel</h3>' +
-            '<p>Your AI handles the full guest lifecycle \u2014 refunds, upsells, room changes, and pay-by-links \u2014 via WhatsApp and website chat. 24/7, 30+ languages.</p>' +
-            '<ul class="pbrd-hosp-gj-bullets">' +
-              '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#6319f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Processes refunds and cancellations in real time</li>' +
-              '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#6319f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Sends pay-by-links for upgrades and extras</li>' +
-              '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#6319f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Handles room changes and late checkouts autonomously</li>' +
-            '</ul>' +
-          '</div>' +
+      '<div class="pbrd-hosp-gj-interactive pbrd-hosp-reveal">' +
+        '<div class="pbrd-hosp-gj-tabs">' + tabsHTML + '</div>' +
+        '<div class="pbrd-hosp-gj-stage">' +
+          '<div class="pbrd-hosp-gj-stage-inner">' + scenesHTML + '</div>' +
+          '<div class="pbrd-hosp-gj-progress"><div class="pbrd-hosp-gj-progress-bar"></div></div>' +
         '</div>' +
+      '</div>' +
 
-        /* Card 2: Journey Touchpoints with live data */
-        '<div class="pbrd-hosp-gj-card pbrd-hosp-reveal">' +
-          '<div class="pbrd-hosp-gj-visual">' +
-            '<div class="pbrd-hosp-gj-journey" id="pbrd-hosp-journey">' +
-              '<div class="pbrd-hosp-gj-j-flow">' +
-                touchpoints.map(function(tp, idx) {
-                  return '<div class="pbrd-hosp-gj-j-node" id="pbrd-hosp-jn' + idx + '">' +
-                    '<div class="pbrd-hosp-gj-j-icon">' + tp.icon + '</div>' +
-                    '<div class="pbrd-hosp-gj-j-title">' + tp.title + '</div>' +
-                    '<div class="pbrd-hosp-gj-j-sub">' + tp.sub + '</div>' +
-                    '<div class="pbrd-hosp-gj-j-stat"><span class="pbrd-hosp-gj-j-stat-v">' + tp.stat + '</span><span class="pbrd-hosp-gj-j-stat-l">' + tp.statLabel + '</span></div>' +
-                    '<div class="pbrd-hosp-gj-j-txns" id="pbrd-hosp-jt' + idx + '">' +
-                      tp.txns.map(function(t) { return '<div class="pbrd-hosp-gj-j-txn">' + t + '</div>'; }).join("") +
-                    '</div>' +
-                  '</div>' +
-                  (idx < 3 ? '<div class="pbrd-hosp-gj-j-connector"><svg viewBox="0 0 40 24" width="40" height="24"><path d="M0 12h32" stroke="rgba(99,25,240,0.3)" stroke-width="1.5" stroke-dasharray="4 3"/><path d="M28 6l8 6-8 6" fill="none" stroke="rgba(99,25,240,0.4)" stroke-width="1.5"/></svg></div>' : '');
-                }).join("") +
-              '</div>' +
-            '</div>' +
-          '</div>' +
-          '<div class="pbrd-hosp-gj-body">' +
-            '<h3>Every channel. One unified platform.</h3>' +
-            '<p>Online bookings, front desk, in-stay charges, and checkout \u2014 every transaction flows through a single payment engine with real-time reconciliation.</p>' +
-            '<ul class="pbrd-hosp-gj-bullets">' +
-              '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#6319f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Unified view across all sales channels</li>' +
-              '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#6319f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>PMS integration for seamless folio management</li>' +
-              '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#6319f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>POS captures spa, restaurant & bar revenue</li>' +
-            '</ul>' +
-          '</div>' +
+      '<div class="pbrd-hosp-gj-stats pbrd-hosp-reveal">' +
+        '<div class="pbrd-hosp-gj-stat-item">' +
+          '<span class="pbrd-hosp-gj-stat-v">100%</span>' +
+          '<span class="pbrd-hosp-gj-stat-l">of guest spend captured</span>' +
         '</div>' +
-
+        '<div class="pbrd-hosp-gj-stat-item">' +
+          '<span class="pbrd-hosp-gj-stat-v">< 30s</span>' +
+          '<span class="pbrd-hosp-gj-stat-l">express checkout</span>' +
+        '</div>' +
+        '<div class="pbrd-hosp-gj-stat-item">' +
+          '<span class="pbrd-hosp-gj-stat-v">24/7</span>' +
+          '<span class="pbrd-hosp-gj-stat-l">AI concierge coverage</span>' +
+        '</div>' +
+        '<div class="pbrd-hosp-gj-stat-item">' +
+          '<span class="pbrd-hosp-gj-stat-v">1 invoice</span>' +
+          '<span class="pbrd-hosp-gj-stat-l">for any group size</span>' +
+        '</div>' +
       '</div>';
 
     section.appendChild(wrap);
 
-    /* ═══ Chat animation ═══ */
-    var chatIdx = 0;
-    var chatRunning = false;
-    function runChat() {
-      if (chatRunning) return;
-      chatRunning = true;
-      var sc = chatScenarios[chatIdx % chatScenarios.length];
-      chatIdx++;
+    /* ═══ Tab switching + auto-rotate ═══ */
+    var activeStep = 0;
+    var tabs = wrap.querySelectorAll(".pbrd-hosp-gj-tab");
+    var scenes = wrap.querySelectorAll(".pbrd-hosp-gj-scene");
+    var progressBar = wrap.querySelector(".pbrd-hosp-gj-progress-bar");
+    var autoTimer = null;
+    var INTERVAL = 5000;
 
-      /* References */
-      var body = document.getElementById("pbrd-hosp-chat-body");
-      var channel = document.getElementById("pbrd-hosp-chat-channel");
-      var cm0 = document.getElementById("pbrd-hosp-cm0");
-      var cm1 = document.getElementById("pbrd-hosp-cm1");
-      var cm1t = document.getElementById("pbrd-hosp-cm1t");
-      var typing = document.getElementById("pbrd-hosp-typing");
-      var cm2 = document.getElementById("pbrd-hosp-cm2");
-      var cm2t = document.getElementById("pbrd-hosp-cm2t");
-      var cm3 = document.getElementById("pbrd-hosp-cm3");
-      var cm4 = document.getElementById("pbrd-hosp-cm4");
-      var cm4t = document.getElementById("pbrd-hosp-cm4t");
-      var cm5 = document.getElementById("pbrd-hosp-cm5");
-      var cact = document.getElementById("pbrd-hosp-cact");
-      var cm6 = document.getElementById("pbrd-hosp-cm6");
-      var cm6t = document.getElementById("pbrd-hosp-cm6t");
-
-      /* Reset all */
-      [cm0, cm1, cm2, cm3, cm4, cm5, cm6].forEach(function(el) { el.style.opacity = "0"; });
-      typing.style.display = "none";
-      if (body) body.scrollTop = 0;
-
-      channel.textContent = sc.channel;
-
-      /* Step flow */
-      setTimeout(function() { cm0.style.opacity = "1"; }, 400);
-      setTimeout(function() {
-        cm1t.textContent = sc.user;
-        cm1.style.opacity = "1";
-        if (body) body.scrollTop = body.scrollHeight;
-      }, 1200);
-      setTimeout(function() {
-        typing.style.display = "flex";
-        if (body) body.scrollTop = body.scrollHeight;
-      }, 2200);
-      setTimeout(function() {
-        typing.style.display = "none";
-        cm2t.textContent = sc.lookup;
-        cm2.style.opacity = "1";
-        if (body) body.scrollTop = body.scrollHeight;
-      }, 3600);
-      setTimeout(function() {
-        document.getElementById("pbrd-hosp-bpnr").textContent = sc.booking.pnr;
-        document.getElementById("pbrd-hosp-bhotel").textContent = sc.booking.hotel;
-        document.getElementById("pbrd-hosp-broom").textContent = sc.booking.room;
-        document.getElementById("pbrd-hosp-bcheckout").textContent = sc.booking.checkout;
-        document.getElementById("pbrd-hosp-bguests").textContent = sc.booking.guests;
-        cm3.style.opacity = "1";
-        if (body) body.scrollTop = body.scrollHeight;
-      }, 4600);
-      setTimeout(function() {
-        cm4t.textContent = sc.offer;
-        cm4.style.opacity = "1";
-        if (body) body.scrollTop = body.scrollHeight;
-      }, 6000);
-      setTimeout(function() {
-        cact.textContent = sc.action;
-        cact.className = "pbrd-hosp-gj-action";
-        cm5.style.opacity = "1";
-        if (body) body.scrollTop = body.scrollHeight;
-      }, 7200);
-      setTimeout(function() {
-        cact.classList.add("pbrd-hosp-gj-action--done");
-      }, 8600);
-      setTimeout(function() {
-        cm6t.textContent = sc.success;
-        cm6.style.opacity = "1";
-        if (body) body.scrollTop = body.scrollHeight;
-      }, 9400);
-      setTimeout(function() {
-        chatRunning = false;
-        runChat();
-      }, 13000);
-    }
-
-    /* ═══ Journey node pulse animation ═══ */
-    function animateJourney() {
-      var nodes = document.querySelectorAll(".pbrd-hosp-gj-j-node");
-      var txnEls = [];
-      for (var i = 0; i < 4; i++) txnEls.push(document.getElementById("pbrd-hosp-jt" + i));
-
-      /* Cycle active node */
-      var activeIdx = 0;
-      function cycleNode() {
-        nodes.forEach(function(n, i) {
-          if (i === activeIdx) {
-            n.classList.add("pbrd-hosp-gj-j-node--active");
-          } else {
-            n.classList.remove("pbrd-hosp-gj-j-node--active");
-          }
-        });
-
-        /* Animate txns in active node */
-        var txnContainer = txnEls[activeIdx];
-        if (txnContainer) {
-          var items = txnContainer.querySelectorAll(".pbrd-hosp-gj-j-txn");
-          items.forEach(function(item, idx) {
-            item.style.opacity = "0";
-            item.style.transform = "translateY(6px)";
-            setTimeout(function() {
-              item.style.transition = "opacity 0.4s, transform 0.4s";
-              item.style.opacity = "1";
-              item.style.transform = "translateY(0)";
-            }, 300 + idx * 250);
-          });
-        }
-
-        activeIdx = (activeIdx + 1) % nodes.length;
-        setTimeout(cycleNode, 3000);
+    function setActive(idx) {
+      activeStep = idx;
+      tabs.forEach(function(t, i) {
+        if (i === idx) { t.classList.add("pbrd-hosp-gj-tab--active"); }
+        else { t.classList.remove("pbrd-hosp-gj-tab--active"); }
+      });
+      scenes.forEach(function(s, i) {
+        if (i === idx) { s.classList.add("pbrd-hosp-gj-scene--active"); }
+        else { s.classList.remove("pbrd-hosp-gj-scene--active"); }
+      });
+      /* Reset progress bar */
+      if (progressBar) {
+        progressBar.style.transition = "none";
+        progressBar.style.width = "0%";
+        setTimeout(function() {
+          progressBar.style.transition = "width " + INTERVAL + "ms linear";
+          progressBar.style.width = "100%";
+        }, 50);
       }
-      cycleNode();
     }
 
-    /* ═══ Trigger on scroll ═══ */
+    function startRotation() {
+      clearInterval(autoTimer);
+      autoTimer = setInterval(function() {
+        setActive((activeStep + 1) % 6);
+      }, INTERVAL);
+    }
+
+    tabs.forEach(function(tab) {
+      tab.addEventListener("click", function() {
+        var idx = parseInt(tab.getAttribute("data-idx"));
+        setActive(idx);
+        startRotation();
+      });
+    });
+
+    /* Start on scroll */
     var gjObserver = new IntersectionObserver(function(entries) {
       entries.forEach(function(en) {
         if (en.isIntersecting) {
-          runChat();
-          animateJourney();
+          setActive(0);
+          startRotation();
           gjObserver.unobserve(en.target);
         }
       });
