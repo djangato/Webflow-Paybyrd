@@ -894,13 +894,13 @@
     '<div class="pbrd-viz pbrd-viz-pricing">' +
       '<div class="pbrd-bv-card" style="animation:pbrd-dv-slide-up 0.5s ease both">' +
         '<div class="pbrd-bv-label">Transaction Fee</div>' +
-        '<div class="pbrd-bv-big" style="margin:4px 0">1.50<span class="pbrd-bv-unit">%</span></div>' +
-        '<div class="pbrd-bv-sublabel">+ \u20AC0.15 per transaction</div>' +
+        '<div class="pbrd-bv-big" style="margin:4px 0">1.11<span class="pbrd-bv-unit">%</span></div>' +
+        '<div class="pbrd-bv-sublabel">+ \u20AC0.05 per transaction</div>' +
         '<div class="pbrd-bv-divider"></div>' +
         '<div class="pbrd-bv-compare">' +
           '<div class="pbrd-bv-comp-row"><span class="pbrd-bv-comp-name">Competitor A</span><div class="pbrd-bv-comp-bar-wrap"><div class="pbrd-bv-comp-bar pbrd-bv-comp-them" style="--w:85%"></div></div><span class="pbrd-bv-comp-val">2.9%</span></div>' +
           '<div class="pbrd-bv-comp-row"><span class="pbrd-bv-comp-name">Competitor B</span><div class="pbrd-bv-comp-bar-wrap"><div class="pbrd-bv-comp-bar pbrd-bv-comp-them" style="--w:72%"></div></div><span class="pbrd-bv-comp-val">2.5%</span></div>' +
-          '<div class="pbrd-bv-comp-row"><span class="pbrd-bv-comp-name">Paybyrd</span><div class="pbrd-bv-comp-bar-wrap"><div class="pbrd-bv-comp-bar pbrd-bv-comp-us" style="--w:44%"></div></div><span class="pbrd-bv-comp-val pbrd-bv-comp-save">1.5%</span></div>' +
+          '<div class="pbrd-bv-comp-row"><span class="pbrd-bv-comp-name">Paybyrd</span><div class="pbrd-bv-comp-bar-wrap"><div class="pbrd-bv-comp-bar pbrd-bv-comp-us" style="--w:32%"></div></div><span class="pbrd-bv-comp-val pbrd-bv-comp-save">1.11%</span></div>' +
         '</div>' +
         '<div class="pbrd-bv-row" style="margin-top:10px">' +
           '<div class="pbrd-bv-mini"><span class="pbrd-bv-mini-val">\u20AC0</span><span class="pbrd-bv-mini-lbl">Setup</span></div>' +
@@ -967,23 +967,20 @@
       '</div>' +
     '</div>';
 
-  /* ─── Card 4: Loyalty — Pulsing NPS ─── */
+  /* ─── Card 4: Revenue — Live payment stream ─── */
   var vizLoyalty =
     '<div class="pbrd-viz pbrd-viz-loyalty2">' +
       '<div class="pbrd-bv-card" style="animation:pbrd-dv-slide-up 0.5s ease both;flex:1">' +
-        '<div style="display:flex;gap:20px;align-items:center">' +
-          '<div style="flex-shrink:0;position:relative;width:90px;height:90px" class="pbrd-bv-ring-wrap">' +
-            '<svg viewBox="0 0 40 40" style="width:100%;height:100%"><circle cx="20" cy="20" r="17" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="2.5"/><circle class="pbrd-bv-ring-fill" cx="20" cy="20" r="17" fill="none" stroke="url(#pbrd-bv-ring-g)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="107" stroke-dashoffset="107" transform="rotate(-90 20 20)" style="animation:pbrd-bv-ring 1.2s 0.4s ease forwards"/><defs><linearGradient id="pbrd-bv-ring-g" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="rgba(255,255,255,0.15)"/><stop offset="100%" stop-color="rgba(120,180,255,0.7)"/></linearGradient></defs></svg>' +
-            '<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center"><span style="font-size:1.25rem;font-weight:300;color:#fff;letter-spacing:-0.03em" id="pbrd-bv-nps">94</span><span style="font-size:0.4375rem;color:rgba(255,255,255,0.25);text-transform:uppercase;letter-spacing:0.08em">NPS</span></div>' +
-          '</div>' +
-          '<div style="flex:1">' +
-            '<div class="pbrd-bv-label">Customer Loyalty · Live</div>' +
-            '<div style="display:flex;flex-direction:column;gap:8px;margin-top:10px">' +
-              '<div class="pbrd-bv-loyalty-row" style="animation:pbrd-fade-in 0.4s 0.3s both"><span class="pbrd-bv-loyalty-val" id="pbrd-bv-repeat">3.2</span><span class="pbrd-bv-loyalty-unit">\u00D7</span><span class="pbrd-bv-loyalty-lbl">Repeat purchase rate</span></div>' +
-              '<div class="pbrd-bv-loyalty-row" style="animation:pbrd-fade-in 0.4s 0.45s both"><span class="pbrd-bv-loyalty-val">68<span class="pbrd-bv-loyalty-unit">%</span></span><span class="pbrd-bv-loyalty-lbl">Return within 30 days</span></div>' +
-              '<div class="pbrd-bv-loyalty-row" style="animation:pbrd-fade-in 0.4s 0.6s both"><span class="pbrd-bv-loyalty-val">\u20AC218</span><span class="pbrd-bv-loyalty-lbl">Lifetime avg. spend</span></div>' +
-            '</div>' +
-          '</div>' +
+        '<div class="pbrd-bv-label">Revenue Processed · Live</div>' +
+        '<div class="pbrd-bv-hero-row" style="margin:6px 0 4px">' +
+          '<span class="pbrd-bv-big" style="font-size:1.5rem">\u20AC<span id="pbrd-bv-rev">2,847,391</span></span>' +
+        '</div>' +
+        '<div class="pbrd-bv-sublabel">today across all merchants</div>' +
+        '<div class="pbrd-bv-stream" id="pbrd-bv-stream"></div>' +
+        '<div style="display:flex;gap:8px;margin-top:8px">' +
+          '<div class="pbrd-bv-mini" style="flex:1"><span class="pbrd-bv-mini-val" id="pbrd-bv-methods">380+</span><span class="pbrd-bv-mini-lbl">Methods</span></div>' +
+          '<div class="pbrd-bv-mini" style="flex:1"><span class="pbrd-bv-mini-val">192+</span><span class="pbrd-bv-mini-lbl">Currencies</span></div>' +
+          '<div class="pbrd-bv-mini" style="flex:1"><span class="pbrd-bv-mini-val">40+</span><span class="pbrd-bv-mini-lbl">Countries</span></div>' +
         '</div>' +
       '</div>' +
     '</div>';
@@ -997,9 +994,9 @@
       desc: "Recurring shoppers, average tickets, and store heatmaps \u2014 insights that turn data into revenue."
     },
     4: {
-      tag: "Loyalty",
-      heading: "Customers who come back, spend more",
-      desc: "Track retention, repeat rates, and lifetime value across every channel."
+      tag: "Global Scale",
+      heading: "Every payment, everywhere, in real time",
+      desc: "380+ methods, 192+ currencies, 40+ countries \u2014 all flowing through one platform."
     }
   };
 
@@ -1110,6 +1107,51 @@
       setTimeout(addFeedItem, txn.ok ? 2200 : 3500);
     }
     if (feedEl) setTimeout(addFeedItem, 1000);
+
+    /* Revenue counter */
+    var revEl = document.getElementById("pbrd-bv-rev");
+    if (revEl) {
+      var revCount = 2847391;
+      setInterval(function() {
+        revCount += Math.floor(Math.random() * 500) + 80;
+        revEl.textContent = revCount.toLocaleString();
+      }, 1200);
+    }
+
+    /* Live payment stream */
+    var streamEl = document.getElementById("pbrd-bv-stream");
+    var streamMethods = [
+      { icon: "\uD83D\uDCB3", name: "Visa", flag: "\uD83C\uDDF3\uD83C\uDDF1" },
+      { icon: "\uD83D\uDCB3", name: "MC", flag: "\uD83C\uDDE9\uD83C\uDDEA" },
+      { icon: "\uD83D\uDCF1", name: "Apple Pay", flag: "\uD83C\uDDEB\uD83C\uDDF7" },
+      { icon: "\uD83D\uDCB3", name: "iDEAL", flag: "\uD83C\uDDF3\uD83C\uDDF1" },
+      { icon: "\uD83D\uDCB3", name: "MB Way", flag: "\uD83C\uDDF5\uD83C\uDDF9" },
+      { icon: "\uD83D\uDCF1", name: "Google Pay", flag: "\uD83C\uDDEC\uD83C\uDDE7" },
+      { icon: "\uD83D\uDCB3", name: "AMEX", flag: "\uD83C\uDDFA\uD83C\uDDF8" },
+      { icon: "\uD83D\uDCB3", name: "Bancontact", flag: "\uD83C\uDDE7\uD83C\uDDEA" }
+    ];
+    var streamIdx = 0;
+    function addStreamItem() {
+      if (!streamEl) return;
+      var m = streamMethods[streamIdx % streamMethods.length];
+      streamIdx++;
+      var amt = (Math.random() * 400 + 15).toFixed(2);
+      var item = document.createElement("div");
+      item.className = "pbrd-bv-stream-item";
+      item.style.opacity = "0";
+      item.innerHTML = '<span class="pbrd-bv-stream-flag">' + m.flag + '</span>' +
+        '<span class="pbrd-bv-stream-name">' + m.name + '</span>' +
+        '<span class="pbrd-bv-stream-amt">\u20AC' + parseFloat(amt).toLocaleString() + '</span>';
+      if (streamEl.children.length >= 3) {
+        var old = streamEl.lastChild;
+        old.style.opacity = "0";
+        setTimeout(function() { if (old.parentNode) old.parentNode.removeChild(old); }, 300);
+      }
+      streamEl.insertBefore(item, streamEl.firstChild);
+      setTimeout(function() { item.style.opacity = "1"; }, 50);
+      setTimeout(addStreamItem, 1500);
+    }
+    if (streamEl) setTimeout(addStreamItem, 800);
   }
 
   if (document.readyState === "complete") {

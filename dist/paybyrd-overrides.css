@@ -1951,9 +1951,9 @@ a.glowing_button_link .glowing_button_text {
 /* ─── Heatmap grid (compact) ─── */
 .pbrd-bv-heatgrid-sm {
   display: grid;
-  grid-template-columns: repeat(7, 10px);
-  grid-template-rows: repeat(4, 10px);
-  gap: 2px;
+  grid-template-columns: repeat(7, 14px);
+  grid-template-rows: repeat(4, 14px);
+  gap: 3px;
 }
 
 .pbrd-heat-cell {
@@ -2100,6 +2100,13 @@ a.glowing_button_link .glowing_button_text {
   50% { filter:drop-shadow(0 0 10px rgba(120,180,255,0.35)); }
 }
 .pbrd-bv-loyalty-unit { font-size:0.625rem; color:rgba(255,255,255,0.3); }
+
+/* Payment stream */
+.pbrd-bv-stream { display:flex; flex-direction:column; gap:4px; margin:10px 0 8px; min-height:52px; }
+.pbrd-bv-stream-item { display:flex; align-items:center; gap:6px; font-size:0.625rem; padding:4px 8px; border-radius:6px; background:rgba(120,180,255,0.04); border:1px solid rgba(120,180,255,0.06); transition:opacity 0.3s; }
+.pbrd-bv-stream-flag { font-size:0.75rem; }
+.pbrd-bv-stream-name { color:rgba(255,255,255,0.5); }
+.pbrd-bv-stream-amt { margin-left:auto; color:rgba(120,255,180,0.7); font-weight:700; font-variant-numeric:tabular-nums; }
 
 /* Sparkline pulse */
 .pbrd-bv-sparkline { animation:pbrd-line-draw 1.5s 0.5s ease forwards, pbrd-bv-spark-pulse 3s 2s ease-in-out infinite; }
