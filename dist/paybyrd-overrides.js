@@ -9741,24 +9741,29 @@
 
       '</div>' +
 
-      /* Benchmark section — with EUR loss on 100M volume */
+      /* Benchmark section — framed as losses with each competitor */
       '<div class="pbrd-hosp-bench pbrd-hosp-reveal" id="data">' +
-        '<div class="pbrd-hosp-bench-label">APPROVAL RATE BENCHMARKS \u00b7 BASED ON \u20AC100M ANNUAL VOLUME</div>' +
+        '<div class="pbrd-hosp-bench-label">REVENUE LEFT ON THE TABLE \u00b7 PER \u20AC100M ANNUAL VOLUME</div>' +
+        '<div class="pbrd-hosp-bench-sub-label">Lower approval rates mean lost bookings. Here\u2019s what each competitor costs you compared to Paybyrd:</div>' +
         '<div class="pbrd-hosp-bench-row">' +
-          '<span class="pbrd-hosp-bench-name">vs Adyen</span>' +
-          '<div class="pbrd-hosp-bench-bar-wrap"><div class="pbrd-hosp-bench-bar--us" data-w="25"><span class="pbrd-hosp-bench-bar-label">+1.72% \u00b7 \u20AC1.72M recovered</span></div></div>' +
+          '<span class="pbrd-hosp-bench-name">Staying with Nuvei</span>' +
+          '<div class="pbrd-hosp-bench-bar-wrap"><div class="pbrd-hosp-bench-bar--them" data-w="85"><span class="pbrd-hosp-bench-bar-label">\u2212\u20AC4.92M lost</span></div></div>' +
         '</div>' +
         '<div class="pbrd-hosp-bench-row">' +
-          '<span class="pbrd-hosp-bench-name">vs Elavon</span>' +
-          '<div class="pbrd-hosp-bench-bar-wrap"><div class="pbrd-hosp-bench-bar--us" data-w="50"><span class="pbrd-hosp-bench-bar-label">+3.16% \u00b7 \u20AC3.16M recovered</span></div></div>' +
+          '<span class="pbrd-hosp-bench-name">Staying with Checkout.com</span>' +
+          '<div class="pbrd-hosp-bench-bar-wrap"><div class="pbrd-hosp-bench-bar--them" data-w="80"><span class="pbrd-hosp-bench-bar-label">\u2212\u20AC4.86M lost</span></div></div>' +
         '</div>' +
         '<div class="pbrd-hosp-bench-row">' +
-          '<span class="pbrd-hosp-bench-name">vs Checkout.com</span>' +
-          '<div class="pbrd-hosp-bench-bar-wrap"><div class="pbrd-hosp-bench-bar--us" data-w="80"><span class="pbrd-hosp-bench-bar-label">+4.86% \u00b7 \u20AC4.86M recovered</span></div></div>' +
+          '<span class="pbrd-hosp-bench-name">Staying with Elavon</span>' +
+          '<div class="pbrd-hosp-bench-bar-wrap"><div class="pbrd-hosp-bench-bar--them" data-w="50"><span class="pbrd-hosp-bench-bar-label">\u2212\u20AC3.16M lost</span></div></div>' +
         '</div>' +
         '<div class="pbrd-hosp-bench-row">' +
-          '<span class="pbrd-hosp-bench-name">vs Nuvei</span>' +
-          '<div class="pbrd-hosp-bench-bar-wrap"><div class="pbrd-hosp-bench-bar--us" data-w="85"><span class="pbrd-hosp-bench-bar-label">+4.92% \u00b7 \u20AC4.92M recovered</span></div></div>' +
+          '<span class="pbrd-hosp-bench-name">Staying with Adyen</span>' +
+          '<div class="pbrd-hosp-bench-bar-wrap"><div class="pbrd-hosp-bench-bar--them" data-w="25"><span class="pbrd-hosp-bench-bar-label">\u2212\u20AC1.72M lost</span></div></div>' +
+        '</div>' +
+        '<div class="pbrd-hosp-bench-row pbrd-hosp-bench-row--paybyrd">' +
+          '<span class="pbrd-hosp-bench-name" style="color:#6319f0;font-weight:700">Switch to Paybyrd</span>' +
+          '<div class="pbrd-hosp-bench-bar-wrap"><div class="pbrd-hosp-bench-bar--us" data-w="5" style="background:#22c55e"><span class="pbrd-hosp-bench-bar-label" style="color:#fff;padding-left:8px">\u20AC0 lost</span></div></div>' +
         '</div>' +
       '</div>';
 
@@ -9769,7 +9774,7 @@
     if ("IntersectionObserver" in window && bench) {
       new IntersectionObserver(function(entries) {
         if (entries[0].isIntersecting) {
-          section.querySelectorAll(".pbrd-hosp-bench-bar--us").forEach(function(bar) {
+          section.querySelectorAll(".pbrd-hosp-bench-bar--them, .pbrd-hosp-bench-bar--us").forEach(function(bar) {
             var w = bar.getAttribute("data-w");
             setTimeout(function() { bar.style.width = w + "%"; }, 400);
           });
