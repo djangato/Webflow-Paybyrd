@@ -1396,6 +1396,13 @@
     section.style.setProperty("margin", "0", "important");
     section.style.setProperty("background", "linear-gradient(135deg, #0a0a0f, #1a1020)", "important");
     section.classList.add("pbrd-hosp-test-section");
+    /* Remove Webflow quote_wrap parent that adds whitespace */
+    var quoteWrap = section.closest(".quote_wrap");
+    if (quoteWrap) {
+      quoteWrap.style.setProperty("padding", "0", "important");
+      quoteWrap.style.setProperty("margin", "0", "important");
+      quoteWrap.style.setProperty("background", "transparent", "important");
+    }
 
     var wrap = document.createElement("div");
     wrap.className = "pbrd-hosp-test-wrap";
