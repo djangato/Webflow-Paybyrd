@@ -1509,9 +1509,10 @@
     var existingSub = heading.nextElementSibling;
     if (existingSub && existingSub.tagName === "P") {
       existingSub.textContent = "Every swipe, tap, and booking tells a story. Paybyrd reads it in real time \u2014 so you know which guest is a VIP before they arrive, which outlet peaks on Fridays, and where your next million in revenue is hiding.";
+      existingSub.style.setProperty("margin-top", "32px", "important");
     } else {
       var sub = document.createElement("p");
-      sub.setAttribute("style", "font-size:1rem;color:#888;max-width:560px;margin:12px auto 0;line-height:1.6;text-align:center;");
+      sub.setAttribute("style", "font-size:1rem;color:#888;max-width:560px;margin:32px auto 0;line-height:1.6;text-align:center;");
       sub.textContent = "Every swipe, tap, and booking tells a story. Paybyrd reads it in real time \u2014 so you know which guest is a VIP before they arrive, which outlet peaks on Fridays, and where your next million in revenue is hiding.";
       heading.parentElement.insertBefore(sub, heading.nextSibling);
     }
@@ -1603,7 +1604,8 @@
       if ((t.includes("every interaction") || t.includes("opportunity to learn")) && biIdx < 3) {
         var card = biCards[biIdx];
         if (biIdx === 0) {
-          p.style.setProperty("margin-top", "90px", "important");
+          p.style.setProperty("position", "relative", "important");
+          p.style.setProperty("top", "90px", "important");
         }
         p.innerHTML =
           '<div style="background:#0e0e18;border-radius:12px;padding:16px;margin-bottom:12px;border:1px solid rgba(99,25,240,0.1);">' + card.svg + '</div>' +
