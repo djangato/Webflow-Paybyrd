@@ -224,6 +224,10 @@
     var section = heading.closest("section") || heading.closest("[class*='section']");
     if (!section) return;
 
+    /* Reduce padding above title and below graph */
+    section.style.setProperty("padding-top", "24px", "important");
+    section.style.setProperty("padding-bottom", "24px", "important");
+
     section.querySelectorAll("p").forEach(function(p) {
       if (p.textContent.toLowerCase().includes("involving multiple") || p.textContent.toLowerCase().includes("outdated")) {
         p.textContent = "Fraud, failed transactions, currency friction, and cart abandonment drain airline revenue at every stage. Here\u2019s where the money goes \u2014 and how Paybyrd plugs the leaks:";
