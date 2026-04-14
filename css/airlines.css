@@ -712,7 +712,7 @@
 /* ── Hosted Form Card ── */
 .pbrd-air-hf {
   position:relative; z-index:1;
-  width:280px; min-height:480px;
+  width:294px; min-height:456px;
   background:#fff; border-radius:16px;
   padding:20px 18px 16px;
   box-shadow:0 16px 48px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.06);
