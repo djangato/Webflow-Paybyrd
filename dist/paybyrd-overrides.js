@@ -8606,6 +8606,25 @@
           '</div>' +
         '</div>' +
 
+      '</div>' +
+
+      /* ── Card 3: Hosted Payment Form Showcase (full-width) ── */
+      '<div class="pbrd-air-pax-form-showcase pbrd-air-reveal">' +
+        '<div class="pbrd-air-pax-form-content">' +
+          '<div class="pbrd-air-section-label" style="text-align:left">HOSTED PAYMENT FORM</div>' +
+          '<h3 class="pbrd-air-pax-form-h3">Payment forms that know<br>what your passenger is buying.</h3>' +
+          '<p class="pbrd-air-pax-form-desc">Our airline-adapted hosted forms display the full reservation — flight legs, cabin class, passenger details — right alongside payment methods. Passengers see exactly what they\'re paying for. No confusion, no calls to support.</p>' +
+          '<ul class="pbrd-air-pax-bullets">' +
+            '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#6319f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Flight legs, booking ref & cabin class shown on the form</li>' +
+            '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#6319f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>All local payment methods — cards, wallets, bank transfers</li>' +
+            '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#6319f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Reduces payment errors & customer support by 40%</li>' +
+            '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#6319f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Pay-by-link compatible — send via email, SMS or WhatsApp</li>' +
+          '</ul>' +
+        '</div>' +
+        '<div class="pbrd-air-pax-form-img">' +
+          '<div class="pbrd-air-pax-form-glow"></div>' +
+          '<img src="https://djangato.github.io/Webflow-Paybyrd/assets/airlines/hosted-form-tap.png" alt="Paybyrd Hosted Payment Form — TAP Air Portugal" />' +
+        '</div>' +
       '</div>';
 
     section.appendChild(wrap);

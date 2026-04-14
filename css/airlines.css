@@ -682,6 +682,37 @@
   display:flex; align-items:center; padding-top:30px; flex-shrink:0;
 }
 
+/* ── Hosted Payment Form Showcase ── */
+.pbrd-air-pax-form-showcase {
+  display:grid; grid-template-columns:1fr 1fr; gap:48px;
+  align-items:center; margin-top:32px;
+  padding:48px 40px; border-radius:16px;
+  background:#0e0e18; border:1px solid rgba(255,255,255,0.06);
+}
+
+.pbrd-air-pax-form-h3 {
+  font-size:clamp(1.375rem,2.5vw,1.75rem); font-weight:700; color:#fff;
+  letter-spacing:-0.02em; margin:10px 0 16px; line-height:1.2;
+}
+.pbrd-air-pax-form-desc {
+  font-size:0.9375rem; color:rgba(255,255,255,0.5); line-height:1.6; margin:0 0 24px;
+}
+
+.pbrd-air-pax-form-img {
+  position:relative; display:flex; justify-content:center; align-items:center;
+}
+.pbrd-air-pax-form-img img {
+  max-width:320px; width:100%; height:auto; border-radius:12px;
+  position:relative; z-index:1;
+  filter:drop-shadow(0 8px 32px rgba(0,0,0,0.4));
+}
+.pbrd-air-pax-form-glow {
+  position:absolute; width:280px; height:280px; border-radius:50%;
+  background:radial-gradient(circle, rgba(99,25,240,0.12) 0%, transparent 70%);
+  top:50%; left:50%; transform:translate(-50%,-50%);
+  z-index:0;
+}
+
 /* ═══ DATA SECTION PARTICLES ═══ */
 @keyframes pbrd-air-data-float {
   0% { transform:translateY(0); opacity:0; }
@@ -713,6 +744,8 @@
   .pbrd-air-bench-bar-wrap { width:100%; margin:0; }
   .pbrd-air-bench-name { width:auto; }
   .pbrd-air-hero-actions { flex-direction:column; align-items:flex-start; }
+  .pbrd-air-pax-form-showcase { grid-template-columns:1fr; gap:32px; padding:32px 24px; }
+  .pbrd-air-pax-form-img img { max-width:260px; }
   .pbrd-air-pax-grid { grid-template-columns:1fr; }
   .pbrd-air-pax-j-flow { flex-wrap:wrap; gap:8px; }
   .pbrd-air-pax-j-connector { display:none; }
