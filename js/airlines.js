@@ -344,30 +344,13 @@
     var section = heading.closest("section") || heading.closest("[class*='section']");
     if (!section) return;
 
-    /* Reduce padding above title + dark background — collapse Webflow wrapper padding */
-    section.style.setProperty("padding-top", "24px", "important");
-    section.style.setProperty("padding-bottom", "24px", "important");
+    /* Hide ALL Webflow children — own the layout */
+    section.style.setProperty("padding", "24px 0", "important");
     section.style.setProperty("background", "#0a0a0f", "important");
     Array.prototype.forEach.call(section.children, function(child) {
-      if (child.tagName !== "SCRIPT" && child.tagName !== "STYLE" && !child.classList.contains("pbrd-air-feat-wrap")) {
-        child.style.setProperty("padding-top", "0", "important");
-        child.style.setProperty("padding-bottom", "0", "important");
-        child.style.setProperty("margin-top", "0", "important");
-        child.style.setProperty("margin-bottom", "0", "important");
+      if (!child.classList || !child.classList.contains("pbrd-air-feat-wrap")) {
+        child.style.setProperty("display", "none", "important");
       }
-    });
-
-    /* Hide existing Webflow cards + heading + CTA */
-    section.querySelectorAll("[class*='card-8'], [class*='card_8']").forEach(function(el) {
-      el.style.setProperty("display", "none", "important");
-    });
-    heading.style.setProperty("display", "none", "important");
-    section.querySelectorAll("a").forEach(function(a) {
-      if (a.textContent.toLowerCase().includes("book consultation")) a.style.setProperty("display", "none", "important");
-    });
-    /* Hide the grid wrapper too */
-    section.querySelectorAll("[class*='grid-1'], [class*='grid_1']").forEach(function(el) {
-      el.style.setProperty("display", "none", "important");
     });
 
     var showcase = document.createElement("div");
