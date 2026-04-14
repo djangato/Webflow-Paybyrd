@@ -9501,21 +9501,22 @@
 
       /* Live counter */
       '<div class="pbrd-hosp-drain-counter pbrd-hosp-reveal">' +
-        '<div class="pbrd-hosp-drain-counter-label">Estimated revenue lost by hotels worldwide today</div>' +
+        '<div class="pbrd-hosp-drain-counter-label">Revenue lost by hotels worldwide since you opened this page</div>' +
         '<div class="pbrd-hosp-drain-counter-value" id="pbrd-hosp-drain-tick">\u20AC0</div>' +
-        '<div class="pbrd-hosp-drain-counter-sub">Based on industry data: 4.6% fraud losses, 84% booking abandonment, ~60% LatAm decline rates</div>' +
+        '<div class="pbrd-hosp-drain-counter-sub">The global hotel industry hemorrhages \u20AC2.7M every day to fraud, abandonment, and payment friction</div>' +
       '</div>' +
 
       /* Waterfall drain visualization */
       '<div class="pbrd-hosp-drain-waterfall">' +
         '<div class="pbrd-hosp-drain-waterfall-head">' +
-          '<span>REVENUE DRAIN \u00b7 PER \u20AC100M ANNUAL VOLUME</span>' +
+          '<span>YOUR HOTEL GROUP \u00b7 ANNUAL LOSSES PER \u20AC100M VOLUME</span>' +
           '<span class="pbrd-hosp-drain-live-dot"></span>' +
         '</div>' +
         waterfallHTML +
         '<div class="pbrd-hosp-drain-total pbrd-hosp-reveal">' +
-          '<span class="pbrd-hosp-drain-total-label">Total recoverable with Paybyrd</span>' +
+          '<span class="pbrd-hosp-drain-total-label">Paybyrd recovers up to</span>' +
           '<span class="pbrd-hosp-drain-total-value" id="pbrd-hosp-drain-total">\u20AC0</span>' +
+          '<span class="pbrd-hosp-drain-total-sub" style="font-size:0.6875rem;color:rgba(255,255,255,0.3);margin-left:8px;">per year on \u20AC100M volume</span>' +
         '</div>' +
       '</div>' +
 
@@ -9541,12 +9542,10 @@
           if (tickEl) {
             var val = 0;
             var perTick = 31500; /* ~$31.5K per tick (every 1s) for dramatic effect */
-            var tickInterval = setInterval(function() {
+            setInterval(function() {
               val += perTick + Math.round(Math.random() * 8000);
               tickEl.textContent = "\u20AC" + val.toLocaleString("de-DE");
             }, 1000);
-            /* Stop after 60s to save resources */
-            setTimeout(function() { clearInterval(tickInterval); }, 60000);
           }
 
           /* Animate total recoverable */
