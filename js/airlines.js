@@ -1541,6 +1541,91 @@
 
 
   /* ═══════════════════════════════════════════ */
+  /* 10. FUTURE SECTION → 10 Problems, 1 Platform */
+  /* ═══════════════════════════════════════════ */
+
+  function enhanceFutureSection() {
+    var section = findSectionByHeading("ready for what");
+    if (!section) return;
+
+    /* Hide all Webflow children */
+    section.style.setProperty("padding", "60px 0", "important");
+    section.style.setProperty("background", "#0a0a0f", "important");
+    section.style.setProperty("overflow", "hidden", "important");
+    Array.prototype.forEach.call(section.children, function(child) {
+      if (!child.classList || !child.classList.contains("pbrd-air-10p-wrap")) {
+        child.style.setProperty("display", "none", "important");
+      }
+    });
+
+    var problems = [
+      { num: "01", icon: '<svg viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="1.5"/></svg>',
+        title: "Fraud & Chargebacks", pain: "$1B+ lost annually across airlines",
+        fix: "AI velocity screening + 3DS", result: "16.8% chargeback reduction" },
+      { num: "02", icon: '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M2 12h20M12 2c2.5 3 4 6 4 10s-1.5 7-4 10c-2.5-3-4-6-4-10s1.5-7 4-10z" stroke="currentColor" stroke-width="1.5"/></svg>',
+        title: "Cross-Border Declines", pain: "FX issues kill international conversion",
+        fix: "192+ currencies, local routing", result: "4\u20137% higher auth rates" },
+      { num: "03", icon: '<svg viewBox="0 0 24 24" fill="none"><path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+        title: "Low Acceptance Rates", pain: "Single acquiring = lost transactions",
+        fix: "Multi-acquiring + instant retry", result: "+4.86% vs Checkout.com" },
+      { num: "04", icon: '<svg viewBox="0 0 24 24" fill="none"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
+        title: "System Downtime", pain: "1 hour = millions in lost sales",
+        fix: "Multi-instance infrastructure", result: "99.999% uptime" },
+      { num: "05", icon: '<svg viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
+        title: "Cart Abandonment", pain: "79% drop-off rate in travel",
+        fix: "Optimized hosted checkout UX", result: "15\u201320% recovery rate" },
+      { num: "06", icon: '<svg viewBox="0 0 24 24" fill="none"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+        title: "Refund Delays", pain: "Slow refunds \u2192 disputes \u2192 fines",
+        fix: "Instant refunds + ARN proof", result: "Immediate confirmation" },
+      { num: "07", icon: '<svg viewBox="0 0 24 24" fill="none"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="1.5"/><circle cx="8.5" cy="7" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M20 8v6M23 11h-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
+        title: "Friendly Fraud", pain: "Post-travel disputes inflate ratios",
+        fix: "3DS + shared fraud database", result: "Vast dispute reduction" },
+      { num: "08", icon: '<svg viewBox="0 0 24 24" fill="none"><rect x="1" y="4" width="22" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M1 10h22" stroke="currentColor" stroke-width="1.5"/></svg>',
+        title: "Missing Local Methods", pain: "20\u201330% conversion loss",
+        fix: "Any method, any country", result: "Full localization" },
+      { num: "09", icon: '<svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
+        title: "GDS/BSP/NDC Integration", pain: "Reconciliation errors, double charges",
+        fix: "Open API, Amadeus & IATA native", result: "Modular plug-in" },
+      { num: "10", icon: '<svg viewBox="0 0 24 24" fill="none"><path d="M12 15l-2 5L7 9l10 2-5 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/></svg>',
+        title: "Loyalty Fraud", pain: "Points theft & unauthorized redemptions",
+        fix: "Custom API + full loyalty system", result: "Points, Tiers, Wallets & more" }
+    ];
+
+    var wrap = document.createElement("div");
+    wrap.className = "pbrd-air-10p-wrap";
+
+    wrap.innerHTML =
+      '<div class="pbrd-air-10p-header pbrd-air-reveal">' +
+        '<div class="pbrd-air-section-label">WHY AIRLINES SWITCH</div>' +
+        '<h2 class="pbrd-air-10p-h2">10 problems every airline faces.<br>One platform that solves them all.</h2>' +
+        '<p class="pbrd-air-10p-sub">From fraud to refunds, cart abandonment to loyalty \u2014 Paybyrd was built to address every pain point in airline payments. Not partially. Completely.</p>' +
+      '</div>' +
+
+      '<div class="pbrd-air-10p-grid">' +
+        problems.map(function(p) {
+          return '<div class="pbrd-air-10p-card pbrd-air-reveal">' +
+            '<div class="pbrd-air-10p-num">' + p.num + '</div>' +
+            '<div class="pbrd-air-10p-icon">' + p.icon + '</div>' +
+            '<h4 class="pbrd-air-10p-title">' + p.title + '</h4>' +
+            '<p class="pbrd-air-10p-pain">' + p.pain + '</p>' +
+            '<div class="pbrd-air-10p-divider"></div>' +
+            '<div class="pbrd-air-10p-fix">' + p.fix + '</div>' +
+            '<div class="pbrd-air-10p-result">' + p.result + '</div>' +
+          '</div>';
+        }).join("") +
+      '</div>' +
+
+      '<div class="pbrd-air-10p-footer pbrd-air-reveal">' +
+        '<p class="pbrd-air-10p-footer-txt">Most payment providers solve 2\u20133 of these. <strong>Paybyrd solves all 10.</strong></p>' +
+        '<a href="/book-demo" class="pbrd-air-cta-primary">See it in action \u2192</a>' +
+      '</div>';
+
+    section.appendChild(wrap);
+    observeReveal(".pbrd-air-reveal", 80, section);
+  }
+
+
+  /* ═══════════════════════════════════════════ */
   /* Init                                        */
   /* ═══════════════════════════════════════════ */
 
@@ -1553,6 +1638,7 @@
     enhancePassengerJourney();
     enhanceDataSection();
     enhanceStackSection();
+    enhanceFutureSection();
     enhanceBottomCTA();
     enhanceFAQ();
     console.log("[Paybyrd] Airlines enhancements loaded");
