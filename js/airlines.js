@@ -237,7 +237,7 @@
     dash.innerHTML =
       /* Mini Paybyrd airplane + trail */
       '<div class="pbrd-air-plane"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/pos/paybyrd-plane.png" alt="Paybyrd" style="width:100%;height:auto;"></div>' +
-      '<div class="pbrd-air-trail"><svg viewBox="0 0 600 200" preserveAspectRatio="none"><path d="M-80,160 C120,30 340,190 600,50" fill="none" stroke="rgba(99,25,240,0.06)" stroke-width="1.5" stroke-dasharray="6 4" class="pbrd-air-trail-path"/></svg></div>' +
+      '<div class="pbrd-air-trail"><svg viewBox="0 0 900 300" preserveAspectRatio="none"><path d="M-150,280 C50,20 250,300 450,40 C550,180 750,60 900,200" fill="none" stroke="rgba(99,25,240,0.05)" stroke-width="1.5" stroke-dasharray="6 4" class="pbrd-air-trail-path"/></svg></div>' +
       '<div class="pbrd-air-leak-header">' +
         '<div class="pbrd-air-leak-dot pbrd-air-leak-dot--live"></div>' +
         '<span>Revenue Leakage Monitor</span>' +

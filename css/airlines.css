@@ -111,10 +111,10 @@
 /* ── Mini airplane flying across ── */
 .pbrd-air-plane {
   position:absolute; z-index:5; pointer-events:none;
-  width:80px; height:auto;
-  offset-path:path("M-80,160 C120,30 340,190 600,50");
+  width:120px; height:auto;
+  offset-path:path("M-150,280 C50,20 250,300 450,40 C550,180 750,60 900,200");
   offset-rotate:auto;
-  animation:pbrd-air-fly 10s ease-in-out infinite;
+  animation:pbrd-air-fly 12s ease-in-out infinite;
 }
 
 .pbrd-air-plane img {
@@ -131,20 +131,20 @@
 }
 
 .pbrd-air-trail-path {
-  stroke-dasharray:800;
-  stroke-dashoffset:800;
-  animation:pbrd-air-trail-draw 8s ease-in-out infinite;
+  stroke-dasharray:1400;
+  stroke-dashoffset:1400;
+  animation:pbrd-air-trail-draw 12s ease-in-out infinite;
 }
 
 @keyframes pbrd-air-fly {
   0% { offset-distance:0%; opacity:0; }
-  5% { opacity:1; }
-  90% { opacity:1; }
+  3% { opacity:1; }
+  92% { opacity:1; }
   100% { offset-distance:100%; opacity:0; }
 }
 
 @keyframes pbrd-air-trail-draw {
-  0% { stroke-dashoffset:800; }
+  0% { stroke-dashoffset:1400; }
   100% { stroke-dashoffset:0; }
 }
 
