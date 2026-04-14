@@ -224,9 +224,17 @@
     var section = heading.closest("section") || heading.closest("[class*='section']");
     if (!section) return;
 
-    /* Reduce padding above title and below graph */
+    /* Reduce padding above title and below graph — also collapse Webflow wrapper padding */
     section.style.setProperty("padding-top", "24px", "important");
     section.style.setProperty("padding-bottom", "12px", "important");
+    Array.prototype.forEach.call(section.children, function(child) {
+      if (child.tagName !== "SCRIPT" && child.tagName !== "STYLE" && !child.classList.contains("pbrd-air-leak-dash") && !child.classList.contains("pbrd-air-plane") && !child.classList.contains("pbrd-air-trail")) {
+        child.style.setProperty("padding-top", "0", "important");
+        child.style.setProperty("padding-bottom", "0", "important");
+        child.style.setProperty("margin-top", "0", "important");
+        child.style.setProperty("margin-bottom", "0", "important");
+      }
+    });
 
     section.querySelectorAll("p").forEach(function(p) {
       if (p.textContent.toLowerCase().includes("involving multiple") || p.textContent.toLowerCase().includes("outdated")) {
@@ -346,9 +354,18 @@
     var section = heading.closest("section") || heading.closest("[class*='section']");
     if (!section) return;
 
-    /* Reduce padding above title + dark background */
+    /* Reduce padding above title + dark background — collapse Webflow wrapper padding */
     section.style.setProperty("padding-top", "24px", "important");
+    section.style.setProperty("padding-bottom", "24px", "important");
     section.style.setProperty("background", "#0a0a0f", "important");
+    Array.prototype.forEach.call(section.children, function(child) {
+      if (child.tagName !== "SCRIPT" && child.tagName !== "STYLE" && !child.classList.contains("pbrd-air-feat-wrap")) {
+        child.style.setProperty("padding-top", "0", "important");
+        child.style.setProperty("padding-bottom", "0", "important");
+        child.style.setProperty("margin-top", "0", "important");
+        child.style.setProperty("margin-bottom", "0", "important");
+      }
+    });
 
     /* Hide existing Webflow cards + heading + CTA */
     section.querySelectorAll("[class*='card-8'], [class*='card_8']").forEach(function(el) {
@@ -949,8 +966,14 @@
     var section = findSectionByHeading("data that moves");
     if (!section) return;
 
-    /* Reduce spacing */
+    /* Reduce spacing — collapse Webflow wrapper padding */
     section.style.setProperty("padding-bottom", "24px", "important");
+    Array.prototype.forEach.call(section.children, function(child) {
+      if (child.tagName !== "SCRIPT" && child.tagName !== "STYLE") {
+        child.style.setProperty("padding-bottom", "0", "important");
+        child.style.setProperty("margin-bottom", "0", "important");
+      }
+    });
 
     /* Add floating data particles to the section */
     section.style.setProperty("position", "relative", "important");
