@@ -10,39 +10,59 @@
   /* ─── CDN base for icons ─── */
   const iconBase = "https://djangato.github.io/Webflow-Paybyrd/assets/icons/";
 
-  /* ─── Payment Methods Data ─── */
+  /* ─── Payment Methods Data (Online) ─── */
   const paymentMethods = [
     // Cards
-    { name: "Visa", category: "cards", region: "Worldwide", fee: "1.50% + €0.15", img: "visa.png" },
-    { name: "Mastercard", category: "cards", region: "Worldwide", fee: "1.50% + €0.15", img: "mastercard.png" },
-    { name: "American Express", category: "cards", region: "Worldwide", fee: "2.60% + €0.15", img: "amex.png" },
-    { name: "Discover", category: "cards", region: "Worldwide", fee: "2.40% + €0.15", img: "discover.png" },
-    { name: "Diners Club", category: "cards", region: "Worldwide", fee: "2.40% + €0.15", img: "diners.png" },
-    { name: "China Union Pay", category: "cards", region: "Worldwide", fee: "2.80% + €0.15", img: "unionpay.png" },
+    { name: "Visa", category: "cards", fee: "1.25% + \u20AC0.08", img: "visa.png" },
+    { name: "Mastercard", category: "cards", fee: "1.25% + \u20AC0.08", img: "mastercard.png" },
+    { name: "American Express", category: "cards", fee: "2.50% + \u20AC0.08", img: "amex.png" },
+    { name: "Discover", category: "cards", fee: "2.50% + \u20AC0.15", img: "discover.png" },
+    { name: "Diners Club", category: "cards", fee: "2.40% + \u20AC0.15", img: "diners.png" },
+    { name: "China Union Pay", category: "cards", fee: "2.80% + \u20AC0.15", img: "unionpay.png" },
 
     // Digital Wallets
-    { name: "Apple Pay", category: "wallets", region: "Worldwide", fee: "Card rate applies", img: "applepay.png" },
-    { name: "Google Pay", category: "wallets", region: "Worldwide", fee: "Card rate applies", img: "googlepay.png" },
-    { name: "Samsung Pay", category: "wallets", region: "Worldwide", fee: "Card rate applies", icon: "SP", iconBg: "#1428A0" },
-    { name: "PayPal", category: "wallets", region: "Worldwide", fee: "PayPal rate + €0.10", img: "paypal.png" },
-    { name: "Revolut Pay", category: "wallets", region: "Europe", fee: "1.00% + €0.20", icon: "REV", iconBg: "#0075EB" },
+    { name: "Apple Pay", category: "wallets", fee: "Card rate applies", img: "applepay.png" },
+    { name: "Google Pay", category: "wallets", fee: "Card rate applies", img: "googlepay.png" },
+    { name: "Samsung Pay", category: "wallets", fee: "Card rate applies", icon: "SP", iconBg: "#1428A0" },
+    { name: "PayPal", category: "wallets", fee: "PayPal rate + \u20AC0.05", img: "paypal.png" },
+    { name: "Revolut Pay", category: "wallets", fee: "1.00% + \u20AC0.20", icon: "REV", iconBg: "#0075EB" },
 
     // Bank Transfers & Direct Debit
-    { name: "SEPA Direct Debit", category: "bank", region: "Europe", fee: "€0.30", icon: "SEPA", iconBg: "#2D6CA2" },
-    { name: "SEPA Instant", category: "bank", region: "Europe", fee: "€0.35", icon: "SEPA", iconBg: "#2D6CA2" },
-    { name: "iDEAL", category: "bank", region: "Netherlands", fee: "€0.29", img: "ideal.png" },
-    { name: "Multibanco Reference", category: "bank", region: "Portugal", fee: "2.00% + €0.25", img: "multibanco.png" },
+    { name: "SEPA Direct Debit", category: "bank", fee: "\u20AC0.15", icon: "SEPA", iconBg: "#2D6CA2" },
+    { name: "SEPA Instant", category: "bank", fee: "\u20AC0.20", icon: "SEPA", iconBg: "#2D6CA2" },
+    { name: "iDEAL", category: "bank", fee: "\u20AC0.20", img: "ideal.png" },
+    { name: "Multibanco Reference", category: "bank", fee: "1.50% + \u20AC0.10", img: "multibanco.png" },
 
     // Buy Now Pay Later
-    { name: "Klarna", category: "bnpl", region: "Europe", fee: "3.29% + €0.35", img: "klarna.png" },
-    { name: "Floa", category: "bnpl", region: "Europe", fee: "2.99% + €0.35", icon: "FL", iconBg: "#00D26A" },
+    { name: "Klarna", category: "bnpl", fee: "3.29% + \u20AC0.35", img: "klarna.png" },
+    { name: "Floa", category: "bnpl", fee: "2.99% + \u20AC0.35", icon: "FL", iconBg: "#00D26A" },
 
     // Local Payment Methods
-    { name: "MBWay", category: "local", region: "Portugal", fee: "1.20% + €0.15", img: "mbway.png" },
-    { name: "PIX", category: "local", region: "Brazil", fee: "0.99%", icon: "PIX", iconBg: "#32BCAD" },
-    { name: "Multicaixa", category: "local", region: "Angola", fee: "Contact us", icon: "MCX", iconBg: "#E3242B" },
-    { name: "Multicaixa Express", category: "local", region: "Angola", fee: "Contact us", icon: "MCX", iconBg: "#E3242B" },
+    { name: "MBWay", category: "local", fee: "0.60% + \u20AC0.05", img: "mbway.png" },
+    { name: "PIX", category: "local", fee: "1.50% + \u20AC0.10", icon: "PIX", iconBg: "#32BCAD" },
+    { name: "Multicaixa", category: "local", fee: "Contact us", icon: "MCX", iconBg: "#E3242B" },
+    { name: "Multicaixa Express", category: "local", fee: "Contact us", icon: "MCX", iconBg: "#E3242B" },
   ];
+
+  /* ─── Card Present Payment Methods ─── */
+  const cpMethods = [
+    { name: "Visa", category: "cards", fee: "1.11% + \u20AC0.05", img: "visa.png" },
+    { name: "Mastercard", category: "cards", fee: "1.11% + \u20AC0.05", img: "mastercard.png" },
+    { name: "American Express", category: "cards", fee: "2.50% + \u20AC0.05", img: "amex.png" },
+    { name: "Discover", category: "cards", fee: "2.50% + \u20AC0.10", img: "discover.png" },
+    { name: "Diners Club", category: "cards", fee: "2.40% + \u20AC0.10", img: "diners.png" },
+    { name: "China Union Pay", category: "cards", fee: "2.80% + \u20AC0.10", img: "unionpay.png" },
+    { name: "Apple Pay", category: "wallets", fee: "Card rate applies", img: "applepay.png" },
+    { name: "Google Pay", category: "wallets", fee: "Card rate applies", img: "googlepay.png" },
+    { name: "Samsung Pay", category: "wallets", fee: "Card rate applies", icon: "SP", iconBg: "#1428A0" },
+    { name: "MBWay", category: "local", fee: "0.60% + \u20AC0.05", img: "mbway.png" },
+  ];
+
+  let currentChannel = "online";
+
+  function getActiveMethods() {
+    return currentChannel === "online" ? paymentMethods : cpMethods;
+  }
 
   const categories = [
     { id: "all", label: "All Methods" },
@@ -79,13 +99,12 @@
           ${buildMethodIcon(method)}
           <span class="pbrd-method-name">${method.name}</span>
         </div>
-        <span class="pbrd-method-region">${method.region}</span>
         <span class="pbrd-method-fee">${method.fee}</span>
       </div>`;
   }
 
-  function buildCategoryGroup(catId, methods) {
-    const filtered = methods.filter((m) => m.category === catId);
+  function buildCategoryGroup(catId, methodsList) {
+    const filtered = methodsList.filter((m) => m.category === catId);
     if (filtered.length === 0) return "";
     return `
       <div class="pbrd-category-group" data-cat="${catId}">
@@ -101,9 +120,10 @@
   }
 
   function render(filteredCategory) {
+    const allMethods = getActiveMethods();
     const methods = filteredCategory === "all"
-      ? paymentMethods
-      : paymentMethods.filter((m) => m.category === filteredCategory);
+      ? allMethods
+      : allMethods.filter((m) => m.category === filteredCategory);
 
     const groupOrder = filteredCategory === "all"
       ? Object.keys(categoryLabels)
@@ -121,7 +141,12 @@
     section.innerHTML = `
       <div class="pbrd-pricing-header">
         <h2>Payment Methods & Fees</h2>
-        <p>Transparent pricing across all payment methods. No hidden fees, no surprises — just simple, competitive rates.</p>
+        <p>Transparent pricing across all payment methods. No hidden fees, no surprises \u2014 just simple, competitive rates.</p>
+      </div>
+
+      <div class="pbrd-channel-toggle">
+        <button class="pbrd-channel-btn pbrd-channel-btn--active" data-channel="online">Online Payments</button>
+        <button class="pbrd-channel-btn" data-channel="cp">Card Present Payments</button>
       </div>
 
       <div class="pbrd-category-filters">
@@ -136,10 +161,9 @@
       <div class="pbrd-pricing-table">
         <div class="pbrd-table-header">
           <span>Payment method</span>
-          <span>Region</span>
           <span>Transaction fee</span>
         </div>
-        <div class="pbrd-table-body">
+        <div class="pbrd-table-body" id="pbrd-pricing-body">
           ${render("all")}
         </div>
       </div>
@@ -191,6 +215,31 @@
     });
 
     // ─── Event Listeners ─── //
+
+    // Channel toggle (Online / Card Present)
+    section.querySelectorAll(".pbrd-channel-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        section.querySelectorAll(".pbrd-channel-btn").forEach((b) => b.classList.remove("pbrd-channel-btn--active"));
+        btn.classList.add("pbrd-channel-btn--active");
+        currentChannel = btn.dataset.channel;
+        // Reset category filter to "all"
+        section.querySelectorAll(".pbrd-filter-btn").forEach((b) => b.classList.remove("active"));
+        const allBtn = section.querySelector('.pbrd-filter-btn[data-filter="all"]');
+        if (allBtn) allBtn.classList.add("active");
+        // Hide category filters that don't apply to CP
+        const filterWrap = section.querySelector(".pbrd-category-filters");
+        if (filterWrap) filterWrap.style.display = currentChannel === "cp" ? "none" : "";
+        // Re-render
+        const body = section.querySelector(".pbrd-table-body");
+        body.style.opacity = "0";
+        body.style.transition = "opacity 0.15s ease";
+        setTimeout(() => {
+          body.innerHTML = render("all");
+          body.style.opacity = "1";
+          bindCategoryToggles(section);
+        }, 150);
+      });
+    });
 
     // Category filter buttons
     section.querySelectorAll(".pbrd-filter-btn").forEach((btn) => {
