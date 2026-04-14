@@ -10156,7 +10156,7 @@
     var section = findSectionByHeading("hospitality-ready pos");
     if (!section) return;
 
-    section.style.setProperty("padding", "60px 0", "important");
+    section.style.setProperty("padding", "80px 0", "important");
     section.style.setProperty("background", "#0a0a0f", "important");
     Array.prototype.forEach.call(section.children, function(child) {
       if (!child.classList || !child.classList.contains("pbrd-hosp-quivi-wrap")) {
@@ -10167,111 +10167,164 @@
     var wrap = document.createElement("div");
     wrap.className = "pbrd-hosp-quivi-wrap";
 
-    /* Header */
-    var header = document.createElement("div");
-    header.className = "pbrd-hosp-quivi-header";
-    header.innerHTML =
-      '<span class="pbrd-hosp-section-label">TABLE ORDERING &amp; BILL SPLITTING</span>' +
-      '<h2 class="pbrd-hosp-quivi-h2">Quivi turns every table into<br>a frictionless payment point.</h2>' +
-      '<p class="pbrd-hosp-quivi-sub">Guests order from their phone, split bills instantly, and pay without waiting. Staff freed up to focus on hospitality, not transactions.</p>';
-    wrap.appendChild(header);
+    var CDN = "https://djangato.github.io/Webflow-Paybyrd/assets/pos/";
 
-    /* Two-column layout */
-    var layout = document.createElement("div");
-    layout.className = "pbrd-hosp-quivi-layout";
+    wrap.innerHTML =
+      /* Header */
+      '<div class="pbrd-hosp-quivi-header pbrd-hosp-reveal">' +
+        '<span class="pbrd-hosp-section-label">POWERED BY QUIVI</span>' +
+        '<h2 class="pbrd-hosp-quivi-h2">Guests order, split, and pay<br>without waiting for the check.</h2>' +
+        '<p class="pbrd-hosp-quivi-sub">QR table ordering, instant bill splitting, and pay-at-table \u2014 all running on Paybyrd\u2019s native payment rails. No third-party gateway fees. No hardware lock-in.</p>' +
+      '</div>' +
 
-    /* Left: feature bullets */
-    var checkSvg = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="rgba(99,25,240,0.15)"/><path d="M5 8l2 2 4-4" stroke="#6319f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-    var features = [
-      "QR code table ordering \u2014 guests browse and order from their phone",
-      "Bill splitting by item, person, or custom amounts",
-      "Pay-at-table \u2014 no waiting for the check",
-      "Kitchen & bar integration \u2014 orders route directly",
-      "Multi-language \u2014 automatic detection from guest\u2019s phone",
-      "Terminals reduce costs 6\u201310%, increase acceptance 4\u20136%"
-    ];
-    var ul = document.createElement("ul");
-    ul.className = "pbrd-hosp-quivi-features";
-    features.forEach(function(f) {
-      var li = document.createElement("li");
-      li.innerHTML = checkSvg + '<span>' + f + '</span>';
-      ul.appendChild(li);
-    });
-    layout.appendChild(ul);
+      /* ── Interactive flow: 4-step ordering journey ── */
+      '<div class="pbrd-hosp-quivi-flow pbrd-hosp-reveal">' +
+        '<div class="pbrd-hosp-quivi-step">' +
+          '<div class="pbrd-hosp-quivi-step-num">1</div>' +
+          '<div class="pbrd-hosp-quivi-step-screen">' +
+            '<div class="pbrd-hosp-quivi-qr">' +
+              '<svg viewBox="0 0 80 80" fill="none"><rect x="4" y="4" width="24" height="24" rx="2" stroke="rgba(99,25,240,0.5)" stroke-width="1.5"/><rect x="8" y="8" width="16" height="16" rx="1" fill="rgba(99,25,240,0.15)"/><rect x="11" y="11" width="10" height="10" rx="1" fill="rgba(99,25,240,0.3)"/><rect x="52" y="4" width="24" height="24" rx="2" stroke="rgba(99,25,240,0.5)" stroke-width="1.5"/><rect x="56" y="8" width="16" height="16" rx="1" fill="rgba(99,25,240,0.15)"/><rect x="59" y="11" width="10" height="10" rx="1" fill="rgba(99,25,240,0.3)"/><rect x="4" y="52" width="24" height="24" rx="2" stroke="rgba(99,25,240,0.5)" stroke-width="1.5"/><rect x="8" y="56" width="16" height="16" rx="1" fill="rgba(99,25,240,0.15)"/><rect x="11" y="59" width="10" height="10" rx="1" fill="rgba(99,25,240,0.3)"/><rect x="34" y="4" width="6" height="6" rx="1" fill="rgba(99,25,240,0.2)"/><rect x="34" y="14" width="6" height="6" rx="1" fill="rgba(99,25,240,0.15)"/><rect x="34" y="34" width="6" height="6" rx="1" fill="rgba(99,25,240,0.25)"/><rect x="4" y="34" width="6" height="6" rx="1" fill="rgba(99,25,240,0.2)"/><rect x="14" y="34" width="6" height="6" rx="1" fill="rgba(99,25,240,0.1)"/><rect x="44" y="34" width="6" height="6" rx="1" fill="rgba(99,25,240,0.15)"/><rect x="54" y="34" width="6" height="6" rx="1" fill="rgba(99,25,240,0.2)"/><rect x="64" y="34" width="6" height="6" rx="1" fill="rgba(99,25,240,0.1)"/><rect x="34" y="54" width="12" height="6" rx="1" fill="rgba(99,25,240,0.15)"/><rect x="54" y="54" width="6" height="6" rx="1" fill="rgba(99,25,240,0.2)"/><rect x="64" y="54" width="12" height="6" rx="1" fill="rgba(99,25,240,0.25)"/><rect x="34" y="64" width="6" height="12" rx="1" fill="rgba(99,25,240,0.1)"/><rect x="44" y="44" width="6" height="6" rx="1" fill="rgba(99,25,240,0.2)"/><rect x="54" y="64" width="6" height="6" rx="1" fill="rgba(99,25,240,0.15)"/><rect x="64" y="64" width="6" height="12" rx="1" fill="rgba(99,25,240,0.3)"/>' +
+              '<rect x="0" y="0" width="80" height="80" rx="4" fill="none" stroke="rgba(99,25,240,0.08)" stroke-width="0.5"/></svg>' +
+              '<div class="pbrd-hosp-quivi-qr-label">Scan to order</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="pbrd-hosp-quivi-step-title">Scan QR</div>' +
+          '<div class="pbrd-hosp-quivi-step-desc">Guest scans table QR code. Menu loads instantly in their language.</div>' +
+        '</div>' +
 
-    /* Right: animated phone mockup */
-    var menuItems = [
-      { name: "Grilled Sea Bass", price: "\u20AC24.50" },
-      { name: "Vinho Verde (bottle)", price: "\u20AC18.00" },
-      { name: "Cr\u00e8me Br\u00fbl\u00e9e", price: "\u20AC8.50" }
-    ];
-    var phone = document.createElement("div");
-    phone.className = "pbrd-hosp-quivi-phone";
-    phone.innerHTML = '<div class="pbrd-hosp-quivi-phone-header">Table 7 \u00b7 Algarve Beach Restaurant</div>';
-    menuItems.forEach(function(item) {
-      var row = document.createElement("div");
-      row.className = "pbrd-hosp-quivi-menu-item";
-      row.innerHTML = '<span class="pbrd-hosp-quivi-menu-name">' + item.name + '</span><span class="pbrd-hosp-quivi-menu-price">' + item.price + '</span>';
-      phone.appendChild(row);
-    });
-    var total = document.createElement("div");
-    total.className = "pbrd-hosp-quivi-total";
-    total.innerHTML = '<span>Total</span><span>\u20AC51.00</span>';
-    phone.appendChild(total);
-    var btn = document.createElement("div");
-    btn.className = "pbrd-hosp-quivi-pay-btn";
-    btn.textContent = "Split Bill";
-    phone.appendChild(btn);
+        '<div class="pbrd-hosp-quivi-step-arrow"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M5 12h14M13 6l6 6-6 6" stroke="rgba(99,25,240,0.3)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>' +
 
-    var phoneWrap = document.createElement("div");
-    phoneWrap.style.cssText = "display:flex;justify-content:center;";
-    phoneWrap.appendChild(phone);
-    layout.appendChild(phoneWrap);
-    wrap.appendChild(layout);
+        '<div class="pbrd-hosp-quivi-step">' +
+          '<div class="pbrd-hosp-quivi-step-num">2</div>' +
+          '<div class="pbrd-hosp-quivi-step-screen">' +
+            '<div class="pbrd-hosp-quivi-order" id="pbrd-quivi-order">' +
+              '<div class="pbrd-hosp-quivi-order-item pbrd-hosp-quivi-oi"><span>Grilled Sea Bass</span><span>\u20AC24.50</span></div>' +
+              '<div class="pbrd-hosp-quivi-order-item pbrd-hosp-quivi-oi"><span>Vinho Verde</span><span>\u20AC18.00</span></div>' +
+              '<div class="pbrd-hosp-quivi-order-item pbrd-hosp-quivi-oi"><span>Cr\u00e8me Br\u00fbl\u00e9e</span><span>\u20AC8.50</span></div>' +
+              '<div class="pbrd-hosp-quivi-order-total"><span>Total</span><span>\u20AC51.00</span></div>' +
+              '<div class="pbrd-hosp-quivi-order-route">Sending to kitchen\u2026</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="pbrd-hosp-quivi-step-title">Browse & Order</div>' +
+          '<div class="pbrd-hosp-quivi-step-desc">Full menu with photos, allergens, and modifiers. Orders route to kitchen or bar.</div>' +
+        '</div>' +
 
-    /* Phone animation via IntersectionObserver */
-    var phoneAnimated = false;
-    var phoneObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(function(en) {
-        if (en.isIntersecting && !phoneAnimated) {
-          phoneAnimated = true;
-          var items = phone.querySelectorAll(".pbrd-hosp-quivi-menu-item");
-          items.forEach(function(it, idx) {
-            setTimeout(function() { it.classList.add("pbrd-hosp-quivi-menu-item--show"); }, idx * 600);
-          });
-          setTimeout(function() { total.classList.add("pbrd-hosp-quivi-total--show"); }, items.length * 600 + 300);
-          setTimeout(function() { btn.classList.add("pbrd-hosp-quivi-pay-btn--show"); }, items.length * 600 + 600);
-          setTimeout(function() {
-            btn.textContent = "Payment Successful \u2713";
-            btn.classList.add("pbrd-hosp-quivi-pay-btn--done");
-          }, 3000);
-          phoneObserver.unobserve(en.target);
-        }
-      });
-    }, { threshold: 0.3 });
-    phoneObserver.observe(phone);
+        '<div class="pbrd-hosp-quivi-step-arrow"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M5 12h14M13 6l6 6-6 6" stroke="rgba(99,25,240,0.3)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>' +
 
-    /* Terminal showcase strip */
-    var terminals = [
-      { img: "https://djangato.github.io/Webflow-Paybyrd/assets/product/A77.png", name: "A77", desc: "Portable \u2014 tableside & pool" },
-      { img: "https://djangato.github.io/Webflow-Paybyrd/assets/product/A920_mockup.png", name: "A920", desc: "Countertop \u2014 front desk" },
-      { img: "https://djangato.github.io/Webflow-Paybyrd/assets/product/IM30.png", name: "IM30", desc: "Unattended \u2014 self-service kiosk" }
-    ];
-    var termStrip = document.createElement("div");
-    termStrip.className = "pbrd-hosp-terminals";
-    terminals.forEach(function(t) {
-      var card = document.createElement("div");
-      card.className = "pbrd-hosp-terminal";
-      card.innerHTML =
-        '<img src="' + t.img + '" alt="' + t.name + '">' +
-        '<div class="pbrd-hosp-terminal-name">' + t.name + '</div>' +
-        '<div class="pbrd-hosp-terminal-desc">' + t.desc + '</div>';
-      termStrip.appendChild(card);
-    });
-    wrap.appendChild(termStrip);
+        '<div class="pbrd-hosp-quivi-step">' +
+          '<div class="pbrd-hosp-quivi-step-num">3</div>' +
+          '<div class="pbrd-hosp-quivi-step-screen">' +
+            '<div class="pbrd-hosp-quivi-split" id="pbrd-quivi-split">' +
+              '<div class="pbrd-hosp-quivi-split-head">Split by item</div>' +
+              '<div class="pbrd-hosp-quivi-split-row pbrd-hosp-quivi-si"><span>Guest 1</span><span>Sea Bass + Wine</span><span>\u20AC42.50</span></div>' +
+              '<div class="pbrd-hosp-quivi-split-row pbrd-hosp-quivi-si"><span>Guest 2</span><span>Cr\u00e8me Br\u00fbl\u00e9e</span><span>\u20AC8.50</span></div>' +
+              '<div class="pbrd-hosp-quivi-split-modes">' +
+                '<span class="pbrd-hosp-quivi-split-mode pbrd-hosp-quivi-split-mode--active">By item</span>' +
+                '<span class="pbrd-hosp-quivi-split-mode">Equal</span>' +
+                '<span class="pbrd-hosp-quivi-split-mode">Custom</span>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="pbrd-hosp-quivi-step-title">Split the Bill</div>' +
+          '<div class="pbrd-hosp-quivi-step-desc">By item, equal share, or custom amounts. Each guest pays their part.</div>' +
+        '</div>' +
+
+        '<div class="pbrd-hosp-quivi-step-arrow"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M5 12h14M13 6l6 6-6 6" stroke="rgba(99,25,240,0.3)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>' +
+
+        '<div class="pbrd-hosp-quivi-step">' +
+          '<div class="pbrd-hosp-quivi-step-num">4</div>' +
+          '<div class="pbrd-hosp-quivi-step-screen">' +
+            '<div class="pbrd-hosp-quivi-pay" id="pbrd-quivi-pay">' +
+              '<div class="pbrd-hosp-quivi-pay-amount">\u20AC42.50</div>' +
+              '<div class="pbrd-hosp-quivi-pay-methods">' +
+                '<span class="pbrd-hosp-quivi-pm">Apple Pay</span>' +
+                '<span class="pbrd-hosp-quivi-pm">Google Pay</span>' +
+                '<span class="pbrd-hosp-quivi-pm">Card</span>' +
+              '</div>' +
+              '<div class="pbrd-hosp-quivi-pay-done" id="pbrd-quivi-done">' +
+                '<svg viewBox="0 0 40 40" width="32" height="32"><circle cx="20" cy="20" r="18" fill="rgba(16,185,129,0.15)" stroke="#10b981" stroke-width="1.5"/><path d="M12 20l5 5 11-11" stroke="#10b981" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+                '<span>Paid</span>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="pbrd-hosp-quivi-step-title">Pay & Go</div>' +
+          '<div class="pbrd-hosp-quivi-step-desc">Tap, scan, or card. Receipt to phone. No waiting, no queue.</div>' +
+        '</div>' +
+      '</div>' +
+
+      /* ── Terminal lineup ── */
+      '<div class="pbrd-hosp-quivi-lineup pbrd-hosp-reveal">' +
+        '<h3 class="pbrd-hosp-quivi-lineup-h3">The hardware that powers it all</h3>' +
+        '<p class="pbrd-hosp-quivi-lineup-sub">Every terminal runs Quivi natively. Zero integration overhead.</p>' +
+        '<div class="pbrd-hosp-terminals">' +
+          '<div class="pbrd-hosp-terminal pbrd-hosp-reveal">' +
+            '<img src="' + CDN + 'lineup-renegade.png" alt="Paybyrd Renegade">' +
+            '<div class="pbrd-hosp-terminal-name">Renegade</div>' +
+            '<div class="pbrd-hosp-terminal-spec">PAX A77</div>' +
+            '<div class="pbrd-hosp-terminal-desc">Portable \u2014 tableside & poolside</div>' +
+          '</div>' +
+          '<div class="pbrd-hosp-terminal pbrd-hosp-reveal">' +
+            '<img src="' + CDN + 'lineup-rawhide.png" alt="Paybyrd Rawhide">' +
+            '<div class="pbrd-hosp-terminal-name">Rawhide</div>' +
+            '<div class="pbrd-hosp-terminal-spec">PAX A920 Pro</div>' +
+            '<div class="pbrd-hosp-terminal-desc">Countertop \u2014 front desk & restaurant</div>' +
+          '</div>' +
+          '<div class="pbrd-hosp-terminal pbrd-hosp-reveal">' +
+            '<img src="' + CDN + 'lineup-maverick.png" alt="Paybyrd Maverick">' +
+            '<div class="pbrd-hosp-terminal-name">Maverick</div>' +
+            '<div class="pbrd-hosp-terminal-spec">Sunmi V3</div>' +
+            '<div class="pbrd-hosp-terminal-desc">All-in-one \u2014 ordering + payment</div>' +
+          '</div>' +
+          '<div class="pbrd-hosp-terminal pbrd-hosp-reveal">' +
+            '<img src="' + CDN + 'lineup-titan.png" alt="Paybyrd Titan">' +
+            '<div class="pbrd-hosp-terminal-name">Titan</div>' +
+            '<div class="pbrd-hosp-terminal-spec">Sunmi T3 Pro</div>' +
+            '<div class="pbrd-hosp-terminal-desc">Self-service \u2014 kiosk & unattended</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="pbrd-hosp-quivi-stats">' +
+          '<div class="pbrd-hosp-quivi-stat"><span class="pbrd-hosp-quivi-stat-v">6\u201310%</span><span class="pbrd-hosp-quivi-stat-l">cost reduction</span></div>' +
+          '<div class="pbrd-hosp-quivi-stat"><span class="pbrd-hosp-quivi-stat-v">4\u20136%</span><span class="pbrd-hosp-quivi-stat-l">acceptance increase</span></div>' +
+          '<div class="pbrd-hosp-quivi-stat"><span class="pbrd-hosp-quivi-stat-v">30+</span><span class="pbrd-hosp-quivi-stat-l">languages auto-detected</span></div>' +
+        '</div>' +
+      '</div>' +
+
+      /* ── CTA to Quivi.com ── */
+      '<div class="pbrd-hosp-quivi-cta pbrd-hosp-reveal" style="text-align:center;margin-top:40px;">' +
+        '<a href="https://quivi.com" target="_blank" rel="noopener" class="pbrd-hosp-quivi-cta-btn">Explore Quivi <svg viewBox="0 0 16 16" width="14" height="14" style="vertical-align:middle;margin-left:4px"><path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>' +
+      '</div>';
 
     section.appendChild(wrap);
-    observeReveal(".pbrd-hosp-quivi-header, .pbrd-hosp-quivi-layout, .pbrd-hosp-terminals", 120, section);
+
+    /* ═══ Flow step animation on scroll ═══ */
+    var flowAnimated = false;
+    var flowObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(en) {
+        if (en.isIntersecting && !flowAnimated) {
+          flowAnimated = true;
+          /* Animate order items */
+          var items = wrap.querySelectorAll(".pbrd-hosp-quivi-oi");
+          items.forEach(function(it, idx) {
+            setTimeout(function() { it.classList.add("pbrd-hosp-quivi-oi--show"); }, 400 + idx * 400);
+          });
+          /* Show order route */
+          var route = wrap.querySelector(".pbrd-hosp-quivi-order-route");
+          if (route) setTimeout(function() { route.classList.add("pbrd-hosp-quivi-route--show"); }, 1800);
+          /* Animate split rows */
+          var splits = wrap.querySelectorAll(".pbrd-hosp-quivi-si");
+          splits.forEach(function(s, idx) {
+            setTimeout(function() { s.classList.add("pbrd-hosp-quivi-si--show"); }, 2200 + idx * 400);
+          });
+          /* Animate pay done */
+          var done = document.getElementById("pbrd-quivi-done");
+          if (done) setTimeout(function() { done.classList.add("pbrd-hosp-quivi-done--show"); }, 3400);
+          flowObs.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    flowObs.observe(wrap);
+
+    observeReveal(".pbrd-hosp-quivi-wrap .pbrd-hosp-reveal", 120);
   }
 
   /* ═══════════════════════════════════════════ */

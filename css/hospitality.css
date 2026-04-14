@@ -489,39 +489,76 @@
 
 /* ═══ QUIVI POS ═══ */
 .pbrd-hosp-quivi-wrap { max-width:1100px; margin:0 auto; padding:0 24px; }
-.pbrd-hosp-quivi-header { text-align:center; margin-bottom:48px; }
+.pbrd-hosp-quivi-header { text-align:center; margin-bottom:56px; }
 .pbrd-hosp-quivi-h2 { font-size:clamp(1.75rem,3.5vw,2.5rem); font-weight:700; color:#fff; letter-spacing:-0.02em; margin:8px 0 14px; line-height:1.15; }
-.pbrd-hosp-quivi-sub { font-size:1rem; color:rgba(255,255,255,0.4); max-width:600px; margin:0 auto; line-height:1.6; }
+.pbrd-hosp-quivi-sub { font-size:1rem; color:rgba(255,255,255,0.4); max-width:620px; margin:0 auto; line-height:1.6; }
 
-.pbrd-hosp-quivi-layout { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; margin-bottom:48px; }
+/* 4-step flow */
+.pbrd-hosp-quivi-flow { display:flex; align-items:flex-start; gap:0; margin-bottom:64px; justify-content:center; }
+.pbrd-hosp-quivi-step { flex:1; max-width:220px; text-align:center; }
+.pbrd-hosp-quivi-step-num { width:28px; height:28px; border-radius:50%; background:linear-gradient(135deg,#6319f0,#7c3aed); color:#fff; font-size:0.75rem; font-weight:700; display:flex; align-items:center; justify-content:center; margin:0 auto 12px; }
+.pbrd-hosp-quivi-step-screen { background:#0e0e1c; border-radius:14px; border:1px solid rgba(99,25,240,0.1); padding:20px 16px; margin-bottom:14px; min-height:160px; display:flex; align-items:center; justify-content:center; transition:border-color 0.3s; }
+.pbrd-hosp-quivi-step:hover .pbrd-hosp-quivi-step-screen { border-color:rgba(99,25,240,0.3); }
+.pbrd-hosp-quivi-step-title { font-size:0.9375rem; font-weight:700; color:#fff; margin-bottom:4px; }
+.pbrd-hosp-quivi-step-desc { font-size:0.75rem; color:rgba(255,255,255,0.4); line-height:1.5; padding:0 8px; }
+.pbrd-hosp-quivi-step-arrow { display:flex; align-items:center; padding-top:80px; flex-shrink:0; margin:0 4px; }
 
-.pbrd-hosp-quivi-features { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:14px; }
-.pbrd-hosp-quivi-features li { display:flex; align-items:flex-start; gap:10px; font-size:0.875rem; color:rgba(255,255,255,0.7); line-height:1.5; }
-.pbrd-hosp-quivi-features li svg { flex-shrink:0; margin-top:2px; }
+/* QR code */
+.pbrd-hosp-quivi-qr { text-align:center; }
+.pbrd-hosp-quivi-qr svg { width:90px; height:90px; opacity:0.85; }
+.pbrd-hosp-quivi-qr-label { font-size:0.625rem; color:rgba(99,25,240,0.6); margin-top:8px; text-transform:uppercase; letter-spacing:0.08em; font-weight:600; }
 
-/* Phone mockup */
-.pbrd-hosp-quivi-phone {
-  width:260px; margin:0 auto; background:#fff; border-radius:24px;
-  padding:16px; box-shadow:0 16px 48px rgba(0,0,0,0.35);
-  font-family:system-ui,-apple-system,sans-serif; overflow:hidden;
-}
-.pbrd-hosp-quivi-phone-header { font-size:0.6875rem; color:#888; text-align:center; padding-bottom:12px; border-bottom:1px solid #eee; margin-bottom:12px; font-weight:500; }
-.pbrd-hosp-quivi-menu-item { display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #f0f0f0; opacity:0; transform:translateY(8px); transition:all 0.5s ease; }
-.pbrd-hosp-quivi-menu-item--show { opacity:1; transform:translateY(0); }
-.pbrd-hosp-quivi-menu-name { font-size:0.8125rem; font-weight:500; color:#1a1a2e; }
-.pbrd-hosp-quivi-menu-price { font-size:0.8125rem; font-weight:700; color:#1a1a2e; }
-.pbrd-hosp-quivi-total { display:flex; justify-content:space-between; padding:12px 0 14px; font-size:0.875rem; font-weight:700; color:#1a1a2e; opacity:0; transition:opacity 0.5s ease; }
-.pbrd-hosp-quivi-total--show { opacity:1; }
-.pbrd-hosp-quivi-pay-btn { width:100%; padding:10px 0; border-radius:8px; background:#6319f0; color:#1a1a2e; text-align:center; font-size:0.8125rem; font-weight:600; opacity:0; transition:all 0.5s ease; }
-.pbrd-hosp-quivi-pay-btn--show { opacity:1; }
-.pbrd-hosp-quivi-pay-btn--done { background:#10b981; color:#fff; }
+/* Order list */
+.pbrd-hosp-quivi-order { width:100%; }
+.pbrd-hosp-quivi-order-item { display:flex; justify-content:space-between; padding:5px 0; font-size:0.75rem; color:rgba(255,255,255,0.6); border-bottom:1px solid rgba(255,255,255,0.04); opacity:0; transform:translateY(6px); transition:all 0.4s ease; }
+.pbrd-hosp-quivi-oi--show { opacity:1; transform:translateY(0); }
+.pbrd-hosp-quivi-order-item span:last-child { font-weight:600; color:rgba(255,255,255,0.85); }
+.pbrd-hosp-quivi-order-total { display:flex; justify-content:space-between; padding:8px 0 0; font-size:0.8125rem; font-weight:700; color:#fff; }
+.pbrd-hosp-quivi-order-route { font-size:0.625rem; color:#6319f0; margin-top:10px; text-align:center; opacity:0; transition:opacity 0.5s; }
+.pbrd-hosp-quivi-route--show { opacity:1; }
 
-/* Terminal showcase */
-.pbrd-hosp-terminals { display:flex; justify-content:center; gap:32px; flex-wrap:wrap; }
-.pbrd-hosp-terminal { text-align:center; }
-.pbrd-hosp-terminal img { height:120px; width:auto; margin-bottom:12px; filter:drop-shadow(0 4px 12px rgba(0,0,0,0.3)); }
-.pbrd-hosp-terminal-name { font-size:0.875rem; font-weight:700; color:#fff; }
-.pbrd-hosp-terminal-desc { font-size:0.6875rem; color:rgba(255,255,255,0.4); }
+/* Bill split */
+.pbrd-hosp-quivi-split { width:100%; }
+.pbrd-hosp-quivi-split-head { font-size:0.625rem; font-weight:700; color:rgba(255,255,255,0.3); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:10px; }
+.pbrd-hosp-quivi-split-row { display:flex; justify-content:space-between; align-items:center; padding:6px 0; font-size:0.6875rem; color:rgba(255,255,255,0.5); border-bottom:1px solid rgba(255,255,255,0.04); opacity:0; transform:translateX(-6px); transition:all 0.4s ease; }
+.pbrd-hosp-quivi-si--show { opacity:1; transform:translateX(0); }
+.pbrd-hosp-quivi-split-row span:first-child { color:#6319f0; font-weight:600; min-width:50px; }
+.pbrd-hosp-quivi-split-row span:last-child { font-weight:700; color:rgba(255,255,255,0.85); }
+.pbrd-hosp-quivi-split-modes { display:flex; gap:6px; margin-top:12px; justify-content:center; }
+.pbrd-hosp-quivi-split-mode { font-size:0.5625rem; padding:3px 10px; border-radius:20px; background:rgba(255,255,255,0.04); color:rgba(255,255,255,0.3); font-weight:600; }
+.pbrd-hosp-quivi-split-mode--active { background:rgba(99,25,240,0.15); color:#6319f0; }
+
+/* Pay & done */
+.pbrd-hosp-quivi-pay { text-align:center; width:100%; }
+.pbrd-hosp-quivi-pay-amount { font-size:1.75rem; font-weight:800; color:#fff; margin-bottom:12px; }
+.pbrd-hosp-quivi-pay-methods { display:flex; gap:6px; justify-content:center; margin-bottom:16px; }
+.pbrd-hosp-quivi-pm { font-size:0.5625rem; padding:4px 10px; border-radius:6px; background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.5); font-weight:500; }
+.pbrd-hosp-quivi-pay-done { opacity:0; transform:scale(0.8); transition:all 0.5s ease; }
+.pbrd-hosp-quivi-pay-done span { display:block; font-size:0.75rem; color:#10b981; font-weight:700; margin-top:4px; }
+.pbrd-hosp-quivi-done--show { opacity:1; transform:scale(1); }
+
+/* Terminal lineup */
+.pbrd-hosp-quivi-lineup { text-align:center; margin-bottom:24px; }
+.pbrd-hosp-quivi-lineup-h3 { font-size:1.25rem; font-weight:700; color:#fff; margin:0 0 6px; }
+.pbrd-hosp-quivi-lineup-sub { font-size:0.875rem; color:rgba(255,255,255,0.35); margin:0 0 36px; }
+.pbrd-hosp-terminals { display:flex; justify-content:center; gap:40px; flex-wrap:wrap; margin-bottom:36px; }
+.pbrd-hosp-terminal { text-align:center; transition:transform 0.3s; }
+.pbrd-hosp-terminal:hover { transform:translateY(-6px); }
+.pbrd-hosp-terminal img { height:160px; width:auto; margin-bottom:12px; filter:drop-shadow(0 8px 24px rgba(99,25,240,0.15)); transition:filter 0.3s; }
+.pbrd-hosp-terminal:hover img { filter:drop-shadow(0 12px 32px rgba(99,25,240,0.25)); }
+.pbrd-hosp-terminal-name { font-size:0.9375rem; font-weight:700; color:#fff; }
+.pbrd-hosp-terminal-spec { font-size:0.6875rem; color:rgba(99,25,240,0.6); font-weight:500; margin-top:2px; }
+.pbrd-hosp-terminal-desc { font-size:0.75rem; color:rgba(255,255,255,0.35); margin-top:4px; }
+
+/* Quivi stats */
+.pbrd-hosp-quivi-stats { display:flex; justify-content:center; gap:48px; flex-wrap:wrap; }
+.pbrd-hosp-quivi-stat { text-align:center; }
+.pbrd-hosp-quivi-stat-v { display:block; font-size:1.5rem; font-weight:800; color:#6319f0; }
+.pbrd-hosp-quivi-stat-l { font-size:0.6875rem; color:rgba(255,255,255,0.35); text-transform:uppercase; letter-spacing:0.04em; }
+
+/* Quivi CTA */
+.pbrd-hosp-quivi-cta-btn { display:inline-flex; align-items:center; padding:12px 28px; border-radius:100px; background:rgba(99,25,240,0.1); border:1px solid rgba(99,25,240,0.25); color:#6319f0; font-size:0.875rem; font-weight:600; text-decoration:none; transition:all 0.3s; }
+.pbrd-hosp-quivi-cta-btn:hover { background:rgba(99,25,240,0.2); border-color:rgba(99,25,240,0.4); transform:translateY(-2px); }
 
 /* ═══ AI FEATURES ═══ */
 .pbrd-hosp-ai-wrap { max-width:1100px; margin:0 auto; padding:0 24px; }
@@ -582,7 +619,11 @@
   .pbrd-hosp-test-divider { display:none; }
   .pbrd-hosp-test-result { min-width:40%; }
   .pbrd-hosp-test-bigquote { font-size:1.125rem; }
-  .pbrd-hosp-quivi-layout { grid-template-columns:1fr; gap:32px; }
-  .pbrd-hosp-quivi-phone { width:240px; }
+  .pbrd-hosp-quivi-flow { flex-wrap:wrap; gap:20px; }
+  .pbrd-hosp-quivi-step { min-width:45%; }
+  .pbrd-hosp-quivi-step-arrow { display:none; }
+  .pbrd-hosp-terminals { gap:24px; }
+  .pbrd-hosp-terminal img { height:120px; }
+  .pbrd-hosp-quivi-stats { gap:24px; }
   .pbrd-hosp-ai-grid { grid-template-columns:1fr; }
 }
