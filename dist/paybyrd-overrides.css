@@ -12662,6 +12662,9 @@ a.glowing_button_link .glowing_button_text {
 .pbrd-hosp-ai-fraud-reason { font-size:0.625rem; color:rgba(239,68,68,0.7); margin-top:6px; padding:4px 8px; background:rgba(239,68,68,0.04); border-radius:4px; }
 .pbrd-hosp-ai-fraud-alert { display:flex; align-items:center; gap:6px; margin-top:6px; font-size:0.625rem; color:#25d366; font-weight:600; padding:4px 8px; background:rgba(37,211,102,0.06); border-radius:4px; border:1px solid rgba(37,211,102,0.12); }
 
+/* Testimonial section */
+.pbrd-hosp-test-section { margin:0!important; }
+
 /* ═══ RESPONSIVE ═══ */
 @media (max-width: 768px) {
   .pbrd-hosp-map-wrap { grid-template-columns: 1fr; }

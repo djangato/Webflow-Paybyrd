@@ -1130,6 +1130,7 @@
     if (!section) return;
 
     section.style.setProperty("padding", "80px 0", "important");
+    section.style.setProperty("margin", "0", "important");
     section.style.setProperty("background", "#0a0a0f", "important");
     Array.prototype.forEach.call(section.children, function(child) {
       if (!child.classList || !child.classList.contains("pbrd-hosp-ai-wrap")) {
@@ -1652,7 +1653,7 @@
     section.querySelectorAll("p").forEach(function(p) {
       var t = p.textContent.toLowerCase();
       if (t.includes("personalized demo") || t.includes("payment specialist")) {
-        p.textContent = "Join Vila Gal\u00e9, Barcel\u00f3, Smy Onyria and leading hotel groups. Get measurable results within 30 days.";
+        p.textContent = "Join Vila Gal\u00e9, Barcel\u00f3, Smy, Onyria and leading hotel groups. Get measurable results within 30 days.";
       }
     });
     /* Style the CTA button */
