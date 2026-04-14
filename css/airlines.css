@@ -38,13 +38,13 @@
 
 /* ── SVG Route Map + Feed ── */
 .pbrd-air-viz {
-  margin-top:-380px; padding:0 24px;
+  margin-top:-420px; padding:0 24px;
   max-width:1200px; margin-left:auto; margin-right:auto;
   width:100% !important; position:relative; z-index:1;
 }
 
 .pbrd-air-map-wrap {
-  display:grid; grid-template-columns:1fr 358px; gap:20px; align-items:center;
+  display:grid; grid-template-columns:1fr 394px; gap:20px; align-items:center;
 }
 
 .pbrd-air-map-left {
