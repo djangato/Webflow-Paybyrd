@@ -247,17 +247,18 @@
   /* ─── POS Terminals Pricing Section ─── */
   /* ═══════════════════════════════════════════════ */
 
+  const posImgBase = "https://djangato.github.io/Webflow-Paybyrd/assets/pos/";
   const terminals = [
     {
       name: "Paybyrd Rawhide",
       model: "PAX A920 Pro",
       description: "Sleek portable terminal with high-res touchscreen, 4G & Wi-Fi. Perfect for restaurants, retail, and on-the-go.",
-      image: "https://cdn.prod.website-files.com/69d9242bbde99c4b80e41ae9/69d9242bbde99c4b80e41c84_paybyrd-pos-tab-04.avif",
-      buyPrice: "€399",
-      rentPrice: "€19.90",
+      image: posImgBase + "lineup-rawhide.png",
+      buyPrice: "\u20AC399",
+      rentPrice: "\u20AC19.90",
       featured: true,
       specs: [
-        "Android 10 · PCI 6 SRED",
+        "Android 10 \u00B7 PCI 6 SRED",
         "5.5\" HD Touchscreen Display",
         "4G / Wi-Fi / Bluetooth",
         "Built-in Printer & Scanner",
@@ -268,12 +269,12 @@
       name: "Paybyrd Renegade",
       model: "PAX A77",
       description: "Compact handheld terminal built for speed and mobility. Ideal for delivery, events, and small businesses.",
-      image: "https://cdn.prod.website-files.com/69d9242bbde99c4b80e41ae9/69d9242bbde99c4b80e41c82_paybyrd-pos-tab-03.avif",
-      buyPrice: "€299",
-      rentPrice: "€14.90",
+      image: posImgBase + "lineup-renegade.png",
+      buyPrice: "\u20AC299",
+      rentPrice: "\u20AC14.90",
       featured: false,
       specs: [
-        "Android 10 · PCI 5 SRED",
+        "Android 10 \u00B7 PCI 5 SRED",
         "5.5\" HD Touchscreen Display",
         "4G / Wi-Fi Connectivity",
         "13MP Rear + 5MP Front Camera",
@@ -281,19 +282,35 @@
       ],
     },
     {
-      name: "Paybyrd Eagle",
-      model: "PAX IM30",
-      description: "All-in-one terminal designed for vending machines, kiosks, and unattended environments.",
-      image: "https://cdn.prod.website-files.com/69d9242bbde99c4b80e41ae9/69d9242bbde99c4b80e41c85_paybyrd-pos-tab-02.avif",
-      buyPrice: "€499",
-      rentPrice: "€24.90",
+      name: "Paybyrd Maverick",
+      model: "Sunmi V3",
+      description: "Built for speed with an integrated high-speed printer. The go-to terminal for restaurants, delivery, and receipts on the spot.",
+      image: posImgBase + "lineup-maverick.png",
+      buyPrice: "\u20AC349",
+      rentPrice: "\u20AC17.90",
       featured: false,
       specs: [
-        "Android 10 · PCI 6.x SRED",
-        "5\" HD Touchscreen Display",
+        "Android 12 \u00B7 PCI 5",
+        "6\" HD Touchscreen Display",
+        "4G / Wi-Fi / Bluetooth",
+        "High-speed Thermal Printer",
+        "Rear Autofocus Camera",
+      ],
+    },
+    {
+      name: "Paybyrd Titan",
+      model: "Sunmi T3 Pro",
+      description: "All-in-one desktop terminal for self-service kiosks, vending machines, and unattended environments. Large touchscreen with full connectivity.",
+      image: posImgBase + "lineup-titan.png",
+      buyPrice: "\u20AC699",
+      rentPrice: "\u20AC34.90",
+      featured: false,
+      specs: [
+        "Android 12 \u00B7 PCI 6.x SRED",
+        "15.6\" FHD Touchscreen",
+        "Ethernet / Wi-Fi / 4G",
         "IP65 / IK09 Rated",
-        "Seamless Kiosk Integration",
-        "2MP Front Camera",
+        "Built-in 80mm Printer",
       ],
     },
   ];
@@ -396,6 +413,17 @@
         }, 200);
       });
     });
+
+    // Horizontal scroll with mouse wheel / trackpad
+    const grid = section.querySelector(".pbrd-pos-grid");
+    if (grid) {
+      grid.addEventListener("wheel", function (e) {
+        var delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+        if (delta === 0) return;
+        e.preventDefault();
+        grid.scrollLeft += delta * 1.5;
+      }, { passive: false });
+    }
   }
 
   // The POS section depends on the payment methods section being inserted first

@@ -469,13 +469,23 @@
   color: rgba(0, 0, 0, 0.5);
 }
 
-/* Terminal Cards Grid */
+/* Terminal Cards Grid — horizontal scroll */
 .pbrd-pos-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
   gap: 24px;
   margin-bottom: 48px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.1) transparent;
+  padding-bottom: 8px;
 }
+.pbrd-pos-grid::-webkit-scrollbar { height: 6px; }
+.pbrd-pos-grid::-webkit-scrollbar-track { background: transparent; }
+.pbrd-pos-grid::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+.pbrd-pos-grid::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
 
 /* Individual Terminal Card */
 .pbrd-terminal-card {
@@ -487,6 +497,8 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  min-width: 300px;
+  flex-shrink: 0;
 }
 
 .pbrd-terminal-card:hover {
@@ -678,8 +690,7 @@
 /* ─── POS Responsive ─── */
 @media (max-width: 900px) {
   .pbrd-pos-grid {
-    grid-template-columns: 1fr;
-    max-width: 440px;
+    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
   }
