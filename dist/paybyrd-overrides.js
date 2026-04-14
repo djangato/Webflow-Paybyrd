@@ -7923,10 +7923,20 @@
   /* ═══════════════════════════════════════════ */
 
   function buildFraudSection() {
-    /* Insert after the features section */
+    /* Insert after the features section OR after the scroll-draw section */
     var featWrap = document.querySelector(".pbrd-air-feat-wrap");
     var anchor = featWrap ? (featWrap.closest("section") || featWrap.parentElement) : null;
-    if (!anchor) return;
+
+    /* Fallback: find the scroll-draw section or CTA section */
+    if (!anchor) {
+      anchor = findSectionByHeading("data that moves") || findSectionByHeading("works with your stack");
+    }
+
+    if (!anchor) {
+      console.log("[Paybyrd] Fraud section: no anchor found");
+      return;
+    }
+    console.log("[Paybyrd] Fraud section anchor: " + anchor.tagName + " class=" + (anchor.className || "").substring(0, 40));
 
     var s = document.createElement("section");
     s.className = "pbrd-air-fraud-section";
