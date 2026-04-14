@@ -8613,17 +8613,115 @@
         '<div class="pbrd-air-pax-form-content">' +
           '<div class="pbrd-air-section-label" style="text-align:left">HOSTED PAYMENT FORM</div>' +
           '<h3 class="pbrd-air-pax-form-h3">Payment forms that know<br>what your passenger is buying.</h3>' +
-          '<p class="pbrd-air-pax-form-desc">Our airline-adapted hosted forms display the full reservation — flight legs, cabin class, passenger details — right alongside payment methods. Passengers see exactly what they\'re paying for. No confusion, no calls to support.</p>' +
+          '<p class="pbrd-air-pax-form-desc">Our airline-adapted hosted forms display the full reservation \u2014 flight legs, cabin class, passenger details \u2014 right alongside payment methods. Passengers see exactly what they\u2019re paying for. No confusion, no calls to support.</p>' +
           '<ul class="pbrd-air-pax-bullets">' +
             '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#6319f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Flight legs, booking ref & cabin class shown on the form</li>' +
-            '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#6319f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>All local payment methods — cards, wallets, bank transfers</li>' +
+            '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#6319f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>All local payment methods \u2014 cards, wallets, bank transfers</li>' +
             '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#6319f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Reduces payment errors & customer support by 40%</li>' +
-            '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#6319f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Pay-by-link compatible — send via email, SMS or WhatsApp</li>' +
+            '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#6319f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Pay-by-link compatible \u2014 send via email, SMS or WhatsApp</li>' +
           '</ul>' +
         '</div>' +
-        '<div class="pbrd-air-pax-form-img">' +
+        '<div class="pbrd-air-pax-form-phone">' +
           '<div class="pbrd-air-pax-form-glow"></div>' +
-          '<img src="https://djangato.github.io/Webflow-Paybyrd/assets/airlines/hosted-form-tap.png" alt="Paybyrd Hosted Payment Form — TAP Air Portugal" />' +
+          '<div class="pbrd-air-hf" id="pbrd-air-hf">' +
+
+            /* TAP logo */
+            '<div class="pbrd-air-hf-logo" id="pbrd-air-hf-logo">' +
+              '<svg viewBox="0 0 80 24" width="80" height="24"><text x="0" y="18" font-family="system-ui,sans-serif" font-weight="800" font-size="16" fill="#1a1a2e">TAP</text><text x="42" y="14" font-family="system-ui,sans-serif" font-weight="500" font-size="6" fill="#8a8a9a">AIR PORTUGAL</text></svg>' +
+            '</div>' +
+
+            /* Header */
+            '<div class="pbrd-air-hf-header" id="pbrd-air-hf-header">' +
+              '<div class="pbrd-air-hf-title">Here is your payment request</div>' +
+              '<div class="pbrd-air-hf-amount" id="pbrd-air-hf-amount">\u20AC0,00</div>' +
+              '<div class="pbrd-air-hf-ref">Order Ref: 0017488429</div>' +
+            '</div>' +
+
+            /* Flight info section */
+            '<div class="pbrd-air-hf-flight" id="pbrd-air-hf-flight">' +
+              '<div class="pbrd-air-hf-flight-head">' +
+                '<div class="pbrd-air-hf-flight-icon"><svg viewBox="0 0 16 16" width="14" height="14"><rect x="2" y="2" width="12" height="12" rx="2" stroke="#1a1a2e" stroke-width="1.2" fill="none"/><path d="M2 6h12" stroke="#1a1a2e" stroke-width="1.2"/></svg></div>' +
+                '<span style="font-weight:600;color:#1a1a2e">Flight Information</span>' +
+                '<span style="margin-left:auto;font-size:0.6rem;color:#8a8a9a">Booking Reference</span>' +
+              '</div>' +
+              '<div class="pbrd-air-hf-flight-pnr" id="pbrd-air-hf-pnr">ABCMAN</div>' +
+
+              /* Leg 1 */
+              '<div class="pbrd-air-hf-leg" id="pbrd-air-hf-leg1">' +
+                '<div class="pbrd-air-hf-leg-row">' +
+                  '<div class="pbrd-air-hf-leg-city">' +
+                    '<div class="pbrd-air-hf-leg-code">LIS</div>' +
+                    '<div class="pbrd-air-hf-leg-date">12 Jul 2028</div>' +
+                    '<div class="pbrd-air-hf-leg-time">13:40</div>' +
+                  '</div>' +
+                  '<div class="pbrd-air-hf-leg-mid">' +
+                    '<div class="pbrd-air-hf-leg-flight">TP 7</div>' +
+                    '<div class="pbrd-air-hf-leg-plane"><svg viewBox="0 0 20 20" width="18" height="18"><circle cx="10" cy="10" r="9" fill="#e8f5e9" stroke="#4caf50" stroke-width="1"/><path d="M6 10l2.5 2.5L14 7.5" stroke="#4caf50" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>' +
+                    '<div class="pbrd-air-hf-leg-dur">8h 45m</div>' +
+                  '</div>' +
+                  '<div class="pbrd-air-hf-leg-city" style="text-align:right">' +
+                    '<div class="pbrd-air-hf-leg-code">GRU</div>' +
+                    '<div class="pbrd-air-hf-leg-date">12 Jul 2028</div>' +
+                    '<div class="pbrd-air-hf-leg-time">23:25</div>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="pbrd-air-hf-leg-cabin">Cabin: Economy</div>' +
+              '</div>' +
+
+              /* Leg 2 */
+              '<div class="pbrd-air-hf-leg" id="pbrd-air-hf-leg2">' +
+                '<div class="pbrd-air-hf-leg-row">' +
+                  '<div class="pbrd-air-hf-leg-city">' +
+                    '<div class="pbrd-air-hf-leg-code">GRU <span style="font-weight:400;font-size:0.55rem;color:#8a8a9a">S\u00e3o Paulo</span></div>' +
+                    '<div class="pbrd-air-hf-leg-date">28 Jul 2028</div>' +
+                    '<div class="pbrd-air-hf-leg-time">21:35</div>' +
+                  '</div>' +
+                  '<div class="pbrd-air-hf-leg-mid">' +
+                    '<div class="pbrd-air-hf-leg-flight">TP 3</div>' +
+                    '<div class="pbrd-air-hf-leg-plane"><svg viewBox="0 0 20 20" width="18" height="18"><circle cx="10" cy="10" r="9" fill="#e8f5e9" stroke="#4caf50" stroke-width="1"/><path d="M6 10l2.5 2.5L14 7.5" stroke="#4caf50" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>' +
+                    '<div class="pbrd-air-hf-leg-dur">8h 45m</div>' +
+                  '</div>' +
+                  '<div class="pbrd-air-hf-leg-city" style="text-align:right">' +
+                    '<div class="pbrd-air-hf-leg-code">LIS</div>' +
+                    '<div class="pbrd-air-hf-leg-date">26 Jul 2028</div>' +
+                    '<div class="pbrd-air-hf-leg-time">05:20</div>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="pbrd-air-hf-leg-cabin">Economy</div>' +
+              '</div>' +
+            '</div>' +
+
+            /* Passenger */
+            '<div class="pbrd-air-hf-pax" id="pbrd-air-hf-pax">' +
+              '<div class="pbrd-air-hf-pax-name">Jo\u00e3o Santos</div>' +
+              '<div class="pbrd-air-hf-pax-ticket">Ticket: 44312221</div>' +
+            '</div>' +
+
+            /* Payment methods */
+            '<div class="pbrd-air-hf-methods" id="pbrd-air-hf-methods">' +
+              '<div class="pbrd-air-hf-methods-label">Select payment method</div>' +
+              '<div class="pbrd-air-hf-methods-row">' +
+                '<div class="pbrd-air-hf-method" id="pbrd-air-hf-m0"><svg viewBox="0 0 32 20" width="32" height="20"><rect width="32" height="20" rx="3" fill="#1a1f71"/><circle cx="12" cy="10" r="5.5" fill="#eb001b"/><circle cx="20" cy="10" r="5.5" fill="#f79e1b" opacity="0.8"/></svg></div>' +
+                '<div class="pbrd-air-hf-method" id="pbrd-air-hf-m1"><svg viewBox="0 0 32 20" width="32" height="20"><rect width="32" height="20" rx="3" fill="#0a2540"/><text x="16" y="13" text-anchor="middle" font-family="system-ui" font-weight="700" font-size="7" fill="#fff">VISA</text></svg></div>' +
+                '<div class="pbrd-air-hf-method" id="pbrd-air-hf-m2"><svg viewBox="0 0 32 20" width="32" height="20"><rect width="32" height="20" rx="3" fill="#000"/><text x="16" y="13" text-anchor="middle" font-family="system-ui" font-weight="700" font-size="6" fill="#fff">AMEX</text></svg></div>' +
+                '<div class="pbrd-air-hf-method" id="pbrd-air-hf-m3"><svg viewBox="0 0 32 20" width="32" height="20"><rect width="32" height="20" rx="3" fill="#008c44"/><text x="16" y="13" text-anchor="middle" font-family="system-ui" font-weight="600" font-size="5" fill="#fff">MB WAY</text></svg></div>' +
+                '<div class="pbrd-air-hf-method" id="pbrd-air-hf-m4"><svg viewBox="0 0 32 20" width="32" height="20"><rect width="32" height="20" rx="3" fill="#6f42c1"/><text x="16" y="13" text-anchor="middle" font-family="system-ui" font-weight="600" font-size="5.5" fill="#fff">PIX</text></svg></div>' +
+              '</div>' +
+            '</div>' +
+
+            /* Pay button */
+            '<div class="pbrd-air-hf-pay" id="pbrd-air-hf-pay">' +
+              '<div class="pbrd-air-hf-pay-btn" id="pbrd-air-hf-btn">Pay \u20AC1.245,00</div>' +
+            '</div>' +
+
+            /* Success overlay */
+            '<div class="pbrd-air-hf-success" id="pbrd-air-hf-success">' +
+              '<svg viewBox="0 0 48 48" width="48" height="48"><circle cx="24" cy="24" r="22" fill="#e8f5e9" stroke="#4caf50" stroke-width="2"/><path d="M14 24l7 7L34 17" stroke="#4caf50" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+              '<div class="pbrd-air-hf-success-text">Payment Successful</div>' +
+              '<div class="pbrd-air-hf-success-sub">Confirmation sent to jo\u00e3o.santos@email.com</div>' +
+            '</div>' +
+
+          '</div>' +
         '</div>' +
       '</div>';
 
@@ -8751,12 +8849,120 @@
       cycleNode();
     }
 
+    /* ═══ Hosted form animation ═══ */
+    function animateHostedForm() {
+      var hf = document.getElementById("pbrd-air-hf");
+      if (!hf) return;
+
+      var els = {
+        logo: document.getElementById("pbrd-air-hf-logo"),
+        header: document.getElementById("pbrd-air-hf-header"),
+        amount: document.getElementById("pbrd-air-hf-amount"),
+        flight: document.getElementById("pbrd-air-hf-flight"),
+        pnr: document.getElementById("pbrd-air-hf-pnr"),
+        leg1: document.getElementById("pbrd-air-hf-leg1"),
+        leg2: document.getElementById("pbrd-air-hf-leg2"),
+        pax: document.getElementById("pbrd-air-hf-pax"),
+        methods: document.getElementById("pbrd-air-hf-methods"),
+        pay: document.getElementById("pbrd-air-hf-pay"),
+        btn: document.getElementById("pbrd-air-hf-btn"),
+        success: document.getElementById("pbrd-air-hf-success")
+      };
+
+      /* All animated parts start hidden */
+      var parts = [els.logo, els.header, els.flight, els.leg1, els.leg2, els.pax, els.methods, els.pay];
+      function resetAll() {
+        parts.forEach(function(p) { if (p) p.style.opacity = "0"; p.style.transform = "translateY(10px)"; });
+        els.success.classList.remove("pbrd-air-hf-success--show");
+        if (els.btn) { els.btn.textContent = "Pay \u20AC1.245,00"; els.btn.classList.remove("pbrd-air-hf-pay-btn--processing"); }
+        /* Reset method highlights */
+        for (var i = 0; i < 5; i++) {
+          var m = document.getElementById("pbrd-air-hf-m" + i);
+          if (m) m.classList.remove("pbrd-air-hf-method--active");
+        }
+      }
+
+      function show(el, delay) {
+        setTimeout(function() {
+          if (!el) return;
+          el.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+          el.style.opacity = "1";
+          el.style.transform = "translateY(0)";
+        }, delay);
+      }
+
+      /* Count up amount */
+      function countAmount(delay) {
+        setTimeout(function() {
+          var target = 1245;
+          var dur = 1200, startTime = null;
+          function step(ts) {
+            if (!startTime) startTime = ts;
+            var p = Math.min((ts - startTime) / dur, 1);
+            var val = Math.round(target * (1 - Math.pow(1 - p, 3)));
+            var formatted = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            els.amount.textContent = "\u20AC" + formatted + ",00";
+            if (p < 1) requestAnimationFrame(step);
+          }
+          requestAnimationFrame(step);
+        }, delay);
+      }
+
+      function runFormCycle() {
+        resetAll();
+
+        show(els.logo, 300);
+        show(els.header, 600);
+        countAmount(700);
+        show(els.flight, 1400);
+        show(els.leg1, 1800);
+        show(els.leg2, 2400);
+        show(els.pax, 3000);
+        show(els.methods, 3600);
+
+        /* Cycle through payment methods */
+        var methodOrder = [0, 1, 2, 3, 4];
+        methodOrder.forEach(function(mIdx, i) {
+          setTimeout(function() {
+            for (var j = 0; j < 5; j++) {
+              var m = document.getElementById("pbrd-air-hf-m" + j);
+              if (m) m.classList.remove("pbrd-air-hf-method--active");
+            }
+            var active = document.getElementById("pbrd-air-hf-m" + mIdx);
+            if (active) active.classList.add("pbrd-air-hf-method--active");
+          }, 4000 + i * 500);
+        });
+
+        /* Show pay button */
+        show(els.pay, 4200);
+
+        /* Button processing */
+        setTimeout(function() {
+          if (els.btn) {
+            els.btn.classList.add("pbrd-air-hf-pay-btn--processing");
+            els.btn.textContent = "Processing\u2026";
+          }
+        }, 7000);
+
+        /* Success */
+        setTimeout(function() {
+          els.success.classList.add("pbrd-air-hf-success--show");
+        }, 8200);
+
+        /* Restart cycle */
+        setTimeout(runFormCycle, 12000);
+      }
+
+      runFormCycle();
+    }
+
     /* Trigger on scroll */
     if ("IntersectionObserver" in window) {
       new IntersectionObserver(function(entries) {
         if (entries[0].isIntersecting) {
           runChat();
           animateJourney();
+          animateHostedForm();
           this.disconnect();
         }
       }, { threshold: 0.15 }).observe(wrap);
