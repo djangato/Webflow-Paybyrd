@@ -1514,18 +1514,66 @@
       }
     });
 
-    /* Replace the 3 repeated text blocks with hospitality-specific BI descriptions */
-    var biTexts = [
-      "Returning Guest Recognition \u2014 Instantly identify returning guests by card token. Surface their preferences, lifetime value (\u20AC12,840 avg for VIPs), and AI-powered upsell suggestions before they reach the front desk.",
-      "Peak-Time Demand Heatmap \u2014 See exactly when each outlet peaks by day, hour, and season. Staff ahead of demand, optimize pricing for Friday dinner rush, and never run short on pool bar inventory.",
-      "Revenue per Outlet Analytics \u2014 Drill down by outlet, shift, payment method, or staff member. Restaurant \u20AC48K, Front Desk \u20AC41K, Spa \u20AC29K, Bar \u20AC22K \u2014 AI generates ad-hoc reports in seconds."
+    /* Build 3 BI cards with DARK colors (light bg section) */
+    var biCards = [
+      { title: "Returning Guest Recognition",
+        desc: "Identify returning guests by card token. Surface preferences, lifetime value, and AI upsell suggestions.",
+        svg: '<svg viewBox="0 0 260 110" fill="none">' +
+          '<circle cx="36" cy="40" r="16" fill="rgba(99,25,240,0.08)" stroke="rgba(99,25,240,0.25)" stroke-width="1.5"/>' +
+          '<text x="36" y="37" text-anchor="middle" fill="#6319f0" font-size="7" font-weight="600" font-family="system-ui">GUEST</text>' +
+          '<text x="36" y="48" text-anchor="middle" fill="#6319f0" font-size="6" font-weight="700" font-family="system-ui">VIP</text>' +
+          '<path d="M55,40 L78,40" stroke="rgba(99,25,240,0.25)" stroke-width="1.5" stroke-dasharray="4 3"/>' +
+          '<rect x="82" y="8" width="170" height="94" rx="8" fill="rgba(99,25,240,0.04)" stroke="rgba(99,25,240,0.12)" stroke-width="1"/>' +
+          '<text x="92" y="24" fill="#6319f0" font-size="6" font-weight="700" font-family="system-ui">RETURNING GUEST DETECTED</text>' +
+          '<text x="92" y="40" fill="#555" font-size="6" font-family="system-ui" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.3s" begin="0.5s" fill="freeze"/>Last stay: Ocean View Suite, 5 nights</text>' +
+          '<text x="92" y="53" fill="#555" font-size="6" font-family="system-ui" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.3s" begin="0.8s" fill="freeze"/>Preferred: Late checkout, extra pillows</text>' +
+          '<text x="92" y="66" fill="#333" font-size="6" font-weight="600" font-family="system-ui" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.3s" begin="1.1s" fill="freeze"/>Lifetime value: \u20AC12,840</text>' +
+          '<rect x="92" y="76" width="115" height="16" rx="4" fill="rgba(34,197,94,0.08)" stroke="rgba(34,197,94,0.3)" stroke-width="1" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.3s" begin="1.6s" fill="freeze"/></rect>' +
+          '<text x="97" y="87" fill="#16a34a" font-size="5.5" font-weight="600" font-family="system-ui" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.3s" begin="1.6s" fill="freeze"/>SUGGEST: Suite upgrade + spa</text>' +
+        '</svg>' },
+      { title: "Peak-Time Demand Heatmap",
+        desc: "See when each outlet peaks \u2014 by day and hour. Staff ahead of demand, optimize pricing.",
+        svg: '<svg viewBox="0 0 260 110" fill="none">' +
+          '<text x="6" y="10" fill="#555" font-size="5.5" font-weight="700" font-family="system-ui">WEEKLY DEMAND</text>' +
+          '<text x="6" y="28" fill="#888" font-size="5" font-family="system-ui">Restaurant</text>' +
+          '<text x="6" y="44" fill="#888" font-size="5" font-family="system-ui">Spa</text>' +
+          '<text x="6" y="60" fill="#888" font-size="5" font-family="system-ui">Bar</text>' +
+          '<text x="6" y="76" fill="#888" font-size="5" font-family="system-ui">Pool</text>' +
+          '<text x="6" y="92" fill="#888" font-size="5" font-family="system-ui">Room Svc</text>' +
+          '<text x="66" y="104" text-anchor="middle" fill="#aaa" font-size="4.5" font-family="system-ui">Mon</text><text x="94" y="104" text-anchor="middle" fill="#aaa" font-size="4.5" font-family="system-ui">Tue</text><text x="122" y="104" text-anchor="middle" fill="#aaa" font-size="4.5" font-family="system-ui">Wed</text><text x="150" y="104" text-anchor="middle" fill="#aaa" font-size="4.5" font-family="system-ui">Thu</text><text x="178" y="104" text-anchor="middle" fill="#aaa" font-size="4.5" font-family="system-ui">Fri</text><text x="206" y="104" text-anchor="middle" fill="#aaa" font-size="4.5" font-family="system-ui">Sat</text><text x="234" y="104" text-anchor="middle" fill="#aaa" font-size="4.5" font-family="system-ui">Sun</text>' +
+          /* Restaurant */ '<rect x="52" y="20" width="24" height="12" rx="2" fill="rgba(99,25,240,0.15)"/><rect x="80" y="20" width="24" height="12" rx="2" fill="rgba(99,25,240,0.12)"/><rect x="108" y="20" width="24" height="12" rx="2" fill="rgba(99,25,240,0.25)"/><rect x="136" y="20" width="24" height="12" rx="2" fill="rgba(99,25,240,0.35)"/><rect x="164" y="20" width="24" height="12" rx="2" fill="rgba(99,25,240,0.7)"/><rect x="192" y="20" width="24" height="12" rx="2" fill="rgba(99,25,240,0.9)"/><rect x="220" y="20" width="24" height="12" rx="2" fill="rgba(99,25,240,0.85)"/>' +
+          /* Spa */ '<rect x="52" y="36" width="24" height="12" rx="2" fill="rgba(99,25,240,0.3)"/><rect x="80" y="36" width="24" height="12" rx="2" fill="rgba(99,25,240,0.2)"/><rect x="108" y="36" width="24" height="12" rx="2" fill="rgba(99,25,240,0.25)"/><rect x="136" y="36" width="24" height="12" rx="2" fill="rgba(99,25,240,0.45)"/><rect x="164" y="36" width="24" height="12" rx="2" fill="rgba(99,25,240,0.6)"/><rect x="192" y="36" width="24" height="12" rx="2" fill="rgba(99,25,240,0.8)"/><rect x="220" y="36" width="24" height="12" rx="2" fill="rgba(99,25,240,0.55)"/>' +
+          /* Bar */ '<rect x="52" y="52" width="24" height="12" rx="2" fill="rgba(99,25,240,0.08)"/><rect x="80" y="52" width="24" height="12" rx="2" fill="rgba(99,25,240,0.08)"/><rect x="108" y="52" width="24" height="12" rx="2" fill="rgba(99,25,240,0.15)"/><rect x="136" y="52" width="24" height="12" rx="2" fill="rgba(99,25,240,0.4)"/><rect x="164" y="52" width="24" height="12" rx="2" fill="rgba(99,25,240,0.85)"/><rect x="192" y="52" width="24" height="12" rx="2" fill="rgba(99,25,240,0.95)"/><rect x="220" y="52" width="24" height="12" rx="2" fill="rgba(99,25,240,0.8)"/>' +
+          /* Pool */ '<rect x="52" y="68" width="24" height="12" rx="2" fill="rgba(99,25,240,0.35)"/><rect x="80" y="68" width="24" height="12" rx="2" fill="rgba(99,25,240,0.3)"/><rect x="108" y="68" width="24" height="12" rx="2" fill="rgba(99,25,240,0.25)"/><rect x="136" y="68" width="24" height="12" rx="2" fill="rgba(99,25,240,0.45)"/><rect x="164" y="68" width="24" height="12" rx="2" fill="rgba(99,25,240,0.7)"/><rect x="192" y="68" width="24" height="12" rx="2" fill="rgba(99,25,240,0.9)"/><rect x="220" y="68" width="24" height="12" rx="2" fill="rgba(99,25,240,0.75)"/>' +
+          /* Room Svc */ '<rect x="52" y="84" width="24" height="12" rx="2" fill="rgba(99,25,240,0.1)"/><rect x="80" y="84" width="24" height="12" rx="2" fill="rgba(99,25,240,0.08)"/><rect x="108" y="84" width="24" height="12" rx="2" fill="rgba(99,25,240,0.15)"/><rect x="136" y="84" width="24" height="12" rx="2" fill="rgba(99,25,240,0.2)"/><rect x="164" y="84" width="24" height="12" rx="2" fill="rgba(99,25,240,0.3)"/><rect x="192" y="84" width="24" height="12" rx="2" fill="rgba(99,25,240,0.45)"/><rect x="220" y="84" width="24" height="12" rx="2" fill="rgba(99,25,240,0.4)"/>' +
+        '</svg>' },
+      { title: "Revenue per Outlet",
+        desc: "Drill down by outlet, shift, method, or staff. AI reports in seconds.",
+        svg: '<svg viewBox="0 0 260 100" fill="none">' +
+          '<text x="6" y="10" fill="#555" font-size="5.5" font-weight="700" font-family="system-ui">REVENUE BY OUTLET</text>' +
+          '<text x="6" y="30" fill="#888" font-size="5.5" font-family="system-ui">Restaurant</text>' +
+          '<rect x="68" y="22" width="0" height="12" rx="3" fill="#6319f0" opacity="0.85"><animate attributeName="width" values="0;160" dur="1s" begin="0.3s" fill="freeze"/></rect>' +
+          '<text x="234" y="31" fill="#333" font-size="6" font-weight="700" font-family="system-ui" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.3s" begin="1s" fill="freeze"/>\u20AC48K</text>' +
+          '<text x="6" y="50" fill="#888" font-size="5.5" font-family="system-ui">Front Desk</text>' +
+          '<rect x="68" y="42" width="0" height="12" rx="3" fill="rgba(99,25,240,0.7)"><animate attributeName="width" values="0;135" dur="1s" begin="0.5s" fill="freeze"/></rect>' +
+          '<text x="208" y="51" fill="#333" font-size="6" font-weight="700" font-family="system-ui" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.3s" begin="1.2s" fill="freeze"/>\u20AC41K</text>' +
+          '<text x="6" y="70" fill="#888" font-size="5.5" font-family="system-ui">Spa</text>' +
+          '<rect x="68" y="62" width="0" height="12" rx="3" fill="rgba(99,25,240,0.5)"><animate attributeName="width" values="0;96" dur="1s" begin="0.7s" fill="freeze"/></rect>' +
+          '<text x="170" y="71" fill="#333" font-size="6" font-weight="700" font-family="system-ui" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.3s" begin="1.4s" fill="freeze"/>\u20AC29K</text>' +
+          '<text x="6" y="90" fill="#888" font-size="5.5" font-family="system-ui">Bar & Pool</text>' +
+          '<rect x="68" y="82" width="0" height="12" rx="3" fill="rgba(99,25,240,0.3)"><animate attributeName="width" values="0;65" dur="1s" begin="0.9s" fill="freeze"/></rect>' +
+          '<text x="138" y="91" fill="#333" font-size="6" font-weight="700" font-family="system-ui" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.3s" begin="1.6s" fill="freeze"/>\u20AC22K</text>' +
+        '</svg>' }
     ];
 
     var biIdx = 0;
     section.querySelectorAll("p").forEach(function(p) {
       var t = p.textContent.toLowerCase();
       if ((t.includes("every interaction") || t.includes("opportunity to learn")) && biIdx < 3) {
-        p.textContent = biTexts[biIdx];
+        var card = biCards[biIdx];
+        p.innerHTML = '<div style="margin-bottom:8px;">' + card.svg + '</div>' +
+          '<strong style="font-size:0.9375rem;color:#111;display:block;margin-bottom:4px;">' + card.title + '</strong>' +
+          '<span style="font-size:0.8125rem;color:#666;line-height:1.5;">' + card.desc + '</span>';
         biIdx++;
       }
     });
