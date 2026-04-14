@@ -7663,15 +7663,14 @@
     var section = heading.closest("section") || heading.closest("[class*='section']");
     if (!section) return;
 
-    /* Reduce padding — nuke ALL Webflow wrapper padding/margin at every nesting level */
+    /* Reduce whitespace above title and below graph */
     section.style.setProperty("padding-top", "12px", "important");
     section.style.setProperty("padding-bottom", "0", "important");
+    /* Only collapse Webflow container wrappers (not content elements like h2, p) */
     section.querySelectorAll("div").forEach(function(el) {
       if (!el.className || !el.className.match || !el.className.match(/pbrd-air/)) {
         el.style.setProperty("padding-top", "0", "important");
         el.style.setProperty("padding-bottom", "0", "important");
-        el.style.setProperty("margin-top", "0", "important");
-        el.style.setProperty("margin-bottom", "0", "important");
       }
     });
 
