@@ -836,15 +836,12 @@
     var section = findSectionByHeading("data that moves");
     if (!section) return;
 
-    /* Add floating data particles behind the draw-scroll area */
-    var drawWrap = section.querySelector("[class*='draw_scroll'], [class*='draw-scroll']") || section;
-    drawWrap.style.setProperty("position", "relative", "important");
-    drawWrap.style.setProperty("overflow", "hidden", "important");
+    /* Add floating data particles to the section */
+    section.style.setProperty("position", "relative", "important");
 
-    /* Particle layer */
     var particles = document.createElement("div");
     particles.setAttribute("style",
-      "position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden;"
+      "position:absolute;inset:0;pointer-events:none;z-index:1;overflow:hidden;"
     );
 
     var particleData = [
@@ -862,16 +859,18 @@
 
     particleData.forEach(function(p) {
       var dot = document.createElement("div");
+      var s = p.size + 2;
       dot.setAttribute("style",
-        "position:absolute;width:" + p.size + "px;height:" + p.size + "px;" +
-        "border-radius:50%;background:rgba(99,25,240,0.15);" +
+        "position:absolute;width:" + s + "px;height:" + s + "px;" +
+        "border-radius:50%;background:rgba(99,25,240,0.25);" +
+        "box-shadow:0 0 6px rgba(99,25,240,0.2);" +
         "left:" + p.x + "%;bottom:-10px;" +
         "animation:pbrd-air-data-float " + p.dur + "s linear " + p.delay + "s infinite;"
       );
       particles.appendChild(dot);
     });
 
-    drawWrap.insertBefore(particles, drawWrap.firstChild);
+    section.appendChild(particles);
 
     /* Add stat badges next to each visual_text item */
     var stats = [
