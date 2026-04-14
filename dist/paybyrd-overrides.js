@@ -8225,6 +8225,9 @@
     var section = findSectionByHeading("works with your stack");
     if (!section) return;
 
+    /* Reduce excessive top padding */
+    section.style.setProperty("padding-top", "40px", "important");
+
     /* Hide existing content */
     var heading = findHeading("works with your stack");
     if (heading) heading.style.setProperty("display", "none", "important");
