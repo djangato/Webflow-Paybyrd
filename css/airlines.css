@@ -104,13 +104,13 @@
 /* ═══ PROBLEM — Leakage Dashboard ═══ */
 .pbrd-air-leak-dash {
   margin-top:40px; border-radius:20px; overflow:hidden;
-  background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06);
+  background:#f8f9fa; border:1px solid rgba(0,0,0,0.06);
 }
 
 .pbrd-air-leak-header {
   display:flex; align-items:center; gap:8px; padding:14px 24px;
-  border-bottom:1px solid rgba(255,255,255,0.04);
-  font-size:0.75rem; font-weight:500; color:rgba(255,255,255,0.4);
+  border-bottom:1px solid rgba(0,0,0,0.04);
+  font-size:0.75rem; font-weight:600; color:#555;
 }
 
 .pbrd-air-leak-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
@@ -122,11 +122,11 @@
 
 .pbrd-air-leak-card {
   padding:28px 20px; text-align:center;
-  border-right:1px solid rgba(255,255,255,0.04);
+  border-right:1px solid rgba(0,0,0,0.04);
   transition:background 0.3s ease;
 }
 .pbrd-air-leak-card:last-child { border-right:none; }
-.pbrd-air-leak-card:hover { background:rgba(255,255,255,0.02); }
+.pbrd-air-leak-card:hover { background:rgba(0,0,0,0.02); }
 
 .pbrd-air-leak-ring { position:relative; width:80px; height:80px; margin:0 auto 16px; }
 .pbrd-air-leak-ring svg { width:100%; height:100%; transform:rotate(-90deg); }
@@ -134,59 +134,59 @@
 
 .pbrd-air-leak-pct {
   position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
-  font-size:1.125rem; font-weight:700; color:#fff; font-variant-numeric:tabular-nums;
+  font-size:1.125rem; font-weight:700; color:#111; font-variant-numeric:tabular-nums;
 }
 
-.pbrd-air-leak-card h4 { font-size:0.8125rem; font-weight:600; color:#fff; margin:0 0 4px; }
-.pbrd-air-leak-card p { font-size:0.6875rem; color:rgba(255,255,255,0.35); margin:0 0 12px; line-height:1.4; }
+.pbrd-air-leak-card h4 { font-size:0.8125rem; font-weight:600; color:#111; margin:0 0 4px; }
+.pbrd-air-leak-card p { font-size:0.6875rem; color:#888; margin:0 0 12px; line-height:1.4; }
 
 .pbrd-air-leak-fix {
-  font-size:0.625rem; font-weight:600; color:#0ea5e9; padding:4px 10px;
-  background:rgba(14,165,233,0.06); border-radius:100px; display:inline-block;
+  font-size:0.625rem; font-weight:600; color:#6319f0; padding:4px 10px;
+  background:rgba(99,25,240,0.06); border-radius:100px; display:inline-block;
 }
 
 /* ═══ BENCHMARK ═══ */
 .pbrd-air-benchmark {
   margin-top:48px; max-width:680px; margin-left:auto; margin-right:auto;
-  padding:32px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:20px;
+  padding:32px; background:#f8f9fa; border:1px solid rgba(0,0,0,0.06); border-radius:20px;
 }
 .pbrd-air-bench-header { text-align:center; margin-bottom:24px; }
-.pbrd-air-bench-header h4 { font-size:1.125rem; font-weight:700; color:#fff; margin:8px 0 4px; }
-.pbrd-air-bench-header p { font-size:0.75rem; color:rgba(255,255,255,0.3); margin:0; }
+.pbrd-air-bench-header h4 { font-size:1.125rem; font-weight:700; color:#111; margin:8px 0 4px; }
+.pbrd-air-bench-header p { font-size:0.75rem; color:#888; margin:0; }
 
 .pbrd-air-bench-row { display:flex; align-items:center; padding:12px 16px; border-radius:10px; margin-bottom:6px; transition:background 0.3s; }
-.pbrd-air-bench-row:hover { background:rgba(14,165,233,0.04); }
-.pbrd-air-bench-row--top { background:rgba(14,165,233,0.04); border:1px solid rgba(14,165,233,0.1); }
+.pbrd-air-bench-row:hover { background:rgba(99,25,240,0.03); }
+.pbrd-air-bench-row--top { background:rgba(99,25,240,0.04); border:1px solid rgba(99,25,240,0.1); }
 
-.pbrd-air-bench-name { flex-shrink:0; width:130px; font-size:0.875rem; font-weight:500; color:rgba(255,255,255,0.6); }
-.pbrd-air-bench-bar-wrap { flex:1; height:10px; background:rgba(255,255,255,0.04); border-radius:5px; overflow:hidden; margin:0 16px; }
+.pbrd-air-bench-name { flex-shrink:0; width:130px; font-size:0.875rem; font-weight:500; color:#555; }
+.pbrd-air-bench-bar-wrap { flex:1; height:10px; background:rgba(0,0,0,0.04); border-radius:5px; overflow:hidden; margin:0 16px; }
 .pbrd-air-bench-bar { height:100%; border-radius:5px; width:0; transition:width 1.4s cubic-bezier(.22,1,.36,1); }
-.pbrd-air-bench-bar--1 { background:linear-gradient(90deg,#0ea5e9,#38bdf8); }
-.pbrd-air-bench-bar--2 { background:linear-gradient(90deg,#0ea5e9,#06b6d4); }
-.pbrd-air-bench-bar--3 { background:linear-gradient(90deg,#0ea5e9,#0891b2); }
-.pbrd-air-bench-bar--4 { background:linear-gradient(90deg,#0ea5e9,#0e7490); }
-.pbrd-air-bench-val { font-size:1rem; font-weight:700; color:#0ea5e9; min-width:55px; text-align:right; font-variant-numeric:tabular-nums; }
+.pbrd-air-bench-bar--1 { background:linear-gradient(90deg,#6319f0,#8b5cf6); }
+.pbrd-air-bench-bar--2 { background:linear-gradient(90deg,#6319f0,#7c3aed); }
+.pbrd-air-bench-bar--3 { background:linear-gradient(90deg,#6319f0,#6d28d9); }
+.pbrd-air-bench-bar--4 { background:linear-gradient(90deg,#6319f0,#5b21b6); }
+.pbrd-air-bench-val { font-size:1rem; font-weight:700; color:#6319f0; min-width:55px; text-align:right; font-variant-numeric:tabular-nums; }
 .pbrd-air-bench-footer { text-align:center; }
 
 /* ═══ TAP TESTIMONIAL ═══ */
-.pbrd-air-test-section { padding:60px 0; }
+.pbrd-air-test-section { padding:60px 0; background:#0a0a0f !important; }
 .pbrd-air-test-wrap { max-width:900px; margin:0 auto; padding:0 24px; }
 
 .pbrd-air-test-card {
   display:grid; grid-template-columns:280px 1fr; gap:0;
-  background:rgba(255,255,255,0.02); border:1px solid rgba(14,165,233,0.1);
+  background:rgba(255,255,255,0.03); border:1px solid rgba(99,25,240,0.12);
   border-radius:20px; overflow:hidden;
 }
 
 .pbrd-air-test-left {
-  background:linear-gradient(135deg, rgba(14,165,233,0.08) 0%, rgba(14,165,233,0.02) 100%);
-  padding:40px 28px; display:flex; align-items:center; border-right:1px solid rgba(14,165,233,0.08);
+  background:linear-gradient(135deg, rgba(99,25,240,0.08) 0%, rgba(99,25,240,0.02) 100%);
+  padding:40px 28px; display:flex; align-items:center; border-right:1px solid rgba(99,25,240,0.08);
 }
 
 .pbrd-air-test-metrics { display:flex; flex-direction:column; gap:24px; }
 .pbrd-air-test-metric { display:flex; flex-direction:column; gap:2px; }
 .pbrd-air-test-mv { font-size:1.25rem; font-weight:700; color:#fff; }
-.pbrd-air-test-ml { font-size:0.625rem; color:rgba(14,165,233,0.6); text-transform:uppercase; letter-spacing:0.06em; }
+.pbrd-air-test-ml { font-size:0.625rem; color:rgba(99,25,240,0.6); text-transform:uppercase; letter-spacing:0.06em; }
 
 .pbrd-air-test-right { padding:40px 36px; display:flex; flex-direction:column; justify-content:center; }
 
@@ -196,19 +196,19 @@
   border:none; padding:0;
 }
 .pbrd-air-test-quote::before {
-  content:"\201C"; font-size:3.5rem; color:rgba(14,165,233,0.2);
+  content:"\201C"; font-size:3.5rem; color:rgba(99,25,240,0.25);
   position:absolute; top:-16px; left:-4px; font-style:normal; line-height:1;
 }
 
 .pbrd-air-test-author { display:flex; align-items:center; gap:12px; }
 .pbrd-air-test-avatar {
   width:44px; height:44px; border-radius:50%;
-  background:linear-gradient(135deg,#0ea5e9,#0284c7);
+  background:linear-gradient(135deg,#6319f0,#7c3aed);
   display:flex; align-items:center; justify-content:center;
   font-size:0.875rem; font-weight:700; color:#fff; flex-shrink:0;
 }
 .pbrd-air-test-name { font-size:0.875rem; font-weight:600; color:#fff; }
-.pbrd-air-test-role { font-size:0.6875rem; color:rgba(14,165,233,0.5); }
+.pbrd-air-test-role { font-size:0.6875rem; color:rgba(99,25,240,0.6); }
 
 /* ═══ RESPONSIVE ═══ */
 @media (max-width:768px) {
@@ -217,7 +217,7 @@
   .pbrd-air-leak-grid { grid-template-columns:1fr 1fr; }
   .pbrd-air-leak-card { border-bottom:1px solid rgba(255,255,255,0.04); }
   .pbrd-air-test-card { grid-template-columns:1fr; }
-  .pbrd-air-test-left { border-right:none; border-bottom:1px solid rgba(14,165,233,0.08); padding:24px; }
+  .pbrd-air-test-left { border-right:none; border-bottom:1px solid rgba(99,25,240,0.08); padding:24px; }
   .pbrd-air-test-left .pbrd-air-test-metrics { flex-direction:row; gap:32px; }
   .pbrd-air-test-right { padding:28px 24px; }
   .pbrd-air-bench-row { flex-direction:column; gap:6px; align-items:flex-start; }
