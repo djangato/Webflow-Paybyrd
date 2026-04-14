@@ -7659,85 +7659,80 @@
   function enhanceProblem() {
     var heading = findHeading("airline payments are complex");
     if (!heading) return;
-    heading.innerHTML = "$1 billion lost to airline fraud.<br>Every year.";
     var section = heading.closest("section") || heading.closest("[class*='section']");
     if (!section) return;
 
-    /* Reduce whitespace above title and below graph */
-    section.style.setProperty("padding-top", "0", "important");
-    section.style.setProperty("margin-top", "-60px", "important");
-    section.style.setProperty("padding-bottom", "0", "important");
-    /* Only collapse Webflow container wrappers (not content elements like h2, p) */
-    section.querySelectorAll("div").forEach(function(el) {
-      if (!el.className || !el.className.match || !el.className.match(/pbrd-air/)) {
-        el.style.setProperty("padding-top", "0", "important");
-        el.style.setProperty("padding-bottom", "0", "important");
+    /* THE FIX: hide ALL Webflow children, own our layout completely */
+    section.style.setProperty("padding", "24px 0", "important");
+    section.style.setProperty("position", "relative", "important");
+    section.style.setProperty("overflow", "visible", "important");
+    Array.prototype.forEach.call(section.children, function(child) {
+      if (!child.classList || !child.classList.contains("pbrd-air-problem-wrap")) {
+        child.style.setProperty("display", "none", "important");
       }
     });
 
-    section.querySelectorAll("p").forEach(function(p) {
-      if (p.textContent.toLowerCase().includes("involving multiple") || p.textContent.toLowerCase().includes("outdated")) {
-        p.textContent = "Fraud, failed transactions, currency friction, and cart abandonment drain airline revenue at every stage. Here\u2019s where the money goes \u2014 and how Paybyrd plugs the leaks:";
-      }
-      if (p.textContent.toLowerCase().includes("paybyrd simplifies")) p.style.display = "none";
-    });
+    var wrap = document.createElement("div");
+    wrap.className = "pbrd-air-problem-wrap";
+    wrap.setAttribute("style", "max-width:1100px;margin:0 auto;padding:0 24px;text-align:center;");
 
-    /* Revenue leakage dashboard */
-    var dash = document.createElement("div");
-    dash.className = "pbrd-air-leak-dash pbrd-air-reveal";
-    dash.innerHTML =
-      '<div class="pbrd-air-leak-header">' +
-        '<div class="pbrd-air-leak-dot pbrd-air-leak-dot--live"></div>' +
-        '<span>Revenue Leakage Monitor</span>' +
-        '<span class="pbrd-air-leak-tag">LIVE</span>' +
-      '</div>' +
-      '<div class="pbrd-air-leak-grid">' +
-        '<div class="pbrd-air-leak-card pbrd-air-leak--red pbrd-air-reveal">' +
-          '<div class="pbrd-air-leak-ring"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="none" stroke="rgba(0,0,0,0.04)" stroke-width="6"/><circle cx="40" cy="40" r="34" fill="none" stroke="#ef4444" stroke-width="6" stroke-dasharray="214" stroke-dashoffset="214" stroke-linecap="round" class="pbrd-air-ring-fill" data-pct="79"/></svg><span class="pbrd-air-leak-pct" data-target="79">0%</span></div>' +
-          '<h4>Cart Abandonment</h4>' +
-          '<p>Travel\u2019s highest drop-off rate</p>' +
-          '<div class="pbrd-air-leak-fix">\u2192 Paybyrd recovers 15\u201320%</div>' +
+    wrap.innerHTML =
+      '<div class="pbrd-air-section-label pbrd-air-reveal">AIRLINES</div>' +
+      '<h2 class="pbrd-air-reveal" style="font-size:clamp(2rem,4.5vw,3.25rem);font-weight:700;color:#111;margin:8px 0 16px;line-height:1.1;letter-spacing:-0.02em;">$1 billion lost to airline fraud.<br>Every year.</h2>' +
+      '<p class="pbrd-air-reveal" style="font-size:1rem;color:#666;max-width:600px;margin:0 auto 24px;line-height:1.6;">Fraud, failed transactions, currency friction, and cart abandonment drain airline revenue at every stage. Here\u2019s where the money goes \u2014 and how Paybyrd plugs the leaks:</p>' +
+
+      '<div class="pbrd-air-leak-dash pbrd-air-reveal">' +
+        '<div class="pbrd-air-leak-header">' +
+          '<div class="pbrd-air-leak-dot pbrd-air-leak-dot--live"></div>' +
+          '<span>Revenue Leakage Monitor</span>' +
+          '<span class="pbrd-air-leak-tag">LIVE</span>' +
         '</div>' +
-        '<div class="pbrd-air-leak-card pbrd-air-leak--orange pbrd-air-reveal">' +
-          '<div class="pbrd-air-leak-ring"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="none" stroke="rgba(0,0,0,0.04)" stroke-width="6"/><circle cx="40" cy="40" r="34" fill="none" stroke="#f97316" stroke-width="6" stroke-dasharray="214" stroke-dashoffset="214" stroke-linecap="round" class="pbrd-air-ring-fill" data-pct="30"/></svg><span class="pbrd-air-leak-pct" data-target="30">0%</span></div>' +
-          '<h4>Missing Local Methods</h4>' +
-          '<p>Sales lost without local options</p>' +
-          '<div class="pbrd-air-leak-fix">\u2192 192+ currencies, local routing</div>' +
+        '<div class="pbrd-air-leak-grid">' +
+          '<div class="pbrd-air-leak-card pbrd-air-leak--red pbrd-air-reveal">' +
+            '<div class="pbrd-air-leak-ring"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="none" stroke="rgba(0,0,0,0.04)" stroke-width="6"/><circle cx="40" cy="40" r="34" fill="none" stroke="#ef4444" stroke-width="6" stroke-dasharray="214" stroke-dashoffset="214" stroke-linecap="round" class="pbrd-air-ring-fill" data-pct="79"/></svg><span class="pbrd-air-leak-pct" data-target="79">0%</span></div>' +
+            '<h4>Cart Abandonment</h4>' +
+            '<p>Travel\u2019s highest drop-off rate</p>' +
+            '<div class="pbrd-air-leak-fix">\u2192 Paybyrd recovers 15\u201320%</div>' +
+          '</div>' +
+          '<div class="pbrd-air-leak-card pbrd-air-leak--orange pbrd-air-reveal">' +
+            '<div class="pbrd-air-leak-ring"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="none" stroke="rgba(0,0,0,0.04)" stroke-width="6"/><circle cx="40" cy="40" r="34" fill="none" stroke="#f97316" stroke-width="6" stroke-dasharray="214" stroke-dashoffset="214" stroke-linecap="round" class="pbrd-air-ring-fill" data-pct="30"/></svg><span class="pbrd-air-leak-pct" data-target="30">0%</span></div>' +
+            '<h4>Missing Local Methods</h4>' +
+            '<p>Sales lost without local options</p>' +
+            '<div class="pbrd-air-leak-fix">\u2192 192+ currencies, local routing</div>' +
+          '</div>' +
+          '<div class="pbrd-air-leak-card pbrd-air-leak--yellow pbrd-air-reveal">' +
+            '<div class="pbrd-air-leak-ring"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="none" stroke="rgba(0,0,0,0.04)" stroke-width="6"/><circle cx="40" cy="40" r="34" fill="none" stroke="#eab308" stroke-width="6" stroke-dasharray="214" stroke-dashoffset="214" stroke-linecap="round" class="pbrd-air-ring-fill" data-pct="17"/></svg><span class="pbrd-air-leak-pct" data-target="17">0%</span></div>' +
+            '<h4>Fraud & Chargebacks</h4>' +
+            '<p>$1B+ lost industry-wide</p>' +
+            '<div class="pbrd-air-leak-fix">\u2192 AI screening: 16.8% reduction</div>' +
+          '</div>' +
+          '<div class="pbrd-air-leak-card pbrd-air-leak--blue pbrd-air-reveal">' +
+            '<div class="pbrd-air-leak-ring"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="none" stroke="rgba(0,0,0,0.04)" stroke-width="6"/><circle cx="40" cy="40" r="34" fill="none" stroke="#6319f0" stroke-width="6" stroke-dasharray="214" stroke-dashoffset="214" stroke-linecap="round" class="pbrd-air-ring-fill" data-pct="15"/></svg><span class="pbrd-air-leak-pct" data-target="15">0%</span></div>' +
+            '<h4>Cross-Border Fees</h4>' +
+            '<p>Excessive FX & routing charges</p>' +
+            '<div class="pbrd-air-leak-fix">\u2192 Local routing: 10\u201315% savings</div>' +
+          '</div>' +
         '</div>' +
-        '<div class="pbrd-air-leak-card pbrd-air-leak--yellow pbrd-air-reveal">' +
-          '<div class="pbrd-air-leak-ring"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="none" stroke="rgba(0,0,0,0.04)" stroke-width="6"/><circle cx="40" cy="40" r="34" fill="none" stroke="#eab308" stroke-width="6" stroke-dasharray="214" stroke-dashoffset="214" stroke-linecap="round" class="pbrd-air-ring-fill" data-pct="17"/></svg><span class="pbrd-air-leak-pct" data-target="17">0%</span></div>' +
-          '<h4>Fraud & Chargebacks</h4>' +
-          '<p>$1B+ lost industry-wide</p>' +
-          '<div class="pbrd-air-leak-fix">\u2192 AI screening: 16.8% reduction</div>' +
-        '</div>' +
-        '<div class="pbrd-air-leak-card pbrd-air-leak--blue pbrd-air-reveal">' +
-          '<div class="pbrd-air-leak-ring"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="none" stroke="rgba(0,0,0,0.04)" stroke-width="6"/><circle cx="40" cy="40" r="34" fill="none" stroke="#6319f0" stroke-width="6" stroke-dasharray="214" stroke-dashoffset="214" stroke-linecap="round" class="pbrd-air-ring-fill" data-pct="15"/></svg><span class="pbrd-air-leak-pct" data-target="15">0%</span></div>' +
-          '<h4>Cross-Border Fees</h4>' +
-          '<p>Excessive FX & routing charges</p>' +
-          '<div class="pbrd-air-leak-fix">\u2192 Local routing: 10\u201315% savings</div>' +
-        '</div>' +
-      '</div>' +
-      /* Summary footer with CTA */
-      '<div class="pbrd-air-leak-footer">' +
-        '<div class="pbrd-air-leak-summary">' +
-          '<span class="pbrd-air-leak-summary-txt">Combined, these issues cost the average airline <strong>millions per year</strong>. Paybyrd addresses all four simultaneously.</span>' +
-          '<a href="/book-demo" class="pbrd-air-cta-primary" style="padding:10px 24px;font-size:0.8125rem;">Calculate your savings \u2192</a>' +
+        '<div class="pbrd-air-leak-footer">' +
+          '<div class="pbrd-air-leak-summary">' +
+            '<span class="pbrd-air-leak-summary-txt">Combined, these issues cost the average airline <strong>millions per year</strong>. Paybyrd addresses all four simultaneously.</span>' +
+            '<a href="/book-demo" class="pbrd-air-cta-primary" style="padding:10px 24px;font-size:0.8125rem;">Calculate your savings \u2192</a>' +
+          '</div>' +
         '</div>' +
       '</div>';
 
-    var paras = section.querySelectorAll("p");
-    var lastP = null; paras.forEach(function(p) { if (p.style.display !== "none") lastP = p; });
-    if (lastP) lastP.parentElement.insertBefore(dash, lastP.nextSibling);
-    else section.appendChild(dash);
+    section.appendChild(wrap);
 
     /* Add plane + trail at SECTION level so it flies freely */
-    section.style.setProperty("position", "relative", "important");
-    section.style.setProperty("overflow", "visible", "important");
-
     var plane = document.createElement("div");
     plane.className = "pbrd-air-plane";
     plane.innerHTML = '<img src="https://djangato.github.io/Webflow-Paybyrd/assets/pos/paybyrd-plane.png" alt="Paybyrd" style="width:100%;height:auto;">';
     section.appendChild(plane);
+
+    var trail = document.createElement("div");
+    trail.className = "pbrd-air-trail";
+    trail.innerHTML = '<svg viewBox="0 0 950 250" preserveAspectRatio="none"><path d="M-150,200 C0,80 150,250 350,100 C500,10 650,150 950,60" fill="none" stroke="rgba(99,25,240,0.04)" stroke-width="1.5" stroke-dasharray="6 4" class="pbrd-air-trail-path"/></svg>';
+    section.appendChild(trail);
 
     /* Randomize flight path each loop */
     var paths = [
@@ -7751,23 +7746,18 @@
       pathIdx = (pathIdx + 1) % paths.length;
       var p = paths[pathIdx];
       plane.style.offsetPath = 'path("' + p + '")';
-      /* Update trail too */
       var trailPath = trail.querySelector("path");
       if (trailPath) trailPath.setAttribute("d", p);
     }, 14000);
 
-    var trail = document.createElement("div");
-    trail.className = "pbrd-air-trail";
-    trail.innerHTML = '<svg viewBox="0 0 950 250" preserveAspectRatio="none"><path d="M-150,200 C0,80 150,250 350,100 C500,10 650,150 950,60" fill="none" stroke="rgba(99,25,240,0.04)" stroke-width="1.5" stroke-dasharray="6 4" class="pbrd-air-trail-path"/></svg>';
-    section.appendChild(trail);
-
     /* Animate rings + counters on scroll */
-    if ("IntersectionObserver" in window) {
+    var dash = wrap.querySelector(".pbrd-air-leak-dash");
+    if ("IntersectionObserver" in window && dash) {
       new IntersectionObserver(function(entries) {
         if (entries[0].isIntersecting) {
           dash.querySelectorAll(".pbrd-air-ring-fill").forEach(function(ring) {
             var pct = parseInt(ring.getAttribute("data-pct"));
-            var circ = 214; /* 2*PI*34 */
+            var circ = 214;
             setTimeout(function() {
               ring.style.strokeDashoffset = circ - (circ * pct / 100);
             }, 300);
