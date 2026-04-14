@@ -261,10 +261,17 @@
           '<div class="pbrd-air-leak-fix">\u2192 AI screening: 16.8% reduction</div>' +
         '</div>' +
         '<div class="pbrd-air-leak-card pbrd-air-leak--blue pbrd-air-reveal">' +
-          '<div class="pbrd-air-leak-ring"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="none" stroke="rgba(0,0,0,0.04)" stroke-width="6"/><circle cx="40" cy="40" r="34" fill="none" stroke="#0ea5e9" stroke-width="6" stroke-dasharray="214" stroke-dashoffset="214" stroke-linecap="round" class="pbrd-air-ring-fill" data-pct="15"/></svg><span class="pbrd-air-leak-pct" data-target="15">0%</span></div>' +
+          '<div class="pbrd-air-leak-ring"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="none" stroke="rgba(0,0,0,0.04)" stroke-width="6"/><circle cx="40" cy="40" r="34" fill="none" stroke="#6319f0" stroke-width="6" stroke-dasharray="214" stroke-dashoffset="214" stroke-linecap="round" class="pbrd-air-ring-fill" data-pct="15"/></svg><span class="pbrd-air-leak-pct" data-target="15">0%</span></div>' +
           '<h4>Cross-Border Fees</h4>' +
           '<p>Excessive FX & routing charges</p>' +
           '<div class="pbrd-air-leak-fix">\u2192 Local routing: 10\u201315% savings</div>' +
+        '</div>' +
+      '</div>' +
+      /* Summary footer with CTA */
+      '<div class="pbrd-air-leak-footer">' +
+        '<div class="pbrd-air-leak-summary">' +
+          '<span class="pbrd-air-leak-summary-txt">Combined, these issues cost the average airline <strong>millions per year</strong>. Paybyrd addresses all four simultaneously.</span>' +
+          '<a href="/book-demo" class="pbrd-air-cta-primary" style="padding:10px 24px;font-size:0.8125rem;">Calculate your savings \u2192</a>' +
         '</div>' +
       '</div>';
 
@@ -361,8 +368,19 @@
   /* ═══════════════════════════════════════════ */
 
   function buildTestimonial() {
-    var anchor = findSectionByHeading("designed for the passenger") || findSectionByHeading("works with your stack");
-    if (!anchor) return;
+    var anchor = findSectionByHeading("designed for the passenger") ||
+                 findSectionByHeading("works with your stack") ||
+                 findSectionByHeading("passenger journey") ||
+                 findSectionByHeading("data that moves");
+    if (!anchor) {
+      /* Last resort: insert after the benchmark or features section */
+      var bench = document.querySelector(".pbrd-air-benchmark");
+      if (bench) anchor = bench.closest("section") || bench.parentElement;
+    }
+    if (!anchor) {
+      console.log("[Paybyrd] Testimonial: no anchor found");
+      return;
+    }
 
     var s = document.createElement("section");
     s.className = "pbrd-air-test-section";
