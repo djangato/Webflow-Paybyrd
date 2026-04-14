@@ -880,16 +880,19 @@
       { find: "revenue leaks", badge: "Real-time alerts" },
     ];
 
+    var usedBadges = {};
     section.querySelectorAll("[class*='visual_text'], [class*='draw'] p, [class*='scroll'] p").forEach(function(el) {
+      if (el.children.length > 3) return; /* skip containers */
       var txt = el.textContent.toLowerCase();
       stats.forEach(function(s) {
-        if (txt.includes(s.find)) {
+        if (txt.includes(s.find) && !usedBadges[s.find]) {
+          usedBadges[s.find] = true;
           var badge = document.createElement("span");
           badge.setAttribute("style",
-            "display:inline-block;margin-top:8px;padding:4px 12px;" +
+            "display:block;margin-top:8px;padding:4px 12px;" +
             "border-radius:100px;background:rgba(99,25,240,0.08);" +
             "color:#6319f0;font-size:0.625rem;font-weight:600;" +
-            "letter-spacing:0.02em;"
+            "letter-spacing:0.02em;width:fit-content;"
           );
           badge.textContent = s.badge;
           el.appendChild(badge);
