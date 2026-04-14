@@ -8705,11 +8705,11 @@
             '<div class="pbrd-air-hf-methods" id="pbrd-air-hf-methods">' +
               '<div class="pbrd-air-hf-methods-label">Select payment method</div>' +
               '<div class="pbrd-air-hf-methods-row">' +
-                '<div class="pbrd-air-hf-method" id="pbrd-air-hf-m0"><svg viewBox="0 0 32 20" width="32" height="20"><rect width="32" height="20" rx="3" fill="#1a1f71"/><circle cx="12" cy="10" r="5.5" fill="#eb001b"/><circle cx="20" cy="10" r="5.5" fill="#f79e1b" opacity="0.8"/></svg></div>' +
-                '<div class="pbrd-air-hf-method" id="pbrd-air-hf-m1"><svg viewBox="0 0 32 20" width="32" height="20"><rect width="32" height="20" rx="3" fill="#0a2540"/><text x="16" y="13" text-anchor="middle" font-family="system-ui" font-weight="700" font-size="7" fill="#fff">VISA</text></svg></div>' +
-                '<div class="pbrd-air-hf-method" id="pbrd-air-hf-m2"><svg viewBox="0 0 32 20" width="32" height="20"><rect width="32" height="20" rx="3" fill="#000"/><text x="16" y="13" text-anchor="middle" font-family="system-ui" font-weight="700" font-size="6" fill="#fff">AMEX</text></svg></div>' +
-                '<div class="pbrd-air-hf-method" id="pbrd-air-hf-m3"><svg viewBox="0 0 32 20" width="32" height="20"><rect width="32" height="20" rx="3" fill="#008c44"/><text x="16" y="13" text-anchor="middle" font-family="system-ui" font-weight="600" font-size="5" fill="#fff">MB WAY</text></svg></div>' +
-                '<div class="pbrd-air-hf-method" id="pbrd-air-hf-m4"><svg viewBox="0 0 32 20" width="32" height="20"><rect width="32" height="20" rx="3" fill="#6f42c1"/><text x="16" y="13" text-anchor="middle" font-family="system-ui" font-weight="600" font-size="5.5" fill="#fff">PIX</text></svg></div>' +
+                '<div class="pbrd-air-hf-method" id="pbrd-air-hf-m0"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/mastercard.png" alt="Mastercard" /></div>' +
+                '<div class="pbrd-air-hf-method" id="pbrd-air-hf-m1"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/visa.png" alt="Visa" /></div>' +
+                '<div class="pbrd-air-hf-method" id="pbrd-air-hf-m2"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/amex.png" alt="Amex" /></div>' +
+                '<div class="pbrd-air-hf-method" id="pbrd-air-hf-m3"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/mbway.png" alt="MB WAY" /></div>' +
+                '<div class="pbrd-air-hf-method" id="pbrd-air-hf-m4"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/icons/multibanco.png" alt="Multibanco" /></div>' +
               '</div>' +
             '</div>' +
 
