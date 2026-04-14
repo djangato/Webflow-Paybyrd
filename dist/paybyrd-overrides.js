@@ -8361,13 +8361,121 @@
   /* ═══════════════════════════════════════════ */
 
   function enhanceFAQ() {
-    document.querySelectorAll("[class*='accordion'] p, [class*='faq'] p").forEach(function(p) {
-      var t = p.textContent.toLowerCase();
-      if (t.includes("reconciling ticket payments"))
-        p.textContent = "Typically 2\u20134 weeks for full integration. Our modular architecture connects to Amadeus, IATA, GDS, BSP, NDC without disrupting live operations. TAP Air Portugal went live across all channels within weeks.";
-      if (t.includes("smart routing and fx"))
-        p.textContent = "Smart multi-acquiring routes each transaction to the optimal acquirer. Local routing through regional banks delivers 4\u20137% higher authorization. Airlines cut costs by up to 15%, with 10\u201315% reduction in cross-border fees.";
+    var section = findSectionByHeading("frequently asked");
+    if (!section) return;
+
+    /* Hide all Webflow children */
+    section.style.setProperty("padding", "60px 0", "important");
+    section.style.setProperty("background", "#0a0a0f", "important");
+    Array.prototype.forEach.call(section.children, function(child) {
+      if (!child.classList || !child.classList.contains("pbrd-air-faq-wrap")) {
+        child.style.setProperty("display", "none", "important");
+      }
     });
+
+    var faqs = [
+      { cat: "Integration", q: "How fast can we roll out Paybyrd without disrupting operations?",
+        a: "Typically 2\u20134 weeks for full integration. Our modular architecture connects directly to Amadeus, IATA, GDS, BSP, and NDC systems without disrupting live operations. TAP Air Portugal went live across all channels \u2014 website, OTAs, call center, and boarding gates \u2014 within weeks." },
+      { cat: "Integration", q: "Can we consolidate payments from website, mobile, OTAs, and gate?",
+        a: "Yes. Paybyrd unifies all sales channels into a single payment engine with real-time reconciliation. Website bookings, GDS/OTA transactions, call center payments, and gate POS \u2014 every transaction flows through one dashboard with consistent reporting, settlement, and fraud screening." },
+      { cat: "Performance", q: "What are your approval rates vs. competitors?",
+        a: "In head-to-head comparisons across airline transactions: +1.72% vs Adyen, +3.16% vs Elavon, +4.86% vs Checkout.com, +4.92% vs Nuvei. Multi-acquirer routing and local processing in 192+ currencies deliver 4\u20137% higher authorization rates overall." },
+      { cat: "Performance", q: "How does Paybyrd reduce transaction costs?",
+        a: "Three ways: smart routing sends each transaction to the lowest-cost acquirer, local acquiring eliminates cross-border fees (10\u201315% savings), and our AI screening reduces chargebacks by 16.8% \u2014 cutting fees and penalty costs. Airlines typically see 15% total cost reduction." },
+      { cat: "Fraud", q: "How do you handle airline-specific fraud patterns?",
+        a: "Our AI velocity screening system flags suspicious transactions preemptively \u2014 before the chargeback happens. Shared database across all merchants with chargeback and flagged transaction history. 3D Secure, advanced screening, and in select markets (US) Verified/Safekey/SecureCode. Result: 16.8% chargeback reduction." },
+      { cat: "Fraud", q: "What about friendly fraud and post-travel disputes?",
+        a: "Customers disputing legitimate charges after travel is a major airline problem. We combat this with 3D Secure liability shift, a shared cross-merchant fraud database, instant refund capability (with ARN proof), and automated dispute management. This vastly reduces chargeback ratios." },
+      { cat: "Operations", q: "Do you support payments at physical touchpoints like gates?",
+        a: "Yes. The A77 Terminal, developed in collaboration with TAP Air Portugal, handles boarding gate upgrades, lounge access, extra baggage, and ancillary sales. SoftPOS capability means any Android device can accept payments. All transactions flow into the same unified dashboard." },
+      { cat: "Operations", q: "How do refunds work during flight disruptions?",
+        a: "Instant refunds through direct connectivity \u2014 instantaneous across most European issuers. Immediate proof of refund generated with an ARN reference that can be provided to customers on the spot. This prevents involuntary chargebacks and regulatory issues from slow refund processing." },
+      { cat: "Security", q: "Are you PCI and GDPR compliant?",
+        a: "Certified to PCI DSS Level 1 \u2014 the highest level. Full GDPR compliance, encryption at rest and in transit (TLS 1.3+), zero-knowledge architecture, and tokenization. We handle all regulatory complexity: KYC, AML, and local compliance for 80+ countries. Your airline focuses on flying, we handle the regulations." },
+      { cat: "Security", q: "What\u2019s your uptime guarantee?",
+        a: "99.999% uptime through multi-instance, multi-acquiring infrastructure. Even if one acquirer goes down, transactions automatically route to alternates. For airlines, where 1 hour of downtime can mean millions in lost sales, this redundancy is critical. Can impact revenue globally upwards of +1%." }
+    ];
+
+    var categories = ["All", "Integration", "Performance", "Fraud", "Operations", "Security"];
+    var catColors = { Integration: "#6366F1", Performance: "#10B981", Fraud: "#EF4444", Operations: "#F59E0B", Security: "#8B5CF6" };
+
+    var wrap = document.createElement("div");
+    wrap.className = "pbrd-air-faq-wrap";
+
+    var html =
+      '<div class="pbrd-air-faq-header pbrd-air-reveal">' +
+        '<div class="pbrd-air-section-label">FAQ</div>' +
+        '<h2 class="pbrd-air-faq-h2">Everything airline executives ask<br>before switching to Paybyrd.</h2>' +
+        '<p class="pbrd-air-faq-sub">The hard questions \u2014 answered with real data, not marketing speak.</p>' +
+      '</div>' +
+
+      '<div class="pbrd-air-faq-filters">';
+
+    categories.forEach(function(cat, i) {
+      html += '<button class="pbrd-air-faq-filter' + (i === 0 ? ' pbrd-air-faq-filter--active' : '') + '" data-cat="' + cat + '">' + cat + '</button>';
+    });
+
+    html += '</div><div class="pbrd-air-faq-list">';
+
+    faqs.forEach(function(faq) {
+      html += '<div class="pbrd-air-faq-item pbrd-air-reveal" data-cat="' + faq.cat + '">' +
+        '<button class="pbrd-air-faq-q">' +
+          '<div class="pbrd-air-faq-q-left">' +
+            '<span class="pbrd-air-faq-cat-dot" style="background:' + catColors[faq.cat] + '"></span>' +
+            '<span>' + faq.q + '</span>' +
+          '</div>' +
+          '<svg class="pbrd-air-faq-chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+        '</button>' +
+        '<div class="pbrd-air-faq-a"><p>' + faq.a + '</p></div>' +
+      '</div>';
+    });
+
+    html += '</div>' +
+      '<div class="pbrd-air-faq-bottom pbrd-air-reveal">' +
+        '<div class="pbrd-air-faq-bottom-card">' +
+          '<div class="pbrd-air-faq-bottom-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="currentColor" stroke-width="1.5"/></svg></div>' +
+          '<h4>Still have questions?</h4>' +
+          '<p>Our airline payment specialists are ready to walk you through a tailored demo with your actual transaction data.</p>' +
+          '<a href="/book-demo" class="pbrd-air-faq-contact-btn">Book a 15-minute demo \u2192</a>' +
+        '</div>' +
+      '</div>';
+
+    wrap.innerHTML = html;
+    section.appendChild(wrap);
+
+    /* Accordion behaviour */
+    var allItems = wrap.querySelectorAll(".pbrd-air-faq-item");
+    wrap.querySelectorAll(".pbrd-air-faq-q").forEach(function(btn) {
+      btn.addEventListener("click", function() {
+        var item = btn.parentElement;
+        var isOpen = item.classList.contains("pbrd-air-faq-item--open");
+        allItems.forEach(function(it) { it.classList.remove("pbrd-air-faq-item--open"); });
+        if (!isOpen) item.classList.add("pbrd-air-faq-item--open");
+      });
+    });
+
+    /* Category filter */
+    var filterBtns = wrap.querySelectorAll(".pbrd-air-faq-filter");
+    filterBtns.forEach(function(btn) {
+      btn.addEventListener("click", function() {
+        filterBtns.forEach(function(b) { b.classList.remove("pbrd-air-faq-filter--active"); });
+        btn.classList.add("pbrd-air-faq-filter--active");
+        var cat = btn.getAttribute("data-cat");
+        allItems.forEach(function(item) {
+          if (cat === "All" || item.getAttribute("data-cat") === cat) {
+            item.style.display = "";
+          } else {
+            item.style.display = "none";
+            item.classList.remove("pbrd-air-faq-item--open");
+          }
+        });
+      });
+    });
+
+    /* Auto-open first */
+    if (allItems.length) allItems[0].classList.add("pbrd-air-faq-item--open");
+
+    observeReveal(".pbrd-air-reveal", 80, section);
   }
 
   /* ═══════════════════════════════════════════ */

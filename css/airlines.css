@@ -809,6 +809,83 @@
 .pbrd-air-hf-success-text { font-size:0.875rem; font-weight:700; color:#1a1a2e; }
 .pbrd-air-hf-success-sub { font-size:0.625rem; color:#8a8a9a; }
 
+/* ═══ FAQ SECTION ═══ */
+.pbrd-air-faq-wrap { max-width:780px; margin:0 auto; padding:0 24px; }
+
+.pbrd-air-faq-header { text-align:center; margin-bottom:40px; }
+.pbrd-air-faq-h2 {
+  font-size:clamp(2rem,3.5vw,2.75rem); font-weight:700; color:#fff;
+  letter-spacing:-0.025em; line-height:1.12; margin:8px 0 12px;
+}
+.pbrd-air-faq-sub { font-size:1rem; color:rgba(255,255,255,0.5); line-height:1.6; max-width:480px; margin:0 auto; }
+
+.pbrd-air-faq-filters {
+  display:flex; justify-content:center; gap:8px; margin-bottom:32px; flex-wrap:wrap;
+}
+.pbrd-air-faq-filter {
+  padding:6px 16px; border-radius:100px; border:1px solid rgba(255,255,255,0.12);
+  background:transparent; color:rgba(255,255,255,0.5);
+  font-size:0.8125rem; font-weight:500; cursor:pointer;
+  transition:all 0.2s ease; font-family:inherit;
+}
+.pbrd-air-faq-filter:hover { border-color:rgba(255,255,255,0.25); color:rgba(255,255,255,0.8); }
+.pbrd-air-faq-filter--active { background:#fff; color:#111; border-color:#fff; }
+.pbrd-air-faq-filter--active:hover { background:#f0f0f0; color:#111; border-color:#f0f0f0; }
+
+.pbrd-air-faq-list { display:flex; flex-direction:column; gap:0; }
+
+.pbrd-air-faq-item { border-bottom:1px solid rgba(255,255,255,0.08); }
+
+.pbrd-air-faq-q {
+  display:flex; align-items:center; justify-content:space-between;
+  width:100%; padding:20px 4px; background:none; border:none;
+  cursor:pointer; text-align:left; font-family:inherit; gap:16px;
+}
+.pbrd-air-faq-q-left {
+  display:flex; align-items:center; gap:12px;
+  font-size:1rem; font-weight:500; color:rgba(255,255,255,0.8); line-height:1.4;
+}
+.pbrd-air-faq-q:hover .pbrd-air-faq-q-left { color:#fff; }
+
+.pbrd-air-faq-cat-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+
+.pbrd-air-faq-chevron {
+  width:20px; height:20px; color:rgba(255,255,255,0.3); flex-shrink:0;
+  transition:transform 0.3s ease, color 0.2s ease;
+}
+.pbrd-air-faq-item--open .pbrd-air-faq-chevron { transform:rotate(180deg); color:rgba(255,255,255,0.6); }
+
+.pbrd-air-faq-a {
+  max-height:0; overflow:hidden;
+  transition:max-height 0.35s cubic-bezier(0.4,0,0.2,1), padding 0.35s cubic-bezier(0.4,0,0.2,1);
+  padding:0 4px 0 24px;
+}
+.pbrd-air-faq-item--open .pbrd-air-faq-a { max-height:300px; padding:0 4px 20px 24px; }
+.pbrd-air-faq-a p { font-size:0.9375rem; color:rgba(255,255,255,0.45); line-height:1.7; margin:0; }
+
+.pbrd-air-faq-bottom { margin-top:48px; }
+.pbrd-air-faq-bottom-card {
+  background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08);
+  border-radius:16px; padding:36px; text-align:center;
+}
+.pbrd-air-faq-bottom-icon {
+  width:48px; height:48px; border-radius:12px; background:rgba(255,255,255,0.1);
+  display:flex; align-items:center; justify-content:center; margin:0 auto 16px;
+}
+.pbrd-air-faq-bottom-icon svg { width:22px; height:22px; color:#fff; }
+.pbrd-air-faq-bottom-card h4 { font-size:1.125rem; font-weight:600; color:#fff; margin:0 0 8px; }
+.pbrd-air-faq-bottom-card p { font-size:0.875rem; color:rgba(255,255,255,0.45); line-height:1.6; max-width:400px; margin:0 auto 20px; }
+.pbrd-air-faq-contact-btn {
+  display:inline-flex; align-items:center; gap:6px;
+  padding:12px 28px; border-radius:100px; background:#fff; color:#111;
+  font-size:0.875rem; font-weight:600; text-decoration:none;
+  transition:all 0.25s ease; font-family:inherit;
+}
+.pbrd-air-faq-contact-btn:hover {
+  background:#f0f0f0; transform:translateY(-1px);
+  box-shadow:0 4px 16px rgba(255,255,255,0.1);
+}
+
 /* ═══ 10 PROBLEMS SECTION ═══ */
 .pbrd-air-10p-wrap { max-width:1100px; margin:0 auto; padding:0 24px; }
 
