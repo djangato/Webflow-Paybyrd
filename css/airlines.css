@@ -44,7 +44,7 @@
 }
 
 .pbrd-air-map-wrap {
-  display:grid; grid-template-columns:1fr 320px; gap:20px; align-items:center;
+  display:grid; grid-template-columns:1fr 358px; gap:20px; align-items:center;
 }
 
 .pbrd-air-map-left {
@@ -55,14 +55,14 @@
 
 .pbrd-air-txn-feed {
   display:flex; flex-direction:column; gap:5px;
-  background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06);
+  background:rgba(255,255,255,0.02); border:1px solid rgba(99,25,240,0.12);
   border-radius:16px; padding:20px;
 }
 
 .pbrd-air-txn-feed-header {
   display:flex; align-items:center; gap:8px; margin-bottom:10px;
   font-size:0.625rem; font-weight:700; letter-spacing:0.1em;
-  color:rgba(14,165,233,0.5); text-transform:uppercase;
+  color:rgba(99,25,240,0.5); text-transform:uppercase;
 }
 
 .pbrd-air-txn-feed-dot {
@@ -74,7 +74,7 @@
 .pbrd-air-txn {
   display:flex; align-items:center; gap:6px; padding:7px 12px;
   background:rgba(0,0,0,0.55); backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px); border:1px solid rgba(14,165,233,0.1);
+  -webkit-backdrop-filter:blur(12px); border:1px solid rgba(99,25,240,0.12);
   border-radius:8px; font-size:0.625rem; font-family:"SF Mono","Fira Code",monospace;
   color:rgba(255,255,255,0.5); transition:opacity 0.4s ease, transform 0.4s ease;
 }
@@ -82,13 +82,15 @@
 .pbrd-air-txn-ok { color:#22c55e; font-weight:700; }
 .pbrd-air-txn-r { color:rgba(255,255,255,0.4); }
 .pbrd-air-txn-a { color:#fff; font-weight:600; margin-left:auto; }
-.pbrd-air-txn-m { color:rgba(14,165,233,0.7); }
+.pbrd-air-txn-m { color:rgba(99,25,240,0.7); }
 .pbrd-air-txn-t { color:rgba(255,255,255,0.2); }
 
 /* ── Ticker strip ── */
 .pbrd-air-ticker-strip {
-  margin-top:20px; overflow:hidden; padding:12px 24px;
-  max-width:1200px; margin-left:auto; margin-right:auto; width:100% !important;
+  margin-top:40px; overflow:hidden; padding:16px 0;
+  width:100vw !important; margin-left:calc(-50vw + 50%) !important;
+  background:linear-gradient(90deg, #6319f0, #7c3aed, #6319f0);
+  position:relative; z-index:3;
   border-top:1px solid rgba(255,255,255,0.04);
   border-bottom:1px solid rgba(255,255,255,0.04);
   mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);
@@ -96,8 +98,8 @@
 }
 .pbrd-air-ticker-track { display:flex; gap:20px; animation:pbrd-air-scroll 30s linear infinite; white-space:nowrap; width:max-content; }
 @keyframes pbrd-air-scroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
-.pbrd-air-tick { font-size:0.8125rem; font-weight:600; color:#0ea5e9; }
-.pbrd-air-tick-dot { color:rgba(255,255,255,0.1); }
+.pbrd-air-tick { font-size:0.8125rem; font-weight:600; color:#fff; }
+.pbrd-air-tick-dot { color:rgba(255,255,255,0.3); }
 
 /* ═══ PROBLEM — Leakage Dashboard ═══ */
 .pbrd-air-leak-dash {

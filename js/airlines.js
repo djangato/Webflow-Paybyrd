@@ -125,8 +125,8 @@
     var svgDots = "";
     routes.forEach(function(r, i) {
       svgPaths +=
-        '<path d="' + r.d + '" fill="none" stroke="rgba(14,165,233,0.18)" stroke-width="1.2" stroke-dasharray="4 4"/>' +
-        '<circle r="4" fill="#0ea5e9" opacity="0">' +
+        '<path d="' + r.d + '" fill="none" stroke="rgba(99,25,240,0.2)" stroke-width="1.2" stroke-dasharray="4 4"/>' +
+        '<circle r="4" fill="#6319f0" opacity="0">' +
           '<animateMotion dur="' + (3 + i * 0.5) + 's" begin="' + (i * 0.8) + 's" repeatCount="indefinite" path="' + r.d + '"/>' +
           '<animate attributeName="opacity" values="0;0.8;0.8;0" dur="' + (3 + i * 0.5) + 's" begin="' + (i * 0.8) + 's" repeatCount="indefinite"/>' +
         '</circle>';
@@ -142,9 +142,9 @@
     ];
     cities.forEach(function(c) {
       var r = c.main ? 6 : 3.5;
-      var glow = c.main ? '<circle cx="' + c.x + '" cy="' + c.y + '" r="18" fill="rgba(14,165,233,0.08)"><animate attributeName="r" values="14;22;14" dur="3s" repeatCount="indefinite"/></circle>' : '';
+      var glow = c.main ? '<circle cx="' + c.x + '" cy="' + c.y + '" r="18" fill="rgba(99,25,240,0.1)"><animate attributeName="r" values="14;22;14" dur="3s" repeatCount="indefinite"/></circle>' : '';
       svgDots += glow +
-        '<circle cx="' + c.x + '" cy="' + c.y + '" r="' + r + '" fill="' + (c.main ? '#0ea5e9' : 'rgba(14,165,233,0.5)') + '"/>' +
+        '<circle cx="' + c.x + '" cy="' + c.y + '" r="' + r + '" fill="' + (c.main ? '#6319f0' : 'rgba(99,25,240,0.5)') + '"/>' +
         '<text x="' + (c.x + (c.main ? 10 : 6)) + '" y="' + (c.y - 6) + '" fill="rgba(255,255,255,' + (c.main ? '0.6' : '0.2') + ')" font-size="' + (c.main ? '9' : '7') + '" font-weight="600" font-family="system-ui">' + c.n + '</text>';
     });
 
