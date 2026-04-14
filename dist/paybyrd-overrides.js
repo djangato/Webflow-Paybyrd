@@ -7727,9 +7727,26 @@
     plane.innerHTML = '<img src="https://djangato.github.io/Webflow-Paybyrd/assets/pos/paybyrd-plane.png" alt="Paybyrd" style="width:100%;height:auto;">';
     section.appendChild(plane);
 
+    /* Randomize flight path each loop */
+    var paths = [
+      "M-150,200 C0,80 150,250 350,100 C500,10 650,150 950,60",
+      "M-150,100 C50,200 200,50 400,180 C550,80 700,200 950,100",
+      "M-150,250 C100,50 300,200 500,80 C600,180 800,30 950,120",
+      "M-150,150 C0,250 200,30 350,200 C500,50 750,180 950,80",
+    ];
+    var pathIdx = 0;
+    setInterval(function() {
+      pathIdx = (pathIdx + 1) % paths.length;
+      var p = paths[pathIdx];
+      plane.style.offsetPath = 'path("' + p + '")';
+      /* Update trail too */
+      var trailPath = trail.querySelector("path");
+      if (trailPath) trailPath.setAttribute("d", p);
+    }, 14000);
+
     var trail = document.createElement("div");
     trail.className = "pbrd-air-trail";
-    trail.innerHTML = '<svg viewBox="0 0 900 300" preserveAspectRatio="none"><path d="M-150,280 C50,20 250,300 450,40 C550,180 750,60 900,200" fill="none" stroke="rgba(99,25,240,0.05)" stroke-width="1.5" stroke-dasharray="6 4" class="pbrd-air-trail-path"/></svg>';
+    trail.innerHTML = '<svg viewBox="0 0 950 250" preserveAspectRatio="none"><path d="M-150,200 C0,80 150,250 350,100 C500,10 650,150 950,60" fill="none" stroke="rgba(99,25,240,0.04)" stroke-width="1.5" stroke-dasharray="6 4" class="pbrd-air-trail-path"/></svg>';
     section.appendChild(trail);
 
     /* Animate rings + counters on scroll */

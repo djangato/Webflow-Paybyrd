@@ -11157,9 +11157,9 @@ a.glowing_button_link .glowing_button_text {
 .pbrd-air-plane {
   position:absolute; z-index:5; pointer-events:none;
   width:120px; height:auto;
-  offset-path:path("M-150,280 C50,20 250,300 450,40 C550,180 750,60 900,200");
-  offset-rotate:auto;
-  animation:pbrd-air-fly 12s ease-in-out infinite;
+  offset-path:path("M-150,200 C0,80 150,250 350,100 C500,10 650,150 950,60");
+  offset-rotate:auto 0deg;
+  animation:pbrd-air-fly 14s linear infinite;
 }
 
 .pbrd-air-plane img {
