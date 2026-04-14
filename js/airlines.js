@@ -478,7 +478,24 @@
 
     section.appendChild(showcase);
 
-  
+    /* Animate benchmark bars */
+    if ("IntersectionObserver" in window) {
+      var bench = showcase.querySelector(".pbrd-air-benchmark");
+      if (bench) {
+        new IntersectionObserver(function(entries) {
+          if (entries[0].isIntersecting) {
+            bench.querySelectorAll(".pbrd-air-bench-bar").forEach(function(bar, i) {
+              setTimeout(function() { bar.style.width = bar.getAttribute("data-w") + "%"; }, 200 + i * 200);
+            });
+            this.disconnect();
+          }
+        }, { threshold: 0.3 }).observe(bench);
+      }
+    }
+
+    observeReveal(".pbrd-air-reveal", 150, section);
+  }
+
   /* ═══════════════════════════════════════════ */
   /* 3b. FRAUD PLATFORM — Dedicated Section      */
   /* ═══════════════════════════════════════════ */
@@ -654,25 +671,6 @@
     }
 
     observeReveal(".pbrd-air-reveal", 120, s);
-  }
-
-
-  /* Animate benchmark bars */
-    if ("IntersectionObserver" in window) {
-      var bench = showcase.querySelector(".pbrd-air-benchmark");
-      if (bench) {
-        new IntersectionObserver(function(entries) {
-          if (entries[0].isIntersecting) {
-            bench.querySelectorAll(".pbrd-air-bench-bar").forEach(function(bar, i) {
-              setTimeout(function() { bar.style.width = bar.getAttribute("data-w") + "%"; }, 200 + i * 200);
-            });
-            this.disconnect();
-          }
-        }, { threshold: 0.3 }).observe(bench);
-      }
-    }
-
-    observeReveal(".pbrd-air-reveal", 150, section);
   }
 
   /* 4. TAP TESTIMONIAL                          */
