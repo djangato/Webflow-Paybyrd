@@ -10335,7 +10335,7 @@
     var section = findSectionByHeading("let ai support");
     if (!section) return;
 
-    section.style.setProperty("padding", "60px 0", "important");
+    section.style.setProperty("padding", "80px 0", "important");
     section.style.setProperty("background", "#0a0a0f", "important");
     Array.prototype.forEach.call(section.children, function(child) {
       if (!child.classList || !child.classList.contains("pbrd-hosp-ai-wrap")) {
@@ -10346,79 +10346,240 @@
     var wrap = document.createElement("div");
     wrap.className = "pbrd-hosp-ai-wrap";
 
-    /* Header */
-    var header = document.createElement("div");
-    header.className = "pbrd-hosp-ai-header";
-    header.innerHTML =
-      '<span class="pbrd-hosp-section-label">AI FOR HOSPITALITY</span>' +
-      '<h2 class="pbrd-hosp-ai-h2">Your AI concierge never sleeps.<br>Neither does your fraud shield.</h2>' +
-      '<p class="pbrd-hosp-ai-sub">Two AI systems working in parallel \u2014 one delights your guests, the other protects your revenue.</p>';
-    wrap.appendChild(header);
+    var checkSvg = '<svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#6319f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>';
 
-    /* Two-card grid */
-    var grid = document.createElement("div");
-    grid.className = "pbrd-hosp-ai-grid";
-
-    /* Card 1: AI Guest Support */
-    var card1 = document.createElement("div");
-    card1.className = "pbrd-hosp-ai-card";
-    card1.innerHTML =
-      '<div class="pbrd-hosp-ai-visual">' +
-        '<div class="pbrd-hosp-ai-bubble pbrd-hosp-ai-bubble--1">What time is checkout?</div>' +
-        '<div class="pbrd-hosp-ai-bubble pbrd-hosp-ai-bubble--2">Can I add breakfast?</div>' +
-        '<div class="pbrd-hosp-ai-bubble pbrd-hosp-ai-bubble--3">73% resolved without staff</div>' +
+    wrap.innerHTML =
+      /* Header */
+      '<div class="pbrd-hosp-ai-header pbrd-hosp-reveal">' +
+        '<span class="pbrd-hosp-section-label">AI FOR HOSPITALITY</span>' +
+        '<h2 class="pbrd-hosp-ai-h2">Your AI concierge never sleeps.<br>Neither does your fraud shield.</h2>' +
+        '<p class="pbrd-hosp-ai-sub">Two AI systems working in parallel \u2014 one delights your guests, the other protects your revenue.</p>' +
       '</div>' +
-      '<div class="pbrd-hosp-ai-body">' +
-        '<h3>24/7 AI Guest Support</h3>' +
-        '<p>Handles billing questions, room changes, late checkout requests, refund processing, and upsell suggestions. 30+ languages. AI reservation agent collects pay-by-links to prevent no-show losses.</p>' +
-        '<span class="pbrd-hosp-ai-stat">73% of guest inquiries auto-resolved</span>' +
-      '</div>';
-    grid.appendChild(card1);
 
-    /* Card 2: Fraud Prevention */
-    var card2 = document.createElement("div");
-    card2.className = "pbrd-hosp-ai-card";
-    card2.innerHTML =
-      '<div class="pbrd-hosp-ai-visual">' +
-        '<div class="pbrd-hosp-ai-shield">' +
-          '<svg viewBox="0 0 80 80" fill="none"><path d="M40 8L12 22v20c0 16.6 12 31.4 28 36 16-4.6 28-19.4 28-36V22L40 8z" stroke="#6319f0" stroke-width="2" fill="none"/><path class="pbrd-hosp-ai-shield-check" d="M28 40l8 8 16-16" stroke="#6319f0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0"/></svg>' +
-          '<div class="pbrd-hosp-ai-scan"></div>' +
-          '<div class="pbrd-hosp-ai-scan" style="animation-delay:0.7s;"></div>' +
-          '<div class="pbrd-hosp-ai-scan" style="animation-delay:1.4s;"></div>' +
+      '<div class="pbrd-hosp-ai-grid">' +
+
+        /* ── Card 1: AI Guest Chat ── */
+        '<div class="pbrd-hosp-ai-card pbrd-hosp-reveal">' +
+          '<div class="pbrd-hosp-ai-visual">' +
+            '<div class="pbrd-hosp-ai-chat" id="pbrd-ai-chat2">' +
+              '<div class="pbrd-hosp-ai-chat-head">' +
+                '<div class="pbrd-hosp-ai-chat-avatar">P</div>' +
+                '<div><div class="pbrd-hosp-ai-chat-name">Paybyrd AI Agent</div>' +
+                '<div class="pbrd-hosp-ai-chat-status"><span class="pbrd-hosp-ai-dot-live"></span><span id="pbrd-ai2-channel">WhatsApp</span></div></div>' +
+                '<div class="pbrd-hosp-ai-chat-badge">AI</div>' +
+              '</div>' +
+              '<div class="pbrd-hosp-ai-chat-body" id="pbrd-ai2-body">' +
+                '<div class="pbrd-hosp-ai-msg bot" id="pbrd-ai2-m0"><span>Hi! I\u2019m your hotel AI assistant. How can I help?</span></div>' +
+                '<div class="pbrd-hosp-ai-msg user" id="pbrd-ai2-m1"><span id="pbrd-ai2-m1t"></span></div>' +
+                '<div class="pbrd-hosp-ai-typing" id="pbrd-ai2-typing"><span></span><span></span><span></span></div>' +
+                '<div class="pbrd-hosp-ai-msg bot" id="pbrd-ai2-m2"><span id="pbrd-ai2-m2t"></span></div>' +
+                '<div class="pbrd-hosp-ai-msg bot" id="pbrd-ai2-m3">' +
+                  '<div class="pbrd-hosp-ai-booking">' +
+                    '<div class="pbrd-hosp-ai-booking-row"><span>Reservation</span><span id="pbrd-ai2-bpnr"></span></div>' +
+                    '<div class="pbrd-hosp-ai-booking-row"><span>Room</span><span id="pbrd-ai2-broom"></span></div>' +
+                    '<div class="pbrd-hosp-ai-booking-row"><span>Status</span><span id="pbrd-ai2-bstat"></span></div>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="pbrd-hosp-ai-msg bot" id="pbrd-ai2-m4"><span id="pbrd-ai2-m4t"></span></div>' +
+                '<div class="pbrd-hosp-ai-msg bot" id="pbrd-ai2-m5"><div class="pbrd-hosp-ai-act-btn" id="pbrd-ai2-act"></div></div>' +
+                '<div class="pbrd-hosp-ai-msg bot" id="pbrd-ai2-m6"><span style="color:#10b981;margin-right:4px">\u2713</span><span id="pbrd-ai2-m6t"></span></div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="pbrd-hosp-ai-body">' +
+            '<h3>24/7 AI Guest Support</h3>' +
+            '<p>Handles billing, room changes, late checkouts, refunds, and upsells via WhatsApp and chat. 30+ languages. 73% auto-resolved.</p>' +
+            '<ul class="pbrd-hosp-ai-bullets">' +
+              '<li>' + checkSvg + 'Processes refunds and cancellations in real time</li>' +
+              '<li>' + checkSvg + 'Sends pay-by-links for upgrades and extras</li>' +
+              '<li>' + checkSvg + 'Escalates complex cases with full guest context</li>' +
+            '</ul>' +
+          '</div>' +
         '</div>' +
-      '</div>' +
-      '<div class="pbrd-hosp-ai-body">' +
-        '<h3>Intelligent Fraud Prevention</h3>' +
-        '<p>3DS + AI velocity checks, no-show prediction, shared merchant fraud database, pre-authorization validation, guest pattern recognition. Cards automatically enter Paybyrd vault at check-in.</p>' +
-        '<span class="pbrd-hosp-ai-stat">16.8% chargeback reduction</span>' +
+
+        /* ── Card 2: Fraud Agent Feed ── */
+        '<div class="pbrd-hosp-ai-card pbrd-hosp-reveal">' +
+          '<div class="pbrd-hosp-ai-visual">' +
+            '<div class="pbrd-hosp-ai-fraud" id="pbrd-ai-fraud">' +
+              '<div class="pbrd-hosp-ai-fraud-head">' +
+                '<span class="pbrd-hosp-ai-dot-live"></span>' +
+                '<span>FRAUD SHIELD \u00b7 LIVE</span>' +
+              '</div>' +
+              '<div class="pbrd-hosp-ai-fraud-feed" id="pbrd-ai-fraud-feed"></div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="pbrd-hosp-ai-body">' +
+            '<h3>Intelligent Fraud Prevention</h3>' +
+            '<p>3DS + AI velocity checks, no-show prediction, shared fraud database, pre-auth validation. Alerts key stakeholders via WhatsApp in real time.</p>' +
+            '<ul class="pbrd-hosp-ai-bullets">' +
+              '<li>' + checkSvg + '16.8% chargeback reduction via AI screening</li>' +
+              '<li>' + checkSvg + 'WhatsApp alerts to fraud team on suspicious activity</li>' +
+              '<li>' + checkSvg + 'Cards auto-vault at check-in for tokenized security</li>' +
+            '</ul>' +
+          '</div>' +
+        '</div>' +
+
       '</div>';
-    grid.appendChild(card2);
-    wrap.appendChild(grid);
 
     section.appendChild(wrap);
 
-    /* Animate chat bubbles */
-    var bubbleAnimated = false;
-    var bubbleObs = new IntersectionObserver(function(entries) {
+    /* ═══ Card 1: Chat animation (adapted from ecommerce) ═══ */
+    var chatScenarios = [
+      { channel: "WhatsApp", user: "Can I get a late checkout tomorrow?", lookup: "Checking your reservation\u2026",
+        pnr: "HTL-X7K29", room: "412 Suite", stat: "Active",
+        offer: "Late checkout until 4PM is \u20AC45. Add to your folio?",
+        action: "Confirm Late Checkout",
+        success: "Done! Checkout extended to 4PM. Confirmation sent." },
+      { channel: "Chat", user: "I need a refund for my cancelled booking", lookup: "Looking that up\u2026",
+        pnr: "HTL-M3R81", room: "207 Standard", stat: "Cancelled",
+        offer: "Full refund of \u20AC480 is eligible. Shall I process it?",
+        action: "Process Refund",
+        success: "Refund of \u20AC480 initiated. 3\u20135 business days." },
+      { channel: "WhatsApp", user: "Can I upgrade to an ocean view room?", lookup: "Searching upgrades\u2026",
+        pnr: "HTL-R9F44", room: "Standard", stat: "Active",
+        offer: "Ocean View Suite: \u20AC120/night extra. Includes breakfast. Pay via link?",
+        action: "Send Pay-by-Link",
+        success: "Payment link sent! Upgrade instant once paid." }
+    ];
+
+    var chatIdx2 = 0;
+    var msgIds = ["pbrd-ai2-m0","pbrd-ai2-m1","pbrd-ai2-m2","pbrd-ai2-m3","pbrd-ai2-m4","pbrd-ai2-m5","pbrd-ai2-m6"];
+
+    function hideChat() {
+      msgIds.forEach(function(id) { var el = document.getElementById(id); if (el) el.style.opacity = "0"; });
+      var ty = document.getElementById("pbrd-ai2-typing");
+      if (ty) ty.style.display = "none";
+    }
+    function showChat(id) { var el = document.getElementById(id); if (el) el.style.opacity = "1"; }
+
+    function runChat2() {
+      var sc = chatScenarios[chatIdx2 % chatScenarios.length];
+      chatIdx2++;
+      hideChat();
+      var body = document.getElementById("pbrd-ai2-body");
+      var ch = document.getElementById("pbrd-ai2-channel");
+      if (ch) ch.textContent = sc.channel;
+      if (body) body.scrollTop = 0;
+
+      var t = 0;
+      t += 400; setTimeout(function() { showChat("pbrd-ai2-m0"); }, t);
+      t += 800; setTimeout(function() {
+        var el = document.getElementById("pbrd-ai2-m1t"); if (el) el.textContent = sc.user;
+        showChat("pbrd-ai2-m1"); if (body) body.scrollTop = body.scrollHeight;
+      }, t);
+      t += 1200; setTimeout(function() {
+        var ty = document.getElementById("pbrd-ai2-typing"); if (ty) ty.style.display = "flex";
+        if (body) body.scrollTop = body.scrollHeight;
+      }, t);
+      t += 1400; setTimeout(function() {
+        var ty = document.getElementById("pbrd-ai2-typing"); if (ty) ty.style.display = "none";
+        var el = document.getElementById("pbrd-ai2-m2t"); if (el) el.textContent = sc.lookup;
+        showChat("pbrd-ai2-m2"); if (body) body.scrollTop = body.scrollHeight;
+      }, t);
+      t += 800; setTimeout(function() {
+        var pnr = document.getElementById("pbrd-ai2-bpnr"); if (pnr) pnr.textContent = sc.pnr;
+        var room = document.getElementById("pbrd-ai2-broom"); if (room) room.textContent = sc.room;
+        var stat = document.getElementById("pbrd-ai2-bstat"); if (stat) stat.textContent = sc.stat;
+        showChat("pbrd-ai2-m3"); if (body) body.scrollTop = body.scrollHeight;
+      }, t);
+      t += 900; setTimeout(function() {
+        var el = document.getElementById("pbrd-ai2-m4t"); if (el) el.textContent = sc.offer;
+        showChat("pbrd-ai2-m4"); if (body) body.scrollTop = body.scrollHeight;
+      }, t);
+      t += 800; setTimeout(function() {
+        var btn = document.getElementById("pbrd-ai2-act"); if (btn) { btn.textContent = sc.action; btn.style.background = "#6319f0"; }
+        showChat("pbrd-ai2-m5"); if (body) body.scrollTop = body.scrollHeight;
+      }, t);
+      t += 1500; setTimeout(function() {
+        var btn = document.getElementById("pbrd-ai2-act"); if (btn) btn.style.background = "#10b981";
+      }, t);
+      t += 800; setTimeout(function() {
+        var el = document.getElementById("pbrd-ai2-m6t"); if (el) el.textContent = sc.success;
+        showChat("pbrd-ai2-m6"); if (body) body.scrollTop = body.scrollHeight;
+      }, t);
+      t += 3000; setTimeout(runChat2, t);
+    }
+
+    /* ═══ Card 2: Fraud agent feed ═══ */
+    var fraudTxns = [
+      { guest: "M. Santos", method: "VISA \u2022\u20224582", amount: "\u20AC342", type: "Check-in pre-auth", status: "pass" },
+      { guest: "J. M\u00fcller", method: "MC \u2022\u20221209", amount: "\u20AC1,890", type: "Online booking", status: "pass" },
+      { guest: "Unknown", method: "AMEX \u2022\u20227744", amount: "\u20AC4,200", type: "Online booking", status: "flag", reason: "Velocity: 3 bookings in 8 min from same card", alert: "Fraud team alerted via WhatsApp" },
+      { guest: "A. Kowalski", method: "VISA \u2022\u20223301", amount: "\u20AC195", type: "Spa payment", status: "pass" },
+      { guest: "R. Chen", method: "UnionPay \u2022\u20226688", amount: "\u20AC567", type: "Restaurant folio", status: "pass" },
+      { guest: "Unknown", method: "MC \u2022\u20229012", amount: "\u20AC2,100", type: "No-show charge", status: "flag", reason: "Card country mismatch + disputed 2x before", alert: "Revenue Mgr notified via WhatsApp" },
+      { guest: "L. Dubois", method: "CB \u2022\u20225511", amount: "\u20AC89", type: "Room service", status: "pass" },
+      { guest: "T. Nakamura", method: "JCB \u2022\u20224433", amount: "\u20AC1,247", type: "Express checkout", status: "pass" },
+      { guest: "Unknown", method: "VISA \u2022\u20220033", amount: "\u20AC6,780", type: "Group booking", status: "flag", reason: "BIN from high-risk region + first-time guest", alert: "GM + Fraud team alerted" }
+    ];
+
+    var fraudIdx = 0;
+    function addFraudEntry() {
+      var feed = document.getElementById("pbrd-ai-fraud-feed");
+      if (!feed) return;
+
+      var txn = fraudTxns[fraudIdx % fraudTxns.length];
+      fraudIdx++;
+
+      var entry = document.createElement("div");
+      entry.className = "pbrd-hosp-ai-fraud-entry pbrd-hosp-ai-fraud-entry--" + txn.status;
+      entry.style.opacity = "0";
+      entry.style.transform = "translateY(-8px)";
+
+      var statusIcon = txn.status === "pass"
+        ? '<span class="pbrd-hosp-ai-fraud-ok">\u2713</span>'
+        : '<span class="pbrd-hosp-ai-fraud-warn">\u26a0</span>';
+
+      entry.innerHTML =
+        '<div class="pbrd-hosp-ai-fraud-row">' +
+          statusIcon +
+          '<span class="pbrd-hosp-ai-fraud-guest">' + txn.guest + '</span>' +
+          '<span class="pbrd-hosp-ai-fraud-method">' + txn.method + '</span>' +
+          '<span class="pbrd-hosp-ai-fraud-amount">' + txn.amount + '</span>' +
+          '<span class="pbrd-hosp-ai-fraud-type">' + txn.type + '</span>' +
+        '</div>';
+
+      if (txn.status === "flag") {
+        entry.innerHTML +=
+          '<div class="pbrd-hosp-ai-fraud-reason">' + txn.reason + '</div>' +
+          '<div class="pbrd-hosp-ai-fraud-alert">' +
+            '<svg viewBox="0 0 16 16" width="12" height="12"><path d="M13.6 11.1l-4.4-8.8a1.4 1.4 0 0 0-2.4 0l-4.4 8.8A1.2 1.2 0 0 0 3.5 13h9a1.2 1.2 0 0 0 1.1-1.9z" fill="none" stroke="#25d366" stroke-width="1.2"/><path d="M8 6v3M8 10.5h.01" stroke="#25d366" stroke-width="1.2" stroke-linecap="round"/></svg>' +
+            '<span>' + txn.alert + '</span>' +
+          '</div>';
+      }
+
+      /* Keep max 5 entries visible */
+      if (feed.children.length >= 5) {
+        var oldest = feed.lastChild;
+        oldest.style.opacity = "0";
+        setTimeout(function() { if (oldest.parentNode) oldest.parentNode.removeChild(oldest); }, 300);
+      }
+      feed.insertBefore(entry, feed.firstChild);
+
+      setTimeout(function() {
+        entry.style.transition = "opacity 0.4s, transform 0.4s";
+        entry.style.opacity = "1";
+        entry.style.transform = "translateY(0)";
+      }, 50);
+
+      /* Schedule next */
+      var delay = txn.status === "flag" ? 4000 : 2000;
+      setTimeout(addFraudEntry, delay);
+    }
+
+    /* ═══ Start on scroll ═══ */
+    var aiObs = new IntersectionObserver(function(entries) {
       entries.forEach(function(en) {
-        if (en.isIntersecting && !bubbleAnimated) {
-          bubbleAnimated = true;
-          var bubbles = card1.querySelectorAll(".pbrd-hosp-ai-bubble");
-          bubbles.forEach(function(b, idx) {
-            setTimeout(function() { b.classList.add("pbrd-hosp-ai-bubble--show"); }, idx * 2000);
-          });
-          /* Show shield checkmark after scan */
-          setTimeout(function() {
-            var chk = card2.querySelector(".pbrd-hosp-ai-shield-check");
-            if (chk) chk.setAttribute("opacity", "1");
-          }, 4000);
-          bubbleObs.unobserve(en.target);
+        if (en.isIntersecting) {
+          runChat2();
+          addFraudEntry();
+          aiObs.unobserve(en.target);
         }
       });
-    }, { threshold: 0.3 });
-    bubbleObs.observe(grid);
+    }, { threshold: 0.15 });
+    aiObs.observe(wrap);
 
-    observeReveal(".pbrd-hosp-ai-header, .pbrd-hosp-ai-card", 120, section);
+    observeReveal(".pbrd-hosp-ai-wrap .pbrd-hosp-reveal", 120);
   }
 
   /* ═══════════════════════════════════════════ */

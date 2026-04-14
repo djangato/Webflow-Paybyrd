@@ -12613,25 +12613,54 @@ a.glowing_button_link .glowing_button_text {
 }
 .pbrd-hosp-ai-card:hover { border-color:rgba(99,25,240,0.2); }
 
-.pbrd-hosp-ai-visual { height:200px; display:flex; align-items:center; justify-content:center; padding:24px; position:relative; overflow:hidden; }
+.pbrd-hosp-ai-visual { height:380px; overflow:hidden; position:relative; }
 
 .pbrd-hosp-ai-body { padding:24px 28px 28px; }
 .pbrd-hosp-ai-body h3 { font-size:1.125rem; font-weight:700; color:#fff; margin:0 0 10px; }
 .pbrd-hosp-ai-body p { font-size:0.8125rem; color:rgba(255,255,255,0.45); line-height:1.6; margin:0 0 16px; }
-.pbrd-hosp-ai-stat { font-size:0.75rem; font-weight:600; color:#6319f0; padding:6px 14px; background:rgba(99,25,240,0.08); border-radius:100px; display:inline-block; }
+.pbrd-hosp-ai-bullets { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px; }
+.pbrd-hosp-ai-bullets li { display:flex; align-items:center; gap:8px; font-size:0.8125rem; color:rgba(255,255,255,0.6); }
+.pbrd-hosp-ai-bullets li svg { flex-shrink:0; }
 
-/* Chat bubbles animation */
-.pbrd-hosp-ai-bubble { padding:8px 14px; border-radius:12px; font-size:0.6875rem; max-width:200px; opacity:0; transition:opacity 0.5s ease; position:absolute; }
-.pbrd-hosp-ai-bubble--1 { background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.7); top:30px; left:24px; border-bottom-left-radius:4px; }
-.pbrd-hosp-ai-bubble--2 { background:rgba(99,25,240,0.15); color:#6319f0; top:70px; right:24px; border-bottom-right-radius:4px; }
-.pbrd-hosp-ai-bubble--3 { background:rgba(16,185,97,0.1); color:#10b981; bottom:30px; left:50%; transform:translateX(-50%); font-weight:600; }
-.pbrd-hosp-ai-bubble--show { opacity:1; }
+/* ── AI Chat mockup ── */
+.pbrd-hosp-ai-chat { height:100%; display:flex; flex-direction:column; }
+.pbrd-hosp-ai-chat-head { display:flex; align-items:center; gap:10px; padding:12px 16px; border-bottom:1px solid rgba(255,255,255,0.06); }
+.pbrd-hosp-ai-chat-avatar { width:28px; height:28px; border-radius:50%; background:linear-gradient(135deg,#6319f0,#7c3aed); color:#fff; display:flex; align-items:center; justify-content:center; font-size:0.6875rem; font-weight:700; }
+.pbrd-hosp-ai-chat-name { font-size:0.75rem; font-weight:600; color:#fff; }
+.pbrd-hosp-ai-chat-status { display:flex; align-items:center; gap:4px; font-size:0.5625rem; color:rgba(255,255,255,0.4); }
+.pbrd-hosp-ai-dot-live { width:6px; height:6px; border-radius:50%; background:#10b981; display:inline-block; animation:pbrd-hosp-ai-pulse 2s infinite; }
+@keyframes pbrd-hosp-ai-pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+.pbrd-hosp-ai-chat-badge { margin-left:auto; padding:2px 8px; border-radius:4px; background:rgba(99,25,240,0.15); color:#6319f0; font-size:0.5625rem; font-weight:700; letter-spacing:0.05em; }
+.pbrd-hosp-ai-chat-body { flex:1; padding:12px 14px; display:flex; flex-direction:column; gap:6px; overflow:hidden; }
+.pbrd-hosp-ai-msg { max-width:85%; padding:8px 12px; border-radius:12px; font-size:0.6875rem; line-height:1.5; opacity:0; transition:opacity 0.4s; }
+.pbrd-hosp-ai-msg.bot { background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.85); align-self:flex-start; border-bottom-left-radius:4px; }
+.pbrd-hosp-ai-msg.user { background:#6319f0; color:#fff; align-self:flex-end; border-bottom-right-radius:4px; }
+.pbrd-hosp-ai-typing { display:none; align-self:flex-start; gap:4px; padding:10px 14px; background:rgba(255,255,255,0.04); border-radius:12px; border-bottom-left-radius:4px; }
+.pbrd-hosp-ai-typing span { width:5px; height:5px; border-radius:50%; background:rgba(255,255,255,0.3); animation:pbrd-hosp-ai-bounce 1.2s infinite; }
+.pbrd-hosp-ai-typing span:nth-child(2) { animation-delay:0.2s; }
+.pbrd-hosp-ai-typing span:nth-child(3) { animation-delay:0.4s; }
+@keyframes pbrd-hosp-ai-bounce { 0%,80%,100%{transform:translateY(0);} 40%{transform:translateY(-4px);} }
+.pbrd-hosp-ai-booking { background:rgba(99,25,240,0.06); border-radius:8px; padding:8px 10px; border:1px solid rgba(99,25,240,0.12); }
+.pbrd-hosp-ai-booking-row { display:flex; justify-content:space-between; font-size:0.625rem; padding:3px 0; color:rgba(255,255,255,0.4); }
+.pbrd-hosp-ai-booking-row span:last-child { font-weight:600; color:rgba(255,255,255,0.85); }
+.pbrd-hosp-ai-act-btn { display:inline-block; background:#6319f0; color:#fff; padding:6px 14px; border-radius:6px; font-size:0.625rem; font-weight:600; transition:background 0.3s; cursor:pointer; }
 
-/* Shield animation */
-.pbrd-hosp-ai-shield { position:relative; }
-.pbrd-hosp-ai-shield svg { width:80px; height:80px; }
-.pbrd-hosp-ai-scan { position:absolute; top:0; left:50%; transform:translateX(-50%); width:60px; height:2px; background:linear-gradient(90deg,transparent,#6319f0,transparent); animation:pbrd-hosp-ai-scan 2s ease-in-out infinite; }
-@keyframes pbrd-hosp-ai-scan { 0%{top:10px;opacity:0;} 50%{opacity:1;} 100%{top:70px;opacity:0;} }
+/* ── Fraud agent feed ── */
+.pbrd-hosp-ai-fraud { height:100%; display:flex; flex-direction:column; }
+.pbrd-hosp-ai-fraud-head { display:flex; align-items:center; gap:8px; padding:12px 16px; border-bottom:1px solid rgba(255,255,255,0.06); font-size:0.6875rem; font-weight:700; color:rgba(255,255,255,0.5); letter-spacing:0.06em; }
+.pbrd-hosp-ai-fraud-feed { flex:1; padding:10px 14px; display:flex; flex-direction:column; gap:6px; overflow:hidden; }
+.pbrd-hosp-ai-fraud-entry { border-radius:8px; padding:8px 10px; font-size:0.6875rem; }
+.pbrd-hosp-ai-fraud-entry--pass { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.04); }
+.pbrd-hosp-ai-fraud-entry--flag { background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.15); }
+.pbrd-hosp-ai-fraud-row { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.pbrd-hosp-ai-fraud-ok { color:#10b981; font-weight:700; font-size:0.75rem; }
+.pbrd-hosp-ai-fraud-warn { color:#ef4444; font-size:0.75rem; }
+.pbrd-hosp-ai-fraud-guest { color:rgba(255,255,255,0.7); font-weight:600; }
+.pbrd-hosp-ai-fraud-method { color:rgba(255,255,255,0.3); font-size:0.625rem; }
+.pbrd-hosp-ai-fraud-amount { color:rgba(255,255,255,0.85); font-weight:700; margin-left:auto; }
+.pbrd-hosp-ai-fraud-type { color:rgba(255,255,255,0.25); font-size:0.5625rem; width:100%; margin-top:2px; }
+.pbrd-hosp-ai-fraud-reason { font-size:0.625rem; color:rgba(239,68,68,0.7); margin-top:6px; padding:4px 8px; background:rgba(239,68,68,0.04); border-radius:4px; }
+.pbrd-hosp-ai-fraud-alert { display:flex; align-items:center; gap:6px; margin-top:6px; font-size:0.625rem; color:#25d366; font-weight:600; padding:4px 8px; background:rgba(37,211,102,0.06); border-radius:4px; border:1px solid rgba(37,211,102,0.12); }
 
 /* ═══ RESPONSIVE ═══ */
 @media (max-width: 768px) {
