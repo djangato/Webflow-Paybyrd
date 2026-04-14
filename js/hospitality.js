@@ -645,7 +645,7 @@
       /* Impact callout */
       '<div class="pbrd-hosp-stack-impact pbrd-hosp-reveal" style="text-align:center;margin:32px 0 40px;padding:20px 24px;border-radius:10px;background:rgba(99,25,240,0.06);border:1px solid rgba(99,25,240,0.12);">' +
         '<p style="font-size:0.9375rem;color:rgba(255,255,255,0.7);margin:0;line-height:1.6;">' +
-          'Vila Gal\u00e9 onboarded <strong style="color:#fff;">40+ properties</strong> without a single day of downtime. ' +
+          'Barcel\u00f3 onboarded <strong style="color:#fff;">multiple properties</strong> without a single day of downtime. ' +
           'Their teams didn\u2019t need training \u2014 Paybyrd was embedded directly into the systems they already use.' +
         '</p>' +
       '</div>' +
