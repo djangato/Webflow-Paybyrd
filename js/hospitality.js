@@ -117,12 +117,26 @@
       '<a href="#data" class="pbrd-hosp-cta-ghost">See the data \u2193</a>';
     parent.insertBefore(ctaRow, subtitle.nextSibling);
 
-    /* \u2500\u2500 Break out of Webflow\u2019s constrained column \u2500\u2500 */
-    var vizWrap = document.createElement("div");
-    vizWrap.className = "pbrd-hosp-viz pbrd-hosp-reveal";
+    observeReveal(".pbrd-hosp-reveal", 120);
+  }
 
-    /* SVG multi-property hierarchy \u2014 HQ hub with hotel properties radiating outward */
-    var HQ = "350,190";
+
+  /* ═══════════════════════════════════════════ */
+  /* 1b. COMMAND CENTER — Inserted after hero    */
+  /* ═══════════════════════════════════════════ */
+
+  function buildCommandCenter() {
+    var heroHeading = findHeading("hotel payment platform");
+    if (!heroHeading) heroHeading = findHeading("seamless payments");
+    if (!heroHeading) return;
+    var heroSection = heroHeading.closest("section") || heroHeading.closest("[class*='section']");
+    if (!heroSection) return;
+
+    var s = document.createElement("section");
+    s.className = "pbrd-hosp-cmd-section";
+    s.setAttribute("style", "padding:40px 0;background:#0a0a0f;overflow:hidden;");
+
+    /* SVG multi-property hierarchy */
     var properties = [
       { name: "Lisbon Resort",  x: 120, y: 80,  d: "M350,190 Q235,100 120,80" },
       { name: "Algarve Beach",  x: 580, y: 80,  d: "M350,190 Q465,100 580,80" },
@@ -142,53 +156,49 @@
         '</circle>';
     });
 
-    /* Property & HQ dots */
-    var svgDots = "";
-
-    /* HQ central node with glow */
-    svgDots +=
+    var svgDots =
       '<circle cx="350" cy="190" r="18" fill="rgba(212,165,116,0.1)"><animate attributeName="r" values="14;22;14" dur="3s" repeatCount="indefinite"/></circle>' +
       '<circle cx="350" cy="190" r="6" fill="#D4A574"/>' +
       '<text x="360" y="184" fill="rgba(255,255,255,0.6)" font-size="9" font-weight="600" font-family="system-ui">HQ</text>';
 
-    /* Property nodes */
     properties.forEach(function(p) {
       svgDots +=
         '<circle cx="' + p.x + '" cy="' + p.y + '" r="3.5" fill="rgba(212,165,116,0.5)"/>' +
         '<text x="' + (p.x + 6) + '" y="' + (p.y - 6) + '" fill="rgba(255,255,255,0.2)" font-size="7" font-weight="600" font-family="system-ui">' + p.name + '</text>';
     });
 
-    vizWrap.innerHTML =
-      '<div class="pbrd-hosp-map-wrap">' +
-        '<div class="pbrd-hosp-map-left">' +
-        '<svg viewBox="0 0 700 380" fill="none" class="pbrd-hosp-map-svg" preserveAspectRatio="xMidYMid meet">' +
-          svgPaths + svgDots +
-        '</svg>' +
+    /* Stat ticker */
+    var stats = ["99.999% Uptime", "192+ Currencies", "84% Abandonment Solved", "PCI Level 1", "DCC 80% Revenue Share", "4\u20137% Higher Auth Rates", "16.8% Fewer Chargebacks"];
+    var tickerHTML = stats.concat(stats).map(function(st) {
+      return '<span class="pbrd-hosp-tick">' + st + '</span><span class="pbrd-hosp-tick-dot">\u00b7</span>';
+    }).join("");
+
+    s.innerHTML =
+      '<div class="pbrd-hosp-cmd-wrap">' +
+        '<div class="pbrd-hosp-cmd-header pbrd-hosp-reveal">' +
+          '<div class="pbrd-hosp-section-label">MULTI-PROPERTY COMMAND CENTER</div>' +
+          '<h2 class="pbrd-hosp-cmd-h2">Real-time visibility across<br>every property.</h2>' +
         '</div>' +
-        '<div class="pbrd-hosp-txn-feed">' +
-          '<div class="pbrd-hosp-txn-feed-header"><div class="pbrd-hosp-txn-feed-dot"></div>LIVE TRANSACTIONS</div>' +
-          '<div id="pbrd-hosp-feed"></div>' +
+        '<div class="pbrd-hosp-map-wrap pbrd-hosp-reveal">' +
+          '<div class="pbrd-hosp-map-left">' +
+            '<svg viewBox="0 0 700 380" fill="none" class="pbrd-hosp-map-svg" preserveAspectRatio="xMidYMid meet">' +
+              svgPaths + svgDots +
+            '</svg>' +
+          '</div>' +
+          '<div class="pbrd-hosp-txn-feed">' +
+            '<div class="pbrd-hosp-txn-feed-header"><div class="pbrd-hosp-txn-feed-dot"></div>LIVE TRANSACTIONS</div>' +
+            '<div id="pbrd-hosp-feed"></div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="pbrd-hosp-ticker-strip pbrd-hosp-reveal">' +
+          '<div class="pbrd-hosp-ticker-track">' + tickerHTML + '</div>' +
         '</div>' +
       '</div>';
 
-    /* Insert viz at section level */
-    section.style.setProperty("overflow", "hidden", "important");
-    section.style.setProperty("padding-bottom", "20px", "important");
-    section.appendChild(vizWrap);
+    heroSection.insertAdjacentElement("afterend", s);
 
-    /* Stat ticker strip */
-    var stats = ["99.999% Uptime", "192+ Currencies", "84% Abandonment Solved", "PCI Level 1", "DCC 80% Revenue Share", "4-7% Higher Auth Rates", "16.8% Fewer Chargebacks"];
-    var tickerHTML = stats.concat(stats).map(function(s) {
-      return '<span class="pbrd-hosp-tick">' + s + '</span><span class="pbrd-hosp-tick-dot">\u00b7</span>';
-    }).join("");
-    var ticker = document.createElement("div");
-    ticker.className = "pbrd-hosp-ticker-strip pbrd-hosp-reveal";
-    ticker.innerHTML = '<div class="pbrd-hosp-ticker-track">' + tickerHTML + '</div>';
-    section.appendChild(ticker);
-
-    /* Init feed */
     setTimeout(initFeed, 600);
-    observeReveal(".pbrd-hosp-reveal", 120);
+    observeReveal(".pbrd-hosp-reveal", 120, s);
   }
 
   /* \u2500\u2500 Transaction feed \u2500\u2500 */
@@ -1392,6 +1402,7 @@
 
   function init() {
     enhanceHero();
+    buildCommandCenter();
     enhancePainPoints();
     enhanceFeatures();
     /* Section 4 (GSAP scroll-draw) skipped */

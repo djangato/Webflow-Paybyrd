@@ -12104,6 +12104,14 @@ a.glowing_button_link .glowing_button_text {
   color: #D4A574 !important;
 }
 
+/* ── Command Center Section ── */
+.pbrd-hosp-cmd-wrap { max-width:1100px; margin:0 auto; padding:0 24px; }
+.pbrd-hosp-cmd-header { text-align:center; margin-bottom:32px; }
+.pbrd-hosp-cmd-h2 {
+  font-size:clamp(1.5rem,3vw,2rem); font-weight:700; color:#fff;
+  letter-spacing:-0.02em; margin:8px 0 0; line-height:1.15;
+}
+
 /* ── Hero Visualization ── */
 .pbrd-hosp-viz {
   position: relative;
