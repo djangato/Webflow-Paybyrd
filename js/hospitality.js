@@ -178,8 +178,8 @@
     /* Outlet nodes */
     outlets.forEach(function(o) {
       svgDots +=
-        '<circle cx="' + o.x + '" cy="' + o.y + '" r="4" fill="rgba(212,165,116,0.4)"/>' +
-        '<text x="' + o.x + '" y="' + (o.y - 12) + '" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="10" font-weight="600" font-family="system-ui">' + o.name + '</text>';
+        '<circle cx="' + o.x + '" cy="' + o.y + '" r="5.5" fill="rgba(212,165,116,0.5)"/>' +
+        '<text x="' + o.x + '" y="' + (o.y - 14) + '" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="12" font-weight="600" font-family="system-ui">' + o.name + '</text>';
     });
 
     s.innerHTML =

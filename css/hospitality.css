@@ -66,7 +66,7 @@
 }
 
 /* ── Command Center Section ── */
-.pbrd-hosp-cmd-wrap { max-width:1100px; margin:0 auto; padding:0 24px; }
+.pbrd-hosp-cmd-wrap { max-width:1300px; margin:0 auto; padding:0 24px; }
 .pbrd-hosp-cmd-header { text-align:center; margin-bottom:32px; }
 .pbrd-hosp-cmd-h2 {
   font-size:clamp(1.5rem,3vw,2rem); font-weight:700; color:#fff;
@@ -82,33 +82,29 @@
   position: relative;
   margin-top: 20px;
   z-index: 2;
-  max-width: 800px;
 }
 
 .pbrd-hosp-map-wrap {
   display: grid;
-  grid-template-columns: 1fr 220px;
+  grid-template-columns: 1fr 240px;
   gap: 0;
   background: transparent;
-  border-radius: 0;
   border: none;
-  border-top: 1px solid rgba(255,255,255,0.06);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  overflow: hidden;
+  overflow: visible;
 }
 
 .pbrd-hosp-map-left {
-  padding: 16px;
+  padding: 0;
 }
 
 .pbrd-hosp-map-svg {
   width: 100%;
-  max-height: 240px;
+  height: auto;
 }
 
 /* ── Transaction Feed (right panel) ── */
 .pbrd-hosp-txn-feed {
-  border-left: 1px solid rgba(255, 255, 255, 0.06);
+  border-left: none;
   padding: 0;
   display: flex;
   flex-direction: column;
@@ -121,7 +117,7 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.3);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: none;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -137,7 +133,7 @@
 
 .pbrd-hosp-txn {
   padding: 10px 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  border-bottom: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
