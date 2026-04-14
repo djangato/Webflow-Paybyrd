@@ -7674,9 +7674,9 @@
     var dash = document.createElement("div");
     dash.className = "pbrd-air-leak-dash pbrd-air-reveal";
     dash.innerHTML =
-      /* Mini airplane + trail */
-      '<div class="pbrd-air-plane"><svg viewBox="0 0 28 28" fill="none"><path d="M14 2 L18 10 L26 12 L18 14 L14 26 L10 14 L2 12 L10 10 Z" fill="#6319f0"/></svg></div>' +
-      '<div class="pbrd-air-trail"><svg viewBox="0 0 560 200" preserveAspectRatio="none"><path d="M-40,140 C100,40 300,180 560,60" fill="none" stroke="rgba(99,25,240,0.08)" stroke-width="1.5" stroke-dasharray="6 4" class="pbrd-air-trail-path"/></svg></div>' +
+      /* Mini Paybyrd airplane + trail */
+      '<div class="pbrd-air-plane"><img src="https://djangato.github.io/Webflow-Paybyrd/assets/pos/paybyrd-plane.png" alt="Paybyrd" style="width:100%;height:auto;"></div>' +
+      '<div class="pbrd-air-trail"><svg viewBox="0 0 600 200" preserveAspectRatio="none"><path d="M-80,160 C120,30 340,190 600,50" fill="none" stroke="rgba(99,25,240,0.06)" stroke-width="1.5" stroke-dasharray="6 4" class="pbrd-air-trail-path"/></svg></div>' +
       '<div class="pbrd-air-leak-header">' +
         '<div class="pbrd-air-leak-dot pbrd-air-leak-dot--live"></div>' +
         '<span>Revenue Leakage Monitor</span>' +
