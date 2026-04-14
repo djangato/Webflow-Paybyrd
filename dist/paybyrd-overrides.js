@@ -7902,13 +7902,13 @@
         '<div class="pbrd-air-bench-header">' +
           '<div class="pbrd-air-section-label">APPROVAL RATE ADVANTAGE</div>' +
           '<h4>Paybyrd vs. the competition</h4>' +
-          '<p>Production data from airline transactions \u00b7 Impact shown on \u20AC10M annual volume</p>' +
+          '<p>Production data from airline transactions \u00b7 Impact shown on \u20AC100M annual volume</p>' +
         '</div>' +
         '<div class="pbrd-air-bench-rows">' +
-          '<div class="pbrd-air-bench-row"><span class="pbrd-air-bench-name">vs Adyen</span><div class="pbrd-air-bench-bar-wrap"><div class="pbrd-air-bench-bar pbrd-air-bench-bar--1" data-w="35"></div></div><span class="pbrd-air-bench-val">+1.72%</span><span class="pbrd-air-bench-money">\u2212\u20AC172K lost</span></div>' +
-          '<div class="pbrd-air-bench-row"><span class="pbrd-air-bench-name">vs Elavon</span><div class="pbrd-air-bench-bar-wrap"><div class="pbrd-air-bench-bar pbrd-air-bench-bar--2" data-w="64"></div></div><span class="pbrd-air-bench-val">+3.16%</span><span class="pbrd-air-bench-money">\u2212\u20AC316K lost</span></div>' +
-          '<div class="pbrd-air-bench-row"><span class="pbrd-air-bench-name">vs Checkout.com</span><div class="pbrd-air-bench-bar-wrap"><div class="pbrd-air-bench-bar pbrd-air-bench-bar--3" data-w="98"></div></div><span class="pbrd-air-bench-val">+4.86%</span><span class="pbrd-air-bench-money">\u2212\u20AC486K lost</span></div>' +
-          '<div class="pbrd-air-bench-row pbrd-air-bench-row--top"><span class="pbrd-air-bench-name">vs Nuvei</span><div class="pbrd-air-bench-bar-wrap"><div class="pbrd-air-bench-bar pbrd-air-bench-bar--4" data-w="100"></div></div><span class="pbrd-air-bench-val">+4.92%</span><span class="pbrd-air-bench-money">\u2212\u20AC492K lost</span></div>' +
+          '<div class="pbrd-air-bench-row"><span class="pbrd-air-bench-name">vs Adyen</span><div class="pbrd-air-bench-bar-wrap"><div class="pbrd-air-bench-bar pbrd-air-bench-bar--1" data-w="35"></div></div><span class="pbrd-air-bench-val">+1.72%</span><span class="pbrd-air-bench-money">\u2212\u20AC1.72M lost</span></div>' +
+          '<div class="pbrd-air-bench-row"><span class="pbrd-air-bench-name">vs Elavon</span><div class="pbrd-air-bench-bar-wrap"><div class="pbrd-air-bench-bar pbrd-air-bench-bar--2" data-w="64"></div></div><span class="pbrd-air-bench-val">+3.16%</span><span class="pbrd-air-bench-money">\u2212\u20AC3.16M lost</span></div>' +
+          '<div class="pbrd-air-bench-row"><span class="pbrd-air-bench-name">vs Checkout.com</span><div class="pbrd-air-bench-bar-wrap"><div class="pbrd-air-bench-bar pbrd-air-bench-bar--3" data-w="98"></div></div><span class="pbrd-air-bench-val">+4.86%</span><span class="pbrd-air-bench-money">\u2212\u20AC4.86M lost</span></div>' +
+          '<div class="pbrd-air-bench-row pbrd-air-bench-row--top"><span class="pbrd-air-bench-name">vs Nuvei</span><div class="pbrd-air-bench-bar-wrap"><div class="pbrd-air-bench-bar pbrd-air-bench-bar--4" data-w="100"></div></div><span class="pbrd-air-bench-val">+4.92%</span><span class="pbrd-air-bench-money">\u2212\u20AC4.92M lost</span></div>' +
         '</div>' +
         '<div class="pbrd-air-bench-footer">' +
           '<a href="/book-demo" class="pbrd-air-cta-primary" style="margin-top:20px">See your projected uplift \u2192</a>' +
