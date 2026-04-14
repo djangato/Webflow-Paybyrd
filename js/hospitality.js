@@ -1505,6 +1505,17 @@
     var section = heading.closest("section") || heading.closest("[class*='section']");
     if (!section) return;
 
+    /* Add subtitle after heading */
+    var existingSub = heading.nextElementSibling;
+    if (existingSub && existingSub.tagName === "P") {
+      existingSub.textContent = "Every swipe, tap, and booking tells a story. Paybyrd reads it in real time \u2014 so you know which guest is a VIP before they arrive, which outlet peaks on Fridays, and where your next million in revenue is hiding.";
+    } else {
+      var sub = document.createElement("p");
+      sub.setAttribute("style", "font-size:1rem;color:#888;max-width:560px;margin:12px auto 0;line-height:1.6;text-align:center;");
+      sub.textContent = "Every swipe, tap, and booking tells a story. Paybyrd reads it in real time \u2014 so you know which guest is a VIP before they arrive, which outlet peaks on Fridays, and where your next million in revenue is hiding.";
+      heading.parentElement.insertBefore(sub, heading.nextSibling);
+    }
+
     /* Replace the 3 repeated generic text blocks with BI visualizations */
     var textBlocks = [];
     section.querySelectorAll("p").forEach(function(p) {
