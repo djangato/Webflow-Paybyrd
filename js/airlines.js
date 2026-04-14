@@ -226,6 +226,7 @@
 
     /* Reduce whitespace above title and below graph */
     section.style.setProperty("padding-top", "0", "important");
+    section.style.setProperty("margin-top", "-60px", "important");
     section.style.setProperty("padding-bottom", "0", "important");
     /* Only collapse Webflow container wrappers (not content elements like h2, p) */
     section.querySelectorAll("div").forEach(function(el) {
