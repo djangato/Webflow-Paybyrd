@@ -10597,7 +10597,8 @@
       c.style.setProperty("display", "none", "important");
     });
 
-    section.style.setProperty("padding", "60px 0", "important");
+    section.style.setProperty("padding", "40px 0", "important");
+    section.style.setProperty("margin", "0", "important");
     section.style.setProperty("background", "linear-gradient(135deg, #0a0a0f, #1a1020)", "important");
     section.classList.add("pbrd-hosp-test-section");
 
