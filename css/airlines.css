@@ -430,6 +430,14 @@
 /* CTA */
 .pbrd-air-test-cta { text-align:center; }
 
+/* ═══ DATA SECTION PARTICLES ═══ */
+@keyframes pbrd-air-data-float {
+  0% { transform:translateY(0); opacity:0; }
+  10% { opacity:0.6; }
+  90% { opacity:0.6; }
+  100% { transform:translateY(-800px); opacity:0; }
+}
+
 /* ═══ RESPONSIVE ═══ */
 @media (max-width:768px) {
   .pbrd-air-map-wrap { grid-template-columns:1fr; }

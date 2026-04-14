@@ -829,6 +829,86 @@
   }
 
   /* ═══════════════════════════════════════════ */
+  /* 7. Data Section — Visual Enrichment         */
+  /* ═══════════════════════════════════════════ */
+
+  function enhanceDataSection() {
+    var section = findSectionByHeading("data that moves");
+    if (!section) return;
+
+    /* Add floating data particles behind the draw-scroll area */
+    var drawWrap = section.querySelector("[class*='draw_scroll'], [class*='draw-scroll']") || section;
+    drawWrap.style.setProperty("position", "relative", "important");
+    drawWrap.style.setProperty("overflow", "hidden", "important");
+
+    /* Particle layer */
+    var particles = document.createElement("div");
+    particles.setAttribute("style",
+      "position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden;"
+    );
+
+    var particleData = [
+      { x: 8, dur: 12, delay: 0, size: 3 },
+      { x: 22, dur: 15, delay: 2, size: 2 },
+      { x: 38, dur: 10, delay: 1, size: 4 },
+      { x: 55, dur: 14, delay: 3, size: 2 },
+      { x: 70, dur: 11, delay: 0.5, size: 3 },
+      { x: 85, dur: 13, delay: 1.5, size: 2 },
+      { x: 15, dur: 16, delay: 4, size: 2 },
+      { x: 48, dur: 12, delay: 2.5, size: 3 },
+      { x: 92, dur: 14, delay: 1, size: 2 },
+      { x: 62, dur: 11, delay: 3.5, size: 4 },
+    ];
+
+    particleData.forEach(function(p) {
+      var dot = document.createElement("div");
+      dot.setAttribute("style",
+        "position:absolute;width:" + p.size + "px;height:" + p.size + "px;" +
+        "border-radius:50%;background:rgba(99,25,240,0.15);" +
+        "left:" + p.x + "%;bottom:-10px;" +
+        "animation:pbrd-air-data-float " + p.dur + "s linear " + p.delay + "s infinite;"
+      );
+      particles.appendChild(dot);
+    });
+
+    drawWrap.insertBefore(particles, drawWrap.firstChild);
+
+    /* Add stat badges next to each visual_text item */
+    var stats = [
+      { find: "forecasts", badge: "12+ dashboard widgets" },
+      { find: "conversion", badge: "By country \u00b7 method \u00b7 channel" },
+      { find: "clarity", badge: "Role-based views" },
+      { find: "revenue leaks", badge: "Real-time alerts" },
+    ];
+
+    section.querySelectorAll("[class*='visual_text'], [class*='draw'] p, [class*='scroll'] p").forEach(function(el) {
+      var txt = el.textContent.toLowerCase();
+      stats.forEach(function(s) {
+        if (txt.includes(s.find)) {
+          var badge = document.createElement("span");
+          badge.setAttribute("style",
+            "display:inline-block;margin-top:8px;padding:4px 12px;" +
+            "border-radius:100px;background:rgba(99,25,240,0.08);" +
+            "color:#6319f0;font-size:0.625rem;font-weight:600;" +
+            "letter-spacing:0.02em;"
+          );
+          badge.textContent = s.badge;
+          el.appendChild(badge);
+        }
+      });
+    });
+
+    /* Add a section subtitle enhancement */
+    var heading = findHeading("data that moves");
+    if (heading) {
+      var nextP = heading.nextElementSibling;
+      if (nextP && nextP.tagName === "P") {
+        nextP.textContent = "Every touchpoint is a transaction. Paybyrd turns payment data into real-time intelligence that drives decisions.";
+      }
+    }
+  }
+
+  /* ═══════════════════════════════════════════ */
   /* Init                                        */
   /* ═══════════════════════════════════════════ */
 
@@ -838,6 +918,7 @@
     enhanceFeatures();
     buildFraudSection();
     buildTestimonial();
+    enhanceDataSection();
     enhanceBottomCTA();
     enhanceFAQ();
     console.log("[Paybyrd] Airlines enhancements loaded");
