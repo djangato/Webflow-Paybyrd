@@ -991,15 +991,7 @@
       '</div>';
     });
 
-    html += '</div>' +
-      '<div class="pbrd-air-faq-bottom pbrd-air-reveal">' +
-        '<div class="pbrd-air-faq-bottom-card">' +
-          '<div class="pbrd-air-faq-bottom-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="currentColor" stroke-width="1.5"/></svg></div>' +
-          '<h4>Still have questions?</h4>' +
-          '<p>Our airline payment specialists are ready to walk you through a tailored demo with your actual transaction data.</p>' +
-          '<a href="/book-demo" class="pbrd-air-faq-contact-btn">Book a 15-minute demo \u2192</a>' +
-        '</div>' +
-      '</div>';
+    html += '</div>';
 
     wrap.innerHTML = html;
     section.appendChild(wrap);
