@@ -1509,7 +1509,12 @@
     var existingSub = heading.nextElementSibling;
     if (existingSub && existingSub.tagName === "P") {
       existingSub.textContent = "Every swipe, tap, and booking tells a story. Paybyrd reads it in real time \u2014 so you know which guest is a VIP before they arrive, which outlet peaks on Fridays, and where your next million in revenue is hiding.";
-      existingSub.style.setProperty("margin-top", "32px", "important");
+      existingSub.style.setProperty("font-size", "1rem", "important");
+      existingSub.style.setProperty("color", "#888", "important");
+      existingSub.style.setProperty("max-width", "560px", "important");
+      existingSub.style.setProperty("margin", "32px auto 0", "important");
+      existingSub.style.setProperty("line-height", "1.6", "important");
+      existingSub.style.setProperty("text-align", "center", "important");
     } else {
       var sub = document.createElement("p");
       sub.setAttribute("style", "font-size:1rem;color:#888;max-width:560px;margin:32px auto 0;line-height:1.6;text-align:center;");
