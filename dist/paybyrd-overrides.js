@@ -9747,22 +9747,22 @@
         '<div class="pbrd-hosp-bench-row">' +
           '<span class="pbrd-hosp-bench-name">Staying with Nuvei</span>' +
           '<div class="pbrd-hosp-bench-bar-wrap"><div class="pbrd-hosp-bench-bar--them" data-w="85"><span class="pbrd-hosp-bench-bar-label">\u2212\u20AC4.92M lost</span></div></div>' +
+          '<span class="pbrd-hosp-bench-uplift">+4.92% with Paybyrd</span>' +
         '</div>' +
         '<div class="pbrd-hosp-bench-row">' +
           '<span class="pbrd-hosp-bench-name">Staying with Checkout.com</span>' +
           '<div class="pbrd-hosp-bench-bar-wrap"><div class="pbrd-hosp-bench-bar--them" data-w="80"><span class="pbrd-hosp-bench-bar-label">\u2212\u20AC4.86M lost</span></div></div>' +
+          '<span class="pbrd-hosp-bench-uplift">+4.86% with Paybyrd</span>' +
         '</div>' +
         '<div class="pbrd-hosp-bench-row">' +
           '<span class="pbrd-hosp-bench-name">Staying with Elavon</span>' +
           '<div class="pbrd-hosp-bench-bar-wrap"><div class="pbrd-hosp-bench-bar--them" data-w="50"><span class="pbrd-hosp-bench-bar-label">\u2212\u20AC3.16M lost</span></div></div>' +
+          '<span class="pbrd-hosp-bench-uplift">+3.16% with Paybyrd</span>' +
         '</div>' +
         '<div class="pbrd-hosp-bench-row">' +
           '<span class="pbrd-hosp-bench-name">Staying with Adyen</span>' +
           '<div class="pbrd-hosp-bench-bar-wrap"><div class="pbrd-hosp-bench-bar--them" data-w="25"><span class="pbrd-hosp-bench-bar-label">\u2212\u20AC1.72M lost</span></div></div>' +
-        '</div>' +
-        '<div class="pbrd-hosp-bench-row pbrd-hosp-bench-row--paybyrd">' +
-          '<span class="pbrd-hosp-bench-name" style="color:#6319f0;font-weight:700">Switch to Paybyrd</span>' +
-          '<div class="pbrd-hosp-bench-bar-wrap"><div class="pbrd-hosp-bench-bar--us" data-w="5" style="background:#22c55e"><span class="pbrd-hosp-bench-bar-label" style="color:#fff;padding-left:8px">\u20AC0 lost</span></div></div>' +
+          '<span class="pbrd-hosp-bench-uplift">+1.72% with Paybyrd</span>' +
         '</div>' +
       '</div>';
 
