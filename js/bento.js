@@ -1,297 +1,327 @@
-/* Paybyrd — Bento Grid: Live Fintech Visuals */
+/* Paybyrd — Savings Calculator (replaces Bento Grid) */
 (function () {
   "use strict";
   var path = window.location.pathname;
   if (path !== "/" && path !== "" && path !== "/index" && path !== "/index.html") return;
 
-  /* ─── Card 0: Conversion — Live approval monitor ─── */
-  var vizConversion =
-    '<div class="pbrd-viz pbrd-viz-conversion">' +
-      '<div class="pbrd-bv-card" style="animation:pbrd-dv-slide-up 0.5s ease both">' +
-        '<div class="pbrd-bv-label">Approval Rate · Live</div>' +
-        '<div class="pbrd-bv-hero-row">' +
-          '<span class="pbrd-bv-big"><span id="pbrd-bv-rate">98.2</span><span class="pbrd-bv-unit">%</span></span>' +
-          '<span class="pbrd-bv-trend-up">+12.4%</span>' +
-        '</div>' +
-        '<div class="pbrd-bv-chart">' +
-          '<div class="pbrd-bv-bar pbrd-bv-bar-live" style="--h:35%;--hmin:28%;--hmax:42%;--dur:2.8s;--d:0.1s"></div>' +
-          '<div class="pbrd-bv-bar pbrd-bv-bar-live" style="--h:52%;--hmin:44%;--hmax:60%;--dur:3.2s;--d:0.15s"></div>' +
-          '<div class="pbrd-bv-bar pbrd-bv-bar-live" style="--h:45%;--hmin:38%;--hmax:55%;--dur:2.5s;--d:0.2s"></div>' +
-          '<div class="pbrd-bv-bar pbrd-bv-bar-live" style="--h:68%;--hmin:58%;--hmax:78%;--dur:3.5s;--d:0.25s"></div>' +
-          '<div class="pbrd-bv-bar pbrd-bv-bar-live" style="--h:60%;--hmin:50%;--hmax:70%;--dur:2.9s;--d:0.3s"></div>' +
-          '<div class="pbrd-bv-bar pbrd-bv-bar-accent pbrd-bv-bar-live" style="--h:90%;--hmin:82%;--hmax:95%;--dur:3.1s;--d:0.35s"></div>' +
-          '<div class="pbrd-bv-bar pbrd-bv-bar-live" style="--h:72%;--hmin:62%;--hmax:80%;--dur:2.7s;--d:0.4s"></div>' +
-        '</div>' +
-        '<div class="pbrd-bv-live-row">' +
-          '<span class="pbrd-bv-live-dot"></span>' +
-          '<span class="pbrd-bv-live-count"><span id="pbrd-bv-txn">1,247</span> transactions/hr</span>' +
-        '</div>' +
-      '</div>' +
-    '</div>';
-
-  /* ─── Card 1: Pricing — Competitor comparison ─── */
-  var vizPricing =
-    '<div class="pbrd-viz pbrd-viz-pricing">' +
-      '<div class="pbrd-bv-card" style="animation:pbrd-dv-slide-up 0.5s ease both">' +
-        '<div class="pbrd-bv-label">Transaction Fee</div>' +
-        '<div class="pbrd-bv-big" style="margin:4px 0">1.11<span class="pbrd-bv-unit">%</span></div>' +
-        '<div class="pbrd-bv-sublabel">+ \u20AC0.05 per transaction</div>' +
-        '<div class="pbrd-bv-divider"></div>' +
-        '<div class="pbrd-bv-compare">' +
-          '<div class="pbrd-bv-comp-row"><span class="pbrd-bv-comp-name">Competitor A</span><div class="pbrd-bv-comp-bar-wrap"><div class="pbrd-bv-comp-bar pbrd-bv-comp-them" style="--w:85%"></div></div><span class="pbrd-bv-comp-val">2.9%</span></div>' +
-          '<div class="pbrd-bv-comp-row"><span class="pbrd-bv-comp-name">Competitor B</span><div class="pbrd-bv-comp-bar-wrap"><div class="pbrd-bv-comp-bar pbrd-bv-comp-them" style="--w:72%"></div></div><span class="pbrd-bv-comp-val">2.5%</span></div>' +
-          '<div class="pbrd-bv-comp-row"><span class="pbrd-bv-comp-name">Paybyrd</span><div class="pbrd-bv-comp-bar-wrap"><div class="pbrd-bv-comp-bar pbrd-bv-comp-us" style="--w:32%"></div></div><span class="pbrd-bv-comp-val pbrd-bv-comp-save">1.11%</span></div>' +
-        '</div>' +
-        '<div class="pbrd-bv-row" style="margin-top:10px">' +
-          '<div class="pbrd-bv-mini"><span class="pbrd-bv-mini-val">\u20AC0</span><span class="pbrd-bv-mini-lbl">Setup</span></div>' +
-          '<div class="pbrd-bv-mini"><span class="pbrd-bv-mini-val">\u20AC0</span><span class="pbrd-bv-mini-lbl">Monthly</span></div>' +
-          '<div class="pbrd-bv-mini"><span class="pbrd-bv-mini-val">T+1</span><span class="pbrd-bv-mini-lbl">Payout</span></div>' +
-        '</div>' +
-      '</div>' +
-    '</div>';
-
-  /* ─── Card 2: Security — Live threat scanner ─── */
-  var vizSecurity =
-    '<div class="pbrd-viz pbrd-viz-security">' +
-      '<div class="pbrd-bv-card" style="animation:pbrd-dv-slide-up 0.5s ease both;text-align:center">' +
-        '<div class="pbrd-bv-shield-wrap">' +
-          '<svg class="pbrd-bv-shield" viewBox="0 0 60 72" fill="none" style="width:48px;height:58px">' +
-            '<path d="M30 3L6 15v21c0 16.5 10.5 28.5 24 33 13.5-4.5 24-16.5 24-33V15L30 3z" stroke="rgba(120,255,180,0.4)" stroke-width="1.5" fill="rgba(120,255,180,0.03)"/>' +
-            '<path class="pbrd-bv-check" d="M21 36l6 6 12-12" stroke="rgba(120,255,180,0.8)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>' +
-          '</svg>' +
-          '<div class="pbrd-bv-scan-ring"></div>' +
-        '</div>' +
-        '<div class="pbrd-bv-feed" id="pbrd-bv-feed"></div>' +
-        '<div class="pbrd-bv-pills">' +
-          '<span class="pbrd-bv-pill" style="--d:0.2s">PCI DSS</span>' +
-          '<span class="pbrd-bv-pill" style="--d:0.3s">3DS2</span>' +
-          '<span class="pbrd-bv-pill" style="--d:0.4s">Tokens</span>' +
-        '</div>' +
-      '</div>' +
-    '</div>';
-
-  /* ─── Card 3: Business Intelligence — Live heatmap ─── */
-  var heatCells = '';
-  var heatData = [
-    [0.1,0.3,0.4,0.5,0.6,0.8,0.3],
-    [0.2,0.5,0.7,0.8,0.9,0.7,0.2],
-    [0.15,0.4,0.6,0.9,1.0,0.6,0.15],
-    [0.1,0.3,0.5,0.7,0.8,0.5,0.1]
-  ];
-  for (var r = 0; r < 4; r++) {
-    for (var c = 0; c < 7; c++) {
-      var dur = (2 + ((r * 7 + c * 3) % 5)).toFixed(1);
-      var begin = ((r * 3 + c * 2) % 7 * 0.3).toFixed(1);
-      heatCells += '<div class="pbrd-heat-cell pbrd-heat-cell-live" style="--op:' + heatData[r][c] + ';--d:' + (r*7+c)*0.02 + 's;--dur:' + dur + 's;--begin:' + begin + 's"></div>';
-    }
-  }
-
-  var vizBI =
-    '<div class="pbrd-viz pbrd-viz-bi">' +
-      '<div class="pbrd-bv-card" style="animation:pbrd-dv-slide-up 0.5s ease both;flex:1">' +
-        '<div style="display:flex;gap:16px;align-items:flex-start">' +
-          '<div style="flex:1">' +
-            '<div class="pbrd-bv-label">Recurring Shoppers · Live</div>' +
-            '<div class="pbrd-bv-hero-row"><span class="pbrd-bv-big" style="font-size:1.75rem" id="pbrd-bv-shoppers">847</span><span class="pbrd-bv-trend-up" style="font-size:0.625rem">+23</span></div>' +
-            '<div class="pbrd-bv-sublabel">\u20AC<span id="pbrd-bv-avg">142</span> avg. ticket</div>' +
-            '<div style="margin-top:12px">' +
-              '<div class="pbrd-bv-label">12-Week Trend</div>' +
-              '<svg viewBox="0 0 120 28" style="width:100%;height:28px;margin-top:4px"><path class="pbrd-bv-sparkline" d="M0 24 C10 22, 15 20, 20 18 S30 14, 40 16 S55 10, 65 8 S80 6, 90 4 S105 2, 120 1" stroke="rgba(120,180,255,0.5)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-dasharray="200" stroke-dashoffset="200" style="animation:pbrd-line-draw 1.5s 0.5s ease forwards"/><path d="M0 24 C10 22, 15 20, 20 18 S30 14, 40 16 S55 10, 65 8 S80 6, 90 4 S105 2, 120 1 V28 H0Z" fill="url(#pbrd-bv-spark)" opacity="0.3"/><defs><linearGradient id="pbrd-bv-spark" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(120,180,255,0.4)"/><stop offset="100%" stop-color="rgba(120,180,255,0)"/></linearGradient></defs></svg>' +
-            '</div>' +
-          '</div>' +
-          '<div style="flex-shrink:0">' +
-            '<div class="pbrd-bv-label" style="margin-bottom:6px">Activity</div>' +
-            '<div class="pbrd-bv-heatgrid-sm">' + heatCells + '</div>' +
-          '</div>' +
-        '</div>' +
-      '</div>' +
-    '</div>';
-
-  /* ─── Card 4: Revenue — Live payment stream ─── */
-  var vizLoyalty =
-    '<div class="pbrd-viz pbrd-viz-loyalty2">' +
-      '<div class="pbrd-bv-card" style="animation:pbrd-dv-slide-up 0.5s ease both;flex:1">' +
-        '<div class="pbrd-bv-label">Revenue Processed · Live</div>' +
-        '<div class="pbrd-bv-hero-row" style="margin:6px 0 4px">' +
-          '<span class="pbrd-bv-big" style="font-size:1.5rem">\u20AC<span id="pbrd-bv-rev">2,847,391</span></span>' +
-        '</div>' +
-        '<div class="pbrd-bv-sublabel">today across all merchants</div>' +
-        '<div class="pbrd-bv-stream" id="pbrd-bv-stream"></div>' +
-        '<div style="display:flex;gap:8px;margin-top:8px">' +
-          '<div class="pbrd-bv-mini" style="flex:1"><span class="pbrd-bv-mini-val" id="pbrd-bv-methods">20+</span><span class="pbrd-bv-mini-lbl">Methods</span></div>' +
-          '<div class="pbrd-bv-mini" style="flex:1"><span class="pbrd-bv-mini-val">192+</span><span class="pbrd-bv-mini-lbl">Currencies</span></div>' +
-          '<div class="pbrd-bv-mini" style="flex:1"><span class="pbrd-bv-mini-val">40+</span><span class="pbrd-bv-mini-lbl">Countries</span></div>' +
-        '</div>' +
-      '</div>' +
-    '</div>';
-
-  var visuals = [vizConversion, vizPricing, vizSecurity, vizBI, vizLoyalty];
-
-  var textOverrides = {
-    3: {
-      tag: "Business Intelligence",
-      heading: "Know your customers before they walk in",
-      desc: "Recurring shoppers, average tickets, and store heatmaps \u2014 insights that turn data into revenue."
+  /* ═══ Competitor Pricing Data ═══ */
+  var competitors = {
+    mollie: {
+      name: "Mollie",
+      online: { cardPct: 1.80, cardFixed: 0.25, apmPct: 0, apmFixed: 0.32, walletSurcharge: 0 },
+      cp: null
     },
-    4: {
-      tag: "Global Scale",
-      heading: "Every payment, everywhere, in real time",
-      desc: "20+ methods, 192+ currencies, 40+ countries \u2014 all flowing through one platform."
+    stripe: {
+      name: "Stripe",
+      online: { cardPct: 1.50, cardFixed: 0.25, apmPct: 1.50, apmFixed: 0.25, walletSurcharge: 0 },
+      cp: { cardPct: 1.40, cardFixed: 0.10 }
+    },
+    adyen: {
+      name: "Adyen",
+      online: { cardPct: 1.50, cardFixed: 0.12, apmPct: 0, apmFixed: 0.34, walletSurcharge: 0 },
+      cp: { cardPct: 1.50, cardFixed: 0.12 }
+    },
+    paynl: {
+      name: "Pay.nl",
+      online: { cardPct: 1.50, cardFixed: 0.15, apmPct: 0, apmFixed: 0.19, walletSurcharge: 0 },
+      cp: { cardPct: 1.75, cardFixed: 0.10 }
     }
   };
 
-  /* ═══ Security feed data ═══ */
-  var feedTxns = [
-    { card: "VISA \u2022\u20224582", amount: "\u20AC342", ok: true },
-    { card: "MC \u2022\u20221209", amount: "\u20AC89", ok: true },
-    { card: "AMEX \u2022\u20227744", amount: "\u20AC2,100", ok: false },
-    { card: "VISA \u2022\u20223301", amount: "\u20AC195", ok: true },
-    { card: "MC \u2022\u20229876", amount: "\u20AC67", ok: true },
-    { card: "CB \u2022\u20225511", amount: "\u20AC1,450", ok: true },
-    { card: "VISA \u2022\u20220033", amount: "\u20AC6,780", ok: false },
-    { card: "JCB \u2022\u20224433", amount: "\u20AC312", ok: true }
-  ];
+  var paybyrd = {
+    online: { cardPct: 1.25, cardFixed: 0.08, apmPct: 0, apmFixed: 0.20 },
+    cp: { debitPct: 0.50, creditPct: 0.60, cardFixed: 0 }
+  };
 
+  /* Defaults */
+  var AVG_TXN = 50;
+  var CARD_SPLIT = 0.75;  /* 75% cards, 15% APMs, 10% wallets (wallets = card rate) */
+  var APM_SPLIT = 0.15;
+  var WALLET_SPLIT = 0.10;
+  var CP_SPLIT = 0.30;    /* when "both": 70% online, 30% CP */
+  var CP_DEBIT_SPLIT = 0.60; /* 60% debit, 40% credit for CP */
+
+  var selectedProvider = "mollie";
+  var monthlyVolume = 100000;
+  var channelMode = "online"; /* "online" or "both" */
+
+  /* ═══ Calculation Engine ═══ */
+  function calcCost(rates, volume, isCP) {
+    var numTxns = volume / AVG_TXN;
+    if (isCP) {
+      /* Card Present: all cards, no APMs */
+      return volume * (rates.cardPct / 100) + numTxns * (rates.cardFixed || 0);
+    }
+    /* Online */
+    var cardVol = volume * (CARD_SPLIT + WALLET_SPLIT); /* wallets use card rate */
+    var apmVol = volume * APM_SPLIT;
+    var cardTxns = cardVol / AVG_TXN;
+    var apmTxns = apmVol / AVG_TXN;
+    var cardCost = cardVol * (rates.cardPct / 100) + cardTxns * rates.cardFixed;
+    var apmCost = apmVol * (rates.apmPct / 100) + apmTxns * rates.apmFixed;
+    return cardCost + apmCost;
+  }
+
+  function calcPaybyrdCP(volume) {
+    var numTxns = volume / AVG_TXN;
+    var debitVol = volume * CP_DEBIT_SPLIT;
+    var creditVol = volume * (1 - CP_DEBIT_SPLIT);
+    return debitVol * (paybyrd.cp.debitPct / 100) + creditVol * (paybyrd.cp.creditPct / 100);
+  }
+
+  function calculate() {
+    var comp = competitors[selectedProvider];
+    var compCost, pbCost;
+
+    if (channelMode === "online") {
+      compCost = calcCost(comp.online, monthlyVolume, false);
+      pbCost = calcCost(paybyrd.online, monthlyVolume, false);
+    } else {
+      var onlineVol = monthlyVolume * (1 - CP_SPLIT);
+      var cpVol = monthlyVolume * CP_SPLIT;
+      compCost = calcCost(comp.online, onlineVol, false);
+      if (comp.cp) {
+        compCost += calcCost(comp.cp, cpVol, true);
+      } else {
+        compCost += calcCost(comp.online, cpVol, false); /* no CP data, use online rates */
+      }
+      pbCost = calcCost(paybyrd.online, onlineVol, false) + calcPaybyrdCP(cpVol);
+    }
+
+    return {
+      compMonthly: compCost,
+      pbMonthly: pbCost,
+      savingsMonthly: compCost - pbCost,
+      savingsAnnual: (compCost - pbCost) * 12,
+      compName: comp.name,
+      savingsPct: compCost > 0 ? ((compCost - pbCost) / compCost * 100) : 0
+    };
+  }
+
+  /* ═══ Format helpers ═══ */
+  function fmtEur(n) {
+    return "\u20AC" + Math.round(n).toLocaleString("en");
+  }
+  function fmtVol(n) {
+    if (n >= 1000000) return "\u20AC" + (n / 1000000).toFixed(1) + "M";
+    if (n >= 1000) return "\u20AC" + Math.round(n / 1000) + "K";
+    return "\u20AC" + n;
+  }
+
+  /* ═══ Update UI ═══ */
+  function updateResults() {
+    var r = calculate();
+    var savingsEl = document.getElementById("pbrd-calc-savings");
+    var compNameEl = document.getElementById("pbrd-calc-comp-name");
+    var costThemEl = document.getElementById("pbrd-calc-cost-them");
+    var costUsEl = document.getElementById("pbrd-calc-cost-us");
+    var barThemEl = document.getElementById("pbrd-calc-bar-them");
+    var barUsEl = document.getElementById("pbrd-calc-bar-us");
+    var breakdownEl = document.getElementById("pbrd-calc-breakdown");
+    var savePctEl = document.getElementById("pbrd-calc-save-pct");
+
+    if (savingsEl) savingsEl.textContent = fmtEur(r.savingsAnnual);
+    if (compNameEl) compNameEl.textContent = r.compName;
+    if (costThemEl) costThemEl.textContent = fmtEur(r.compMonthly) + "/mo";
+    if (costUsEl) costUsEl.textContent = fmtEur(r.pbMonthly) + "/mo";
+    if (savePctEl) savePctEl.textContent = Math.round(r.savingsPct) + "% less";
+
+    /* Animate bars */
+    var maxCost = Math.max(r.compMonthly, r.pbMonthly, 1);
+    if (barThemEl) barThemEl.style.width = Math.round(r.compMonthly / maxCost * 100) + "%";
+    if (barUsEl) barUsEl.style.width = Math.round(r.pbMonthly / maxCost * 100) + "%";
+
+    /* Breakdown */
+    if (breakdownEl) {
+      var perTxnComp = r.compMonthly / (monthlyVolume / AVG_TXN);
+      var perTxnPb = r.pbMonthly / (monthlyVolume / AVG_TXN);
+      breakdownEl.innerHTML =
+        '<div class="pbrd-calc-bd-row">' +
+          '<span class="pbrd-calc-bd-label">Cost per transaction</span>' +
+          '<span class="pbrd-calc-bd-them">' + r.compName + ': \u20AC' + perTxnComp.toFixed(2) + '</span>' +
+          '<span class="pbrd-calc-bd-us">Paybyrd: \u20AC' + perTxnPb.toFixed(2) + '</span>' +
+        '</div>' +
+        '<div class="pbrd-calc-bd-row">' +
+          '<span class="pbrd-calc-bd-label">Monthly transactions</span>' +
+          '<span class="pbrd-calc-bd-val">' + Math.round(monthlyVolume / AVG_TXN).toLocaleString("en") + '</span>' +
+        '</div>' +
+        '<div class="pbrd-calc-bd-row">' +
+          '<span class="pbrd-calc-bd-label">Avg. transaction</span>' +
+          '<span class="pbrd-calc-bd-val">\u20AC' + AVG_TXN + '</span>' +
+        '</div>';
+    }
+  }
+
+  /* ═══ Build Calculator ═══ */
   function init() {
-    var cards = document.querySelectorAll(".card-1_element");
-    if (!cards.length) return;
+    /* Find the bento section */
+    var heading = null;
+    document.querySelectorAll("h2").forEach(function (h) {
+      if (!heading && h.textContent.toLowerCase().includes("why settle")) heading = h;
+    });
+    if (!heading) return;
 
-    cards.forEach(function (card, idx) {
-      if (visuals[idx]) {
-        var imgWrap = card.querySelector(".card-1_gradient-bg");
-        if (imgWrap) {
-          var origImg = imgWrap.querySelector(".u-image-wrapper");
-          if (origImg) origImg.style.display = "none";
+    var section = heading.closest("section") || heading.closest("[class*='section']");
+    if (!section) return;
 
-          var vizDiv = document.createElement("div");
-          vizDiv.className = "pbrd-viz-container";
-          vizDiv.innerHTML = visuals[idx];
-          imgWrap.appendChild(vizDiv);
+    /* Hide Webflow children */
+    Array.prototype.forEach.call(section.children, function (child) {
+      child.style.setProperty("display", "none", "important");
+    });
+    section.style.setProperty("padding", "80px 0", "important");
+
+    /* Build calculator */
+    var wrap = document.createElement("div");
+    wrap.className = "pbrd-calc-wrap";
+
+    wrap.innerHTML =
+      '<div class="pbrd-calc-header">' +
+        '<span class="pbrd-calc-label">SAVINGS CALCULATOR</span>' +
+        '<h2 class="pbrd-calc-h2">How much are you overpaying<br>for payments?</h2>' +
+        '<p class="pbrd-calc-sub">Select your current provider, enter your volume, and see exactly how much you\u2019d save with Paybyrd.</p>' +
+      '</div>' +
+
+      '<div class="pbrd-calc-body">' +
+
+        /* ── Left: Inputs ── */
+        '<div class="pbrd-calc-inputs">' +
+
+          '<div class="pbrd-calc-field">' +
+            '<label class="pbrd-calc-field-label">Current provider</label>' +
+            '<div class="pbrd-calc-providers" id="pbrd-calc-providers">' +
+              '<div class="pbrd-calc-provider pbrd-calc-provider--active" data-provider="mollie">' +
+                '<span class="pbrd-calc-prov-name">Mollie</span>' +
+                '<span class="pbrd-calc-prov-rate">1.80% + \u20AC0.25</span>' +
+              '</div>' +
+              '<div class="pbrd-calc-provider" data-provider="stripe">' +
+                '<span class="pbrd-calc-prov-name">Stripe</span>' +
+                '<span class="pbrd-calc-prov-rate">1.50% + \u20AC0.25</span>' +
+              '</div>' +
+              '<div class="pbrd-calc-provider" data-provider="adyen">' +
+                '<span class="pbrd-calc-prov-name">Adyen</span>' +
+                '<span class="pbrd-calc-prov-rate">~1.50% + \u20AC0.12</span>' +
+              '</div>' +
+              '<div class="pbrd-calc-provider" data-provider="paynl">' +
+                '<span class="pbrd-calc-prov-name">Pay.nl</span>' +
+                '<span class="pbrd-calc-prov-rate">1.50% + \u20AC0.15</span>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+
+          '<div class="pbrd-calc-field">' +
+            '<label class="pbrd-calc-field-label">Monthly payment volume</label>' +
+            '<div class="pbrd-calc-input-wrap">' +
+              '<span class="pbrd-calc-currency">\u20AC</span>' +
+              '<input type="text" class="pbrd-calc-input" id="pbrd-calc-vol-input" value="100,000">' +
+            '</div>' +
+            '<input type="range" class="pbrd-calc-slider" id="pbrd-calc-slider" min="5000" max="2000000" value="100000" step="5000">' +
+            '<div class="pbrd-calc-range-labels"><span>\u20AC5K</span><span>\u20AC2M</span></div>' +
+          '</div>' +
+
+          '<div class="pbrd-calc-field">' +
+            '<label class="pbrd-calc-field-label">Payment channels</label>' +
+            '<div class="pbrd-calc-channels" id="pbrd-calc-channels">' +
+              '<button class="pbrd-calc-ch pbrd-calc-ch--active" data-ch="online">Online only</button>' +
+              '<button class="pbrd-calc-ch" data-ch="both">Online + Card Present</button>' +
+            '</div>' +
+            '<div class="pbrd-calc-ch-note" id="pbrd-calc-ch-note" style="display:none">' +
+              '<span>Assumed split: 70% online, 30% in-store</span>' +
+            '</div>' +
+          '</div>' +
+
+        '</div>' +
+
+        /* ── Right: Results ── */
+        '<div class="pbrd-calc-results">' +
+
+          '<div class="pbrd-calc-savings-hero">' +
+            '<div class="pbrd-calc-save-label">Annual savings</div>' +
+            '<div class="pbrd-calc-save-amount" id="pbrd-calc-savings">\u20AC0</div>' +
+            '<div class="pbrd-calc-save-pct" id="pbrd-calc-save-pct">0% less</div>' +
+          '</div>' +
+
+          '<div class="pbrd-calc-bars">' +
+            '<div class="pbrd-calc-bar-row">' +
+              '<span class="pbrd-calc-bar-name" id="pbrd-calc-comp-name">Mollie</span>' +
+              '<div class="pbrd-calc-bar-track"><div class="pbrd-calc-bar pbrd-calc-bar--them" id="pbrd-calc-bar-them"></div></div>' +
+              '<span class="pbrd-calc-bar-val" id="pbrd-calc-cost-them">\u20AC0/mo</span>' +
+            '</div>' +
+            '<div class="pbrd-calc-bar-row">' +
+              '<span class="pbrd-calc-bar-name">Paybyrd</span>' +
+              '<div class="pbrd-calc-bar-track"><div class="pbrd-calc-bar pbrd-calc-bar--us" id="pbrd-calc-bar-us"></div></div>' +
+              '<span class="pbrd-calc-bar-val pbrd-calc-bar-val--us" id="pbrd-calc-cost-us">\u20AC0/mo</span>' +
+            '</div>' +
+          '</div>' +
+
+          '<div class="pbrd-calc-breakdown" id="pbrd-calc-breakdown"></div>' +
+
+          '<a href="/book-demo" class="pbrd-calc-cta">Switch to Paybyrd \u2192</a>' +
+          '<p class="pbrd-calc-disclaimer">Based on blended EEA card rates, \u20AC50 avg. transaction. Actual savings depend on card mix, geography, and volume. Paybyrd rates: cards 1.25% + \u20AC0.08, APMs from \u20AC0.20, CP from 0.50%.</p>' +
+
+        '</div>' +
+
+      '</div>';
+
+    section.appendChild(wrap);
+
+    /* ═══ Event Handlers ═══ */
+
+    /* Provider selection */
+    wrap.querySelectorAll(".pbrd-calc-provider").forEach(function (el) {
+      el.addEventListener("click", function () {
+        wrap.querySelectorAll(".pbrd-calc-provider").forEach(function (p) { p.classList.remove("pbrd-calc-provider--active"); });
+        el.classList.add("pbrd-calc-provider--active");
+        selectedProvider = el.getAttribute("data-provider");
+        /* Hide CP option if provider has no CP */
+        var comp = competitors[selectedProvider];
+        var chNote = document.getElementById("pbrd-calc-ch-note");
+        if (!comp.cp && channelMode === "both") {
+          channelMode = "online";
+          wrap.querySelectorAll(".pbrd-calc-ch").forEach(function (b) { b.classList.remove("pbrd-calc-ch--active"); });
+          wrap.querySelector('[data-ch="online"]').classList.add("pbrd-calc-ch--active");
+          if (chNote) chNote.style.display = "none";
         }
-      }
-
-      if (textOverrides[idx]) {
-        var ov = textOverrides[idx];
-        var tag = card.querySelector(".tag_wrap-2");
-        if (tag) tag.textContent = ov.tag;
-        var h3 = card.querySelector(".card-1_content h3");
-        if (h3) h3.textContent = ov.heading;
-        var p = card.querySelector(".card-1_content .u-color-faded p");
-        if (p) p.textContent = ov.desc;
-      }
-
-      var spot = document.createElement("div");
-      spot.className = "pbrd-spotlight";
-      card.appendChild(spot);
-      card.addEventListener("mousemove", function (e) {
-        var r = card.getBoundingClientRect();
-        spot.style.left = (e.clientX - r.left) + "px";
-        spot.style.top = (e.clientY - r.top) + "px";
+        updateResults();
       });
     });
 
-    /* ═══ Start live animations ═══ */
-    startLive();
-  }
+    /* Volume slider */
+    var slider = document.getElementById("pbrd-calc-slider");
+    var volInput = document.getElementById("pbrd-calc-vol-input");
 
-  function startLive() {
-    /* Approval rate ticker */
-    var rateEl = document.getElementById("pbrd-bv-rate");
-    if (rateEl) {
-      setInterval(function() {
-        var v = 97.6 + Math.random() * 1.2;
-        rateEl.textContent = v.toFixed(1);
-      }, 2500);
-    }
+    slider.addEventListener("input", function () {
+      monthlyVolume = parseInt(slider.value);
+      volInput.value = monthlyVolume.toLocaleString("en");
+      updateResults();
+    });
 
-    /* Transaction counter */
-    var txnEl = document.getElementById("pbrd-bv-txn");
-    if (txnEl) {
-      var txnCount = 1247;
-      setInterval(function() {
-        txnCount += Math.floor(Math.random() * 8) + 1;
-        txnEl.textContent = txnCount.toLocaleString();
-      }, 1800);
-    }
+    volInput.addEventListener("input", function () {
+      var raw = volInput.value.replace(/[^0-9]/g, "");
+      var val = parseInt(raw) || 5000;
+      if (val > 10000000) val = 10000000;
+      monthlyVolume = val;
+      slider.value = Math.min(val, 2000000);
+      updateResults();
+    });
 
-    /* Shoppers counter */
-    var shopEl = document.getElementById("pbrd-bv-shoppers");
-    if (shopEl) {
-      var shopCount = 847;
-      setInterval(function() {
-        shopCount += Math.floor(Math.random() * 3);
-        shopEl.textContent = shopCount.toLocaleString();
-      }, 4000);
-    }
+    volInput.addEventListener("blur", function () {
+      volInput.value = monthlyVolume.toLocaleString("en");
+    });
 
-    /* Security feed */
-    var feedEl = document.getElementById("pbrd-bv-feed");
-    var feedIdx = 0;
-    function addFeedItem() {
-      if (!feedEl) return;
-      var txn = feedTxns[feedIdx % feedTxns.length];
-      feedIdx++;
-      var item = document.createElement("div");
-      item.className = "pbrd-bv-feed-item" + (txn.ok ? "" : " pbrd-bv-feed-blocked");
-      item.style.opacity = "0";
-      item.innerHTML = '<span class="pbrd-bv-feed-icon">' + (txn.ok ? "\u2713" : "\u2716") + '</span>' +
-        '<span class="pbrd-bv-feed-card">' + txn.card + '</span>' +
-        '<span class="pbrd-bv-feed-amt">' + txn.amount + '</span>';
-      if (feedEl.children.length >= 3) {
-        var old = feedEl.lastChild;
-        old.style.opacity = "0";
-        setTimeout(function() { if (old.parentNode) old.parentNode.removeChild(old); }, 300);
-      }
-      feedEl.insertBefore(item, feedEl.firstChild);
-      setTimeout(function() { item.style.opacity = "1"; }, 50);
-      setTimeout(addFeedItem, txn.ok ? 2200 : 3500);
-    }
-    if (feedEl) setTimeout(addFeedItem, 1000);
+    /* Channel toggle */
+    wrap.querySelectorAll(".pbrd-calc-ch").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        wrap.querySelectorAll(".pbrd-calc-ch").forEach(function (b) { b.classList.remove("pbrd-calc-ch--active"); });
+        btn.classList.add("pbrd-calc-ch--active");
+        channelMode = btn.getAttribute("data-ch");
+        var chNote = document.getElementById("pbrd-calc-ch-note");
+        if (chNote) chNote.style.display = channelMode === "both" ? "" : "none";
+        updateResults();
+      });
+    });
 
-    /* Revenue counter */
-    var revEl = document.getElementById("pbrd-bv-rev");
-    if (revEl) {
-      var revCount = 2847391;
-      setInterval(function() {
-        revCount += Math.floor(Math.random() * 500) + 80;
-        revEl.textContent = revCount.toLocaleString();
-      }, 1200);
-    }
-
-    /* Live payment stream */
-    var streamEl = document.getElementById("pbrd-bv-stream");
-    var streamMethods = [
-      { icon: "\uD83D\uDCB3", name: "Visa", flag: "\uD83C\uDDF3\uD83C\uDDF1" },
-      { icon: "\uD83D\uDCB3", name: "MC", flag: "\uD83C\uDDE9\uD83C\uDDEA" },
-      { icon: "\uD83D\uDCF1", name: "Apple Pay", flag: "\uD83C\uDDEB\uD83C\uDDF7" },
-      { icon: "\uD83D\uDCB3", name: "iDEAL", flag: "\uD83C\uDDF3\uD83C\uDDF1" },
-      { icon: "\uD83D\uDCB3", name: "MB Way", flag: "\uD83C\uDDF5\uD83C\uDDF9" },
-      { icon: "\uD83D\uDCF1", name: "Google Pay", flag: "\uD83C\uDDEC\uD83C\uDDE7" },
-      { icon: "\uD83D\uDCB3", name: "AMEX", flag: "\uD83C\uDDFA\uD83C\uDDF8" },
-      { icon: "\uD83D\uDCB3", name: "Bancontact", flag: "\uD83C\uDDE7\uD83C\uDDEA" }
-    ];
-    var streamIdx = 0;
-    function addStreamItem() {
-      if (!streamEl) return;
-      var m = streamMethods[streamIdx % streamMethods.length];
-      streamIdx++;
-      var amt = (Math.random() * 400 + 15).toFixed(2);
-      var item = document.createElement("div");
-      item.className = "pbrd-bv-stream-item";
-      item.style.opacity = "0";
-      item.innerHTML = '<span class="pbrd-bv-stream-flag">' + m.flag + '</span>' +
-        '<span class="pbrd-bv-stream-name">' + m.name + '</span>' +
-        '<span class="pbrd-bv-stream-amt">\u20AC' + parseFloat(amt).toLocaleString() + '</span>';
-      if (streamEl.children.length >= 3) {
-        var old = streamEl.lastChild;
-        old.style.opacity = "0";
-        setTimeout(function() { if (old.parentNode) old.parentNode.removeChild(old); }, 300);
-      }
-      streamEl.insertBefore(item, streamEl.firstChild);
-      setTimeout(function() { item.style.opacity = "1"; }, 50);
-      setTimeout(addStreamItem, 1500);
-    }
-    if (streamEl) setTimeout(addStreamItem, 800);
+    /* Initial calculation */
+    updateResults();
   }
 
   if (document.readyState === "complete") {
