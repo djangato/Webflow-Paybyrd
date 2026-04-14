@@ -607,61 +607,69 @@
     wrap.innerHTML =
       '<div class="pbrd-hosp-stack-header">' +
         '<div class="pbrd-hosp-section-label pbrd-hosp-reveal">INTEGRATION SPEED</div>' +
-        '<h2 class="pbrd-hosp-stack-h2 pbrd-hosp-reveal">Other platforms take months.<br>We take days.</h2>' +
-        '<p class="pbrd-hosp-stack-sub pbrd-hosp-reveal">Full PMS, ERP, and booking engine integration. New properties onboarded in days, not months.</p>' +
+        '<h2 class="pbrd-hosp-stack-h2 pbrd-hosp-reveal">Your competitors spent 6 months integrating.<br>You won\u2019t.</h2>' +
+        '<p class="pbrd-hosp-stack-sub pbrd-hosp-reveal">Every week your payment platform isn\u2019t live costs you revenue. Paybyrd plugs into your PMS, ERP, and booking engine in days \u2014 with pre-built connectors, not custom dev work.</p>' +
       '</div>' +
 
       '<div class="pbrd-hosp-stack-timeline pbrd-hosp-reveal">' +
         '<div class="pbrd-hosp-stack-tl-row">' +
           '<span class="pbrd-hosp-stack-tl-label">PROPERTY ONBOARDING</span>' +
           '<div class="pbrd-hosp-stack-tl-bars">' +
-            '<div class="pbrd-hosp-stack-tl-bar pbrd-hosp-stack-tl--them" style="width:75%"><span>Competitors: 4\u20138 weeks</span></div>' +
-            '<div class="pbrd-hosp-stack-tl-bar pbrd-hosp-stack-tl--us" data-w="10"><span>Paybyrd: Days</span></div>' +
+            '<div class="pbrd-hosp-stack-tl-bar pbrd-hosp-stack-tl--them" style="width:80%"><span>Competitors: 4\u20138 weeks</span></div>' +
+            '<div class="pbrd-hosp-stack-tl-bar pbrd-hosp-stack-tl--us" data-w="22"><span>Paybyrd: Days</span></div>' +
           '</div>' +
         '</div>' +
         '<div class="pbrd-hosp-stack-tl-row">' +
           '<span class="pbrd-hosp-stack-tl-label">PMS INTEGRATION</span>' +
           '<div class="pbrd-hosp-stack-tl-bars">' +
-            '<div class="pbrd-hosp-stack-tl-bar pbrd-hosp-stack-tl--them" style="width:60%"><span>Competitors: 6\u201312 weeks</span></div>' +
-            '<div class="pbrd-hosp-stack-tl-bar pbrd-hosp-stack-tl--us" data-w="12"><span>Paybyrd: Pre-built</span></div>' +
+            '<div class="pbrd-hosp-stack-tl-bar pbrd-hosp-stack-tl--them" style="width:70%"><span>Competitors: 6\u201312 weeks</span></div>' +
+            '<div class="pbrd-hosp-stack-tl-bar pbrd-hosp-stack-tl--us" data-w="24"><span>Paybyrd: Pre-built</span></div>' +
           '</div>' +
         '</div>' +
         '<div class="pbrd-hosp-stack-tl-row">' +
           '<span class="pbrd-hosp-stack-tl-label">NEW PAYMENT METHOD</span>' +
           '<div class="pbrd-hosp-stack-tl-bars">' +
-            '<div class="pbrd-hosp-stack-tl-bar pbrd-hosp-stack-tl--them" style="width:55%"><span>Competitors: 4\u20138 weeks</span></div>' +
-            '<div class="pbrd-hosp-stack-tl-bar pbrd-hosp-stack-tl--us" data-w="8"><span>Paybyrd: 48h</span></div>' +
+            '<div class="pbrd-hosp-stack-tl-bar pbrd-hosp-stack-tl--them" style="width:65%"><span>Competitors: 4\u20138 weeks</span></div>' +
+            '<div class="pbrd-hosp-stack-tl-bar pbrd-hosp-stack-tl--us" data-w="20"><span>Paybyrd: 48 hours</span></div>' +
           '</div>' +
         '</div>' +
         '<div class="pbrd-hosp-stack-tl-row">' +
           '<span class="pbrd-hosp-stack-tl-label">MULTI-PROPERTY ROLLOUT</span>' +
           '<div class="pbrd-hosp-stack-tl-bars">' +
-            '<div class="pbrd-hosp-stack-tl-bar pbrd-hosp-stack-tl--them" style="width:85%"><span>Competitors: 3\u20136 months</span></div>' +
-            '<div class="pbrd-hosp-stack-tl-bar pbrd-hosp-stack-tl--us" data-w="15"><span>Paybyrd: Weeks</span></div>' +
+            '<div class="pbrd-hosp-stack-tl-bar pbrd-hosp-stack-tl--them" style="width:90%"><span>Competitors: 3\u20136 months</span></div>' +
+            '<div class="pbrd-hosp-stack-tl-bar pbrd-hosp-stack-tl--us" data-w="22"><span>Paybyrd: Days</span></div>' +
           '</div>' +
         '</div>' +
+      '</div>' +
+
+      /* Impact callout */
+      '<div class="pbrd-hosp-stack-impact pbrd-hosp-reveal" style="text-align:center;margin:32px 0 40px;padding:20px 24px;border-radius:10px;background:rgba(99,25,240,0.06);border:1px solid rgba(99,25,240,0.12);">' +
+        '<p style="font-size:0.9375rem;color:rgba(255,255,255,0.7);margin:0;line-height:1.6;">' +
+          'Vila Gal\u00e9 onboarded <strong style="color:#fff;">40+ properties</strong> without a single day of downtime. ' +
+          'Their teams didn\u2019t need training \u2014 Paybyrd was embedded directly into the systems they already use.' +
+        '</p>' +
       '</div>' +
 
       '<div class="pbrd-hosp-stack-grid">' +
         '<div class="pbrd-hosp-stack-card pbrd-hosp-reveal">' +
           iconDatabase +
           '<h4>PMS Systems</h4>' +
-          '<p>Opera, Mews, Protel, Newhotel. Pre-built connectors, room charge auto-posting.</p>' +
+          '<p>Opera, Mews, Protel, Newhotel. Pre-built connectors, room charge auto-posting. Zero custom dev.</p>' +
         '</div>' +
         '<div class="pbrd-hosp-stack-card pbrd-hosp-reveal">' +
           iconChart +
           '<h4>ERP & Finance</h4>' +
-          '<p>SAP, Oracle, Dynamics. Direct API. Gross settlement for easy reconciliation.</p>' +
+          '<p>SAP, Oracle, Dynamics. Direct API integration. Gross settlement for instant reconciliation.</p>' +
         '</div>' +
         '<div class="pbrd-hosp-stack-card pbrd-hosp-reveal">' +
           iconGlobe +
           '<h4>Booking Engines</h4>' +
-          '<p>Direct booking, OTA reconciliation, channel manager integration. Virtual card auto-processing.</p>' +
+          '<p>Direct booking, OTA reconciliation, channel managers. Virtual card auto-processing included.</p>' +
         '</div>' +
         '<div class="pbrd-hosp-stack-card pbrd-hosp-reveal">' +
           iconServer +
           '<h4>Self-Hosted Option</h4>' +
-          '<p>Run on your own infrastructure. Full PCI scope control. Zero vendor lock-in.</p>' +
+          '<p>Run on your own infrastructure. Full PCI scope control. Zero vendor lock-in, ever.</p>' +
         '</div>' +
       '</div>';
 
