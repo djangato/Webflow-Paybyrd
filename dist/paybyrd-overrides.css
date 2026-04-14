@@ -11249,6 +11249,40 @@ a.glowing_button_link .glowing_button_text {
   color:#111; font-weight:700;
 }
 
+/* ═══ FEATURE SHOWCASE ═══ */
+.pbrd-air-feat-wrap {
+  max-width:1100px; margin:0 auto; padding:40px 24px 0;
+}
+
+.pbrd-air-feat-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:40px;
+}
+
+.pbrd-air-feat-card {
+  background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);
+  border-radius:16px; overflow:hidden;
+  transition:border-color 0.3s ease, transform 0.3s ease;
+}
+.pbrd-air-feat-card:hover {
+  border-color:rgba(99,25,240,0.2); transform:translateY(-3px);
+}
+
+.pbrd-air-feat-visual {
+  padding:20px 16px 8px; display:flex; justify-content:center;
+  background:rgba(99,25,240,0.02); border-bottom:1px solid rgba(255,255,255,0.04);
+}
+
+.pbrd-air-feat-svg { width:100%; max-width:240px; height:auto; }
+
+.pbrd-air-feat-card h4 {
+  font-size:1rem; font-weight:700; color:#fff; margin:0 0 6px; padding:20px 20px 0;
+}
+
+.pbrd-air-feat-card p {
+  font-size:0.8125rem; color:rgba(255,255,255,0.4); line-height:1.55;
+  margin:0; padding:0 20px 20px;
+}
+
 /* ═══ BENCHMARK ═══ */
 .pbrd-air-benchmark {
   margin-top:48px; max-width:680px; margin-left:auto; margin-right:auto;
@@ -11375,6 +11409,7 @@ a.glowing_button_link .glowing_button_text {
   .pbrd-air-txn-feed { display:none; }
   .pbrd-air-leak-grid { grid-template-columns:1fr 1fr; }
   .pbrd-air-leak-card { border-bottom:1px solid rgba(255,255,255,0.04); }
+  .pbrd-air-feat-grid { grid-template-columns:1fr; }
   .pbrd-air-test-results { flex-wrap:wrap; gap:20px; padding:20px; }
   .pbrd-air-test-divider { display:none; }
   .pbrd-air-test-result { min-width:40%; }

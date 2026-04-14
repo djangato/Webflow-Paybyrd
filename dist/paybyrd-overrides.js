@@ -7778,61 +7778,163 @@
   function enhanceFeatures() {
     var heading = findHeading("built for the way airlines");
     if (!heading) return;
-    heading.textContent = "Built for airlines. Proven in production.";
     var section = heading.closest("section") || heading.closest("[class*='section']");
     if (!section) return;
 
-    var updates = [
-      { find: "global", text: "Process in 192+ currencies with local routing. 4\u20137% higher authorization rates. 10\u201315% lower cross-border fees." },
-      { find: "dashboard", text: "Route-level filters, real-time reconciliation, role-based views. Track by country, channel, or payment method." },
-      { find: "fraud", text: "AI velocity screening + shared fraud database. 3D Secure. Automated disputes. Result: 16.8% chargeback reduction." },
-      { find: "flexibility", text: "Connects to Amadeus, IATA, GDS, BSP, NDC. Self-host modules or use full-stack. Like Lego blocks for payments." }
-    ];
-    section.querySelectorAll("p").forEach(function(p) {
-      var t = p.textContent.toLowerCase();
-      updates.forEach(function(u) { if (t.includes(u.find)) p.textContent = u.text; });
+    /* Hide existing Webflow cards + heading + CTA */
+    section.querySelectorAll("[class*='card-8'], [class*='card_8']").forEach(function(el) {
+      el.style.setProperty("display", "none", "important");
+    });
+    heading.style.setProperty("display", "none", "important");
+    section.querySelectorAll("a").forEach(function(a) {
+      if (a.textContent.toLowerCase().includes("book consultation")) a.style.setProperty("display", "none", "important");
+    });
+    /* Hide the grid wrapper too */
+    section.querySelectorAll("[class*='grid-1'], [class*='grid_1']").forEach(function(el) {
+      el.style.setProperty("display", "none", "important");
     });
 
-    /* Benchmark chart */
-    var bench = document.createElement("div");
-    bench.className = "pbrd-air-benchmark pbrd-air-reveal";
-    bench.id = "benchmark";
-    bench.innerHTML =
-      '<div class="pbrd-air-bench-header">' +
-        '<div class="pbrd-air-section-label">APPROVAL RATE ADVANTAGE</div>' +
-        '<h4>Paybyrd vs. the competition</h4>' +
-        '<p>Production data from airline transactions</p>' +
+    var showcase = document.createElement("div");
+    showcase.className = "pbrd-air-feat-wrap";
+    showcase.innerHTML =
+      '<div class="pbrd-air-feat-header pbrd-air-reveal" style="text-align:center;margin-bottom:40px;">' +
+        '<div class="pbrd-air-section-label">THE PAYBYRD ADVANTAGE</div>' +
+        '<h2 style="font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:700;color:#fff;margin:8px 0 12px;letter-spacing:-0.02em;">Four engines powering your payments.</h2>' +
+        '<p style="font-size:1rem;color:rgba(255,255,255,0.4);max-width:500px;margin:0 auto;">Each one solves a problem that costs airlines millions.</p>' +
       '</div>' +
-      '<div class="pbrd-air-bench-rows">' +
-        '<div class="pbrd-air-bench-row"><span class="pbrd-air-bench-name">vs Adyen</span><div class="pbrd-air-bench-bar-wrap"><div class="pbrd-air-bench-bar pbrd-air-bench-bar--1" data-w="35"></div></div><span class="pbrd-air-bench-val">+1.72%</span></div>' +
-        '<div class="pbrd-air-bench-row"><span class="pbrd-air-bench-name">vs Elavon</span><div class="pbrd-air-bench-bar-wrap"><div class="pbrd-air-bench-bar pbrd-air-bench-bar--2" data-w="64"></div></div><span class="pbrd-air-bench-val">+3.16%</span></div>' +
-        '<div class="pbrd-air-bench-row"><span class="pbrd-air-bench-name">vs Checkout.com</span><div class="pbrd-air-bench-bar-wrap"><div class="pbrd-air-bench-bar pbrd-air-bench-bar--3" data-w="98"></div></div><span class="pbrd-air-bench-val">+4.86%</span></div>' +
-        '<div class="pbrd-air-bench-row pbrd-air-bench-row--top"><span class="pbrd-air-bench-name">vs Nuvei</span><div class="pbrd-air-bench-bar-wrap"><div class="pbrd-air-bench-bar pbrd-air-bench-bar--4" data-w="100"></div></div><span class="pbrd-air-bench-val">+4.92%</span></div>' +
+      '<div class="pbrd-air-feat-grid">' +
+        /* 1. Smart Routing */
+        '<div class="pbrd-air-feat-card pbrd-air-reveal">' +
+          '<div class="pbrd-air-feat-visual">' +
+            '<svg viewBox="0 0 240 140" fill="none" class="pbrd-air-feat-svg">' +
+              '<text x="120" y="18" text-anchor="middle" fill="rgba(255,255,255,0.15)" font-size="7" font-family="system-ui" font-weight="600">TRANSACTION \u20ac342.50</text>' +
+              '<rect x="80" y="28" width="80" height="24" rx="6" fill="rgba(99,25,240,0.1)" stroke="rgba(99,25,240,0.3)" stroke-width="1"/>' +
+              '<text x="120" y="44" text-anchor="middle" fill="#6319f0" font-size="8" font-weight="600" font-family="system-ui">SMART ROUTER</text>' +
+              '<line x1="90" y1="52" x2="40" y2="82" stroke="rgba(239,68,68,0.2)" stroke-width="1" stroke-dasharray="3 3"/>' +
+              '<line x1="120" y1="52" x2="120" y2="82" stroke="rgba(34,197,94,0.4)" stroke-width="1.5"/>' +
+              '<line x1="150" y1="52" x2="200" y2="82" stroke="rgba(239,68,68,0.2)" stroke-width="1" stroke-dasharray="3 3"/>' +
+              '<rect x="15" y="82" width="50" height="18" rx="4" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)" stroke-width="0.6"/>' +
+              '<text x="40" y="94" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-size="6" font-family="system-ui">Acquirer A</text>' +
+              '<rect x="95" y="82" width="50" height="18" rx="4" fill="rgba(34,197,94,0.08)" stroke="rgba(34,197,94,0.25)" stroke-width="0.8"/>' +
+              '<text x="120" y="94" text-anchor="middle" fill="rgba(34,197,94,0.8)" font-size="6" font-weight="600" font-family="system-ui">Local Bank \u2713</text>' +
+              '<rect x="175" y="82" width="50" height="18" rx="4" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)" stroke-width="0.6"/>' +
+              '<text x="200" y="94" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-size="6" font-family="system-ui">Acquirer C</text>' +
+              '<text x="120" y="120" text-anchor="middle" fill="rgba(34,197,94,0.7)" font-size="7" font-weight="600" font-family="system-ui">\u2713 Routed locally \u2192 4\u20137% higher auth</text>' +
+              '<circle r="3" fill="#22c55e" opacity="0.8"><animateMotion dur="1.5s" repeatCount="indefinite" path="M120,52 L120,82"/><animate attributeName="opacity" values="0;0.8;0" dur="1.5s" repeatCount="indefinite"/></circle>' +
+            '</svg>' +
+          '</div>' +
+          '<h4>Smart Multi-Acquirer Routing</h4>' +
+          '<p>Each transaction routes to the optimal local acquirer. 192+ currencies. 4\u20137% higher authorization. 10\u201315% lower fees.</p>' +
+        '</div>' +
+        /* 2. Fraud Shield */
+        '<div class="pbrd-air-feat-card pbrd-air-reveal">' +
+          '<div class="pbrd-air-feat-visual">' +
+            '<svg viewBox="0 0 240 140" fill="none" class="pbrd-air-feat-svg">' +
+              '<path d="M120 15 L160 35 L160 75 C160 100 140 115 120 125 C100 115 80 100 80 75 L80 35 Z" fill="rgba(99,25,240,0.06)" stroke="rgba(99,25,240,0.25)" stroke-width="1.2"/>' +
+              '<path d="M108 70 L116 78 L134 58" stroke="#6319f0" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>' +
+              '<circle cx="50" cy="45" r="4" fill="rgba(239,68,68,0.15)" stroke="rgba(239,68,68,0.4)" stroke-width="0.8"><animate attributeName="cx" values="50;75;50" dur="3s" repeatCount="indefinite"/></circle>' +
+              '<text x="50" y="48" text-anchor="middle" fill="rgba(239,68,68,0.5)" font-size="5" font-family="system-ui">\u2718</text>' +
+              '<circle cx="190" cy="60" r="4" fill="rgba(239,68,68,0.15)" stroke="rgba(239,68,68,0.4)" stroke-width="0.8"><animate attributeName="cx" values="190;165;190" dur="2.5s" repeatCount="indefinite"/></circle>' +
+              '<circle cx="65" cy="90" r="3" fill="rgba(239,68,68,0.1)"><animate attributeName="cx" values="65;82;65" dur="3.5s" repeatCount="indefinite"/></circle>' +
+              '<text x="120" y="135" text-anchor="middle" fill="rgba(99,25,240,0.6)" font-size="7" font-weight="600" font-family="system-ui">16.8% chargeback reduction</text>' +
+            '</svg>' +
+          '</div>' +
+          '<h4>AI Fraud Shield</h4>' +
+          '<p>Velocity screening + shared merchant database. 3D Secure, automated disputes. Threats blocked before they reach you.</p>' +
+        '</div>' +
+        /* 3. Dashboard */
+        '<div class="pbrd-air-feat-card pbrd-air-reveal">' +
+          '<div class="pbrd-air-feat-visual">' +
+            '<svg viewBox="0 0 240 140" fill="none" class="pbrd-air-feat-svg">' +
+              '<rect x="20" y="10" width="200" height="110" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)" stroke-width="0.8"/>' +
+              '<rect x="20" y="10" width="200" height="20" rx="8" fill="rgba(255,255,255,0.04)"/>' +
+              '<circle cx="34" cy="20" r="3" fill="rgba(239,68,68,0.4)"/><circle cx="44" cy="20" r="3" fill="rgba(245,158,11,0.4)"/><circle cx="54" cy="20" r="3" fill="rgba(34,197,94,0.4)"/>' +
+              '<text x="120" y="23" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="6" font-family="system-ui">Paybyrd Dashboard</text>' +
+              '<rect x="35" y="90" width="14" height="20" rx="2" fill="rgba(99,25,240,0.3)"><animate attributeName="height" values="20;35;20" dur="3s" repeatCount="indefinite"/><animate attributeName="y" values="90;75;90" dur="3s" repeatCount="indefinite"/></rect>' +
+              '<rect x="55" y="80" width="14" height="30" rx="2" fill="rgba(99,25,240,0.4)"><animate attributeName="height" values="30;22;30" dur="2.5s" repeatCount="indefinite"/><animate attributeName="y" values="80;88;80" dur="2.5s" repeatCount="indefinite"/></rect>' +
+              '<rect x="75" y="70" width="14" height="40" rx="2" fill="rgba(99,25,240,0.5)"><animate attributeName="height" values="40;45;40" dur="3.2s" repeatCount="indefinite"/><animate attributeName="y" values="70;65;70" dur="3.2s" repeatCount="indefinite"/></rect>' +
+              '<rect x="95" y="60" width="14" height="50" rx="2" fill="rgba(99,25,240,0.6)"><animate attributeName="height" values="50;38;50" dur="2.8s" repeatCount="indefinite"/><animate attributeName="y" values="60;72;60" dur="2.8s" repeatCount="indefinite"/></rect>' +
+              '<rect x="115" y="55" width="14" height="55" rx="2" fill="#6319f0"><animate attributeName="height" values="55;60;55" dur="3s" repeatCount="indefinite"/><animate attributeName="y" values="55;50;55" dur="3s" repeatCount="indefinite"/></rect>' +
+              '<rect x="145" y="55" width="65" height="22" rx="4" fill="rgba(34,197,94,0.06)" stroke="rgba(34,197,94,0.15)" stroke-width="0.6"/>' +
+              '<text x="178" y="68" text-anchor="middle" fill="rgba(34,197,94,0.8)" font-size="7" font-weight="600" font-family="system-ui">98.4% auth</text>' +
+              '<rect x="145" y="82" width="65" height="22" rx="4" fill="rgba(99,25,240,0.06)" stroke="rgba(99,25,240,0.15)" stroke-width="0.6"/>' +
+              '<text x="178" y="95" text-anchor="middle" fill="rgba(99,25,240,0.7)" font-size="7" font-weight="600" font-family="system-ui">\u20ac2.4M today</text>' +
+            '</svg>' +
+          '</div>' +
+          '<h4>Real-Time Analytics</h4>' +
+          '<p>Route-level filters, live reconciliation, role-based views for finance, ops, and support. Track by country, channel, or method.</p>' +
+        '</div>' +
+        /* 4. Modular Architecture */
+        '<div class="pbrd-air-feat-card pbrd-air-reveal">' +
+          '<div class="pbrd-air-feat-visual">' +
+            '<svg viewBox="0 0 240 140" fill="none" class="pbrd-air-feat-svg">' +
+              '<rect x="85" y="50" width="70" height="30" rx="8" fill="rgba(99,25,240,0.1)" stroke="rgba(99,25,240,0.3)" stroke-width="1"/>' +
+              '<text x="120" y="69" text-anchor="middle" fill="#6319f0" font-size="7" font-weight="700" font-family="system-ui">PAYBYRD</text>' +
+              '<rect x="10" y="10" width="55" height="20" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)" stroke-width="0.6"/>' +
+              '<text x="38" y="23" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="6" font-weight="600" font-family="system-ui">Amadeus</text>' +
+              '<line x1="65" y1="30" x2="90" y2="50" stroke="rgba(99,25,240,0.2)" stroke-width="0.8" stroke-dasharray="3 2"/>' +
+              '<rect x="175" y="10" width="55" height="20" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)" stroke-width="0.6"/>' +
+              '<text x="203" y="23" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="6" font-weight="600" font-family="system-ui">IATA</text>' +
+              '<line x1="175" y1="30" x2="150" y2="50" stroke="rgba(99,25,240,0.2)" stroke-width="0.8" stroke-dasharray="3 2"/>' +
+              '<rect x="10" y="100" width="40" height="20" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)" stroke-width="0.6"/>' +
+              '<text x="30" y="113" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="6" font-weight="600" font-family="system-ui">GDS</text>' +
+              '<line x1="50" y1="100" x2="90" y2="80" stroke="rgba(99,25,240,0.2)" stroke-width="0.8" stroke-dasharray="3 2"/>' +
+              '<rect x="80" y="100" width="40" height="20" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)" stroke-width="0.6"/>' +
+              '<text x="100" y="113" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="6" font-weight="600" font-family="system-ui">BSP</text>' +
+              '<line x1="100" y1="100" x2="110" y2="80" stroke="rgba(99,25,240,0.2)" stroke-width="0.8" stroke-dasharray="3 2"/>' +
+              '<rect x="150" y="100" width="40" height="20" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)" stroke-width="0.6"/>' +
+              '<text x="170" y="113" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="6" font-weight="600" font-family="system-ui">NDC</text>' +
+              '<line x1="150" y1="100" x2="140" y2="80" stroke="rgba(99,25,240,0.2)" stroke-width="0.8" stroke-dasharray="3 2"/>' +
+              '<rect x="185" y="55" width="50" height="20" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.1)" stroke-width="0.6"/>' +
+              '<text x="210" y="68" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="6" font-weight="600" font-family="system-ui">Custom</text>' +
+              '<line x1="185" y1="65" x2="155" y2="65" stroke="rgba(99,25,240,0.2)" stroke-width="0.8" stroke-dasharray="3 2"/>' +
+              '<circle r="2" fill="#6319f0" opacity="0"><animateMotion dur="2s" begin="0s" repeatCount="indefinite" path="M38,30 L90,50"/><animate attributeName="opacity" values="0;0.6;0" dur="2s" repeatCount="indefinite"/></circle>' +
+              '<circle r="2" fill="#6319f0" opacity="0"><animateMotion dur="2.5s" begin="0.5s" repeatCount="indefinite" path="M203,30 L150,50"/><animate attributeName="opacity" values="0;0.6;0" dur="2.5s" repeatCount="indefinite"/></circle>' +
+              '<circle r="2" fill="#6319f0" opacity="0"><animateMotion dur="2s" begin="1s" repeatCount="indefinite" path="M30,100 L90,80"/><animate attributeName="opacity" values="0;0.6;0" dur="2s" repeatCount="indefinite"/></circle>' +
+            '</svg>' +
+          '</div>' +
+          '<h4>Modular Architecture</h4>' +
+          '<p>Connects to Amadeus, IATA, GDS, BSP, NDC. Self-host modules or use full-stack. Like Lego blocks for payments.</p>' +
+        '</div>' +
       '</div>' +
-      '<div class="pbrd-air-bench-footer">' +
-        '<a href="/book-demo" class="pbrd-air-cta-primary" style="margin-top:24px">See your projected uplift \u2192</a>' +
+      /* Benchmark */
+      '<div class="pbrd-air-benchmark pbrd-air-reveal" id="benchmark">' +
+        '<div class="pbrd-air-bench-header">' +
+          '<div class="pbrd-air-section-label">APPROVAL RATE ADVANTAGE</div>' +
+          '<h4>Paybyrd vs. the competition</h4>' +
+          '<p>Production data from airline transactions</p>' +
+        '</div>' +
+        '<div class="pbrd-air-bench-rows">' +
+          '<div class="pbrd-air-bench-row"><span class="pbrd-air-bench-name">vs Adyen</span><div class="pbrd-air-bench-bar-wrap"><div class="pbrd-air-bench-bar pbrd-air-bench-bar--1" data-w="35"></div></div><span class="pbrd-air-bench-val">+1.72%</span></div>' +
+          '<div class="pbrd-air-bench-row"><span class="pbrd-air-bench-name">vs Elavon</span><div class="pbrd-air-bench-bar-wrap"><div class="pbrd-air-bench-bar pbrd-air-bench-bar--2" data-w="64"></div></div><span class="pbrd-air-bench-val">+3.16%</span></div>' +
+          '<div class="pbrd-air-bench-row"><span class="pbrd-air-bench-name">vs Checkout.com</span><div class="pbrd-air-bench-bar-wrap"><div class="pbrd-air-bench-bar pbrd-air-bench-bar--3" data-w="98"></div></div><span class="pbrd-air-bench-val">+4.86%</span></div>' +
+          '<div class="pbrd-air-bench-row pbrd-air-bench-row--top"><span class="pbrd-air-bench-name">vs Nuvei</span><div class="pbrd-air-bench-bar-wrap"><div class="pbrd-air-bench-bar pbrd-air-bench-bar--4" data-w="100"></div></div><span class="pbrd-air-bench-val">+4.92%</span></div>' +
+        '</div>' +
+        '<div class="pbrd-air-bench-footer">' +
+          '<a href="/book-demo" class="pbrd-air-cta-primary" style="margin-top:20px">See your projected uplift \u2192</a>' +
+        '</div>' +
       '</div>';
 
-    var grid = section.querySelector("[class*='grid']");
-    var target = grid || heading;
-    while (target.parentElement && window.getComputedStyle(target.parentElement).display === "contents") target = target.parentElement;
-    if (target.parentElement) target.parentElement.insertBefore(bench, target.nextSibling);
+    section.appendChild(showcase);
 
+    /* Animate benchmark bars */
     if ("IntersectionObserver" in window) {
-      new IntersectionObserver(function(entries) {
-        if (entries[0].isIntersecting) {
-          bench.querySelectorAll(".pbrd-air-bench-bar").forEach(function(bar, i) {
-            setTimeout(function() { bar.style.width = bar.getAttribute("data-w") + "%"; }, 200 + i * 200);
-          });
-          this.disconnect();
-        }
-      }, { threshold: 0.3 }).observe(bench);
+      var bench = showcase.querySelector(".pbrd-air-benchmark");
+      if (bench) {
+        new IntersectionObserver(function(entries) {
+          if (entries[0].isIntersecting) {
+            bench.querySelectorAll(".pbrd-air-bench-bar").forEach(function(bar, i) {
+              setTimeout(function() { bar.style.width = bar.getAttribute("data-w") + "%"; }, 200 + i * 200);
+            });
+            this.disconnect();
+          }
+        }, { threshold: 0.3 }).observe(bench);
+      }
     }
 
-    observeReveal(".pbrd-air-reveal", 100, section);
+    observeReveal(".pbrd-air-reveal", 150, section);
   }
 
-  /* ═══════════════════════════════════════════ */
   /* 4. TAP TESTIMONIAL                          */
   /* ═══════════════════════════════════════════ */
 
