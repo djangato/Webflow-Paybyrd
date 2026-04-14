@@ -9351,48 +9351,53 @@
 
     var s = document.createElement("section");
     s.className = "pbrd-hosp-cmd-section";
-    s.setAttribute("style", "padding:40px 0;background:#0a0a0f;overflow:hidden;");
+    s.setAttribute("style", "padding:48px 0;background:#0a0a0f;overflow:hidden;");
 
-    /* SVG multi-property hierarchy */
-    var properties = [
-      { name: "Lisbon Resort",  x: 120, y: 80,  d: "M350,190 Q235,100 120,80" },
-      { name: "Algarve Beach",  x: 580, y: 80,  d: "M350,190 Q465,100 580,80" },
-      { name: "Porto City",     x: 80,  y: 220, d: "M350,190 Q215,200 80,220" },
-      { name: "Cascais Spa",    x: 620, y: 220, d: "M350,190 Q485,200 620,220" },
-      { name: "Azores Lodge",   x: 160, y: 340, d: "M350,190 Q255,280 160,340" },
-      { name: "Madeira Palace", x: 540, y: 340, d: "M350,190 Q445,280 540,340" },
+    /* SVG hotel outlet map — central Dashboard hub with all outlets */
+    var CX = 350, CY = 190;
+    var outlets = [
+      { name: "Front Desk",    icon: "\u{1F3E8}", x: 120, y: 60,  d: "M350,190 Q235,90 120,60" },
+      { name: "Restaurant",    icon: "\u{1F37D}", x: 580, y: 60,  d: "M350,190 Q465,90 580,60" },
+      { name: "Spa & Wellness",icon: "\u{1F9D6}", x: 60,  y: 190, d: "M350,190 Q205,190 60,190" },
+      { name: "Bar & Lounge",  icon: "\u{1F378}", x: 640, y: 190, d: "M350,190 Q495,190 640,190" },
+      { name: "Room Service",  icon: "\u{1F6CE}", x: 140, y: 320, d: "M350,190 Q245,270 140,320" },
+      { name: "Pool & Beach",  icon: "\u{1F3CA}", x: 560, y: 320, d: "M350,190 Q455,270 560,320" },
+      { name: "Concierge",     icon: "\u{1F511}", x: 350, y: 360, d: "M350,190 Q350,275 350,360" },
     ];
 
     var svgPaths = "";
-    properties.forEach(function(p, i) {
+    outlets.forEach(function(o, i) {
       svgPaths +=
-        '<path d="' + p.d + '" fill="none" stroke="rgba(212,165,116,0.35)" stroke-width="1.5" stroke-dasharray="5 4"/>' +
-        '<circle r="4" fill="#D4A574" opacity="0">' +
-          '<animateMotion dur="' + (3 + i * 0.5) + 's" begin="' + (i * 0.8) + 's" repeatCount="indefinite" path="' + p.d + '"/>' +
-          '<animate attributeName="opacity" values="0;0.8;0.8;0" dur="' + (3 + i * 0.5) + 's" begin="' + (i * 0.8) + 's" repeatCount="indefinite"/>' +
+        '<path d="' + o.d + '" fill="none" stroke="rgba(212,165,116,0.25)" stroke-width="1.2" stroke-dasharray="4 3"/>' +
+        '<circle r="3.5" fill="#D4A574" opacity="0">' +
+          '<animateMotion dur="' + (2.5 + i * 0.4) + 's" begin="' + (i * 0.6) + 's" repeatCount="indefinite" path="' + o.d + '"/>' +
+          '<animate attributeName="opacity" values="0;0.7;0.7;0" dur="' + (2.5 + i * 0.4) + 's" begin="' + (i * 0.6) + 's" repeatCount="indefinite"/>' +
         '</circle>';
     });
 
+    /* Central dashboard hub */
     var svgDots =
-      '<circle cx="350" cy="190" r="18" fill="rgba(212,165,116,0.1)"><animate attributeName="r" values="14;22;14" dur="3s" repeatCount="indefinite"/></circle>' +
-      '<circle cx="350" cy="190" r="6" fill="#D4A574"/>' +
-      '<text x="360" y="184" fill="rgba(255,255,255,0.6)" font-size="9" font-weight="600" font-family="system-ui">HQ</text>';
+      '<circle cx="' + CX + '" cy="' + CY + '" r="24" fill="rgba(212,165,116,0.08)"><animate attributeName="r" values="20;28;20" dur="3s" repeatCount="indefinite"/></circle>' +
+      '<circle cx="' + CX + '" cy="' + CY + '" r="8" fill="#D4A574"/>' +
+      '<text x="' + CX + '" y="' + (CY - 14) + '" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="8" font-weight="700" font-family="system-ui">DASHBOARD</text>';
 
-    properties.forEach(function(p) {
+    /* Outlet nodes */
+    outlets.forEach(function(o) {
       svgDots +=
-        '<circle cx="' + p.x + '" cy="' + p.y + '" r="3.5" fill="rgba(212,165,116,0.5)"/>' +
-        '<text x="' + (p.x + 6) + '" y="' + (p.y - 6) + '" fill="rgba(255,255,255,0.2)" font-size="7" font-weight="600" font-family="system-ui">' + p.name + '</text>';
+        '<circle cx="' + o.x + '" cy="' + o.y + '" r="4" fill="rgba(212,165,116,0.4)"/>' +
+        '<text x="' + o.x + '" y="' + (o.y - 10) + '" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-size="7" font-weight="600" font-family="system-ui">' + o.name + '</text>';
     });
 
     s.innerHTML =
       '<div class="pbrd-hosp-cmd-wrap">' +
         '<div class="pbrd-hosp-cmd-header pbrd-hosp-reveal">' +
-          '<div class="pbrd-hosp-section-label">MULTI-PROPERTY COMMAND CENTER</div>' +
-          '<h2 class="pbrd-hosp-cmd-h2">Real-time visibility across<br>every property.</h2>' +
+          '<div class="pbrd-hosp-section-label">OPERATIONAL COMMAND CENTER</div>' +
+          '<h2 class="pbrd-hosp-cmd-h2">Every outlet. Every transaction.<br>One real-time dashboard.</h2>' +
+          '<p class="pbrd-hosp-cmd-sub">Front desk, restaurant, spa, bar, pool, room service \u2014 every revenue stream flows into a single dashboard. Full business intelligence to maximize revenue and drive guest satisfaction.</p>' +
         '</div>' +
         '<div class="pbrd-hosp-map-wrap pbrd-hosp-reveal">' +
           '<div class="pbrd-hosp-map-left">' +
-            '<svg viewBox="0 0 700 380" fill="none" class="pbrd-hosp-map-svg" preserveAspectRatio="xMidYMid meet">' +
+            '<svg viewBox="0 0 700 390" fill="none" class="pbrd-hosp-map-svg" preserveAspectRatio="xMidYMid meet">' +
               svgPaths + svgDots +
             '</svg>' +
           '</div>' +
