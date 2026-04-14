@@ -7665,7 +7665,7 @@
 
     /* Reduce padding above title and below graph */
     section.style.setProperty("padding-top", "24px", "important");
-    section.style.setProperty("padding-bottom", "24px", "important");
+    section.style.setProperty("padding-bottom", "12px", "important");
 
     section.querySelectorAll("p").forEach(function(p) {
       if (p.textContent.toLowerCase().includes("involving multiple") || p.textContent.toLowerCase().includes("outdated")) {
@@ -7784,6 +7784,10 @@
     if (!heading) return;
     var section = heading.closest("section") || heading.closest("[class*='section']");
     if (!section) return;
+
+    /* Reduce padding above title + dark background */
+    section.style.setProperty("padding-top", "24px", "important");
+    section.style.setProperty("background", "#0a0a0f", "important");
 
     /* Hide existing Webflow cards + heading + CTA */
     section.querySelectorAll("[class*='card-8'], [class*='card_8']").forEach(function(el) {
@@ -8383,6 +8387,9 @@
   function enhanceDataSection() {
     var section = findSectionByHeading("data that moves");
     if (!section) return;
+
+    /* Reduce spacing */
+    section.style.setProperty("padding-bottom", "24px", "important");
 
     /* Add floating data particles to the section */
     section.style.setProperty("position", "relative", "important");
