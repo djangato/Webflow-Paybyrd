@@ -118,7 +118,7 @@
         '<div class="pbrd-bv-sublabel">today across all merchants</div>' +
         '<div class="pbrd-bv-stream" id="pbrd-bv-stream"></div>' +
         '<div style="display:flex;gap:8px;margin-top:8px">' +
-          '<div class="pbrd-bv-mini" style="flex:1"><span class="pbrd-bv-mini-val" id="pbrd-bv-methods">380+</span><span class="pbrd-bv-mini-lbl">Methods</span></div>' +
+          '<div class="pbrd-bv-mini" style="flex:1"><span class="pbrd-bv-mini-val" id="pbrd-bv-methods">20+</span><span class="pbrd-bv-mini-lbl">Methods</span></div>' +
           '<div class="pbrd-bv-mini" style="flex:1"><span class="pbrd-bv-mini-val">192+</span><span class="pbrd-bv-mini-lbl">Currencies</span></div>' +
           '<div class="pbrd-bv-mini" style="flex:1"><span class="pbrd-bv-mini-val">40+</span><span class="pbrd-bv-mini-lbl">Countries</span></div>' +
         '</div>' +
@@ -136,7 +136,7 @@
     4: {
       tag: "Global Scale",
       heading: "Every payment, everywhere, in real time",
-      desc: "380+ methods, 192+ currencies, 40+ countries \u2014 all flowing through one platform."
+      desc: "20+ methods, 192+ currencies, 40+ countries \u2014 all flowing through one platform."
     }
   };
 
