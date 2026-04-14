@@ -8218,6 +8218,109 @@
   }
 
   /* ═══════════════════════════════════════════ */
+  /* 4c. WORKS WITH YOUR STACK — Full Redesign   */
+  /* ═══════════════════════════════════════════ */
+
+  function enhanceStackSection() {
+    var section = findSectionByHeading("works with your stack");
+    if (!section) return;
+
+    /* Hide existing content */
+    var heading = findHeading("works with your stack");
+    if (heading) heading.style.setProperty("display", "none", "important");
+    section.querySelectorAll("p, a, img, [class*='img']").forEach(function(el) {
+      el.style.setProperty("display", "none", "important");
+    });
+
+    /* Build new content */
+    var wrap = document.createElement("div");
+    wrap.className = "pbrd-air-stack-wrap";
+    wrap.innerHTML =
+      '<div class="pbrd-air-stack-header pbrd-air-reveal">' +
+        '<div class="pbrd-air-section-label">INTEGRATION SPEED</div>' +
+        '<h2 class="pbrd-air-stack-h2">Other platforms take months.<br>We take hours.</h2>' +
+        '<p class="pbrd-air-stack-sub">Full ERP, CRM, and booking system integration. New acquirers connected in days, not quarters. Platform changes deployed in hours, not months.</p>' +
+      '</div>' +
+
+      /* ── Speed comparison timeline ── */
+      '<div class="pbrd-air-stack-timeline pbrd-air-reveal">' +
+        '<div class="pbrd-air-stack-tl-row">' +
+          '<span class="pbrd-air-stack-tl-label">Platform change</span>' +
+          '<div class="pbrd-air-stack-tl-bars">' +
+            '<div class="pbrd-air-stack-tl-bar pbrd-air-stack-tl--them" style="width:85%"><span>Competitors: 3\u20136 months</span></div>' +
+            '<div class="pbrd-air-stack-tl-bar pbrd-air-stack-tl--us" data-w="8"><span>Paybyrd: Hours</span></div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="pbrd-air-stack-tl-row">' +
+          '<span class="pbrd-air-stack-tl-label">New acquirer</span>' +
+          '<div class="pbrd-air-stack-tl-bars">' +
+            '<div class="pbrd-air-stack-tl-bar pbrd-air-stack-tl--them" style="width:60%"><span>Competitors: 6\u201312 weeks</span></div>' +
+            '<div class="pbrd-air-stack-tl-bar pbrd-air-stack-tl--us" data-w="12"><span>Paybyrd: Days</span></div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="pbrd-air-stack-tl-row">' +
+          '<span class="pbrd-air-stack-tl-label">New payment method</span>' +
+          '<div class="pbrd-air-stack-tl-bars">' +
+            '<div class="pbrd-air-stack-tl-bar pbrd-air-stack-tl--them" style="width:50%"><span>Competitors: 4\u20138 weeks</span></div>' +
+            '<div class="pbrd-air-stack-tl-bar pbrd-air-stack-tl--us" data-w="10"><span>Paybyrd: 48 hours</span></div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="pbrd-air-stack-tl-row">' +
+          '<span class="pbrd-air-stack-tl-label">Custom routing rule</span>' +
+          '<div class="pbrd-air-stack-tl-bars">' +
+            '<div class="pbrd-air-stack-tl-bar pbrd-air-stack-tl--them" style="width:40%"><span>Competitors: 2\u20134 weeks</span></div>' +
+            '<div class="pbrd-air-stack-tl-bar pbrd-air-stack-tl--us" data-w="5"><span>Paybyrd: Minutes</span></div>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+
+      /* ── Integration grid ── */
+      '<div class="pbrd-air-stack-grid">' +
+        '<div class="pbrd-air-stack-card pbrd-air-reveal">' +
+          '<svg viewBox="0 0 32 32" fill="none" class="pbrd-air-stack-icon"><path d="M16 2L4 8v8c0 8 5.3 15.4 12 17.3C22.7 31.4 28 24 28 16V8L16 2z" stroke="#6319f0" stroke-width="1.5" fill="rgba(99,25,240,0.06)"/><path d="M12 16l3 3 6-6" stroke="#6319f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+          '<h5>ERP & CRM</h5>' +
+          '<p>SAP, Oracle, Salesforce, Microsoft Dynamics. Direct API integration with your existing finance and operations stack.</p>' +
+        '</div>' +
+        '<div class="pbrd-air-stack-card pbrd-air-reveal">' +
+          '<svg viewBox="0 0 32 32" fill="none" class="pbrd-air-stack-icon"><rect x="4" y="4" width="24" height="24" rx="4" stroke="#6319f0" stroke-width="1.5" fill="rgba(99,25,240,0.06)"/><path d="M4 12h24M12 4v24" stroke="#6319f0" stroke-width="1.5"/></svg>' +
+          '<h5>Booking Systems</h5>' +
+          '<p>Amadeus, Sabre, Travelport. Embed payments directly into your NDC, GDS, or custom booking flow.</p>' +
+        '</div>' +
+        '<div class="pbrd-air-stack-card pbrd-air-reveal">' +
+          '<svg viewBox="0 0 32 32" fill="none" class="pbrd-air-stack-icon"><circle cx="16" cy="16" r="12" stroke="#6319f0" stroke-width="1.5" fill="rgba(99,25,240,0.06)"/><path d="M16 10v6l4 2" stroke="#6319f0" stroke-width="1.5" stroke-linecap="round"/></svg>' +
+          '<h5>Real-Time Webhooks</h5>' +
+          '<p>Every transaction event pushed instantly. Payment confirmations, refund status, chargeback alerts \u2014 all via webhook.</p>' +
+        '</div>' +
+        '<div class="pbrd-air-stack-card pbrd-air-reveal">' +
+          '<svg viewBox="0 0 32 32" fill="none" class="pbrd-air-stack-icon"><path d="M8 28V18M16 28V10M24 28V4" stroke="#6319f0" stroke-width="2" stroke-linecap="round" fill="none"/></svg>' +
+          '<h5>Self-Hosted Option</h5>' +
+          '<p>Run Paybyrd payment modules on your own infrastructure. Full control, zero vendor lock-in. Modular architecture like Lego blocks.</p>' +
+        '</div>' +
+      '</div>' +
+
+      '<div style="text-align:center;margin-top:32px;" class="pbrd-air-reveal">' +
+        '<a href="/book-demo" class="pbrd-air-cta-primary">See how fast we integrate \u2192</a>' +
+      '</div>';
+
+    section.appendChild(wrap);
+
+    /* Animate Paybyrd bars on scroll */
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function(entries) {
+        if (entries[0].isIntersecting) {
+          wrap.querySelectorAll(".pbrd-air-stack-tl--us").forEach(function(bar, i) {
+            var w = bar.getAttribute("data-w");
+            setTimeout(function() { bar.style.width = w + "%"; }, 300 + i * 200);
+          });
+          this.disconnect();
+        }
+      }, { threshold: 0.2 }).observe(wrap);
+    }
+
+    observeReveal(".pbrd-air-reveal", 120, section);
+  }
+
+  /* ═══════════════════════════════════════════ */
   /* 5. BOTTOM CTA                               */
   /* ═══════════════════════════════════════════ */
 
@@ -8360,6 +8463,7 @@
     buildFraudSection();
     buildTestimonial();
     enhanceDataSection();
+    enhanceStackSection();
     enhanceBottomCTA();
     enhanceFAQ();
     console.log("[Paybyrd] Airlines enhancements loaded");
