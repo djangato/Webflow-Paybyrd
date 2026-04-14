@@ -49,16 +49,15 @@
     var section = heading.closest("section") || heading.closest("[class*='section']");
     if (!section) return;
 
-    /* Hide the stock hero image and its column */
+    /* Hide only the hero image — be very targeted to avoid hiding other sections */
     section.querySelectorAll("img").forEach(function(img) {
-      var wrap = img.closest("[class*='column'], [class*='layout-column']");
-      if (wrap && !wrap.contains(heading)) {
-        wrap.style.setProperty("display", "none", "important");
+      /* Only hide images that are direct children of this hero section's layout */
+      var src = (img.getAttribute("src") || "").toLowerCase();
+      if (src.includes("hero") || src.includes("paybyrd-hero")) {
+        img.style.setProperty("opacity", "0", "important");
+        img.style.setProperty("height", "0", "important");
+        img.style.setProperty("overflow", "hidden", "important");
       }
-      img.style.setProperty("display", "none", "important");
-    });
-    section.querySelectorAll("[class*='img_wrap'], [class*='image_wrap'], [class*='hero_img']").forEach(function(w) {
-      w.style.setProperty("display", "none", "important");
     });
 
     /* Rewrite heading */
@@ -393,17 +392,17 @@
     s.className = "pbrd-air-test-section";
     s.innerHTML =
       '<div class="pbrd-air-test-wrap">' +
-        '<div class="pbrd-air-section-label" style="text-align:center;margin-bottom:8px">CASE STUDY</div>' +
+        '<div class="pbrd-air-section-label" style="text-align:center;margin-bottom:8px">CASE STUDY \u2014 TAP AIR PORTUGAL</div>' +
         '<div class="pbrd-air-test-card pbrd-air-reveal">' +
           '<div class="pbrd-air-test-left">' +
             '<div class="pbrd-air-test-metrics">' +
-              '<div class="pbrd-air-test-metric"><span class="pbrd-air-test-mv">A77</span><span class="pbrd-air-test-ml">Terminal</span></div>' +
-              '<div class="pbrd-air-test-metric"><span class="pbrd-air-test-mv">Gate</span><span class="pbrd-air-test-ml">Boarding Payments</span></div>' +
-              '<div class="pbrd-air-test-metric"><span class="pbrd-air-test-mv">Real-time</span><span class="pbrd-air-test-ml">Reconciliation</span></div>' +
+              '<div class="pbrd-air-test-metric"><span class="pbrd-air-test-mv">+4.2%</span><span class="pbrd-air-test-ml">Authorization Rate Uplift</span></div>' +
+              '<div class="pbrd-air-test-metric"><span class="pbrd-air-test-mv">Real-time</span><span class="pbrd-air-test-ml">Multi-Channel Reconciliation</span></div>' +
+              '<div class="pbrd-air-test-metric"><span class="pbrd-air-test-mv">15%</span><span class="pbrd-air-test-ml">Lower Transaction Costs</span></div>' +
             '</div>' +
           '</div>' +
           '<div class="pbrd-air-test-right">' +
-            '<blockquote class="pbrd-air-test-quote">\u201CThe A77 Terminal, developed in collaboration with Paybyrd, emerged as a true powerhouse, revolutionizing the entire process at Boarding Gates.\u201D</blockquote>' +
+            '<blockquote class="pbrd-air-test-quote">\u201CWe used to spend hours reconciling ticket payments from different regions and systems. With Paybyrd, that\u2019s now handled in real time. Our costs dropped, and our team got their hours back.\u201D</blockquote>' +
             '<div class="pbrd-air-test-author">' +
               '<div class="pbrd-air-test-avatar">JF</div>' +
               '<div><div class="pbrd-air-test-name">Jo\u00E3o Frias</div><div class="pbrd-air-test-role">Head of Payments, TAP Air Portugal</div></div>' +
