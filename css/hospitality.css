@@ -286,6 +286,29 @@
 
 .pbrd-hosp-drain-cta { text-align:center; margin-top:32px; }
 
+/* ═══ BI SECTION ═══ */
+.pbrd-hosp-bi-wrap { max-width:1100px; margin:0 auto; padding:0 24px; }
+.pbrd-hosp-bi-header { text-align:center; margin-bottom:48px; }
+.pbrd-hosp-bi-h2 {
+  font-size:clamp(1.75rem,3.5vw,2.5rem); font-weight:700; color:#fff;
+  letter-spacing:-0.02em; margin:8px 0 14px; line-height:1.15;
+}
+.pbrd-hosp-bi-sub { font-size:1rem; color:rgba(255,255,255,0.4); max-width:600px; margin:0 auto; line-height:1.6; }
+
+.pbrd-hosp-bi-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; }
+
+.pbrd-hosp-bi-card {
+  background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06);
+  border-radius:16px; overflow:hidden; transition:all 0.3s ease;
+}
+.pbrd-hosp-bi-card:hover { border-color:rgba(99,25,240,0.2); transform:translateY(-3px); }
+
+.pbrd-hosp-bi-card-viz { padding:20px 16px 12px; overflow:hidden; }
+.pbrd-hosp-bi-card-viz svg { width:100%; height:auto; }
+
+.pbrd-hosp-bi-card h3 { font-size:0.9375rem; font-weight:700; color:#fff; margin:0 0 8px; padding:0 20px; }
+.pbrd-hosp-bi-card p { font-size:0.8125rem; color:rgba(255,255,255,0.4); line-height:1.5; margin:0; padding:0 20px 24px; }
+
 /* ═══ FEATURES SECTION ═══ */
 .pbrd-hosp-feat-wrap { max-width:1100px; margin:0 auto; padding:0 24px; }
 .pbrd-hosp-feat-header { text-align:center; margin-bottom:40px; }
@@ -521,6 +544,7 @@
   .pbrd-hosp-map-wrap { grid-template-columns: 1fr; }
   .pbrd-hosp-txn-feed { display: none; }
   .pbrd-hosp-drain-counter-value { font-size:2.5rem; }
+  .pbrd-hosp-bi-grid { grid-template-columns:1fr; }
   .pbrd-hosp-feat-grid { grid-template-columns:1fr; }
   .pbrd-hosp-bench-row { flex-direction:column; gap:6px; align-items:flex-start; }
   .pbrd-hosp-bench-bar-wrap { width:100%; }

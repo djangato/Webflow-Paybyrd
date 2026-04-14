@@ -10700,6 +10700,184 @@
   }
 
   /* ═══════════════════════════════════════════ */
+  /* 4a. DATA SECTION — Improve copy              */
+  /* ═══════════════════════════════════════════ */
+
+  function enhanceDataSection() {
+    var heading = findHeading("data that drives");
+    if (!heading) return;
+    heading.innerHTML = "Intelligence that turns<br>guest data into revenue.";
+
+    var section = heading.closest("section") || heading.closest("[class*='section']");
+    if (!section) return;
+
+    section.querySelectorAll("p").forEach(function(p) {
+      var t = p.textContent.toLowerCase();
+      if (t.includes("every interaction") || t.includes("opportunity to learn")) {
+        p.textContent = "Returning guest recognition, peak-time demand forecasting, outlet performance heatmaps \u2014 Paybyrd turns every transaction into actionable intelligence.";
+      }
+    });
+  }
+
+
+  /* ═══════════════════════════════════════════ */
+  /* 4b. BI SECTION — Inserted after data section */
+  /* ═══════════════════════════════════════════ */
+
+  function buildBISection() {
+    var dataHeading = findHeading("intelligence that turns");
+    if (!dataHeading) dataHeading = findHeading("data that drives");
+    if (!dataHeading) return;
+    var anchor = dataHeading.closest("section") || dataHeading.closest("[class*='section']");
+    if (!anchor) return;
+
+    var s = document.createElement("section");
+    s.setAttribute("style", "padding:60px 0;background:#0a0a0f;overflow:hidden;");
+
+    s.innerHTML =
+      '<div class="pbrd-hosp-bi-wrap">' +
+
+        '<div class="pbrd-hosp-bi-header pbrd-hosp-reveal">' +
+          '<div class="pbrd-hosp-section-label">BUSINESS INTELLIGENCE</div>' +
+          '<h2 class="pbrd-hosp-bi-h2">Your hotel\u2019s data, working harder<br>than your competitors\u2019.</h2>' +
+          '<p class="pbrd-hosp-bi-sub">Real-time dashboards that predict demand, recognize returning guests, and reveal where revenue hides.</p>' +
+        '</div>' +
+
+        /* Three BI cards */
+        '<div class="pbrd-hosp-bi-grid">' +
+
+          /* Card 1: Returning Guest Recognition */
+          '<div class="pbrd-hosp-bi-card pbrd-hosp-reveal">' +
+            '<div class="pbrd-hosp-bi-card-viz">' +
+              '<svg viewBox="0 0 280 140" fill="none">' +
+                /* Guest profile appearing */
+                '<circle cx="50" cy="50" r="20" fill="rgba(99,25,240,0.1)" stroke="rgba(99,25,240,0.3)" stroke-width="1.5"/>' +
+                '<text x="50" y="46" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="600" font-family="system-ui">GUEST</text>' +
+                '<text x="50" y="57" text-anchor="middle" fill="#6319f0" font-size="6" font-weight="700" font-family="system-ui">VIP</text>' +
+                /* Arrow */
+                '<path d="M75,50 L100,50" stroke="rgba(99,25,240,0.3)" stroke-width="1.5" stroke-dasharray="4 3"/>' +
+                /* Recognition box */
+                '<rect x="105" y="20" width="170" height="100" rx="8" fill="rgba(99,25,240,0.04)" stroke="rgba(99,25,240,0.12)" stroke-width="1"/>' +
+                '<text x="115" y="38" fill="rgba(255,255,255,0.5)" font-size="6" font-weight="600" font-family="system-ui">RETURNING GUEST DETECTED</text>' +
+                /* Data rows appearing */
+                '<text x="115" y="55" fill="rgba(255,255,255,0.35)" font-size="6" font-family="system-ui" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.3s" begin="0.5s" fill="freeze"/>Last stay: Ocean View Suite, 5 nights</text>' +
+                '<text x="115" y="68" fill="rgba(255,255,255,0.35)" font-size="6" font-family="system-ui" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.3s" begin="0.8s" fill="freeze"/>Preferred: Late checkout, extra pillows</text>' +
+                '<text x="115" y="81" fill="rgba(255,255,255,0.35)" font-size="6" font-family="system-ui" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.3s" begin="1.1s" fill="freeze"/>Lifetime value: \u20AC12,840</text>' +
+                '<text x="115" y="94" fill="rgba(255,255,255,0.35)" font-size="6" font-family="system-ui" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.3s" begin="1.4s" fill="freeze"/>Avg. spend per stay: \u20AC1,605</text>' +
+                /* Upsell suggestion */
+                '<rect x="115" y="100" width="100" height="14" rx="4" fill="rgba(34,197,94,0.1)" stroke="rgba(34,197,94,0.25)" stroke-width="1" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.3s" begin="1.8s" fill="freeze"/></rect>' +
+                '<text x="120" y="110" fill="#22c55e" font-size="5.5" font-weight="600" font-family="system-ui" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.3s" begin="1.8s" fill="freeze"/>SUGGEST: Suite upgrade + spa package</text>' +
+              '</svg>' +
+            '</div>' +
+            '<h3>Returning Guest Recognition</h3>' +
+            '<p>Instantly recognize returning guests by card token. Surface their preferences, lifetime value, and AI-powered upsell suggestions before they reach the front desk.</p>' +
+          '</div>' +
+
+          /* Card 2: Peak-Time Demand Heatmap */
+          '<div class="pbrd-hosp-bi-card pbrd-hosp-reveal">' +
+            '<div class="pbrd-hosp-bi-card-viz">' +
+              '<svg viewBox="0 0 280 140" fill="none">' +
+                '<text x="10" y="15" fill="rgba(255,255,255,0.35)" font-size="6" font-weight="600" font-family="system-ui">WEEKLY DEMAND HEATMAP \u00b7 BY OUTLET</text>' +
+                /* Y-axis labels */
+                '<text x="8" y="38" fill="rgba(255,255,255,0.25)" font-size="5" font-family="system-ui">Restaurant</text>' +
+                '<text x="8" y="56" fill="rgba(255,255,255,0.25)" font-size="5" font-family="system-ui">Spa</text>' +
+                '<text x="8" y="74" fill="rgba(255,255,255,0.25)" font-size="5" font-family="system-ui">Bar</text>' +
+                '<text x="8" y="92" fill="rgba(255,255,255,0.25)" font-size="5" font-family="system-ui">Pool</text>' +
+                '<text x="8" y="110" fill="rgba(255,255,255,0.25)" font-size="5" font-family="system-ui">Room Svc</text>' +
+                /* X-axis (days) */
+                '<text x="72" y="125" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="5" font-family="system-ui">Mon</text>' +
+                '<text x="102" y="125" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="5" font-family="system-ui">Tue</text>' +
+                '<text x="132" y="125" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="5" font-family="system-ui">Wed</text>' +
+                '<text x="162" y="125" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="5" font-family="system-ui">Thu</text>' +
+                '<text x="192" y="125" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="5" font-family="system-ui">Fri</text>' +
+                '<text x="222" y="125" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="5" font-family="system-ui">Sat</text>' +
+                '<text x="252" y="125" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="5" font-family="system-ui">Sun</text>' +
+                /* Heatmap cells — Restaurant row */
+                '<rect x="58" y="30" width="26" height="14" rx="2" fill="rgba(99,25,240,0.2)" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.15s" begin="0.1s" fill="freeze"/></rect>' +
+                '<rect x="88" y="30" width="26" height="14" rx="2" fill="rgba(99,25,240,0.15)" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.15s" begin="0.15s" fill="freeze"/></rect>' +
+                '<rect x="118" y="30" width="26" height="14" rx="2" fill="rgba(99,25,240,0.3)" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.15s" begin="0.2s" fill="freeze"/></rect>' +
+                '<rect x="148" y="30" width="26" height="14" rx="2" fill="rgba(99,25,240,0.4)" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.15s" begin="0.25s" fill="freeze"/></rect>' +
+                '<rect x="178" y="30" width="26" height="14" rx="2" fill="rgba(99,25,240,0.8)" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.15s" begin="0.3s" fill="freeze"/></rect>' +
+                '<rect x="208" y="30" width="26" height="14" rx="2" fill="rgba(99,25,240,0.95)" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.15s" begin="0.35s" fill="freeze"/></rect>' +
+                '<rect x="238" y="30" width="26" height="14" rx="2" fill="rgba(99,25,240,0.9)" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.15s" begin="0.4s" fill="freeze"/></rect>' +
+                /* Spa row */
+                '<rect x="58" y="48" width="26" height="14" rx="2" fill="rgba(99,25,240,0.35)" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.15s" begin="0.2s" fill="freeze"/></rect>' +
+                '<rect x="88" y="48" width="26" height="14" rx="2" fill="rgba(99,25,240,0.25)" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.15s" begin="0.25s" fill="freeze"/></rect>' +
+                '<rect x="118" y="48" width="26" height="14" rx="2" fill="rgba(99,25,240,0.3)" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.15s" begin="0.3s" fill="freeze"/></rect>' +
+                '<rect x="148" y="48" width="26" height="14" rx="2" fill="rgba(99,25,240,0.5)" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.15s" begin="0.35s" fill="freeze"/></rect>' +
+                '<rect x="178" y="48" width="26" height="14" rx="2" fill="rgba(99,25,240,0.7)" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.15s" begin="0.4s" fill="freeze"/></rect>' +
+                '<rect x="208" y="48" width="26" height="14" rx="2" fill="rgba(99,25,240,0.85)" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.15s" begin="0.45s" fill="freeze"/></rect>' +
+                '<rect x="238" y="48" width="26" height="14" rx="2" fill="rgba(99,25,240,0.6)" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.15s" begin="0.5s" fill="freeze"/></rect>' +
+                /* Bar row */
+                '<rect x="58" y="66" width="26" height="14" rx="2" fill="rgba(99,25,240,0.1)" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.15s" begin="0.3s" fill="freeze"/></rect>' +
+                '<rect x="88" y="66" width="26" height="14" rx="2" fill="rgba(99,25,240,0.15)" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.15s" begin="0.35s" fill="freeze"/></rect>' +
+                '<rect x="118" y="66" width="26" height="14" rx="2" fill="rgba(99,25,240,0.2)" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.15s" begin="0.4s" fill="freeze"/></rect>' +
+                '<rect x="148" y="66" width="26" height="14" rx="2" fill="rgba(99,25,240,0.45)" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.15s" begin="0.45s" fill="freeze"/></rect>' +
+                '<rect x="178" y="66" width="26" height="14" rx="2" fill="rgba(99,25,240,0.9)" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.15s" begin="0.5s" fill="freeze"/></rect>' +
+                '<rect x="208" y="66" width="26" height="14" rx="2" fill="rgba(99,25,240,1)" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.15s" begin="0.55s" fill="freeze"/></rect>' +
+                '<rect x="238" y="66" width="26" height="14" rx="2" fill="rgba(99,25,240,0.85)" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.15s" begin="0.6s" fill="freeze"/></rect>' +
+                /* Pool row */
+                '<rect x="58" y="84" width="26" height="14" rx="2" fill="rgba(99,25,240,0.4)" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.15s" begin="0.4s" fill="freeze"/></rect>' +
+                '<rect x="88" y="84" width="26" height="14" rx="2" fill="rgba(99,25,240,0.35)" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.15s" begin="0.45s" fill="freeze"/></rect>' +
+                '<rect x="118" y="84" width="26" height="14" rx="2" fill="rgba(99,25,240,0.3)" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.15s" begin="0.5s" fill="freeze"/></rect>' +
+                '<rect x="148" y="84" width="26" height="14" rx="2" fill="rgba(99,25,240,0.5)" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.15s" begin="0.55s" fill="freeze"/></rect>' +
+                '<rect x="178" y="84" width="26" height="14" rx="2" fill="rgba(99,25,240,0.75)" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.15s" begin="0.6s" fill="freeze"/></rect>' +
+                '<rect x="208" y="84" width="26" height="14" rx="2" fill="rgba(99,25,240,0.95)" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.15s" begin="0.65s" fill="freeze"/></rect>' +
+                '<rect x="238" y="84" width="26" height="14" rx="2" fill="rgba(99,25,240,0.8)" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.15s" begin="0.7s" fill="freeze"/></rect>' +
+                /* Room Service row */
+                '<rect x="58" y="102" width="26" height="14" rx="2" fill="rgba(99,25,240,0.15)" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.15s" begin="0.5s" fill="freeze"/></rect>' +
+                '<rect x="88" y="102" width="26" height="14" rx="2" fill="rgba(99,25,240,0.1)" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.15s" begin="0.55s" fill="freeze"/></rect>' +
+                '<rect x="118" y="102" width="26" height="14" rx="2" fill="rgba(99,25,240,0.2)" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.15s" begin="0.6s" fill="freeze"/></rect>' +
+                '<rect x="148" y="102" width="26" height="14" rx="2" fill="rgba(99,25,240,0.25)" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.15s" begin="0.65s" fill="freeze"/></rect>' +
+                '<rect x="178" y="102" width="26" height="14" rx="2" fill="rgba(99,25,240,0.35)" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.15s" begin="0.7s" fill="freeze"/></rect>' +
+                '<rect x="208" y="102" width="26" height="14" rx="2" fill="rgba(99,25,240,0.5)" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.15s" begin="0.75s" fill="freeze"/></rect>' +
+                '<rect x="238" y="102" width="26" height="14" rx="2" fill="rgba(99,25,240,0.45)" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.15s" begin="0.8s" fill="freeze"/></rect>' +
+              '</svg>' +
+            '</div>' +
+            '<h3>Peak-Time Demand Heatmap</h3>' +
+            '<p>See exactly when each outlet peaks \u2014 by day, hour, and season. Staff ahead of demand, optimize pricing, and never get caught short on a Friday night rush.</p>' +
+          '</div>' +
+
+          /* Card 3: Revenue per Outlet Analytics */
+          '<div class="pbrd-hosp-bi-card pbrd-hosp-reveal">' +
+            '<div class="pbrd-hosp-bi-card-viz">' +
+              '<svg viewBox="0 0 280 140" fill="none">' +
+                '<text x="10" y="15" fill="rgba(255,255,255,0.35)" font-size="6" font-weight="600" font-family="system-ui">REVENUE BY OUTLET \u00b7 THIS MONTH</text>' +
+                /* Horizontal bar chart — outlets ranked by revenue */
+                '<text x="10" y="36" fill="rgba(255,255,255,0.35)" font-size="6" font-family="system-ui">Restaurant</text>' +
+                '<rect x="75" y="28" width="0" height="12" rx="3" fill="#6319f0" opacity="0.8"><animate attributeName="width" values="0;170" dur="1s" begin="0.3s" fill="freeze"/></rect>' +
+                '<text x="250" y="37" fill="rgba(255,255,255,0.4)" font-size="6" font-weight="600" font-family="system-ui" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.3s" begin="1s" fill="freeze"/>\u20AC48K</text>' +
+
+                '<text x="10" y="56" fill="rgba(255,255,255,0.35)" font-size="6" font-family="system-ui">Front Desk</text>' +
+                '<rect x="75" y="48" width="0" height="12" rx="3" fill="rgba(99,25,240,0.7)"><animate attributeName="width" values="0;145" dur="1s" begin="0.5s" fill="freeze"/></rect>' +
+                '<text x="225" y="57" fill="rgba(255,255,255,0.4)" font-size="6" font-weight="600" font-family="system-ui" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.3s" begin="1.2s" fill="freeze"/>\u20AC41K</text>' +
+
+                '<text x="10" y="76" fill="rgba(255,255,255,0.35)" font-size="6" font-family="system-ui">Spa</text>' +
+                '<rect x="75" y="68" width="0" height="12" rx="3" fill="rgba(99,25,240,0.55)"><animate attributeName="width" values="0;105" dur="1s" begin="0.7s" fill="freeze"/></rect>' +
+                '<text x="185" y="77" fill="rgba(255,255,255,0.4)" font-size="6" font-weight="600" font-family="system-ui" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.3s" begin="1.4s" fill="freeze"/>\u20AC29K</text>' +
+
+                '<text x="10" y="96" fill="rgba(255,255,255,0.35)" font-size="6" font-family="system-ui">Bar</text>' +
+                '<rect x="75" y="88" width="0" height="12" rx="3" fill="rgba(99,25,240,0.4)"><animate attributeName="width" values="0;80" dur="1s" begin="0.9s" fill="freeze"/></rect>' +
+                '<text x="160" y="97" fill="rgba(255,255,255,0.4)" font-size="6" font-weight="600" font-family="system-ui" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.3s" begin="1.6s" fill="freeze"/>\u20AC22K</text>' +
+
+                '<text x="10" y="116" fill="rgba(255,255,255,0.35)" font-size="6" font-family="system-ui">Pool & Room Svc</text>' +
+                '<rect x="75" y="108" width="0" height="12" rx="3" fill="rgba(99,25,240,0.25)"><animate attributeName="width" values="0;50" dur="1s" begin="1.1s" fill="freeze"/></rect>' +
+                '<text x="130" y="117" fill="rgba(255,255,255,0.4)" font-size="6" font-weight="600" font-family="system-ui" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.3s" begin="1.8s" fill="freeze"/>\u20AC14K</text>' +
+              '</svg>' +
+            '</div>' +
+            '<h3>Revenue per Outlet Analytics</h3>' +
+            '<p>Drill down by outlet, shift, payment method, or staff member. Generate AI reports per channel in seconds \u2014 no spreadsheets, no waiting for month-end.</p>' +
+          '</div>' +
+
+        '</div>' +
+      '</div>';
+
+    anchor.insertAdjacentElement("afterend", s);
+    observeReveal(".pbrd-hosp-reveal", 100, s);
+  }
+
+
+  /* ═══════════════════════════════════════════ */
   /* Init                                        */
   /* ═══════════════════════════════════════════ */
 
@@ -10708,7 +10886,9 @@
     buildCommandCenter();
     enhancePainPoints();
     enhanceFeatures();
-    /* Section 4 (GSAP scroll-draw) skipped */
+    /* Section 4 (GSAP scroll-draw) — enhance copy + insert BI section after */
+    enhanceDataSection();
+    buildBISection();
     enhanceCTA();
     enhanceGuestJourney();
     enhanceQuiviPOS();
