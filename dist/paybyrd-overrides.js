@@ -170,11 +170,53 @@
         </div>
       </div>
 
-      <div class="pbrd-pricing-cta">
-        <p>Looking for volume pricing or a custom package?<br>We offer tailored rates for high-volume businesses.</p>
-        <a href="/book-demo" class="pbrd-cta-button">Get a Custom Quote →</a>
-        <br>
-        <a href="/payment-methods" class="pbrd-cta-secondary">View all payment methods →</a>
+      <div class="pbrd-pricing-cards">
+
+        <div class="pbrd-pricing-info-card">
+          <div class="pbrd-pricing-info-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <h3>Free daily payouts</h3>
+          <p>No payout fees \u2014 ever. Whether you process \u20AC1,000 or \u20AC10,000,000 a month, daily payouts are always free.</p>
+          <ul>
+            <li><span class="pbrd-info-check">\u2713</span>Daily payouts at no extra cost</li>
+            <li><span class="pbrd-info-check">\u2713</span>Gross settlement \u2014 full monthly volume paid out</li>
+            <li><span class="pbrd-info-check">\u2713</span>No commission deductions from payouts</li>
+            <li><span class="pbrd-info-check">\u2713</span>Easy accounting reconciliation</li>
+          </ul>
+        </div>
+
+        <div class="pbrd-pricing-info-card">
+          <div class="pbrd-pricing-info-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <h3>No currency surcharges</h3>
+          <p>Receive payouts in major currencies without any FX surcharge or conversion fee.</p>
+          <div class="pbrd-currency-pills">
+            <span class="pbrd-currency-pill">EUR</span>
+            <span class="pbrd-currency-pill">USD</span>
+            <span class="pbrd-currency-pill">GBP</span>
+            <span class="pbrd-currency-pill">DKK</span>
+            <span class="pbrd-currency-pill">SEK</span>
+          </div>
+          <p class="pbrd-info-note">Zero surcharges on payouts in these currencies. Other currencies available on request.</p>
+        </div>
+
+        <div class="pbrd-pricing-info-card pbrd-pricing-info-card--highlight">
+          <div class="pbrd-pricing-info-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <h3>Volume pricing</h3>
+          <p>Processing more than \u20AC80,000 per month? Unlock tailored rates designed for your scale.</p>
+          <ul>
+            <li><span class="pbrd-info-check">\u2713</span>Dedicated account manager</li>
+            <li><span class="pbrd-info-check">\u2713</span>IC++ pricing available</li>
+            <li><span class="pbrd-info-check">\u2713</span>Volume-based discounts</li>
+            <li><span class="pbrd-info-check">\u2713</span>Multi-product bundling</li>
+          </ul>
+          <a href="/book-demo" class="pbrd-info-cta">Talk to sales \u2192</a>
+        </div>
+
       </div>
 
       <div class="pbrd-pricing-disclaimer">

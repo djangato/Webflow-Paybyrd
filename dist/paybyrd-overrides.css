@@ -334,6 +334,103 @@
 }
 
 /* ─── Disclaimer ─── */
+/* ─── Pricing Info Cards ─── */
+.pbrd-pricing-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin: 48px 0 32px;
+}
+.pbrd-pricing-info-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 28px 24px;
+}
+.pbrd-pricing-info-card--highlight {
+  border-color: rgba(99,25,240,0.2);
+  background: rgba(99,25,240,0.04);
+}
+.pbrd-pricing-info-icon {
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 16px;
+}
+.pbrd-pricing-info-card--highlight .pbrd-pricing-info-icon { color: #6319f0; }
+.pbrd-pricing-info-card h3 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 8px;
+}
+.pbrd-pricing-info-card p {
+  font-size: 0.8125rem;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.6;
+  margin: 0 0 16px;
+}
+.pbrd-pricing-info-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.pbrd-pricing-info-card li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8125rem;
+  color: rgba(255,255,255,0.6);
+}
+.pbrd-info-check {
+  color: #10b981;
+  font-weight: 700;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+.pbrd-currency-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.pbrd-currency-pill {
+  padding: 6px 14px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #fff;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.pbrd-info-note {
+  font-size: 0.75rem !important;
+  color: rgba(255,255,255,0.3) !important;
+  margin: 0 !important;
+}
+.pbrd-info-cta {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 10px 24px;
+  border-radius: 100px;
+  background: #6319f0;
+  color: #fff;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.pbrd-info-cta:hover {
+  background: #7c3aed;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .pbrd-pricing-cards { grid-template-columns: 1fr; }
+}
+
 .pbrd-pricing-disclaimer {
   text-align: center;
   margin-top: 24px;
