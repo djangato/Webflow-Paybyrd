@@ -9456,88 +9456,119 @@
     var section = heading.closest("section") || heading.closest("[class*='section']");
     if (!section) return;
 
-    /* Hide ALL Webflow children, own layout completely */
-    section.style.setProperty("padding", "24px 0", "important");
-    section.style.setProperty("position", "relative", "important");
-    section.style.setProperty("overflow", "visible", "important");
+    /* Hide ALL Webflow children */
+    section.style.setProperty("padding", "60px 0", "important");
+    section.style.setProperty("background", "#0a0a0f", "important");
     Array.prototype.forEach.call(section.children, function(child) {
-      if (!child.classList || !child.classList.contains("pbrd-hosp-problem-wrap")) {
+      if (!child.classList || !child.classList.contains("pbrd-hosp-drain-wrap")) {
         child.style.setProperty("display", "none", "important");
       }
     });
 
     var wrap = document.createElement("div");
-    wrap.className = "pbrd-hosp-problem-wrap";
-    wrap.setAttribute("style", "max-width:1100px;margin:0 auto;padding:0 24px;text-align:center;");
+    wrap.className = "pbrd-hosp-drain-wrap";
+
+    /* Revenue drain data — based on \u20AC100M annual volume */
+    var leaks = [
+      { label: "Booking Abandonment", pct: 84, lost: "8.4M", color: "#ef4444", fix: "Optimized checkout recovers 15\u201320%" },
+      { label: "Card Declines (LatAm ~60%)", pct: 7, lost: "7.0M", color: "#f97316", fix: "Multi-acquiring: 4\u20137% higher auth rates" },
+      { label: "Fraud & Chargebacks", pct: 4.6, lost: "4.6M", color: "#eab308", fix: "AI velocity screening: 16.8% reduction" },
+      { label: "Cross-Border & FX Fees", pct: 12, lost: "1.2M", color: "#6319f0", fix: "Local routing: 10\u201315% savings, DCC 80% share" }
+    ];
+
+    /* Build the waterfall bars */
+    var waterfallHTML = leaks.map(function(l, i) {
+      return '<div class="pbrd-hosp-drain-row pbrd-hosp-reveal">' +
+        '<div class="pbrd-hosp-drain-row-top">' +
+          '<span class="pbrd-hosp-drain-label">' + l.label + '</span>' +
+          '<span class="pbrd-hosp-drain-lost" style="color:' + l.color + '">\u2212\u20AC' + l.lost + '</span>' +
+        '</div>' +
+        '<div class="pbrd-hosp-drain-bar-track">' +
+          '<div class="pbrd-hosp-drain-bar" data-w="' + Math.min(l.pct, 100) + '" style="background:' + l.color + '"></div>' +
+        '</div>' +
+        '<div class="pbrd-hosp-drain-fix">' +
+          '<svg viewBox="0 0 16 16" width="12" height="12"><path d="M12 2L6 14" stroke="' + l.color + '" stroke-width="2" stroke-linecap="round" opacity="0.4"/><path d="M2 8l3 3 5-5" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>' +
+          '<span>' + l.fix + '</span>' +
+        '</div>' +
+      '</div>';
+    }).join("");
 
     wrap.innerHTML =
-      '<div class="pbrd-hosp-section-label pbrd-hosp-reveal">HOSPITALITY</div>' +
-      '<h2 class="pbrd-hosp-reveal" style="font-size:clamp(2rem,4.5vw,3.25rem);font-weight:700;color:#111;margin:8px 0 16px;line-height:1.1;letter-spacing:-0.02em;">Hotels lose up to 4.6% of revenue<br>to payment friction. Every year.</h2>' +
-      '<p class="pbrd-hosp-reveal" style="font-size:1rem;color:#666;max-width:600px;margin:0 auto 24px;line-height:1.6;">Booking abandonment, card declines, fraud, and cross-border fees drain hotel revenue at every touchpoint. Here\u2019s where the money goes \u2014 and how Paybyrd plugs the leaks:</p>' +
+      '<div class="pbrd-hosp-drain-header pbrd-hosp-reveal">' +
+        '<div class="pbrd-hosp-section-label">THE REVENUE DRAIN</div>' +
+        '<h2 class="pbrd-hosp-drain-h2">While you read this, your hotel<br>is losing money.</h2>' +
+      '</div>' +
 
-      '<div class="pbrd-hosp-leak-dash pbrd-hosp-reveal">' +
-        '<div class="pbrd-hosp-leak-header">' +
-          '<div class="pbrd-hosp-leak-dot pbrd-hosp-leak-dot--live"></div>' +
-          '<span>Hotel Revenue Leakage Monitor</span>' +
-          '<span class="pbrd-hosp-leak-tag">LIVE</span>' +
+      /* Live counter */
+      '<div class="pbrd-hosp-drain-counter pbrd-hosp-reveal">' +
+        '<div class="pbrd-hosp-drain-counter-label">Estimated revenue lost by hotels worldwide today</div>' +
+        '<div class="pbrd-hosp-drain-counter-value" id="pbrd-hosp-drain-tick">\u20AC0</div>' +
+        '<div class="pbrd-hosp-drain-counter-sub">Based on industry data: 4.6% fraud losses, 84% booking abandonment, ~60% LatAm decline rates</div>' +
+      '</div>' +
+
+      /* Waterfall drain visualization */
+      '<div class="pbrd-hosp-drain-waterfall">' +
+        '<div class="pbrd-hosp-drain-waterfall-head">' +
+          '<span>REVENUE DRAIN \u00b7 PER \u20AC100M ANNUAL VOLUME</span>' +
+          '<span class="pbrd-hosp-drain-live-dot"></span>' +
         '</div>' +
-        '<div class="pbrd-hosp-leak-grid">' +
-          '<div class="pbrd-hosp-leak-card pbrd-hosp-leak--red pbrd-hosp-reveal">' +
-            '<div class="pbrd-hosp-leak-ring"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="none" stroke="rgba(0,0,0,0.04)" stroke-width="6"/><circle cx="40" cy="40" r="34" fill="none" stroke="#ef4444" stroke-width="6" stroke-dasharray="214" stroke-dashoffset="214" stroke-linecap="round" class="pbrd-hosp-ring-fill" data-pct="84"/></svg><span class="pbrd-hosp-leak-pct" data-target="84">0%</span></div>' +
-            '<h4>Booking Abandonment</h4>' +
-            '<p>Highest hospitality drop-off rate</p>' +
-            '<div class="pbrd-hosp-leak-fix">\u2192 Optimized checkout: recover 15\u201320%</div>' +
-          '</div>' +
-          '<div class="pbrd-hosp-leak-card pbrd-hosp-leak--orange pbrd-hosp-reveal">' +
-            '<div class="pbrd-hosp-leak-ring"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="none" stroke="rgba(0,0,0,0.04)" stroke-width="6"/><circle cx="40" cy="40" r="34" fill="none" stroke="#f97316" stroke-width="6" stroke-dasharray="214" stroke-dashoffset="214" stroke-linecap="round" class="pbrd-hosp-ring-fill" data-pct="60"/></svg><span class="pbrd-hosp-leak-pct" data-target="60">0%</span></div>' +
-            '<h4>Card Decline Rates</h4>' +
-            '<p>Failed transactions erode revenue</p>' +
-            '<div class="pbrd-hosp-leak-fix">\u2192 Multi-acquiring: 4\u20137% higher auth</div>' +
-          '</div>' +
-          '<div class="pbrd-hosp-leak-card pbrd-hosp-leak--yellow pbrd-hosp-reveal">' +
-            '<div class="pbrd-hosp-leak-ring"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="none" stroke="rgba(0,0,0,0.04)" stroke-width="6"/><circle cx="40" cy="40" r="34" fill="none" stroke="#eab308" stroke-width="6" stroke-dasharray="214" stroke-dashoffset="214" stroke-linecap="round" class="pbrd-hosp-ring-fill" data-pct="5"/></svg><span class="pbrd-hosp-leak-pct" data-target="5">0%</span></div>' +
-            '<h4>Fraud & Chargebacks</h4>' +
-            '<p>4.6% of revenue at risk</p>' +
-            '<div class="pbrd-hosp-leak-fix">\u2192 AI screening: 16.8% reduction</div>' +
-          '</div>' +
-          '<div class="pbrd-hosp-leak-card pbrd-hosp-leak--copper pbrd-hosp-reveal">' +
-            '<div class="pbrd-hosp-leak-ring"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="none" stroke="rgba(0,0,0,0.04)" stroke-width="6"/><circle cx="40" cy="40" r="34" fill="none" stroke="#6319f0" stroke-width="6" stroke-dasharray="214" stroke-dashoffset="214" stroke-linecap="round" class="pbrd-hosp-ring-fill" data-pct="15"/></svg><span class="pbrd-hosp-leak-pct" data-target="15">0%</span></div>' +
-            '<h4>FX & Cross-Border</h4>' +
-            '<p>Excessive currency & routing fees</p>' +
-            '<div class="pbrd-hosp-leak-fix">\u2192 Local routing: 10\u201315% savings</div>' +
-          '</div>' +
+        waterfallHTML +
+        '<div class="pbrd-hosp-drain-total pbrd-hosp-reveal">' +
+          '<span class="pbrd-hosp-drain-total-label">Total recoverable with Paybyrd</span>' +
+          '<span class="pbrd-hosp-drain-total-value" id="pbrd-hosp-drain-total">\u20AC0</span>' +
         '</div>' +
-        '<div class="pbrd-hosp-leak-footer">' +
-          '<div class="pbrd-hosp-leak-summary">' +
-            '<span class="pbrd-hosp-leak-summary-txt">Combined, these issues cost the average hotel group <strong>millions per year</strong>. Paybyrd addresses all four from a single platform.</span>' +
-            '<a href="/book-demo" class="pbrd-hosp-cta-primary" style="padding:10px 24px;font-size:0.8125rem;">Calculate your savings \u2192</a>' +
-          '</div>' +
-        '</div>' +
+      '</div>' +
+
+      '<div class="pbrd-hosp-drain-cta pbrd-hosp-reveal">' +
+        '<a href="/book-demo" class="pbrd-hosp-cta-primary" style="padding:14px 32px;">Calculate your exact savings \u2192</a>' +
       '</div>';
 
     section.appendChild(wrap);
 
-    /* Animate rings + counters on scroll */
-    var dash = wrap.querySelector(".pbrd-hosp-leak-dash");
-    if ("IntersectionObserver" in window && dash) {
+    /* Animate on scroll */
+    if ("IntersectionObserver" in window) {
       new IntersectionObserver(function(entries) {
         if (entries[0].isIntersecting) {
-          dash.querySelectorAll(".pbrd-hosp-ring-fill").forEach(function(ring) {
-            var pct = parseInt(ring.getAttribute("data-pct"));
-            var circ = 214;
+          /* Animate drain bars */
+          wrap.querySelectorAll(".pbrd-hosp-drain-bar").forEach(function(bar, i) {
             setTimeout(function() {
-              ring.style.strokeDashoffset = circ - (circ * pct / 100);
-            }, 300);
+              bar.style.width = bar.getAttribute("data-w") + "%";
+            }, 300 + i * 200);
           });
-          dash.querySelectorAll(".pbrd-hosp-leak-pct").forEach(function(el) {
-            countUp(el, parseInt(el.getAttribute("data-target")), "%");
-          });
+
+          /* Live ticking counter — $1B/year = ~$2.74M/day = ~$114K/hour = ~$1,900/min = ~$32/sec */
+          var tickEl = document.getElementById("pbrd-hosp-drain-tick");
+          if (tickEl) {
+            var val = 0;
+            var perTick = 31500; /* ~$31.5K per tick (every 1s) for dramatic effect */
+            var tickInterval = setInterval(function() {
+              val += perTick + Math.round(Math.random() * 8000);
+              tickEl.textContent = "\u20AC" + val.toLocaleString("de-DE");
+            }, 1000);
+            /* Stop after 60s to save resources */
+            setTimeout(function() { clearInterval(tickInterval); }, 60000);
+          }
+
+          /* Animate total recoverable */
+          var totalEl = document.getElementById("pbrd-hosp-drain-total");
+          if (totalEl) {
+            var dur = 2000, target = 21200000, startTime = null;
+            function stepTotal(ts) {
+              if (!startTime) startTime = ts;
+              var p = Math.min((ts - startTime) / dur, 1);
+              var v = Math.round(target * (1 - Math.pow(1 - p, 3)));
+              totalEl.textContent = "\u20AC" + v.toLocaleString("de-DE");
+              if (p < 1) requestAnimationFrame(stepTotal);
+            }
+            setTimeout(function() { requestAnimationFrame(stepTotal); }, 1200);
+          }
+
           this.disconnect();
         }
-      }, { threshold: 0.2 }).observe(dash);
+      }, { threshold: 0.15 }).observe(wrap);
     }
 
-    observeReveal(".pbrd-hosp-reveal", 150, section);
+    observeReveal(".pbrd-hosp-reveal", 100, section);
   }
 
   /* ═══════════════════════════════════════════ */

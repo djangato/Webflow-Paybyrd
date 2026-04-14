@@ -12245,70 +12245,85 @@ a.glowing_button_link .glowing_button_text {
   to   { transform: translateX(-50%); }
 }
 
-/* ═══ PAIN POINTS — REVENUE LEAKAGE ═══ */
-.pbrd-hosp-problem-wrap { max-width:1100px; margin:0 auto; padding:0 24px; text-align:center; }
+/* ═══ REVENUE DRAIN — LIVE VISUALIZATION ═══ */
+.pbrd-hosp-drain-wrap { max-width:900px; margin:0 auto; padding:0 24px; }
 
-.pbrd-hosp-leak-dash {
-  margin-top:24px; border-radius:20px; overflow:hidden;
-  background:#f8f9fa; border:1px solid rgba(0,0,0,0.06);
-  position:relative;
+.pbrd-hosp-drain-header { text-align:center; margin-bottom:32px; }
+.pbrd-hosp-drain-h2 {
+  font-size:clamp(1.75rem,3.5vw,2.5rem); font-weight:700; color:#fff;
+  letter-spacing:-0.02em; margin:8px 0 0; line-height:1.15;
 }
 
-.pbrd-hosp-leak-header {
-  display:flex; align-items:center; gap:8px; padding:14px 24px;
-  border-bottom:1px solid rgba(0,0,0,0.04);
-  font-size:0.75rem; font-weight:600; color:#555;
+/* Live counter */
+.pbrd-hosp-drain-counter {
+  text-align:center; margin-bottom:40px;
+  padding:32px 24px; border-radius:16px;
+  background:rgba(239,68,68,0.04); border:1px solid rgba(239,68,68,0.1);
+}
+.pbrd-hosp-drain-counter-label {
+  font-size:0.75rem; font-weight:600; color:rgba(255,255,255,0.35);
+  text-transform:uppercase; letter-spacing:0.1em; margin-bottom:12px;
+}
+.pbrd-hosp-drain-counter-value {
+  font-size:clamp(2.5rem,6vw,4rem); font-weight:800; color:#ef4444;
+  font-variant-numeric:tabular-nums; letter-spacing:-0.02em;
+  text-shadow:0 0 40px rgba(239,68,68,0.3);
+}
+.pbrd-hosp-drain-counter-sub {
+  font-size:0.6875rem; color:rgba(255,255,255,0.25); margin-top:10px; line-height:1.5;
 }
 
-.pbrd-hosp-leak-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
-.pbrd-hosp-leak-dot--live { background:#22c55e; box-shadow:0 0 8px rgba(34,197,94,0.5); animation:pbrd-hosp-blink 2s ease-in-out infinite; }
-@keyframes pbrd-hosp-blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
-.pbrd-hosp-leak-tag { margin-left:auto; font-size:0.5625rem; font-weight:700; color:#22c55e; letter-spacing:0.1em; }
-
-.pbrd-hosp-leak-grid { display:grid; grid-template-columns:repeat(4,1fr); }
-
-.pbrd-hosp-leak-card {
-  padding:28px 20px; text-align:center;
-  border-right:1px solid rgba(0,0,0,0.04);
-  transition:background 0.3s ease;
+/* Waterfall */
+.pbrd-hosp-drain-waterfall {
+  border-radius:16px; overflow:hidden;
+  background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06);
+  padding:0 0 20px;
 }
-.pbrd-hosp-leak-card:last-child { border-right:none; }
-.pbrd-hosp-leak-card:hover { background:rgba(0,0,0,0.02); }
-
-.pbrd-hosp-leak-ring { position:relative; width:80px; height:80px; margin:0 auto 16px; }
-.pbrd-hosp-leak-ring svg { width:100%; height:100%; transform:rotate(-90deg); }
-.pbrd-hosp-ring-fill { transition:stroke-dashoffset 1.4s cubic-bezier(.22,1,.36,1); }
-
-.pbrd-hosp-leak-pct {
-  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
-  font-size:1.125rem; font-weight:700; color:#111; font-variant-numeric:tabular-nums;
+.pbrd-hosp-drain-waterfall-head {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 24px; font-size:0.6875rem; font-weight:700;
+  color:rgba(255,255,255,0.3); letter-spacing:0.08em;
 }
-
-.pbrd-hosp-leak-card h4 { font-size:0.8125rem; font-weight:600; color:#111; margin:0 0 4px; }
-.pbrd-hosp-leak-card p { font-size:0.6875rem; color:#888; margin:0 0 12px; line-height:1.4; }
-
-.pbrd-hosp-leak-fix {
-  font-size:0.625rem; font-weight:600; color:#6319f0; padding:4px 10px;
-  background:rgba(99,25,240,0.08); border-radius:100px; display:inline-block;
+.pbrd-hosp-drain-live-dot {
+  width:6px; height:6px; border-radius:50%; background:#ef4444;
+  box-shadow:0 0 8px rgba(239,68,68,0.5);
+  animation:pbrd-hosp-drain-pulse 2s infinite;
 }
+@keyframes pbrd-hosp-drain-pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
 
-.pbrd-hosp-leak-footer {
-  padding:16px 24px; border-top:1px solid rgba(0,0,0,0.04);
-  background:rgba(99,25,240,0.02);
+.pbrd-hosp-drain-row { padding:14px 24px; }
+.pbrd-hosp-drain-row-top {
+  display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;
+}
+.pbrd-hosp-drain-label { font-size:0.875rem; font-weight:600; color:rgba(255,255,255,0.7); }
+.pbrd-hosp-drain-lost { font-size:1rem; font-weight:800; font-variant-numeric:tabular-nums; }
+
+.pbrd-hosp-drain-bar-track {
+  height:8px; background:rgba(255,255,255,0.04); border-radius:4px; overflow:hidden;
+}
+.pbrd-hosp-drain-bar {
+  height:100%; width:0; border-radius:4px;
+  transition:width 1.4s cubic-bezier(.22,1,.36,1);
 }
 
-.pbrd-hosp-leak-summary {
-  display:flex; flex-direction:column; align-items:center; gap:12px;
-  text-align:center;
+.pbrd-hosp-drain-fix {
+  display:flex; align-items:center; gap:6px; margin-top:8px;
+  font-size:0.6875rem; color:rgba(255,255,255,0.35);
 }
 
-.pbrd-hosp-leak-summary-txt {
-  font-size:0.8125rem; color:#555; line-height:1.5;
+.pbrd-hosp-drain-total {
+  margin:20px 24px 0; padding:16px 20px; border-radius:10px;
+  background:rgba(99,25,240,0.06); border:1px solid rgba(99,25,240,0.15);
+  display:flex; justify-content:space-between; align-items:center;
+}
+.pbrd-hosp-drain-total-label {
+  font-size:0.875rem; font-weight:600; color:rgba(255,255,255,0.6);
+}
+.pbrd-hosp-drain-total-value {
+  font-size:1.5rem; font-weight:800; color:#6319f0; font-variant-numeric:tabular-nums;
 }
 
-.pbrd-hosp-leak-summary-txt strong {
-  color:#111; font-weight:700;
-}
+.pbrd-hosp-drain-cta { text-align:center; margin-top:32px; }
 
 /* ═══ FEATURES SECTION ═══ */
 .pbrd-hosp-feat-wrap { max-width:1100px; margin:0 auto; padding:0 24px; }
@@ -12537,8 +12552,7 @@ a.glowing_button_link .glowing_button_text {
 @media (max-width: 768px) {
   .pbrd-hosp-map-wrap { grid-template-columns: 1fr; }
   .pbrd-hosp-txn-feed { display: none; }
-  .pbrd-hosp-leak-grid { grid-template-columns:1fr 1fr; }
-  .pbrd-hosp-leak-card { border-bottom:1px solid rgba(255,255,255,0.04); }
+  .pbrd-hosp-drain-counter-value { font-size:2.5rem; }
   .pbrd-hosp-feat-grid { grid-template-columns:1fr; }
   .pbrd-hosp-bench-row { flex-direction:column; gap:6px; align-items:flex-start; }
   .pbrd-hosp-bench-bar-wrap { width:100%; }
