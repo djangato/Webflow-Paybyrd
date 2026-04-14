@@ -224,15 +224,15 @@
     var section = heading.closest("section") || heading.closest("[class*='section']");
     if (!section) return;
 
-    /* Reduce padding above title and below graph — also collapse Webflow wrapper padding */
-    section.style.setProperty("padding-top", "24px", "important");
-    section.style.setProperty("padding-bottom", "12px", "important");
-    Array.prototype.forEach.call(section.children, function(child) {
-      if (child.tagName !== "SCRIPT" && child.tagName !== "STYLE" && !child.classList.contains("pbrd-air-leak-dash") && !child.classList.contains("pbrd-air-plane") && !child.classList.contains("pbrd-air-trail")) {
-        child.style.setProperty("padding-top", "0", "important");
-        child.style.setProperty("padding-bottom", "0", "important");
-        child.style.setProperty("margin-top", "0", "important");
-        child.style.setProperty("margin-bottom", "0", "important");
+    /* Reduce padding — nuke ALL Webflow wrapper padding/margin at every nesting level */
+    section.style.setProperty("padding-top", "12px", "important");
+    section.style.setProperty("padding-bottom", "0", "important");
+    section.querySelectorAll("div").forEach(function(el) {
+      if (!el.className || !el.className.match || !el.className.match(/pbrd-air/)) {
+        el.style.setProperty("padding-top", "0", "important");
+        el.style.setProperty("padding-bottom", "0", "important");
+        el.style.setProperty("margin-top", "0", "important");
+        el.style.setProperty("margin-bottom", "0", "important");
       }
     });
 
