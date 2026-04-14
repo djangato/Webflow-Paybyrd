@@ -8248,28 +8248,28 @@
           '<span class="pbrd-air-stack-tl-label">Platform change</span>' +
           '<div class="pbrd-air-stack-tl-bars">' +
             '<div class="pbrd-air-stack-tl-bar pbrd-air-stack-tl--them" style="width:85%"><span>Competitors: 3\u20136 months</span></div>' +
-            '<div class="pbrd-air-stack-tl-bar pbrd-air-stack-tl--us" data-w="8"><span>Paybyrd: Hours</span></div>' +
+            '<div class="pbrd-air-stack-tl-bar pbrd-air-stack-tl--us" data-w="12"><span>Paybyrd: Hours</span></div>' +
           '</div>' +
         '</div>' +
         '<div class="pbrd-air-stack-tl-row">' +
           '<span class="pbrd-air-stack-tl-label">New acquirer</span>' +
           '<div class="pbrd-air-stack-tl-bars">' +
             '<div class="pbrd-air-stack-tl-bar pbrd-air-stack-tl--them" style="width:60%"><span>Competitors: 6\u201312 weeks</span></div>' +
-            '<div class="pbrd-air-stack-tl-bar pbrd-air-stack-tl--us" data-w="12"><span>Paybyrd: Days</span></div>' +
+            '<div class="pbrd-air-stack-tl-bar pbrd-air-stack-tl--us" data-w="15"><span>Paybyrd: Days</span></div>' +
           '</div>' +
         '</div>' +
         '<div class="pbrd-air-stack-tl-row">' +
           '<span class="pbrd-air-stack-tl-label">New payment method</span>' +
           '<div class="pbrd-air-stack-tl-bars">' +
             '<div class="pbrd-air-stack-tl-bar pbrd-air-stack-tl--them" style="width:50%"><span>Competitors: 4\u20138 weeks</span></div>' +
-            '<div class="pbrd-air-stack-tl-bar pbrd-air-stack-tl--us" data-w="10"><span>Paybyrd: 48 hours</span></div>' +
+            '<div class="pbrd-air-stack-tl-bar pbrd-air-stack-tl--us" data-w="14"><span>Paybyrd: 48h</span></div>' +
           '</div>' +
         '</div>' +
         '<div class="pbrd-air-stack-tl-row">' +
           '<span class="pbrd-air-stack-tl-label">Custom routing rule</span>' +
           '<div class="pbrd-air-stack-tl-bars">' +
             '<div class="pbrd-air-stack-tl-bar pbrd-air-stack-tl--them" style="width:40%"><span>Competitors: 2\u20134 weeks</span></div>' +
-            '<div class="pbrd-air-stack-tl-bar pbrd-air-stack-tl--us" data-w="5"><span>Paybyrd: Minutes</span></div>' +
+            '<div class="pbrd-air-stack-tl-bar pbrd-air-stack-tl--us" data-w="10"><span>Paybyrd: Minutes</span></div>' +
           '</div>' +
         '</div>' +
       '</div>' +
