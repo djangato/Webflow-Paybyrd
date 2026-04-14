@@ -1878,6 +1878,15 @@ a.glowing_button_link .glowing_button_text {
   animation: pbrd-bv-grow 0.8s ease var(--d) both;
   transition: background 0.3s ease;
 }
+/* Continuously breathing bars */
+.pbrd-bv-bar-live {
+  animation: pbrd-bv-grow 0.8s ease var(--d) both, pbrd-bv-breathe var(--dur) ease-in-out 1s infinite;
+}
+@keyframes pbrd-bv-breathe {
+  0%,100% { height: var(--h); }
+  30% { height: var(--hmax); }
+  70% { height: var(--hmin); }
+}
 
 .pbrd-bv-bar-accent {
   background: linear-gradient(to top, rgba(120,180,255,0.4), rgba(120,180,255,0.8)) !important;
@@ -2030,6 +2039,73 @@ a.glowing_button_link .glowing_button_text {
 @keyframes pbrd-dv-slide-up {
   from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══ LIVE ELEMENTS ═══ */
+
+/* Live dot indicator */
+.pbrd-bv-live-row { display:flex; align-items:center; gap:6px; margin-top:10px; }
+.pbrd-bv-live-dot { width:6px; height:6px; border-radius:50%; background:#10b981; animation:pbrd-bv-live-pulse 2s infinite; flex-shrink:0; }
+@keyframes pbrd-bv-live-pulse { 0%,100%{opacity:1;box-shadow:0 0 4px rgba(16,185,129,0.5);} 50%{opacity:0.4;box-shadow:none;} }
+.pbrd-bv-live-count { font-size:0.5625rem; color:rgba(255,255,255,0.3); }
+
+/* Continuously pulsing heatmap cells */
+.pbrd-heat-cell-live {
+  animation: pbrd-heat-pop 0.3s var(--d) both, pbrd-heat-glow var(--dur) ease-in-out var(--begin) infinite;
+}
+@keyframes pbrd-heat-glow {
+  0%,100% { opacity:1; transform:scale(1); }
+  50% { opacity:0.6; transform:scale(1.08); }
+}
+
+/* Security scan ring */
+.pbrd-bv-shield-wrap { position:relative; display:inline-block; margin-bottom:8px; }
+.pbrd-bv-scan-ring {
+  position:absolute; inset:-6px; border-radius:50%;
+  border:1.5px solid transparent; border-top-color:rgba(120,255,180,0.4);
+  animation:pbrd-bv-scan-spin 1.8s linear infinite;
+}
+@keyframes pbrd-bv-scan-spin { to { transform:rotate(360deg); } }
+
+/* Security live feed */
+.pbrd-bv-feed { display:flex; flex-direction:column; gap:3px; margin:8px 0; min-height:48px; }
+.pbrd-bv-feed-item {
+  display:flex; align-items:center; gap:5px; font-size:0.5625rem;
+  padding:3px 6px; border-radius:4px; background:rgba(255,255,255,0.02);
+  transition:opacity 0.3s;
+}
+.pbrd-bv-feed-blocked { background:rgba(239,68,68,0.06); }
+.pbrd-bv-feed-icon { font-size:0.625rem; font-weight:700; }
+.pbrd-bv-feed-item:not(.pbrd-bv-feed-blocked) .pbrd-bv-feed-icon { color:#10b981; }
+.pbrd-bv-feed-blocked .pbrd-bv-feed-icon { color:#ef4444; }
+.pbrd-bv-feed-card { color:rgba(255,255,255,0.4); }
+.pbrd-bv-feed-amt { margin-left:auto; color:rgba(255,255,255,0.7); font-weight:600; }
+
+/* Pricing comparison bars */
+.pbrd-bv-compare { display:flex; flex-direction:column; gap:6px; margin-top:4px; }
+.pbrd-bv-comp-row { display:flex; align-items:center; gap:6px; }
+.pbrd-bv-comp-name { font-size:0.5rem; color:rgba(255,255,255,0.3); min-width:58px; }
+.pbrd-bv-comp-bar-wrap { flex:1; height:8px; background:rgba(255,255,255,0.02); border-radius:4px; overflow:hidden; }
+.pbrd-bv-comp-bar { height:100%; border-radius:4px; animation:pbrd-bv-comp-grow 1s ease 0.3s both; }
+.pbrd-bv-comp-them { background:rgba(239,68,68,0.3); }
+.pbrd-bv-comp-us { background:linear-gradient(90deg,rgba(120,180,255,0.5),rgba(120,180,255,0.8)); box-shadow:0 0 8px rgba(120,180,255,0.2); }
+@keyframes pbrd-bv-comp-grow { from { width:0; } to { width:var(--w); } }
+.pbrd-bv-comp-val { font-size:0.5625rem; color:rgba(255,255,255,0.4); min-width:24px; text-align:right; font-weight:600; }
+.pbrd-bv-comp-save { color:rgba(120,180,255,0.8)!important; }
+
+/* Loyalty ring glow pulse */
+.pbrd-bv-ring-wrap { animation:pbrd-bv-ring-glow 3s ease-in-out 2s infinite; }
+@keyframes pbrd-bv-ring-glow {
+  0%,100% { filter:drop-shadow(0 0 3px rgba(120,180,255,0.1)); }
+  50% { filter:drop-shadow(0 0 10px rgba(120,180,255,0.35)); }
+}
+.pbrd-bv-loyalty-unit { font-size:0.625rem; color:rgba(255,255,255,0.3); }
+
+/* Sparkline pulse */
+.pbrd-bv-sparkline { animation:pbrd-line-draw 1.5s 0.5s ease forwards, pbrd-bv-spark-pulse 3s 2s ease-in-out infinite; }
+@keyframes pbrd-bv-spark-pulse {
+  0%,100% { stroke:rgba(120,180,255,0.5); }
+  50% { stroke:rgba(120,180,255,0.8); }
 }
 /* Paybyrd — Showcase Section Custom Visuals */
 
