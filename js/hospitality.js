@@ -966,7 +966,7 @@
     wrap.innerHTML =
       /* Header */
       '<div class="pbrd-hosp-quivi-header pbrd-hosp-reveal">' +
-        '<span class="pbrd-hosp-section-label">POWERED BY QUIVI</span>' +
+        '<span class="pbrd-hosp-section-label" style="color:#5ACC61">POWERED BY QUIVI</span>' +
         '<h2 class="pbrd-hosp-quivi-h2">Guests order, split, and pay<br>without waiting for the check.</h2>' +
         '<p class="pbrd-hosp-quivi-sub">QR table ordering, instant bill splitting, and pay-at-table \u2014 all running on Paybyrd\u2019s native payment rails. No third-party gateway fees. No hardware lock-in.</p>' +
       '</div>' +
@@ -977,8 +977,8 @@
           '<div class="pbrd-hosp-quivi-step-num">1</div>' +
           '<div class="pbrd-hosp-quivi-step-screen">' +
             '<div class="pbrd-hosp-quivi-qr">' +
-              '<svg viewBox="0 0 80 80" fill="none"><rect x="4" y="4" width="24" height="24" rx="2" stroke="rgba(99,25,240,0.5)" stroke-width="1.5"/><rect x="8" y="8" width="16" height="16" rx="1" fill="rgba(99,25,240,0.15)"/><rect x="11" y="11" width="10" height="10" rx="1" fill="rgba(99,25,240,0.3)"/><rect x="52" y="4" width="24" height="24" rx="2" stroke="rgba(99,25,240,0.5)" stroke-width="1.5"/><rect x="56" y="8" width="16" height="16" rx="1" fill="rgba(99,25,240,0.15)"/><rect x="59" y="11" width="10" height="10" rx="1" fill="rgba(99,25,240,0.3)"/><rect x="4" y="52" width="24" height="24" rx="2" stroke="rgba(99,25,240,0.5)" stroke-width="1.5"/><rect x="8" y="56" width="16" height="16" rx="1" fill="rgba(99,25,240,0.15)"/><rect x="11" y="59" width="10" height="10" rx="1" fill="rgba(99,25,240,0.3)"/><rect x="34" y="4" width="6" height="6" rx="1" fill="rgba(99,25,240,0.2)"/><rect x="34" y="14" width="6" height="6" rx="1" fill="rgba(99,25,240,0.15)"/><rect x="34" y="34" width="6" height="6" rx="1" fill="rgba(99,25,240,0.25)"/><rect x="4" y="34" width="6" height="6" rx="1" fill="rgba(99,25,240,0.2)"/><rect x="14" y="34" width="6" height="6" rx="1" fill="rgba(99,25,240,0.1)"/><rect x="44" y="34" width="6" height="6" rx="1" fill="rgba(99,25,240,0.15)"/><rect x="54" y="34" width="6" height="6" rx="1" fill="rgba(99,25,240,0.2)"/><rect x="64" y="34" width="6" height="6" rx="1" fill="rgba(99,25,240,0.1)"/><rect x="34" y="54" width="12" height="6" rx="1" fill="rgba(99,25,240,0.15)"/><rect x="54" y="54" width="6" height="6" rx="1" fill="rgba(99,25,240,0.2)"/><rect x="64" y="54" width="12" height="6" rx="1" fill="rgba(99,25,240,0.25)"/><rect x="34" y="64" width="6" height="12" rx="1" fill="rgba(99,25,240,0.1)"/><rect x="44" y="44" width="6" height="6" rx="1" fill="rgba(99,25,240,0.2)"/><rect x="54" y="64" width="6" height="6" rx="1" fill="rgba(99,25,240,0.15)"/><rect x="64" y="64" width="6" height="12" rx="1" fill="rgba(99,25,240,0.3)"/>' +
-              '<rect x="0" y="0" width="80" height="80" rx="4" fill="none" stroke="rgba(99,25,240,0.08)" stroke-width="0.5"/></svg>' +
+              '<svg viewBox="0 0 80 80" fill="none"><rect x="4" y="4" width="24" height="24" rx="2" stroke="rgba(90,204,97,0.5)" stroke-width="1.5"/><rect x="8" y="8" width="16" height="16" rx="1" fill="rgba(90,204,97,0.15)"/><rect x="11" y="11" width="10" height="10" rx="1" fill="rgba(90,204,97,0.3)"/><rect x="52" y="4" width="24" height="24" rx="2" stroke="rgba(90,204,97,0.5)" stroke-width="1.5"/><rect x="56" y="8" width="16" height="16" rx="1" fill="rgba(90,204,97,0.15)"/><rect x="59" y="11" width="10" height="10" rx="1" fill="rgba(90,204,97,0.3)"/><rect x="4" y="52" width="24" height="24" rx="2" stroke="rgba(90,204,97,0.5)" stroke-width="1.5"/><rect x="8" y="56" width="16" height="16" rx="1" fill="rgba(90,204,97,0.15)"/><rect x="11" y="59" width="10" height="10" rx="1" fill="rgba(90,204,97,0.3)"/><rect x="34" y="4" width="6" height="6" rx="1" fill="rgba(90,204,97,0.2)"/><rect x="34" y="14" width="6" height="6" rx="1" fill="rgba(90,204,97,0.15)"/><rect x="34" y="34" width="6" height="6" rx="1" fill="rgba(90,204,97,0.25)"/><rect x="4" y="34" width="6" height="6" rx="1" fill="rgba(90,204,97,0.2)"/><rect x="14" y="34" width="6" height="6" rx="1" fill="rgba(90,204,97,0.1)"/><rect x="44" y="34" width="6" height="6" rx="1" fill="rgba(90,204,97,0.15)"/><rect x="54" y="34" width="6" height="6" rx="1" fill="rgba(90,204,97,0.2)"/><rect x="64" y="34" width="6" height="6" rx="1" fill="rgba(90,204,97,0.1)"/><rect x="34" y="54" width="12" height="6" rx="1" fill="rgba(90,204,97,0.15)"/><rect x="54" y="54" width="6" height="6" rx="1" fill="rgba(90,204,97,0.2)"/><rect x="64" y="54" width="12" height="6" rx="1" fill="rgba(90,204,97,0.25)"/><rect x="34" y="64" width="6" height="12" rx="1" fill="rgba(90,204,97,0.1)"/><rect x="44" y="44" width="6" height="6" rx="1" fill="rgba(90,204,97,0.2)"/><rect x="54" y="64" width="6" height="6" rx="1" fill="rgba(90,204,97,0.15)"/><rect x="64" y="64" width="6" height="12" rx="1" fill="rgba(90,204,97,0.3)"/>' +
+              '<rect x="0" y="0" width="80" height="80" rx="4" fill="none" stroke="rgba(90,204,97,0.08)" stroke-width="0.5"/></svg>' +
               '<div class="pbrd-hosp-quivi-qr-label">Scan to order</div>' +
             '</div>' +
           '</div>' +
@@ -986,7 +986,7 @@
           '<div class="pbrd-hosp-quivi-step-desc">Guest scans table QR code. Menu loads instantly in their language.</div>' +
         '</div>' +
 
-        '<div class="pbrd-hosp-quivi-step-arrow"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M5 12h14M13 6l6 6-6 6" stroke="rgba(99,25,240,0.3)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>' +
+        '<div class="pbrd-hosp-quivi-step-arrow"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M5 12h14M13 6l6 6-6 6" stroke="rgba(90,204,97,0.3)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>' +
 
         '<div class="pbrd-hosp-quivi-step">' +
           '<div class="pbrd-hosp-quivi-step-num">2</div>' +
@@ -1003,7 +1003,7 @@
           '<div class="pbrd-hosp-quivi-step-desc">Full menu with photos, allergens, and modifiers. Orders route to kitchen or bar.</div>' +
         '</div>' +
 
-        '<div class="pbrd-hosp-quivi-step-arrow"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M5 12h14M13 6l6 6-6 6" stroke="rgba(99,25,240,0.3)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>' +
+        '<div class="pbrd-hosp-quivi-step-arrow"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M5 12h14M13 6l6 6-6 6" stroke="rgba(90,204,97,0.3)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>' +
 
         '<div class="pbrd-hosp-quivi-step">' +
           '<div class="pbrd-hosp-quivi-step-num">3</div>' +
@@ -1023,7 +1023,7 @@
           '<div class="pbrd-hosp-quivi-step-desc">By item, equal share, or custom amounts. Each guest pays their part.</div>' +
         '</div>' +
 
-        '<div class="pbrd-hosp-quivi-step-arrow"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M5 12h14M13 6l6 6-6 6" stroke="rgba(99,25,240,0.3)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>' +
+        '<div class="pbrd-hosp-quivi-step-arrow"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M5 12h14M13 6l6 6-6 6" stroke="rgba(90,204,97,0.3)" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></div>' +
 
         '<div class="pbrd-hosp-quivi-step">' +
           '<div class="pbrd-hosp-quivi-step-num">4</div>' +
@@ -1036,7 +1036,7 @@
                 '<span class="pbrd-hosp-quivi-pm">Card</span>' +
               '</div>' +
               '<div class="pbrd-hosp-quivi-pay-done" id="pbrd-quivi-done">' +
-                '<svg viewBox="0 0 40 40" width="32" height="32"><circle cx="20" cy="20" r="18" fill="rgba(16,185,129,0.15)" stroke="#10b981" stroke-width="1.5"/><path d="M12 20l5 5 11-11" stroke="#10b981" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+                '<svg viewBox="0 0 40 40" width="32" height="32"><circle cx="20" cy="20" r="18" fill="rgba(90,204,97,0.15)" stroke="#5ACC61" stroke-width="1.5"/><path d="M12 20l5 5 11-11" stroke="#5ACC61" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
                 '<span>Paid</span>' +
               '</div>' +
             '</div>' +
