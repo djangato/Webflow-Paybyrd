@@ -9368,8 +9368,8 @@
     var svgPaths = "";
     outlets.forEach(function(o, i) {
       svgPaths +=
-        '<path d="' + o.d + '" fill="none" stroke="rgba(212,165,116,0.25)" stroke-width="1.2" stroke-dasharray="4 3"/>' +
-        '<circle r="3.5" fill="#D4A574" opacity="0">' +
+        '<path d="' + o.d + '" fill="none" stroke="rgba(99,25,240,0.25)" stroke-width="1.2" stroke-dasharray="4 3"/>' +
+        '<circle r="3.5" fill="#6319f0" opacity="0">' +
           '<animateMotion dur="' + (2.5 + i * 0.4) + 's" begin="' + (i * 0.6) + 's" repeatCount="indefinite" path="' + o.d + '"/>' +
           '<animate attributeName="opacity" values="0;0.7;0.7;0" dur="' + (2.5 + i * 0.4) + 's" begin="' + (i * 0.6) + 's" repeatCount="indefinite"/>' +
         '</circle>';
@@ -9377,14 +9377,14 @@
 
     /* Central dashboard hub */
     var svgDots =
-      '<circle cx="' + CX + '" cy="' + CY + '" r="24" fill="rgba(212,165,116,0.08)"><animate attributeName="r" values="20;28;20" dur="3s" repeatCount="indefinite"/></circle>' +
-      '<circle cx="' + CX + '" cy="' + CY + '" r="8" fill="#D4A574"/>' +
+      '<circle cx="' + CX + '" cy="' + CY + '" r="24" fill="rgba(99,25,240,0.08)"><animate attributeName="r" values="20;28;20" dur="3s" repeatCount="indefinite"/></circle>' +
+      '<circle cx="' + CX + '" cy="' + CY + '" r="8" fill="#6319f0"/>' +
       '<text x="' + CX + '" y="' + (CY - 16) + '" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="11" font-weight="700" font-family="system-ui">DASHBOARD</text>';
 
     /* Outlet nodes */
     outlets.forEach(function(o) {
       svgDots +=
-        '<circle cx="' + o.x + '" cy="' + o.y + '" r="5.5" fill="rgba(212,165,116,0.5)"/>' +
+        '<circle cx="' + o.x + '" cy="' + o.y + '" r="5.5" fill="rgba(99,25,240,0.5)"/>' +
         '<text x="' + o.x + '" y="' + (o.y - 14) + '" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="12" font-weight="600" font-family="system-ui">' + o.name + '</text>';
     });
 
@@ -9501,7 +9501,7 @@
             '<div class="pbrd-hosp-leak-fix">\u2192 AI screening: 16.8% reduction</div>' +
           '</div>' +
           '<div class="pbrd-hosp-leak-card pbrd-hosp-leak--copper pbrd-hosp-reveal">' +
-            '<div class="pbrd-hosp-leak-ring"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="none" stroke="rgba(0,0,0,0.04)" stroke-width="6"/><circle cx="40" cy="40" r="34" fill="none" stroke="#D4A574" stroke-width="6" stroke-dasharray="214" stroke-dashoffset="214" stroke-linecap="round" class="pbrd-hosp-ring-fill" data-pct="15"/></svg><span class="pbrd-hosp-leak-pct" data-target="15">0%</span></div>' +
+            '<div class="pbrd-hosp-leak-ring"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="none" stroke="rgba(0,0,0,0.04)" stroke-width="6"/><circle cx="40" cy="40" r="34" fill="none" stroke="#6319f0" stroke-width="6" stroke-dasharray="214" stroke-dashoffset="214" stroke-linecap="round" class="pbrd-hosp-ring-fill" data-pct="15"/></svg><span class="pbrd-hosp-leak-pct" data-target="15">0%</span></div>' +
             '<h4>FX & Cross-Border</h4>' +
             '<p>Excessive currency & routing fees</p>' +
             '<div class="pbrd-hosp-leak-fix">\u2192 Local routing: 10\u201315% savings</div>' +
@@ -9573,13 +9573,13 @@
         '<div class="pbrd-hosp-feat-card pbrd-hosp-reveal">' +
           '<div class="pbrd-hosp-feat-card-visual">' +
             '<svg viewBox="0 0 200 120" fill="none">' +
-              '<rect x="50" y="10" width="100" height="100" rx="8" fill="rgba(212,165,116,0.08)" stroke="rgba(212,165,116,0.3)" stroke-width="1.5"/>' +
+              '<rect x="50" y="10" width="100" height="100" rx="8" fill="rgba(99,25,240,0.08)" stroke="rgba(99,25,240,0.3)" stroke-width="1.5"/>' +
               '<line x1="70" y1="32" x2="130" y2="32" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-dasharray="0 150" stroke-linecap="round"><animate attributeName="stroke-dasharray" values="0 150;60 90" dur="1.5s" begin="0.3s" fill="freeze"/></line>' +
               '<line x1="70" y1="48" x2="120" y2="48" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-dasharray="0 150" stroke-linecap="round"><animate attributeName="stroke-dasharray" values="0 150;50 100" dur="1.5s" begin="0.6s" fill="freeze"/></line>' +
               '<line x1="70" y1="64" x2="125" y2="64" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-dasharray="0 150" stroke-linecap="round"><animate attributeName="stroke-dasharray" values="0 150;55 95" dur="1.5s" begin="0.9s" fill="freeze"/></line>' +
               '<line x1="70" y1="80" x2="115" y2="80" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-dasharray="0 150" stroke-linecap="round"><animate attributeName="stroke-dasharray" values="0 150;45 105" dur="1.5s" begin="1.2s" fill="freeze"/></line>' +
-              '<line x1="70" y1="96" x2="130" y2="96" stroke="#D4A574" stroke-width="2" stroke-dasharray="0 150" stroke-linecap="round"><animate attributeName="stroke-dasharray" values="0 150;60 90" dur="1s" begin="1.8s" fill="freeze"/></line>' +
-              '<text x="132" y="100" fill="#D4A574" font-size="8" font-weight="700" font-family="system-ui" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.5s" begin="2.2s" fill="freeze"/>TOTAL</text>' +
+              '<line x1="70" y1="96" x2="130" y2="96" stroke="#6319f0" stroke-width="2" stroke-dasharray="0 150" stroke-linecap="round"><animate attributeName="stroke-dasharray" values="0 150;60 90" dur="1s" begin="1.8s" fill="freeze"/></line>' +
+              '<text x="132" y="100" fill="#6319f0" font-size="8" font-weight="700" font-family="system-ui" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.5s" begin="2.2s" fill="freeze"/>TOTAL</text>' +
             '</svg>' +
           '</div>' +
           '<h3>Unified Guest Folio</h3>' +
@@ -9590,10 +9590,10 @@
         '<div class="pbrd-hosp-feat-card pbrd-hosp-reveal">' +
           '<div class="pbrd-hosp-feat-card-visual">' +
             '<svg viewBox="0 0 200 120" fill="none">' +
-              '<rect x="20" y="10" width="160" height="100" rx="8" fill="rgba(212,165,116,0.05)" stroke="rgba(212,165,116,0.2)" stroke-width="1"/>' +
-              '<rect x="38" y="70" width="24" height="0" rx="3" fill="rgba(212,165,116,0.4)"><animate attributeName="height" values="0;40" dur="1s" begin="0.4s" fill="freeze"/><animate attributeName="y" values="70;30" dur="1s" begin="0.4s" fill="freeze"/></rect>' +
-              '<rect x="88" y="70" width="24" height="0" rx="3" fill="rgba(212,165,116,0.6)"><animate attributeName="height" values="0;55" dur="1s" begin="0.7s" fill="freeze"/><animate attributeName="y" values="70;15" dur="1s" begin="0.7s" fill="freeze"/></rect>' +
-              '<rect x="138" y="70" width="24" height="0" rx="3" fill="#D4A574"><animate attributeName="height" values="0;48" dur="1s" begin="1s" fill="freeze"/><animate attributeName="y" values="70;22" dur="1s" begin="1s" fill="freeze"/></rect>' +
+              '<rect x="20" y="10" width="160" height="100" rx="8" fill="rgba(99,25,240,0.05)" stroke="rgba(99,25,240,0.2)" stroke-width="1"/>' +
+              '<rect x="38" y="70" width="24" height="0" rx="3" fill="rgba(99,25,240,0.4)"><animate attributeName="height" values="0;40" dur="1s" begin="0.4s" fill="freeze"/><animate attributeName="y" values="70;30" dur="1s" begin="0.4s" fill="freeze"/></rect>' +
+              '<rect x="88" y="70" width="24" height="0" rx="3" fill="rgba(99,25,240,0.6)"><animate attributeName="height" values="0;55" dur="1s" begin="0.7s" fill="freeze"/><animate attributeName="y" values="70;15" dur="1s" begin="0.7s" fill="freeze"/></rect>' +
+              '<rect x="138" y="70" width="24" height="0" rx="3" fill="#6319f0"><animate attributeName="height" values="0;48" dur="1s" begin="1s" fill="freeze"/><animate attributeName="y" values="70;22" dur="1s" begin="1s" fill="freeze"/></rect>' +
               '<line x1="30" y1="80" x2="170" y2="80" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>' +
               '<text x="42" y="92" fill="rgba(255,255,255,0.3)" font-size="6" font-family="system-ui">Hotel A</text>' +
               '<text x="92" y="92" fill="rgba(255,255,255,0.3)" font-size="6" font-family="system-ui">Hotel B</text>' +
@@ -9608,20 +9608,20 @@
         '<div class="pbrd-hosp-feat-card pbrd-hosp-reveal">' +
           '<div class="pbrd-hosp-feat-card-visual">' +
             '<svg viewBox="0 0 200 120" fill="none">' +
-              '<circle cx="40" cy="60" r="12" fill="rgba(212,165,116,0.1)" stroke="rgba(212,165,116,0.4)" stroke-width="1.5"/>' +
+              '<circle cx="40" cy="60" r="12" fill="rgba(99,25,240,0.1)" stroke="rgba(99,25,240,0.4)" stroke-width="1.5"/>' +
               '<text x="40" y="63" fill="rgba(255,255,255,0.5)" font-size="6" font-weight="600" font-family="system-ui" text-anchor="middle">TXN</text>' +
-              '<rect x="80" y="45" width="40" height="30" rx="6" fill="rgba(212,165,116,0.15)" stroke="#D4A574" stroke-width="1.5"/>' +
-              '<text x="100" y="63" fill="#D4A574" font-size="6" font-weight="700" font-family="system-ui" text-anchor="middle">ROUTER</text>' +
-              '<circle cx="160" cy="30" r="10" fill="rgba(212,165,116,0.08)" stroke="rgba(212,165,116,0.3)" stroke-width="1"/>' +
+              '<rect x="80" y="45" width="40" height="30" rx="6" fill="rgba(99,25,240,0.15)" stroke="#6319f0" stroke-width="1.5"/>' +
+              '<text x="100" y="63" fill="#6319f0" font-size="6" font-weight="700" font-family="system-ui" text-anchor="middle">ROUTER</text>' +
+              '<circle cx="160" cy="30" r="10" fill="rgba(99,25,240,0.08)" stroke="rgba(99,25,240,0.3)" stroke-width="1"/>' +
               '<text x="160" y="33" fill="rgba(255,255,255,0.4)" font-size="5" font-family="system-ui" text-anchor="middle">ACQ 1</text>' +
-              '<circle cx="160" cy="60" r="10" fill="rgba(212,165,116,0.08)" stroke="rgba(212,165,116,0.3)" stroke-width="1"/>' +
+              '<circle cx="160" cy="60" r="10" fill="rgba(99,25,240,0.08)" stroke="rgba(99,25,240,0.3)" stroke-width="1"/>' +
               '<text x="160" y="63" fill="rgba(255,255,255,0.4)" font-size="5" font-family="system-ui" text-anchor="middle">ACQ 2</text>' +
-              '<circle cx="160" cy="90" r="10" fill="rgba(212,165,116,0.08)" stroke="rgba(212,165,116,0.3)" stroke-width="1"/>' +
+              '<circle cx="160" cy="90" r="10" fill="rgba(99,25,240,0.08)" stroke="rgba(99,25,240,0.3)" stroke-width="1"/>' +
               '<text x="160" y="93" fill="rgba(255,255,255,0.4)" font-size="5" font-family="system-ui" text-anchor="middle">ACQ 3</text>' +
-              '<path d="M52,60 L80,60" stroke="rgba(212,165,116,0.4)" stroke-width="1.5" stroke-dasharray="4 3"/>' +
-              '<path d="M120,55 L150,32" stroke="rgba(212,165,116,0.3)" stroke-width="1" stroke-dasharray="4 3"/>' +
-              '<path d="M120,60 L150,60" stroke="#D4A574" stroke-width="1.5"><animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/></path>' +
-              '<path d="M120,65 L150,88" stroke="rgba(212,165,116,0.3)" stroke-width="1" stroke-dasharray="4 3"/>' +
+              '<path d="M52,60 L80,60" stroke="rgba(99,25,240,0.4)" stroke-width="1.5" stroke-dasharray="4 3"/>' +
+              '<path d="M120,55 L150,32" stroke="rgba(99,25,240,0.3)" stroke-width="1" stroke-dasharray="4 3"/>' +
+              '<path d="M120,60 L150,60" stroke="#6319f0" stroke-width="1.5"><animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/></path>' +
+              '<path d="M120,65 L150,88" stroke="rgba(99,25,240,0.3)" stroke-width="1" stroke-dasharray="4 3"/>' +
             '</svg>' +
           '</div>' +
           '<h3>Smart Payment Routing</h3>' +
@@ -9632,21 +9632,21 @@
         '<div class="pbrd-hosp-feat-card pbrd-hosp-reveal">' +
           '<div class="pbrd-hosp-feat-card-visual">' +
             '<svg viewBox="0 0 200 120" fill="none">' +
-              '<circle cx="100" cy="60" r="20" fill="rgba(212,165,116,0.12)" stroke="#D4A574" stroke-width="1.5"/>' +
-              '<text x="100" y="57" fill="#D4A574" font-size="6" font-weight="700" font-family="system-ui" text-anchor="middle">PAYBYRD</text>' +
-              '<text x="100" y="66" fill="#D4A574" font-size="5" font-family="system-ui" text-anchor="middle">HUB</text>' +
-              '<rect x="10" y="15" width="44" height="18" rx="4" fill="rgba(212,165,116,0.08)" stroke="rgba(212,165,116,0.25)" stroke-width="1"/>' +
+              '<circle cx="100" cy="60" r="20" fill="rgba(99,25,240,0.12)" stroke="#6319f0" stroke-width="1.5"/>' +
+              '<text x="100" y="57" fill="#6319f0" font-size="6" font-weight="700" font-family="system-ui" text-anchor="middle">PAYBYRD</text>' +
+              '<text x="100" y="66" fill="#6319f0" font-size="5" font-family="system-ui" text-anchor="middle">HUB</text>' +
+              '<rect x="10" y="15" width="44" height="18" rx="4" fill="rgba(99,25,240,0.08)" stroke="rgba(99,25,240,0.25)" stroke-width="1"/>' +
               '<text x="32" y="27" fill="rgba(255,255,255,0.5)" font-size="6" font-weight="600" font-family="system-ui" text-anchor="middle">Opera</text>' +
-              '<rect x="146" y="15" width="44" height="18" rx="4" fill="rgba(212,165,116,0.08)" stroke="rgba(212,165,116,0.25)" stroke-width="1"/>' +
+              '<rect x="146" y="15" width="44" height="18" rx="4" fill="rgba(99,25,240,0.08)" stroke="rgba(99,25,240,0.25)" stroke-width="1"/>' +
               '<text x="168" y="27" fill="rgba(255,255,255,0.5)" font-size="6" font-weight="600" font-family="system-ui" text-anchor="middle">Mews</text>' +
-              '<rect x="10" y="87" width="44" height="18" rx="4" fill="rgba(212,165,116,0.08)" stroke="rgba(212,165,116,0.25)" stroke-width="1"/>' +
+              '<rect x="10" y="87" width="44" height="18" rx="4" fill="rgba(99,25,240,0.08)" stroke="rgba(99,25,240,0.25)" stroke-width="1"/>' +
               '<text x="32" y="99" fill="rgba(255,255,255,0.5)" font-size="6" font-weight="600" font-family="system-ui" text-anchor="middle">Protel</text>' +
-              '<rect x="146" y="87" width="44" height="18" rx="4" fill="rgba(212,165,116,0.08)" stroke="rgba(212,165,116,0.25)" stroke-width="1"/>' +
+              '<rect x="146" y="87" width="44" height="18" rx="4" fill="rgba(99,25,240,0.08)" stroke="rgba(99,25,240,0.25)" stroke-width="1"/>' +
               '<text x="168" y="99" fill="rgba(255,255,255,0.5)" font-size="6" font-weight="600" font-family="system-ui" text-anchor="middle">Newhotel</text>' +
-              '<line x1="54" y1="24" x2="80" y2="50" stroke="rgba(212,165,116,0.3)" stroke-width="1" stroke-dasharray="4 3"/>' +
-              '<line x1="146" y1="24" x2="120" y2="50" stroke="rgba(212,165,116,0.3)" stroke-width="1" stroke-dasharray="4 3"/>' +
-              '<line x1="54" y1="96" x2="80" y2="70" stroke="rgba(212,165,116,0.3)" stroke-width="1" stroke-dasharray="4 3"/>' +
-              '<line x1="146" y1="96" x2="120" y2="70" stroke="rgba(212,165,116,0.3)" stroke-width="1" stroke-dasharray="4 3"/>' +
+              '<line x1="54" y1="24" x2="80" y2="50" stroke="rgba(99,25,240,0.3)" stroke-width="1" stroke-dasharray="4 3"/>' +
+              '<line x1="146" y1="24" x2="120" y2="50" stroke="rgba(99,25,240,0.3)" stroke-width="1" stroke-dasharray="4 3"/>' +
+              '<line x1="54" y1="96" x2="80" y2="70" stroke="rgba(99,25,240,0.3)" stroke-width="1" stroke-dasharray="4 3"/>' +
+              '<line x1="146" y1="96" x2="120" y2="70" stroke="rgba(99,25,240,0.3)" stroke-width="1" stroke-dasharray="4 3"/>' +
             '</svg>' +
           '</div>' +
           '<h3>POS + PMS Integration</h3>' +
@@ -9911,9 +9911,9 @@
             '<h3>Autonomous AI agent across every channel</h3>' +
             '<p>Your AI handles the full guest lifecycle \u2014 refunds, upsells, room changes, and pay-by-links \u2014 via WhatsApp and website chat. 24/7, 30+ languages.</p>' +
             '<ul class="pbrd-hosp-gj-bullets">' +
-              '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#D4A574" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Processes refunds and cancellations in real time</li>' +
-              '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#D4A574" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Sends pay-by-links for upgrades and extras</li>' +
-              '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#D4A574" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Handles room changes and late checkouts autonomously</li>' +
+              '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#6319f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Processes refunds and cancellations in real time</li>' +
+              '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#6319f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Sends pay-by-links for upgrades and extras</li>' +
+              '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#6319f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Handles room changes and late checkouts autonomously</li>' +
             '</ul>' +
           '</div>' +
         '</div>' +
@@ -9933,7 +9933,7 @@
                       tp.txns.map(function(t) { return '<div class="pbrd-hosp-gj-j-txn">' + t + '</div>'; }).join("") +
                     '</div>' +
                   '</div>' +
-                  (idx < 3 ? '<div class="pbrd-hosp-gj-j-connector"><svg viewBox="0 0 40 24" width="40" height="24"><path d="M0 12h32" stroke="rgba(212,165,116,0.3)" stroke-width="1.5" stroke-dasharray="4 3"/><path d="M28 6l8 6-8 6" fill="none" stroke="rgba(212,165,116,0.4)" stroke-width="1.5"/></svg></div>' : '');
+                  (idx < 3 ? '<div class="pbrd-hosp-gj-j-connector"><svg viewBox="0 0 40 24" width="40" height="24"><path d="M0 12h32" stroke="rgba(99,25,240,0.3)" stroke-width="1.5" stroke-dasharray="4 3"/><path d="M28 6l8 6-8 6" fill="none" stroke="rgba(99,25,240,0.4)" stroke-width="1.5"/></svg></div>' : '');
                 }).join("") +
               '</div>' +
             '</div>' +
@@ -9942,9 +9942,9 @@
             '<h3>Every channel. One unified platform.</h3>' +
             '<p>Online bookings, front desk, in-stay charges, and checkout \u2014 every transaction flows through a single payment engine with real-time reconciliation.</p>' +
             '<ul class="pbrd-hosp-gj-bullets">' +
-              '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#D4A574" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Unified view across all sales channels</li>' +
-              '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#D4A574" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>PMS integration for seamless folio management</li>' +
-              '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#D4A574" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>POS captures spa, restaurant & bar revenue</li>' +
+              '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#6319f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Unified view across all sales channels</li>' +
+              '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#6319f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>PMS integration for seamless folio management</li>' +
+              '<li><svg viewBox="0 0 16 16" width="14" height="14"><path d="M3 8l3.5 3.5L13 5" stroke="#6319f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>POS captures spa, restaurant & bar revenue</li>' +
             '</ul>' +
           '</div>' +
         '</div>' +
@@ -10123,7 +10123,7 @@
     layout.className = "pbrd-hosp-quivi-layout";
 
     /* Left: feature bullets */
-    var checkSvg = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="rgba(212,165,116,0.15)"/><path d="M5 8l2 2 4-4" stroke="#D4A574" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    var checkSvg = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="rgba(99,25,240,0.15)"/><path d="M5 8l2 2 4-4" stroke="#6319f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     var features = [
       "QR code table ordering \u2014 guests browse and order from their phone",
       "Bill splitting by item, person, or custom amounts",
@@ -10270,7 +10270,7 @@
     card2.innerHTML =
       '<div class="pbrd-hosp-ai-visual">' +
         '<div class="pbrd-hosp-ai-shield">' +
-          '<svg viewBox="0 0 80 80" fill="none"><path d="M40 8L12 22v20c0 16.6 12 31.4 28 36 16-4.6 28-19.4 28-36V22L40 8z" stroke="#D4A574" stroke-width="2" fill="none"/><path class="pbrd-hosp-ai-shield-check" d="M28 40l8 8 16-16" stroke="#D4A574" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0"/></svg>' +
+          '<svg viewBox="0 0 80 80" fill="none"><path d="M40 8L12 22v20c0 16.6 12 31.4 28 36 16-4.6 28-19.4 28-36V22L40 8z" stroke="#6319f0" stroke-width="2" fill="none"/><path class="pbrd-hosp-ai-shield-check" d="M28 40l8 8 16-16" stroke="#6319f0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0"/></svg>' +
           '<div class="pbrd-hosp-ai-scan"></div>' +
           '<div class="pbrd-hosp-ai-scan" style="animation-delay:0.7s;"></div>' +
           '<div class="pbrd-hosp-ai-scan" style="animation-delay:1.4s;"></div>' +
@@ -10477,7 +10477,7 @@
 
     /* Categories */
     var categories = ["All", "Integration", "Operations", "Security", "Billing", "POS"];
-    var dotColors = { Integration: "#6366F1", Operations: "#10B981", Security: "#8B5CF6", Billing: "#F59E0B", POS: "#D4A574" };
+    var dotColors = { Integration: "#6366F1", Operations: "#10B981", Security: "#8B5CF6", Billing: "#F59E0B", POS: "#6319f0" };
 
     var filters = document.createElement("div");
     filters.className = "pbrd-hosp-faq-filters";
