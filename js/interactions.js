@@ -7,35 +7,38 @@
   // Only run on the pricing page
   if (!window.location.pathname.includes("/pricing")) return;
 
+  /* ─── CDN base for icons ─── */
+  const iconBase = "https://djangato.github.io/Webflow-Paybyrd/assets/icons/";
+
   /* ─── Payment Methods Data ─── */
   const paymentMethods = [
     // Cards
-    { name: "Visa", category: "cards", region: "Worldwide", fee: "1.50% + €0.15", icon: "VISA", iconBg: "#1A1F71" },
-    { name: "Mastercard", category: "cards", region: "Worldwide", fee: "1.50% + €0.15", icon: "MC", iconBg: "#EB001B" },
-    { name: "American Express", category: "cards", region: "Worldwide", fee: "2.60% + €0.15", icon: "AMEX", iconBg: "#006FCF" },
-    { name: "Discover", category: "cards", region: "Worldwide", fee: "2.40% + €0.15", icon: "DISC", iconBg: "#FF6000" },
-    { name: "Diners Club", category: "cards", region: "Worldwide", fee: "2.40% + €0.15", icon: "DC", iconBg: "#004A97" },
-    { name: "China Union Pay", category: "cards", region: "Worldwide", fee: "2.80% + €0.15", icon: "CUP", iconBg: "#E21836" },
+    { name: "Visa", category: "cards", region: "Worldwide", fee: "1.50% + €0.15", img: "visa.png" },
+    { name: "Mastercard", category: "cards", region: "Worldwide", fee: "1.50% + €0.15", img: "mastercard.png" },
+    { name: "American Express", category: "cards", region: "Worldwide", fee: "2.60% + €0.15", img: "amex.png" },
+    { name: "Discover", category: "cards", region: "Worldwide", fee: "2.40% + €0.15", img: "discover.png" },
+    { name: "Diners Club", category: "cards", region: "Worldwide", fee: "2.40% + €0.15", img: "diners.png" },
+    { name: "China Union Pay", category: "cards", region: "Worldwide", fee: "2.80% + €0.15", img: "unionpay.png" },
 
     // Digital Wallets
-    { name: "Apple Pay", category: "wallets", region: "Worldwide", fee: "Card rate applies", icon: "AP", iconBg: "#000" },
-    { name: "Google Pay", category: "wallets", region: "Worldwide", fee: "Card rate applies", icon: "GP", iconBg: "#4285F4" },
+    { name: "Apple Pay", category: "wallets", region: "Worldwide", fee: "Card rate applies", img: "applepay.png" },
+    { name: "Google Pay", category: "wallets", region: "Worldwide", fee: "Card rate applies", img: "googlepay.png" },
     { name: "Samsung Pay", category: "wallets", region: "Worldwide", fee: "Card rate applies", icon: "SP", iconBg: "#1428A0" },
-    { name: "PayPal", category: "wallets", region: "Worldwide", fee: "PayPal rate + €0.10", icon: "PP", iconBg: "#003087" },
+    { name: "PayPal", category: "wallets", region: "Worldwide", fee: "PayPal rate + €0.10", img: "paypal.png" },
     { name: "Revolut Pay", category: "wallets", region: "Europe", fee: "1.00% + €0.20", icon: "REV", iconBg: "#0075EB" },
 
     // Bank Transfers & Direct Debit
     { name: "SEPA Direct Debit", category: "bank", region: "Europe", fee: "€0.30", icon: "SEPA", iconBg: "#2D6CA2" },
     { name: "SEPA Instant", category: "bank", region: "Europe", fee: "€0.35", icon: "SEPA", iconBg: "#2D6CA2" },
-    { name: "iDEAL", category: "bank", region: "Netherlands", fee: "€0.29", icon: "iD", iconBg: "#CC0066" },
-    { name: "Multibanco Reference", category: "bank", region: "Portugal", fee: "2.00% + €0.25", icon: "MB", iconBg: "#1F3B7A" },
+    { name: "iDEAL", category: "bank", region: "Netherlands", fee: "€0.29", img: "ideal.png" },
+    { name: "Multibanco Reference", category: "bank", region: "Portugal", fee: "2.00% + €0.25", img: "multibanco.png" },
 
     // Buy Now Pay Later
-    { name: "Klarna", category: "bnpl", region: "Europe", fee: "3.29% + €0.35", icon: "K", iconBg: "#FFB3C7" },
+    { name: "Klarna", category: "bnpl", region: "Europe", fee: "3.29% + €0.35", img: "klarna.png" },
     { name: "Floa", category: "bnpl", region: "Europe", fee: "2.99% + €0.35", icon: "FL", iconBg: "#00D26A" },
 
     // Local Payment Methods
-    { name: "MBWay", category: "local", region: "Portugal", fee: "1.20% + €0.15", icon: "MBW", iconBg: "#D4002A" },
+    { name: "MBWay", category: "local", region: "Portugal", fee: "1.20% + €0.15", img: "mbway.png" },
     { name: "PIX", category: "local", region: "Brazil", fee: "0.99%", icon: "PIX", iconBg: "#32BCAD" },
     { name: "Multicaixa", category: "local", region: "Angola", fee: "Contact us", icon: "MCX", iconBg: "#E3242B" },
     { name: "Multicaixa Express", category: "local", region: "Angola", fee: "Contact us", icon: "MCX", iconBg: "#E3242B" },
@@ -63,6 +66,9 @@
 
   /* ─── Render Functions ─── */
   function buildMethodIcon(method) {
+    if (method.img) {
+      return `<div class="pbrd-method-icon pbrd-method-icon-img"><img src="${iconBase}${method.img}" alt="${method.name}" loading="lazy"></div>`;
+    }
     return `<div class="pbrd-method-icon" style="background:${method.iconBg}"><span style="color:#fff;font-size:0.5rem;font-weight:800;letter-spacing:0.02em;line-height:1">${method.icon}</span></div>`;
   }
 
