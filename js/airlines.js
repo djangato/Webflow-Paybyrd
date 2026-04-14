@@ -894,7 +894,7 @@
 
     section.querySelectorAll("p").forEach(function(p) {
       if (p.textContent.toLowerCase().includes("unlock") || p.textContent.toLowerCase().includes("revenue")) {
-        p.textContent = "Join TAP Air Portugal and Europe\u2019s leading carriers. Most airlines see measurable results within 30 days.";
+        p.textContent = "Join TAP Air Portugal and Europe\u2019s leading carriers. Get measurable results within 30 days.";
       }
     });
 
