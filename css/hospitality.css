@@ -70,25 +70,27 @@
   position: relative;
   margin-top: 20px;
   z-index: 2;
+  max-width: 800px;
 }
 
 .pbrd-hosp-map-wrap {
   display: grid;
-  grid-template-columns: 1fr 240px;
+  grid-template-columns: 1fr 200px;
   gap: 0;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(12px);
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   overflow: hidden;
 }
 
 .pbrd-hosp-map-left {
-  padding: 24px;
+  padding: 16px;
 }
 
 .pbrd-hosp-map-svg {
   width: 100%;
-  height: auto;
+  max-height: 240px;
 }
 
 /* ── Transaction Feed (right panel) ── */

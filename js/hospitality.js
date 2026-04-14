@@ -49,10 +49,16 @@
     var section = heading.closest("section") || heading.closest("[class*='section']");
     if (!section) return;
 
+    /* Hero background image */
+    section.style.setProperty("background-image", "url('https://djangato.github.io/Webflow-Paybyrd/assets/hospitality/hero-hotel.png')", "important");
+    section.style.setProperty("background-size", "cover", "important");
+    section.style.setProperty("background-position", "center", "important");
+    section.style.setProperty("background-repeat", "no-repeat", "important");
+    section.style.setProperty("position", "relative", "important");
+
     /* Dark overlay for text readability */
     var overlay = document.createElement("div");
     overlay.setAttribute("style", "position:absolute;inset:0;background:rgba(0,0,0,0.55);z-index:0;pointer-events:none;");
-    section.style.setProperty("position", "relative", "important");
     section.insertBefore(overlay, section.firstChild);
 
     /* Ensure content sits above overlay */
@@ -166,8 +172,8 @@
       '</div>';
 
     /* Insert viz at section level */
-    section.style.setProperty("overflow", "visible", "important");
-    section.style.setProperty("padding-bottom", "0", "important");
+    section.style.setProperty("overflow", "hidden", "important");
+    section.style.setProperty("padding-bottom", "20px", "important");
     section.appendChild(vizWrap);
 
     /* Stat ticker strip */
@@ -203,15 +209,14 @@
     function add() {
       var t = txns[idx++ % txns.length];
       var el = document.createElement("div");
-      el.className = "pbrd-hosp-txn pbrd-hosp-txn--in";
+      el.className = "pbrd-hosp-txn";
       el.innerHTML =
-        '<span class="pbrd-hosp-txn-ok">\u2713</span>' +
-        '<span class="pbrd-hosp-txn-r">' + t.r + '</span>' +
-        '<span class="pbrd-hosp-txn-a">' + t.a + '</span>' +
-        '<span class="pbrd-hosp-txn-m">' + t.m + '</span>' +
-        '<span class="pbrd-hosp-txn-t">' + t.t + '</span>';
+        '<span class="pbrd-hosp-txn-route">' + t.r + '</span>' +
+        '<span class="pbrd-hosp-txn-amount">' + t.a + '</span>' +
+        '<span class="pbrd-hosp-txn-method">' + t.m + '</span>' +
+        '<span class="pbrd-hosp-txn-time">' + t.t + '</span>';
       feed.insertBefore(el, feed.firstChild);
-      setTimeout(function() { el.classList.remove("pbrd-hosp-txn--in"); }, 50);
+      setTimeout(function() { el.classList.add("pbrd-hosp-txn--in"); }, 50);
       while (feed.children.length > 6) feed.removeChild(feed.lastChild);
     }
     add(); setTimeout(add, 600);
