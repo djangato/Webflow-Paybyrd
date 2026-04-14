@@ -173,13 +173,13 @@
     var svgDots =
       '<circle cx="' + CX + '" cy="' + CY + '" r="24" fill="rgba(212,165,116,0.08)"><animate attributeName="r" values="20;28;20" dur="3s" repeatCount="indefinite"/></circle>' +
       '<circle cx="' + CX + '" cy="' + CY + '" r="8" fill="#D4A574"/>' +
-      '<text x="' + CX + '" y="' + (CY - 14) + '" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="8" font-weight="700" font-family="system-ui">DASHBOARD</text>';
+      '<text x="' + CX + '" y="' + (CY - 16) + '" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="11" font-weight="700" font-family="system-ui">DASHBOARD</text>';
 
     /* Outlet nodes */
     outlets.forEach(function(o) {
       svgDots +=
         '<circle cx="' + o.x + '" cy="' + o.y + '" r="4" fill="rgba(212,165,116,0.4)"/>' +
-        '<text x="' + o.x + '" y="' + (o.y - 10) + '" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-size="7" font-weight="600" font-family="system-ui">' + o.name + '</text>';
+        '<text x="' + o.x + '" y="' + (o.y - 12) + '" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="10" font-weight="600" font-family="system-ui">' + o.name + '</text>';
     });
 
     s.innerHTML =
