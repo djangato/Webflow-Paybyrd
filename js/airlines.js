@@ -786,14 +786,13 @@
     var section = findSectionByHeading("works with your stack");
     if (!section) return;
 
-    /* Reduce excessive top padding */
+    /* Collapse all Webflow wrappers — they add padding/margin above our content */
     section.style.setProperty("padding-top", "40px", "important");
-
-    /* Hide existing content */
-    var heading = findHeading("works with your stack");
-    if (heading) heading.style.setProperty("display", "none", "important");
-    section.querySelectorAll("p, a, img, [class*='img']").forEach(function(el) {
-      el.style.setProperty("display", "none", "important");
+    section.style.setProperty("padding-bottom", "0", "important");
+    Array.prototype.forEach.call(section.children, function(child) {
+      if (!child.classList || !child.classList.contains("pbrd-air-stack-wrap")) {
+        child.style.setProperty("display", "none", "important");
+      }
     });
 
     /* Build new content */
