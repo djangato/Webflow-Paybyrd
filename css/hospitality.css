@@ -444,7 +444,7 @@
 .pbrd-hosp-gj-sc-row--bold span { font-weight:700!important; color:#fff!important; font-size:0.9375rem; }
 .pbrd-hosp-gj-sc-row--dim span:last-child { color:rgba(255,255,255,0.3)!important; }
 .pbrd-hosp-gj-sc-row--step span:first-child { padding-left:12px; position:relative; }
-.pbrd-hosp-gj-sc-row--step span:first-child::before { content:"\u2022"; position:absolute; left:0; color:#6319f0; }
+.pbrd-hosp-gj-sc-row--step span:first-child::before { content:"\2022"; position:absolute; left:0; color:#6319f0; }
 
 .pbrd-hosp-gj-sc-div { height:1px; background:rgba(255,255,255,0.06); margin:6px 0; opacity:0; animation:pbrd-hosp-gj-lineIn 0.3s forwards; }
 
