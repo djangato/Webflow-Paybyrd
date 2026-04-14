@@ -1161,12 +1161,20 @@
   function init() {
     /* Find the bento section */
     var heading = null;
-    document.querySelectorAll("h2").forEach(function (h) {
+    document.querySelectorAll("h1,h2,h3,h4,h5,h6").forEach(function (h) {
       if (!heading && h.textContent.toLowerCase().includes("why settle")) heading = h;
     });
+    /* Fallback: try finding the bento card grid directly */
+    if (!heading) {
+      var bentoCard = document.querySelector(".card-1_element");
+      if (bentoCard) {
+        heading = bentoCard.closest("section") || bentoCard.closest("[class*='section']");
+        if (heading) heading = { closest: function() { return heading; } };
+      }
+    }
     if (!heading) return;
 
-    var section = heading.closest("section") || heading.closest("[class*='section']");
+    var section = heading.closest ? (heading.closest("section") || heading.closest("[class*='section']") || heading.parentElement) : heading;
     if (!section) return;
 
     /* Hide Webflow children */
