@@ -9901,7 +9901,8 @@
   /* ═══════════════════════════════════════════ */
 
   function enhanceGuestJourney() {
-    var section = findSectionByHeading("designed for the full guest");
+    var section = findSectionByHeading("designed for the");
+    if (!section) section = findSectionByHeading("full guest journey");
     if (!section) return;
 
     section.style.setProperty("padding", "80px 0", "important");
