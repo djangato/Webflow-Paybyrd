@@ -11306,6 +11306,77 @@ a.glowing_button_link .glowing_button_text {
 .pbrd-air-bench-val { font-size:1rem; font-weight:700; color:#6319f0; min-width:55px; text-align:right; font-variant-numeric:tabular-nums; }
 .pbrd-air-bench-footer { text-align:center; }
 
+/* ═══ FRAUD PLATFORM ═══ */
+.pbrd-air-fraud-section {
+  padding:80px 0; background:#0a0a0f !important;
+  position:relative; overflow:hidden;
+}
+
+.pbrd-air-fraud-wrap { max-width:1100px; margin:0 auto; padding:0 24px; }
+
+.pbrd-air-fraud-header { text-align:center; margin-bottom:40px; }
+.pbrd-air-fraud-h2 {
+  font-size:clamp(1.75rem,3.5vw,2.5rem); font-weight:700; color:#fff;
+  letter-spacing:-0.02em; margin:8px 0 12px;
+}
+.pbrd-air-fraud-sub { font-size:1rem; color:rgba(255,255,255,0.4); max-width:550px; margin:0 auto; line-height:1.6; }
+
+/* Monitor card */
+.pbrd-air-fraud-monitor {
+  border-radius:20px; overflow:hidden;
+  background:rgba(255,255,255,0.02); border:1px solid rgba(99,25,240,0.1);
+  margin-bottom:40px;
+}
+
+.pbrd-air-fraud-mon-header {
+  display:flex; align-items:center; gap:8px; padding:12px 20px;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+  font-size:0.75rem; font-weight:600; color:rgba(255,255,255,0.4);
+}
+.pbrd-air-fraud-mon-dot {
+  width:6px; height:6px; border-radius:50%; background:#22c55e;
+  box-shadow:0 0 8px rgba(34,197,94,0.5); animation:pbrd-air-blink 2s ease-in-out infinite;
+}
+.pbrd-air-fraud-mon-live { margin-left:auto; font-size:0.5625rem; font-weight:700; color:#22c55e; letter-spacing:0.1em; }
+
+.pbrd-air-fraud-mon-body {
+  display:grid; grid-template-columns:1fr 240px; gap:0;
+}
+
+.pbrd-air-fraud-viz { padding:20px; }
+.pbrd-air-fraud-svg { width:100%; height:auto; }
+
+/* Stats panel */
+.pbrd-air-fraud-stats {
+  border-left:1px solid rgba(255,255,255,0.04);
+  display:flex; flex-direction:column; justify-content:center; gap:16px;
+  padding:24px;
+}
+
+.pbrd-air-fraud-stat { }
+.pbrd-air-fraud-stat-v { font-size:1.25rem; font-weight:700; color:#fff; font-variant-numeric:tabular-nums; }
+.pbrd-air-fraud-stat-l { font-size:0.625rem; color:rgba(255,255,255,0.3); text-transform:uppercase; letter-spacing:0.04em; margin-top:2px; }
+
+/* Capabilities grid */
+.pbrd-air-fraud-caps {
+  display:grid; grid-template-columns:repeat(3, 1fr); gap:12px;
+}
+
+.pbrd-air-fraud-cap {
+  padding:20px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05);
+  border-radius:14px; transition:border-color 0.3s ease, transform 0.3s ease;
+}
+.pbrd-air-fraud-cap:hover { border-color:rgba(99,25,240,0.15); transform:translateY(-2px); }
+
+.pbrd-air-fraud-cap-icon {
+  width:32px; height:32px; border-radius:8px; background:rgba(99,25,240,0.08);
+  display:flex; align-items:center; justify-content:center; margin-bottom:12px;
+}
+.pbrd-air-fraud-cap-icon svg { width:16px; height:16px; color:rgba(99,25,240,0.7); }
+
+.pbrd-air-fraud-cap h5 { font-size:0.8125rem; font-weight:600; color:#fff; margin:0 0 6px; }
+.pbrd-air-fraud-cap p { font-size:0.6875rem; color:rgba(255,255,255,0.35); line-height:1.5; margin:0; }
+
 /* ═══ TAP TESTIMONIAL — Cinematic ═══ */
 .pbrd-air-test-section {
   padding:80px 0; background:#0a0a0f !important;
@@ -11410,6 +11481,10 @@ a.glowing_button_link .glowing_button_text {
   .pbrd-air-leak-grid { grid-template-columns:1fr 1fr; }
   .pbrd-air-leak-card { border-bottom:1px solid rgba(255,255,255,0.04); }
   .pbrd-air-feat-grid { grid-template-columns:1fr; }
+  .pbrd-air-fraud-mon-body { grid-template-columns:1fr; }
+  .pbrd-air-fraud-stats { flex-direction:row; flex-wrap:wrap; gap:12px; border-left:none; border-top:1px solid rgba(255,255,255,0.04); }
+  .pbrd-air-fraud-stat { min-width:40%; }
+  .pbrd-air-fraud-caps { grid-template-columns:1fr; }
   .pbrd-air-test-results { flex-wrap:wrap; gap:20px; padding:20px; }
   .pbrd-air-test-divider { display:none; }
   .pbrd-air-test-result { min-width:40%; }

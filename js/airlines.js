@@ -400,8 +400,8 @@
               '<text x="120" y="135" text-anchor="middle" fill="rgba(99,25,240,0.6)" font-size="7" font-weight="600" font-family="system-ui">16.8% chargeback reduction</text>' +
             '</svg>' +
           '</div>' +
-          '<h4>AI Fraud Shield</h4>' +
-          '<p>Velocity screening + shared merchant database. 3D Secure, automated disputes. Threats blocked before they reach you.</p>' +
+          '<h4>Paybyrd Antifraud Engine</h4>' +
+          '<p>Real-time scoring on every transaction. Configurable rule engine, velocity counters, IP/email intelligence, and AI-assisted case review. 16.8% chargeback reduction.</p>' +
         '</div>' +
         /* 3. Dashboard */
         '<div class="pbrd-air-feat-card pbrd-air-reveal">' +
@@ -478,7 +478,176 @@
 
     section.appendChild(showcase);
 
-    /* Animate benchmark bars */
+  
+  /* ═══════════════════════════════════════════ */
+  /* 3b. FRAUD PLATFORM — Dedicated Section      */
+  /* ═══════════════════════════════════════════ */
+
+  function buildFraudSection() {
+    /* Insert after the features section */
+    var featWrap = document.querySelector(".pbrd-air-feat-wrap");
+    var anchor = featWrap ? (featWrap.closest("section") || featWrap.parentElement) : null;
+    if (!anchor) return;
+
+    var s = document.createElement("section");
+    s.className = "pbrd-air-fraud-section";
+
+    s.innerHTML =
+      '<div class="pbrd-air-fraud-wrap">' +
+
+        /* Header */
+        '<div class="pbrd-air-fraud-header pbrd-air-reveal">' +
+          '<div class="pbrd-air-section-label">FRAUD PREVENTION</div>' +
+          '<h2 class="pbrd-air-fraud-h2">Your shield against the $1B threat.</h2>' +
+          '<p class="pbrd-air-fraud-sub">Real-time transaction scoring, configurable rules, and AI-powered case review \u2014 all in one platform.</p>' +
+        '</div>' +
+
+        /* ── Main visualization: Live Threat Monitor ── */
+        '<div class="pbrd-air-fraud-monitor pbrd-air-reveal">' +
+          '<div class="pbrd-air-fraud-mon-header">' +
+            '<div class="pbrd-air-fraud-mon-dot"></div>' +
+            '<span>Threat Detection Monitor</span>' +
+            '<span class="pbrd-air-fraud-mon-live">LIVE</span>' +
+          '</div>' +
+          '<div class="pbrd-air-fraud-mon-body">' +
+
+            /* Left: SVG threat visualization */
+            '<div class="pbrd-air-fraud-viz">' +
+              '<svg viewBox="0 0 400 240" fill="none" class="pbrd-air-fraud-svg">' +
+
+                /* Incoming transactions from left */
+                '<text x="10" y="15" fill="rgba(255,255,255,0.2)" font-size="7" font-weight="600" font-family="system-ui">INCOMING</text>' +
+                '<circle r="4" fill="#22c55e" opacity="0"><animateMotion dur="2.5s" begin="0s" repeatCount="indefinite" path="M0,40 L130,40 L200,120"/><animate attributeName="opacity" values="0;0.8;0.8;0" dur="2.5s" repeatCount="indefinite"/></circle>' +
+                '<circle r="4" fill="#22c55e" opacity="0"><animateMotion dur="3s" begin="0.8s" repeatCount="indefinite" path="M0,70 L130,70 L200,120"/><animate attributeName="opacity" values="0;0.8;0.8;0" dur="3s" repeatCount="indefinite"/></circle>' +
+                '<circle r="4" fill="#ef4444" opacity="0"><animateMotion dur="2.8s" begin="1.5s" repeatCount="indefinite" path="M0,100 L130,100"/><animate attributeName="opacity" values="0;0.8;0.8;0" dur="2.8s" repeatCount="indefinite"/></circle>' +
+                '<circle r="4" fill="#22c55e" opacity="0"><animateMotion dur="3.2s" begin="2s" repeatCount="indefinite" path="M0,130 L130,130 L200,120"/><animate attributeName="opacity" values="0;0.8;0.8;0" dur="3.2s" repeatCount="indefinite"/></circle>' +
+                '<circle r="4" fill="#ef4444" opacity="0"><animateMotion dur="2.6s" begin="0.5s" repeatCount="indefinite" path="M0,160 L130,160"/><animate attributeName="opacity" values="0;0.8;0.8;0" dur="2.6s" repeatCount="indefinite"/></circle>' +
+                '<circle r="4" fill="#22c55e" opacity="0"><animateMotion dur="3s" begin="1.2s" repeatCount="indefinite" path="M0,190 L130,190 L200,120"/><animate attributeName="opacity" values="0;0.8;0.8;0" dur="3s" repeatCount="indefinite"/></circle>' +
+
+                /* Shield / filter barrier */
+                '<rect x="125" y="20" width="8" height="200" rx="4" fill="rgba(99,25,240,0.15)" stroke="rgba(99,25,240,0.3)" stroke-width="1">' +
+                  '<animate attributeName="fill" values="rgba(99,25,240,0.1);rgba(99,25,240,0.2);rgba(99,25,240,0.1)" dur="2s" repeatCount="indefinite"/>' +
+                '</rect>' +
+                '<text x="129" y="12" text-anchor="middle" fill="rgba(99,25,240,0.5)" font-size="6" font-weight="700" font-family="system-ui">SHIELD</text>' +
+
+                /* Scoring engine */
+                '<rect x="160" y="85" width="80" height="70" rx="10" fill="rgba(99,25,240,0.06)" stroke="rgba(99,25,240,0.15)" stroke-width="0.8"/>' +
+                '<text x="200" y="105" text-anchor="middle" fill="#6319f0" font-size="8" font-weight="700" font-family="system-ui">SCORING</text>' +
+                '<text x="200" y="118" text-anchor="middle" fill="rgba(255,255,255,0.25)" font-size="6" font-family="system-ui">Rules \u00b7 Velocity \u00b7 AI</text>' +
+
+                /* Score gauge */
+                '<circle cx="200" cy="140" r="10" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="3"/>' +
+                '<circle cx="200" cy="140" r="10" fill="none" stroke="#22c55e" stroke-width="3" stroke-dasharray="20 43" stroke-linecap="round" transform="rotate(-90,200,140)"><animate attributeName="stroke-dasharray" values="20 43;40 23;15 48;30 33" dur="4s" repeatCount="indefinite"/><animate attributeName="stroke" values="#22c55e;#eab308;#ef4444;#22c55e" dur="4s" repeatCount="indefinite"/></circle>' +
+
+                /* Output: approved transactions exit right */
+                '<text x="300" y="85" fill="rgba(34,197,94,0.5)" font-size="7" font-weight="600" font-family="system-ui">APPROVED</text>' +
+                '<circle r="3" fill="#22c55e" opacity="0"><animateMotion dur="1.5s" begin="2.5s" repeatCount="indefinite" path="M200,120 L320,95"/><animate attributeName="opacity" values="0;0.6;0" dur="1.5s" repeatCount="indefinite"/></circle>' +
+                '<circle r="3" fill="#22c55e" opacity="0"><animateMotion dur="1.5s" begin="3.3s" repeatCount="indefinite" path="M200,120 L320,105"/><animate attributeName="opacity" values="0;0.6;0" dur="1.5s" repeatCount="indefinite"/></circle>' +
+                '<circle r="3" fill="#22c55e" opacity="0"><animateMotion dur="1.5s" begin="2.8s" repeatCount="indefinite" path="M200,120 L320,115"/><animate attributeName="opacity" values="0;0.6;0" dur="1.5s" repeatCount="indefinite"/></circle>' +
+
+                /* Declined: red dots deflected down */
+                '<text x="160" y="195" fill="rgba(239,68,68,0.4)" font-size="6" font-weight="600" font-family="system-ui">BLOCKED</text>' +
+                '<circle r="2.5" fill="#ef4444" opacity="0"><animateMotion dur="1.5s" begin="1.5s" repeatCount="indefinite" path="M130,100 L160,200"/><animate attributeName="opacity" values="0;0.5;0" dur="1.5s" repeatCount="indefinite"/></circle>' +
+                '<circle r="2.5" fill="#ef4444" opacity="0"><animateMotion dur="1.5s" begin="0.5s" repeatCount="indefinite" path="M130,160 L170,210"/><animate attributeName="opacity" values="0;0.5;0" dur="1.5s" repeatCount="indefinite"/></circle>' +
+
+                /* Connection lines (faint) */
+                '<line x1="0" y1="40" x2="125" y2="40" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>' +
+                '<line x1="0" y1="70" x2="125" y2="70" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>' +
+                '<line x1="0" y1="100" x2="125" y2="100" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>' +
+                '<line x1="0" y1="130" x2="125" y2="130" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>' +
+                '<line x1="0" y1="160" x2="125" y2="160" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>' +
+                '<line x1="0" y1="190" x2="125" y2="190" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>' +
+
+              '</svg>' +
+            '</div>' +
+
+            /* Right: live stats panel */
+            '<div class="pbrd-air-fraud-stats">' +
+              '<div class="pbrd-air-fraud-stat">' +
+                '<div class="pbrd-air-fraud-stat-v pbrd-air-fraud-countup" data-target="98.7" data-suffix="%" data-prefix="">0%</div>' +
+                '<div class="pbrd-air-fraud-stat-l">Legitimate Traffic</div>' +
+              '</div>' +
+              '<div class="pbrd-air-fraud-stat">' +
+                '<div class="pbrd-air-fraud-stat-v" style="color:#ef4444;">1.3%</div>' +
+                '<div class="pbrd-air-fraud-stat-l">Threats Blocked</div>' +
+              '</div>' +
+              '<div class="pbrd-air-fraud-stat">' +
+                '<div class="pbrd-air-fraud-stat-v" style="color:#6319f0;">< 50ms</div>' +
+                '<div class="pbrd-air-fraud-stat-l">Scoring Latency</div>' +
+              '</div>' +
+              '<div class="pbrd-air-fraud-stat">' +
+                '<div class="pbrd-air-fraud-stat-v">16.8%</div>' +
+                '<div class="pbrd-air-fraud-stat-l">Chargeback Reduction</div>' +
+              '</div>' +
+            '</div>' +
+
+          '</div>' +
+        '</div>' +
+
+        /* ── Capabilities grid ── */
+        '<div class="pbrd-air-fraud-caps">' +
+          '<div class="pbrd-air-fraud-cap pbrd-air-reveal">' +
+            '<div class="pbrd-air-fraud-cap-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v5c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z" stroke="currentColor" stroke-width="1.5"/></svg></div>' +
+            '<h5>Configurable Rule Engine</h5>' +
+            '<p>15+ condition types: velocity, pattern matching, geo-distance, BIN analysis, temporal triggers, ML scores. Visual builder \u2014 no coding.</p>' +
+          '</div>' +
+          '<div class="pbrd-air-fraud-cap pbrd-air-reveal">' +
+            '<div class="pbrd-air-fraud-cap-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>' +
+            '<h5>Real-Time Enrichment</h5>' +
+            '<p>IP geolocation, proxy detection, email reputation, phone validation, billing/shipping distance \u2014 all resolved instantly per transaction.</p>' +
+          '</div>' +
+          '<div class="pbrd-air-fraud-cap pbrd-air-reveal">' +
+            '<div class="pbrd-air-fraud-cap-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="3" y="3" width="18" height="18" rx="4" stroke="currentColor" stroke-width="1.5"/></svg></div>' +
+            '<h5>Shadow Mode Testing</h5>' +
+            '<p>Run new rules in parallel without affecting live decisions. See impact on approval rates and false positives before activation.</p>' +
+          '</div>' +
+          '<div class="pbrd-air-fraud-cap pbrd-air-reveal">' +
+            '<div class="pbrd-air-fraud-cap-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="currentColor" stroke-width="1.5"/></svg></div>' +
+            '<h5>AI Case Review</h5>' +
+            '<p>AI analyzes every flagged transaction: fraud type, risk indicators, recommended action. Analysts decide \u2014 not dig.</p>' +
+          '</div>' +
+          '<div class="pbrd-air-fraud-cap pbrd-air-reveal">' +
+            '<div class="pbrd-air-fraud-cap-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 3h18v18H3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M3 9h18M9 3v18" stroke="currentColor" stroke-width="1.5"/></svg></div>' +
+            '<h5>Analytics Dashboard</h5>' +
+            '<p>12+ real-time widgets: country heatmaps, rule leaderboards, scheme breakdowns, merchant risk profiles, peer benchmarks.</p>' +
+          '</div>' +
+          '<div class="pbrd-air-fraud-cap pbrd-air-reveal">' +
+            '<div class="pbrd-air-fraud-cap-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="1.5"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="currentColor" stroke-width="1.5"/></svg></div>' +
+            '<h5>Multi-Tenant Hierarchy</h5>' +
+            '<p>Partner \u2192 Merchant \u2192 Store. Shared rule sets cascade down. Each workspace fully isolated with role-based access.</p>' +
+          '</div>' +
+        '</div>' +
+
+      '</div>';
+
+    anchor.insertAdjacentElement("afterend", s);
+
+    /* Animate counters */
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function(entries) {
+        if (entries[0].isIntersecting) {
+          s.querySelectorAll(".pbrd-air-fraud-countup").forEach(function(el) {
+            var target = parseFloat(el.getAttribute("data-target"));
+            var suffix = el.getAttribute("data-suffix") || "";
+            var dur = 1800, startTime = null;
+            function step(ts) {
+              if (!startTime) startTime = ts;
+              var p = Math.min((ts - startTime) / dur, 1);
+              el.textContent = (target * (1 - Math.pow(1 - p, 3))).toFixed(1) + suffix;
+              if (p < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+          });
+          this.disconnect();
+        }
+      }, { threshold: 0.2 }).observe(s);
+    }
+
+    observeReveal(".pbrd-air-reveal", 120, s);
+  }
+
+
+  /* Animate benchmark bars */
     if ("IntersectionObserver" in window) {
       var bench = showcase.querySelector(".pbrd-air-benchmark");
       if (bench) {
@@ -659,6 +828,7 @@
     enhanceHero();
     enhanceProblem();
     enhanceFeatures();
+    buildFraudSection();
     buildTestimonial();
     enhanceBottomCTA();
     enhanceFAQ();
