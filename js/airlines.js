@@ -49,6 +49,24 @@
     var section = heading.closest("section") || heading.closest("[class*='section']");
     if (!section) return;
 
+    /* Hero background image */
+    section.style.setProperty("background-image", "url('https://djangato.github.io/Webflow-Paybyrd/assets/airlines/hero-tap.jpg')", "important");
+    section.style.setProperty("background-size", "cover", "important");
+    section.style.setProperty("background-position", "center", "important");
+    section.style.setProperty("background-repeat", "no-repeat", "important");
+    section.style.setProperty("position", "relative", "important");
+
+    /* Dark overlay for text readability */
+    var overlay = document.createElement("div");
+    overlay.setAttribute("style", "position:absolute;inset:0;background:rgba(0,0,0,0.55);z-index:0;pointer-events:none;");
+    section.insertBefore(overlay, section.firstChild);
+
+    /* Ensure content sits above overlay */
+    Array.prototype.forEach.call(section.children, function(child) {
+      if (child !== overlay) child.style.setProperty("position", "relative", "important");
+      if (child !== overlay) child.style.setProperty("z-index", "1", "important");
+    });
+
     /* Hide only the hero image — be very targeted to avoid hiding other sections */
     section.querySelectorAll("img").forEach(function(img) {
       /* Only hide images that are direct children of this hero section's layout */
