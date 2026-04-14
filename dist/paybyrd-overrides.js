@@ -7603,7 +7603,7 @@
     /* Insert viz at section level, positioned to overlap under the heading */
     section.style.setProperty("position", "relative", "important");
     section.style.setProperty("overflow", "visible", "important");
-    section.style.setProperty("padding-bottom", "80px", "important");
+    section.style.setProperty("padding-bottom", "0", "important");
     section.appendChild(vizWrap);
 
     var stats = ["+4.86% vs Checkout.com", "+3.16% vs Elavon", "+1.72% vs Adyen", "+4.92% vs Nuvei", "99.999% Uptime", "192+ Currencies", "16.8% Fewer Chargebacks"];
