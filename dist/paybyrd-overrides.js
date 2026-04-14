@@ -7564,7 +7564,7 @@
     var svgDots = "";
     routes.forEach(function(r, i) {
       svgPaths +=
-        '<path d="' + r.d + '" fill="none" stroke="rgba(99,25,240,0.2)" stroke-width="1.2" stroke-dasharray="4 4"/>' +
+        '<path d="' + r.d + '" fill="none" stroke="rgba(99,25,240,0.35)" stroke-width="1.5" stroke-dasharray="5 4"/>' +
         '<circle r="4" fill="#6319f0" opacity="0">' +
           '<animateMotion dur="' + (3 + i * 0.5) + 's" begin="' + (i * 0.8) + 's" repeatCount="indefinite" path="' + r.d + '"/>' +
           '<animate attributeName="opacity" values="0;0.8;0.8;0" dur="' + (3 + i * 0.5) + 's" begin="' + (i * 0.8) + 's" repeatCount="indefinite"/>' +
