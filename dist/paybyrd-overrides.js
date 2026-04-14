@@ -7807,15 +7807,22 @@
   /* ═══════════════════════════════════════════ */
 
   function buildTestimonial() {
-    var anchor = findSectionByHeading("designed for the passenger") ||
-                 findSectionByHeading("works with your stack") ||
-                 findSectionByHeading("passenger journey") ||
-                 findSectionByHeading("data that moves");
+    /* Insert after the leakage dashboard's parent section */
+    var dash = document.querySelector(".pbrd-air-leak-dash");
+    var anchor = dash ? (dash.closest("section") || dash.closest("[class*='section']")) : null;
+
+    /* Fallback: try finding any section after the features */
     if (!anchor) {
-      /* Last resort: insert after the benchmark or features section */
       var bench = document.querySelector(".pbrd-air-benchmark");
-      if (bench) anchor = bench.closest("section") || bench.parentElement;
+      anchor = bench ? (bench.closest("section") || bench.closest("[class*='section']")) : null;
     }
+
+    /* Nuclear fallback: just find the 3rd section on the page */
+    if (!anchor) {
+      var allSections = document.querySelectorAll("section, [class*='section']");
+      if (allSections.length > 3) anchor = allSections[3];
+    }
+
     if (!anchor) {
       console.log("[Paybyrd] Testimonial: no anchor found");
       return;

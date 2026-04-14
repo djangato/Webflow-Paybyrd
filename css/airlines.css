@@ -151,8 +151,8 @@
 }
 
 .pbrd-air-leak-summary {
-  display:flex; align-items:center; justify-content:space-between; gap:16px;
-  flex-wrap:wrap;
+  display:flex; flex-direction:column; align-items:center; gap:12px;
+  text-align:center;
 }
 
 .pbrd-air-leak-summary-txt {
