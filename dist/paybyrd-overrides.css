@@ -11150,6 +11150,48 @@ a.glowing_button_link .glowing_button_text {
 .pbrd-air-leak-dash {
   margin-top:40px; border-radius:20px; overflow:hidden;
   background:#f8f9fa; border:1px solid rgba(0,0,0,0.06);
+  position:relative;
+}
+
+/* ── Mini airplane flying across ── */
+.pbrd-air-plane {
+  position:absolute; z-index:5; pointer-events:none;
+  width:28px; height:28px;
+  offset-path:path("M-40,140 C100,40 300,180 560,60");
+  offset-rotate:auto;
+  animation:pbrd-air-fly 8s ease-in-out infinite;
+}
+
+.pbrd-air-plane svg {
+  width:100%; height:100%;
+  filter:drop-shadow(0 2px 8px rgba(99,25,240,0.3));
+}
+
+/* Trail line behind the plane */
+.pbrd-air-trail {
+  position:absolute; inset:0; z-index:4; pointer-events:none; overflow:hidden;
+}
+
+.pbrd-air-trail svg {
+  width:100%; height:100%;
+}
+
+.pbrd-air-trail-path {
+  stroke-dasharray:800;
+  stroke-dashoffset:800;
+  animation:pbrd-air-trail-draw 8s ease-in-out infinite;
+}
+
+@keyframes pbrd-air-fly {
+  0% { offset-distance:0%; opacity:0; }
+  5% { opacity:1; }
+  90% { opacity:1; }
+  100% { offset-distance:100%; opacity:0; }
+}
+
+@keyframes pbrd-air-trail-draw {
+  0% { stroke-dashoffset:800; }
+  100% { stroke-dashoffset:0; }
 }
 
 .pbrd-air-leak-header {
