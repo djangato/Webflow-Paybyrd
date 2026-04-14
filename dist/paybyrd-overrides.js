@@ -48,16 +48,22 @@
 
   /* ─── Card Present Payment Methods ─── */
   const cpMethods = [
-    { name: "Visa", category: "cards", fee: "1.11% + \u20AC0.05", img: "visa.png" },
-    { name: "Mastercard", category: "cards", fee: "1.11% + \u20AC0.05", img: "mastercard.png" },
-    { name: "American Express", category: "cards", fee: "2.50% + \u20AC0.05", img: "amex.png" },
-    { name: "Discover", category: "cards", fee: "2.50% + \u20AC0.10", img: "discover.png" },
-    { name: "Diners Club", category: "cards", fee: "2.40% + \u20AC0.10", img: "diners.png" },
-    { name: "China Union Pay", category: "cards", fee: "2.80% + \u20AC0.10", img: "unionpay.png" },
+    { name: "Visa", category: "cards", img: "visa.png", subRates: [
+      { label: "European Debit", fee: "0.50%" },
+      { label: "European Credit", fee: "0.60%" }
+    ]},
+    { name: "Mastercard", category: "cards", img: "mastercard.png", subRates: [
+      { label: "European Debit", fee: "0.50%" },
+      { label: "European Credit", fee: "0.60%" }
+    ]},
+    { name: "American Express", category: "cards", fee: "2.50%", img: "amex.png" },
+    { name: "Discover", category: "cards", fee: "2.50%", img: "discover.png" },
+    { name: "Diners Club", category: "cards", fee: "2.40%", img: "diners.png" },
+    { name: "China Union Pay", category: "cards", fee: "2.80%", img: "unionpay.png" },
     { name: "Apple Pay", category: "wallets", fee: "Card rate applies", img: "applepay.png" },
     { name: "Google Pay", category: "wallets", fee: "Card rate applies", img: "googlepay.png" },
     { name: "Samsung Pay", category: "wallets", fee: "Card rate applies", icon: "SP", iconBg: "#1428A0" },
-    { name: "MBWay", category: "local", fee: "0.60% + \u20AC0.05", img: "mbway.png" },
+    { name: "MBWay", category: "local", fee: "0.60%", img: "mbway.png" },
   ];
 
   let currentChannel = "online";
@@ -95,6 +101,20 @@
   }
 
   function buildMethodRow(method) {
+    if (method.subRates) {
+      return `
+      <div class="pbrd-method-row pbrd-method-row--multi" data-category="${method.category}">
+        <div class="pbrd-method-info">
+          ${buildMethodIcon(method)}
+          <span class="pbrd-method-name">${method.name}</span>
+        </div>
+        <div class="pbrd-method-subrates">
+          ${method.subRates.map(function(sr) {
+            return '<div class="pbrd-method-subrate"><span class="pbrd-subrate-label">' + sr.label + '</span><span class="pbrd-subrate-fee">' + sr.fee + '</span></div>';
+          }).join("")}
+        </div>
+      </div>`;
+    }
     return `
       <div class="pbrd-method-row" data-category="${method.category}">
         <div class="pbrd-method-info">

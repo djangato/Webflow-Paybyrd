@@ -249,6 +249,13 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* Sub-rates for CP (e.g. Debit/Credit split) */
+.pbrd-method-row--multi { grid-template-columns: 1fr auto; }
+.pbrd-method-subrates { display: flex; flex-direction: column; gap: 4px; text-align: right; }
+.pbrd-method-subrate { display: flex; align-items: baseline; gap: 10px; justify-content: flex-end; }
+.pbrd-subrate-label { font-size: 0.6875rem; color: rgba(255,255,255,0.35); }
+.pbrd-subrate-fee { font-size: 0.9375rem; font-weight: 600; color: #fff; white-space: nowrap; }
+
 .pbrd-method-fee .pbrd-fee-from {
   font-size: 0.75rem;
   font-weight: 400;
