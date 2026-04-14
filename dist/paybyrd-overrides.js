@@ -10707,6 +10707,8 @@
     var heading = findHeading("data that drives");
     if (!heading) return;
     heading.innerHTML = "Intelligence that turns<br>guest data into revenue.";
+    heading.style.setProperty("margin-bottom", "24px", "important");
+    heading.style.setProperty("padding-bottom", "0", "important");
 
     var section = heading.closest("section") || heading.closest("[class*='section']");
     if (!section) return;
