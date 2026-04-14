@@ -11251,7 +11251,7 @@ a.glowing_button_link .glowing_button_text {
 
 /* ═══ FEATURE SHOWCASE ═══ */
 .pbrd-air-feat-wrap {
-  max-width:1100px; margin:0 auto; padding:40px 24px 0;
+  max-width:1100px; margin:0 auto; padding:0 24px;
 }
 
 .pbrd-air-feat-grid {
@@ -11285,7 +11285,7 @@ a.glowing_button_link .glowing_button_text {
 
 /* ═══ BENCHMARK ═══ */
 .pbrd-air-benchmark {
-  margin-top:48px; max-width:680px; margin-left:auto; margin-right:auto;
+  margin-top:48px; margin-bottom:0; max-width:680px; margin-left:auto; margin-right:auto;
   padding:32px; background:#f8f9fa; border:1px solid rgba(0,0,0,0.06); border-radius:20px;
 }
 .pbrd-air-bench-header { text-align:center; margin-bottom:24px; }
@@ -11304,6 +11304,7 @@ a.glowing_button_link .glowing_button_text {
 .pbrd-air-bench-bar--3 { background:linear-gradient(90deg,#6319f0,#6d28d9); }
 .pbrd-air-bench-bar--4 { background:linear-gradient(90deg,#6319f0,#5b21b6); }
 .pbrd-air-bench-val { font-size:1rem; font-weight:700; color:#6319f0; min-width:55px; text-align:right; font-variant-numeric:tabular-nums; }
+.pbrd-air-bench-money { font-size:0.6875rem; color:#ef4444; min-width:80px; text-align:right; font-weight:500; }
 .pbrd-air-bench-footer { text-align:center; }
 
 /* ═══ FRAUD PLATFORM ═══ */
