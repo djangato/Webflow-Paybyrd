@@ -51,7 +51,7 @@
     var section = heading.closest("section") || heading.closest("[class*='section']");
     if (!section) return;
 
-    section.style.setProperty("background-image", "url('https://djangato.github.io/Webflow-Paybyrd/assets/retail/hero-retail.png')", "important");
+    section.style.setProperty("background-image", "url('https://djangato.github.io/Webflow-Paybyrd/assets/retail/hero-retail.jpg')", "important");
     section.style.setProperty("background-size", "cover", "important");
     section.style.setProperty("background-position", "center", "important");
     section.style.setProperty("background-repeat", "no-repeat", "important");

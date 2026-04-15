@@ -50,7 +50,7 @@
     if (!section) return;
 
     /* Hero background image */
-    section.style.setProperty("background-image", "url('https://djangato.github.io/Webflow-Paybyrd/assets/hospitality/hero-hotel.png')", "important");
+    section.style.setProperty("background-image", "url('https://djangato.github.io/Webflow-Paybyrd/assets/hospitality/hero-hotel.jpg')", "important");
     section.style.setProperty("background-size", "cover", "important");
     section.style.setProperty("background-position", "center", "important");
     section.style.setProperty("background-repeat", "no-repeat", "important");
