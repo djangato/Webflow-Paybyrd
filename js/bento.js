@@ -154,19 +154,16 @@
 
   /* ═══ Build Calculator ═══ */
   function init() {
-    /* Find the "Why settle" section — it's a Swiper slider with card-12_wrap items */
-    var section = null;
-    document.querySelectorAll("h1,h2,h3,h4,h5,h6").forEach(function (h) {
-      if (!section && h.textContent.toLowerCase().includes("why settle")) {
-        section = h.closest("section") || h.closest("[class*='u-section']");
-      }
-    });
-    /* Fallback: find by slider card class */
+    /* Find the "Why settle" section */
+    var section = document.querySelector(".w-variant-a4eabb01-8ed6-63d0-157e-0a7b56aedaa1");
     if (!section) {
-      var sliderCard = document.querySelector(".card-12_wrap");
-      if (sliderCard) section = sliderCard.closest("section") || sliderCard.closest("[class*='u-section']");
+      /* Fallback: search all sections for the heading text */
+      document.querySelectorAll("section").forEach(function(s) {
+        if (!section && s.textContent.toLowerCase().indexOf("why settle") !== -1) section = s;
+      });
     }
     if (!section) return;
+    console.log("[Paybyrd] Calculator: found section", section);
 
     /* Hide Webflow children */
     Array.prototype.forEach.call(section.children, function (child) {
@@ -328,9 +325,17 @@
     updateResults();
   }
 
+  /* Run after Webflow + Swiper have initialized */
+  function tryInit() {
+    if (document.querySelector(".card-12_wrap") || document.querySelector(".w-variant-a4eabb01-8ed6-63d0-157e-0a7b56aedaa1")) {
+      init();
+    } else {
+      setTimeout(tryInit, 200);
+    }
+  }
   if (document.readyState === "complete") {
-    init();
+    setTimeout(tryInit, 100);
   } else {
-    window.addEventListener("load", init);
+    window.addEventListener("load", function() { setTimeout(tryInit, 100); });
   }
 })();
