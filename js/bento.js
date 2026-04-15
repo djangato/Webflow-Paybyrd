@@ -76,6 +76,13 @@
     if (channelMode === "online") {
       compCost = calcCost(comp.online, monthlyVolume, false);
       pbCost = calcCost(paybyrd.online, monthlyVolume, false);
+    } else if (channelMode === "cp") {
+      if (comp.cp) {
+        compCost = calcCost(comp.cp, monthlyVolume, true);
+      } else {
+        compCost = calcCost(comp.online, monthlyVolume, true);
+      }
+      pbCost = calcPaybyrdCP(monthlyVolume);
     } else {
       var onlineVol = monthlyVolume * (1 - CP_SPLIT);
       var cpVol = monthlyVolume * CP_SPLIT;
@@ -83,7 +90,7 @@
       if (comp.cp) {
         compCost += calcCost(comp.cp, cpVol, true);
       } else {
-        compCost += calcCost(comp.online, cpVol, false); /* no CP data, use online rates */
+        compCost += calcCost(comp.online, cpVol, false);
       }
       pbCost = calcCost(paybyrd.online, onlineVol, false) + calcPaybyrdCP(cpVol);
     }
@@ -189,23 +196,14 @@
 
           '<div class="pbrd-calc-field">' +
             '<label class="pbrd-calc-field-label">Current provider</label>' +
-            '<div class="pbrd-calc-providers" id="pbrd-calc-providers">' +
-              '<div class="pbrd-calc-provider pbrd-calc-provider--active" data-provider="mollie">' +
-                '<span class="pbrd-calc-prov-name">Mollie</span>' +
-                '<span class="pbrd-calc-prov-rate">1.80% + \u20AC0.25</span>' +
-              '</div>' +
-              '<div class="pbrd-calc-provider" data-provider="stripe">' +
-                '<span class="pbrd-calc-prov-name">Stripe</span>' +
-                '<span class="pbrd-calc-prov-rate">1.50% + \u20AC0.25</span>' +
-              '</div>' +
-              '<div class="pbrd-calc-provider" data-provider="adyen">' +
-                '<span class="pbrd-calc-prov-name">Adyen</span>' +
-                '<span class="pbrd-calc-prov-rate">~1.50% + \u20AC0.12</span>' +
-              '</div>' +
-              '<div class="pbrd-calc-provider" data-provider="paynl">' +
-                '<span class="pbrd-calc-prov-name">Pay.nl</span>' +
-                '<span class="pbrd-calc-prov-rate">1.50% + \u20AC0.15</span>' +
-              '</div>' +
+            '<div class="pbrd-calc-select-wrap">' +
+              '<select class="pbrd-calc-select" id="pbrd-calc-provider-select">' +
+                Object.keys(competitors).map(function(key) {
+                  var c = competitors[key];
+                  return '<option value="' + key + '"' + (key === "mollie" ? ' selected' : '') + '>' + c.name + '</option>';
+                }).join("") +
+              '</select>' +
+              '<svg class="pbrd-calc-select-chevron" viewBox="0 0 16 16" width="14" height="14"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
             '</div>' +
           '</div>' +
 
@@ -222,8 +220,9 @@
           '<div class="pbrd-calc-field">' +
             '<label class="pbrd-calc-field-label">Payment channels</label>' +
             '<div class="pbrd-calc-channels" id="pbrd-calc-channels">' +
-              '<button class="pbrd-calc-ch pbrd-calc-ch--active" data-ch="online">Online only</button>' +
-              '<button class="pbrd-calc-ch" data-ch="both">Online + Card Present</button>' +
+              '<button class="pbrd-calc-ch pbrd-calc-ch--active" data-ch="online">Online</button>' +
+              '<button class="pbrd-calc-ch" data-ch="cp">Card Present</button>' +
+              '<button class="pbrd-calc-ch" data-ch="both">Both</button>' +
             '</div>' +
             '<div class="pbrd-calc-ch-note" id="pbrd-calc-ch-note" style="display:none">' +
               '<span>Assumed split: 70% online, 30% in-store</span>' +
@@ -267,16 +266,14 @@
 
     /* ═══ Event Handlers ═══ */
 
-    /* Provider selection */
-    wrap.querySelectorAll(".pbrd-calc-provider").forEach(function (el) {
-      el.addEventListener("click", function () {
-        wrap.querySelectorAll(".pbrd-calc-provider").forEach(function (p) { p.classList.remove("pbrd-calc-provider--active"); });
-        el.classList.add("pbrd-calc-provider--active");
-        selectedProvider = el.getAttribute("data-provider");
-        /* Hide CP option if provider has no CP */
+    /* Provider dropdown */
+    var provSelect = document.getElementById("pbrd-calc-provider-select");
+    if (provSelect) {
+      provSelect.addEventListener("change", function () {
+        selectedProvider = provSelect.value;
         var comp = competitors[selectedProvider];
         var chNote = document.getElementById("pbrd-calc-ch-note");
-        if (!comp.cp && channelMode === "both") {
+        if (!comp.cp && (channelMode === "both" || channelMode === "cp")) {
           channelMode = "online";
           wrap.querySelectorAll(".pbrd-calc-ch").forEach(function (b) { b.classList.remove("pbrd-calc-ch--active"); });
           wrap.querySelector('[data-ch="online"]').classList.add("pbrd-calc-ch--active");
@@ -284,7 +281,7 @@
         }
         updateResults();
       });
-    });
+    }
 
     /* Volume slider */
     var slider = document.getElementById("pbrd-calc-slider");
