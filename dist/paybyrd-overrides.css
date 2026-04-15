@@ -13343,7 +13343,7 @@ a.glowing_button_link .glowing_button_text {
 .pbrd-ret-cta-ghost:hover { border-color:rgba(255,255,255,0.3); color:#fff; }
 
 /* ═══ HERO ═══ */
-.pbrd-ret-hero-wrap { max-width:1100px; margin:0 auto; padding:140px 24px 60px; display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; }
+.pbrd-ret-hero-wrap { max-width:1100px; margin:0 auto; padding:20px 24px 40px; display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; }
 .pbrd-ret-hero-h1 { font-size:clamp(2rem,4vw,3.25rem); font-weight:700; color:#fff; letter-spacing:-0.03em; line-height:1.1; margin:0 0 16px; }
 .pbrd-ret-hero-sub { font-size:1.0625rem; color:rgba(255,255,255,0.45); line-height:1.6; margin:0 0 28px; max-width:480px; }
 .pbrd-ret-hero-ctas { display:flex; gap:12px; flex-wrap:wrap; }

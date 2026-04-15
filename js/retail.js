@@ -51,14 +51,22 @@
     var section = heading.closest("section") || heading.closest("[class*='section']");
     if (!section) return;
 
-    section.style.setProperty("padding", "0", "important");
-    section.style.setProperty("margin", "0", "important");
     section.style.setProperty("background", "#0a0a0f", "important");
+    section.style.setProperty("position", "relative", "important");
+
+    /* Keep Webflow layout structure but make children relative for z-index */
     Array.prototype.forEach.call(section.children, function(child) {
-      if (!child.classList || !child.classList.contains("pbrd-ret-hero-wrap")) {
-        child.style.setProperty("display", "none", "important");
-      }
+      child.style.setProperty("position", "relative", "important");
+      child.style.setProperty("z-index", "1", "important");
     });
+
+    /* Hide the Webflow content wrapper that contains the old text, but NOT spacers */
+    var contentWrap = heading.closest(".u-content-wrapper") || heading.closest(".u-container") || heading.parentElement;
+    if (contentWrap) contentWrap.style.setProperty("display", "none", "important");
+    /* Also hide any hero images */
+    section.querySelectorAll("img").forEach(function(img) { img.style.setProperty("display", "none", "important"); });
+    /* Hide image wrappers */
+    section.querySelectorAll(".u-image-wrapper").forEach(function(el) { el.style.setProperty("display", "none", "important"); });
 
     var wrap = document.createElement("div");
     wrap.className = "pbrd-ret-hero-wrap";
