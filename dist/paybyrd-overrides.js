@@ -1228,16 +1228,24 @@ function pbrdReady() {
   ];
 
   function init() {
-    var cards = document.querySelectorAll(".card-1_element");
+    /* Try new Webflow structure first (card-12_wrap), fallback to old (card-1_element) */
+    var cards = document.querySelectorAll(".card-12_wrap");
+    var isNewLayout = cards.length > 0;
+    if (!isNewLayout) {
+      cards = document.querySelectorAll(".card-1_element");
+    }
     if (!cards.length) return;
 
     cards.forEach(function (card, idx) {
       if (visuals[idx]) {
-        var imgWrap = card.querySelector(".card-1_gradient-bg");
+        var imgWrap = isNewLayout
+          ? card.querySelector(".card-12_img_wrap")
+          : card.querySelector(".card-1_gradient-bg");
         if (imgWrap) {
           var origImg = imgWrap.querySelector(".u-image-wrapper");
           if (origImg) origImg.style.display = "none";
 
+          imgWrap.style.position = "relative";
           var vizDiv = document.createElement("div");
           vizDiv.className = "pbrd-viz-container";
           vizDiv.innerHTML = visuals[idx];
@@ -1249,12 +1257,18 @@ function pbrdReady() {
         var ov = textOverrides[idx];
         var tag = card.querySelector(".tag_wrap-2");
         if (tag) tag.textContent = ov.tag;
-        var h3 = card.querySelector(".card-1_content h3");
+        var h3 = isNewLayout
+          ? card.querySelector(".card-12_text_wrap h3")
+          : card.querySelector(".card-1_content h3");
         if (h3) h3.textContent = ov.heading;
-        var p = card.querySelector(".card-1_content .u-color-faded p");
+        var p = isNewLayout
+          ? card.querySelector(".card-12_text_wrap .u-rich-text p, .card-12_text_wrap p")
+          : card.querySelector(".card-1_content .u-color-faded p");
         if (p) p.textContent = ov.desc;
       }
 
+      card.style.position = "relative";
+      card.style.overflow = "hidden";
       var spot = document.createElement("div");
       spot.className = "pbrd-spotlight";
       card.appendChild(spot);
