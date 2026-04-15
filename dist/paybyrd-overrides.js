@@ -11941,7 +11941,7 @@ function pbrdReady() {
     var section = heading.closest("section") || heading.closest("[class*='section']");
     if (!section) return;
 
-    section.style.setProperty("padding", "80px 0 60px", "important");
+    section.style.setProperty("padding", "120px 0 60px", "important");
     section.style.setProperty("background", "#0a0a0f", "important");
     Array.prototype.forEach.call(section.children, function(child) {
       if (!child.classList || !child.classList.contains("pbrd-ret-hero-wrap")) {
