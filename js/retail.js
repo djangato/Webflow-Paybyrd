@@ -59,7 +59,7 @@
 
     /* Dark overlay for text readability */
     var overlay = document.createElement("div");
-    overlay.setAttribute("style", "position:absolute;inset:0;background:rgba(0,0,0,0.6);z-index:0;pointer-events:none;");
+    overlay.setAttribute("style", "position:absolute;inset:0;background:rgba(0,0,0,0.45);z-index:0;pointer-events:none;");
     section.insertBefore(overlay, section.firstChild);
 
     /* Keep Webflow layout structure but make children relative for z-index */

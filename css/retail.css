@@ -16,7 +16,7 @@
 .pbrd-ret-hero-ctas { display:flex; gap:12px; flex-wrap:wrap; }
 
 /* Transaction feed */
-.pbrd-ret-txn-feed { background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:16px; padding:16px; min-height:280px; }
+.pbrd-ret-txn-feed { background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:16px; padding:16px; height:280px; overflow:hidden; }
 .pbrd-ret-txn-head { display:flex; align-items:center; gap:8px; font-size:0.6875rem; font-weight:700; color:rgba(255,255,255,0.4); letter-spacing:0.06em; margin-bottom:10px; }
 .pbrd-ret-txn-dot { width:6px; height:6px; border-radius:50%; background:#10b981; animation:pbrd-ret-pulse 2s infinite; }
 @keyframes pbrd-ret-pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
