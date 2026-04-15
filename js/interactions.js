@@ -542,4 +542,62 @@
   } else {
     setTimeout(initPOS, 100);
   }
+
+  /* ═══════════════════════════════════════════════ */
+  /* ─── Contact Form Copy Enhancement ─── */
+  /* ═══════════════════════════════════════════════ */
+
+  function enhanceContactForm() {
+    /* Find the heading */
+    let formHeading = null;
+    document.querySelectorAll("h1,h2,h3,h4").forEach(function(h) {
+      if (!formHeading && h.textContent.toLowerCase().includes("not sure which plan")) formHeading = h;
+    });
+    if (!formHeading) return;
+
+    /* Rewrite heading */
+    formHeading.textContent = "Still have questions? Let\u2019s talk.";
+
+    /* Find and rewrite the subtitle paragraph */
+    const parent = formHeading.closest(".u-content-wrapper") || formHeading.parentElement;
+    if (parent) {
+      const paras = parent.querySelectorAll("p");
+      paras.forEach(function(p) {
+        if (p.textContent.toLowerCase().includes("perfect solution") || p.textContent.toLowerCase().includes("personalized consultation")) {
+          p.innerHTML = "Get a tailored proposal with rates based on your volume, industry, and payment mix. Our team responds within 2 hours on business days.";
+        }
+      });
+
+      /* Add trust signals below the subtitle */
+      const existing = parent.querySelector(".pbrd-form-trust");
+      if (!existing) {
+        const trust = document.createElement("div");
+        trust.className = "pbrd-form-trust";
+        trust.innerHTML =
+          '<div class="pbrd-form-trust-items">' +
+            '<div class="pbrd-form-trust-item">' +
+              '<svg viewBox="0 0 20 20" width="16" height="16" fill="none"><path d="M10 1l2.47 5.01L18 6.87l-4 3.9.94 5.5L10 13.77l-4.94 2.5.94-5.5-4-3.9 5.53-.86L10 1z" stroke="#6319f0" stroke-width="1.5" stroke-linejoin="round"/></svg>' +
+              '<span>No commitment required</span>' +
+            '</div>' +
+            '<div class="pbrd-form-trust-item">' +
+              '<svg viewBox="0 0 20 20" width="16" height="16" fill="none"><circle cx="10" cy="10" r="8" stroke="#6319f0" stroke-width="1.5"/><path d="M10 6v4l2.5 2.5" stroke="#6319f0" stroke-width="1.5" stroke-linecap="round"/></svg>' +
+              '<span>15-min call, max</span>' +
+            '</div>' +
+            '<div class="pbrd-form-trust-item">' +
+              '<svg viewBox="0 0 20 20" width="16" height="16" fill="none"><path d="M7 10l2 2 4-4" stroke="#6319f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="2" y="2" width="16" height="16" rx="4" stroke="#6319f0" stroke-width="1.5"/></svg>' +
+              '<span>Custom rate proposal included</span>' +
+            '</div>' +
+          '</div>';
+        trust.style.cssText = "margin-top:20px;";
+        parent.appendChild(trust);
+      }
+    }
+  }
+
+  /* Run form enhancement */
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", enhanceContactForm);
+  } else {
+    enhanceContactForm();
+  }
 })();

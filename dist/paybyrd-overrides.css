@@ -438,6 +438,11 @@
   .pbrd-pricing-cards { grid-template-columns: 1fr; }
 }
 
+/* Form trust signals */
+.pbrd-form-trust-items { display:flex; flex-direction:column; gap:10px; }
+.pbrd-form-trust-item { display:flex; align-items:center; gap:8px; font-size:0.8125rem; color:#666; }
+.pbrd-form-trust-item svg { flex-shrink:0; }
+
 .pbrd-pricing-disclaimer {
   text-align: center;
   margin-top: 24px;
