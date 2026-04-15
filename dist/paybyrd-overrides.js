@@ -525,16 +525,6 @@
       });
     });
 
-    // Horizontal scroll with mouse wheel / trackpad
-    const grid = section.querySelector(".pbrd-pos-grid");
-    if (grid) {
-      grid.addEventListener("wheel", function (e) {
-        var delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-        if (delta === 0) return;
-        e.preventDefault();
-        grid.scrollLeft += delta * 1.5;
-      }, { passive: false });
-    }
   }
 
   // The POS section depends on the payment methods section being inserted first
