@@ -1006,8 +1006,9 @@
 /* Paybyrd — Savings Calculator (replaces Bento Grid) */
 (function () {
   "use strict";
-  var path = window.location.pathname;
-  if (path !== "/" && path !== "" && path !== "/index" && path !== "/index.html") return;
+  var path = window.location.pathname.replace(/\/+$/, "") || "/";
+  console.log("[Paybyrd] Calculator: path =", path);
+  if (path !== "/" && path !== "" && path !== "/index" && path !== "/index.html" && path !== "/home") return;
 
   /* ═══ Competitor Pricing Data ═══ */
   var competitors = {
