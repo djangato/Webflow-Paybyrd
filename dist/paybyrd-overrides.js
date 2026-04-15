@@ -11941,13 +11941,23 @@ function pbrdReady() {
     var section = heading.closest("section") || heading.closest("[class*='section']");
     if (!section) return;
 
-    section.style.setProperty("background", "#0a0a0f", "important");
+    section.style.setProperty("background-image", "url('https://djangato.github.io/Webflow-Paybyrd/assets/retail/hero-retail.png')", "important");
+    section.style.setProperty("background-size", "cover", "important");
+    section.style.setProperty("background-position", "center", "important");
+    section.style.setProperty("background-repeat", "no-repeat", "important");
     section.style.setProperty("position", "relative", "important");
+
+    /* Dark overlay for text readability */
+    var overlay = document.createElement("div");
+    overlay.setAttribute("style", "position:absolute;inset:0;background:rgba(0,0,0,0.6);z-index:0;pointer-events:none;");
+    section.insertBefore(overlay, section.firstChild);
 
     /* Keep Webflow layout structure but make children relative for z-index */
     Array.prototype.forEach.call(section.children, function(child) {
-      child.style.setProperty("position", "relative", "important");
-      child.style.setProperty("z-index", "1", "important");
+      if (child !== overlay) {
+        child.style.setProperty("position", "relative", "important");
+        child.style.setProperty("z-index", "1", "important");
+      }
     });
 
     /* Hide the Webflow content wrapper that contains the old text, but NOT spacers */
