@@ -90,11 +90,6 @@
           '<a href="#pbrd-ret-heatmap" class="pbrd-ret-cta-ghost">See the dashboard</a>' +
         '</div>' +
       '</div>' +
-      '<div class="pbrd-ret-hero-viz pbrd-ret-reveal">' +
-        '<div class="pbrd-ret-txn-feed" id="pbrd-ret-txn-feed">' +
-          '<div class="pbrd-ret-txn-head"><span class="pbrd-ret-txn-dot"></span>Live Transactions</div>' +
-        '</div>' +
-      '</div>' +
       '<div class="pbrd-ret-ticker pbrd-ret-reveal">' +
         '<span>4\u20137% Higher Auth</span><span class="pbrd-ret-ticker-sep">\u00b7</span>' +
         '<span>39% Less Queue Drop-off</span><span class="pbrd-ret-ticker-sep">\u00b7</span>' +
@@ -103,39 +98,6 @@
       '</div>';
 
     section.appendChild(wrap);
-
-    /* Live transaction feed */
-    var txns = [
-      { store: "Store Lisboa", amount: "\u20AC87.50", method: "Visa", color: "#1A1F71" },
-      { store: "Online", amount: "\u20AC234.00", method: "Mastercard", color: "#EB001B" },
-      { store: "Kiosk Porto", amount: "\u20AC12.90", method: "Apple Pay", color: "#333" },
-      { store: "Store Faro", amount: "\u20AC156.00", method: "MB Way", color: "#D4002A" },
-      { store: "Online", amount: "\u20AC67.80", method: "Google Pay", color: "#4285F4" },
-      { store: "Store Cascais", amount: "\u20AC342.00", method: "Visa", color: "#1A1F71" },
-      { store: "Mobile", amount: "\u20AC29.90", method: "Mastercard", color: "#EB001B" },
-      { store: "Store Braga", amount: "\u20AC198.50", method: "Visa", color: "#1A1F71" }
-    ];
-    var txnIdx = 0;
-    var feed = document.getElementById("pbrd-ret-txn-feed");
-    function addTxn() {
-      if (!feed) return;
-      var t = txns[txnIdx % txns.length]; txnIdx++;
-      var el = document.createElement("div");
-      el.className = "pbrd-ret-txn-item";
-      el.style.opacity = "0";
-      el.innerHTML = '<span class="pbrd-ret-txn-method" style="background:' + t.color + '">' + t.method.charAt(0) + '</span>' +
-        '<span class="pbrd-ret-txn-store">' + t.store + '</span>' +
-        '<span class="pbrd-ret-txn-amount">' + t.amount + '</span>' +
-        '<span class="pbrd-ret-txn-status">\u2713</span>';
-      var items = feed.querySelectorAll(".pbrd-ret-txn-item");
-      if (items.length >= 5) { var old = items[items.length - 1]; old.style.opacity = "0"; setTimeout(function() { if (old.parentNode) old.parentNode.removeChild(old); }, 300); }
-      feed.appendChild(el);
-      var headEl = feed.querySelector(".pbrd-ret-txn-head");
-      if (headEl && headEl.nextSibling) feed.insertBefore(el, headEl.nextSibling);
-      setTimeout(function() { el.style.opacity = "1"; }, 50);
-      setTimeout(addTxn, 1800);
-    }
-    new IntersectionObserver(function(entries) { if (entries[0].isIntersecting) { addTxn(); this.disconnect(); } }, { threshold: 0.1 }).observe(wrap);
 
     observeReveal(".pbrd-ret-hero-wrap .pbrd-ret-reveal", 150);
   }
@@ -194,18 +156,23 @@
         '<h2 class="pbrd-ret-pain-h2">Your busiest hour is your leakiest.<br>Here\u2019s the proof.</h2>' +
       '</div>' +
 
-      '<div class="pbrd-ret-heatmap pbrd-ret-reveal" id="pbrd-ret-heatmap">' +
-        '<div class="pbrd-ret-hm-title">Peak Transaction Hours</div>' +
-        '<div class="pbrd-ret-hm-subtitle">When your customers pay \u2014 optimize staffing and promotions</div>' +
-        '<div class="pbrd-ret-hm-hours">' + hourLabels + '</div>' +
-        '<div class="pbrd-ret-hm-body">' +
-          '<div class="pbrd-ret-hm-days">' + dayLabels + '</div>' +
-          '<div class="pbrd-ret-hm-grid">' + heatCells + '</div>' +
+      '<div class="pbrd-ret-pain-dashboard pbrd-ret-reveal">' +
+        '<div class="pbrd-ret-heatmap" id="pbrd-ret-heatmap">' +
+          '<div class="pbrd-ret-hm-title">Peak Transaction Hours</div>' +
+          '<div class="pbrd-ret-hm-subtitle">When your customers pay \u2014 optimize staffing and promotions</div>' +
+          '<div class="pbrd-ret-hm-hours">' + hourLabels + '</div>' +
+          '<div class="pbrd-ret-hm-body">' +
+            '<div class="pbrd-ret-hm-days">' + dayLabels + '</div>' +
+            '<div class="pbrd-ret-hm-grid">' + heatCells + '</div>' +
+          '</div>' +
+          '<div class="pbrd-ret-hm-legend">' +
+            '<span>Less</span>' +
+            '<div class="pbrd-ret-hm-legend-bar"></div>' +
+            '<span>More</span>' +
+          '</div>' +
         '</div>' +
-        '<div class="pbrd-ret-hm-legend">' +
-          '<span>Less</span>' +
-          '<div class="pbrd-ret-hm-legend-bar"></div>' +
-          '<span>More</span>' +
+        '<div class="pbrd-ret-txn-feed" id="pbrd-ret-txn-feed">' +
+          '<div class="pbrd-ret-txn-head"><span class="pbrd-ret-txn-dot"></span>Live Transactions</div>' +
         '</div>' +
       '</div>' +
 
@@ -247,6 +214,39 @@
         this.disconnect();
       }
     }, { threshold: 0.2 }).observe(wrap);
+
+    /* Live transaction feed */
+    var txns = [
+      { store: "Store Lisboa", amount: "\u20AC87.50", method: "Visa", color: "#1A1F71" },
+      { store: "Online", amount: "\u20AC234.00", method: "Mastercard", color: "#EB001B" },
+      { store: "Kiosk Porto", amount: "\u20AC12.90", method: "Apple Pay", color: "#333" },
+      { store: "Store Faro", amount: "\u20AC156.00", method: "MB Way", color: "#D4002A" },
+      { store: "Online", amount: "\u20AC67.80", method: "Google Pay", color: "#4285F4" },
+      { store: "Store Cascais", amount: "\u20AC342.00", method: "Visa", color: "#1A1F71" },
+      { store: "Mobile", amount: "\u20AC29.90", method: "Mastercard", color: "#EB001B" },
+      { store: "Store Braga", amount: "\u20AC198.50", method: "Visa", color: "#1A1F71" }
+    ];
+    var txnIdx = 0;
+    var feed = document.getElementById("pbrd-ret-txn-feed");
+    function addTxn() {
+      if (!feed) return;
+      var t = txns[txnIdx % txns.length]; txnIdx++;
+      var el = document.createElement("div");
+      el.className = "pbrd-ret-txn-item";
+      el.style.opacity = "0";
+      el.innerHTML = '<span class="pbrd-ret-txn-method" style="background:' + t.color + '">' + t.method.charAt(0) + '</span>' +
+        '<span class="pbrd-ret-txn-store">' + t.store + '</span>' +
+        '<span class="pbrd-ret-txn-amount">' + t.amount + '</span>' +
+        '<span class="pbrd-ret-txn-status">\u2713</span>';
+      var items = feed.querySelectorAll(".pbrd-ret-txn-item");
+      if (items.length >= 6) { var old = items[items.length - 1]; old.style.opacity = "0"; setTimeout(function() { if (old.parentNode) old.parentNode.removeChild(old); }, 300); }
+      var headEl = feed.querySelector(".pbrd-ret-txn-head");
+      if (headEl && headEl.nextSibling) feed.insertBefore(el, headEl.nextSibling);
+      else feed.appendChild(el);
+      setTimeout(function() { el.style.opacity = "1"; }, 50);
+      setTimeout(addTxn, 1800);
+    }
+    new IntersectionObserver(function(entries) { if (entries[0].isIntersecting) { addTxn(); this.disconnect(); } }, { threshold: 0.1 }).observe(wrap);
 
     observeReveal(".pbrd-ret-pain-wrap .pbrd-ret-reveal", 120);
   }
