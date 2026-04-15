@@ -11952,8 +11952,6 @@ function pbrdReady() {
 
     var wrap = document.createElement("div");
     wrap.className = "pbrd-ret-hero-wrap";
-    wrap.style.setProperty("padding-top", "140px", "important");
-    wrap.style.setProperty("padding-bottom", "60px", "important");
 
     wrap.innerHTML =
       '<div class="pbrd-ret-hero-content pbrd-ret-reveal">' +
