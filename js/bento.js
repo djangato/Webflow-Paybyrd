@@ -2,8 +2,7 @@
 (function () {
   "use strict";
   var path = window.location.pathname.replace(/\/+$/, "") || "/";
-  console.log("[Paybyrd] Calculator: path =", path);
-  if (path !== "/" && path !== "" && path !== "/index" && path !== "/index.html" && path !== "/home") return;
+  if (path !== "/" && path !== "" && path !== "/index" && path !== "/index.html" && path !== "/home" && path !== "/pricing") return;
 
   /* ═══ Competitor Pricing Data ═══ */
   var competitors = {
