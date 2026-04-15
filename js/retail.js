@@ -51,7 +51,8 @@
     var section = heading.closest("section") || heading.closest("[class*='section']");
     if (!section) return;
 
-    section.style.setProperty("padding", "120px 0 60px", "important");
+    section.style.setProperty("padding", "0", "important");
+    section.style.setProperty("margin", "0", "important");
     section.style.setProperty("background", "#0a0a0f", "important");
     Array.prototype.forEach.call(section.children, function(child) {
       if (!child.classList || !child.classList.contains("pbrd-ret-hero-wrap")) {
@@ -61,6 +62,8 @@
 
     var wrap = document.createElement("div");
     wrap.className = "pbrd-ret-hero-wrap";
+    wrap.style.setProperty("padding-top", "140px", "important");
+    wrap.style.setProperty("padding-bottom", "60px", "important");
 
     wrap.innerHTML =
       '<div class="pbrd-ret-hero-content pbrd-ret-reveal">' +
