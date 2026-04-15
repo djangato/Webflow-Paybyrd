@@ -560,19 +560,20 @@
     /* Rewrite heading */
     formHeading.textContent = "Still have questions? Let\u2019s talk.";
 
-    /* Find and rewrite the subtitle paragraph */
-    const parent = formHeading.closest(".u-content-wrapper") || formHeading.parentElement;
-    if (parent) {
-      const paras = parent.querySelectorAll("p");
-      paras.forEach(function(p) {
-        if (p.textContent.toLowerCase().includes("perfect solution") || p.textContent.toLowerCase().includes("personalized consultation")) {
-          p.innerHTML = "Get a tailored proposal with rates based on your volume, industry, and payment mix. Our team responds within 2 hours on business days.";
+    /* Find and rewrite the subtitle paragraph — walk up to section level to find it */
+    const section = formHeading.closest("section") || formHeading.closest("[class*='section']") || formHeading.parentElement;
+    if (section) {
+      section.querySelectorAll("p").forEach(function(p) {
+        var t = p.textContent.toLowerCase();
+        if (t.includes("perfect solution") || t.includes("personalized") || t.includes("consultation")) {
+          p.textContent = "Get a tailored proposal with rates based on your volume, industry, and payment mix. Our team responds within 2 hours on business days.";
         }
       });
 
-      /* Add trust signals below the subtitle */
-      const existing = parent.querySelector(".pbrd-form-trust");
-      if (!existing) {
+      /* Add trust signals after heading */
+      const parent = formHeading.closest(".u-content-wrapper") || formHeading.parentElement;
+      const existing = section.querySelector(".pbrd-form-trust");
+      if (!existing && parent) {
         const trust = document.createElement("div");
         trust.className = "pbrd-form-trust";
         trust.innerHTML =
@@ -590,8 +591,15 @@
               '<span>Custom rate proposal included</span>' +
             '</div>' +
           '</div>';
-        trust.style.cssText = "margin-top:20px;";
-        parent.appendChild(trust);
+        trust.style.cssText = "margin-top:24px;";
+        /* Insert after the subtitle paragraph, not at end of wrapper */
+        var subtitleP = null;
+        parent.querySelectorAll("p").forEach(function(p) { subtitleP = p; });
+        if (subtitleP) {
+          subtitleP.parentElement.insertBefore(trust, subtitleP.nextSibling);
+        } else {
+          parent.appendChild(trust);
+        }
       }
     }
   }
