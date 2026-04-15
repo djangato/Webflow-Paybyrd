@@ -590,6 +590,7 @@
         }
       }
     }
+    pbrdReady();
   }
 
   /* Run form enhancement */

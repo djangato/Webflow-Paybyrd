@@ -1966,6 +1966,7 @@
     enhanceFAQ();
     enhanceCTA();
     console.log("[Paybyrd] E-commerce enhancements loaded");
+    pbrdReady();
   }
 
   if (document.readyState === "complete") {

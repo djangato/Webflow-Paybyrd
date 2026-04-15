@@ -258,6 +258,7 @@
         setTimeout(updateVisual, 150);
       }
     });
+    pbrdReady();
   }
 
   if (document.readyState === "complete") {

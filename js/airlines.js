@@ -1760,6 +1760,7 @@
     enhanceBottomCTA();
     enhanceFAQ();
     console.log("[Paybyrd] Airlines enhancements loaded");
+    pbrdReady();
   }
 
   if (document.readyState === "complete") init();

@@ -428,6 +428,7 @@
       }
 
       console.log("[Paybyrd] Showcase inserted successfully");
+      pbrdReady();
     } catch(err) {
       console.error("[Paybyrd] Showcase error:", err);
     }

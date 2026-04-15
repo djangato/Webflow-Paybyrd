@@ -32,6 +32,7 @@
 
     // Insert where the old CTA was
     original.parentElement.insertBefore(section, original);
+    pbrdReady();
   }
 
   if (document.readyState === "complete") {

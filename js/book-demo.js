@@ -141,6 +141,7 @@
         }, 100);
       }
     });
+    pbrdReady();
   }
 
   if (document.readyState === "complete") {

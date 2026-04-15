@@ -20,6 +20,7 @@
     document.querySelectorAll('a[href*="onboard.paybyrd.com"]').forEach(function (link) {
       link.href = "https://beta.paybyrd.com";
     });
+    pbrdReady();
   }
 
   if (document.readyState === "complete") {

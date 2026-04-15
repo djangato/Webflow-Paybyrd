@@ -1972,6 +1972,7 @@
     enhanceFAQ();
     enhanceBottomCTA();
     console.log("[Paybyrd] Hospitality enhancements loaded");
+    pbrdReady();
   }
 
   if (document.readyState === "complete") init();

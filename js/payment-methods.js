@@ -659,6 +659,7 @@
     enhanceContact();
     fixFooter();
     console.log("[Paybyrd] Payment Methods enhancements loaded");
+    pbrdReady();
   }
 
   if (document.readyState === "complete") {

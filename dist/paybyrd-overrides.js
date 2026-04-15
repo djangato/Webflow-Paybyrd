@@ -1,5 +1,14 @@
 /* Paybyrd Webflow Overrides — Utilities */
 /* Helper functions */
+
+/* FOUC prevention: mark page as ready after overrides are applied.
+   Requires this in Webflow <head> custom code:
+   <style>.pbrd-loading section>*{opacity:0;transition:opacity .3s ease}.pbrd-ready section>*{opacity:1}</style>
+   <script>document.documentElement.classList.add('pbrd-loading');setTimeout(function(){document.documentElement.classList.replace('pbrd-loading','pbrd-ready')},3000);</script>
+*/
+function pbrdReady() {
+  document.documentElement.classList.replace('pbrd-loading', 'pbrd-ready');
+}
 /* Paybyrd Webflow Overrides — Interactions */
 /* Payment Methods Pricing Table */
 
@@ -592,6 +601,7 @@
         }
       }
     }
+    pbrdReady();
   }
 
   /* Run form enhancement */
@@ -623,6 +633,7 @@
     document.querySelectorAll('a[href*="onboard.paybyrd.com"]').forEach(function (link) {
       link.href = "https://beta.paybyrd.com";
     });
+    pbrdReady();
   }
 
   if (document.readyState === "complete") {
@@ -665,6 +676,7 @@
 
     // Insert where the old CTA was
     original.parentElement.insertBefore(section, original);
+    pbrdReady();
   }
 
   if (document.readyState === "complete") {
@@ -900,6 +912,7 @@
     initTicker();
     initStickyCTA();
     initExitIntent();
+    pbrdReady();
   }
 
   if (document.readyState === "complete") {
@@ -1051,6 +1064,7 @@
         }, 100);
       }
     });
+    pbrdReady();
   }
 
   if (document.readyState === "complete") {
@@ -1381,6 +1395,7 @@
 
     /* Initial calculation */
     updateResults();
+    pbrdReady();
   }
 
   /* Run after Webflow + Swiper have initialized */
@@ -1827,6 +1842,7 @@
       }
 
       console.log("[Paybyrd] Showcase inserted successfully");
+      pbrdReady();
     } catch(err) {
       console.error("[Paybyrd] Showcase error:", err);
     }
@@ -1991,6 +2007,7 @@
 
     /* Kick off scroll animations */
     observeCards(section);
+    pbrdReady();
   }
 
   if (document.readyState === "complete") {
@@ -2412,6 +2429,7 @@
       }, { rootMargin: "300px" });
       section.querySelectorAll(".pbrd-customer-card").forEach(function (c) { obs.observe(c); });
     }
+    pbrdReady();
   }
 
   if (document.readyState === "complete") {
@@ -2680,6 +2698,7 @@
         setTimeout(updateVisual, 150);
       }
     });
+    pbrdReady();
   }
 
   if (document.readyState === "complete") {
@@ -3592,6 +3611,7 @@
       buildBenefits();
       buildCTA();
       console.log("[Paybyrd] Omnichannel enhancements loaded");
+      pbrdReady();
     } catch (err) {
       console.error("[Paybyrd] Omnichannel error:", err);
     }
@@ -5571,6 +5591,7 @@
     enhanceFAQ();
     enhanceCTA();
     console.log("[Paybyrd] E-commerce enhancements loaded");
+    pbrdReady();
   }
 
   if (document.readyState === "complete") {
@@ -7124,6 +7145,7 @@
     enhanceContact();
     initPricingCanvas();
     console.log("[Paybyrd] POS enhancements loaded");
+    pbrdReady();
   }
 
   if (document.readyState === "complete") {
@@ -7793,6 +7815,7 @@
     enhanceContact();
     fixFooter();
     console.log("[Paybyrd] Payment Methods enhancements loaded");
+    pbrdReady();
   }
 
   if (document.readyState === "complete") {
@@ -9563,6 +9586,7 @@
     enhanceBottomCTA();
     enhanceFAQ();
     console.log("[Paybyrd] Airlines enhancements loaded");
+    pbrdReady();
   }
 
   if (document.readyState === "complete") init();
@@ -11542,6 +11566,7 @@
     enhanceFAQ();
     enhanceBottomCTA();
     console.log("[Paybyrd] Hospitality enhancements loaded");
+    pbrdReady();
   }
 
   if (document.readyState === "complete") init();

@@ -411,6 +411,7 @@
       }, { rootMargin: "300px" });
       section.querySelectorAll(".pbrd-customer-card").forEach(function (c) { obs.observe(c); });
     }
+    pbrdReady();
   }
 
   if (document.readyState === "complete") {

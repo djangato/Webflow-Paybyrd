@@ -320,6 +320,7 @@
 
     /* Initial calculation */
     updateResults();
+    pbrdReady();
   }
 
   /* Run after Webflow + Swiper have initialized */

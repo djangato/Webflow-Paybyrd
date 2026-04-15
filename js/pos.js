@@ -1543,6 +1543,7 @@
     enhanceContact();
     initPricingCanvas();
     console.log("[Paybyrd] POS enhancements loaded");
+    pbrdReady();
   }
 
   if (document.readyState === "complete") {

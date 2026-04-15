@@ -902,6 +902,7 @@
       buildBenefits();
       buildCTA();
       console.log("[Paybyrd] Omnichannel enhancements loaded");
+      pbrdReady();
     } catch (err) {
       console.error("[Paybyrd] Omnichannel error:", err);
     }

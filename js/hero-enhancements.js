@@ -225,6 +225,7 @@
     initTicker();
     initStickyCTA();
     initExitIntent();
+    pbrdReady();
   }
 
   if (document.readyState === "complete") {

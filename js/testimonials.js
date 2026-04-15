@@ -135,6 +135,7 @@
 
     /* Kick off scroll animations */
     observeCards(section);
+    pbrdReady();
   }
 
   if (document.readyState === "complete") {
