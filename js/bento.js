@@ -6,15 +6,15 @@
 
   /* ═══ Competitor Pricing Data ═══ */
   var competitors = {
-    mollie: {
-      name: "Mollie",
-      online: { cardPct: 1.80, cardFixed: 0.25, apmPct: 0, apmFixed: 0.32, walletSurcharge: 0 },
-      cp: null
-    },
     stripe: {
       name: "Stripe",
       online: { cardPct: 1.50, cardFixed: 0.25, apmPct: 1.50, apmFixed: 0.25, walletSurcharge: 0 },
       cp: { cardPct: 1.40, cardFixed: 0.10 }
+    },
+    mollie: {
+      name: "Mollie",
+      online: { cardPct: 1.80, cardFixed: 0.25, apmPct: 0, apmFixed: 0.32, walletSurcharge: 0 },
+      cp: null
     },
     adyen: {
       name: "Adyen",
@@ -41,7 +41,7 @@
   var CP_SPLIT = 0.30;    /* when "both": 70% online, 30% CP */
   var CP_DEBIT_SPLIT = 0.60; /* 60% debit, 40% credit for CP */
 
-  var selectedProvider = "mollie";
+  var selectedProvider = "stripe";
   var monthlyVolume = 100000;
   var channelMode = "online"; /* "online" or "both" */
 
@@ -200,7 +200,7 @@
               '<select class="pbrd-calc-select" id="pbrd-calc-provider-select">' +
                 Object.keys(competitors).map(function(key) {
                   var c = competitors[key];
-                  return '<option value="' + key + '"' + (key === "mollie" ? ' selected' : '') + '>' + c.name + '</option>';
+                  return '<option value="' + key + '"' + (key === "stripe" ? ' selected' : '') + '>' + c.name + '</option>';
                 }).join("") +
               '</select>' +
               '<svg class="pbrd-calc-select-chevron" viewBox="0 0 16 16" width="14" height="14"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
