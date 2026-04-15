@@ -1159,22 +1159,18 @@
 
   /* ═══ Build Calculator ═══ */
   function init() {
-    /* Find the bento section */
-    var heading = null;
+    /* Find the "Why settle" section — it's a Swiper slider with card-12_wrap items */
+    var section = null;
     document.querySelectorAll("h1,h2,h3,h4,h5,h6").forEach(function (h) {
-      if (!heading && h.textContent.toLowerCase().includes("why settle")) heading = h;
-    });
-    /* Fallback: try finding the bento card grid directly */
-    if (!heading) {
-      var bentoCard = document.querySelector(".card-1_element");
-      if (bentoCard) {
-        heading = bentoCard.closest("section") || bentoCard.closest("[class*='section']");
-        if (heading) heading = { closest: function() { return heading; } };
+      if (!section && h.textContent.toLowerCase().includes("why settle")) {
+        section = h.closest("section") || h.closest("[class*='u-section']");
       }
+    });
+    /* Fallback: find by slider card class */
+    if (!section) {
+      var sliderCard = document.querySelector(".card-12_wrap");
+      if (sliderCard) section = sliderCard.closest("section") || sliderCard.closest("[class*='u-section']");
     }
-    if (!heading) return;
-
-    var section = heading.closest ? (heading.closest("section") || heading.closest("[class*='section']") || heading.parentElement) : heading;
     if (!section) return;
 
     /* Hide Webflow children */
