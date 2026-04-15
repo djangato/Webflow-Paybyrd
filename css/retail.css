@@ -31,7 +31,7 @@
 .pbrd-ret-ticker-sep { color:rgba(255,255,255,0.1); }
 
 /* ═══ PAIN POINTS — Heatmap ═══ */
-.pbrd-ret-pain-wrap { max-width:1200px; margin:0 auto; padding:0 40px; width:100vw; margin-left:calc(-50vw + 50%); box-sizing:border-box; }
+.pbrd-ret-pain-wrap { width:100vw; position:relative; left:50%; transform:translateX(-50%); padding:0 40px; box-sizing:border-box; }
 .pbrd-ret-pain-header { text-align:center; margin-bottom:40px; }
 .pbrd-ret-pain-h2 { font-size:clamp(1.75rem,3.5vw,2.5rem); font-weight:700; color:#fff; letter-spacing:-0.02em; margin:8px 0 0; line-height:1.15; }
 
