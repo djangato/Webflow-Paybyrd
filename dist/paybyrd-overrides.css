@@ -870,6 +870,14 @@
 }
 /* Paybyrd Webflow Overrides — Homepage Product Showcase */
 
+/* Ensure hero fills viewport so dashboard image stays below fold */
+.hero-main_contain, .hero-main_layout {
+  min-height: 100vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
+
 /* Hide the original slider section */
 .slider-2_wrap {
   display: none !important;
