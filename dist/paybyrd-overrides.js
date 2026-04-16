@@ -24,8 +24,14 @@ function pbrdReady() {
   /* ─── Payment Methods Data (Online) ─── */
   const paymentMethods = [
     // Cards
-    { name: "Visa", category: "cards", fee: "1.25% + \u20AC0.08", img: "visa.png" },
-    { name: "Mastercard", category: "cards", fee: "1.25% + \u20AC0.08", img: "mastercard.png" },
+    { name: "Visa", category: "cards", img: "visa.png", subRates: [
+      { label: "Domestic & European Debit", fee: "1.25% + \u20AC0.08" },
+      { label: "Domestic & European Credit", fee: "1.25% + \u20AC0.08" }
+    ]},
+    { name: "Mastercard", category: "cards", img: "mastercard.png", subRates: [
+      { label: "Domestic & European Debit", fee: "1.25% + \u20AC0.08" },
+      { label: "Domestic & European Credit", fee: "1.25% + \u20AC0.08" }
+    ]},
     { name: "American Express", category: "cards", fee: "2.50% + \u20AC0.08", img: "amex.png" },
     { name: "Discover", category: "cards", fee: "2.50% + \u20AC0.15", img: "discover.png" },
     { name: "Diners Club", category: "cards", fee: "2.40% + \u20AC0.15", img: "diners.png" },
