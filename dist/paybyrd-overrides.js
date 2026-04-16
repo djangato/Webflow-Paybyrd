@@ -12067,43 +12067,75 @@ function pbrdReady() {
       '</div>' +
 
       '<div class="pbrd-ret-pain-stats pbrd-ret-reveal">' +
-        '<div class="pbrd-ret-pain-stat">' +
-          '<svg viewBox="0 0 40 40" class="pbrd-ret-pain-ring"><circle cx="20" cy="20" r="17" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="2.5"/><circle cx="20" cy="20" r="17" fill="none" stroke="rgba(239,68,68,0.6)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="107" stroke-dashoffset="107" transform="rotate(-90 20 20)" class="pbrd-ret-ring-fill" data-offset="80"/></svg>' +
-          '<div class="pbrd-ret-pain-stat-val" data-target="25" data-suffix="%">0%</div>' +
-          '<div class="pbrd-ret-pain-stat-lbl">checkout abandonment</div>' +
+
+        /* Card 1: Checkout Abandonment — funnel visualization */
+        '<div class="pbrd-ret-pain-card">' +
+          '<div class="pbrd-ret-pain-card-viz">' +
+            '<svg viewBox="0 0 200 80" fill="none" style="width:100%;height:auto">' +
+              '<rect x="0" y="0" width="200" height="16" rx="3" fill="rgba(99,25,240,0.4)"/>' +
+              '<text x="100" y="11" text-anchor="middle" fill="#fff" font-size="6" font-weight="600" font-family="system-ui">100 shoppers start checkout</text>' +
+              '<path d="M30,16 L50,30 L150,30 L170,16" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>' +
+              '<rect x="30" y="30" width="140" height="16" rx="3" fill="rgba(245,158,11,0.35)"/>' +
+              '<text x="100" y="41" text-anchor="middle" fill="#fff" font-size="6" font-weight="600" font-family="system-ui">75 reach payment step</text>' +
+              '<path d="M55,46 L70,60 L130,60 L145,46" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>' +
+              '<rect x="50" y="60" width="100" height="16" rx="3" fill="rgba(239,68,68,0.4)"/>' +
+              '<text x="100" y="71" text-anchor="middle" fill="#fff" font-size="6" font-weight="600" font-family="system-ui">Only 75 complete \u2014 25 lost</text>' +
+            '</svg>' +
+          '</div>' +
+          '<div class="pbrd-ret-pain-card-body">' +
+            '<div class="pbrd-ret-pain-card-big" style="color:#ef4444">25%</div>' +
+            '<div class="pbrd-ret-pain-card-label">abandon at checkout</div>' +
+            '<div class="pbrd-ret-pain-card-fix">\u2192 Paybyrd\u2019s one-click checkout recovers 15\u201320%</div>' +
+          '</div>' +
         '</div>' +
-        '<div class="pbrd-ret-pain-stat">' +
-          '<svg viewBox="0 0 40 40" class="pbrd-ret-pain-ring"><circle cx="20" cy="20" r="17" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="2.5"/><circle cx="20" cy="20" r="17" fill="none" stroke="rgba(245,158,11,0.6)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="107" stroke-dashoffset="107" transform="rotate(-90 20 20)" class="pbrd-ret-ring-fill" data-offset="65"/></svg>' +
-          '<div class="pbrd-ret-pain-stat-val" data-target="39" data-suffix="%">0%</div>' +
-          '<div class="pbrd-ret-pain-stat-lbl">peak-hour drop-offs</div>' +
+
+        /* Card 2: Peak Hour Drop-offs — queue visualization */
+        '<div class="pbrd-ret-pain-card">' +
+          '<div class="pbrd-ret-pain-card-viz">' +
+            '<svg viewBox="0 0 200 80" fill="none" style="width:100%;height:auto">' +
+              '<text x="6" y="10" fill="rgba(255,255,255,0.3)" font-size="5" font-weight="600" font-family="system-ui">QUEUE LENGTH \u00b7 PEAK HOUR</text>' +
+              '<rect x="6" y="18" width="0" height="10" rx="2" fill="rgba(245,158,11,0.5)"><animate attributeName="width" values="0;160" dur="1.2s" begin="0.3s" fill="freeze"/></rect>' +
+              '<text x="170" y="26" fill="rgba(255,255,255,0.6)" font-size="6" font-weight="700" font-family="system-ui" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.3s" begin="1.2s" fill="freeze"/>8 min wait</text>' +
+              '<rect x="6" y="34" width="0" height="10" rx="2" fill="rgba(245,158,11,0.35)"><animate attributeName="width" values="0;120" dur="1.2s" begin="0.5s" fill="freeze"/></rect>' +
+              '<text x="130" y="42" fill="rgba(255,255,255,0.6)" font-size="6" font-weight="700" font-family="system-ui" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.3s" begin="1.4s" fill="freeze"/>6 min wait</text>' +
+              '<text x="6" y="60" fill="rgba(255,255,255,0.25)" font-size="5" font-family="system-ui">WITH PAYBYRD CONTACTLESS</text>' +
+              '<rect x="6" y="66" width="0" height="10" rx="2" fill="rgba(16,185,129,0.5)"><animate attributeName="width" values="0;30" dur="1s" begin="0.7s" fill="freeze"/></rect>' +
+              '<text x="40" y="74" fill="#10b981" font-size="6" font-weight="700" font-family="system-ui" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.3s" begin="1.5s" fill="freeze"/>< 30s</text>' +
+            '</svg>' +
+          '</div>' +
+          '<div class="pbrd-ret-pain-card-body">' +
+            '<div class="pbrd-ret-pain-card-big" style="color:#f59e0b">39%</div>' +
+            '<div class="pbrd-ret-pain-card-label">walk away during peak queues</div>' +
+            '<div class="pbrd-ret-pain-card-fix">\u2192 Tap-to-pay + mobile POS eliminates queues entirely</div>' +
+          '</div>' +
         '</div>' +
-        '<div class="pbrd-ret-pain-stat">' +
-          '<svg viewBox="0 0 40 40" class="pbrd-ret-pain-ring"><circle cx="20" cy="20" r="17" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="2.5"/><circle cx="20" cy="20" r="17" fill="none" stroke="rgba(234,179,8,0.6)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="107" stroke-dashoffset="107" transform="rotate(-90 20 20)" class="pbrd-ret-ring-fill" data-offset="55"/></svg>' +
-          '<div class="pbrd-ret-pain-stat-val" data-target="15" data-suffix="+ hrs">0+ hrs</div>' +
-          '<div class="pbrd-ret-pain-stat-lbl">monthly reconciliation waste</div>' +
+
+        /* Card 3: Reconciliation — before/after */
+        '<div class="pbrd-ret-pain-card">' +
+          '<div class="pbrd-ret-pain-card-viz">' +
+            '<svg viewBox="0 0 200 80" fill="none" style="width:100%;height:auto">' +
+              '<text x="6" y="10" fill="rgba(255,255,255,0.3)" font-size="5" font-weight="600" font-family="system-ui">MONTHLY RECONCILIATION</text>' +
+              '<text x="6" y="28" fill="rgba(239,68,68,0.7)" font-size="5.5" font-weight="600" font-family="system-ui">Before</text>' +
+              '<rect x="40" y="20" width="0" height="12" rx="2" fill="rgba(239,68,68,0.3)"><animate attributeName="width" values="0;150" dur="1s" begin="0.3s" fill="freeze"/></rect>' +
+              '<text x="194" y="29" text-anchor="end" fill="rgba(255,255,255,0.5)" font-size="6" font-weight="700" font-family="system-ui" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.3s" begin="1s" fill="freeze"/>15+ hours</text>' +
+              '<text x="6" y="50" fill="rgba(16,185,129,0.7)" font-size="5.5" font-weight="600" font-family="system-ui">After</text>' +
+              '<rect x="40" y="42" width="0" height="12" rx="2" fill="rgba(16,185,129,0.4)"><animate attributeName="width" values="0;8" dur="0.6s" begin="0.5s" fill="freeze"/></rect>' +
+              '<text x="54" y="51" fill="#10b981" font-size="6" font-weight="700" font-family="system-ui" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.3s" begin="1s" fill="freeze"/>Seconds</text>' +
+              '<text x="6" y="72" fill="rgba(255,255,255,0.15)" font-size="5" font-family="system-ui" opacity="0"><animate attributeName="opacity" values="0;1" dur="0.5s" begin="1.3s" fill="freeze"/>AI matches every transaction automatically</text>' +
+            '</svg>' +
+          '</div>' +
+          '<div class="pbrd-ret-pain-card-body">' +
+            '<div class="pbrd-ret-pain-card-big" style="color:#eab308">15+ hrs</div>' +
+            '<div class="pbrd-ret-pain-card-label">wasted on manual reconciliation</div>' +
+            '<div class="pbrd-ret-pain-card-fix">\u2192 AI reconciliation closes books in seconds</div>' +
+          '</div>' +
         '</div>' +
+
       '</div>' +
 
-      '<p class="pbrd-ret-pain-footer pbrd-ret-reveal">Paybyrd shows you exactly when and where you\u2019re losing revenue \u2014 in real time.</p>';
+      '<p class="pbrd-ret-pain-footer pbrd-ret-reveal">Paybyrd shows you exactly when and where you\u2019re losing revenue \u2014 and fixes it.</p>';
 
     section.appendChild(wrap);
-
-    /* Animate rings + counters on scroll */
-    new IntersectionObserver(function(entries) {
-      if (entries[0].isIntersecting) {
-        wrap.querySelectorAll(".pbrd-ret-ring-fill").forEach(function(ring) {
-          var off = ring.getAttribute("data-offset");
-          ring.style.transition = "stroke-dashoffset 1.2s ease";
-          ring.style.strokeDashoffset = off;
-        });
-        wrap.querySelectorAll(".pbrd-ret-pain-stat-val").forEach(function(el) {
-          var t = parseInt(el.getAttribute("data-target"));
-          var s = el.getAttribute("data-suffix");
-          countUp(el, t, s);
-        });
-        this.disconnect();
-      }
-    }, { threshold: 0.2 }).observe(wrap);
 
     /* Live transaction feed */
     var txns = [
