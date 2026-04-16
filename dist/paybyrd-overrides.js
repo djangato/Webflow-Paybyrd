@@ -12658,57 +12658,260 @@ function pbrdReady() {
     var section = findSectionByHeading("works with the stack");
     if (!section) return;
 
-    section.style.setProperty("padding", "60px 0", "important");
+    section.style.setProperty("padding", "80px 0", "important");
     section.style.setProperty("background", "#0a0a0f", "important");
     Array.prototype.forEach.call(section.children, function(child) {
-      if (!child.classList || !child.classList.contains("pbrd-ret-stack-wrap")) {
+      if (!child.classList || !child.classList.contains("pbrd-ret-bi-wrap")) {
         child.style.setProperty("display", "none", "important");
       }
     });
 
     var wrap = document.createElement("div");
-    wrap.className = "pbrd-ret-stack-wrap";
+    wrap.className = "pbrd-ret-bi-wrap";
 
-    var iconEcom = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="pbrd-ret-stack-icon"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/></svg>';
-    var iconAPI = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="pbrd-ret-stack-icon"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>';
-    var iconPOS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="pbrd-ret-stack-icon"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M2 9h20"/></svg>';
-    var iconERP = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="pbrd-ret-stack-icon"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>';
+    /* ── SVG phone frame helper ── */
+    function phoneFrame(id, screenContent) {
+      return '<div class="pbrd-ret-bi-phone" id="' + id + '">' +
+        '<svg viewBox="0 0 220 440" fill="none" xmlns="http://www.w3.org/2000/svg" class="pbrd-ret-bi-device">' +
+          '<rect x="8" y="8" width="204" height="424" rx="36" fill="#1a1a1e"/>' +
+          '<rect x="8" y="8" width="204" height="424" rx="36" fill="none" stroke="rgba(180,180,190,0.25)" stroke-width="1.5"/>' +
+          '<rect x="14" y="14" width="192" height="412" rx="32" fill="#0a0a10"/>' +
+          '<rect x="78" y="22" width="64" height="22" rx="11" fill="#1a1a1e"/>' +
+          '<circle cx="124" cy="33" r="4" fill="#0a0a0e" stroke="rgba(40,40,50,0.5)" stroke-width="0.5"/>' +
+          '<text x="30" y="47" fill="rgba(255,255,255,0.4)" font-size="9" font-weight="600" font-family="system-ui">9:41</text>' +
+          '<g transform="translate(170,38)"><rect x="0" y="0" width="16" height="8" rx="2" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.8"/><rect x="1.5" y="1.5" width="10" height="5" rx="1" fill="rgba(255,255,255,0.3)"/></g>' +
+          screenContent +
+        '</svg>' +
+      '</div>';
+    }
 
-    wrap.innerHTML =
-      '<div class="pbrd-ret-stack-header pbrd-ret-reveal">' +
-        '<div class="pbrd-ret-section-label">INTEGRATION SPEED</div>' +
-        '<h2 class="pbrd-ret-stack-h2">Your competitors spent months integrating.<br>You won\u2019t.</h2>' +
-        '<p class="pbrd-ret-stack-sub">Pre-built connectors for every major platform. Custom API for everything else.</p>' +
-      '</div>' +
+    /* ── Phone 1: Dashboard overview ── */
+    var phone1 = phoneFrame("pbrd-ret-bi-p1",
+      /* Header */
+      '<g transform="translate(24,60)">' +
+        '<text x="0" y="0" fill="rgba(255,255,255,0.4)" font-size="8" font-family="system-ui" font-weight="500">\u21B3 Paybyrd</text>' +
+        '<text x="0" y="16" fill="rgba(255,255,255,0.5)" font-size="7" font-family="system-ui">Welcome back,</text>' +
+        '<text x="0" y="32" fill="#fff" font-size="18" font-weight="700" font-family="system-ui">Hugo</text>' +
+        '<circle cx="160" cy="18" r="14" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>' +
+        '<text x="160" y="22" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="10" font-family="system-ui">H</text>' +
+      '</g>' +
+      /* Period tabs */
+      '<g transform="translate(24,108)">' +
+        '<rect x="0" y="0" width="38" height="18" rx="9" fill="rgba(255,255,255,0.04)"/><text x="19" y="12" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="7" font-family="system-ui">Today</text>' +
+        '<rect x="44" y="0" width="38" height="18" rx="9" fill="#6319f0"/><text x="63" y="12" text-anchor="middle" fill="#fff" font-size="7" font-weight="600" font-family="system-ui">7 days</text>' +
+        '<rect x="88" y="0" width="42" height="18" rx="9" fill="rgba(255,255,255,0.04)"/><text x="109" y="12" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="7" font-family="system-ui">30 days</text>' +
+      '</g>' +
+      /* Main volume card */
+      '<g transform="translate(24,138)">' +
+        '<rect x="0" y="0" width="172" height="82" rx="12" fill="rgba(99,25,240,0.12)" stroke="rgba(99,25,240,0.2)" stroke-width="0.5"/>' +
+        '<text x="12" y="18" fill="rgba(255,255,255,0.4)" font-size="7" font-family="system-ui">EUR Total Volume</text>' +
+        '<rect x="124" y="6" width="38" height="14" rx="7" fill="rgba(99,25,240,0.3)"/><text x="143" y="16" text-anchor="middle" fill="#fff" font-size="6" font-weight="600" font-family="system-ui">7 days</text>' +
+        '<text x="12" y="42" fill="#fff" font-size="16" font-weight="800" font-family="system-ui" class="pbrd-ret-bi-vol">\u20AC 2,093,631</text>' +
+        '<g transform="translate(12,52)">' +
+          '<text x="0" y="10" fill="rgba(255,255,255,0.35)" font-size="6.5" font-family="system-ui">Transactions</text>' +
+          '<text x="60" y="10" fill="rgba(255,255,255,0.35)" font-size="6.5" font-family="system-ui">Success Rate</text>' +
+          '<text x="120" y="10" fill="rgba(255,255,255,0.35)" font-size="6.5" font-family="system-ui">Avg. Tx</text>' +
+          '<text x="0" y="24" fill="#fff" font-size="10" font-weight="700" font-family="system-ui">16,532</text>' +
+          '<text x="60" y="24" fill="#fff" font-size="10" font-weight="700" font-family="system-ui">92%</text>' +
+          '<text x="120" y="24" fill="#fff" font-size="10" font-weight="700" font-family="system-ui">\u20AC142</text>' +
+        '</g>' +
+      '</g>' +
+      /* Other currencies */
+      '<g transform="translate(24,232)">' +
+        '<text x="0" y="0" fill="rgba(255,255,255,0.25)" font-size="6.5" font-weight="600" letter-spacing="0.5" font-family="system-ui">OTHER CURRENCIES</text>' +
+        '<g transform="translate(0,10)">' +
+          '<rect x="0" y="0" width="52" height="36" rx="6" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>' +
+          '<text x="8" y="12" fill="rgba(255,255,255,0.3)" font-size="5" font-family="system-ui">AOA</text>' +
+          '<text x="8" y="28" fill="#fff" font-size="8" font-weight="700" font-family="system-ui">Kz783.0M</text>' +
+          '<rect x="58" y="0" width="52" height="36" rx="6" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>' +
+          '<text x="66" y="12" fill="rgba(255,255,255,0.3)" font-size="5" font-family="system-ui">BRL</text>' +
+          '<text x="66" y="28" fill="#fff" font-size="8" font-weight="700" font-family="system-ui">R$60.0M</text>' +
+          '<rect x="116" y="0" width="52" height="36" rx="6" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>' +
+          '<text x="124" y="12" fill="rgba(255,255,255,0.3)" font-size="5" font-family="system-ui">CZK</text>' +
+          '<text x="124" y="28" fill="#fff" font-size="8" font-weight="700" font-family="system-ui">K\u010D3.6M</text>' +
+        '</g>' +
+      '</g>' +
+      /* Bottom metrics */
+      '<g transform="translate(24,290)">' +
+        '<rect x="0" y="0" width="80" height="46" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>' +
+        '<circle cx="12" cy="14" r="5" fill="rgba(16,185,129,0.15)" stroke="#10b981" stroke-width="0.8"/>' +
+        '<path d="M9.5 14 L11 15.5 L14.5 12" stroke="#10b981" stroke-width="0.8" fill="none" stroke-linecap="round"/>' +
+        '<text x="12" y="30" fill="rgba(255,255,255,0.3)" font-size="6" font-family="system-ui">Success Rate</text>' +
+        '<text x="12" y="42" fill="#fff" font-size="12" font-weight="800" font-family="system-ui">92%</text>' +
+        '<rect x="88" y="0" width="80" height="46" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>' +
+        '<text x="100" y="14" fill="rgba(255,255,255,0.3)" font-size="6" font-family="system-ui">Refunds</text>' +
+        '<text x="100" y="30" fill="#fff" font-size="12" font-weight="800" font-family="system-ui">2,639</text>' +
+      '</g>'
+    );
 
-      '<div class="pbrd-ret-stack-timeline pbrd-ret-reveal">' +
-        '<div class="pbrd-ret-stack-tl-row"><span class="pbrd-ret-stack-tl-label">E-COMMERCE SETUP</span><div class="pbrd-ret-stack-tl-bars"><div class="pbrd-ret-stack-tl-bar pbrd-ret-stack-tl--them" style="width:75%"><span>Competitors: 4\u20138 weeks</span></div><div class="pbrd-ret-stack-tl-bar pbrd-ret-stack-tl--us" data-w="22"><span>Paybyrd: Pre-built</span></div></div></div>' +
-        '<div class="pbrd-ret-stack-tl-row"><span class="pbrd-ret-stack-tl-label">POS INTEGRATION</span><div class="pbrd-ret-stack-tl-bars"><div class="pbrd-ret-stack-tl-bar pbrd-ret-stack-tl--them" style="width:65%"><span>Competitors: 6\u201312 weeks</span></div><div class="pbrd-ret-stack-tl-bar pbrd-ret-stack-tl--us" data-w="20"><span>Paybyrd: Days</span></div></div></div>' +
-        '<div class="pbrd-ret-stack-tl-row"><span class="pbrd-ret-stack-tl-label">ERP CONNECTION</span><div class="pbrd-ret-stack-tl-bars"><div class="pbrd-ret-stack-tl-bar pbrd-ret-stack-tl--them" style="width:85%"><span>Competitors: 3\u20136 months</span></div><div class="pbrd-ret-stack-tl-bar pbrd-ret-stack-tl--us" data-w="24"><span>Paybyrd: Weeks</span></div></div></div>' +
-        '<div class="pbrd-ret-stack-tl-row"><span class="pbrd-ret-stack-tl-label">MULTI-STORE ROLLOUT</span><div class="pbrd-ret-stack-tl-bars"><div class="pbrd-ret-stack-tl-bar pbrd-ret-stack-tl--them" style="width:90%"><span>Competitors: 3\u20136 months</span></div><div class="pbrd-ret-stack-tl-bar pbrd-ret-stack-tl--us" data-w="22"><span>Paybyrd: Days</span></div></div></div>' +
-      '</div>' +
+    /* ── Phone 2: Analytics ── */
+    var phone2 = phoneFrame("pbrd-ret-bi-p2",
+      /* Revenue chart card */
+      '<g transform="translate(24,60)">' +
+        '<rect x="0" y="0" width="172" height="110" rx="10" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>' +
+        /* Currency tabs */
+        '<rect x="8" y="8" width="32" height="14" rx="7" fill="#2d3748"/><text x="24" y="18" text-anchor="middle" fill="#fff" font-size="5.5" font-weight="600" font-family="system-ui">EUR</text>' +
+        '<text x="50" y="18" fill="rgba(255,255,255,0.3)" font-size="5.5" font-family="system-ui">AOA</text>' +
+        '<text x="72" y="18" fill="rgba(255,255,255,0.3)" font-size="5.5" font-family="system-ui">BRL</text>' +
+        '<text x="94" y="18" fill="rgba(255,255,255,0.3)" font-size="5.5" font-family="system-ui">CZK</text>' +
+        '<text x="8" y="36" fill="rgba(255,255,255,0.35)" font-size="6" font-family="system-ui">Total Revenue</text>' +
+        '<text x="105" y="36" fill="#fff" font-size="9" font-weight="700" font-family="system-ui" text-anchor="end">\u20AC 2,093,631</text>' +
+        /* Bar chart */
+        '<g transform="translate(12,44)">' +
+          '<rect x="0" y="48" width="30" height="12" rx="2" fill="rgba(147,130,220,0.25)"/><text x="15" y="46" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="5" font-family="system-ui">\u20AC158.0K</text>' +
+          '<rect x="38" y="28" width="30" height="32" rx="2" fill="rgba(147,130,220,0.4)"/><text x="53" y="26" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="5" font-family="system-ui">\u20AC649.4K</text>' +
+          '<rect x="76" y="6" width="30" height="54" rx="2" fill="rgba(99,25,240,0.7)"/><text x="91" y="4" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="5" font-weight="600" font-family="system-ui">\u20AC1.2M</text>' +
+          '<rect x="114" y="46" width="30" height="14" rx="2" fill="rgba(147,130,220,0.2)"/><text x="129" y="44" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="5" font-family="system-ui">\u20AC132.7K</text>' +
+          '<text x="15" y="68" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="5" font-family="system-ui">00-06</text>' +
+          '<text x="53" y="68" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="5" font-family="system-ui">06-12</text>' +
+          '<text x="91" y="68" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="5" font-family="system-ui">12-18</text>' +
+          '<text x="129" y="68" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="5" font-family="system-ui">18-24</text>' +
+        '</g>' +
+      '</g>' +
 
-      '<div class="pbrd-ret-stack-grid pbrd-ret-reveal">' +
-        '<div class="pbrd-ret-stack-card">' + iconEcom + '<h4>E-Commerce</h4><p>WooCommerce, Magento, PrestaShop, nopCommerce. Pre-built plugins.</p></div>' +
-        '<div class="pbrd-ret-stack-card">' + iconERP + '<h4>ERP & Finance</h4><p>SAP, Oracle, Dynamics. Direct API for instant reconciliation.</p></div>' +
-        '<div class="pbrd-ret-stack-card">' + iconPOS + '<h4>POS Systems</h4><p>Any terminal, cloud or local. Latest-gen with OTA updates.</p></div>' +
-        '<div class="pbrd-ret-stack-card">' + iconAPI + '<h4>Custom API</h4><p>RESTful APIs, webhooks, SDK. Build anything, connect everything.</p></div>' +
+      /* Status Breakdown */
+      '<g transform="translate(24,184)">' +
+        '<text x="0" y="0" fill="#fff" font-size="10" font-weight="700" font-family="system-ui">Status Breakdown</text>' +
+        /* Stacked bar */
+        '<g transform="translate(0,12)">' +
+          '<rect x="0" y="0" width="172" height="10" rx="5" fill="rgba(255,255,255,0.04)"/>' +
+          '<rect x="0" y="0" width="140" height="10" rx="5" fill="#10b981"/>' +
+          '<rect x="140" y="0" width="18" height="10" fill="#ef4444"/>' +
+          '<rect x="158" y="0" width="14" height="10" rx="0 5 5 0" fill="#f59e0b"/>' +
+        '</g>' +
+        '<g transform="translate(0,32)">' +
+          '<circle cx="5" cy="5" r="4" fill="#10b981"/><text x="14" y="9" fill="rgba(255,255,255,0.5)" font-size="7" font-family="system-ui">Success</text>' +
+          '<text x="108" y="9" fill="#fff" font-size="8" font-weight="700" font-family="system-ui">11,832</text>' +
+          '<text x="148" y="9" fill="rgba(255,255,255,0.3)" font-size="7" font-family="system-ui">(92%)</text>' +
+        '</g>' +
+        '<g transform="translate(0,50)">' +
+          '<circle cx="5" cy="5" r="4" fill="#ef4444"/><text x="14" y="9" fill="rgba(255,255,255,0.5)" font-size="7" font-family="system-ui">Failed</text>' +
+          '<text x="108" y="9" fill="#fff" font-size="8" font-weight="700" font-family="system-ui">772</text>' +
+          '<text x="148" y="9" fill="rgba(255,255,255,0.3)" font-size="7" font-family="system-ui">(6%)</text>' +
+        '</g>' +
+        '<g transform="translate(0,68)">' +
+          '<circle cx="5" cy="5" r="4" fill="#f59e0b"/><text x="14" y="9" fill="rgba(255,255,255,0.5)" font-size="7" font-family="system-ui">Pending</text>' +
+          '<text x="108" y="9" fill="#fff" font-size="8" font-weight="700" font-family="system-ui">257</text>' +
+          '<text x="148" y="9" fill="rgba(255,255,255,0.3)" font-size="7" font-family="system-ui">(2%)</text>' +
+        '</g>' +
+      '</g>' +
+
+      /* Total Volume card */
+      '<g transform="translate(24,300)">' +
+        '<rect x="0" y="0" width="172" height="66" rx="10" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>' +
+        '<text x="12" y="18" fill="rgba(255,255,255,0.35)" font-size="7" font-family="system-ui">Total Volume</text>' +
+        '<text x="160" y="18" text-anchor="end" fill="#fff" font-size="10" font-weight="800" font-family="system-ui">\u20AC 2,282,684</text>' +
+        /* Payment method bar */
+        '<g transform="translate(12,28)">' +
+          '<rect x="0" y="0" width="148" height="8" rx="4" fill="rgba(255,255,255,0.04)"/>' +
+          '<rect x="0" y="0" width="52" height="8" rx="4" fill="#3b5bdb"/>' +
+          '<rect x="52" y="0" width="38" height="8" fill="#10b981"/>' +
+          '<rect x="90" y="0" width="24" height="8" fill="#f59e0b"/>' +
+          '<rect x="114" y="0" width="16" height="8" fill="#ef4444"/>' +
+          '<rect x="130" y="0" width="10" height="8" fill="#6366f1"/>' +
+          '<rect x="140" y="0" width="8" height="8" rx="0 4 4 0" fill="#a855f7"/>' +
+        '</g>' +
+        '<g transform="translate(12,44)">' +
+          '<circle cx="3" cy="3" r="2.5" fill="#3b5bdb"/><text x="9" y="6" fill="rgba(255,255,255,0.35)" font-size="5" font-family="system-ui">VISA</text>' +
+          '<circle cx="36" cy="3" r="2.5" fill="#10b981"/><text x="42" y="6" fill="rgba(255,255,255,0.35)" font-size="5" font-family="system-ui">MASTER</text>' +
+          '<circle cx="80" cy="3" r="2.5" fill="#f59e0b"/><text x="86" y="6" fill="rgba(255,255,255,0.35)" font-size="5" font-family="system-ui">MBWAY</text>' +
+        '</g>' +
+        '<g transform="translate(12,54)">' +
+          '<circle cx="3" cy="3" r="2.5" fill="#6366f1"/><text x="9" y="6" fill="rgba(255,255,255,0.35)" font-size="5" font-family="system-ui">KLARNA</text>' +
+          '<circle cx="48" cy="3" r="2.5" fill="#a855f7"/><text x="54" y="6" fill="rgba(255,255,255,0.35)" font-size="5" font-family="system-ui">PAYPAL</text>' +
+          '<text x="92" y="6" fill="rgba(255,255,255,0.25)" font-size="5" font-family="system-ui">+8 more</text>' +
+        '</g>' +
+      '</g>'
+    );
+
+    /* ── Phone 3: Transactions ── */
+    var phone3 = phoneFrame("pbrd-ret-bi-p3",
+      '<g transform="translate(24,56)">' +
+        '<text x="0" y="0" fill="#fff" font-size="14" font-weight="700" font-family="system-ui">Transactions</text>' +
+        /* Filter pills */
+        '<g transform="translate(0,14)">' +
+          '<rect x="0" y="0" width="36" height="14" rx="7" fill="#6319f0"/><text x="18" y="10" text-anchor="middle" fill="#fff" font-size="5.5" font-weight="600" font-family="system-ui">Today</text>' +
+          '<rect x="40" y="0" width="46" height="14" rx="7" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/><text x="63" y="10" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="5.5" font-family="system-ui">All Stores</text>' +
+          '<rect x="92" y="0" width="36" height="14" rx="7" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/><text x="110" y="10" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="5.5" font-family="system-ui">Filters</text>' +
+        '</g>' +
+      '</g>' +
+      /* Transaction rows */
+      '<g transform="translate(24,100)">' +
+        /* Row 1 */
+        '<circle cx="8" cy="8" r="7" fill="rgba(16,185,129,0.12)"/><path d="M5 8 L7 10 L11 6" stroke="#10b981" stroke-width="1" fill="none" stroke-linecap="round"/>' +
+        '<text x="22" y="6" fill="#fff" font-size="7" font-weight="600" font-family="system-ui">\u20AC 9.45</text>' +
+        '<text x="22" y="14" fill="rgba(255,255,255,0.3)" font-size="5.5" font-family="system-ui">NONE</text>' +
+        '<text x="156" y="10" text-anchor="end" fill="rgba(255,255,255,0.2)" font-size="5.5" font-family="system-ui">09:45</text>' +
+        '<line x1="0" y1="22" x2="168" y2="22" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>' +
+        /* Row 2 */
+        '<circle cx="8" cy="34" r="7" fill="rgba(16,185,129,0.12)"/><path d="M5 34 L7 36 L11 32" stroke="#10b981" stroke-width="1" fill="none" stroke-linecap="round"/>' +
+        '<text x="22" y="32" fill="#fff" font-size="7" font-weight="600" font-family="system-ui">\u20AC 41.21</text>' +
+        '<text x="22" y="40" fill="rgba(255,255,255,0.3)" font-size="5.5" font-family="system-ui">APPLE PAY</text>' +
+        '<text x="156" y="36" text-anchor="end" fill="rgba(255,255,255,0.2)" font-size="5.5" font-family="system-ui">09:41</text>' +
+        '<line x1="0" y1="48" x2="168" y2="48" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>' +
+        /* Row 3 */
+        '<circle cx="8" cy="60" r="7" fill="rgba(16,185,129,0.12)"/><path d="M5 60 L7 62 L11 58" stroke="#10b981" stroke-width="1" fill="none" stroke-linecap="round"/>' +
+        '<text x="22" y="58" fill="#fff" font-size="7" font-weight="600" font-family="system-ui">\u20AC 9.90</text>' +
+        '<text x="22" y="66" fill="rgba(255,255,255,0.3)" font-size="5.5" font-family="system-ui">VISA</text>' +
+        '<text x="156" y="62" text-anchor="end" fill="rgba(255,255,255,0.2)" font-size="5.5" font-family="system-ui">09:38</text>' +
+        '<line x1="0" y1="74" x2="168" y2="74" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>' +
+        /* Row 4 */
+        '<circle cx="8" cy="86" r="7" fill="rgba(245,158,11,0.12)"/><text x="8" y="90" text-anchor="middle" fill="#f59e0b" font-size="7" font-family="system-ui">\u2022</text>' +
+        '<text x="22" y="84" fill="#fff" font-size="7" font-weight="600" font-family="system-ui">\u20AC 16,306.68</text>' +
+        '<text x="22" y="92" fill="rgba(255,255,255,0.3)" font-size="5.5" font-family="system-ui">MULTIBANCO</text>' +
+        '<text x="156" y="88" text-anchor="end" fill="rgba(255,255,255,0.2)" font-size="5.5" font-family="system-ui">09:32</text>' +
+        '<line x1="0" y1="100" x2="168" y2="100" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>' +
+        /* Row 5 */
+        '<circle cx="8" cy="112" r="7" fill="rgba(16,185,129,0.12)"/><path d="M5 112 L7 114 L11 110" stroke="#10b981" stroke-width="1" fill="none" stroke-linecap="round"/>' +
+        '<text x="22" y="110" fill="#fff" font-size="7" font-weight="600" font-family="system-ui">\u20AC 87.50</text>' +
+        '<text x="22" y="118" fill="rgba(255,255,255,0.3)" font-size="5.5" font-family="system-ui">MASTERCARD</text>' +
+        '<text x="156" y="114" text-anchor="end" fill="rgba(255,255,255,0.2)" font-size="5.5" font-family="system-ui">09:28</text>' +
+        '<line x1="0" y1="126" x2="168" y2="126" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>' +
+        /* Row 6 */
+        '<circle cx="8" cy="138" r="7" fill="rgba(239,68,68,0.12)"/><text x="8" y="141" text-anchor="middle" fill="#ef4444" font-size="6" font-weight="700" font-family="system-ui">\u2715</text>' +
+        '<text x="22" y="136" fill="#fff" font-size="7" font-weight="600" font-family="system-ui">\u20AC 234.00</text>' +
+        '<text x="22" y="144" fill="rgba(255,255,255,0.3)" font-size="5.5" font-family="system-ui">VISA</text>' +
+        '<text x="156" y="140" text-anchor="end" fill="rgba(255,255,255,0.2)" font-size="5.5" font-family="system-ui">09:15</text>' +
+      '</g>' +
+
+      /* Transaction detail overlay — slides in */
+      '<g class="pbrd-ret-bi-detail">' +
+        '<rect x="14" y="120" width="192" height="300" rx="16" fill="#0e0e18" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>' +
+        '<rect x="14" y="120" width="192" height="80" rx="16" fill="#6319f0"/>' +
+        '<rect x="14" y="184" width="192" height="16" fill="#6319f0"/>' +
+        '<text x="110" y="152" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="7" font-family="system-ui">Transaction</text>' +
+        '<text x="110" y="180" text-anchor="middle" fill="#fff" font-size="24" font-weight="700" font-family="system-ui">\u20AC 47.94</text>' +
+        '<rect x="88" y="190" width="44" height="14" rx="7" fill="rgba(16,185,129,0.15)"/><text x="110" y="200" text-anchor="middle" fill="#10b981" font-size="6" font-weight="600" font-family="system-ui">CAPTURED</text>' +
+        '<text x="34" y="226" fill="rgba(255,255,255,0.3)" font-size="6" font-family="system-ui">Refund Transaction</text>' +
+        '<rect x="34" y="232" width="152" height="22" rx="6" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>' +
+        '<text x="34" y="262" fill="rgba(255,255,255,0.3)" font-size="6" font-family="system-ui">Payment Info</text>' +
+        '<text x="34" y="276" fill="rgba(255,255,255,0.5)" font-size="6.5" font-family="system-ui">VISA \u2022\u2022\u2022\u2022 4582 \u00b7 3DS Secured</text>' +
+      '</g>'
+    );
+
+    /* ── Context pills ── */
+    var pills =
+      '<div class="pbrd-ret-bi-pills pbrd-ret-reveal">' +
+        '<div class="pbrd-ret-bi-pill"><span class="pbrd-ret-bi-pill-icon">\uD83C\uDFE2</span>At the store</div>' +
+        '<div class="pbrd-ret-bi-pill"><span class="pbrd-ret-bi-pill-icon">\u2708\uFE0F</span>On holiday</div>' +
+        '<div class="pbrd-ret-bi-pill"><span class="pbrd-ret-bi-pill-icon">\uD83C\uDFE0</span>At home</div>' +
+        '<div class="pbrd-ret-bi-pill"><span class="pbrd-ret-bi-pill-icon">\uD83D\uDCF1</span>On the go</div>' +
       '</div>';
 
+    wrap.innerHTML =
+      '<div class="pbrd-ret-bi-header pbrd-ret-reveal">' +
+        '<div class="pbrd-ret-section-label">REAL-TIME INTELLIGENCE</div>' +
+        '<h2 class="pbrd-ret-bi-h2">Your entire business.<br>Always in your pocket.</h2>' +
+        '<p class="pbrd-ret-bi-sub">Revenue, transactions, refunds, status breakdowns, payment methods \u2014 every data point that matters, updating in real time. Whether you\u2019re behind the counter or on the other side of the world.</p>' +
+      '</div>' +
+      pills +
+      '<div class="pbrd-ret-bi-phones pbrd-ret-reveal">' +
+        phone1 + phone2 + phone3 +
+      '</div>' +
+      '<p class="pbrd-ret-bi-footer pbrd-ret-reveal">Not a single second of your business-critical data goes unseen.</p>';
+
     section.appendChild(wrap);
-
-    /* Animate Paybyrd bars */
-    new IntersectionObserver(function(entries) {
-      if (entries[0].isIntersecting) {
-        wrap.querySelectorAll(".pbrd-ret-stack-tl--us").forEach(function(bar) {
-          var w = bar.getAttribute("data-w");
-          setTimeout(function() { bar.style.width = w + "%"; }, 400);
-        });
-        this.disconnect();
-      }
-    }, { threshold: 0.2 }).observe(wrap);
-
-    observeReveal(".pbrd-ret-stack-wrap .pbrd-ret-reveal", 120);
+    observeReveal(".pbrd-ret-bi-wrap .pbrd-ret-reveal", 150);
   }
 
   /* ═══════════════════════════════════════════ */
