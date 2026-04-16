@@ -12208,25 +12208,63 @@ function pbrdReady() {
             '</div>' +
           '</div>' +
 
-          /* Card 2: Pay by Link */
+          /* Card 2: PayLink — animated multi-step flow */
           '<div class="pbrd-ret-sol-card pbrd-ret-reveal">' +
             '<div class="pbrd-ret-sol-card-viz">' +
               '<div class="pbrd-ret-sol-paylink">' +
-                '<div class="pbrd-ret-sol-paylink-head">Payment Link</div>' +
-                '<div class="pbrd-ret-sol-paylink-url">pay.paybyrd.com/r/<span class="pbrd-ret-sol-paylink-id">x7k29</span></div>' +
-                '<div class="pbrd-ret-sol-paylink-amount">\u20AC139.90</div>' +
-                '<div class="pbrd-ret-sol-paylink-desc">Nike Air Max 90 \u2014 Size 42</div>' +
-                '<div class="pbrd-ret-sol-paylink-methods">' +
-                  '<span>Visa</span><span>MC</span><span>Apple Pay</span><span>MB Way</span>' +
+                '<div class="pbrd-ret-sol-paylink-head">PayLink</div>' +
+
+                /* Step 1: Amount input (0-2.5s) */
+                '<div class="pbrd-ret-pl-step pbrd-ret-pl-s1">' +
+                  '<div class="pbrd-ret-sol-paylink-label">Amount</div>' +
+                  '<div class="pbrd-ret-sol-paylink-input">' +
+                    '<span class="pbrd-ret-pl-cursor"></span>' +
+                    '<span class="pbrd-ret-pl-typing" data-text="139.90">QAR </span>' +
+                  '</div>' +
+                  '<div class="pbrd-ret-sol-paylink-label" style="margin-top:8px">Description</div>' +
+                  '<div class="pbrd-ret-sol-paylink-input pbrd-ret-pl-desc-input">' +
+                    '<span class="pbrd-ret-pl-typing2" data-text="Nike Air Max 90">Nike Air Max 90</span>' +
+                  '</div>' +
                 '</div>' +
-                '<div class="pbrd-ret-sol-paylink-btn">Pay Now</div>' +
-                '<div class="pbrd-ret-sol-paylink-sent">' +
-                  '<span class="pbrd-ret-sol-paylink-check">\u2713</span> Sent via SMS' +
+
+                /* Step 2: Phone number (2.5-5s) */
+                '<div class="pbrd-ret-pl-step pbrd-ret-pl-s2">' +
+                  '<div class="pbrd-ret-sol-paylink-amount">QAR 139.90</div>' +
+                  '<div class="pbrd-ret-sol-paylink-desc">Nike Air Max 90</div>' +
+                  '<div class="pbrd-ret-sol-paylink-label" style="margin-top:10px">Send to</div>' +
+                  '<div class="pbrd-ret-sol-paylink-input pbrd-ret-pl-phone-input">' +
+                    '<span style="color:#999;margin-right:4px">\uD83C\uDDF6\uD83C\uDDE6 +974</span>' +
+                    '<span class="pbrd-ret-pl-typing3">5512 8834</span>' +
+                  '</div>' +
+                  '<div class="pbrd-ret-sol-paylink-methods">' +
+                    '<span>Visa</span><span>MC</span><span>Apple Pay</span>' +
+                  '</div>' +
                 '</div>' +
+
+                /* Step 3: Pay Now button press (5-6.5s) */
+                '<div class="pbrd-ret-pl-step pbrd-ret-pl-s3">' +
+                  '<div class="pbrd-ret-sol-paylink-amount">QAR 139.90</div>' +
+                  '<div class="pbrd-ret-sol-paylink-desc">Nike Air Max 90</div>' +
+                  '<div class="pbrd-ret-sol-paylink-phone-display">\uD83C\uDDF6\uD83C\uDDE6 +974 5512 8834</div>' +
+                  '<div class="pbrd-ret-sol-paylink-btn pbrd-ret-pl-btn-pulse">Send PayLink</div>' +
+                  '<div class="pbrd-ret-sol-paylink-sending">Sending\u2026</div>' +
+                '</div>' +
+
+                /* Step 4: Success (6.5-8s) */
+                '<div class="pbrd-ret-pl-step pbrd-ret-pl-s4">' +
+                  '<div class="pbrd-ret-pl-success-icon">\u2713</div>' +
+                  '<div class="pbrd-ret-pl-success-text">PayLink Sent!</div>' +
+                  '<div class="pbrd-ret-sol-paylink-phone-display">\uD83C\uDDF6\uD83C\uDDE6 +974 5512 8834</div>' +
+                  '<div class="pbrd-ret-sol-paylink-url">pay.paybyrd.com/r/<span class="pbrd-ret-sol-paylink-id">x7k29</span></div>' +
+                  '<div class="pbrd-ret-sol-paylink-sent">' +
+                    '<span class="pbrd-ret-sol-paylink-check">\u2713</span> Delivered via SMS' +
+                  '</div>' +
+                '</div>' +
+
               '</div>' +
             '</div>' +
             '<div class="pbrd-ret-sol-card-body">' +
-              '<div class="pbrd-ret-sol-tag">Pay by Link</div>' +
+              '<div class="pbrd-ret-sol-tag">PayLink</div>' +
               '<h3>Sell anywhere \u2014 no checkout required</h3>' +
               '<p>Generate a payment link in seconds. Share via SMS, WhatsApp, email, or social. Perfect for phone orders and remote sales.</p>' +
             '</div>' +
