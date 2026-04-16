@@ -272,11 +272,23 @@
         selectedProvider = provSelect.value;
         var comp = competitors[selectedProvider];
         var chNote = document.getElementById("pbrd-calc-ch-note");
-        if (!comp.cp && (channelMode === "both" || channelMode === "cp")) {
-          channelMode = "online";
-          wrap.querySelectorAll(".pbrd-calc-ch").forEach(function (b) { b.classList.remove("pbrd-calc-ch--active"); });
-          wrap.querySelector('[data-ch="online"]').classList.add("pbrd-calc-ch--active");
-          if (chNote) chNote.style.display = "none";
+        var cpBtn = wrap.querySelector('[data-ch="cp"]');
+        var bothBtn = wrap.querySelector('[data-ch="both"]');
+
+        if (!comp.cp) {
+          /* Competitor has no CP — disable CP/Both buttons, reset if needed */
+          if (cpBtn) { cpBtn.style.opacity = "0.35"; cpBtn.style.pointerEvents = "none"; }
+          if (bothBtn) { bothBtn.style.opacity = "0.35"; bothBtn.style.pointerEvents = "none"; }
+          if (channelMode === "both" || channelMode === "cp") {
+            channelMode = "online";
+            wrap.querySelectorAll(".pbrd-calc-ch").forEach(function (b) { b.classList.remove("pbrd-calc-ch--active"); });
+            wrap.querySelector('[data-ch="online"]').classList.add("pbrd-calc-ch--active");
+            if (chNote) chNote.style.display = "none";
+          }
+        } else {
+          /* Competitor has CP — re-enable buttons, preserve current channel mode */
+          if (cpBtn) { cpBtn.style.opacity = ""; cpBtn.style.pointerEvents = ""; }
+          if (bothBtn) { bothBtn.style.opacity = ""; bothBtn.style.pointerEvents = ""; }
         }
         updateResults();
       });
