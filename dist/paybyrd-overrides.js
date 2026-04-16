@@ -58,12 +58,12 @@ function pbrdReady() {
   /* ─── Card Present Payment Methods ─── */
   const cpMethods = [
     { name: "Visa", category: "cards", img: "visa.png", subRates: [
-      { label: "European Debit", fee: "0.50%" },
-      { label: "European Credit", fee: "0.60%" }
+      { label: "Domestic & European Debit", fee: "0.50%" },
+      { label: "Domestic & European Credit", fee: "0.60%" }
     ]},
     { name: "Mastercard", category: "cards", img: "mastercard.png", subRates: [
-      { label: "European Debit", fee: "0.50%" },
-      { label: "European Credit", fee: "0.60%" }
+      { label: "Domestic & European Debit", fee: "0.50%" },
+      { label: "Domestic & European Credit", fee: "0.60%" }
     ]},
     { name: "American Express", category: "cards", fee: "2.50%", img: "amex.png" },
     { name: "Discover", category: "cards", fee: "2.50%", img: "discover.png" },
