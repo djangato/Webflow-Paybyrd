@@ -1351,7 +1351,7 @@
     section.style.setProperty("margin", "0", "important");
     section.style.setProperty("background", "linear-gradient(135deg, #0a0a0f, #1a1020)", "important");
     var quoteWrap = section.closest(".quote_wrap");
-    if (quoteWrap) { quoteWrap.style.setProperty("padding", "0", "important"); quoteWrap.style.setProperty("margin", "0", "important"); }
+    if (quoteWrap) { quoteWrap.style.setProperty("padding", "0", "important"); quoteWrap.style.setProperty("margin", "0", "important"); quoteWrap.style.setProperty("display", "contents", "important"); }
 
     var wrap = document.createElement("div");
     wrap.className = "pbrd-ret-test-wrap";
