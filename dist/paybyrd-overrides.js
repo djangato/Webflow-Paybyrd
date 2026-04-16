@@ -12212,7 +12212,6 @@ function pbrdReady() {
           '<div class="pbrd-ret-sol-card pbrd-ret-reveal">' +
             '<div class="pbrd-ret-sol-card-viz">' +
               '<div class="pbrd-ret-sol-paylink">' +
-                '<div class="pbrd-ret-sol-paylink-head">PayLink</div>' +
 
                 /* Step 1: Amount input (0-2.5s) */
                 '<div class="pbrd-ret-pl-step pbrd-ret-pl-s1">' +
