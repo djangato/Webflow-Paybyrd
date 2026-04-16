@@ -284,6 +284,164 @@
   }
 
   /* ═══════════════════════════════════════════ */
+  /* 2b. SOLUTIONS — "More ways to get paid"     */
+  /* ═══════════════════════════════════════════ */
+
+  function buildSolutions() {
+    /* Insert after the pain points section */
+    var painSection = findSectionByHeading("retail moves fast");
+    if (!painSection) return;
+
+    var solSection = document.createElement("div");
+    solSection.className = "pbrd-ret-sol-section";
+
+    var CDN = "https://djangato.github.io/Webflow-Paybyrd/assets/";
+
+    solSection.innerHTML =
+      '<div class="pbrd-ret-sol-wrap">' +
+        '<div class="pbrd-ret-sol-header pbrd-ret-reveal">' +
+          '<h2 class="pbrd-ret-sol-h2">More ways to sell.<br>More ways to grow.</h2>' +
+          '<p class="pbrd-ret-sol-sub">Accept payments everywhere your customers are \u2014 in-store, online, on the go, or over the phone. One platform powers them all.</p>' +
+        '</div>' +
+
+        '<div class="pbrd-ret-sol-grid">' +
+
+          /* Card 1: In-Store POS — retail terminals image */
+          '<div class="pbrd-ret-sol-card pbrd-ret-sol-card--wide pbrd-ret-reveal">' +
+            '<div class="pbrd-ret-sol-card-img">' +
+              '<img src="' + CDN + 'retail/retail-terminals.jpg" alt="Paybyrd POS terminals" loading="lazy">' +
+            '</div>' +
+            '<div class="pbrd-ret-sol-card-body">' +
+              '<div class="pbrd-ret-sol-tag">In-Store POS</div>' +
+              '<h3>Accept every card, every wallet, every time</h3>' +
+              '<p>Latest-gen terminals with contactless, chip, and mobile payments. Over-the-air updates. PCI compliant out of the box.</p>' +
+            '</div>' +
+          '</div>' +
+
+          /* Card 2: Pay by Link */
+          '<div class="pbrd-ret-sol-card pbrd-ret-reveal">' +
+            '<div class="pbrd-ret-sol-card-viz">' +
+              '<div class="pbrd-ret-sol-paylink">' +
+                '<div class="pbrd-ret-sol-paylink-head">Payment Link</div>' +
+                '<div class="pbrd-ret-sol-paylink-url">pay.paybyrd.com/r/<span class="pbrd-ret-sol-paylink-id">x7k29</span></div>' +
+                '<div class="pbrd-ret-sol-paylink-amount">\u20AC139.90</div>' +
+                '<div class="pbrd-ret-sol-paylink-desc">Nike Air Max 90 \u2014 Size 42</div>' +
+                '<div class="pbrd-ret-sol-paylink-methods">' +
+                  '<span>Visa</span><span>MC</span><span>Apple Pay</span><span>MB Way</span>' +
+                '</div>' +
+                '<div class="pbrd-ret-sol-paylink-btn">Pay Now</div>' +
+                '<div class="pbrd-ret-sol-paylink-sent">' +
+                  '<span class="pbrd-ret-sol-paylink-check">\u2713</span> Sent via SMS' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+            '<div class="pbrd-ret-sol-card-body">' +
+              '<div class="pbrd-ret-sol-tag">Pay by Link</div>' +
+              '<h3>Sell anywhere \u2014 no checkout required</h3>' +
+              '<p>Generate a payment link in seconds. Share via SMS, WhatsApp, email, or social. Perfect for phone orders and remote sales.</p>' +
+            '</div>' +
+          '</div>' +
+
+          /* Card 3: Tap on Phone */
+          '<div class="pbrd-ret-sol-card pbrd-ret-reveal">' +
+            '<div class="pbrd-ret-sol-card-viz">' +
+              '<div class="pbrd-ret-sol-tap">' +
+                '<div class="pbrd-ret-sol-phone">' +
+                  '<div class="pbrd-ret-sol-phone-screen">' +
+                    '<div class="pbrd-ret-sol-phone-amount">\u20AC24.90</div>' +
+                    '<div class="pbrd-ret-sol-phone-ready">Ready for payment</div>' +
+                    '<div class="pbrd-ret-sol-phone-waves">' +
+                      '<div class="pbrd-ret-sol-wave"></div>' +
+                      '<div class="pbrd-ret-sol-wave" style="animation-delay:0.4s"></div>' +
+                      '<div class="pbrd-ret-sol-wave" style="animation-delay:0.8s"></div>' +
+                    '</div>' +
+                    '<div class="pbrd-ret-sol-phone-nfc">Tap card here</div>' +
+                  '</div>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+            '<div class="pbrd-ret-sol-card-body">' +
+              '<div class="pbrd-ret-sol-tag">Tap on Phone</div>' +
+              '<h3>Turn any phone into a terminal</h3>' +
+              '<p>Accept contactless payments with just a smartphone. No hardware needed. Perfect for pop-ups, markets, and delivery.</p>' +
+            '</div>' +
+          '</div>' +
+
+          /* Card 4: Real-time Dashboard */
+          '<div class="pbrd-ret-sol-card pbrd-ret-reveal">' +
+            '<div class="pbrd-ret-sol-card-viz">' +
+              '<div class="pbrd-ret-sol-dash">' +
+                '<div class="pbrd-ret-sol-dash-row"><span class="pbrd-ret-sol-dash-label">Today\u2019s revenue</span><span class="pbrd-ret-sol-dash-val" id="pbrd-ret-sol-rev">\u20AC0</span></div>' +
+                '<div class="pbrd-ret-sol-dash-row"><span class="pbrd-ret-sol-dash-label">Transactions</span><span class="pbrd-ret-sol-dash-val" id="pbrd-ret-sol-txns">0</span></div>' +
+                '<div class="pbrd-ret-sol-dash-row"><span class="pbrd-ret-sol-dash-label">Avg. ticket</span><span class="pbrd-ret-sol-dash-val">\u20AC47.80</span></div>' +
+                '<div class="pbrd-ret-sol-dash-bar">' +
+                  '<div class="pbrd-ret-sol-dash-seg" style="flex:62;background:rgba(99,25,240,0.6)"><span>POS 62%</span></div>' +
+                  '<div class="pbrd-ret-sol-dash-seg" style="flex:28;background:rgba(99,25,240,0.35)"><span>Web 28%</span></div>' +
+                  '<div class="pbrd-ret-sol-dash-seg" style="flex:10;background:rgba(99,25,240,0.15)"><span>Mobile</span></div>' +
+                '</div>' +
+                '<div class="pbrd-ret-sol-dash-live"><span class="pbrd-ret-txn-dot"></span>Updating in real time</div>' +
+              '</div>' +
+            '</div>' +
+            '<div class="pbrd-ret-sol-card-body">' +
+              '<div class="pbrd-ret-sol-tag">Live Dashboard</div>' +
+              '<h3>Every store. Every channel. One screen.</h3>' +
+              '<p>See revenue, transactions, and channel mix across all locations in real time. AI-powered insights included.</p>' +
+            '</div>' +
+          '</div>' +
+
+          /* Card 5: Omnichannel */
+          '<div class="pbrd-ret-sol-card pbrd-ret-reveal">' +
+            '<div class="pbrd-ret-sol-card-viz">' +
+              '<div class="pbrd-ret-sol-omni">' +
+                '<svg viewBox="0 0 200 100" fill="none" style="width:100%;height:auto">' +
+                  '<circle cx="100" cy="50" r="22" fill="rgba(99,25,240,0.08)" stroke="rgba(99,25,240,0.3)" stroke-width="1.5"/>' +
+                  '<text x="100" y="48" text-anchor="middle" fill="#6319f0" font-size="6" font-weight="700" font-family="system-ui">PAYBYRD</text>' +
+                  '<text x="100" y="57" text-anchor="middle" fill="rgba(99,25,240,0.5)" font-size="4" font-family="system-ui">Unified</text>' +
+                  '<text x="30" y="25" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="5" font-weight="600" font-family="system-ui">POS</text>' +
+                  '<text x="170" y="25" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="5" font-weight="600" font-family="system-ui">Online</text>' +
+                  '<text x="30" y="82" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="5" font-weight="600" font-family="system-ui">Mobile</text>' +
+                  '<text x="170" y="82" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="5" font-weight="600" font-family="system-ui">Kiosk</text>' +
+                  '<path d="M78,40 L38,28" stroke="rgba(99,25,240,0.2)" stroke-width="1" stroke-dasharray="3 2"><animate attributeName="stroke-dashoffset" from="10" to="0" dur="1.5s" repeatCount="indefinite"/></path>' +
+                  '<path d="M122,40 L162,28" stroke="rgba(99,25,240,0.2)" stroke-width="1" stroke-dasharray="3 2"><animate attributeName="stroke-dashoffset" from="10" to="0" dur="1.8s" repeatCount="indefinite"/></path>' +
+                  '<path d="M78,60 L38,75" stroke="rgba(99,25,240,0.2)" stroke-width="1" stroke-dasharray="3 2"><animate attributeName="stroke-dashoffset" from="10" to="0" dur="2s" repeatCount="indefinite"/></path>' +
+                  '<path d="M122,60 L162,75" stroke="rgba(99,25,240,0.2)" stroke-width="1" stroke-dasharray="3 2"><animate attributeName="stroke-dashoffset" from="10" to="0" dur="1.7s" repeatCount="indefinite"/></path>' +
+                '</svg>' +
+              '</div>' +
+            '</div>' +
+            '<div class="pbrd-ret-sol-card-body">' +
+              '<div class="pbrd-ret-sol-tag">Omnichannel</div>' +
+              '<h3>One customer. One view. Every channel.</h3>' +
+              '<p>Unified commerce means your POS, e-commerce, mobile, and kiosk all share one payment engine, one reconciliation, one dashboard.</p>' +
+            '</div>' +
+          '</div>' +
+
+        '</div>' +
+      '</div>';
+
+    painSection.parentNode.insertBefore(solSection, painSection.nextSibling);
+
+    /* Animate dashboard counters */
+    var revEl = document.getElementById("pbrd-ret-sol-rev");
+    var txnEl = document.getElementById("pbrd-ret-sol-txns");
+    if (revEl && txnEl) {
+      var rev = 8420, txn = 176;
+      new IntersectionObserver(function(entries) {
+        if (entries[0].isIntersecting) {
+          setInterval(function() {
+            rev += Math.floor(Math.random() * 80) + 20;
+            txn += Math.floor(Math.random() * 3) + 1;
+            revEl.textContent = "\u20AC" + rev.toLocaleString();
+            txnEl.textContent = txn.toLocaleString();
+          }, 2000);
+          this.disconnect();
+        }
+      }, { threshold: 0.2 }).observe(solSection);
+    }
+
+    observeReveal(".pbrd-ret-sol-section .pbrd-ret-reveal", 120);
+  }
+
+  /* ═══════════════════════════════════════════ */
   /* 3. FEATURES — 4 Cards with Live Viz         */
   /* ═══════════════════════════════════════════ */
 
@@ -1001,6 +1159,7 @@
   function init() {
     enhanceHero();
     enhancePainPoints();
+    buildSolutions();
     enhanceFeatures();
     enhanceDataSection();
     enhanceIntegrations();
