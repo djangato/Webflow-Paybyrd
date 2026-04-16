@@ -12847,7 +12847,11 @@ a.glowing_button_link .glowing_button_text {
 .pbrd-hosp-ticker-strip {
   overflow: hidden;
   padding: 14px 0;
-  position: relative;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100vw !important;
+  z-index: 3;
   border-top: 1px solid rgba(212,165,116,0.15);
   border-bottom: 1px solid rgba(212,165,116,0.15);
   background: rgba(212,165,116,0.03);
