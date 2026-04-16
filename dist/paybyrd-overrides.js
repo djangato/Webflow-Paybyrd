@@ -3687,7 +3687,7 @@ function pbrdReady() {
               '<div class="pbrd-oc-price-row"><span>Setup fee</span><span class="pbrd-oc-price-zero">\u20AC0</span></div>' +
               '<div class="pbrd-oc-price-row"><span>Monthly fee</span><span class="pbrd-oc-price-zero">\u20AC0</span></div>' +
               '<div class="pbrd-oc-price-row"><span>Lock-in</span><span class="pbrd-oc-price-zero">None</span></div>' +
-              '<div class="pbrd-oc-price-row pbrd-oc-price-highlight"><span>Transaction</span><span>From 1.5% + \u20AC0.15</span></div>' +
+              '<div class="pbrd-oc-price-row pbrd-oc-price-highlight"><span>Transaction</span><span>From 1.25% + \u20AC0.08</span></div>' +
             '</div>' +
           '</div>' +
         '</div>' +
@@ -3751,7 +3751,7 @@ function pbrdReady() {
           '</div>' +
         '</div>' +
 
-        /* Card 7: POS Terminals */
+        /* Card 7: POS Terminals — lineup images, no pricing */
         '<div class="pbrd-oc-feature-card">' +
           '<div class="pbrd-oc-feature-label">Terminals</div>' +
           '<h3>Enterprise-grade POS.<br>Your software built in.</h3>' +
@@ -3759,19 +3759,16 @@ function pbrdReady() {
           '<div class="pbrd-oc-feature-viz">' +
             '<div class="pbrd-oc-terminal-grid">' +
               '<div class="pbrd-oc-terminal-item">' +
-                '<img src="https://djangato.github.io/Webflow-Paybyrd/assets/product/A920_mockup.png" alt="Rawhide">' +
+                '<img src="https://djangato.github.io/Webflow-Paybyrd/assets/pos/lineup-rawhide.png" alt="Rawhide">' +
                 '<div class="pbrd-oc-terminal-name">Rawhide</div>' +
-                '<div class="pbrd-oc-terminal-price">From \u20AC19.90/mo</div>' +
               '</div>' +
               '<div class="pbrd-oc-terminal-item">' +
-                '<img src="https://djangato.github.io/Webflow-Paybyrd/assets/product/A77.png" alt="Renegade">' +
+                '<img src="https://djangato.github.io/Webflow-Paybyrd/assets/pos/lineup-renegade.png" alt="Renegade">' +
                 '<div class="pbrd-oc-terminal-name">Renegade</div>' +
-                '<div class="pbrd-oc-terminal-price">From \u20AC14.90/mo</div>' +
               '</div>' +
               '<div class="pbrd-oc-terminal-item">' +
-                '<img src="https://djangato.github.io/Webflow-Paybyrd/assets/product/IM30.png" alt="Eagle">' +
-                '<div class="pbrd-oc-terminal-name">Eagle</div>' +
-                '<div class="pbrd-oc-terminal-price">From \u20AC24.90/mo</div>' +
+                '<img src="https://djangato.github.io/Webflow-Paybyrd/assets/pos/lineup-maverick.png" alt="Maverick">' +
+                '<div class="pbrd-oc-terminal-name">Maverick</div>' +
               '</div>' +
             '</div>' +
           '</div>' +
