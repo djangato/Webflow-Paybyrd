@@ -13240,17 +13240,29 @@ function pbrdReady() {
     section.style.setProperty("padding", "40px 0", "important");
     section.style.setProperty("margin", "0", "important");
     section.style.setProperty("background", "linear-gradient(135deg, #0a0a0f, #1a1020)", "important");
-    var quoteWrap = section.closest(".quote_wrap");
-    if (quoteWrap) {
-      quoteWrap.style.setProperty("padding", "0", "important");
-      quoteWrap.style.setProperty("margin", "0", "important");
-      quoteWrap.style.setProperty("display", "contents", "important");
-      /* Kill whitespace gap between quote_wrap and next section */
-      var nextSib = quoteWrap.nextElementSibling;
-      if (nextSib) { nextSib.style.setProperty("margin-top", "0", "important"); nextSib.style.setProperty("padding-top", "0", "important"); }
-    }
-    /* Also collapse spacers inside testimonial section */
+    /* Collapse spacers inside testimonial section */
     section.querySelectorAll(".u-section-spacer").forEach(function(sp) { sp.style.setProperty("display", "none", "important"); });
+
+    /* Nuke the quote_wrap and all siblings between it and the FAQ */
+    var outerEl = section.closest(".quote_wrap") || section;
+    outerEl.style.setProperty("padding", "0", "important");
+    outerEl.style.setProperty("margin", "0", "important");
+    /* Walk every sibling after outerEl until we hit the FAQ section — hide them */
+    var sib = outerEl.nextElementSibling;
+    while (sib) {
+      var txt = (sib.textContent || "").toLowerCase();
+      if (txt.indexOf("frequently asked") !== -1) break;
+      sib.style.setProperty("display", "none", "important");
+      sib = sib.nextElementSibling;
+    }
+    /* Also check parent — if outerEl is inside another wrapper, collapse that too */
+    if (outerEl.parentElement && outerEl.parentElement !== document.body) {
+      var parent = outerEl.parentElement;
+      if (parent.tagName !== "MAIN" && !parent.classList.contains("page-wrapper")) {
+        parent.style.setProperty("padding", "0", "important");
+        parent.style.setProperty("margin", "0", "important");
+      }
+    }
 
     var wrap = document.createElement("div");
     wrap.className = "pbrd-ret-test-wrap";
