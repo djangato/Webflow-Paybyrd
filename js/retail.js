@@ -1351,7 +1351,16 @@
     section.style.setProperty("margin", "0", "important");
     section.style.setProperty("background", "linear-gradient(135deg, #0a0a0f, #1a1020)", "important");
     var quoteWrap = section.closest(".quote_wrap");
-    if (quoteWrap) { quoteWrap.style.setProperty("padding", "0", "important"); quoteWrap.style.setProperty("margin", "0", "important"); quoteWrap.style.setProperty("display", "contents", "important"); }
+    if (quoteWrap) {
+      quoteWrap.style.setProperty("padding", "0", "important");
+      quoteWrap.style.setProperty("margin", "0", "important");
+      quoteWrap.style.setProperty("display", "contents", "important");
+      /* Kill whitespace gap between quote_wrap and next section */
+      var nextSib = quoteWrap.nextElementSibling;
+      if (nextSib) { nextSib.style.setProperty("margin-top", "0", "important"); nextSib.style.setProperty("padding-top", "0", "important"); }
+    }
+    /* Also collapse spacers inside testimonial section */
+    section.querySelectorAll(".u-section-spacer").forEach(function(sp) { sp.style.setProperty("display", "none", "important"); });
 
     var wrap = document.createElement("div");
     wrap.className = "pbrd-ret-test-wrap";
