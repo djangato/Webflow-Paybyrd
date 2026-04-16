@@ -204,20 +204,28 @@
 .pbrd-ret-bi-pill:hover { background:rgba(99,25,240,0.1); border-color:rgba(99,25,240,0.3); color:#fff; }
 .pbrd-ret-bi-pill-icon { font-size:1rem; }
 
-/* Phone trio */
-.pbrd-ret-bi-phones { display:flex; justify-content:center; align-items:flex-end; gap:24px; padding:0 20px; }
-.pbrd-ret-bi-phone { flex:0 0 auto; }
-#pbrd-ret-bi-p1 { width:190px; transform:rotate(-4deg); }
-#pbrd-ret-bi-p2 { width:210px; z-index:2; }
-#pbrd-ret-bi-p3 { width:190px; transform:rotate(4deg); }
+/* Phone carousel */
+.pbrd-ret-bi-phones { position:relative; height:420px; max-width:240px; margin:0 auto; }
+.pbrd-ret-bi-phone { position:absolute; top:0; left:50%; width:220px; transform:translateX(-50%) scale(0.85); opacity:0; transition:all 0.8s cubic-bezier(.4,0,.2,1); pointer-events:none; }
+.pbrd-ret-bi-phone--active { opacity:1; transform:translateX(-50%) scale(1); z-index:3; pointer-events:auto; }
+.pbrd-ret-bi-phone--prev { opacity:0; transform:translateX(-120%) scale(0.75) rotate(-6deg); }
+.pbrd-ret-bi-phone--next { opacity:0; transform:translateX(20%) scale(0.75) rotate(6deg); }
 .pbrd-ret-bi-device { width:100%; height:auto; filter:drop-shadow(0 20px 40px rgba(0,0,0,0.5)); }
 
 /* Transaction detail slide-in */
 .pbrd-ret-bi-detail { opacity:0; transform:translateY(20px); animation:pbrd-ret-bi-slide 6s ease-in-out infinite; }
 @keyframes pbrd-ret-bi-slide { 0%,40%{opacity:0;transform:translateY(20px)} 50%,85%{opacity:1;transform:translateY(0)} 95%,100%{opacity:0;transform:translateY(20px)} }
 
+/* Carousel dots */
+.pbrd-ret-bi-dots { display:flex; justify-content:center; gap:8px; margin-top:16px; }
+.pbrd-ret-bi-dot { width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.15); cursor:pointer; transition:all 0.3s; }
+.pbrd-ret-bi-dot--active { background:#6319f0; transform:scale(1.3); }
+
+/* Carousel labels */
+.pbrd-ret-bi-label { text-align:center; margin-top:12px; font-size:0.8125rem; font-weight:600; color:rgba(255,255,255,0.5); min-height:20px; transition:opacity 0.4s; }
+
 /* Footer text */
-.pbrd-ret-bi-footer { text-align:center; color:rgba(255,255,255,0.25); font-size:0.875rem; margin-top:40px; font-style:italic; }
+.pbrd-ret-bi-footer { text-align:center; color:rgba(255,255,255,0.25); font-size:0.875rem; margin-top:32px; font-style:italic; }
 
 /* ═══ TOUCHPOINTS (Tab Explorer) — White bg ═══ */
 .pbrd-ret-gj-wrap { max-width:1100px; margin:0 auto; padding:0 24px; }
@@ -350,8 +358,8 @@
   .pbrd-ret-pain-dashboard { grid-template-columns:1fr; }
   .pbrd-ret-pain-stats { grid-template-columns:1fr; }
   .pbrd-ret-feat-grid { grid-template-columns:1fr; }
-  .pbrd-ret-bi-phones { flex-direction:column; align-items:center; gap:32px; }
-  #pbrd-ret-bi-p1, #pbrd-ret-bi-p2, #pbrd-ret-bi-p3 { width:200px; transform:none; }
+  .pbrd-ret-bi-phones { height:380px; max-width:200px; }
+  .pbrd-ret-bi-phone { width:190px; }
   .pbrd-ret-bi-pills { gap:6px; }
   .pbrd-ret-bi-pill { font-size:0.75rem; padding:6px 12px; }
   .pbrd-ret-gj-interactive { flex-direction:column; }

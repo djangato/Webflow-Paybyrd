@@ -12908,9 +12908,55 @@ function pbrdReady() {
       '<div class="pbrd-ret-bi-phones pbrd-ret-reveal">' +
         phone1 + phone2 + phone3 +
       '</div>' +
+      '<div class="pbrd-ret-bi-dots pbrd-ret-reveal">' +
+        '<div class="pbrd-ret-bi-dot pbrd-ret-bi-dot--active" data-idx="0"></div>' +
+        '<div class="pbrd-ret-bi-dot" data-idx="1"></div>' +
+        '<div class="pbrd-ret-bi-dot" data-idx="2"></div>' +
+      '</div>' +
+      '<div class="pbrd-ret-bi-label pbrd-ret-reveal">Dashboard Overview</div>' +
       '<p class="pbrd-ret-bi-footer pbrd-ret-reveal">Not a single second of your business-critical data goes unseen.</p>';
 
     section.appendChild(wrap);
+
+    /* ── Carousel rotation ── */
+    var phones = wrap.querySelectorAll(".pbrd-ret-bi-phone");
+    var dots = wrap.querySelectorAll(".pbrd-ret-bi-dot");
+    var label = wrap.querySelector(".pbrd-ret-bi-label");
+    var labels = ["Dashboard Overview", "Revenue Analytics", "Live Transactions"];
+    var current = 0;
+
+    function showPhone(idx) {
+      phones.forEach(function(p, i) {
+        p.classList.remove("pbrd-ret-bi-phone--active", "pbrd-ret-bi-phone--prev", "pbrd-ret-bi-phone--next");
+        if (i === idx) p.classList.add("pbrd-ret-bi-phone--active");
+        else if (i === (idx - 1 + 3) % 3) p.classList.add("pbrd-ret-bi-phone--prev");
+        else p.classList.add("pbrd-ret-bi-phone--next");
+      });
+      dots.forEach(function(d, i) {
+        d.classList.toggle("pbrd-ret-bi-dot--active", i === idx);
+      });
+      if (label) label.textContent = labels[idx];
+      current = idx;
+    }
+
+    showPhone(0);
+
+    /* Auto-rotate every 4s */
+    var autoTimer = setInterval(function() {
+      showPhone((current + 1) % 3);
+    }, 4000);
+
+    /* Click dots to jump */
+    dots.forEach(function(dot) {
+      dot.addEventListener("click", function() {
+        clearInterval(autoTimer);
+        showPhone(parseInt(dot.getAttribute("data-idx")));
+        autoTimer = setInterval(function() {
+          showPhone((current + 1) % 3);
+        }, 4000);
+      });
+    });
+
     observeReveal(".pbrd-ret-bi-wrap .pbrd-ret-reveal", 150);
   }
 
