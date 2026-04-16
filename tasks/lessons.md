@@ -24,15 +24,18 @@
 - **Build command reference:**
   ```bash
   # CSS — all source files in order
-  cat css/layout.css css/typography.css css/colors.css css/components.css css/homepage.css css/hero-enhancements.css css/cta-color.css css/bento.css css/showcase-visuals.css css/testimonials.css css/customers.css css/mid-cta.css css/book-demo.css css/book-demo-visuals.css css/omnichannel.css css/ecommerce.css > dist/paybyrd-overrides.css
+  cat css/layout.css css/typography.css css/colors.css css/components.css css/homepage.css css/hero-enhancements.css css/cta-color.css css/bento.css css/showcase-visuals.css css/testimonials.css css/customers.css css/mid-cta.css css/book-demo.css css/book-demo-visuals.css css/omnichannel.css css/ecommerce.css css/payment-methods.css css/pos.css css/airlines.css css/hospitality.css css/retail.css > dist/paybyrd-overrides.css
 
   # JS — all source files in order
-  cat js/utils.js js/interactions.js js/cta-rewrites.js js/mid-cta.js js/hero-enhancements.js js/book-demo.js js/bento.js js/homepage.js js/testimonials.js js/customers.js js/book-demo-visuals.js js/omnichannel.js js/ecommerce.js > dist/paybyrd-overrides.js
+  cat js/utils.js js/interactions.js js/cta-rewrites.js js/mid-cta.js js/hero-enhancements.js js/book-demo.js js/bento.js js/calculator.js js/homepage.js js/testimonials.js js/customers.js js/book-demo-visuals.js js/omnichannel.js js/ecommerce.js js/pos.js js/payment-methods.js js/airlines.js js/hospitality.js js/retail.js > dist/paybyrd-overrides.js
   ```
 - **When adding a new source file**, add it to BOTH the source directory AND the build command above. (2026-04-12)
 
 ## Webflow Padding
 - **Setting padding on `<section>` alone is NOT enough.** Webflow's inner wrapper divs (containers, w-containers, generic divs) carry their own padding/margin. When reducing section spacing, ALWAYS also collapse the Webflow children's padding/margin with `Array.prototype.forEach.call(section.children, ...)` setting `padding-top/bottom` and `margin-top/bottom` to `0 !important`. Exclude our own injected elements by checking classList. This has been a recurring issue across multiple sections. (2026-04-14)
+
+- **Hero sections: NEVER hide ALL section children.** Webflow's `u-section-spacer` divs provide the top padding that clears the fixed navbar. Hiding them with `display:none` pushes the hero content under the nav. Instead, only hide the content wrapper (`u-content-wrapper` / `u-container`) and images — keep spacers intact. Use `heading.closest(".u-content-wrapper")` to target just the text/image content. This is how hospitality and airlines hero sections work. (2026-04-15)
+- **CSS shorthand `padding` overrides inline `padding-top`.** If a CSS class has `padding: 0 24px`, it resets all four sides — so `el.style.setProperty("padding-top", "140px")` gets overridden. Either use longhand properties in CSS or put the full padding in the shorthand. (2026-04-15)
 
 ## Theme Awareness
 - **Check the parent section's background before styling injected content.** The e-commerce page uses a dark theme — writing light-theme colors (#111 text, #F9FAFB backgrounds, #E5E7EB borders) makes content invisible. Always match the existing section's color scheme. (2026-04-12)
