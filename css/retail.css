@@ -27,8 +27,8 @@
 .pbrd-ret-txn-status { color:#10b981; font-weight:700; font-size:0.75rem; }
 
 /* Ticker strip */
-.pbrd-ret-ticker { grid-column:1/-1; display:flex; justify-content:center; align-items:center; gap:16px; padding:16px 0 0; margin-top:20px; border-top:1px solid rgba(255,255,255,0.04); font-size:0.75rem; color:rgba(255,255,255,0.35); font-weight:500; flex-wrap:wrap; }
-.pbrd-ret-ticker-sep { color:rgba(255,255,255,0.1); }
+.pbrd-ret-ticker { grid-column:1/-1; display:flex; justify-content:center; align-items:center; gap:18px; padding:18px 0 0; margin-top:20px; border-top:1px solid rgba(255,255,255,0.08); font-size:0.9rem; color:#fff; font-weight:600; flex-wrap:wrap; }
+.pbrd-ret-ticker-sep { color:rgba(255,255,255,0.25); }
 
 /* ═══ PAIN POINTS — Heatmap ═══ */
 .pbrd-ret-pain-wrap { width:100vw; position:relative; left:50%; transform:translateX(-50%); padding:0 40px; box-sizing:border-box; }
