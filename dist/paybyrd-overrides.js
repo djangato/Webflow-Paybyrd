@@ -12232,22 +12232,68 @@ function pbrdReady() {
             '</div>' +
           '</div>' +
 
-          /* Card 3: Tap on Phone */
+          /* Card 3: Tap on Phone — reuse POS page iPhone visualization */
           '<div class="pbrd-ret-sol-card pbrd-ret-reveal">' +
-            '<div class="pbrd-ret-sol-card-viz">' +
-              '<div class="pbrd-ret-sol-tap">' +
-                '<div class="pbrd-ret-sol-phone">' +
-                  '<div class="pbrd-ret-sol-phone-screen">' +
-                    '<div class="pbrd-ret-sol-phone-amount">\u20AC24.90</div>' +
-                    '<div class="pbrd-ret-sol-phone-ready">Ready for payment</div>' +
-                    '<div class="pbrd-ret-sol-phone-waves">' +
-                      '<div class="pbrd-ret-sol-wave"></div>' +
-                      '<div class="pbrd-ret-sol-wave" style="animation-delay:0.4s"></div>' +
-                      '<div class="pbrd-ret-sol-wave" style="animation-delay:0.8s"></div>' +
-                    '</div>' +
-                    '<div class="pbrd-ret-sol-phone-nfc">Tap card here</div>' +
-                  '</div>' +
-                '</div>' +
+            '<div class="pbrd-ret-sol-card-viz" style="background:#f0edf5;position:relative;overflow:hidden">' +
+              '<div style="position:relative;width:120px;margin:0 auto">' +
+                '<svg viewBox="0 0 220 440" fill="none" xmlns="http://www.w3.org/2000/svg" class="pbrd-pos-tap-device pbrd-pos-tap-iphone" style="width:100%;height:auto;filter:drop-shadow(0 8px 24px rgba(0,0,0,0.15))">' +
+                  '<rect x="8" y="8" width="204" height="424" rx="36" fill="#1a1a1e"/>' +
+                  '<rect x="8" y="8" width="204" height="424" rx="36" fill="none" stroke="rgba(180,180,190,0.3)" stroke-width="1.5"/>' +
+                  '<rect x="14" y="14" width="192" height="412" rx="32" fill="#000"/>' +
+                  '<rect x="78" y="22" width="64" height="22" rx="11" fill="#1a1a1e"/>' +
+                  '<circle cx="124" cy="33" r="4" fill="#0a0a0e" stroke="rgba(40,40,50,0.5)" stroke-width="0.5"/>' +
+                  '<g class="pbrd-pos-txn-step pbrd-pos-txn-s1">' +
+                    '<text x="110" y="110" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="10" font-family="system-ui" font-weight="500">CHARGE AMOUNT</text>' +
+                    '<text x="110" y="175" text-anchor="middle" fill="#fff" font-size="42" font-weight="200" font-family="system-ui" letter-spacing="-1">\u20AC24.90</text>' +
+                    '<g transform="translate(50,220)" fill="rgba(255,255,255,0.06)">' +
+                      '<rect width="44" height="36" rx="6"/><rect x="50" width="44" height="36" rx="6"/><rect x="100" width="44" height="36" rx="6"/>' +
+                      '<rect y="42" width="44" height="36" rx="6"/><rect x="50" y="42" width="44" height="36" rx="6"/><rect x="100" y="42" width="44" height="36" rx="6"/>' +
+                    '</g>' +
+                    '<rect x="40" y="340" width="140" height="40" rx="20" fill="#6319f0"/>' +
+                    '<text x="110" y="365" text-anchor="middle" fill="#fff" font-size="13" font-weight="600" font-family="system-ui">Charge</text>' +
+                  '</g>' +
+                  '<g class="pbrd-pos-txn-step pbrd-pos-txn-s2">' +
+                    '<text x="110" y="100" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="10" font-family="system-ui" font-weight="500">TOTAL</text>' +
+                    '<text x="110" y="130" text-anchor="middle" fill="#fff" font-size="32" font-weight="300" font-family="system-ui">\u20AC24.90</text>' +
+                    '<g transform="translate(82,170)">' +
+                      '<path d="M28 8 C34 14, 34 30, 28 36" stroke="rgba(99,25,240,0.7)" stroke-width="2" fill="none" class="pbrd-pos-nfc-wave1"/>' +
+                      '<path d="M28 0 C40 12, 40 32, 28 44" stroke="rgba(99,25,240,0.5)" stroke-width="2" fill="none" class="pbrd-pos-nfc-wave2"/>' +
+                      '<path d="M28 -6 C46 10, 46 36, 28 50" stroke="rgba(99,25,240,0.3)" stroke-width="2" fill="none" class="pbrd-pos-nfc-wave3"/>' +
+                    '</g>' +
+                    '<text x="110" y="260" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="11" font-family="system-ui">Hold card near iPhone</text>' +
+                    '<rect x="60" y="390" width="100" height="4" rx="2" fill="rgba(255,255,255,0.15)"/>' +
+                  '</g>' +
+                  '<g class="pbrd-pos-txn-step pbrd-pos-txn-s3">' +
+                    '<text x="110" y="140" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="11" font-family="system-ui">Processing\u2026</text>' +
+                    '<circle cx="110" cy="200" r="24" fill="none" stroke="rgba(99,25,240,0.15)" stroke-width="2.5"/>' +
+                    '<path d="M110 176 A24 24 0 0 1 134 200" stroke="#6319f0" stroke-width="2.5" fill="none" stroke-linecap="round" class="pbrd-pos-spinner"/>' +
+                    '<text x="110" y="260" text-anchor="middle" fill="#fff" font-size="28" font-weight="300" font-family="system-ui">\u20AC24.90</text>' +
+                  '</g>' +
+                  '<g class="pbrd-pos-txn-step pbrd-pos-txn-s4">' +
+                    '<circle cx="110" cy="175" r="40" fill="rgba(99,25,240,0.08)" stroke="#6319f0" stroke-width="2" class="pbrd-pos-success-ring"/>' +
+                    '<path d="M94 175 L106 187 L128 163" stroke="#6319f0" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" class="pbrd-pos-checkmark"/>' +
+                    '<text x="110" y="250" text-anchor="middle" fill="#fff" font-size="28" font-weight="300" font-family="system-ui">\u20AC24.90</text>' +
+                    '<text x="110" y="278" text-anchor="middle" fill="rgba(99,25,240,0.8)" font-size="12" font-weight="600" font-family="system-ui">Approved</text>' +
+                    '<rect x="40" y="340" width="140" height="40" rx="20" fill="rgba(99,25,240,0.1)" stroke="rgba(99,25,240,0.3)" stroke-width="1"/>' +
+                    '<text x="110" y="365" text-anchor="middle" fill="#6319f0" font-size="13" font-weight="600" font-family="system-ui">New Sale</text>' +
+                  '</g>' +
+                  '<text x="30" y="47" fill="rgba(255,255,255,0.4)" font-size="9" font-weight="600" font-family="system-ui">9:41</text>' +
+                  '<g transform="translate(170,38)">' +
+                    '<rect x="0" y="0" width="16" height="8" rx="2" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.8"/>' +
+                    '<rect x="1.5" y="1.5" width="10" height="5" rx="1" fill="rgba(255,255,255,0.3)"/>' +
+                    '<rect x="16.5" y="2" width="1.5" height="4" rx="0.5" fill="rgba(255,255,255,0.2)"/>' +
+                  '</g>' +
+                '</svg>' +
+                '<svg viewBox="0 0 130 82" class="pbrd-pos-tap-card" style="position:absolute;bottom:15%;right:-30px;width:80px" xmlns="http://www.w3.org/2000/svg">' +
+                  '<rect width="130" height="82" rx="10" fill="#e8e4ef" stroke="rgba(0,0,0,0.06)" stroke-width="0.5"/>' +
+                  '<rect x="14" y="22" width="24" height="18" rx="3" fill="rgba(200,180,130,0.4)" stroke="rgba(180,160,100,0.5)" stroke-width="0.6"/>' +
+                  '<line x1="14" y1="28" x2="38" y2="28" stroke="rgba(180,160,100,0.3)" stroke-width="0.4"/>' +
+                  '<line x1="14" y1="34" x2="38" y2="34" stroke="rgba(180,160,100,0.3)" stroke-width="0.4"/>' +
+                  '<line x1="26" y1="22" x2="26" y2="40" stroke="rgba(180,160,100,0.3)" stroke-width="0.4"/>' +
+                  '<g transform="translate(96,20)"><path d="M8 4 C11 7, 11 13, 8 16" stroke="rgba(0,0,0,0.15)" stroke-width="1" fill="none"/><path d="M8 1 C14 6, 14 14, 8 19" stroke="rgba(0,0,0,0.1)" stroke-width="1" fill="none"/></g>' +
+                  '<g fill="rgba(0,0,0,0.12)"><circle cx="14" cy="56" r="2"/><circle cx="20" cy="56" r="2"/><circle cx="26" cy="56" r="2"/><circle cx="32" cy="56" r="2"/><text x="42" y="59" font-size="9" font-family="system-ui" fill="rgba(0,0,0,0.2)">4821</text></g>' +
+                  '<text x="14" y="74" font-size="7" font-family="system-ui" fill="rgba(0,0,0,0.15)" letter-spacing="0.5">J. ANDERSON</text>' +
+                '</svg>' +
               '</div>' +
             '</div>' +
             '<div class="pbrd-ret-sol-card-body">' +
