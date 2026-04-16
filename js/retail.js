@@ -1523,7 +1523,7 @@
 
     var faqs = [
       { cat: "pos", q: "Can I use the same platform for in-store and online?", a: "Yes. Paybyrd unifies POS, e-commerce, mobile, and kiosk payments into a single platform with one dashboard, one reconciliation engine, and one set of reports." },
-      { cat: "security", q: "How does Paybyrd prevent retail fraud?", a: "AI-powered screening, 3DS authentication, velocity checks, and a shared merchant fraud database. Result: ~16.8% reduction in chargebacks." },
+      { cat: "security", q: "How does Paybyrd prevent retail fraud?", a: "AI-powered screening, 3DS authentication, velocity checks, and a shared merchant fraud database. Plus cross-channel refunds: an online payment can be refunded at the POS, and a POS payment refunded online \u2014 no cash refunds ever needed. This eliminates one of the biggest retail fraud angles. Result: ~16.8% reduction in chargebacks." },
       { cat: "ecommerce", q: "Which e-commerce platforms do you integrate with?", a: "WooCommerce, Magento, PrestaShop, and nopCommerce with pre-built plugins. Custom integrations via RESTful API and webhooks." },
       { cat: "integration", q: "How long does integration take?", a: "Pre-built connectors: days. Custom API integration: 1\u20132 weeks. Multi-store rollout: days, not months." },
       { cat: "pos", q: "What POS terminals do you support?", a: "PAX A920 Pro (Rawhide), PAX A77 (Renegade), Sunmi V3 (Maverick), and Sunmi T3 Pro (Titan). All run Paybyrd software natively with over-the-air updates." },
