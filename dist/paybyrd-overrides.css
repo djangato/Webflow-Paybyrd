@@ -13657,16 +13657,48 @@ a.glowing_button_link .glowing_button_text {
 .pbrd-ret-ai-recon-amt { margin-left:auto; color:rgba(255,255,255,0.8); font-weight:600; font-variant-numeric:tabular-nums; }
 .pbrd-ret-ai-recon-tag { font-size:0.5625rem; padding:2px 6px; border-radius:4px; background:rgba(16,185,129,0.1); color:#10b981; font-weight:600; margin-left:8px; }
 
-/* ═══ TESTIMONIAL ═══ */
-.pbrd-ret-test-wrap { max-width:700px; margin:0 auto; padding:0 24px; text-align:center; }
-.pbrd-ret-test-bigquote { font-size:clamp(1rem,2vw,1.25rem); font-weight:400; color:rgba(255,255,255,0.75); line-height:1.7; font-style:italic; margin:24px 0 28px; }
-.pbrd-ret-test-author { font-size:0.875rem; font-weight:700; color:#fff; }
-.pbrd-ret-test-title { font-size:0.75rem; color:rgba(255,255,255,0.35); margin-top:4px; margin-bottom:32px; }
-.pbrd-ret-test-results { display:flex; justify-content:center; align-items:center; gap:20px; flex-wrap:wrap; margin-bottom:12px; }
-.pbrd-ret-test-result { text-align:center; }
-.pbrd-ret-test-rv { font-size:1.5rem; font-weight:700; color:#6319f0; display:block; font-variant-numeric:tabular-nums; }
-.pbrd-ret-test-rl { font-size:0.625rem; color:rgba(255,255,255,0.3); text-transform:uppercase; letter-spacing:0.06em; }
-.pbrd-ret-test-divider { width:1px; height:36px; background:rgba(255,255,255,0.08); }
+/* ═══ TESTIMONIALS — IG-style video cards ═══ */
+.pbrd-ret-testimonials { background:#0a0a0f; padding:80px 24px; }
+.pbrd-ret-testimonials-inner { max-width:1100px; margin:0 auto; }
+.pbrd-ret-testimonials-header { margin-bottom:48px; }
+.pbrd-ret-testimonials-header h2 { font-size:clamp(1.75rem,3.5vw,2.5rem); font-weight:600; letter-spacing:-0.025em; color:#fff; margin:0 0 8px; }
+.pbrd-ret-testimonials-header p { font-size:1rem; color:rgba(255,255,255,0.35); margin:0; }
+
+.pbrd-ret-tv-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.pbrd-ret-tvcard { border-radius:8px; overflow:hidden; cursor:pointer; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); transition:all 0.3s; }
+.pbrd-ret-tvcard:hover { border-color:rgba(99,25,240,0.3); box-shadow:0 8px 32px rgba(0,0,0,0.3); transform:translateY(-3px); }
+
+.pbrd-ret-tv-ig-header { display:flex; align-items:center; gap:10px; padding:12px 14px; }
+.pbrd-ret-tv-logo { height:32px; width:auto; max-width:80px; object-fit:contain; border-radius:6px; }
+.pbrd-ret-tv-ig-meta { flex:1; min-width:0; }
+.pbrd-ret-tv-name { font-size:0.8125rem; font-weight:700; color:#fff; }
+.pbrd-ret-tv-title { font-size:0.6875rem; color:rgba(255,255,255,0.35); }
+
+.pbrd-ret-tv-visual { position:relative; width:100%; aspect-ratio:1/1; overflow:hidden; background:#111; }
+.pbrd-ret-tv-vid { width:100%; height:100%; object-fit:cover; }
+
+.pbrd-ret-tv-caption { padding:14px; }
+.pbrd-ret-tv-quote { font-size:0.8125rem; color:rgba(255,255,255,0.6); line-height:1.5; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+.pbrd-ret-tv-quote strong { color:#fff; font-weight:700; }
+.pbrd-ret-tv-tags { font-size:0.6875rem; color:rgba(99,25,240,0.6); margin-top:8px; }
+
+/* Modal */
+.pbrd-ret-tv-modal { position:fixed; inset:0; z-index:9999; display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity 0.3s; }
+.pbrd-ret-tv-modal.active { opacity:1; pointer-events:auto; }
+.pbrd-ret-tv-modal-backdrop { position:absolute; inset:0; background:rgba(0,0,0,0.85); }
+.pbrd-ret-tv-modal-content { position:relative; display:flex; max-width:900px; max-height:85vh; width:90vw; border-radius:12px; overflow:hidden; background:#111; }
+.pbrd-ret-tv-modal-close { position:absolute; top:12px; right:12px; z-index:10; width:36px; height:36px; border-radius:50%; background:rgba(0,0,0,0.6); color:#fff; font-size:16px; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:background 0.2s; }
+.pbrd-ret-tv-modal-close:hover { background:rgba(255,255,255,0.15); }
+.pbrd-ret-tv-modal-video { flex:1; min-width:0; background:#000; display:flex; align-items:center; }
+.pbrd-ret-tv-modal-video video { width:100%; max-height:85vh; object-fit:contain; }
+.pbrd-ret-tv-modal-card { width:320px; flex-shrink:0; padding:24px; display:flex; flex-direction:column; gap:16px; border-left:1px solid rgba(255,255,255,0.06); }
+.pbrd-ret-tv-modal-header { display:flex; align-items:center; gap:10px; }
+.pbrd-ret-tv-modal-avatar { height:36px; width:auto; max-width:80px; object-fit:contain; border-radius:8px; }
+.pbrd-ret-tv-modal-name { font-size:0.875rem; font-weight:700; color:#fff; }
+.pbrd-ret-tv-modal-title { font-size:0.75rem; color:rgba(255,255,255,0.35); }
+.pbrd-ret-tv-modal-quote { font-size:0.875rem; color:rgba(255,255,255,0.6); line-height:1.6; font-style:italic; }
+.pbrd-ret-tv-modal-tags { font-size:0.75rem; color:rgba(99,25,240,0.5); }
+.pbrd-ret-tv-modal-powered { margin-top:auto; font-size:0.6875rem; color:rgba(255,255,255,0.2); }
 
 /* ═══ FAQ ═══ */
 .pbrd-ret-faq-wrap { max-width:800px; margin:0 auto; padding:0 24px; }
@@ -13703,6 +13735,9 @@ a.glowing_button_link .glowing_button_text {
   .pbrd-ret-gj-stage { min-height:380px; }
   .pbrd-ret-gj-stats { grid-template-columns:repeat(2,1fr); }
   .pbrd-ret-ai-grid { grid-template-columns:1fr; }
+  .pbrd-ret-tv-grid { grid-template-columns:1fr; }
+  .pbrd-ret-tv-modal-content { flex-direction:column; }
+  .pbrd-ret-tv-modal-card { width:100%; border-left:none; border-top:1px solid rgba(255,255,255,0.06); }
   .pbrd-ret-test-results { gap:16px; }
   .pbrd-ret-test-divider { display:none; }
 }

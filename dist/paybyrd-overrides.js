@@ -13232,22 +13232,84 @@ function pbrdReady() {
   function enhanceTestimonial() {
     var heading = findHeading("customers stopped waiting");
     if (!heading) heading = findHeading("staff stopped apologizing");
+    if (!heading) heading = findHeading("checkouts into a brand");
     if (!heading) return;
-    var section = heading.closest("section") || heading.closest("[class*='section']") || heading.parentElement;
-    if (!section) return;
+    var oldSection = heading.closest("section") || heading.closest("[class*='section']") || heading.parentElement;
+    if (!oldSection) return;
 
-    Array.prototype.forEach.call(section.children, function(c) { c.style.setProperty("display", "none", "important"); });
-    section.style.setProperty("padding", "40px 0", "important");
-    section.style.setProperty("margin", "0", "important");
-    section.style.setProperty("background", "linear-gradient(135deg, #0a0a0f, #1a1020)", "important");
-    /* Collapse spacers inside testimonial section */
-    section.querySelectorAll(".u-section-spacer").forEach(function(sp) { sp.style.setProperty("display", "none", "important"); });
+    var CUST = "https://djangato.github.io/Webflow-Paybyrd/assets/customers/";
+    var LOGOS = "https://cdn.prod.website-files.com/69d9242bbde99c4b80e41aeb/";
 
-    /* Nuke the quote_wrap and all siblings between it and the FAQ */
-    var outerEl = section.closest(".quote_wrap") || section;
-    outerEl.style.setProperty("padding", "0", "important");
-    outerEl.style.setProperty("margin", "0", "important");
-    /* Walk every sibling after outerEl until we hit the FAQ section — hide them */
+    var testimonials = [
+      {
+        name: "Wi\u00F1k",
+        person: "Retail Team",
+        title: "Fashion & Lifestyle",
+        quote: "Paybyrd gave us a single platform for all our stores and online. Checkout lines disappeared, and the real-time data lets us make smarter decisions every day.",
+        tags: "#retail #fashion #unifiedcommerce #POS",
+        logo: LOGOS + "69d9242bbde99c4b80e41dd1_WINK.svg",
+        video: CUST + "wink.mp4",
+        poster: CUST + "wink-poster.jpg"
+      },
+      {
+        name: "SkinBoutique",
+        person: "Management",
+        title: "Beauty & Skincare",
+        quote: "From our first store to multiple locations, Paybyrd scaled with us. The dashboard intelligence \u2014 peak hours, customer insights, payment methods \u2014 changed how we run the business.",
+        tags: "#beauty #skincare #multibrand #analytics",
+        logo: CUST + "skinboutique-logo.png",
+        video: CUST + "skinboutique.mp4",
+        poster: CUST + "skinboutique-poster.jpg"
+      },
+      {
+        name: "Andr\u00E9 \u00D3ticas",
+        person: "Operations",
+        title: "Optical Retail",
+        quote: "With 50+ stores, we needed a payment partner that just works \u2014 fast terminals, reliable uptime, and one reconciliation for everything. Paybyrd delivered from day one.",
+        tags: "#optical #multistore #POS #reconciliation",
+        logo: CUST + "andreoticas-logo.png",
+        video: CUST + "andreoticas.mp4",
+        poster: CUST + "andreoticas-poster.jpg"
+      }
+    ];
+
+    var cardsHTML = testimonials.map(function(t, idx) {
+      return '<div class="pbrd-ret-tvcard pbrd-ret-reveal" data-tv-idx="' + idx + '">' +
+        '<div class="pbrd-ret-tv-ig-header">' +
+          '<img src="' + t.logo + '" alt="' + t.name + '" class="pbrd-ret-tv-logo">' +
+          '<div class="pbrd-ret-tv-ig-meta">' +
+            '<div class="pbrd-ret-tv-name">' + t.name + '</div>' +
+            '<div class="pbrd-ret-tv-title">' + t.title + '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="pbrd-ret-tv-visual">' +
+          '<video class="pbrd-ret-tv-vid" loop playsinline muted preload="none" poster="' + t.poster + '">' +
+            '<source src="' + t.video + '" type="video/mp4">' +
+          '</video>' +
+        '</div>' +
+        '<div class="pbrd-ret-tv-caption">' +
+          '<div class="pbrd-ret-tv-quote"><strong>' + t.name.toLowerCase() + '</strong> \u201C' + t.quote + '\u201D</div>' +
+          '<div class="pbrd-ret-tv-tags">' + t.tags + '</div>' +
+        '</div>' +
+      '</div>';
+    }).join("");
+
+    /* Create new section, insert before FAQ, hide old */
+    var newSection = document.createElement("section");
+    newSection.className = "pbrd-ret-testimonials";
+    newSection.innerHTML =
+      '<div class="pbrd-ret-testimonials-inner">' +
+        '<div class="pbrd-ret-testimonials-header pbrd-ret-reveal">' +
+          '<h2>What retailers say.</h2>' +
+          '<p>Don\u2019t take our word for it.</p>' +
+        '</div>' +
+        '<div class="pbrd-ret-tv-grid">' + cardsHTML + '</div>' +
+      '</div>';
+
+    /* Hide old testimonial + quote_wrap */
+    var outerEl = oldSection.closest(".quote_wrap") || oldSection;
+    outerEl.style.setProperty("display", "none", "important");
+    /* Also hide siblings between old testimonial and FAQ */
     var sib = outerEl.nextElementSibling;
     while (sib) {
       var txt = (sib.textContent || "").toLowerCase();
@@ -13255,47 +13317,82 @@ function pbrdReady() {
       sib.style.setProperty("display", "none", "important");
       sib = sib.nextElementSibling;
     }
-    /* Also check parent — if outerEl is inside another wrapper, collapse that too */
-    if (outerEl.parentElement && outerEl.parentElement !== document.body) {
-      var parent = outerEl.parentElement;
-      if (parent.tagName !== "MAIN" && !parent.classList.contains("page-wrapper")) {
-        parent.style.setProperty("padding", "0", "important");
-        parent.style.setProperty("margin", "0", "important");
-      }
+
+    /* Insert new section before FAQ */
+    var faq = findSectionByHeading("frequently asked");
+    if (faq) {
+      faq.insertAdjacentElement("beforebegin", newSection);
+    } else {
+      outerEl.insertAdjacentElement("afterend", newSection);
     }
 
-    var wrap = document.createElement("div");
-    wrap.className = "pbrd-ret-test-wrap";
-    wrap.innerHTML =
-      '<span class="pbrd-ret-section-label">CASE STUDY</span>' +
-      '<p class="pbrd-ret-test-bigquote">Paybyrd turned our payments from a headache into a growth driver. Fraud dropped, approval rates went up, and checkout feels invisible to our customers. Best of all, it\u2019s embedded directly into the e-commerce systems we already use \u2014 no retraining, no disruption, just smarter payments from day one.</p>' +
-      '<div class="pbrd-ret-test-author">Sergio Figueiredo</div>' +
-      '<div class="pbrd-ret-test-title">Prozis</div>' +
-      '<div class="pbrd-ret-test-results" id="pbrd-ret-test-results">' +
-        '<div class="pbrd-ret-test-result"><div class="pbrd-ret-test-rv" data-target="4" data-suffix="-7%" data-countup="1">0%</div><div class="pbrd-ret-test-rl">Higher Auth Rates</div></div>' +
-        '<div class="pbrd-ret-test-divider"></div>' +
-        '<div class="pbrd-ret-test-result"><div class="pbrd-ret-test-rv" data-target="16.8" data-suffix="%" data-countup="1">0%</div><div class="pbrd-ret-test-rl">Fewer Chargebacks</div></div>' +
-        '<div class="pbrd-ret-test-divider"></div>' +
-        '<div class="pbrd-ret-test-result"><div class="pbrd-ret-test-rv" data-text="Real-time" data-countup="0">Real-time</div><div class="pbrd-ret-test-rl">Reconciliation</div></div>' +
-        '<div class="pbrd-ret-test-divider"></div>' +
-        '<div class="pbrd-ret-test-result"><div class="pbrd-ret-test-rv" data-target="192" data-suffix="+" data-countup="1">0+</div><div class="pbrd-ret-test-rl">Currencies</div></div>' +
-      '</div>' +
-      '<a href="/book-demo" class="pbrd-ret-cta-primary" style="margin-top:32px;display:inline-flex">Get results like Prozis \u2192</a>';
+    observeReveal(".pbrd-ret-testimonials .pbrd-ret-reveal", 150);
 
-    section.appendChild(wrap);
-
-    new IntersectionObserver(function(entries) {
-      if (entries[0].isIntersecting) {
-        wrap.querySelectorAll(".pbrd-ret-test-rv").forEach(function(rv) {
-          if (rv.getAttribute("data-countup") === "1") {
-            var t = parseFloat(rv.getAttribute("data-target"));
-            var s = rv.getAttribute("data-suffix");
-            countUp(rv, t, s);
-          }
+    /* Autoplay videos when visible */
+    var vids = newSection.querySelectorAll(".pbrd-ret-tv-vid");
+    if ("IntersectionObserver" in window) {
+      var vidObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) { e.target.play().catch(function(){}); }
+          else { e.target.pause(); }
         });
-        this.disconnect();
-      }
-    }, { threshold: 0.3 }).observe(wrap);
+      }, { threshold: 0.3 });
+      vids.forEach(function(v) { vidObs.observe(v); });
+    }
+
+    /* ── Lightbox modal ── */
+    var modal = document.createElement("div");
+    modal.className = "pbrd-ret-tv-modal";
+    modal.innerHTML =
+      '<div class="pbrd-ret-tv-modal-backdrop"></div>' +
+      '<div class="pbrd-ret-tv-modal-content">' +
+        '<div class="pbrd-ret-tv-modal-close">\u2715</div>' +
+        '<div class="pbrd-ret-tv-modal-video">' +
+          '<video id="pbrd-ret-modal-vid" playsinline loop preload="none"></video>' +
+        '</div>' +
+        '<div class="pbrd-ret-tv-modal-card">' +
+          '<div class="pbrd-ret-tv-modal-header">' +
+            '<img id="pbrd-ret-modal-logo" alt="" class="pbrd-ret-tv-modal-avatar">' +
+            '<div>' +
+              '<div id="pbrd-ret-modal-name" class="pbrd-ret-tv-modal-name"></div>' +
+              '<div id="pbrd-ret-modal-title" class="pbrd-ret-tv-modal-title"></div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="pbrd-ret-tv-modal-quote" id="pbrd-ret-modal-quote"></div>' +
+          '<div class="pbrd-ret-tv-modal-tags" id="pbrd-ret-modal-tags"></div>' +
+          '<div class="pbrd-ret-tv-modal-powered">Powered by <strong>Paybyrd</strong></div>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(modal);
+
+    var modalVid = document.getElementById("pbrd-ret-modal-vid");
+
+    newSection.querySelectorAll(".pbrd-ret-tvcard").forEach(function(card) {
+      card.addEventListener("click", function() {
+        var idx = parseInt(card.getAttribute("data-tv-idx"));
+        var t = testimonials[idx];
+        modalVid.src = t.video;
+        modalVid.poster = t.poster;
+        modalVid.play().catch(function(){});
+        document.getElementById("pbrd-ret-modal-logo").src = t.logo;
+        document.getElementById("pbrd-ret-modal-name").textContent = t.name;
+        document.getElementById("pbrd-ret-modal-title").textContent = t.person + " \u2022 " + t.title;
+        document.getElementById("pbrd-ret-modal-quote").textContent = "\u201C" + t.quote + "\u201D";
+        document.getElementById("pbrd-ret-modal-tags").textContent = t.tags;
+        modal.classList.add("active");
+        document.body.style.overflow = "hidden";
+      });
+    });
+
+    function closeModal() {
+      modal.classList.remove("active");
+      modalVid.pause();
+      modalVid.src = "";
+      document.body.style.overflow = "";
+    }
+    modal.querySelector(".pbrd-ret-tv-modal-backdrop").addEventListener("click", closeModal);
+    modal.querySelector(".pbrd-ret-tv-modal-close").addEventListener("click", closeModal);
+    document.addEventListener("keydown", function(e) { if (e.key === "Escape") closeModal(); });
   }
 
   /* ═══════════════════════════════════════════ */
