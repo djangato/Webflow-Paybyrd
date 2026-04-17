@@ -1,6 +1,17 @@
 /* Paybyrd Webflow Overrides — Layout */
 /* Grid, flexbox, spacing, responsive overrides */
 
+/* ── Hide "Get in Touch"/"Contact" button in navbar ── */
+.nav_component a[href="/contact"],
+.nav_component a[href^="/contact"] {
+  display: none !important;
+}
+/* Also hide any wrapper div that holds ONLY the contact button */
+.nav_component .btn:has(> a[href="/contact"]),
+.nav_component .btn:has(> a[href^="/contact"]) {
+  display: none !important;
+}
+
 /* ── Navbar Sign Up button ── */
 .pbrd-nav-signup {
   display: inline-flex;
