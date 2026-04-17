@@ -1,14 +1,16 @@
 /* Paybyrd Webflow Overrides — Layout */
 /* Grid, flexbox, spacing, responsive overrides */
 
-/* ── Hide "Get in Touch"/"Contact" button in navbar ── */
-.nav_component a[href="/contact"],
-.nav_component a[href^="/contact"] {
+/* ── Hide "Get in Touch" / "Contact us" button in navbar ──
+   The button uses a clickable_wrap overlay pattern with a /book-demo link.
+   We hide the visible button parent that contains this wrapper. */
+.nav_component .clickable_wrap:has(a[href="/book-demo"]),
+.nav_component .clickable_wrap:has(a[href^="/book-demo"]) {
   display: none !important;
 }
-/* Also hide any wrapper div that holds ONLY the contact button */
-.nav_component .btn:has(> a[href="/contact"]),
-.nav_component .btn:has(> a[href^="/contact"]) {
+/* Hide the parent button element (the visible one) */
+.nav_component *:has(> .clickable_wrap > a[href="/book-demo"]),
+.nav_component *:has(> .clickable_wrap > a[href^="/book-demo"]) {
   display: none !important;
 }
 

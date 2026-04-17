@@ -20,30 +20,30 @@ function pbrdReady() {
     if (!nav) nav = document;
 
     var loginBtn = null;
-    var contactBtns = [];
     nav.querySelectorAll("a").forEach(function(a) {
       var href = (a.getAttribute("href") || "").toLowerCase();
       var txt = (a.textContent || "").trim().toLowerCase();
       if (!loginBtn && (href.indexOf("backoffice.paybyrd") !== -1 || href.indexOf("beta.paybyrd") !== -1 || txt === "login" || txt === "log in")) {
         loginBtn = a;
       }
-      if (href === "/contact" || href.indexOf("/contact") !== -1 || txt === "contact" || txt === "get in touch") {
-        contactBtns.push(a);
-      }
     });
 
-    /* Belt-and-suspenders: hide contact buttons + their closest btn wrapper div via JS too */
-    contactBtns.forEach(function(btn) {
-      btn.style.setProperty("display", "none", "important");
-      /* Walk up to find the .btn wrapper (not btn_txt which is the button itself) */
-      var parent = btn.parentElement;
-      while (parent && parent !== nav) {
-        if (parent.classList && (parent.classList.contains("btn") || parent.getAttribute("role") === "link")) {
-          parent.style.setProperty("display", "none", "important");
-          break;
-        }
-        parent = parent.parentElement;
-      }
+    /* Hide navbar "Get in Touch / Contact" button.
+       The button uses a clickable_wrap overlay pattern linking to /book-demo.
+       Walk up from the clickable_wrap to hide the visible button element. */
+    nav.querySelectorAll(".clickable_wrap").forEach(function(w) {
+      var inner = w.querySelector("a[href*='/book-demo'], a[href*='/contact']");
+      if (!inner) return;
+      /* Hide the wrapper and walk up one level to hide the visible button */
+      w.style.setProperty("display", "none", "important");
+      var parent = w.parentElement;
+      if (parent && parent !== nav) parent.style.setProperty("display", "none", "important");
+    });
+    /* Fallback: any direct contact link inside nav */
+    nav.querySelectorAll("a[href='/contact']").forEach(function(a) {
+      a.style.setProperty("display", "none", "important");
+      var p = a.parentElement;
+      if (p && p !== nav) p.style.setProperty("display", "none", "important");
     });
 
     if (!loginBtn) return;
