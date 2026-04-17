@@ -14,13 +14,15 @@ function pbrdReady() {
 (function() {
   "use strict";
   function addSignUp() {
-    /* Find the "Get in Touch" button in the nav */
+    /* Find "Log in" and "Get in Touch" in the nav */
+    var loginBtn = null;
     var gitBtn = null;
     document.querySelectorAll("a").forEach(function(a) {
       var txt = (a.textContent || "").trim().toLowerCase();
+      if (txt === "log in" && !loginBtn) loginBtn = a;
       if (txt === "get in touch" && !gitBtn) gitBtn = a;
     });
-    if (!gitBtn) return;
+    if (!loginBtn && !gitBtn) return;
 
     /* Don't add twice */
     if (document.getElementById("pbrd-nav-signup")) return;
@@ -33,8 +35,12 @@ function pbrdReady() {
     signUp.className = "pbrd-nav-signup";
     signUp.setAttribute("target", "_blank");
 
-    /* Insert after "Get in Touch" */
-    gitBtn.insertAdjacentElement("afterend", signUp);
+    /* Insert between Log in and Get in Touch */
+    if (loginBtn) {
+      loginBtn.insertAdjacentElement("afterend", signUp);
+    } else if (gitBtn) {
+      gitBtn.insertAdjacentElement("beforebegin", signUp);
+    }
   }
 
   if (document.readyState === "complete") {
