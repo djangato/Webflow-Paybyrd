@@ -28,22 +28,14 @@ function pbrdReady() {
       }
     });
 
-    /* Hide navbar "Get in Touch / Contact" button.
+    /* Hide navbar "Get in Touch" button.
        The button uses a clickable_wrap overlay pattern linking to /book-demo.
        Walk up from the clickable_wrap to hide the visible button element. */
     nav.querySelectorAll(".clickable_wrap").forEach(function(w) {
-      var inner = w.querySelector("a[href*='/book-demo'], a[href*='/contact']");
-      if (!inner) return;
-      /* Hide the wrapper and walk up one level to hide the visible button */
+      if (!w.querySelector("a[href*='/book-demo']")) return;
       w.style.setProperty("display", "none", "important");
       var parent = w.parentElement;
       if (parent && parent !== nav) parent.style.setProperty("display", "none", "important");
-    });
-    /* Fallback: any direct contact link inside nav */
-    nav.querySelectorAll("a[href='/contact']").forEach(function(a) {
-      a.style.setProperty("display", "none", "important");
-      var p = a.parentElement;
-      if (p && p !== nav) p.style.setProperty("display", "none", "important");
     });
 
     if (!loginBtn) return;
@@ -59,9 +51,8 @@ function pbrdReady() {
     signUp.className = "pbrd-nav-signup";
     signUp.setAttribute("target", "_blank");
 
-    /* Insert after the login wrapper (so it appears outside the login's wrapper div) */
-    var loginWrap = loginBtn.closest("[class*='btn']") || loginBtn;
-    loginWrap.insertAdjacentElement("afterend", signUp);
+    /* Insert after the login button */
+    loginBtn.insertAdjacentElement("afterend", signUp);
   }
 
   if (document.readyState === "complete") {
