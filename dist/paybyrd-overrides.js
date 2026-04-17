@@ -22,7 +22,11 @@ function pbrdReady() {
       if (txt === "log in" && !loginBtn) loginBtn = a;
       if (txt === "get in touch" && !gitBtn) gitBtn = a;
     });
-    if (!loginBtn && !gitBtn) return;
+
+    /* Hide "Get in Touch" */
+    if (gitBtn) gitBtn.style.setProperty("display", "none", "important");
+
+    if (!loginBtn) return;
 
     /* Don't add twice */
     if (document.getElementById("pbrd-nav-signup")) return;
@@ -35,12 +39,8 @@ function pbrdReady() {
     signUp.className = "pbrd-nav-signup";
     signUp.setAttribute("target", "_blank");
 
-    /* Insert between Log in and Get in Touch */
-    if (loginBtn) {
-      loginBtn.insertAdjacentElement("afterend", signUp);
-    } else if (gitBtn) {
-      gitBtn.insertAdjacentElement("beforebegin", signUp);
-    }
+    /* Insert after Log in */
+    loginBtn.insertAdjacentElement("afterend", signUp);
   }
 
   if (document.readyState === "complete") {
