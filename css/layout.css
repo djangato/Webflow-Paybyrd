@@ -1,2 +1,29 @@
 /* Paybyrd Webflow Overrides — Layout */
 /* Grid, flexbox, spacing, responsive overrides */
+
+/* ── Navbar Sign Up button ── */
+.pbrd-nav-signup {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 18px;
+  border-radius: 100px;
+  background: #6319f0;
+  color: #fff !important;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-decoration: none !important;
+  white-space: nowrap;
+  transition: all 0.25s ease;
+  margin-right: 8px;
+  font-family: inherit;
+  line-height: 1.4;
+}
+.pbrd-nav-signup:hover {
+  background: #7c3aed;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(99, 25, 240, 0.3);
+}
+
+@media (max-width: 768px) {
+  .pbrd-nav-signup { display: none; }
+}

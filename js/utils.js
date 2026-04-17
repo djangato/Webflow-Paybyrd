@@ -9,3 +9,37 @@
 function pbrdReady() {
   document.documentElement.classList.replace('pbrd-loading', 'pbrd-ready');
 }
+
+/* ── Navbar: inject Sign Up button on all pages ── */
+(function() {
+  "use strict";
+  function addSignUp() {
+    /* Find the "Get in Touch" button in the nav */
+    var gitBtn = null;
+    document.querySelectorAll("a").forEach(function(a) {
+      var txt = (a.textContent || "").trim().toLowerCase();
+      if (txt === "get in touch" && !gitBtn) gitBtn = a;
+    });
+    if (!gitBtn) return;
+
+    /* Don't add twice */
+    if (document.getElementById("pbrd-nav-signup")) return;
+
+    /* Create Sign Up button */
+    var signUp = document.createElement("a");
+    signUp.id = "pbrd-nav-signup";
+    signUp.href = "https://beta.paybyrd.com";
+    signUp.textContent = "Sign Up Free";
+    signUp.className = "pbrd-nav-signup";
+    signUp.setAttribute("target", "_blank");
+
+    /* Insert before "Get in Touch" */
+    gitBtn.parentElement.insertBefore(signUp, gitBtn);
+  }
+
+  if (document.readyState === "complete") {
+    addSignUp();
+  } else {
+    window.addEventListener("load", addSignUp);
+  }
+})();
