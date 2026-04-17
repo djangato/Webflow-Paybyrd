@@ -3508,20 +3508,20 @@ function pbrdReady() {
         '<p style="font-size:0.9375rem;color:rgba(255,255,255,0.4);max-width:480px;margin:0 auto;line-height:1.6">Every transaction across every channel feeds one intelligent dashboard. See what single-channel platforms can\u2019t.</p>' +
       '</div>' +
 
-      /* Row 1: Big metrics */
+      /* Row 1: Big metrics — animated counters */
       '<div class="pbrd-oc-dash-grid" style="grid-template-columns:1fr 1fr 1fr;margin-bottom:16px">' +
         '<div class="pbrd-oc-dash-card" style="text-align:center">' +
-          '<div class="pbrd-oc-dash-big" style="font-size:2.5rem;font-weight:700">\u20AC1.4M</div>' +
+          '<div class="pbrd-oc-dash-big pbrd-oc-countup" data-prefix="\u20AC" data-target="1400000" data-format="volume" style="font-size:2.5rem;font-weight:700">\u20AC0</div>' +
           '<div class="pbrd-oc-dash-sub">Total Volume Today</div>' +
           '<div style="margin-top:8px;font-size:0.625rem;color:rgba(120,255,180,0.7);font-weight:600">\u2191 18% vs. last month</div>' +
         '</div>' +
         '<div class="pbrd-oc-dash-card" style="text-align:center">' +
-          '<div class="pbrd-oc-dash-big" style="font-size:2.5rem;font-weight:700;color:rgba(120,180,255,0.9)">92.7%</div>' +
+          '<div class="pbrd-oc-dash-big pbrd-oc-countup" data-target="92.7" data-suffix="%" data-decimals="1" style="font-size:2.5rem;font-weight:700;color:rgba(120,180,255,0.9)">0%</div>' +
           '<div class="pbrd-oc-dash-sub">Approval Rate</div>' +
           '<div style="margin-top:8px;font-size:0.625rem;color:rgba(120,255,180,0.7);font-weight:600">\u2191 4.7% above industry avg</div>' +
         '</div>' +
         '<div class="pbrd-oc-dash-card" style="text-align:center">' +
-          '<div class="pbrd-oc-dash-big" style="font-size:2.5rem;font-weight:700">847</div>' +
+          '<div class="pbrd-oc-dash-big pbrd-oc-countup" data-target="847" style="font-size:2.5rem;font-weight:700">0</div>' +
           '<div class="pbrd-oc-dash-sub">Returning Customers</div>' +
           '<div style="margin-top:8px;font-size:0.625rem;color:rgba(120,255,180,0.7);font-weight:600">\u2191 12% identified this month</div>' +
         '</div>' +
@@ -3601,6 +3601,98 @@ function pbrdReady() {
           '<div style="font-size:0.6875rem;color:rgba(255,255,255,0.35)">Pre-built plug-ins \u2022 Same-day integration \u2022 Full API with webhooks and sandbox</div>' +
         '</div>' +
       '</div>';
+
+    /* ── Animate on scroll ── */
+    function animateDash() {
+      /* Count-up animation */
+      section.querySelectorAll(".pbrd-oc-countup").forEach(function(el) {
+        var target = parseFloat(el.getAttribute("data-target"));
+        var prefix = el.getAttribute("data-prefix") || "";
+        var suffix = el.getAttribute("data-suffix") || "";
+        var decimals = parseInt(el.getAttribute("data-decimals")) || 0;
+        var format = el.getAttribute("data-format");
+        var start = 0;
+        var duration = 1800;
+        var startTime = null;
+
+        function step(ts) {
+          if (!startTime) startTime = ts;
+          var progress = Math.min((ts - startTime) / duration, 1);
+          var ease = 1 - Math.pow(1 - progress, 3);
+          var val = start + (target - start) * ease;
+
+          if (format === "volume") {
+            if (val >= 1000000) el.textContent = prefix + (val / 1000000).toFixed(1) + "M";
+            else if (val >= 1000) el.textContent = prefix + Math.round(val / 1000) + "K";
+            else el.textContent = prefix + Math.round(val);
+          } else if (decimals > 0) {
+            el.textContent = prefix + val.toFixed(decimals) + suffix;
+          } else {
+            el.textContent = prefix + Math.round(val).toLocaleString("en") + suffix;
+          }
+
+          if (progress < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+
+      /* Animate horizontal bars from 0 */
+      section.querySelectorAll(".pbrd-oc-hbar-fill").forEach(function(bar) {
+        var targetW = bar.style.getPropertyValue("--bar-w");
+        bar.style.width = "0";
+        setTimeout(function() {
+          bar.style.transition = "width 1.2s cubic-bezier(.22,1,.36,1)";
+          bar.style.width = targetW;
+        }, 300);
+      });
+
+      /* Animate frequency segments from 0 */
+      section.querySelectorAll(".pbrd-oc-freq-seg").forEach(function(seg, i) {
+        var targetW = seg.style.getPropertyValue("--seg-w");
+        seg.style.width = "0";
+        setTimeout(function() {
+          seg.style.transition = "width 1s cubic-bezier(.22,1,.36,1)";
+          seg.style.width = targetW;
+        }, 300 + i * 150);
+      });
+
+      /* Pulse heatmap cells randomly */
+      var hcells = section.querySelectorAll(".pbrd-oc-hcell");
+      function pulseRandom() {
+        var idx = Math.floor(Math.random() * hcells.length);
+        var cell = hcells[idx];
+        var origOpacity = cell.style.opacity;
+        cell.style.transition = "opacity 0.4s, transform 0.4s";
+        cell.style.opacity = "1";
+        cell.style.transform = "scale(1.3)";
+        setTimeout(function() {
+          cell.style.opacity = origOpacity;
+          cell.style.transform = "scale(1)";
+        }, 600);
+      }
+      setInterval(pulseRandom, 1200);
+
+      /* Live volume ticker — slowly increment the main volume */
+      var volEl = section.querySelector('[data-format="volume"]');
+      if (volEl) {
+        var currentVol = 1400000;
+        setInterval(function() {
+          currentVol += Math.floor(Math.random() * 800) + 200;
+          if (currentVol >= 1000000) volEl.textContent = "\u20AC" + (currentVol / 1000000).toFixed(1) + "M";
+        }, 3000);
+      }
+    }
+
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function(entries) {
+        if (entries[0].isIntersecting) {
+          animateDash();
+          this.disconnect();
+        }
+      }, { threshold: 0.15 }).observe(section);
+    } else {
+      animateDash();
+    }
 
     /* Hide ALL existing content inside the dashboard section */
     var children = dashSection.children;
