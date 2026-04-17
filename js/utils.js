@@ -33,8 +33,8 @@ function pbrdReady() {
     signUp.className = "pbrd-nav-signup";
     signUp.setAttribute("target", "_blank");
 
-    /* Insert before "Get in Touch" */
-    gitBtn.parentElement.insertBefore(signUp, gitBtn);
+    /* Insert after "Get in Touch" */
+    gitBtn.insertAdjacentElement("afterend", signUp);
   }
 
   if (document.readyState === "complete") {
